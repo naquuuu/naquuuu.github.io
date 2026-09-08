@@ -1,402 +1,468 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#120305">
-  
-  <title>naquuuu@pm — Resilient Cyber-Physical Systems Lead &amp; Product Architect</title>
-  <meta name="description" content="Portfolio and architectural notes by Ramadhana Bhanuharya Krishnamurti (Krishna / naquuuu). Designing resilient failure-proof products at the boundary of Bits & Atoms.">
-  <link rel="canonical" href="https://naquuuu.github.io/">
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krishna (naquuuu) — Systems Architect &amp; Product Builder</title>
+  <meta name="description" content="Personal portfolio and systems architecture journey of Ramadhana Bhanuharya Krishnamurti (Krishna / naquuuu). Designing resilient products where software meets the physical world.">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
-  <link rel="alternate icon" href="./favicon.ico">
-  
-  <!-- Open Graph -->
-  <meta property="og:site_name" content="naquuuu@pm">
-  <meta property="og:title" content="naquuuu@pm — Resilient Cyber-Physical Systems Lead &amp; Product Architect">
-  <meta property="og:description" content="Designing failure-proof products across Bits & Atoms: decentralized edge intelligence, tropical cold-chain telemetry, tactile human interfaces, and digital state machines.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://naquuuu.github.io/">
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
 
-  <!-- Site Header -->
+  <!-- Persistent Floating Music Bar (Plays Hukum Murphy) -->
+  <aside class="floating-music-bar" id="floating-music-bar" aria-label="Now Playing Audio Bar">
+    <img src="./assets/img/hukum-murphy-art.jpg" alt="Hukum Murphy Art" class="floating-art">
+    <div class="floating-info">
+      <span class="floating-song">Hukum Murphy</span>
+      <span class="floating-artist">Kafin Sulthan</span>
+    </div>
+    <button type="button" class="floating-play-btn" id="floating-play-btn" aria-label="Play / Pause Audio">
+      <svg id="floating-play-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      <svg id="floating-pause-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+    </button>
+  </aside>
+
+  <!-- Navigation -->
   <header class="site-header">
     <div class="wrap nav">
-      <a class="site-title" href="./">
-        <span class="prompt-user">naquuuu</span><span class="prompt-at">@</span><span class="prompt-host">pm</span>
-        <span class="prompt-badge">BITS &amp; ATOMS</span>
+      <a href="./" class="site-title">
+        <span class="prompt-user">krishna</span><span class="prompt-at">@</span><span class="prompt-host">builder</span>
+        <span class="prompt-badge">bits + atoms</span>
       </a>
       <nav class="nav-links">
-        <a href="./" class="active">home</a>
-        <a href="./blog/">essays</a>
-        <a href="./about/">about</a>
-        <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer">linkedin ↗</a>
+        <a href="#about" class="active">About</a>
+        <a href="#empathy">Empathy Loop</a>
+        <a href="#battle-scars">Battle Scars</a>
+        <a href="#works">Works</a>
+        <a href="#soundroom">Soundroom</a>
+        <a href="./blog/">Essays</a>
       </nav>
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Ambient Hero Section (Canvas Artwork in Background) -->
+  <section class="hero-ambient" id="about">
+    <div class="wrap hero-content">
+      <div class="hero-badge-row">
+        <span class="hero-badge hero-badge-status">● Active Systems Builder</span>
+        <span class="hero-badge hero-badge-art">🎨 Physical Canvas Atelier</span>
+        <span class="hero-badge">🇮🇩 17,000 Islands Focus</span>
+      </div>
+
+      <h1 class="hero-name">Ramadhana Bhanuharya Krishnamurti</h1>
+      <div class="hero-tagline">Building failure-proof systems where software meets the real world.</div>
+
+      <p class="hero-bio">
+        Hi, I'm <strong>Krishna (naquuuu)</strong>. Most software today is built assuming endless high-speed WiFi and air-conditioned cloud servers. But Indonesia is an archipelago of <strong>17,000 islands</strong>, where power flickers, internet drops on the sea, and physical products have to work anyway.
+      </p>
+
+      <p class="hero-bio" style="margin-bottom: 1.5rem;">
+        With an <strong>Industrial Engineering foundation from Institut Teknologi Bandung (ITB)</strong>, I design resilient systems that combine radical human empathy with clean, reliable engineering—from heavy industrial energy projects at <strong style="color:#ffffff;">BCG</strong> to high-stress flight systems at <strong style="color:#ffffff;">Traveloka</strong>, and automated retail platforms at <strong style="color:#ffffff;">MAPCLUB</strong>.
+      </p>
+
+      <div class="hero-cta-row">
+        <a href="#empathy" class="btn-primary">Explore My Thinking Loop ↓</a>
+        <a href="#works" class="btn-secondary">View Selected Works</a>
+        <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" class="btn-secondary">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
   <main class="wrap">
 
-    <!-- Terminal Workstation Hero -->
-    <article class="term" aria-label="Terminal Workstation">
-      <div class="term-bar">
-        <div class="term-dots">
-          <span class="term-dot term-dot-red"></span>
-          <span class="term-dot term-dot-yellow"></span>
-          <span class="term-dot term-dot-green"></span>
-        </div>
-        <span class="term-title">naquuuu@pm : zsh (tty1) — cyber-physical architecture console</span>
-        <span class="term-status">online // bits+atoms</span>
-      </div>
-
-      <div class="term-body">
-        <div class="term-line">
-          <span class="term-prompt">naquuuu@pm</span>:~$ <span class="term-cmd">whoami</span>
-        </div>
-        <div class="term-out">
-          <strong>Ramadhana Bhanuharya Krishnamurti (Krishna / naquuuu)</strong>.<br>
-          <span style="color:var(--accent-crimson-hover); font-weight:700;">Resilient Cyber-Physical Product Lead &amp; Systems Architect.</span><br>
-          Industrial Engineering (ITB) • Ex-BCG, Traveloka (Flight Refunds ~Rp10Bn revenue engine) &amp; MAPCLUB Digital Asia.<br>
-          Canvas painter (acrylic/oil) • Guitarist &amp; music explorer (2,733 mins/mo) • Dedicated to Indonesia's Archipelago Resilience.
-        </div>
-
-        <div class="term-line" style="margin-top: 1.25rem;">
-          <span class="term-prompt">naquuuu@pm</span>:~$ <span class="term-cmd">cat thesis.txt</span>
-        </div>
-        <div class="term-out">
-          <pre class="term-tree" style="margin: 0;">├── Boundary of Bits & Atoms (Decentralized, Edge-Intelligent Hardware + Resilient Firmware)
-├── Frugal Archipelago Infrastructure (18-Hour Offline Maritime Transit, High-Humidity Telemetry)
-├── Non-Screen Tactile Interfaces (Cognitive Resilience against Screen Fatigue)
-└── Battle-Tested Digital State Machines (Automated Invoicing & Flight Disruption Cascades)</pre>
-        </div>
-
-        <!-- Interactive CLI Input -->
-        <div id="term-cmd-history" style="margin-top: 1.25rem;"></div>
-        <div class="term-line" style="margin-top: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
-          <span class="term-prompt">visitor@naquuuu:~$</span>
-          <input type="text" id="term-cmd-input" placeholder="type 'help', 'hardware', 'music', or 'proof_points'..." 
-                 style="background: transparent; border: none; outline: none; color: #FDE8EA; font-family: var(--font-mono); font-size: 0.85rem; flex: 1;"
-                 autocomplete="off" spellcheck="false">
-        </div>
-      </div>
-    </article>
-
-    <!-- Interactive Systems Architecture Flowchart -->
-    <section>
-      <div class="flowchart-wrapper">
-        <div class="flowchart-header">
-          <div>
-            <h2 style="font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin: 0;">
-              Cyber-Physical Systems Architecture: The Archipelago Edge Loop
-            </h2>
-            <span style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-mono);">
-              Interactive Flowchart // Click any stage to inspect failure-recovery telemetry
-            </span>
-          </div>
-          <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--term-green); border: 1px solid rgba(52, 211, 153, 0.3); padding: 2px 8px; border-radius: var(--radius-sm); background: rgba(52, 211, 153, 0.08);">
-            ● FAULT-TOLERANT
-          </span>
-        </div>
-
-        <!-- Animated / Interactive SVG Diagram -->
-        <div class="flowchart-svg-wrap">
-          <svg viewBox="0 0 840 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; min-width: 720px; display: block;">
-            <defs>
-              <linearGradient id="grad-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#E6243A" stop-opacity="0.2"/>
-                <stop offset="50%" stop-color="#E6243A" stop-opacity="1"/>
-                <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.2"/>
-              </linearGradient>
-            </defs>
-
-            <!-- Connecting Flow Lines -->
-            <path d="M170 90 L230 90" stroke="#4F0E15" stroke-width="2.5" stroke-dasharray="4 4"/>
-            <path d="M380 90 L440 90" stroke="#4F0E15" stroke-width="2.5" stroke-dasharray="4 4"/>
-            <path d="M590 90 L650 90" stroke="#4F0E15" stroke-width="2.5" stroke-dasharray="4 4"/>
-
-            <!-- Animated data pulse arrows -->
-            <circle cx="200" cy="90" r="3.5" fill="#E6243A">
-              <animate attributeName="cx" values="170;230" dur="2.2s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="410" cy="90" r="3.5" fill="#38BDF8">
-              <animate attributeName="cx" values="380;440" dur="2.2s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="620" cy="90" r="3.5" fill="#34D399">
-              <animate attributeName="cx" values="590;650" dur="2.2s" repeatCount="indefinite" />
-            </circle>
-
-            <!-- Node 1: Sensor Node (Atoms) -->
-            <g class="flowchart-node active" data-node="node-sensor">
-              <rect x="20" y="45" width="150" height="90" rx="10" fill="#1A0508" stroke="#38BDF8" stroke-width="2"/>
-              <text x="95" y="75" fill="#FDE8EA" font-family="'DM Sans', sans-serif" font-size="13" font-weight="700" text-anchor="middle">01. Sensor Node</text>
-              <text x="95" y="93" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">ATOMS // IP67</text>
-              <text x="95" y="112" fill="#9E6B70" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle">Temp/Shock/LiFePO4</text>
-            </g>
-
-            <!-- Node 2: TinyML Firmware (ESP32) -->
-            <g class="flowchart-node" data-node="node-tinyml">
-              <rect x="230" y="45" width="150" height="90" rx="10" fill="#1A0508" stroke="#4F0E15" stroke-width="1.5"/>
-              <text x="305" y="75" fill="#FDE8EA" font-family="'DM Sans', sans-serif" font-size="13" font-weight="700" text-anchor="middle">02. TinyML Engine</text>
-              <text x="305" y="93" fill="#E6243A" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">FIRMWARE // ESP32</text>
-              <text x="305" y="112" fill="#9E6B70" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle">18h Offline Anomaly State</text>
-            </g>
-
-            <!-- Node 3: Low-Bandwidth Sync (Bits) -->
-            <g class="flowchart-node" data-node="node-sync">
-              <rect x="440" y="45" width="150" height="90" rx="10" fill="#1A0508" stroke="#4F0E15" stroke-width="1.5"/>
-              <text x="515" y="75" fill="#FDE8EA" font-family="'DM Sans', sans-serif" font-size="13" font-weight="700" text-anchor="middle">03. Archipelago Sync</text>
-              <text x="515" y="93" fill="#34D399" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">BITS // 2G/LoRa/CBOR</text>
-              <text x="515" y="112" fill="#9E6B70" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle">Burst Drain on Port Entry</text>
-            </g>
-
-            <!-- Node 4: Tactile Human Interface -->
-            <g class="flowchart-node" data-node="node-interface">
-              <rect x="650" y="45" width="165" height="90" rx="10" fill="#1A0508" stroke="#4F0E15" stroke-width="1.5"/>
-              <text x="732" y="75" fill="#FDE8EA" font-family="'DM Sans', sans-serif" font-size="13" font-weight="700" text-anchor="middle">04. Tactile Interface</text>
-              <text x="732" y="93" fill="#FBBF24" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">NON-SCREEN // HAPTIC</text>
-              <text x="732" y="112" fill="#9E6B70" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle">Zero-App Field Operation</text>
-            </g>
-        </div>
-
-        <!-- Mobile Interactive Stage Selector (Touch friendly on mobile screens) -->
-        <div class="flowchart-mobile-stages">
-          <button type="button" class="flowchart-stage-btn active" data-node="node-sensor">01. Sensor Node</button>
-          <button type="button" class="flowchart-stage-btn" data-node="node-tinyml">02. TinyML Engine</button>
-          <button type="button" class="flowchart-stage-btn" data-node="node-sync">03. Archipelago Sync</button>
-          <button type="button" class="flowchart-stage-btn" data-node="node-interface">04. Tactile Interface</button>
-        </div>
-
-        <!-- Node Details Inspector Box -->
-        <div id="flowchart-inspector" class="flowchart-inspector">
-          <div class="inspector-title">> 01 / PHYSICAL SENSOR NODE (ATOMS)</div>
-          <div>Ruggedized IP67 edge unit with DHT22/PT100 temperature probes, multi-axis accelerometer, and shock sensors designed for high-humidity, marine tropical environments. Operates on solar-boosted LiFePO4 battery pack with ultra-low sleep draw (&lt;15µA).</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- The 5 Resilience Proof Points -->
-    <section>
+    <!-- 1. The Radical Empathy Engine: Flowchart Explanation -->
+    <section id="empathy">
       <div class="section-header">
-        <h2 class="section-title">The 5 Resilience Proof Points</h2>
-        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">proof_chain.portfolio</span>
+        <h2 class="section-title">The Radical Empathy Engine</h2>
+        <span class="section-sub">empathy_loop.flow</span>
       </div>
 
-      <!-- Filter Tabs -->
-      <div class="portfolio-tabs">
-        <button class="portfolio-tab-btn active" data-filter="all">All Proof Points</button>
-        <button class="portfolio-tab-btn" data-filter="hardware">Hardware &amp; Atoms</button>
-        <button class="portfolio-tab-btn" data-filter="software">Software &amp; Bits</button>
-        <button class="portfolio-tab-btn" data-filter="energy">Clean Energy &amp; Materials</button>
-      </div>
-
-      <div class="portfolio-grid">
-        <!-- 1. Cold-Chain IoT Node -->
-        <div class="proof-card" data-category="hardware">
-          <div class="proof-header">
-            <span class="proof-domain">Logistics Telemetry</span>
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--term-cyan);">TinyML / ESP32</span>
-          </div>
-          <h3 class="proof-title">Cold-Chain IoT Node (Archipelago Telemetry)</h3>
-          <p class="proof-thesis">
-            <strong>Telemetry Resilience:</strong> Edge-computed anomaly detection on an ESP32 microcontroller keeping vaccine vials and tuna fresh through 18-hour offline sea voyages across eastern Indonesia. Circular SPI flash logging with opportunistic LoRa/CBOR delta burst.
+      <div class="concept-box">
+        <div class="concept-box-header">
+          <h3>From Answering 10,000 Panicking Students to Autonomous Squads</h3>
+          <p>
+            Right after high school at 18, my first real job wasn't a cozy office internship—it was customer support at <strong>EdukaSystem</strong>, answering the panic and confusion of <strong>over 10,000 students</strong> preparing for university entrance exams.
           </p>
-          <div class="proof-footer">
-            <span style="color:var(--text-muted); font-size:0.75rem;">Prototyping Focus</span>
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-secondary);">Physical Sensors + TinyML</span>
-          </div>
         </div>
 
-        <!-- 2. Tactile Spotify Wearable -->
-        <div class="proof-card" data-category="hardware">
-          <div class="proof-header">
-            <span class="proof-domain">Cultural Ergonomics</span>
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-crimson-hover);">Non-Screen UI</span>
-          </div>
-          <h3 class="proof-title">Tactile Spotify Wearable (Screen-Free Audio)</h3>
-          <p class="proof-thesis">
-            <strong>Cognitive Resilience:</strong> Mechanical rotary dials and tactile haptic actuation providing complete Spotify playback control without picking up a distracting smartphone screen. Inspired by analog cassette tape decks and high-end audio hardware.
-          </p>
-          <div class="proof-footer">
-            <span style="color:var(--text-muted); font-size:0.75rem;">Industrial Design</span>
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-secondary);">Tactile Ergonomics</span>
-          </div>
-        </div>
-
-        <!-- 3. Disruption Engine -->
-        <div class="proof-card" data-category="software">
-          <div class="proof-header">
-            <span class="proof-domain">Digital Scale</span>
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--term-green);">Rp10Bn Engine</span>
-          </div>
-          <h3 class="proof-title">Disruption &amp; Invoicing State Machines</h3>
-          <p class="proof-thesis">
-            <strong>Operational Resilience:</strong> Overhauled Traveloka's flight disruption policies under aviation law PM 185/2015 into an automated revenue engine capturing ~IDR 10Bn in net revenue in 3 months; elevated refund math from 87.97% to 94.24% accuracy; built MAPCLUB C-level invoice automation.
-          </p>
-          <div class="proof-footer">
-            <span style="color:var(--text-muted); font-size:0.75rem;">Production Scale</span>
-            <a href="./blog/building-an-autonomous-product-operating-system/" class="proof-deck-btn">Read Essay →</a>
-          </div>
-        </div>
-
-        <!-- 4. 3M PHB Bio-Mask -->
-        <div class="proof-card" data-category="energy">
-          <div class="proof-header">
-            <span class="proof-domain">Materials Resilience</span>
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:#F59E0B;">Award Winner</span>
-          </div>
-          <h3 class="proof-title">3M PHB Bio-Mask (Biodegradable PPE)</h3>
-          <p class="proof-thesis">
-            <strong>Supply Chain Resilience:</strong> 100% biodegradable personal protective mask utilizing locally harvested polyhydroxybutyrate (PHB) biopolymers to displace imported fossil plastics. Regional Finalist at 3M Inspire Challenge.
-          </p>
-          <div class="proof-footer">
-            <span style="color:var(--text-muted); font-size:0.75rem;">3M Challenge</span>
-            <a href="https://drive.google.com/file/d/1gZuh_dSusRz0d3JNs4EQvEd-lMygwI5D/view" target="_blank" rel="noopener noreferrer" class="proof-deck-btn">Inspect Deck ↗</a>
-          </div>
-        </div>
-
-        <!-- 5. Schneider HotSand -->
-        <div class="proof-card proof-card-featured" data-category="energy">
-          <div class="proof-header">
-            <span class="proof-domain">Infrastructure Resilience</span>
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:#F59E0B;">Award Winner</span>
-          </div>
-          <h3 class="proof-title">Schneider HotSand (Decentralized Thermal Storage)</h3>
-          <p class="proof-thesis">
-            <strong>Energy Resilience:</strong> Ultra-low-cost, battery-free thermal sand energy storage system for unelectrified off-grid Indonesian villages. Replaces costly lithium-ion battery imports that rapidly fail in humid tropical environments. National Winner, Schneider Go Green.
-          </p>
-          <div class="proof-footer">
-            <span style="color:var(--text-muted); font-size:0.75rem;">Schneider Go Green Winner</span>
-            <a href="https://drive.google.com/file/d/1jzYClW4QXZBA_4ziyex0n7IH53hsO3-h/view" target="_blank" rel="noopener noreferrer" class="proof-deck-btn">Inspect Deck ↗</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Atelier & Soundroom Teaser -->
-    <section style="margin-bottom: 4rem;">
-      <div class="section-header">
-        <h2 class="section-title">The Physical Atelier &amp; Soundroom</h2>
-        <a href="./about/" class="section-link">view full profile &amp; artwork →</a>
-      </div>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-        <!-- Art Teaser -->
-        <a href="./about/" style="background: var(--bg-surface); border: 1px solid var(--border-active); border-radius: var(--radius-lg); overflow: hidden; display: block; text-decoration: none;">
-          <div style="width: 100%; aspect-ratio: 16/6; overflow: hidden; background: #000;">
-            <img src="./assets/img/krishna-artwork.jpeg" alt="Canvas Painting by Krishna" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div style="padding: 1.25rem;">
-            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--term-cyan);">CANVAS ATELIER // ACRYLIC &amp; OIL</span>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--text-primary); margin: 0.25rem 0 0.5rem;">Friction Between Organic Canvas &amp; Deterministic Systems</h4>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">Exploring tactile craftsmanship, physical pigments, and how painterly spontaneity informs cyber-physical product design.</p>
-          </div>
-        </a>
-
-        <!-- Soundroom Teaser with Live Audio Player -->
-        <div style="background: var(--bg-surface); border: 1px solid var(--border-active); border-radius: var(--radius-lg); padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
-          <div>
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
-              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #1DB954;">SPOTIFY SOUNDROOM // +862% vs ID AVG</span>
-              <div class="spotify-icon-dot"></div>
+        <div class="flow-chain flow-chain-4">
+          <!-- Step 1 -->
+          <div class="flow-step-card">
+            <span class="step-num">STEP 01</span>
+            <div class="step-title">10,000 Panicking Students</div>
+            <div class="step-desc">
+              High schoolers studying late at night when test servers crash. You learn that users don't care about coding buzzwords—they care whether your product solves their anxiety in seconds.
             </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.25rem;">Kafin Sulthan — Hukum Murphy</h4>
-            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.85rem;">
-              #1 Most Played Track (100 plays) • 2,733 mins listened in September 2026.
-            </p>
+          </div>
 
-            <!-- Playable Audio Stream -->
-            <div class="soundroom-player-box" style="margin-bottom: 1rem; padding: 0.9rem;">
-              <audio id="hukum-murphy-audio" preload="metadata">
-                <source src="./assets/audio/hukum-murphy-preview.m4a" type="audio/mp4">
-                <source src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/85/19/0e/85190ee9-b8b9-7a4d-3fa2-61afada97252/mzaf_11279198995228694862.plus.aac.p.m4a" type="audio/mp4">
-              </audio>
-              
-              <div class="player-controls-row">
-                <img src="./assets/img/hukum-murphy-art.jpg" alt="A Midsummer Night's Dream - Kafin Sulthan" style="width:40px; height:40px; border-radius:6px; object-fit:cover; flex-shrink:0;">
-                <button type="button" class="play-toggle-btn" id="play-toggle-btn" aria-label="Play Hukum Murphy" style="width:38px; height:38px;">
-                  <svg id="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                  <svg id="pause-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
-                </button>
+          <!-- Step 2 -->
+          <div class="flow-step-card">
+            <span class="step-num">STEP 02</span>
+            <div class="step-title">Listen for the Signal</div>
+            <div class="step-desc">
+              Instead of treating complaints as annoying support tickets, every single bug report was treated as a treasure map showing where the product flow was confusing.
+            </div>
+          </div>
 
-                <div class="player-progress-wrap">
-                  <div class="player-progress-bar" id="player-progress-bar">
-                    <div class="player-progress-fill" id="player-progress-fill"></div>
-                  </div>
-                  <div class="player-time-row">
-                    <span id="player-current-time">0:00</span>
-                    <span>Tap to stream audio</span>
-                    <span id="player-duration">1:30</span>
-                  </div>
-                </div>
+          <!-- Step 3 -->
+          <div class="flow-step-card">
+            <span class="step-num">STEP 03</span>
+            <div class="step-title">Break Functional Silos</div>
+            <div class="step-desc">
+              At ITB, when leading the Professional Development division, I tore down rigid departmental walls and turned 20 students into fast, autonomous product squads with real ownership.
+            </div>
+          </div>
 
-                <div class="equalizer-bars" id="equalizer-bars" style="margin-left: 4px;">
-                  <span class="eq-bar"></span>
-                  <span class="eq-bar"></span>
-                  <span class="eq-bar"></span>
-                  <span class="eq-bar"></span>
-                </div>
+          <!-- Step 4 -->
+          <div class="flow-step-card">
+            <span class="step-num">STEP 04</span>
+            <div class="step-title">Ranked #1 with Real Trust</div>
+            <div class="step-desc">
+              Organized hands-on offline immersions with tech leaders (Huawei, Tokopedia, Paragon) for 200+ students. Ranked #1 of 15 divisions in ITB with record team engagement.
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.88rem; color: var(--text-secondary); background: rgba(0,0,0,0.35); padding: 0.85rem 1.15rem; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-crimson); margin-top: 0.75rem;">
+          💬 <strong>The Lesson for Any Young Builder:</strong> You don't need fancy jargon to make an impact. Listen deeply to real human frustration, find the root cause, and build a clean system that fixes it permanently.
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. The Battle Scars: Visual Systems in Production -->
+    <section id="battle-scars">
+      <div class="section-header">
+        <h2 class="section-title">The Battle Scars: Systems in Production</h2>
+        <span class="section-sub">production_systems.map</span>
+      </div>
+
+      <div class="battle-grid">
+        <!-- Battle Scar 1: Traveloka -->
+        <div class="battle-card" id="traveloka-case">
+          <div class="battle-card-top">
+            <div>
+              <div class="battle-role">Product Manager (Flight Refunds &amp; Disruption Domain)</div>
+              <div class="battle-company">Traveloka • High-Scale Aviation Systems</div>
+            </div>
+            <span class="battle-time">2024 — 2026</span>
+          </div>
+
+          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 0.5rem;">
+            When airlines cancel or delay flights, passengers are stressed and airlines have cryptic, confusing fare rules. We turned complex aviation regulation (PM 185/2015) into an automated, transparent system.
+          </p>
+
+          <div class="battle-model-grid">
+            <div class="model-col">
+              <span class="model-tag model-tag-problem">The Real-World Mess</span>
+              <div class="model-text">
+                Airline delays created massive customer anxiety and error-prone manual calculations between 10+ different flight APIs and tax rules.
+              </div>
+            </div>
+            <div class="model-col">
+              <span class="model-tag model-tag-system">The Engineering Fix</span>
+              <div class="model-text">
+                Overhauled calculation accuracy from 87.9% to 94.2% and automated cryptic airline ticket rules using smart parsing algorithms.
+              </div>
+            </div>
+            <div class="model-col">
+              <span class="model-tag model-tag-impact">The Concrete Result</span>
+              <div class="model-text">
+                Doubled automated resolutions (16.8% → 34.4%), cut customer disputes in half, and unlocked ~Rp10 Billion in net business revenue in 3 months.
               </div>
             </div>
           </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
-            <a href="./about/" style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-crimson-hover); font-weight: 700;">
-              view all top tracks &amp; playlists →
-            </a>
-            <a href="https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf" target="_blank" rel="noopener noreferrer" style="font-family: var(--font-mono); font-size: 0.72rem; color: #1DB954;">
-              Spotify ↗
-            </a>
+        </div>
+
+        <!-- Battle Scar 2: MAPCLUB -->
+        <div class="battle-card">
+          <div class="battle-card-top">
+            <div>
+              <div class="battle-role">Technical Product Owner (TPO)</div>
+              <div class="battle-company">PT. MAPCLUB Digital Asia • Omnichannel Retail Loyalty</div>
+            </div>
+            <span class="battle-time">2026 — Present</span>
+          </div>
+
+          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 0.5rem;">
+            Connecting hundreds of world-class retail brands to millions of Indonesian shoppers. Transforming manual spreadsheets into automated, trusted software.
+          </p>
+
+          <div class="battle-model-grid">
+            <div class="model-col">
+              <span class="model-tag model-tag-problem">The Real-World Mess</span>
+              <div class="model-text">
+                Endless disconnected Excel sheets between marketing promotions and corporate finance, leading to weeks of manual verification.
+              </div>
+            </div>
+            <div class="model-col">
+              <span class="model-tag model-tag-system">The Engineering Fix</span>
+              <div class="model-text">
+                Designed an automated Marketing Services invoicing engine and established unambiguous bug gates so QA and developers work in sync.
+              </div>
+            </div>
+            <div class="model-col">
+              <span class="model-tag model-tag-impact">The Concrete Result</span>
+              <div class="model-text">
+                Eliminated manual reconciliation bottlenecks, secured corporate C-level approval, and made product specifications crystal clear.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Battle Scar 3: BCG -->
+        <div class="battle-card">
+          <div class="battle-card-top">
+            <div>
+              <div class="battle-role">Project Specialist (Heavy Industry &amp; Energy)</div>
+              <div class="battle-company">Boston Consulting Group (BCG) • Industrial Mega-Projects</div>
+            </div>
+            <span class="battle-time">2023 — 2024</span>
+          </div>
+
+          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 0.5rem;">
+            Wearing hard hats and steel-toed boots in mining, metals, and geothermal energy sites across Indonesia.
+          </p>
+
+          <div class="battle-model-grid">
+            <div class="model-col">
+              <span class="model-tag model-tag-problem">The Real-World Mess</span>
+              <div class="model-text">
+                $400M capital engineering bids where paper spreadsheets failed to account for heavy equipment breakdown and harsh tropical field wear.
+              </div>
+            </div>
+            <div class="model-col">
+              <span class="model-tag model-tag-system">The Engineering Fix</span>
+              <div class="model-text">
+                Structured 10+ commercial engineering tenders and built an Operations &amp; Maintenance capability grounded in factory floor reality.
+              </div>
+            </div>
+            <div class="model-col">
+              <span class="model-tag model-tag-impact">The Concrete Result</span>
+              <div class="model-text">
+                Advanced 30% of competitive bids to final contract awards, bridging the gap between boardroom financial targets and physical machinery.
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Latest Essays Section -->
-    <section style="margin-bottom: 4rem;">
+    <!-- 3. Selected Works & Hardware Innovations (Pruned & Interactive) -->
+    <section id="works">
       <div class="section-header">
-        <h2 class="section-title">Latest Product Essays</h2>
-        <a href="./blog/" class="section-link">view all essays →</a>
+        <h2 class="section-title">Selected Works &amp; Innovations</h2>
+        <span class="section-sub">award_winning_solutions.lab</span>
       </div>
 
-      <div class="essay-grid">
-        <!-- Post 1: Autonomous Product Operating System -->
-        <a href="./blog/building-an-autonomous-product-operating-system/" class="essay-card">
-          <div class="essay-meta">
-            <time datetime="2026-09-09">Sep 9, 2026</time>
-            <span>•</span>
-            <span>8 min read</span>
-            <span>•</span>
-            <span class="essay-tag">Bits &amp; Atoms</span>
-            <span class="essay-tag">Systems Architecture</span>
-            <span class="essay-tag">Zero-Slop Specification</span>
+      <div class="portfolio-grid">
+        <!-- 3M PHB Bio-Mask -->
+        <div class="proof-card">
+          <div class="proof-header">
+            <span class="proof-domain">Healthcare &amp; Eco-Materials</span>
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #F59E0B;">★ 3M Regional Award</span>
           </div>
-          <h3 class="essay-title">
-            Building an Autonomous Product Operating System: From Raw Requirements to Production Prototypes Without the Slop
-          </h3>
-          <p class="essay-excerpt">
-            Why traditional AI generates "slop" that paralyzes engineering teams, and how we engineered a multi-tier agentic operating model that transforms unstructured meeting notes into certified corporate specifications, soft API contracts, and edge-gated interactive prototypes.
+          <h3 class="proof-title">3M PHB Bio-Mask: 100% Biodegradable PPE</h3>
+          <p class="proof-thesis">
+            Billions of plastic surgical masks litter our oceans and take 450+ years to break down. We engineered a medical mask made from bacterial biopolymers (PHB) grown on Indonesian sugarcane waste that safely composts in soil within 90 days.
           </p>
+          <div class="proof-footer">
+            <span style="color: var(--text-muted); font-size: 0.76rem;">3M Inspire Challenge Finalist</span>
+            <a href="./portfolio/3m-bio-mask/" class="proof-deck-btn">View Interactive Deck →</a>
+          </div>
+        </div>
+
+        <!-- Schneider HotSand -->
+        <div class="proof-card">
+          <div class="proof-header">
+            <span class="proof-domain">Clean Energy Storage</span>
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #F59E0B;">★ Schneider National Winner</span>
+          </div>
+          <h3 class="proof-title">Schneider HotSand: Storing Solar Heat in Sand</h3>
+          <p class="proof-thesis">
+            Imported lithium batteries are too expensive and break down rapidly in hot Indonesian humidity. HotSand stores excess daytime solar energy in superheated local silica sand beds to provide hot water, crop drying, and clean power at night.
+          </p>
+          <div class="proof-footer">
+            <span style="color: var(--text-muted); font-size: 0.76rem;">Schneider Go Green Winner</span>
+            <a href="./portfolio/schneider-hotsand/" class="proof-deck-btn">View Interactive Deck →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. The Physical Atelier: Art & Canvas -->
+    <section id="atelier">
+      <div class="section-header">
+        <h2 class="section-title">The Physical Atelier: Canvas &amp; Pigment</h2>
+        <span class="section-sub">acrylic_on_linen.art</span>
+      </div>
+
+      <div class="concept-box" style="display: flex; flex-direction: column; gap: 1rem;">
+        <h3 style="font-size: 1.25rem; color: #ffffff;">Why I Paint: Atoms Cannot Be Undone With a Git Commit</h3>
+        <p style="color: var(--text-secondary); font-size: 0.94rem; line-height: 1.7; margin: 0;">
+          The textured dark red backdrop you see across this workstation is my original physical acrylic and oil painting on linen. In digital software, if you make a mistake, you can press <code style="color:var(--term-cyan)">Ctrl+Z</code> or roll back a server. In physical painting, every sweep of the palette knife leaves real texture that cannot be erased.
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin: 0;">
+          This discipline carries straight into how I design physical products: <em>measure twice, respect the natural materials, and craft with intention.</em>
+        </p>
+      </div>
+    </section>
+
+    <!-- 5. The Spotify Soundroom (Curated Playlists & Hukum Murphy) -->
+    <section id="soundroom">
+      <div class="section-header">
+        <h2 class="section-title">The Soundroom: Music &amp; Playlists</h2>
+        <span class="section-sub">spotify_curation.audio</span>
+      </div>
+
+      <div class="soundroom-console">
+        <!-- Profile Banner -->
+        <div class="soundroom-profile-banner">
+          <div class="soundroom-user-info">
+            <div class="soundroom-avatar-dot"></div>
+            <div>
+              <div style="font-weight: 700; color: #ffffff; font-size: 0.95rem;">Krishna's Spotify Universe</div>
+              <div style="font-size: 0.76rem; color: var(--text-muted);">Curator &amp; Amateur Guitarist • Eclectic Grooves, Neo-Soul &amp; Indonesian Jazz</div>
+            </div>
+          </div>
+          <a href="https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf" target="_blank" rel="noopener noreferrer" style="color: var(--spotify-green); font-weight: 700; font-size: 0.84rem;">
+            Visit Profile @1j69whrwxcopwxxto9n74zcdf ↗
+          </a>
+        </div>
+
+        <!-- Curated Playlists Cover Grid -->
+        <div class="playlist-cards-grid">
+          <!-- Playlist 1 -->
+          <a href="https://open.spotify.com/playlist/5rMH1EaSOENPgWTZf0sysT" target="_blank" rel="noopener noreferrer" class="playlist-art-card">
+            <div class="playlist-img-wrap">
+              <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8457b9600af7d1052f768ffbd9" alt="trop chic pour pleurer" class="playlist-img">
+            </div>
+            <div class="playlist-details">
+              <div class="playlist-name">trop chic pour pleurer</div>
+              <div class="playlist-desc">City Groove &amp; French Touch</div>
+            </div>
+          </a>
+
+          <!-- Playlist 2 -->
+          <a href="https://open.spotify.com/playlist/4wKJqsG3yNAEl47lWPc3Et" target="_blank" rel="noopener noreferrer" class="playlist-art-card">
+            <div class="playlist-img-wrap">
+              <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8421f9ba4c95f0c95fffb69838" alt="pop mega raya" class="playlist-img">
+            </div>
+            <div class="playlist-details">
+              <div class="playlist-name">pop mega raya</div>
+              <div class="playlist-desc">Vintage Indonesian Pop &amp; Funk</div>
+            </div>
+          </a>
+
+          <!-- Playlist 3 -->
+          <a href="https://open.spotify.com/playlist/6x6WTV9mBXwESfDOd28v74" target="_blank" rel="noopener noreferrer" class="playlist-art-card">
+            <div class="playlist-img-wrap">
+              <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da847c654c212c5a86abe83dc083" alt="zetaa" class="playlist-img">
+            </div>
+            <div class="playlist-details">
+              <div class="playlist-name">zetaa</div>
+              <div class="playlist-desc">Deep Electronic Syncopation</div>
+            </div>
+          </a>
+
+          <!-- Playlist 4 -->
+          <a href="https://open.spotify.com/playlist/48524vCOrYJd8Mj5Ztl8wS" target="_blank" rel="noopener noreferrer" class="playlist-art-card">
+            <div class="playlist-img-wrap">
+              <img src="https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da84de7e22f597db523eea79c1e0" alt="night rotation" class="playlist-img">
+            </div>
+            <div class="playlist-details">
+              <div class="playlist-name">night rotation</div>
+              <div class="playlist-desc">Late Night Neo-Soul &amp; Focus</div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Live Audio Player: Hukum Murphy by Kafin Sulthan -->
+        <div class="soundroom-player-box">
+          <audio id="hukum-murphy-audio" preload="auto" loop>
+            <source src="./assets/audio/hukum-murphy-preview.m4a" type="audio/mp4">
+            <source src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/85/19/0e/85190ee9-b8b9-7a4d-3fa2-61afada97252/mzaf_11279198995228694862.plus.aac.p.m4a" type="audio/mp4">
+          </audio>
+
+          <div class="player-header">
+            <div class="player-track-info">
+              <img src="./assets/img/hukum-murphy-art.jpg" alt="A Midsummer Night's Dream - Kafin Sulthan" class="player-art">
+              <div>
+                <div style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--spotify-green); font-weight: 700;">HEAVY ROTATION // PLAYING NOW</div>
+                <div style="font-size: 1.05rem; font-weight: 800; color: #ffffff;">Hukum Murphy</div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary);">Kafin Sulthan • <em>A Midsummer Night's Dream</em></div>
+              </div>
+            </div>
+
+            <div class="equalizer-bars" id="equalizer-bars">
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+            </div>
+          </div>
+
+          <div class="player-controls-row">
+            <button type="button" class="play-toggle-btn" id="play-toggle-btn" aria-label="Play or Pause Hukum Murphy">
+              <svg id="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <svg id="pause-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+            </button>
+
+            <div class="player-progress-wrap">
+              <div class="player-progress-bar" id="player-progress-bar">
+                <div class="player-progress-fill" id="player-progress-fill"></div>
+              </div>
+              <div class="player-time-row">
+                <span id="player-current-time">0:00</span>
+                <span>Tap anywhere or scroll to hear Kafin Sulthan</span>
+                <span id="player-duration">1:30</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Architectural Essays -->
+    <section id="essays">
+      <div class="section-header">
+        <h2 class="section-title">Architectural Essays</h2>
+        <a href="./blog/" class="section-sub" style="color: var(--accent-crimson-hover);">View All Essays →</a>
+      </div>
+
+      <div class="concept-box" style="border-color: var(--border-crimson);">
+        <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--term-cyan); margin-bottom: 0.4rem;">
+          SYSTEMS ARCHITECTURE • AUGUST 2026
+        </div>
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.6rem;">
+          <a href="./blog/building-an-autonomous-product-operating-system/" style="color:#ffffff;">
+            Building an Autonomous Product Operating System: Beyond LLM Slop
+          </a>
+        </h3>
+        <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 1rem;">
+          Why standard AI code generation produces fragile code that breaks in production—and how we built an autonomous multi-agent verification engine that guarantees zero bugs before software ever reaches customers.
+        </p>
+        <a href="./blog/building-an-autonomous-product-operating-system/" class="btn-primary" style="font-size: 0.8rem; padding: 5px 12px;">
+          Read Essay &amp; Architecture Flowchart →
         </a>
       </div>
     </section>
 
   </main>
 
-  <!-- Site Footer -->
   <footer class="site-footer">
     <div class="wrap footer-content">
       <div>
-        <span>© 2026 Ramadhana Bhanuharya Krishnamurti (naquuuu). Bits &amp; Atoms.</span>
+        <strong>Ramadhana Bhanuharya Krishnamurti (naquuuu)</strong>
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">
+          Bits &amp; Atoms • Cyber-Physical Product Architecture
+        </div>
       </div>
       <div class="footer-links">
-        <a href="./about/">About</a>
-        <a href="https://github.com/naquuuu/naquuuu.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf" target="_blank" rel="noopener noreferrer">Spotify</a>
         <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://bhanuharya.github.io/" target="_blank" rel="noopener noreferrer">Twin Brother's Blog ↗</a>
+        <a href="https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf" target="_blank" rel="noopener noreferrer">Spotify</a>
+        <a href="https://bhanuharya.github.io/" target="_blank" rel="noopener noreferrer">Twin Brother (Harya) ↗</a>
+        <a href="mailto:rbkrishnamurti@gmail.com">Email</a>
       </div>
     </div>
   </footer>
