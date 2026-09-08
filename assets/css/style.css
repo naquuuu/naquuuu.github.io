@@ -1,0 +1,638 @@
+/* =============================================================================
+   naquuuu@pm — Personal Product & AI Systems Workstation
+   Design System: Deep Crimson & Dark Maroon IDE Palette
+   Source Inspiration: Antigravity IDE Dark Red Theme & https://bhanuharya.github.io/
+   ============================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+  /* --- Deep Crimson / Wine IDE Palette (Screenshot Ground Truth) --- */
+  --bg-primary: #120305;              /* Ultra-deep dark maroon workspace background */
+  --bg-surface: #1A0508;              /* Surface panels & cards */
+  --bg-surface-elevated: #24080C;     /* Elevated terminal headers & toolbars */
+  --bg-card: #1C0609;                 /* Card container */
+  --bg-card-hover: #29090E;           /* Hovered card state */
+  --bg-input: #4A0B10;                /* Input backgrounds matching IDE settings */
+  --bg-input-focus: #630F16;          /* Input active state */
+  --bg-code: #0B0203;                 /* Deepest black-red for code blocks */
+
+  /* --- Borders & Outlines --- */
+  --border-subtle: #2D070B;           /* Subtle dark red borders */
+  --border-active: #4F0E15;           /* Active panel borders */
+  --border-crimson: #871622;          /* Accent border */
+  --border-glow: rgba(230, 36, 58, 0.45);
+
+  /* --- Vibrant Accents --- */
+  --accent-crimson: #E6243A;          /* Signature bright crimson */
+  --accent-crimson-hover: #FF3B52;    /* Glowing hover state */
+  --accent-crimson-dim: rgba(230, 36, 58, 0.16);
+  --accent-wine: #9E1522;             /* Deep wine accent */
+
+  /* --- Typography Colors --- */
+  --text-primary: #FDE8EA;            /* Crisp off-white with warm rose undertone */
+  --text-secondary: #D4A5A9;          /* Soft rose-gray body text (ultra-legible) */
+  --text-muted: #9E6B70;              /* Muted rose for timestamps & labels */
+  --text-code: #FFE2E5;               /* Monospace code text */
+
+  /* --- Terminal ANSI Colors (Matching Screenshot Terminal) --- */
+  --term-cyan: #38BDF8;               /* Terminal command prompts (>> git add ...) */
+  --term-green: #34D399;              /* Status active & pass */
+  --term-yellow: #FBBF24;             /* Warning dot */
+  --term-red: #F87171;                /* Close dot */
+
+  /* --- Typography Stacks --- */
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+
+  --max-w-content: 840px;
+  --max-w-wide: 1100px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 30px rgba(230, 36, 58, 0.2);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-crimson-hover);
+}
+
+/* --- Container & Wrap --- */
+.wrap {
+  width: 100%;
+  max-width: var(--max-w-content);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.wrap-wide {
+  width: 100%;
+  max-width: var(--max-w-wide);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --- Header / Navigation --- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(18, 3, 5, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.site-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.site-title .prompt-user {
+  color: var(--accent-crimson);
+}
+
+.site-title .prompt-at {
+  color: var(--text-muted);
+}
+
+.site-title .prompt-host {
+  color: var(--text-secondary);
+}
+
+.site-title .prompt-badge {
+  background: var(--accent-crimson-dim);
+  color: var(--accent-crimson-hover);
+  font-size: 0.7rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-crimson);
+  margin-left: 0.35rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  padding: 0.25rem 0;
+  position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--text-primary);
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-crimson);
+  box-shadow: 0 0 8px var(--accent-crimson);
+  border-radius: 2px;
+}
+
+/* --- Terminal Workstation Hero Card --- */
+.term {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-active);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  margin: 2.5rem 0 3.5rem 0;
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface-elevated);
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.term-dots {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.term-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.term-dot-red { background: var(--term-red); }
+.term-dot-yellow { background: var(--term-yellow); }
+.term-dot-green { background: var(--term-green); }
+
+.term-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.term-status {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--term-green);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.term-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--term-green);
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+
+.term-body {
+  padding: 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.term-line {
+  margin-bottom: 1rem;
+}
+
+.term-prompt {
+  color: var(--accent-crimson);
+  font-weight: 600;
+}
+
+.term-cmd {
+  color: var(--term-cyan);
+  font-weight: 600;
+}
+
+.term-out {
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-top: 0.35rem;
+  padding-left: 0.25rem;
+}
+
+.term-out strong {
+  color: var(--text-primary);
+}
+
+.term-tree {
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-top: 0.5rem;
+}
+
+.term-tree span {
+  color: var(--text-primary);
+}
+
+/* --- Section Headings --- */
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.section-title::before {
+  content: '//';
+  color: var(--accent-crimson);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.section-link {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-crimson-hover);
+}
+
+/* --- Essay Cards Grid --- */
+.essay-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+.essay-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.6rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.essay-card:hover {
+  border-color: var(--border-crimson);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.essay-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.essay-meta time {
+  color: var(--text-secondary);
+}
+
+.essay-tag {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+}
+
+.essay-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin-bottom: 0.6rem;
+}
+
+.essay-card:hover .essay-title {
+  color: var(--accent-crimson-hover);
+}
+
+.essay-excerpt {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+/* --- Single Essay Layout --- */
+.essay-article {
+  padding: 2.5rem 0 5rem 0;
+}
+
+.essay-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.essay-header-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.essay-content {
+  font-size: 1.05rem;
+  line-height: 1.82;
+  color: var(--text-secondary);
+}
+
+.essay-content h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 2.5rem 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.essay-content h2::before {
+  content: '§';
+  color: var(--accent-crimson);
+  font-family: var(--font-mono);
+}
+
+.essay-content h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 1.75rem 0 0.75rem 0;
+}
+
+.essay-content p {
+  margin-bottom: 1.35rem;
+}
+
+.essay-content strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.essay-content ul, .essay-content ol {
+  margin: 0 0 1.5rem 1.5rem;
+}
+
+.essay-content li {
+  margin-bottom: 0.5rem;
+}
+
+.essay-content blockquote {
+  border-left: 3px solid var(--accent-crimson);
+  background: var(--bg-surface);
+  padding: 1rem 1.25rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+.essay-content pre {
+  background: var(--bg-code);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+  color: var(--text-code);
+}
+
+.essay-content code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--bg-input);
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.essay-content pre code {
+  background: transparent;
+  padding: 0;
+  border: none;
+  color: inherit;
+}
+
+/* Callout Box */
+.callout-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-crimson);
+  border-left: 4px solid var(--accent-crimson);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  margin: 1.75rem 0;
+}
+
+.callout-box h4 {
+  color: var(--accent-crimson-hover);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Architecture Comparison Table */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.75rem 0;
+  font-size: 0.9rem;
+}
+
+.data-table th, .data-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-subtle);
+  text-align: left;
+}
+
+.data-table th {
+  background: var(--bg-surface-elevated);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.data-table td {
+  background: var(--bg-card);
+}
+
+/* --- About Page Specifics --- */
+.timeline {
+  position: relative;
+  margin: 2rem 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--border-subtle);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.95rem;
+  top: 0.25rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-crimson);
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 8px var(--accent-crimson);
+}
+
+.timeline-time {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.timeline-role {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.timeline-company {
+  font-size: 0.9rem;
+  color: var(--accent-crimson-hover);
+  margin-bottom: 0.4rem;
+}
+
+.timeline-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* --- Footer --- */
+.site-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border-subtle);
+  padding: 2.5rem 0;
+  background: var(--bg-primary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  sm-flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+}
+
+.footer-links a:hover {
+  color: var(--accent-crimson-hover);
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+@media (max-width: 640px) {
+  .nav-links {
+    gap: 1rem;
+  }
+  .essay-header-title {
+    font-size: 1.75rem;
+  }
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
