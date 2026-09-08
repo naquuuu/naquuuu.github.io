@@ -3,8 +3,7 @@
 A public thought-leadership and engineering workstation by **Ramadhana Bhanuharya Krishnamurti (Krishna / naquuuu)**.
 Bridging AI agentic workflows, high-precision technical product management, and systems architecture.
 
-- Canonical URL: [https://naquuuu.github.io/](https://naquuuu.github.io/)
-- Edge Preview: [https://mapclubkris.vercel.app/blog/](https://mapclubkris.vercel.app/blog/)
+- Live URL: [https://naquuuu.github.io/](https://naquuuu.github.io/)
 
 ---
 
