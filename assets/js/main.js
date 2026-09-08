@@ -1,5 +1,5 @@
 /**
- * naquuuu@pm — Interactive Client Scripts, Audio Autoplay & Flowchart Controllers
+ * naquuuu@pm — Interactive Client Scripts, Scroll-Spy, Audio Looping & Scroll Reveal
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -41,7 +41,73 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 2. Audio Player & Autoplay Logic for Hukum Murphy (Kafin Sulthan)
+  // 2. Scroll-Spy: Synchronize Header Nav Highlights with Current Scroll Position
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[id]');
+
+  function updateScrollSpy() {
+    let currentId = '';
+    const scrollPos = window.scrollY + 130; // offset for sticky navbar
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+        currentId = section.getAttribute('id');
+      }
+    });
+
+    if (currentId) {
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === `#${currentId}`) {
+          link.classList.add('active');
+        } else if (href && href.startsWith('#')) {
+          link.classList.remove('active');
+        }
+      });
+    }
+  }
+
+  window.addEventListener('scroll', updateScrollSpy, { passive: true });
+  updateScrollSpy();
+
+  // Instant active feedback when clicking anchor nav items
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      link.addEventListener('click', () => {
+        navLinks.forEach(l => {
+          if (l.getAttribute('href') && l.getAttribute('href').startsWith('#')) {
+            l.classList.remove('active');
+          }
+        });
+        link.classList.add('active');
+      });
+    }
+  });
+
+  // 3. Scroll-triggered Reveal Animations (IntersectionObserver)
+  const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  } else {
+    revealElements.forEach(el => el.classList.add('is-visible'));
+  }
+
+  // 4. Audio Player & Continuous Autoplay Logic for Hukum Murphy (Kafin Sulthan)
   const audioEl = document.getElementById('hukum-murphy-audio');
   const playBtn = document.getElementById('play-toggle-btn');
   const playIcon = document.getElementById('play-icon');
@@ -100,8 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
     floatingPlayBtn.addEventListener('click', toggleAudio);
   }
 
-  // Handle Autoplay on Page Load or First Interaction (Touch / Click / Scroll)
+  // Autoplay and Seamless Continuous Playback
   if (audioEl) {
+    audioEl.loop = true;
+
     const tryAutoplay = () => {
       audioEl.play().then(() => {
         updatePlayerUI(true);
@@ -127,14 +195,19 @@ document.addEventListener('DOMContentLoaded', () => {
       window.removeEventListener('keydown', onFirstUserInteraction);
     }
 
-    // Try immediate playback
     tryAutoplay();
 
-    // Fallback: start on first scroll or interaction
+    // Fallback: start on first user interaction
     window.addEventListener('click', onFirstUserInteraction, { once: true, passive: true });
     window.addEventListener('scroll', onFirstUserInteraction, { once: true, passive: true });
     window.addEventListener('touchstart', onFirstUserInteraction, { once: true, passive: true });
     window.addEventListener('keydown', onFirstUserInteraction, { once: true, passive: true });
+
+    audioEl.addEventListener('loadedmetadata', () => {
+      if (!isNaN(audioEl.duration) && audioEl.duration > 0) {
+        if (durationEl) durationEl.textContent = formatTime(audioEl.duration);
+      }
+    });
 
     audioEl.addEventListener('timeupdate', () => {
       if (!isNaN(audioEl.duration) && audioEl.duration > 0) {
@@ -145,10 +218,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Seamless looping: don't stop, smoothly restart
     audioEl.addEventListener('ended', () => {
-      updatePlayerUI(false);
-      if (progressFill) progressFill.style.width = '0%';
-      if (currentTimeEl) currentTimeEl.textContent = '0:00';
+      audioEl.currentTime = 0;
+      audioEl.play().catch(() => {});
     });
 
     if (progressBar) {
