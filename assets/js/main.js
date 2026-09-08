@@ -1,5 +1,5 @@
 /**
- * krishna@pm — Client Script & Interactive Workstation
+ * naquuuu@pm — Client Script & Interactive Cyber-Physical Workstation
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(codeBlock.innerText).then(() => {
         copyBtn.textContent = 'copied!';
-        copyBtn.style.color = '#27C93F';
+        copyBtn.style.color = '#34D399';
         setTimeout(() => {
           copyBtn.textContent = 'copy';
           copyBtn.style.color = '#94A3B8';
@@ -47,13 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (termInput && termHistory) {
     const commands = {
-      help: 'Available commands: whoami, focus, experience, skills, contact, brother, clear',
-      whoami: 'Krishna (Ramadhana Bhanuharya Krishnamurti) — Technical Product Manager & Systems Architect.',
-      focus: 'Bridging AI agentic workflows, revenue-generating e-commerce platforms, and zero-slop technical requirements.',
-      experience: 'Product Manager @ MAPCLUB (2026-Present) | Product Manager @ Traveloka (2024-2026) | Project Specialist @ BCG (2023-2024).',
-      skills: 'SQL, Python, LLM Workflows, RPA, System Architecture, MoSCoW Prioritization, Techno-Commercial Strategy.',
-      contact: 'Email: rbkrishnamurti@gmail.com | LinkedIn: https://www.linkedin.com/in/rbkrishnamurti/',
-      brother: 'Twin brother: Wishnumurti / Harya (@bhanuharya — Security Engineer). Check out his blog at https://bhanuharya.github.io/',
+      help: 'Available commands: whoami, mission, hardware, music, art, arsenal, experience, proof_points, contact, brother, clear',
+      whoami: 'Krishna (Ramadhana Bhanuharya Krishnamurti) — Resilient Cyber-Physical Product Lead & Systems Architect (Bits + Atoms).',
+      mission: 'National Archipelago Resilience: Engineering rugged, decentralized, failure-proof hardware & telemetry that survives Indonesia\'s 3T regions and 18-hour offline maritime transit.',
+      hardware: 'Focus areas: TinyML on ESP32, edge sensor telemetry, battery-free thermal storage, tactile non-screen physical interfaces.',
+      music: 'Monthly telemetry: 2,733 mins listened (862% > Indonesia avg). Heavy rotation: Hukum Murphy (Kafin Sulthan), Attention 250 (NewJeans), Wesley\'s Theory (Kendrick Lamar), Oddie Agam. Plays guitar.',
+      art: 'Canvas painter in acrylic/oil: Exploring textural friction between painterly organic chaos and deterministic engineering systems.',
+      arsenal: 'Gunners faithful: Tactical appreciation of positional play, high-press counter-transitions, and defensive rest-structures.',
+      experience: 'PO @ MAPCLUB Digital Asia | PM @ Traveloka (Rp10Bn net revenue engine) | Project Specialist @ BCG ($400M industrial EPC pipeline).',
+      proof_points: '1) Cold-Chain IoT Node | 2) Tactile Spotify Wearable | 3) Disruption Engine | 4) 3M PHB Bio-Mask (Award Winner) | 5) Schneider HotSand (Award Winner).',
+      contact: 'Email: rbkrishnamurti@gmail.com | LinkedIn: https://www.linkedin.com/in/rbkrishnamurti/ | Spotify: @1j69whrwxcopwxxto9n74zcdf',
+      brother: 'Twin brother: Wishnumurti / Harya (@bhanuharya — Security & Infrastructure Engineer). Check out his blog at https://bhanuharya.github.io/',
       clear: 'CLEAR'
     };
 
@@ -69,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const line = document.createElement('div');
         line.className = 'term-line';
-        line.innerHTML = `<span class="term-prompt">visitor@krishna:~$</span> <span class="term-cmd">${cmd}</span>`;
+        line.innerHTML = `<span class="term-prompt">visitor@naquuuu:~$</span> <span class="term-cmd">${escapeHtml(cmd)}</span>`;
 
         const out = document.createElement('div');
         out.className = 'term-out';
@@ -79,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (cmd === '') {
           // empty
         } else {
-          out.innerHTML = `command not found: <code>${cmd}</code>. Type <code style="color:var(--accent-crimson)">help</code> for available commands.`;
+          out.innerHTML = `command not found: <code>${escapeHtml(cmd)}</code>. Type <code style="color:var(--accent-crimson)">help</code> for command list.`;
         }
 
         termHistory.appendChild(line);
@@ -87,4 +91,100 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // 3. Interactive Portfolio Proof Points Tab Filter
+  const filterBtns = document.querySelectorAll('.portfolio-tab-btn');
+  const proofCards = document.querySelectorAll('.proof-card');
+
+  if (filterBtns.length > 0 && proofCards.length > 0) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+        proofCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter || category.includes(filter)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  // 4. Interactive Systems Architecture Flowchart Inspector
+  const flowchartNodes = document.querySelectorAll('.flowchart-node');
+  const inspectorBox = document.getElementById('flowchart-inspector');
+
+  const nodeDescriptions = {
+    'node-sensor': {
+      title: '01 / PHYSICAL SENSOR NODE (ATOMS)',
+      desc: 'Ruggedized IP67 edge unit with DHT22/PT100 temperature probes, multi-axis accelerometer, and shock sensors designed for high-humidity, marine tropical environments. Operates on solar-boosted LiFePO4 battery pack with ultra-low sleep draw (<15µA).'
+    },
+    'node-tinyml': {
+      title: '02 / EDGE TINYML & OFFLINE STATE MACHINE (FIRMWARE)',
+      desc: 'Runs quantized TensorFlow Lite Micro / TinyML anomaly detection on an ESP32 dual-core MCU. Detects thermal runway and shock degradation locally without cloud ping. Buffers time-series telemetry in circular SPI flash across 18+ hour offline maritime transit.'
+    },
+    'node-sync': {
+      title: '03 / ARCHIPELAGO LOW-BANDWIDTH SYNC (BITS)',
+      desc: 'Opportunistic delta synchronizer utilizing CBOR binary serialization over intermittent 2G/LoRa/eSIM connections. Automatically establishes cryptographic HMAC integrity when vessel enters port coverage, draining buffered telemetry in seconds.'
+    },
+    'node-interface': {
+      title: '04 / TACTILE HUMAN INTERFACE (COGNITIVE RESILIENCE)',
+      desc: 'Physical, high-contrast LED status arrays and tactile rotary dials for non-screen field operation. Fishermen, dock workers, and cold-storage operators receive immediate haptic/optical threshold validation without needing smartphones or app downloads.'
+    }
+  };
+
+  if (flowchartNodes.length > 0 && inspectorBox) {
+    flowchartNodes.forEach(node => {
+      node.addEventListener('click', () => {
+        flowchartNodes.forEach(n => n.classList.remove('active'));
+        node.classList.add('active');
+
+        const nodeId = node.getAttribute('data-node');
+        if (nodeDescriptions[nodeId]) {
+          inspectorBox.innerHTML = `
+            <div class="inspector-title">> ${nodeDescriptions[nodeId].title}</div>
+            <div>${nodeDescriptions[nodeId].desc}</div>
+          `;
+        }
+      });
+    });
+  }
+
+  // 5. Interactive Spotify Soundroom Track Selector
+  const trackTiles = document.querySelectorAll('.track-tile');
+  const nowPlayingDisplay = document.getElementById('soundroom-now-playing');
+
+  if (trackTiles.length > 0 && nowPlayingDisplay) {
+    trackTiles.forEach(tile => {
+      tile.addEventListener('click', () => {
+        trackTiles.forEach(t => t.classList.remove('playing'));
+        tile.classList.add('playing');
+
+        const title = tile.getAttribute('data-title');
+        const artist = tile.getAttribute('data-artist');
+        const plays = tile.getAttribute('data-plays');
+
+        nowPlayingDisplay.innerHTML = `
+          <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">[CURRENT ROTATION]</div>
+          <div style="font-size:1.1rem; font-weight:800; color:#1DB954; margin-top:2px;">${title}</div>
+          <div style="font-size:0.85rem; color:var(--text-secondary);">${artist} • <span style="color:var(--term-cyan); font-family:var(--font-mono);">${plays} plays</span></div>
+        `;
+      });
+    });
+  }
 });
+
+function escapeHtml(str) {
+  return str.replace(/[&<>"']/g, m => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[m]);
+}
