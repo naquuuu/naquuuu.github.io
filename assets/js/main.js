@@ -1,5 +1,5 @@
 /**
- * naquuuu@pm — Interactive Client Scripts, Scroll-Spy, Audio Looping & Scroll Reveal
+ * naquuuu@pm — Interactive Client Scripts, Scroll-Spy, Immediate Audio Autoplay & Seamless Looping
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -41,13 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 2. Scroll-Spy: Synchronize Header Nav Highlights with Current Scroll Position
+  // 2. Scroll-Spy: Synchronize Header Nav Highlights (About, Thinking Loop, Soundroom, Experience, Essays)
   const navLinks = document.querySelectorAll('.nav-links a');
   const sections = document.querySelectorAll('section[id]');
 
   function updateScrollSpy() {
     let currentId = '';
-    const scrollPos = window.scrollY + 130; // offset for sticky navbar
+    const scrollPos = window.scrollY + 140; // offset for sticky navbar
 
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, {
       threshold: 0.1,
-      rootMargin: '0px 0px -40px 0px'
+      rootMargin: '0px 0px -30px 0px'
     });
 
     revealElements.forEach(el => revealObserver.observe(el));
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(el => el.classList.add('is-visible'));
   }
 
-  // 4. Audio Player & Continuous Autoplay Logic for Hukum Murphy (Kafin Sulthan)
+  // 4. Audio Player & Autoplay Logic for Hukum Murphy (Kafin Sulthan)
   const audioEl = document.getElementById('hukum-murphy-audio');
   const playBtn = document.getElementById('play-toggle-btn');
   const playIcon = document.getElementById('play-icon');
@@ -132,7 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (floatingPlayIcon) floatingPlayIcon.style.display = 'none';
       if (floatingPauseIcon) floatingPauseIcon.style.display = 'block';
-      if (floatingBar) floatingBar.classList.add('playing');
+      if (floatingBar) {
+        floatingBar.classList.add('playing');
+        floatingBar.title = 'Playing Hukum Murphy (Click to pause)';
+      }
     } else {
       if (playIcon) playIcon.style.display = 'block';
       if (pauseIcon) pauseIcon.style.display = 'none';
@@ -140,7 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (floatingPlayIcon) floatingPlayIcon.style.display = 'block';
       if (floatingPauseIcon) floatingPauseIcon.style.display = 'none';
-      if (floatingBar) floatingBar.classList.remove('playing');
+      if (floatingBar) {
+        floatingBar.classList.remove('playing');
+        floatingBar.title = 'Click anywhere to play Hukum Murphy';
+      }
     }
   }
 
@@ -150,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
       audioEl.play().then(() => {
         updatePlayerUI(true);
       }).catch(err => {
-        console.log('User interaction required to play audio:', err);
+        console.log('Playback error / User interaction needed:', err);
       });
     } else {
       audioEl.pause();
@@ -158,50 +164,55 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  if (playBtn) {
-    playBtn.addEventListener('click', toggleAudio);
+  if (playBtn) playBtn.addEventListener('click', toggleAudio);
+  if (floatingPlayBtn) floatingPlayBtn.addEventListener('click', toggleAudio);
+  if (floatingBar) {
+    floatingBar.addEventListener('click', (e) => {
+      if (e.target !== floatingPlayBtn && !floatingPlayBtn.contains(e.target)) {
+        toggleAudio();
+      }
+    });
   }
 
-  if (floatingPlayBtn) {
-    floatingPlayBtn.addEventListener('click', toggleAudio);
-  }
-
-  // Autoplay and Seamless Continuous Playback
+  // Autoplay & Seamless Continuous Playback
   if (audioEl) {
     audioEl.loop = true;
 
+    // Attempt immediate playback on load
     const tryAutoplay = () => {
       audioEl.play().then(() => {
         updatePlayerUI(true);
         cleanupAutoplayTriggers();
       }).catch(() => {
-        // Autoplay policy prevented immediate playback; waiting for user interaction
+        // Autoplay policy prevented immediate playback; waiting for any user motion
       });
     };
 
-    const onFirstUserInteraction = () => {
+    const triggerPlayOnGesture = () => {
       if (audioEl.paused) {
         audioEl.play().then(() => {
           updatePlayerUI(true);
+          cleanupAutoplayTriggers();
         }).catch(() => {});
+      } else {
+        cleanupAutoplayTriggers();
       }
-      cleanupAutoplayTriggers();
     };
 
+    const interactionEvents = ['pointerdown', 'touchstart', 'click', 'scroll', 'keydown', 'mousemove'];
+    interactionEvents.forEach(evt => {
+      window.addEventListener(evt, triggerPlayOnGesture, { once: true, passive: true });
+      document.addEventListener(evt, triggerPlayOnGesture, { once: true, passive: true });
+    });
+
     function cleanupAutoplayTriggers() {
-      window.removeEventListener('click', onFirstUserInteraction);
-      window.removeEventListener('scroll', onFirstUserInteraction);
-      window.removeEventListener('touchstart', onFirstUserInteraction);
-      window.removeEventListener('keydown', onFirstUserInteraction);
+      interactionEvents.forEach(evt => {
+        window.removeEventListener(evt, triggerPlayOnGesture);
+        document.removeEventListener(evt, triggerPlayOnGesture);
+      });
     }
 
     tryAutoplay();
-
-    // Fallback: start on first user interaction
-    window.addEventListener('click', onFirstUserInteraction, { once: true, passive: true });
-    window.addEventListener('scroll', onFirstUserInteraction, { once: true, passive: true });
-    window.addEventListener('touchstart', onFirstUserInteraction, { once: true, passive: true });
-    window.addEventListener('keydown', onFirstUserInteraction, { once: true, passive: true });
 
     audioEl.addEventListener('loadedmetadata', () => {
       if (!isNaN(audioEl.duration) && audioEl.duration > 0) {
@@ -215,13 +226,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (progressFill) progressFill.style.width = pct + '%';
         if (currentTimeEl) currentTimeEl.textContent = formatTime(audioEl.currentTime);
         if (durationEl) durationEl.textContent = formatTime(audioEl.duration);
+
+        // Continuous loop guarantee: if within 0.2s of end, seamlessly rewind and keep going
+        if (audioEl.currentTime >= audioEl.duration - 0.25) {
+          audioEl.currentTime = 0;
+          if (audioEl.paused) audioEl.play().catch(() => {});
+        }
       }
     });
 
-    // Seamless looping: don't stop, smoothly restart
+    // Fallback ended listener to ensure it never stops
     audioEl.addEventListener('ended', () => {
       audioEl.currentTime = 0;
       audioEl.play().catch(() => {});
+      updatePlayerUI(true);
     });
 
     if (progressBar) {
