@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Krishna (naquuuu) — Systems Architect &amp; Product Builder</title>
-  <meta name="description" content="Personal portfolio and systems architecture journey of Ramadhana Bhanuharya Krishnamurti (Krishna / naquuuu). Designing resilient products where software meets the physical world.">
+  <title>Krishna (naquuuu) — Product Builder &amp; Systems Architect</title>
+  <meta name="description" content="Personal portfolio and systems architecture journey of Ramadhana Bhanuharya Krishnamurti (Krishna / naquuuu). Building failure-proof products where software meets the real world.">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -23,7 +23,7 @@
     </button>
   </aside>
 
-  <!-- Navigation -->
+  <!-- Navigation Header with Instant Scroll-Spy -->
   <header class="site-header">
     <div class="wrap nav">
       <a href="./" class="site-title">
@@ -32,143 +32,282 @@
       </a>
       <nav class="nav-links">
         <a href="#about" class="active">About</a>
-        <a href="#empathy">Empathy Loop</a>
+        <a href="#empathy">Thinking Loop</a>
         <a href="#battle-scars">Battle Scars</a>
-        <a href="#works">Works</a>
         <a href="#soundroom">Soundroom</a>
-        <a href="./blog/">Essays</a>
+        <a href="#essays">Essays</a>
       </nav>
     </div>
   </header>
 
-  <!-- Ambient Hero Section (Canvas Artwork in Background) -->
+  <!-- Ambient Hero Section: Integrated Skyline Portrait & Personality-First Intro -->
   <section class="hero-ambient" id="about">
     <div class="wrap hero-content">
-      <div class="hero-badge-row">
-        <span class="hero-badge hero-badge-status">● Active Systems Builder</span>
-        <span class="hero-badge hero-badge-art">🎨 Physical Canvas Atelier</span>
-        <span class="hero-badge">🇮🇩 17,000 Islands Focus</span>
-      </div>
+      <div class="hero-grid">
+        <!-- Left: Bio & Purpose -->
+        <div>
+          <div class="hero-badge-row">
+            <span class="hero-badge hero-badge-status">● Active Product Builder</span>
+            <span class="hero-badge hero-badge-art">🎨 Physical Canvas Painter</span>
+            <span class="hero-badge">🇮🇩 17,000 Islands Focus</span>
+          </div>
 
-      <h1 class="hero-name">Ramadhana Bhanuharya Krishnamurti</h1>
-      <div class="hero-tagline">Building failure-proof systems where software meets the real world.</div>
+          <h1 class="hero-name">Ramadhana Bhanuharya Krishnamurti</h1>
+          <div class="hero-tagline">Building systems that don't break when real life gets messy.</div>
 
-      <p class="hero-bio">
-        Hi, I'm <strong>Krishna (naquuuu)</strong>. Most software today is built assuming endless high-speed WiFi and air-conditioned cloud servers. But Indonesia is an archipelago of <strong>17,000 islands</strong>, where power flickers, internet drops on the sea, and physical products have to work anyway.
-      </p>
+          <p class="hero-bio">
+            Hey, I'm <strong>Krishna (naquuuu)</strong>. Most tech today assumes fast WiFi, air-conditioned rooms, and infinite cloud power. But Indonesia is an archipelago of <strong>17,000 islands</strong> where internet flickers on the water, hardware takes a beating in tropical heat, and products must work anyway.
+          </p>
 
-      <p class="hero-bio" style="margin-bottom: 1.5rem;">
-        With an <strong>Industrial Engineering foundation from Institut Teknologi Bandung (ITB)</strong>, I design resilient systems that combine radical human empathy with clean, reliable engineering—from heavy industrial energy projects at <strong style="color:#ffffff;">BCG</strong> to high-stress flight systems at <strong style="color:#ffffff;">Traveloka</strong>, and automated retail platforms at <strong style="color:#ffffff;">MAPCLUB</strong>.
-      </p>
+          <p class="hero-bio">
+            At 18, my first job was answering <strong>10,000 panicking high school students</strong> whose exam servers crashed late at night. That taught me one permanent lesson: <em>technology is useless if it doesn't solve real human anxiety.</em>
+          </p>
 
-      <div class="hero-cta-row">
-        <a href="#empathy" class="btn-primary">Explore My Thinking Loop ↓</a>
-        <a href="#works" class="btn-secondary">View Selected Works</a>
-        <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" class="btn-secondary">LinkedIn ↗</a>
+          <p class="hero-bio" style="margin-bottom: 1.25rem;">
+            With an <strong>Industrial Engineering background from ITB</strong>, I turn messy real-world operations into automated, reliable software—from heavy industrial energy projects at <strong style="color:#ffffff;">BCG</strong> to high-stress flight systems at <strong style="color:#ffffff;">Traveloka</strong> and retail platforms at <strong style="color:#ffffff;">MAPCLUB</strong>.
+          </p>
+
+          <div class="hero-cta-row">
+            <a href="#empathy" class="btn-primary">See My PRD Flowchart ↓</a>
+            <a href="#battle-scars" class="btn-secondary">Battle Scars</a>
+            <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" class="btn-secondary">LinkedIn ↗</a>
+          </div>
+        </div>
+
+        <!-- Right: Top Photo (ssdqq.jpeg) -->
+        <div class="hero-photo-card reveal-on-scroll">
+          <img src="./assets/img/krishna-hero.jpeg" alt="Ramadhana Bhanuharya Krishnamurti overlooking city skyline" class="hero-photo-img">
+          <div class="hero-photo-caption">
+            <div>
+              <div class="hero-photo-name">Krishna (naquuuu)</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted);">Systems Architect &amp; Product Lead</div>
+            </div>
+            <div class="hero-photo-loc">
+              <span>●</span> Jakarta &amp; Bandung
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <main class="wrap">
 
-    <!-- 1. The Radical Empathy Engine: Flowchart Explanation -->
-    <section id="empathy">
+    <!-- Life in Bits & Atoms: Personal Photo Strip -->
+    <section class="reveal-on-scroll" style="margin-bottom: 2rem;">
       <div class="section-header">
-        <h2 class="section-title">The Radical Empathy Engine</h2>
-        <span class="section-sub">empathy_loop.flow</span>
+        <h2 class="section-title">Life in Bits &amp; Atoms</h2>
+        <span class="section-sub">moments.photo</span>
+      </div>
+
+      <div class="life-gallery-grid">
+        <!-- Card 1: Twin Brother Harya -->
+        <div class="life-card">
+          <div class="life-card-img-wrap">
+            <img src="./assets/img/krishna-twin.jpeg" alt="Krishna and identical twin brother Harya" class="life-card-img">
+          </div>
+          <div class="life-card-caption">
+            <div class="life-card-title">Twin Brothers &amp; Builders</div>
+            <div class="life-card-desc">
+              Growing up with an identical twin brother, <a href="https://bhanuharya.github.io/" target="_blank" rel="noopener noreferrer" style="color:var(--accent-crimson-hover); text-decoration:underline;">Harya</a>, meant having a built-in partner to debate systems and build things side-by-side.
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Suit / Community -->
+        <div class="life-card">
+          <div class="life-card-img-wrap">
+            <img src="./assets/img/krishna-suit.jpeg" alt="Krishna at Hara Kollektiv" class="life-card-img">
+          </div>
+          <div class="life-card-caption">
+            <div class="life-card-title">Community &amp; Culture</div>
+            <div class="life-card-desc">
+              Whether organizing offline tech immersions for 200+ students or engaging with creative collectives, real human trust always comes before code.
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Casual Field / Travel -->
+        <div class="life-card">
+          <div class="life-card-img-wrap">
+            <img src="./assets/img/gallery-WhatsApp_Image_2026-09-09_at_03_41_20.jpeg" alt="Everyday observation" class="life-card-img">
+          </div>
+          <div class="life-card-caption">
+            <div class="life-card-title">Grounded in the Real World</div>
+            <div class="life-card-desc">
+              You can't design great systems just staring at a laptop. The best insights happen on the street, in coffee shops, and on the road.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. The Empathy-to-Production Loop: Logical PRD Flowchart -->
+    <section id="empathy" class="reveal-on-scroll">
+      <div class="section-header">
+        <h2 class="section-title">The Empathy-to-Production Architecture</h2>
+        <span class="section-sub">prd_decision_tree.flow</span>
       </div>
 
       <div class="concept-box">
         <div class="concept-box-header">
-          <h3>From Answering 10,000 Panicking Students to Autonomous Squads</h3>
+          <h3>How I Turn Human Frustration Into Permanent Code</h3>
           <p>
-            Right after high school at 18, my first real job wasn't a cozy office internship—it was customer support at <strong>EdukaSystem</strong>, answering the panic and confusion of <strong>over 10,000 students</strong> preparing for university entrance exams.
+            A real PRD isn't just fluffy text boxes—it is an unambiguous logic tree that handles errors, isolates root causes, and guarantees safety before software touches real users.
           </p>
         </div>
 
-        <div class="flow-chain flow-chain-4">
-          <!-- Step 1 -->
-          <div class="flow-step-card">
-            <span class="step-num">STEP 01</span>
-            <div class="step-title">10,000 Panicking Students</div>
-            <div class="step-desc">
-              High schoolers studying late at night when test servers crash. You learn that users don't care about coding buzzwords—they care whether your product solves their anxiety in seconds.
+        <div class="prd-flowchart">
+          <!-- Step 1: Trigger / Event -->
+          <div class="flow-terminal">
+            <span>● TRIGGER</span> User Distress Signal Detected (Flight Delays, Ticket Errors, or Exam Crash)
+          </div>
+
+          <div class="flow-arrow-down">↓</div>
+
+          <!-- Step 2: Triage Decision Diamond -->
+          <div class="flow-decision-block">
+            <div class="decision-question-row">
+              <div class="decision-diamond"><span>◇</span></div>
+              <span>DECISION 1: Is this an isolated one-off error or a systemic pattern?</span>
+            </div>
+            <div class="decision-branches">
+              <div class="branch-col">
+                <div class="branch-condition is-no">
+                  <span>✕ IF NO (Isolated Noise &lt;1%):</span>
+                </div>
+                <div class="branch-result">
+                  Trigger automated self-serve resolution guide, issue instant FAQ help, and log ticket telemetry.
+                </div>
+              </div>
+              <div class="branch-col">
+                <div class="branch-condition is-yes">
+                  <span>✓ IF YES (Systemic Friction &gt;5%):</span>
+                </div>
+                <div class="branch-result">
+                  Escalate to Root Cause Deep Dive: audit API payloads, tax rules, and user journey drop-offs.
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Step 2 -->
-          <div class="flow-step-card">
-            <span class="step-num">STEP 02</span>
-            <div class="step-title">Listen for the Signal</div>
-            <div class="step-desc">
-              Instead of treating complaints as annoying support tickets, every single bug report was treated as a treasure map showing where the product flow was confusing.
+          <div class="flow-arrow-down">↓</div>
+
+          <!-- Step 3: Boundary Investigation -->
+          <div class="flow-action">
+            <div class="flow-action-title">
+              <span>[PROCESS 02]</span> Trace Root Cause Across Domain Boundaries
+            </div>
+            <div class="flow-action-desc">
+              Find where the real-world disconnect happens. (e.g. airline fare codes vs Indonesian regulation PM 185, or corporate marketing spreadsheets vs ERP invoicing).
             </div>
           </div>
 
-          <!-- Step 3 -->
-          <div class="flow-step-card">
-            <span class="step-num">STEP 03</span>
-            <div class="step-title">Break Functional Silos</div>
-            <div class="step-desc">
-              At ITB, when leading the Professional Development division, I tore down rigid departmental walls and turned 20 students into fast, autonomous product squads with real ownership.
+          <div class="flow-arrow-down">↓</div>
+
+          <!-- Step 4: Silo Decision Diamond -->
+          <div class="flow-decision-block">
+            <div class="decision-question-row">
+              <div class="decision-diamond"><span>◇</span></div>
+              <span>DECISION 2: Does the fix require crossing departmental or company silos?</span>
+            </div>
+            <div class="decision-branches">
+              <div class="branch-col">
+                <div class="branch-condition is-yes">
+                  <span>✓ IF YES (Cross-Silo Friction):</span>
+                </div>
+                <div class="branch-result">
+                  Form autonomous cross-functional squad (Product + Eng + Ops + Finance). Establish strict, unambiguous API contracts so neither side can break calculations.
+                </div>
+              </div>
+              <div class="branch-col">
+                <div class="branch-condition is-no">
+                  <span>✕ IF NO (Single Service):</span>
+                </div>
+                <div class="branch-result">
+                  Deploy targeted rule parser update directly to the calculation engine with regression tests.
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Step 4 -->
-          <div class="flow-step-card">
-            <span class="step-num">STEP 04</span>
-            <div class="step-title">Ranked #1 with Real Trust</div>
-            <div class="step-desc">
-              Organized hands-on offline immersions with tech leaders (Huawei, Tokopedia, Paragon) for 200+ students. Ranked #1 of 15 divisions in ITB with record team engagement.
+          <div class="flow-arrow-down">↓</div>
+
+          <!-- Step 5: Verification Gate Decision Diamond -->
+          <div class="flow-decision-block">
+            <div class="decision-question-row">
+              <div class="decision-diamond"><span>◇</span></div>
+              <span>DECISION 3: Automated Verification Gate: Zero Disputes &amp; 100% Reconciliation?</span>
+            </div>
+            <div class="decision-branches">
+              <div class="branch-col">
+                <div class="branch-condition is-no">
+                  <span>✕ IF FAIL (Discrepancy Found):</span>
+                </div>
+                <div class="branch-result">
+                  Auto-quarantine in sandbox staging, flag breaking diff to on-call squad, and abort release.
+                </div>
+              </div>
+              <div class="branch-col">
+                <div class="branch-condition is-yes">
+                  <span>✓ IF PASS (99.9%+ Accuracy):</span>
+                </div>
+                <div class="branch-result">
+                  Canary release to 5% live users, monitor real-time dispute metrics, then auto-expand to 100%.
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div style="font-size: 0.88rem; color: var(--text-secondary); background: rgba(0,0,0,0.35); padding: 0.85rem 1.15rem; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-crimson); margin-top: 0.75rem;">
-          💬 <strong>The Lesson for Any Young Builder:</strong> You don't need fancy jargon to make an impact. Listen deeply to real human frustration, find the root cause, and build a clean system that fixes it permanently.
+          <div class="flow-arrow-down">↓</div>
+
+          <!-- Step 6: Terminal Success -->
+          <div class="flow-terminal flow-terminal-end">
+            <span>✔ RESOLUTION</span> Resilient System in Production (Zero manual spreadsheets, cut user anxiety in half)
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 2. The Battle Scars: Visual Systems in Production -->
-    <section id="battle-scars">
+    <section id="battle-scars" class="reveal-on-scroll">
       <div class="section-header">
         <h2 class="section-title">The Battle Scars: Systems in Production</h2>
-        <span class="section-sub">production_systems.map</span>
+        <span class="section-sub">experience.log</span>
       </div>
 
       <div class="battle-grid">
         <!-- Battle Scar 1: Traveloka -->
-        <div class="battle-card" id="traveloka-case">
+        <div class="battle-card">
           <div class="battle-card-top">
             <div>
-              <div class="battle-role">Product Manager (Flight Refunds &amp; Disruption Domain)</div>
+              <div class="battle-role">Product Manager (Flight Refunds &amp; Disruptions)</div>
               <div class="battle-company">Traveloka • High-Scale Aviation Systems</div>
             </div>
             <span class="battle-time">2024 — 2026</span>
           </div>
 
-          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 0.5rem;">
-            When airlines cancel or delay flights, passengers are stressed and airlines have cryptic, confusing fare rules. We turned complex aviation regulation (PM 185/2015) into an automated, transparent system.
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.4rem;">
+            When airlines delay or cancel flights, passengers panic and airlines hide behind cryptic fare rules. We turned complex aviation regulations into an automated, transparent engine.
           </p>
 
           <div class="battle-model-grid">
             <div class="model-col">
               <span class="model-tag model-tag-problem">The Real-World Mess</span>
               <div class="model-text">
-                Airline delays created massive customer anxiety and error-prone manual calculations between 10+ different flight APIs and tax rules.
+                Manual calculations between 10+ different flight APIs and tax codes led to customer disputes and days of waiting.
               </div>
             </div>
             <div class="model-col">
               <span class="model-tag model-tag-system">The Engineering Fix</span>
               <div class="model-text">
-                Overhauled calculation accuracy from 87.9% to 94.2% and automated cryptic airline ticket rules using smart parsing algorithms.
+                Overhauled calculation accuracy from 87.9% to 94.2% using smart fare-rule parsing algorithms.
               </div>
             </div>
             <div class="model-col">
               <span class="model-tag model-tag-impact">The Concrete Result</span>
               <div class="model-text">
-                Doubled automated resolutions (16.8% → 34.4%), cut customer disputes in half, and unlocked ~Rp10 Billion in net business revenue in 3 months.
+                Doubled automated resolutions (16.8% → 34.4%), cut customer disputes in half, and unlocked ~Rp10B in 3 months.
               </div>
             </div>
           </div>
@@ -184,27 +323,27 @@
             <span class="battle-time">2026 — Present</span>
           </div>
 
-          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 0.5rem;">
-            Connecting hundreds of world-class retail brands to millions of Indonesian shoppers. Transforming manual spreadsheets into automated, trusted software.
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.4rem;">
+            Powering loyalty for hundreds of world-class retail brands across Indonesia. Replacing manual spreadsheets with automated, trusted software.
           </p>
 
           <div class="battle-model-grid">
             <div class="model-col">
               <span class="model-tag model-tag-problem">The Real-World Mess</span>
               <div class="model-text">
-                Endless disconnected Excel sheets between marketing promotions and corporate finance, leading to weeks of manual verification.
+                Endless disconnected Excel files between marketing campaigns and finance, causing weeks of manual billing verification.
               </div>
             </div>
             <div class="model-col">
               <span class="model-tag model-tag-system">The Engineering Fix</span>
               <div class="model-text">
-                Designed an automated Marketing Services invoicing engine and established unambiguous bug gates so QA and developers work in sync.
+                Architected an automated Marketing Services invoicing engine and established zero-bug verification gates.
               </div>
             </div>
             <div class="model-col">
               <span class="model-tag model-tag-impact">The Concrete Result</span>
               <div class="model-text">
-                Eliminated manual reconciliation bottlenecks, secured corporate C-level approval, and made product specifications crystal clear.
+                Eliminated manual reconciliation bottlenecks and made product specifications crystal clear across teams.
               </div>
             </div>
           </div>
@@ -220,27 +359,27 @@
             <span class="battle-time">2023 — 2024</span>
           </div>
 
-          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 0.5rem;">
-            Wearing hard hats and steel-toed boots in mining, metals, and geothermal energy sites across Indonesia.
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.4rem;">
+            Wearing steel-toed boots in mining, metals, and geothermal energy sites across Indonesia.
           </p>
 
           <div class="battle-model-grid">
             <div class="model-col">
               <span class="model-tag model-tag-problem">The Real-World Mess</span>
               <div class="model-text">
-                $400M capital engineering bids where paper spreadsheets failed to account for heavy equipment breakdown and harsh tropical field wear.
+                $400M capital engineering bids where boardroom spreadsheets ignored heavy machinery breakdown in tropical mud.
               </div>
             </div>
             <div class="model-col">
               <span class="model-tag model-tag-system">The Engineering Fix</span>
               <div class="model-text">
-                Structured 10+ commercial engineering tenders and built an Operations &amp; Maintenance capability grounded in factory floor reality.
+                Structured 10+ engineering tenders and built an Operations &amp; Maintenance capability grounded in factory floor reality.
               </div>
             </div>
             <div class="model-col">
               <span class="model-tag model-tag-impact">The Concrete Result</span>
               <div class="model-text">
-                Advanced 30% of competitive bids to final contract awards, bridging the gap between boardroom financial targets and physical machinery.
+                Advanced 30% of competitive tenders to contract awards, connecting boardroom spreadsheets to physical machines.
               </div>
             </div>
           </div>
@@ -248,11 +387,11 @@
       </div>
     </section>
 
-    <!-- 3. Selected Works & Hardware Innovations (Pruned & Interactive) -->
-    <section id="works">
+    <!-- 3. Selected Works & Innovations -->
+    <section id="works" class="reveal-on-scroll">
       <div class="section-header">
-        <h2 class="section-title">Selected Works &amp; Innovations</h2>
-        <span class="section-sub">award_winning_solutions.lab</span>
+        <h2 class="section-title">Selected Innovations</h2>
+        <span class="section-sub">proof_points.lab</span>
       </div>
 
       <div class="portfolio-grid">
@@ -264,7 +403,7 @@
           </div>
           <h3 class="proof-title">3M PHB Bio-Mask: 100% Biodegradable PPE</h3>
           <p class="proof-thesis">
-            Billions of plastic surgical masks litter our oceans and take 450+ years to break down. We engineered a medical mask made from bacterial biopolymers (PHB) grown on Indonesian sugarcane waste that safely composts in soil within 90 days.
+            Billions of plastic medical masks pollute our oceans and take 450+ years to break down. We engineered a surgical mask from bacterial biopolymers (PHB) grown on Indonesian sugarcane waste that safely composts in soil in 90 days.
           </p>
           <div class="proof-footer">
             <span style="color: var(--text-muted); font-size: 0.76rem;">3M Inspire Challenge Finalist</span>
@@ -280,7 +419,7 @@
           </div>
           <h3 class="proof-title">Schneider HotSand: Storing Solar Heat in Sand</h3>
           <p class="proof-thesis">
-            Imported lithium batteries are too expensive and break down rapidly in hot Indonesian humidity. HotSand stores excess daytime solar energy in superheated local silica sand beds to provide hot water, crop drying, and clean power at night.
+            Imported lithium batteries are expensive and degrade fast in humid tropical climates. HotSand stores excess daytime solar energy in superheated local silica sand beds to provide hot water, crop drying, and clean power overnight.
           </p>
           <div class="proof-footer">
             <span style="color: var(--text-muted); font-size: 0.76rem;">Schneider Go Green Winner</span>
@@ -291,25 +430,25 @@
     </section>
 
     <!-- 4. The Physical Atelier: Art & Canvas -->
-    <section id="atelier">
+    <section id="atelier" class="reveal-on-scroll">
       <div class="section-header">
         <h2 class="section-title">The Physical Atelier: Canvas &amp; Pigment</h2>
         <span class="section-sub">acrylic_on_linen.art</span>
       </div>
 
-      <div class="concept-box" style="display: flex; flex-direction: column; gap: 1rem;">
-        <h3 style="font-size: 1.25rem; color: #ffffff;">Why I Paint: Atoms Cannot Be Undone With a Git Commit</h3>
-        <p style="color: var(--text-secondary); font-size: 0.94rem; line-height: 1.7; margin: 0;">
-          The textured dark red backdrop you see across this workstation is my original physical acrylic and oil painting on linen. In digital software, if you make a mistake, you can press <code style="color:var(--term-cyan)">Ctrl+Z</code> or roll back a server. In physical painting, every sweep of the palette knife leaves real texture that cannot be erased.
+      <div class="concept-box" style="display: flex; flex-direction: column; gap: 0.85rem;">
+        <h3 style="font-size: 1.15rem; color: #ffffff;">Why I Paint: Atoms Cannot Be Undone With a Git Commit</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.65; margin: 0;">
+          The textured dark red backdrop across this site is my original physical oil and acrylic painting on linen. In software, if you make a mistake, you can hit <code style="color:var(--term-cyan)">Ctrl+Z</code> or roll back a release. In physical painting, every scrape of the palette knife leaves real texture on the fabric that cannot be erased.
         </p>
-        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin: 0;">
-          This discipline carries straight into how I design physical products: <em>measure twice, respect the natural materials, and craft with intention.</em>
+        <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin: 0;">
+          This discipline shapes how I build systems: <em>measure twice, respect the constraints of the real world, and craft with intention.</em>
         </p>
       </div>
     </section>
 
-    <!-- 5. The Spotify Soundroom (Curated Playlists & Hukum Murphy) -->
-    <section id="soundroom">
+    <!-- 5. The Spotify Soundroom (Curated Playlists & Hukum Murphy Player) -->
+    <section id="soundroom" class="reveal-on-scroll">
       <div class="section-header">
         <h2 class="section-title">The Soundroom: Music &amp; Playlists</h2>
         <span class="section-sub">spotify_curation.audio</span>
@@ -321,11 +460,11 @@
           <div class="soundroom-user-info">
             <div class="soundroom-avatar-dot"></div>
             <div>
-              <div style="font-weight: 700; color: #ffffff; font-size: 0.95rem;">Krishna's Spotify Universe</div>
-              <div style="font-size: 0.76rem; color: var(--text-muted);">Curator &amp; Amateur Guitarist • Eclectic Grooves, Neo-Soul &amp; Indonesian Jazz</div>
+              <div style="font-weight: 700; color: #ffffff; font-size: 0.92rem;">Krishna's Spotify Universe</div>
+              <div style="font-size: 0.74rem; color: var(--text-muted);">Curator &amp; Amateur Guitarist • Indonesian Jazz, Neo-Soul &amp; City Groove</div>
             </div>
           </div>
-          <a href="https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf" target="_blank" rel="noopener noreferrer" style="color: var(--spotify-green); font-weight: 700; font-size: 0.84rem;">
+          <a href="https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf" target="_blank" rel="noopener noreferrer" style="color: var(--spotify-green); font-weight: 700; font-size: 0.82rem;">
             Visit Profile @1j69whrwxcopwxxto9n74zcdf ↗
           </a>
         </div>
@@ -377,20 +516,22 @@
           </a>
         </div>
 
-        <!-- Live Audio Player: Hukum Murphy by Kafin Sulthan -->
+        <!-- Live Audio Player: Hukum Murphy by Kafin Sulthan (Continuous Seamless Loop) -->
         <div class="soundroom-player-box">
           <audio id="hukum-murphy-audio" preload="auto" loop>
+            <source src="./assets/audio/hukum-murphy-full.mp3" type="audio/mpeg">
+            <source src="./assets/audio/hukum-murphy.mp3" type="audio/mpeg">
             <source src="./assets/audio/hukum-murphy-preview.m4a" type="audio/mp4">
             <source src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/85/19/0e/85190ee9-b8b9-7a4d-3fa2-61afada97252/mzaf_11279198995228694862.plus.aac.p.m4a" type="audio/mp4">
           </audio>
 
           <div class="player-header">
             <div class="player-track-info">
-              <img src="./assets/img/hukum-murphy-art.jpg" alt="A Midsummer Night's Dream - Kafin Sulthan" class="player-art">
+              <img src="./assets/img/hukum-murphy-art.jpg" alt="Hukum Murphy - Kafin Sulthan" class="player-art">
               <div>
-                <div style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--spotify-green); font-weight: 700;">HEAVY ROTATION // PLAYING NOW</div>
-                <div style="font-size: 1.05rem; font-weight: 800; color: #ffffff;">Hukum Murphy</div>
-                <div style="font-size: 0.8rem; color: var(--text-secondary);">Kafin Sulthan • <em>A Midsummer Night's Dream</em></div>
+                <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--spotify-green); font-weight: 700;">HEAVY ROTATION // NOW PLAYING (LOOP)</div>
+                <div style="font-size: 0.98rem; font-weight: 800; color: #ffffff;">Hukum Murphy</div>
+                <div style="font-size: 0.78rem; color: var(--text-secondary);">Kafin Sulthan • <em>A Midsummer Night's Dream</em></div>
               </div>
             </div>
 
@@ -414,35 +555,43 @@
               </div>
               <div class="player-time-row">
                 <span id="player-current-time">0:00</span>
-                <span>Tap anywhere or scroll to hear Kafin Sulthan</span>
-                <span id="player-duration">1:30</span>
+                <span>Playing continuously on loop • Tap anywhere or scroll</span>
+                <span id="player-duration">3:20</span>
               </div>
             </div>
+          </div>
+
+          <!-- Direct Full-Length Spotify Player Link -->
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 0.65rem; font-size: 0.74rem;">
+            <span style="color: var(--text-muted);">Want to hear the complete 3-minute studio recording on Spotify?</span>
+            <a href="https://open.spotify.com/search/Kafin%20Sulthan%20Hukum%20Murphy" target="_blank" rel="noopener noreferrer" style="color: var(--spotify-green); font-weight: 700;">
+              Open Full Song on Spotify ↗
+            </a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 6. Architectural Essays -->
-    <section id="essays">
+    <section id="essays" class="reveal-on-scroll">
       <div class="section-header">
         <h2 class="section-title">Architectural Essays</h2>
         <a href="./blog/" class="section-sub" style="color: var(--accent-crimson-hover);">View All Essays →</a>
       </div>
 
       <div class="concept-box" style="border-color: var(--border-crimson);">
-        <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--term-cyan); margin-bottom: 0.4rem;">
+        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--term-cyan); margin-bottom: 0.35rem;">
           SYSTEMS ARCHITECTURE • AUGUST 2026
         </div>
-        <h3 style="font-size: 1.3rem; margin-bottom: 0.6rem;">
+        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">
           <a href="./blog/building-an-autonomous-product-operating-system/" style="color:#ffffff;">
             Building an Autonomous Product Operating System: Beyond LLM Slop
           </a>
         </h3>
-        <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 1rem;">
-          Why standard AI code generation produces fragile code that breaks in production—and how we built an autonomous multi-agent verification engine that guarantees zero bugs before software ever reaches customers.
+        <p style="color: var(--text-secondary); font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.85rem;">
+          Why standard AI code generation produces fragile code that breaks in production—and how to construct an autonomous multi-agent verification engine that guarantees zero bugs before software ever reaches customers.
         </p>
-        <a href="./blog/building-an-autonomous-product-operating-system/" class="btn-primary" style="font-size: 0.8rem; padding: 5px 12px;">
+        <a href="./blog/building-an-autonomous-product-operating-system/" class="btn-primary" style="font-size: 0.78rem; padding: 4px 12px;">
           Read Essay &amp; Architecture Flowchart →
         </a>
       </div>
