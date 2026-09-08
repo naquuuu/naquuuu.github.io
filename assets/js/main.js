@@ -1,5 +1,5 @@
 /**
- * naquuuu@pm — Client Script & Interactive Cyber-Physical Workstation
+ * naquuuu@pm — Client Script, Audio Player & Interactive Cyber-Physical Workstation
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 4. Interactive Systems Architecture Flowchart Inspector
   const flowchartNodes = document.querySelectorAll('.flowchart-node');
+  const mobileStageBtns = document.querySelectorAll('.flowchart-stage-btn');
   const inspectorBox = document.getElementById('flowchart-inspector');
 
   const nodeDescriptions = {
@@ -138,19 +139,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  if (flowchartNodes.length > 0 && inspectorBox) {
+  function updateFlowchartNode(nodeId) {
+    flowchartNodes.forEach(n => {
+      if (n.getAttribute('data-node') === nodeId) {
+        n.classList.add('active');
+      } else {
+        n.classList.remove('active');
+      }
+    });
+
+    mobileStageBtns.forEach(b => {
+      if (b.getAttribute('data-node') === nodeId) {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+
+    if (inspectorBox && nodeDescriptions[nodeId]) {
+      inspectorBox.innerHTML = `
+        <div class="inspector-title">> ${nodeDescriptions[nodeId].title}</div>
+        <div>${nodeDescriptions[nodeId].desc}</div>
+      `;
+    }
+  }
+
+  if (flowchartNodes.length > 0) {
     flowchartNodes.forEach(node => {
       node.addEventListener('click', () => {
-        flowchartNodes.forEach(n => n.classList.remove('active'));
-        node.classList.add('active');
-
         const nodeId = node.getAttribute('data-node');
-        if (nodeDescriptions[nodeId]) {
-          inspectorBox.innerHTML = `
-            <div class="inspector-title">> ${nodeDescriptions[nodeId].title}</div>
-            <div>${nodeDescriptions[nodeId].desc}</div>
-          `;
-        }
+        updateFlowchartNode(nodeId);
+      });
+    });
+  }
+
+  if (mobileStageBtns.length > 0) {
+    mobileStageBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const nodeId = btn.getAttribute('data-node');
+        updateFlowchartNode(nodeId);
       });
     });
   }
@@ -170,16 +197,80 @@ document.addEventListener('DOMContentLoaded', () => {
         const plays = tile.getAttribute('data-plays');
 
         nowPlayingDisplay.innerHTML = `
-          <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">[CURRENT ROTATION]</div>
-          <div style="font-size:1.1rem; font-weight:800; color:#1DB954; margin-top:2px;">${title}</div>
-          <div style="font-size:0.85rem; color:var(--text-secondary);">${artist} • <span style="color:var(--term-cyan); font-family:var(--font-mono);">${plays} plays</span></div>
+          <div style="font-size:0.72rem; color:var(--text-muted); font-family:var(--font-mono);">[CURRENT ROTATION]</div>
+          <div style="font-size:1.05rem; font-weight:800; color:#1DB954; margin-top:2px;">${escapeHtml(title)}</div>
+          <div style="font-size:0.82rem; color:var(--text-secondary);">${escapeHtml(artist)} • <span style="color:var(--term-cyan); font-family:var(--font-mono);">${escapeHtml(plays)}</span></div>
         `;
       });
     });
   }
+
+  // 6. Real Audio Playback: Kafin Sulthan — Hukum Murphy
+  const audioEl = document.getElementById('hukum-murphy-audio');
+  const playBtn = document.getElementById('play-toggle-btn');
+  const playIcon = document.getElementById('play-icon');
+  const pauseIcon = document.getElementById('pause-icon');
+  const eqBars = document.getElementById('equalizer-bars');
+  const progressFill = document.getElementById('player-progress-fill');
+  const progressBar = document.getElementById('player-progress-bar');
+  const currentTimeEl = document.getElementById('player-current-time');
+  const durationEl = document.getElementById('player-duration');
+
+  if (audioEl && playBtn) {
+    playBtn.addEventListener('click', () => {
+      if (audioEl.paused) {
+        audioEl.play().then(() => {
+          if (playIcon) playIcon.style.display = 'none';
+          if (pauseIcon) pauseIcon.style.display = 'block';
+          if (eqBars) eqBars.classList.add('active');
+        }).catch(err => {
+          console.warn('Playback error:', err);
+        });
+      } else {
+        audioEl.pause();
+        if (playIcon) playIcon.style.display = 'block';
+        if (pauseIcon) pauseIcon.style.display = 'none';
+        if (eqBars) eqBars.classList.remove('active');
+      }
+    });
+
+    audioEl.addEventListener('timeupdate', () => {
+      if (!isNaN(audioEl.duration) && audioEl.duration > 0) {
+        const pct = (audioEl.currentTime / audioEl.duration) * 100;
+        if (progressFill) progressFill.style.width = pct + '%';
+        if (currentTimeEl) currentTimeEl.textContent = formatTime(audioEl.currentTime);
+        if (durationEl) durationEl.textContent = formatTime(audioEl.duration);
+      }
+    });
+
+    audioEl.addEventListener('ended', () => {
+      if (playIcon) playIcon.style.display = 'block';
+      if (pauseIcon) pauseIcon.style.display = 'none';
+      if (eqBars) eqBars.classList.remove('active');
+      if (progressFill) progressFill.style.width = '0%';
+      if (currentTimeEl) currentTimeEl.textContent = '0:00';
+    });
+
+    if (progressBar) {
+      progressBar.addEventListener('click', (e) => {
+        const rect = progressBar.getBoundingClientRect();
+        const clickPos = (e.clientX - rect.left) / rect.width;
+        if (!isNaN(audioEl.duration)) {
+          audioEl.currentTime = clickPos * audioEl.duration;
+        }
+      });
+    }
+  }
 });
 
+function formatTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return `${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
 function escapeHtml(str) {
+  if (!str) return '';
   return str.replace(/[&<>"']/g, m => ({
     '&': '&amp;',
     '<': '&lt;',
