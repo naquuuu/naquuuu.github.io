@@ -80,6 +80,70 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: clip; /* Blog Reliability Standard: safety net against horizontal spill */
+}
+
+/* =============================================================================
+   Blog Reliability Standard (Rule 1: Mobile Layout & Anti-Overflow Resets)
+   ============================================================================= */
+
+/* Content elements never exceed container bounds */
+img, svg, video, iframe, pre, table {
+  max-width: 100%;
+}
+
+img, video, iframe {
+  height: auto;
+}
+
+pre {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Flex & Grid Children: Zero min-width to prevent intrinsic sizing overflow */
+.wrap, .wrap-wide, .nav, .nav-links, .hero-grid, .playlist-row,
+.life-gallery-grid, .concept-box, .essay-article, .essay-content,
+.life-card, .playlist-art-card, .soundroom-meta-col, .flowchart-whiteboard-box {
+  min-width: 0;
+}
+
+/* Wide Content Scroller (SVG Flowcharts & Tables) */
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Subtitle wide container (replaces inline max-width: 840px) */
+.section-subtitle-wide {
+  max-width: 840px;
+}
+
+/* Touch Targets: minimum 44x44px hitbox for accessibility */
+button, .btn-primary, .btn-secondary, .hero-link-badge, .control-btn, .proof-deck-btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Prevent iOS auto-zoom on input focus */
+input, select, textarea {
+  font-size: 16px;
+}
+
+.icon-pause-init {
+  display: none;
 }
 
 a {
@@ -614,6 +678,9 @@ h1, h2, h3, h4 {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 16px 16px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  min-width: 0;
   display: flex;
   justify-content: center;
 }
@@ -1543,6 +1610,9 @@ h1, h2, h3, h4 {
 }
 
 .essay-content {
+  max-width: 72ch;
+  margin: 0 auto;
+  min-width: 0;
   font-size: 1.02rem;
   line-height: 1.8;
   color: var(--text-secondary);

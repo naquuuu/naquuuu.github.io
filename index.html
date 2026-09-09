@@ -19,7 +19,7 @@
     </div>
     <button type="button" class="floating-play-btn" id="floating-play-btn" aria-label="Play / Pause Audio">
       <svg id="floating-play-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-      <svg id="floating-pause-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+      <svg id="floating-pause-icon" class="icon-pause-init" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
     </button>
   </aside>
 
@@ -166,7 +166,7 @@
         </div>
 
         <!-- SVG Flowchart Diagram (Personal Life Decision Engine) -->
-        <div class="flowchart-board-canvas">
+        <div class="flowchart-board-canvas scroll-x">
           <svg class="flowchart-svg" viewBox="0 0 660 595" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <marker id="arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -357,7 +357,7 @@
 
         <!-- Live Audio Player: Hukum Murphy by Kafin Sulthan (Continuous Seamless Loop) -->
         <div class="soundroom-player-box">
-          <audio id="hukum-murphy-audio" preload="auto" loop playsinline>
+          <audio id="hukum-murphy-audio" preload="auto" playsinline>
             <source src="./assets/audio/hukum-murphy-preview.m4a" type="audio/mp4">
             <source src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/85/19/0e/85190ee9-b8b9-7a4d-3fa2-61afada97252/mzaf_11279198995228694862.plus.aac.p.m4a" type="audio/mp4">
           </audio>
@@ -383,7 +383,7 @@
           <div class="player-controls-row">
             <button type="button" class="play-toggle-btn" id="play-toggle-btn" aria-label="Play or Pause Hukum Murphy">
               <svg id="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              <svg id="pause-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+              <svg id="pause-icon" class="icon-pause-init" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
             </button>
 
             <div class="player-progress-wrap">
@@ -580,7 +580,7 @@
         <span class="section-sub">acrylic_on_linen.art</span>
       </div>
 
-      <div class="concept-box" style="display: flex; flex-direction: column; gap: 0.85rem; max-width: 100%; box-sizing: border-box; overflow: hidden;">
+      <div class="concept-box" style="display: flex; flex-direction: column; gap: 0.85rem;">
         <h3 style="font-size: 1.15rem; color: #ffffff;">Why I Paint: Atoms Cannot Be Undone With a Git Commit</h3>
         <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.65; margin: 0;">
           The textured dark red canvas below is my original physical acrylic and oil painting on Belgian linen. In digital software, if you make a mistake, you can hit <code style="color:var(--term-cyan)">Ctrl+Z</code> or roll back a server commit. In physical painting, every sweep of the palette knife leaves real texture on the fabric that cannot be erased.

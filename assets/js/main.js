@@ -124,6 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const floatingPlayIcon = document.getElementById('floating-play-icon');
   const floatingPauseIcon = document.getElementById('floating-pause-icon');
 
+  // Flag to track intentional user pauses vs OS/browser audio interruptions
+  let isUserInitiatedPause = false;
+  let hasAttemptedAutoplay = false;
+
   function updatePlayerUI(isPlaying) {
     if (isPlaying) {
       if (playIcon) playIcon.style.display = 'none';
@@ -150,17 +154,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Toggle audio on user interaction
   function toggleAudio() {
     if (!audioEl) return;
     if (audioEl.paused) {
-      audioEl.play().then(() => {
-        updatePlayerUI(true);
-      }).catch(err => {
-        console.log('Playback error / User interaction needed:', err);
+      isUserInitiatedPause = false;
+      audioEl.play().catch(err => {
+        console.log('Playback request handled:', err);
       });
     } else {
+      isUserInitiatedPause = true;
       audioEl.pause();
-      updatePlayerUI(false);
     }
   }
 
@@ -174,24 +178,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Autoplay & Seamless Continuous Playback
   if (audioEl) {
-    audioEl.loop = true;
+    // 1. Single Looping Mechanism: Never use loop attribute or timeupdate seek.
+    // Listen exclusively to 'ended' event per Blog Reliability Standard.
+    audioEl.loop = false;
 
-    // Attempt immediate playback on load
-    const tryAutoplay = () => {
-      audioEl.play().then(() => {
-        updatePlayerUI(true);
-        cleanupAutoplayTriggers();
-      }).catch(() => {
-        // Autoplay policy prevented immediate playback; waiting for any user motion
+    // 2. Event-driven UI: Synchronize UI with actual hardware audio state
+    audioEl.addEventListener('play', () => {
+      updatePlayerUI(true);
+    });
+
+    audioEl.addEventListener('pause', () => {
+      updatePlayerUI(false);
+      // Interruption resilience: If paused by browser/OS without user click, attempt resume once
+      if (!isUserInitiatedPause) {
+        setTimeout(() => {
+          if (!isUserInitiatedPause && audioEl.paused) {
+            audioEl.play().catch(() => {});
+          }
+        }, 300);
+      }
+    });
+
+    // 3. Visibility Change: Resume if tab becomes visible and wasn't intentionally paused
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && !isUserInitiatedPause && audioEl.paused) {
+        audioEl.play().catch(() => {});
+      }
+    });
+
+    // 4. Single Loop Event Handler (Ended -> Reset & Play)
+    audioEl.addEventListener('ended', () => {
+      audioEl.currentTime = 0;
+      audioEl.play().catch(err => {
+        console.warn('Seamless loop restart caught:', err);
       });
-    };
+    });
+
+    // 5. Autoplay Triggers: ONLY valid mobile gestures (NO scroll, NO mousemove)
+    const validInteractionEvents = ['pointerdown', 'touchstart', 'click', 'keydown'];
 
     const triggerPlayOnGesture = () => {
-      if (audioEl.paused) {
+      if (audioEl.paused && !isUserInitiatedPause) {
         audioEl.play().then(() => {
-          updatePlayerUI(true);
           cleanupAutoplayTriggers();
         }).catch(() => {});
       } else {
@@ -199,27 +228,41 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    const interactionEvents = ['pointerdown', 'touchstart', 'click', 'scroll', 'keydown', 'mousemove'];
-    interactionEvents.forEach(evt => {
-      window.addEventListener(evt, triggerPlayOnGesture, { once: true, passive: true });
-      document.addEventListener(evt, triggerPlayOnGesture, { once: true, passive: true });
-    });
-
     function cleanupAutoplayTriggers() {
-      interactionEvents.forEach(evt => {
+      validInteractionEvents.forEach(evt => {
         window.removeEventListener(evt, triggerPlayOnGesture);
         document.removeEventListener(evt, triggerPlayOnGesture);
       });
     }
 
-    tryAutoplay();
+    validInteractionEvents.forEach(evt => {
+      window.addEventListener(evt, triggerPlayOnGesture, { once: true, passive: true });
+      document.addEventListener(evt, triggerPlayOnGesture, { once: true, passive: true });
+    });
 
+    // 6. Play after loadedmetadata
     audioEl.addEventListener('loadedmetadata', () => {
       if (!isNaN(audioEl.duration) && audioEl.duration > 0) {
         if (durationEl) durationEl.textContent = formatTime(audioEl.duration);
       }
+      if (!isUserInitiatedPause && audioEl.paused && !hasAttemptedAutoplay) {
+        hasAttemptedAutoplay = true;
+        audioEl.play().then(() => {
+          cleanupAutoplayTriggers();
+        }).catch(() => {
+          // Autoplay policy waiting for user gesture
+        });
+      }
     });
 
+    // Initial silent attempt on DOMContentLoaded
+    audioEl.play().then(() => {
+      cleanupAutoplayTriggers();
+    }).catch(() => {
+      // Normal browser autoplay restriction; gesture listeners will engage
+    });
+
+    // 7. Timeupdate for progress bar display ONLY (zero seek logic)
     audioEl.addEventListener('timeupdate', () => {
       if (!isNaN(audioEl.duration) && audioEl.duration > 0) {
         const pct = (audioEl.currentTime / audioEl.duration) * 100;
@@ -229,16 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Unconditional seamless loop listener
-    audioEl.addEventListener('ended', () => {
-      audioEl.currentTime = 0;
-      audioEl.play().then(() => {
-        updatePlayerUI(true);
-      }).catch(err => {
-        console.warn('Loop restart error:', err);
-      });
-    });
-
+    // Seek via progress bar click
     if (progressBar) {
       progressBar.addEventListener('click', (e) => {
         const rect = progressBar.getBoundingClientRect();
