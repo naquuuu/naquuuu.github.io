@@ -226,20 +226,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (progressFill) progressFill.style.width = pct + '%';
         if (currentTimeEl) currentTimeEl.textContent = formatTime(audioEl.currentTime);
         if (durationEl) durationEl.textContent = formatTime(audioEl.duration);
-
-        // Continuous loop guarantee: if within 0.2s of end, seamlessly rewind and keep going
-        if (audioEl.currentTime >= audioEl.duration - 0.25) {
-          audioEl.currentTime = 0;
-          if (audioEl.paused) audioEl.play().catch(() => {});
-        }
       }
     });
 
-    // Fallback ended listener to ensure it never stops
+    // Unconditional seamless loop listener
     audioEl.addEventListener('ended', () => {
       audioEl.currentTime = 0;
-      audioEl.play().catch(() => {});
-      updatePlayerUI(true);
+      audioEl.play().then(() => {
+        updatePlayerUI(true);
+      }).catch(err => {
+        console.warn('Loop restart error:', err);
+      });
     });
 
     if (progressBar) {
