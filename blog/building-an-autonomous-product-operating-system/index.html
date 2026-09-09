@@ -138,112 +138,112 @@
               </marker>
             </defs>
 
-            <!-- 1. START NODE (Capsule / Pill) -->
-            <rect x="225" y="20" width="190" height="34" rx="17" ry="17" fill="#27272A" stroke="#52525B" stroke-width="1.5" />
-            <text x="320" y="42" font-family="'Open Sans', sans-serif" font-size="11.5" font-weight="700" fill="#F4F4F5" text-anchor="middle">
-              START: User Distress Signal
+            <!-- 1. START NODE (Raw Stakeholder Context) -->
+            <rect x="200" y="20" width="240" height="36" rx="18" ry="18" fill="#27272A" stroke="#52525B" stroke-width="1.5" />
+            <text x="320" y="43" font-family="'Open Sans', sans-serif" font-size="11.5" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              START: Raw Context / Slack Brief
             </text>
 
             <!-- Connector Down to Decision 1 -->
-            <path d="M 320 54 L 320 90" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+            <path d="M 320 56 L 320 90" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
 
-            <!-- 2. DECISION 1 (Diamond) -->
-            <polygon points="320,90 415,125 320,160 225,125" fill="#18181B" stroke="#52525B" stroke-width="1.5" />
+            <!-- 2. DECISION 1 (MoSCoW Boundary Gate) -->
+            <polygon points="320,90 425,125 320,160 215,125" fill="#18181B" stroke="#52525B" stroke-width="1.5" />
             <text x="320" y="122" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              Recurring
+              Strict MoSCoW
             </text>
             <text x="320" y="136" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              Pattern?
+              Boundary Audit?
             </text>
 
-            <!-- Branch NO -> Right (Self-Serve FAQ) -->
-            <path d="M 415 125 L 485 125" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
-            <text x="450" y="117" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#A1A1AA" text-anchor="middle">[No]</text>
+            <!-- Branch NO -> Right (Demand Missing Context) -->
+            <path d="M 425 125 L 485 125" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+            <text x="455" y="117" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#A1A1AA" text-anchor="middle">[Fail]</text>
 
             <rect x="485" y="103" width="160" height="44" rx="4" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
             <text x="565" y="122" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="600" fill="#E4E4E7" text-anchor="middle">
-              Deploy Self-Serve FAQ
+              Demand Clarification
             </text>
             <text x="565" y="136" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="400" fill="#A1A1AA" text-anchor="middle">
-              &amp; Log Telemetry Ticket
+              Reject Unbounded Slop
             </text>
 
             <!-- Branch YES -> Process 1 (Center Down) -->
             <path d="M 320 160 L 320 195" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
-            <text x="336" y="180" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#E4E4E7">[Yes]</text>
+            <text x="336" y="180" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#E4E4E7">[Pass]</text>
 
-            <!-- 3. PROCESS 1 (Audit Root Cause) -->
-            <rect x="205" y="195" width="230" height="44" rx="4" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
+            <!-- 3. PROCESS 1 (Soft API Contract Extraction) -->
+            <rect x="185" y="195" width="270" height="46" rx="4" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
             <text x="320" y="214" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              Audit Root Cause
+              Soft API Contract Schemas
             </text>
-            <text x="320" y="228" font-family="'Open Sans', sans-serif" font-size="10" font-weight="400" fill="#A1A1AA" text-anchor="middle">
-              Trace Across Domain Boundaries
+            <text x="320" y="229" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="400" fill="#A1A1AA" text-anchor="middle">
+              JSON Payloads, Error Codes &amp; DB States
+            </text>
+
+            <!-- Connector Down to Process 2 -->
+            <path d="M 320 241 L 320 275" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+
+            <!-- 4. PROCESS 2 (Anti-Slop BRD & SharePoint Sync) -->
+            <rect x="185" y="275" width="270" height="46" rx="4" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
+            <text x="320" y="294" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+              Anti-Slop Corporate BRD Engine
+            </text>
+            <text x="320" y="309" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="400" fill="#A1A1AA" text-anchor="middle">
+              Deterministic Specs &amp; Word (.docx) Sync
             </text>
 
             <!-- Connector Down to Decision 2 -->
-            <path d="M 320 239 L 320 270" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+            <path d="M 320 321 L 320 355" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
 
-            <!-- 4. DECISION 2 (Diamond) -->
-            <polygon points="320,270 420,310 320,350 220,310" fill="#18181B" stroke="#52525B" stroke-width="1.5" />
-            <text x="320" y="306" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              Crosses Team
+            <!-- 5. DECISION 2 (Prototype Needed?) -->
+            <polygon points="320,355 425,390 320,425 215,390" fill="#18181B" stroke="#52525B" stroke-width="1.5" />
+            <text x="320" y="386" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+              Interactive Native
             </text>
-            <text x="320" y="320" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              or API Silos?
-            </text>
-
-            <!-- Branch NO -> Right (Rule Parser Hotfix) -->
-            <path d="M 420 310 L 485 310" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
-            <text x="450" y="302" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#A1A1AA" text-anchor="middle">[No]</text>
-
-            <rect x="485" y="288" width="160" height="44" rx="4" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
-            <text x="565" y="307" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="600" fill="#E4E4E7" text-anchor="middle">
-              Rule Parser Hotfix
-            </text>
-            <text x="565" y="321" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="400" fill="#A1A1AA" text-anchor="middle">
-              Push Isolated Patch
+            <text x="320" y="400" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+              Prototype Needed?
             </text>
 
-            <!-- Route Hotfix down into Verification Gate -->
-            <path d="M 565 332 L 565 440 L 426 440" stroke="#52525B" stroke-width="1.2" stroke-dasharray="3" fill="none" marker-end="url(#arrow-gray)" />
+            <!-- Branch YES -> Right (Binary Token Harvester & Edge Shell) -->
+            <path d="M 425 390 L 485 390" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+            <text x="455" y="382" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#A1A1AA" text-anchor="middle">[Yes]</text>
 
-            <!-- Branch YES -> Process 2 (Center Down) -->
-            <path d="M 320 350 L 320 380" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
-            <text x="336" y="368" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#E4E4E7">[Yes]</text>
-
-            <!-- 5. PROCESS 2: Autonomous Squad -->
-            <rect x="195" y="380" width="250" height="44" rx="4" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
-            <text x="320" y="399" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              Form Squad: Eng + Ops + Finance
+            <rect x="485" y="368" width="160" height="44" rx="4" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
+            <text x="565" y="387" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="600" fill="#E4E4E7" text-anchor="middle">
+              Binary APK Harvester
             </text>
-            <text x="320" y="413" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="400" fill="#A1A1AA" text-anchor="middle">
-              Define Soft API Contracts &amp; MoSCoW
+            <text x="565" y="401" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="400" fill="#A1A1AA" text-anchor="middle">
+              Vercel Edge-Gated Shell
             </text>
 
-            <!-- Connector Down to Decision 3 -->
-            <path d="M 320 424 L 320 450" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+            <!-- Route prototype back into Verification Gate -->
+            <path d="M 565 412 L 565 488 L 425 488" stroke="#52525B" stroke-width="1.2" stroke-dasharray="3" fill="none" marker-end="url(#arrow-gray)" />
 
-            <!-- 6. DECISION 3 (Diamond: Verification Gate) -->
-            <polygon points="320,450 420,488 320,526 220,488" fill="#18181B" stroke="#52525B" stroke-width="1.5" />
+            <!-- Branch NO -> Down to Verification Gate -->
+            <path d="M 320 425 L 320 450" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+            <text x="336" y="440" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#E4E4E7">[No]</text>
+
+            <!-- 6. DECISION 3 (Verification Gate: UAT & BAC Sign-off) -->
+            <polygon points="320,450 425,488 320,526 215,488" fill="#18181B" stroke="#52525B" stroke-width="1.5" />
             <text x="320" y="484" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              Verification Gate:
+              Automated BAC / UAT
             </text>
             <text x="320" y="498" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              Zero-Defect Pass?
+              Sign-Off Passed?
             </text>
 
-            <!-- Branch NO -> Loop Back / Quarantine -->
-            <path d="M 220 488 L 130 488 L 130 402 L 195 402" stroke="#71717A" stroke-width="1.2" stroke-dasharray="4" fill="none" marker-end="url(#arrow-gray)" />
-            <text x="175" y="481" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#A1A1AA" text-anchor="middle">[Fail: Retest]</text>
+            <!-- Branch NO -> Quarantine Loop back to BRD Engine -->
+            <path d="M 215 488 L 125 488 L 125 298 L 185 298" stroke="#71717A" stroke-width="1.2" stroke-dasharray="4" fill="none" marker-end="url(#arrow-gray)" />
+            <text x="170" y="481" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#A1A1AA" text-anchor="middle">[Fail: Refine]</text>
 
-            <!-- Branch YES -> Production Release (Down) -->
-            <path d="M 320 526 L 320 545" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+            <!-- Branch YES -> Release (Center Down) -->
+            <path d="M 320 526 L 320 550" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
 
-            <!-- 7. END NODE (Capsule / Pill) -->
-            <rect x="205" y="545" width="230" height="34" rx="17" ry="17" fill="#27272A" stroke="#52525B" stroke-width="1.5" />
-            <text x="320" y="567" font-family="'Open Sans', sans-serif" font-size="11" font-weight="800" fill="#F4F4F5" text-anchor="middle">
-              ✔ RESILIENT PRODUCTION RELEASE
+            <!-- 7. END NODE: Verified Deployment -->
+            <rect x="180" y="550" width="280" height="34" rx="17" ry="17" fill="#27272A" stroke="#52525B" stroke-width="1.5" />
+            <text x="320" y="572" font-family="'Open Sans', sans-serif" font-size="11" font-weight="800" fill="#F4F4F5" text-anchor="middle">
+              ✔ ZERO-DRIFT ENGINEERING HANDOFF
             </text>
           </svg>
         </div>

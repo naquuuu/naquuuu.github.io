@@ -1,0 +1,79 @@
+name: Weekly Blog Synthesis & Reliability QA
+
+on:
+  schedule:
+    # Runs every Saturday at 11:00 AM JKT (04:00 AM UTC)
+    - cron: '0 4 * * 6'
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Custom topic for the synthesized PM essay'
+        required: false
+        default: 'Autonomous Product Workspaces & Design System Reverse-Engineering'
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  synthesize-and-verify:
+    name: Synthesize Weekly Essay & Enforce Gates
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 20
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate Weekly Draft
+        id: generate
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ inputs.topic }}" ]; then
+            python scripts/generate_blog_post.py --topic "${{ inputs.topic }}"
+          else
+            python scripts/generate_blog_post.py --weekly
+          fi
+
+      - name: Run Blog Reliability QA Gate (All 5 Gates)
+        run: |
+          python scripts/verify_blog_qa.py
+
+      - name: Run Corporate Sanitization & PII Linter
+        run: |
+          python scripts/verify_sanitization.py --dir blog
+
+      - name: Notify & Create Draft Issue Preview
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            const draftsDir = path.join(process.env.GITHUB_WORKSPACE, 'blog', 'drafts');
+            if (fs.existsSync(draftsDir)) {
+              const files = fs.readdirSync(draftsDir);
+              if (files.length > 0) {
+                const latestDraft = files[files.length - 1];
+                const issueBody = `### 🚀 New Autonomous Blog Draft Ready for Review\n\n` +
+                  `- **Target Author**: Ramadhana Bhanuharya Krishnamurti (Krishna / naquuuu)\n` +
+                  `- **Notification Target**: \`rbkrishnamurti@gmail.com\`\n` +
+                  `- **Scheduled Publish**: Saturday 11:00 AM JKT (UTC+7)\n` +
+                  `- **Draft Directory**: \`blog/drafts/${latestDraft}/index.html\`\n` +
+                  `- **Reliability Status**: ✅ All 5 QA Gates Passed (Zero Inline Width, Responsive, Valid Audio, 72ch Typography)\n\n` +
+                  `To publish to live production:\n` +
+                  `\`\`\`bash\npython scripts/generate_blog_post.py --publish ${latestDraft}\n\`\`\``;
+                
+                await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: `[Draft Review] Weekly Synthesized Essay: ${latestDraft}`,
+                  body: issueBody
+                });
+              }
+            }
