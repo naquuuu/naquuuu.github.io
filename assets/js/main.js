@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (heroPortraitImg && heroPortraitMeta) {
         heroPortraitImg.style.opacity = '0';
         setTimeout(() => {
-          heroPortraitImg.src = './assets/img/krishna-hero-portrait.jpeg';
+          heroPortraitImg.src = './assets/img/krishna-culture-portrait.jpeg?v=20260911';
           heroPortraitMeta.innerHTML = '<span>SHIBUYA-KEI</span><span>[ SONIC ROTATIONS ]</span><span>TASTE VECTORS</span>';
           heroPortraitImg.style.opacity = '1';
         }, 180);
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (heroPortraitImg && heroPortraitMeta) {
         heroPortraitImg.style.opacity = '0';
         setTimeout(() => {
-          heroPortraitImg.src = './assets/img/naquuuu-studio-bw.jpeg';
+          heroPortraitImg.src = './assets/img/naquuuu-studio-bw.jpeg?v=20260911';
           heroPortraitMeta.innerHTML = '<span>LOC: 6°12\'S 106°49\'E</span><span>[ WIB / UTC+7 ]</span><span>MATTER + CODE</span>';
           heroPortraitImg.style.opacity = '1';
         }, 180);
