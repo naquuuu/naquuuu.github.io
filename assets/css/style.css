@@ -393,14 +393,49 @@ body[data-mode="culture"] .nav-audio-pill.playing {
   font-family: var(--font-mono);
   font-size: 0.76rem;
   color: var(--text-secondary);
-  padding: 0.35rem 0.6rem;
+  padding: 0.35rem 0.65rem;
   border-radius: var(--radius-xs);
-  transition: all 0.15s ease;
+  border: 1px solid transparent;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
 }
 
 .nav-link:hover {
   color: var(--text-primary);
   background: rgba(220, 38, 38, 0.08);
+  border-color: rgba(220, 38, 38, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Red / Creative Mode Nav Links & Hover */
+body[data-mode="culture"] .nav-link {
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+}
+
+body[data-mode="culture"] .nav-link:hover {
+  color: #FFFFFF;
+  background: rgba(230, 36, 58, 0.22);
+  border-color: var(--accent-crimson);
+  box-shadow: 0 0 14px rgba(230, 36, 58, 0.45);
+  transform: translateY(-1px);
+}
+
+body[data-mode="culture"] .nav-link:active {
+  color: #FFFFFF;
+  background: var(--accent-crimson);
+  border-color: var(--accent-crimson-hover);
+}
+
+/* Sticky Header Offset for All Sections */
+#philosophy,
+#artifacts,
+#notes,
+#inquiries,
+#culture-philosophy,
+#culture-artifacts,
+#culture-notes {
+  scroll-margin-top: 76px;
 }
 
 .nav-back-link {
