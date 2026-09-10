@@ -873,7 +873,7 @@ a:hover {
 /* Technical Competencies Matrix */
 .comp-matrix-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1px;
   background: var(--border-hairline);
   border: 1px solid var(--border-hairline);

@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: '02',
       tag: 'STAGE 02 // LOGIC & PHYSICAL MATTER',
       title: 'Logic & Matter',
-      desc: 'Deterministic finite-state machine routing, bio-based biopolymer mechanical seal geometry, local silica sand thermal beds, and edge microcontrollers (ESP32/C++). Systems ground software abstractions in physical constraints.'
+      desc: 'Deterministic finite-state machine routing, bio-based biopolymer mechanical seal geometry, and local silica sand thermal beds. Systems ground software abstractions in physical constraints.'
     },
     {
       id: '03',
