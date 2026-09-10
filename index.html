@@ -6,7 +6,7 @@
   <title>naquuuu — working across physical matter, code, and culture</title>
   <meta name="description" content="Personal technical portfolio and systems craft of naquuuu. Things break. I design around the recovery.">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
-  <link rel="stylesheet" href="./assets/css/style.css?v=20260911e">
+  <link rel="stylesheet" href="./assets/css/style.css?v=20260911f">
 </head>
 <body data-mode="systems">
 
@@ -43,6 +43,20 @@
     </div>
   </header>
 
+  <!-- Floating Sticky Perspective Switcher (Floats on scroll past Hero) -->
+  <div class="sticky-perspective-wrap" id="sticky-perspective-bar" aria-hidden="true">
+    <div class="sticky-perspective-inner" role="tablist" aria-label="Quick Perspective Switcher">
+      <button type="button" class="mode-tab-btn active" id="sticky-tab-mode-systems" role="tab" aria-selected="true">
+        <span class="mode-tab-icon" aria-hidden="true">⚡</span>
+        <span>Systems &amp; Matter</span>
+      </button>
+      <button type="button" class="mode-tab-btn" id="sticky-tab-mode-culture" role="tab" aria-selected="false">
+        <span class="mode-tab-icon" aria-hidden="true">✦</span>
+        <span>Culture &amp; Taste</span>
+      </button>
+    </div>
+  </div>
+
   <!-- Audio Element: Streamlined Single Source (Blog Reliability Standard) -->
   <audio id="hukum-murphy-audio" preload="metadata" playsinline>
     <source src="./assets/audio/hukum-murphy-full.mp3" type="audio/mpeg">
@@ -77,6 +91,16 @@
               <p>
                 From Indonesia's archipelago of <strong>17,000 islands</strong> to high-concurrency systems handling millions of transactions, I build resilient digital and physical architectures that hold when real-world conditions get messy.
               </p>
+            </div>
+
+            <!-- Mode-Contextual Hero Call-To-Action (CTA) -->
+            <div class="hero-cta-group" id="hero-cta-group">
+              <a href="#artifacts" class="hero-cta-btn hero-cta-primary" id="hero-cta-primary">
+                <span class="hero-cta-label">[ Explore Systems Proof ↓ ]</span>
+              </a>
+              <a href="#operating-philosophy" class="hero-cta-btn hero-cta-secondary" id="hero-cta-secondary">
+                <span class="hero-cta-label">[ Operating Framework ↓ ]</span>
+              </a>
             </div>
           </div>
 
@@ -636,7 +660,17 @@
     </div>
   </footer>
 
+  <!-- Mobile Ergonomic Bottom Navigation Dock (<= 768px viewports) -->
+  <nav class="mobile-bottom-dock" id="mobile-bottom-dock" aria-label="Mobile Bottom Navigation">
+    <div class="mobile-dock-inner">
+      <a href="#philosophy" class="mobile-dock-link active" data-nav="philosophy">[ Philosophy ]</a>
+      <a href="#artifacts" class="mobile-dock-link" data-nav="artifacts">[ Artifacts ]</a>
+      <a href="#notes" class="mobile-dock-link" data-nav="notes">[ Notes ]</a>
+      <a href="#inquiries" class="mobile-dock-link" data-nav="inquiries">[ Inquiries ]</a>
+    </div>
+  </nav>
+
   <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
-  <script src="./assets/js/main.js?v=20260911e"></script>
+  <script src="./assets/js/main.js?v=20260911f"></script>
 </body>
 </html>

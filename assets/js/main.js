@@ -36,6 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===========================================================================
   const btnModeSystems = document.getElementById('tab-mode-systems');
   const btnModeCulture = document.getElementById('tab-mode-culture');
+  const stickyBtnSystems = document.getElementById('sticky-tab-mode-systems');
+  const stickyBtnCulture = document.getElementById('sticky-tab-mode-culture');
+  const stickyPerspectiveBar = document.getElementById('sticky-perspective-bar');
+  const heroModeBar = document.querySelector('.mode-switch-wrap');
+  const ctaPrimary = document.getElementById('hero-cta-primary');
+  const ctaSecondary = document.getElementById('hero-cta-secondary');
+
   const viewSystems = document.getElementById('view-systems');
   const viewCulture = document.getElementById('view-culture');
   const modeStatusLabel = document.getElementById('mode-status-label');
@@ -60,17 +67,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateNavHrefs(activeMode) {
     Object.keys(navSectionMap).forEach(key => {
-      const linkEl = navLinks[key];
-      if (linkEl) {
-        const targetId = navSectionMap[key][activeMode] || navSectionMap[key].systems;
-        linkEl.setAttribute('href', targetId);
-      }
+      const targetId = navSectionMap[key][activeMode] || navSectionMap[key].systems;
+      const topLink = navLinks[key];
+      if (topLink) topLink.setAttribute('href', targetId);
+
+      const dockLink = document.querySelector(`.mobile-bottom-dock a[data-nav="${key}"]`);
+      if (dockLink) dockLink.setAttribute('href', targetId);
     });
   }
 
   function switchMode(mode) {
     if (mode === 'culture') {
       document.body.setAttribute('data-mode', 'culture');
+
+      // Primary Hero Switcher
       if (btnModeSystems) {
         btnModeSystems.classList.remove('active');
         btnModeSystems.setAttribute('aria-selected', 'false');
@@ -79,10 +89,33 @@ document.addEventListener('DOMContentLoaded', () => {
         btnModeCulture.classList.add('active');
         btnModeCulture.setAttribute('aria-selected', 'true');
       }
+
+      // Secondary Sticky Switcher
+      if (stickyBtnSystems) {
+        stickyBtnSystems.classList.remove('active');
+        stickyBtnSystems.setAttribute('aria-selected', 'false');
+      }
+      if (stickyBtnCulture) {
+        stickyBtnCulture.classList.add('active');
+        stickyBtnCulture.setAttribute('aria-selected', 'true');
+      }
+
       if (viewSystems) viewSystems.classList.remove('active');
       if (viewCulture) viewCulture.classList.add('active');
       if (modeStatusLabel) modeStatusLabel.textContent = 'PERSPECTIVE: CREATIVE SANDBOX';
       if (heroSubIdentity) heroSubIdentity.textContent = 'exploring sound, silhouette, and human taste';
+
+      // Update CTA buttons for Culture perspective
+      if (ctaPrimary) {
+        ctaPrimary.setAttribute('href', '#culture-artifacts');
+        const lbl = ctaPrimary.querySelector('.hero-cta-label');
+        if (lbl) lbl.textContent = '[ Explore Sonic & Aesthetic Archives ↓ ]';
+      }
+      if (ctaSecondary) {
+        ctaSecondary.setAttribute('href', '#culture-philosophy');
+        const lbl = ctaSecondary.querySelector('.hero-cta-label');
+        if (lbl) lbl.textContent = '[ Aesthetic Axioms ↓ ]';
+      }
 
       updateNavHrefs('culture');
 
@@ -99,6 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('naquuuu_mode', 'culture');
     } else {
       document.body.setAttribute('data-mode', 'systems');
+
+      // Primary Hero Switcher
       if (btnModeCulture) {
         btnModeCulture.classList.remove('active');
         btnModeCulture.setAttribute('aria-selected', 'false');
@@ -107,10 +142,33 @@ document.addEventListener('DOMContentLoaded', () => {
         btnModeSystems.classList.add('active');
         btnModeSystems.setAttribute('aria-selected', 'true');
       }
+
+      // Secondary Sticky Switcher
+      if (stickyBtnCulture) {
+        stickyBtnCulture.classList.remove('active');
+        stickyBtnCulture.setAttribute('aria-selected', 'false');
+      }
+      if (stickyBtnSystems) {
+        stickyBtnSystems.classList.add('active');
+        stickyBtnSystems.setAttribute('aria-selected', 'true');
+      }
+
       if (viewCulture) viewCulture.classList.remove('active');
       if (viewSystems) viewSystems.classList.add('active');
       if (modeStatusLabel) modeStatusLabel.textContent = 'PERSPECTIVE: TECHNICAL PROOF';
       if (heroSubIdentity) heroSubIdentity.textContent = 'working across physical matter, code, and culture';
+
+      // Update CTA buttons for Systems perspective
+      if (ctaPrimary) {
+        ctaPrimary.setAttribute('href', '#artifacts');
+        const lbl = ctaPrimary.querySelector('.hero-cta-label');
+        if (lbl) lbl.textContent = '[ Explore Systems Proof ↓ ]';
+      }
+      if (ctaSecondary) {
+        ctaSecondary.setAttribute('href', '#operating-philosophy');
+        const lbl = ctaSecondary.querySelector('.hero-cta-label');
+        if (lbl) lbl.textContent = '[ Operating Framework ↓ ]';
+      }
 
       updateNavHrefs('systems');
 
@@ -136,13 +194,39 @@ document.addEventListener('DOMContentLoaded', () => {
     updateNavHrefs('systems');
   }
 
+  // Bind click listeners for hero switcher
   if (btnModeSystems && btnModeCulture) {
     btnModeSystems.addEventListener('click', () => switchMode('systems'));
     btnModeCulture.addEventListener('click', () => switchMode('culture'));
   }
 
+  // Bind click listeners for sticky secondary switcher
+  if (stickyBtnSystems && stickyBtnCulture) {
+    stickyBtnSystems.addEventListener('click', () => switchMode('systems'));
+    stickyBtnCulture.addEventListener('click', () => switchMode('culture'));
+  }
+
+  // IntersectionObserver: Float in sticky perspective bar when hero switcher scrolls out
+  if (heroModeBar && stickyPerspectiveBar) {
+    const stickyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+          stickyPerspectiveBar.classList.add('visible');
+          stickyPerspectiveBar.setAttribute('aria-hidden', 'false');
+        } else {
+          stickyPerspectiveBar.classList.remove('visible');
+          stickyPerspectiveBar.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }, {
+      threshold: 0,
+      rootMargin: '-52px 0px 0px 0px'
+    });
+    stickyObserver.observe(heroModeBar);
+  }
+
   // Smooth scroll handler targeting active perspective's sections
-  document.querySelectorAll('.nav-links a.nav-link').forEach(link => {
+  document.querySelectorAll('.nav-links a.nav-link, .mobile-bottom-dock a.mobile-dock-link, .hero-cta-btn').forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
       if (href === '#philosophy') {
@@ -176,6 +260,31 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Active section scroll spy for mobile dock
+  const sectionIds = ['philosophy', 'operating-philosophy', 'culture-philosophy', 'artifacts', 'culture-artifacts', 'notes', 'culture-notes', 'inquiries'];
+  function updateActiveNavOnScroll() {
+    const scrollPos = window.scrollY + 120;
+    let currentActive = 'philosophy';
+
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const sec = document.getElementById(sectionIds[i]);
+      if (sec && sec.offsetTop <= scrollPos) {
+        const id = sec.id;
+        if (id.includes('philosophy')) currentActive = 'philosophy';
+        else if (id.includes('artifacts')) currentActive = 'artifacts';
+        else if (id.includes('notes')) currentActive = 'notes';
+        else if (id.includes('inquiries')) currentActive = 'inquiries';
+        break;
+      }
+    }
+
+    document.querySelectorAll('.mobile-bottom-dock a.mobile-dock-link').forEach(link => {
+      link.classList.toggle('active', link.getAttribute('data-nav') === currentActive);
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNavOnScroll, { passive: true });
 
   // ===========================================================================
   // 3. Audio Telemetry Engine: Hukum Murphy by Kafin Sulthan (Gate 4 Standard)
