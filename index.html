@@ -80,28 +80,15 @@
             </div>
           </div>
 
-          <!-- Dynamic Hero Visual Container: Seamless Animated Crossfade -->
-          <div class="hero-visual-container">
-            <!-- Frame 1: Systems & Matter Technical Frame -->
-            <div class="portrait-technical-wrap" id="portrait-technical">
-              <div class="portrait-corner-tl" aria-hidden="true"></div>
-              <div class="portrait-corner-br" aria-hidden="true"></div>
-              <img src="./assets/img/naquuuu-studio-bw.jpeg" alt="Technical studio portrait of naquuuu in halo rim-light" class="portrait-img">
-              <div class="portrait-meta-strip">
-                <span>LOC: 6°12'S 106°49'E</span>
-                <span>[ WIB / UTC+7 ]</span>
-                <span>MATTER + CODE</span>
-              </div>
-            </div>
-
-            <!-- Frame 2: Culture & Taste Creative Persona Frame -->
-            <div class="portrait-culture-wrap" id="portrait-culture">
-              <img src="./assets/img/krishna-hero-portrait.jpeg" alt="Editorial relaxed portrait of naquuuu" class="portrait-img">
-              <div class="portrait-meta-strip">
-                <span>SHIBUYA-KEI</span>
-                <span>[ SONIC ROTATIONS ]</span>
-                <span>TASTE VECTORS</span>
-              </div>
+          <!-- Single Dynamic Portrait Frame (Swaps on Mode Switch) -->
+          <div class="portrait-technical-wrap" id="hero-portrait-card">
+            <div class="portrait-corner-tl" aria-hidden="true"></div>
+            <div class="portrait-corner-br" aria-hidden="true"></div>
+            <img id="hero-portrait-img" src="./assets/img/naquuuu-studio-bw.jpeg" alt="Studio portrait of naquuuu" class="portrait-img">
+            <div class="portrait-meta-strip" id="hero-portrait-meta">
+              <span>LOC: 6°12'S 106°49'E</span>
+              <span>[ WIB / UTC+7 ]</span>
+              <span>MATTER + CODE</span>
             </div>
           </div>
         </div>
@@ -127,7 +114,7 @@
     </section>
 
     <!-- =======================================================================
-         VIEW A: SYSTEMS & MATTER (TECHNICAL PROOF)
+         VIEW A: SYSTEMS & MATTER (TECHNICAL PROOF — WHITE PAPER THEME)
          ======================================================================= -->
     <div id="view-systems" class="view-panel active" role="tabpanel" aria-labelledby="tab-mode-systems">
       <!-- 1. The Persistent 4-Card Responsive Grid -->
@@ -381,7 +368,7 @@
     </div> <!-- /#view-systems -->
 
     <!-- =======================================================================
-         VIEW B: CULTURE & TASTE (CREATIVE SANDBOX)
+         VIEW B: CULTURE & TASTE (CREATIVE SANDBOX — DARK VELVET CRIMSON THEME)
          ======================================================================= -->
     <div id="view-culture" class="view-panel" role="tabpanel" aria-labelledby="tab-mode-culture">
       <section class="section-culture">
@@ -548,6 +535,6 @@
     </div>
   </footer>
 
-  <script src="./assets/js/main.js?v=5"></script>
+  <script src="./assets/js/main.js?v=6"></script>
 </body>
 </html>
