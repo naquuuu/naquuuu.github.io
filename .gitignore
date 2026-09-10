@@ -1,0 +1,4 @@
+# Local development artifacts & revamp experiments
+_revamp/
+.DS_Store
+Thumbs.db

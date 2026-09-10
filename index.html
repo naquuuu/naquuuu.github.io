@@ -10,18 +10,6 @@
 </head>
 <body>
 
-  <!-- Persistent Floating Music Bar (Plays Hukum Murphy on Continuous Loop) -->
-  <aside class="floating-music-bar" id="floating-music-bar" aria-label="Now Playing Audio Bar">
-    <img src="./assets/img/hukum-murphy-art.jpg" alt="Hukum Murphy Art" class="floating-art">
-    <div class="floating-info">
-      <span class="floating-song">Hukum Murphy</span>
-      <span class="floating-artist">Kafin Sulthan</span>
-    </div>
-    <button type="button" class="floating-play-btn" id="floating-play-btn" aria-label="Play / Pause Audio">
-      <svg id="floating-play-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-      <svg id="floating-pause-icon" class="icon-pause-init" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
-    </button>
-  </aside>
 
   <!-- Navigation Header with naquuuu Brand & Exact Requested Order -->
   <header class="site-header">
@@ -105,7 +93,7 @@
         <!-- Card 1: Twin Brother Harya -->
         <div class="life-card">
           <div class="life-card-img-wrap">
-            <img src="./assets/img/krishna-twin-highlight.jpeg" alt="Krishna and identical twin brother Harya" class="life-card-img">
+            <img src="./assets/img/krishna-twin-highlight.jpeg" alt="Krishna and identical twin brother Harya" class="life-card-img" loading="lazy" decoding="async">
           </div>
           <div class="life-card-caption">
             <div class="life-card-title">Twin Brothers &amp; Builders</div>
@@ -118,7 +106,7 @@
         <!-- Card 2: Pinstripe Suit / Community (Face & Body Highlighted) -->
         <div class="life-card">
           <div class="life-card-img-wrap">
-            <img src="./assets/img/krishna-suit-highlight.jpeg" alt="Krishna in pinstripe suit at Hara Kollektiv" class="life-card-img">
+            <img src="./assets/img/krishna-suit-highlight.jpeg" alt="Krishna in pinstripe suit at Hara Kollektiv" class="life-card-img" loading="lazy" decoding="async">
           </div>
           <div class="life-card-caption">
             <div class="life-card-title">Community &amp; Culture</div>
@@ -131,7 +119,7 @@
         <!-- Card 3: Sabuga ITB / Field (Face & Body Highlighted) -->
         <div class="life-card">
           <div class="life-card-img-wrap">
-            <img src="./assets/img/krishna-sabuga-highlight.jpeg" alt="Krishna at Sasana Budaya Ganesha ITB" class="life-card-img">
+            <img src="./assets/img/krishna-sabuga-highlight.jpeg" alt="Krishna at Sasana Budaya Ganesha ITB" class="life-card-img" loading="lazy" decoding="async">
           </div>
           <div class="life-card-caption">
             <div class="life-card-title">Grounded in the Real World</div>
@@ -357,7 +345,7 @@
 
         <!-- Live Audio Player: Hukum Murphy by Kafin Sulthan (Continuous Seamless Loop) -->
         <div class="soundroom-player-box">
-          <audio id="hukum-murphy-audio" preload="auto" playsinline>
+          <audio id="hukum-murphy-audio" preload="metadata" playsinline>
             <source src="./assets/audio/hukum-murphy-preview.m4a" type="audio/mp4">
             <source src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/85/19/0e/85190ee9-b8b9-7a4d-3fa2-61afada97252/mzaf_11279198995228694862.plus.aac.p.m4a" type="audio/mp4">
           </audio>
@@ -392,8 +380,8 @@
               </div>
               <div class="player-time-row">
                 <span id="player-current-time">0:00</span>
-                <span>Continuous loop • Touch, scroll, or tap anywhere to start</span>
-                <span id="player-duration">3:20</span>
+                <span id="player-hint">Continuous loop • Tap to start</span>
+                <span id="player-duration">--:--</span>
               </div>
             </div>
           </div>
@@ -592,7 +580,7 @@
         <!-- Artwork Showcase Image Card -->
         <div class="atelier-artwork-card">
           <div class="atelier-art-img-wrap">
-            <img src="./assets/img/krishna-artwork.jpeg" alt="Original oil and acrylic on linen painting by Krishna" class="atelier-art-img">
+            <img src="./assets/img/krishna-artwork.jpeg" alt="Original oil and acrylic on linen painting by Krishna" class="atelier-art-img" loading="lazy" decoding="async">
           </div>
           <div class="atelier-art-meta">
             <span class="atelier-art-title">Untitled I (Palette Knife on Linen)</span>
@@ -665,6 +653,6 @@
     </div>
   </footer>
 
-  <script src="./assets/js/main.js"></script>
+  <script src="./assets/js/main.js?v=2"></script>
 </body>
 </html>
