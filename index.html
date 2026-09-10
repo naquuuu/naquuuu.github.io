@@ -11,7 +11,7 @@
 <body>
 
   <!-- =========================================================================
-       Navigation Header: Strict Single-Row, Live Jakarta Clock, Monospace Links
+       Navigation Header: Strict Single-Row, Live Jakarta Clock & Controls
        ========================================================================= -->
   <header class="site-header">
     <div class="wrap nav-container">
@@ -23,7 +23,7 @@
       </div>
 
       <div class="nav-actions">
-        <!-- Minimalist Audio Telemetry Toggle (Hukum Murphy by Kafin Sulthan) -->
+        <!-- Audio Telemetry Toggle (Hukum Murphy by Kafin Sulthan) -->
         <button type="button" class="nav-audio-pill" id="nav-audio-pill" aria-label="Toggle Hukum Murphy Audio Telemetry" title="Hukum Murphy - Kafin Sulthan (Tap to play/pause)">
           <span class="nav-audio-wave" aria-hidden="true">
             <span class="nav-wave-bar"></span>
@@ -31,6 +31,12 @@
             <span class="nav-wave-bar"></span>
           </span>
           <span id="nav-audio-status">[ SOUND ]</span>
+        </button>
+
+        <!-- Dynamic Theme Switcher Button -->
+        <button type="button" class="nav-theme-btn" id="nav-theme-btn" aria-label="Toggle Color Theme" title="Toggle Theme (Crimson Dark / Paper Light)">
+          <span id="theme-btn-icon" aria-hidden="true">🌓</span>
+          <span id="theme-btn-label">CRIMSON</span>
         </button>
 
         <nav class="nav-links" aria-label="Primary Navigation">
@@ -52,7 +58,7 @@
     <!-- =======================================================================
          SECTION 1: HERO & CONSOLIDATED PHILOSOPHY
          ======================================================================= -->
-    <section class="section-hero">
+    <section class="section-hero" id="about">
       <div class="wrap">
         <div class="hero-editorial-grid">
           <div>
@@ -61,14 +67,25 @@
               Things break.<br>
               I design around the recovery.
             </h1>
+
+            <blockquote class="hero-epigraph">
+              "Yang bisa gagal 'kan gagal juga pada akhirnya"
+              <cite>
+                — Kafin Sulthan, <a href="https://genius.com/Kafin-sulthan-hukum-murphy-lyrics" target="_blank" rel="noopener noreferrer">"Hukum Murphy" ↗</a>
+              </cite>
+            </blockquote>
+
             <div class="hero-prose">
               <p>
                 Everything that can go wrong, will go wrong. Inspired by "reka semua peluang yang ada"—I approach systems, physical matter, and cultural design with MECE probabilistic mapping: anticipating every breakdown so the system recovers gracefully instead of halting.
               </p>
+              <p>
+                From Indonesia's archipelago of <strong>17,000 islands</strong> to high-concurrency systems handling millions of transactions, I build resilient digital and physical architectures that hold when real-world conditions get messy.
+              </p>
             </div>
           </div>
 
-          <!-- Studio Portrait Frame: High-Contrast Black & White with Coordinate Labels -->
+          <!-- Studio Portrait Frame: High-Contrast Technical Frame -->
           <div class="portrait-technical-wrap">
             <div class="portrait-corner-tl" aria-hidden="true"></div>
             <div class="portrait-corner-br" aria-hidden="true"></div>
@@ -108,248 +125,258 @@
       <!-- 1. The Simplified 4-Step Horizontal Loop -->
       <section class="section-loop-cards" id="loop">
         <div class="wrap">
-          <div class="loop-cards-container">
-            <div class="loop-cards-header">
-              <span class="loop-cards-title">The Resilient Loop // Operating Principles</span>
-              <span class="loop-cards-sub">[ 04 MECE PHASES ]</span>
+          <div class="loop-cards-header">
+            <span class="loop-cards-title">The Resilient Loop // Operating Principles</span>
+            <span class="loop-cards-sub">[ 04 MECE PHASES ]</span>
+          </div>
+
+          <div class="loop-cards-grid">
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <span class="loop-card-step">01 / THE AXIOM</span>
+                <span class="loop-card-tag">MURPHY'S LAW</span>
+              </div>
+              <h3 class="loop-card-title">Assume Failure from Day One</h3>
+              <p class="loop-card-desc">Murphy's Law. Assume failure and operational breakdown from day one. Systems are designed assuming real-world friction and entropy.</p>
             </div>
 
-            <div class="loop-cards-grid">
-              <div class="loop-card">
-                <div class="loop-card-header">
-                  <span class="loop-card-step">01 / THE AXIOM</span>
-                  <span class="loop-card-tag">MURPHY'S LAW</span>
-                </div>
-                <h3 class="loop-card-title">Assume Failure from Day One</h3>
-                <p class="loop-card-desc">Murphy's Law. Assume failure and operational breakdown from day one. Systems are designed assuming real-world friction and entropy.</p>
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <span class="loop-card-step">02 / THE REKA</span>
+                <span class="loop-card-tag">REKA PELUANG</span>
               </div>
+              <h3 class="loop-card-title">MECE Probabilistic Mapping</h3>
+              <p class="loop-card-desc">"Reka semua peluang." MECE probabilistic mapping of every edge case, error route, and boundary condition before committing code or matter.</p>
+            </div>
 
-              <div class="loop-card">
-                <div class="loop-card-header">
-                  <span class="loop-card-step">02 / THE REKA</span>
-                  <span class="loop-card-tag">REKA PELUANG</span>
-                </div>
-                <h3 class="loop-card-title">MECE Probabilistic Mapping</h3>
-                <p class="loop-card-desc">"Reka semua peluang." MECE probabilistic mapping of every edge case, error route, and boundary condition before committing code or matter.</p>
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <span class="loop-card-step">03 / THE BUFFER</span>
+                <span class="loop-card-tag">FAULT TOLERANCE</span>
               </div>
+              <h3 class="loop-card-title">Slack in Matter &amp; Logic</h3>
+              <p class="loop-card-desc">Building fault-tolerant slack into code state machines, biopolymer structures, and decentralized energy storage to absorb entropy.</p>
+            </div>
 
-              <div class="loop-card">
-                <div class="loop-card-header">
-                  <span class="loop-card-step">03 / THE BUFFER</span>
-                  <span class="loop-card-tag">FAULT TOLERANCE</span>
-                </div>
-                <h3 class="loop-card-title">Slack in Matter &amp; Logic</h3>
-                <p class="loop-card-desc">Building fault-tolerant slack into code state machines, biopolymer structures, and decentralized energy storage to absorb entropy.</p>
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <span class="loop-card-step">04 / THE RECOVERY</span>
+                <span class="loop-card-tag">ADAPTIVE RECOVERY</span>
               </div>
-
-              <div class="loop-card">
-                <div class="loop-card-header">
-                  <span class="loop-card-step">04 / THE RECOVERY</span>
-                  <span class="loop-card-tag">ADAPTIVE RECOVERY</span>
-                </div>
-                <h3 class="loop-card-title">Graceful Degradation Loops</h3>
-                <p class="loop-card-desc">Graceful recovery loops where failure is handled as a standard operational state rather than an unexpected system halt.</p>
-              </div>
+              <h3 class="loop-card-title">Graceful Degradation Loops</h3>
+              <p class="loop-card-desc">Graceful recovery loops where failure is handled as a standard operational state rather than an unexpected system halt.</p>
             </div>
           </div>
         </div>
       </section>
 
-    <!-- =======================================================================
-         SECTION 2: SELECTED WORKS (THE 3 PROVEN SYSTEMS)
-         ======================================================================= -->
-    <section class="section-works" id="works">
-      <div class="wrap">
-        <div class="section-label-bar">
-          <span class="section-label">Selected Works // Shipped Systems</span>
-          <span class="section-count">[ 03 PROVEN ARTIFACTS ]</span>
-        </div>
-
-        <div class="dossier-stack">
-          <!-- Dossier 1: Operational Disruption Architecture -->
-          <article class="dossier-card">
-            <div class="dossier-header">
-              <div class="dossier-badge">
-                <span class="dossier-badge-dot" aria-hidden="true"></span>
-                <span>SHIPPED PRODUCTION</span>
-              </div>
-              <span class="dossier-category">Scaled Digital Systems / Fault-Tolerant Logic</span>
-            </div>
-            <h2 class="dossier-title">Operational Disruption Architecture</h2>
-
-            <div class="dossier-body-grid">
-              <div>
-                <div class="dossier-subheading">The Constraint</div>
-                <p class="dossier-prose">
-                  Cascading flight cancellations, retail checkout inventory locks, and high-frequency automated refund failures across mission-critical customer operations.
-                </p>
-              </div>
-              <div>
-                <div class="dossier-subheading">The Craft</div>
-                <p class="dossier-prose">
-                  Architecting state-machine routing, automated decision trees, and fault-tolerant policy engines to gracefully absorb operational chaos at scale across Traveloka and MAPCLUB.
-                </p>
-              </div>
-            </div>
-
-            <div class="dossier-footer">
-              <div class="dossier-tags">
-                <span class="dossier-tag">State Machines</span>
-                <span class="dossier-tag">Operational Recovery</span>
-                <span class="dossier-tag">Scaled Systems</span>
-              </div>
-              <a href="./experience/" class="dossier-link">View Systems Log ↗</a>
-            </div>
-          </article>
-
-          <!-- Dossier 2: 3M PHB Bio-Mask -->
-          <article class="dossier-card">
-            <div class="dossier-header">
-              <div class="dossier-badge">
-                <span class="dossier-badge-dot" aria-hidden="true"></span>
-                <span>1ST PLACE NATIONAL — 3M ASEAN</span>
-              </div>
-              <span class="dossier-category">Circular Materials / Biodesign / Ergonomics</span>
-            </div>
-            <h2 class="dossier-title">3M PHB Bio-Mask</h2>
-
-            <div class="dossier-body-grid">
-              <div>
-                <div class="dossier-subheading">The Constraint</div>
-                <p class="dossier-prose">
-                  Vulnerable fossil-plastic medical supply chains during global disruptions and persistent accumulation of non-biodegradable synthetic polypropylene personal protection equipment.
-                </p>
-              </div>
-              <div>
-                <div class="dossier-subheading">The Craft</div>
-                <p class="dossier-prose">
-                  Biodegradable personal protective equipment engineered from domestic sugarcane biopolymers (PHB), balancing ergonomic facial-seal geometry with safe 90-day soil degradation.
-                </p>
-              </div>
-            </div>
-
-            <div class="dossier-footer">
-              <div class="dossier-tags">
-                <span class="dossier-tag">Biomaterials</span>
-                <span class="dossier-tag">Ergonomic Craft</span>
-                <span class="dossier-tag">Supply Chain Resilience</span>
-              </div>
-              <a href="./portfolio/3m-bio-mask/" class="dossier-link">View Interactive Deck ↗</a>
-            </div>
-          </article>
-
-          <!-- Dossier 3: HotSand Clean Thermal Microgrid -->
-          <article class="dossier-card">
-            <div class="dossier-header">
-              <div class="dossier-badge">
-                <span class="dossier-badge-dot" aria-hidden="true"></span>
-                <span>COUNTRY FAVORITE — SCHNEIDER GO GREEN</span>
-              </div>
-              <span class="dossier-category">Heavy Clean-Tech / Thermodynamics</span>
-            </div>
-            <h2 class="dossier-title">HotSand Clean Thermal Microgrid</h2>
-
-            <div class="dossier-body-grid">
-              <div>
-                <div class="dossier-subheading">The Constraint</div>
-                <p class="dossier-prose">
-                  Rapid thermal degradation, high tropical fire hazards, and prohibitive procurement expenses of imported chemical lithium batteries in rural off-grid island communities.
-                </p>
-              </div>
-              <div>
-                <div class="dossier-subheading">The Craft</div>
-                <p class="dossier-prose">
-                  Decentralized sand-based thermal energy storage utilizing local silica beds to provide round-the-clock clean heat, agricultural crop drying, and steam power without chemical dependency.
-                </p>
-              </div>
-            </div>
-
-            <div class="dossier-footer">
-              <div class="dossier-tags">
-                <span class="dossier-tag">Thermodynamics</span>
-                <span class="dossier-tag">Decentralized Energy</span>
-                <span class="dossier-tag">Frugal Hardware</span>
-              </div>
-              <a href="./portfolio/schneider-hotsand/" class="dossier-link">View Interactive Deck ↗</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         SECTION 4: WRITING / NOTES & TECHNICAL COMPETENCIES
-         ======================================================================= -->
-    <section class="section-notes-comp" id="notes">
-      <div class="wrap">
-        <div class="section-label-bar">
-          <span class="section-label">Notes // Systems &amp; Industrial Writing</span>
-          <a href="./blog/" class="section-count">View All Published Essays →</a>
-        </div>
-
-        <div class="notes-stack">
-          <!-- Note 1 -->
-          <a href="./blog/reverse-engineering-client-binaries/" class="note-item">
-            <div class="note-main">
-              <div class="note-title">Reverse-Engineering Client Binaries: Extracting Ground-Truth Design Systems</div>
-              <p class="note-summary">
-                Why design systems rot in disconnected Figma canvases, and how reverse-engineering production mobile bytecode enforces zero-friction prototyping parity.
-              </p>
-            </div>
-            <span class="note-meta">[ SEP 2026 • ARCHITECTURE ]</span>
-          </a>
-
-          <!-- Note 2 -->
-          <a href="./blog/building-an-autonomous-product-operating-system/" class="note-item">
-            <div class="note-main">
-              <div class="note-title">Building an Autonomous Product Operating System: Beyond LLM Prompting</div>
-              <p class="note-summary">
-                Moving from speculative chat assistants to deterministic multi-agent product operations backed by MoSCoW bounds and contract verification.
-              </p>
-            </div>
-            <span class="note-meta">[ SEP 2026 • SYSTEMS ]</span>
-          </a>
-        </div>
-
-        <!-- Competency Drawer / Technical Matrix -->
-        <div class="section-label-bar section-label-bar--spaced">
-          <span class="section-label">Technical Competencies Matrix</span>
-          <span class="section-count">[ 2 DOMAINS ]</span>
-        </div>
-
-        <div class="comp-matrix-grid">
-          <!-- Column 1 -->
-          <div class="comp-col">
-            <div class="comp-col-header">Physical &amp; CAD</div>
-            <ul class="comp-list">
-              <li class="comp-item">Fusion 360</li>
-              <li class="comp-item">Design for Manufacturing (DFM)</li>
-              <li class="comp-item">Rapid Prototyping (FDM / Resin)</li>
-              <li class="comp-item">Ergonomic Testing &amp; Anthropometrics</li>
-            </ul>
+      <!-- 2. Selected Works (The 3 Proven Systems + Physical Atelier) -->
+      <section class="section-works" id="works">
+        <div class="wrap">
+          <div class="section-label-bar">
+            <span class="section-label">Selected Works // Shipped Systems</span>
+            <span class="section-count">[ 03 PROVEN ARTIFACTS + ATELIER ]</span>
           </div>
 
-          <!-- Column 2 -->
-          <div class="comp-col">
-            <div class="comp-col-header">Software &amp; Data</div>
-            <ul class="comp-list">
-              <li class="comp-item">Finite-State Machines</li>
-              <li class="comp-item">Fault-Tolerant System Architecture</li>
-              <li class="comp-item">SQL &amp; Relational Schemas</li>
-              <li class="comp-item">Python, JS &amp; API Workflows</li>
-            </ul>
+          <div class="dossier-stack">
+            <!-- Dossier 1: Operational Disruption Architecture -->
+            <article class="dossier-card">
+              <div class="dossier-header">
+                <div class="dossier-badge">
+                  <span class="dossier-badge-dot" aria-hidden="true"></span>
+                  <span>SHIPPED PRODUCTION</span>
+                </div>
+                <span class="dossier-category">Scaled Digital Systems / Fault-Tolerant Logic</span>
+              </div>
+              <h2 class="dossier-title">Operational Disruption Architecture</h2>
+
+              <div class="dossier-body-grid">
+                <div>
+                  <div class="dossier-subheading">The Constraint</div>
+                  <p class="dossier-prose">
+                    Cascading flight cancellations, retail checkout inventory locks, and high-frequency automated refund failures across mission-critical customer operations.
+                  </p>
+                </div>
+                <div>
+                  <div class="dossier-subheading">The Craft</div>
+                  <p class="dossier-prose">
+                    Architecting state-machine routing, automated decision trees, and fault-tolerant policy engines to gracefully absorb operational chaos at scale across Traveloka and MAPCLUB.
+                  </p>
+                </div>
+              </div>
+
+              <div class="dossier-footer">
+                <div class="dossier-tags">
+                  <span class="dossier-tag">State Machines</span>
+                  <span class="dossier-tag">Operational Recovery</span>
+                  <span class="dossier-tag">Scaled Systems</span>
+                </div>
+                <a href="./experience/" class="dossier-link">View Systems Log ↗</a>
+              </div>
+            </article>
+
+            <!-- Dossier 2: 3M PHB Bio-Mask -->
+            <article class="dossier-card">
+              <div class="dossier-header">
+                <div class="dossier-badge">
+                  <span class="dossier-badge-dot" aria-hidden="true"></span>
+                  <span>1ST PLACE NATIONAL — 3M ASEAN</span>
+                </div>
+                <span class="dossier-category">Circular Materials / Biodesign / Ergonomics</span>
+              </div>
+              <h2 class="dossier-title">3M PHB Bio-Mask</h2>
+
+              <div class="dossier-body-grid">
+                <div>
+                  <div class="dossier-subheading">The Constraint</div>
+                  <p class="dossier-prose">
+                    Vulnerable fossil-plastic medical supply chains during global disruptions and persistent accumulation of non-biodegradable synthetic polypropylene personal protection equipment.
+                  </p>
+                </div>
+                <div>
+                  <div class="dossier-subheading">The Craft</div>
+                  <p class="dossier-prose">
+                    Biodegradable personal protective equipment engineered from domestic sugarcane biopolymers (PHB), balancing ergonomic facial-seal geometry with safe 90-day soil degradation.
+                  </p>
+                </div>
+              </div>
+
+              <div class="dossier-footer">
+                <div class="dossier-tags">
+                  <span class="dossier-tag">Biomaterials</span>
+                  <span class="dossier-tag">Ergonomic Craft</span>
+                  <span class="dossier-tag">Supply Chain Resilience</span>
+                </div>
+                <a href="./portfolio/3m-bio-mask/" class="dossier-link">View Interactive Deck ↗</a>
+              </div>
+            </article>
+
+            <!-- Dossier 3: HotSand Clean Thermal Microgrid -->
+            <article class="dossier-card">
+              <div class="dossier-header">
+                <div class="dossier-badge">
+                  <span class="dossier-badge-dot" aria-hidden="true"></span>
+                  <span>COUNTRY FAVORITE — SCHNEIDER GO GREEN</span>
+                </div>
+                <span class="dossier-category">Heavy Clean-Tech / Thermodynamics</span>
+              </div>
+              <h2 class="dossier-title">HotSand Clean Thermal Microgrid</h2>
+
+              <div class="dossier-body-grid">
+                <div>
+                  <div class="dossier-subheading">The Constraint</div>
+                  <p class="dossier-prose">
+                    Rapid thermal degradation, high tropical fire hazards, and prohibitive procurement expenses of imported chemical lithium batteries in rural off-grid island communities.
+                  </p>
+                </div>
+                <div>
+                  <div class="dossier-subheading">The Craft</div>
+                  <p class="dossier-prose">
+                    Decentralized sand-based thermal energy storage utilizing local silica beds to provide round-the-clock clean heat, agricultural crop drying, and steam power without chemical dependency.
+                  </p>
+                </div>
+              </div>
+
+              <div class="dossier-footer">
+                <div class="dossier-tags">
+                  <span class="dossier-tag">Thermodynamics</span>
+                  <span class="dossier-tag">Decentralized Energy</span>
+                  <span class="dossier-tag">Frugal Hardware</span>
+                </div>
+                <a href="./portfolio/schneider-hotsand/" class="dossier-link">View Interactive Deck ↗</a>
+              </div>
+            </article>
+
+            <!-- Physical Canvas Atelier Card: Palette Knife on Belgian Linen -->
+            <article class="atelier-card">
+              <div class="atelier-photo-wrap">
+                <img src="./assets/img/krishna-artwork.jpeg" alt="Original oil painting on Belgian linen crafted with palette knife by naquuuu" class="atelier-img" loading="lazy">
+              </div>
+              <div class="atelier-info">
+                <span class="atelier-badge">🎨 Physical Canvas Discipline</span>
+                <h3 class="atelier-title">Stepping Outside the Screen: No Cmd+Z on Belgian Linen</h3>
+                <p class="atelier-prose">
+                  In software, rollback is cheap. On physical linen with heavy oil paint, every stroke of the palette knife is permanent. Once paint oxidizes, you either integrate the texture or ruin the canvas.
+                </p>
+                <p class="atelier-prose">
+                  That physical finality is why I build systems with obsessive defensive margin: respecting real-world friction, material constraints, and the irrecoverable cost of failure.
+                </p>
+              </div>
+            </article>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
+      <!-- 3. Writing / Notes & Technical Competencies -->
+      <section class="section-notes-comp" id="notes">
+        <div class="wrap">
+          <div class="section-label-bar">
+            <span class="section-label">Notes // Systems &amp; Industrial Writing</span>
+            <a href="./blog/" class="section-count">View All Published Essays →</a>
+          </div>
+
+          <div class="notes-stack">
+            <!-- Note 1 -->
+            <a href="./blog/reverse-engineering-client-binaries/" class="note-item">
+              <div class="note-main">
+                <div class="note-title">Reverse-Engineering Client Binaries: Extracting Ground-Truth Design Systems</div>
+                <p class="note-summary">
+                  Why design systems rot in disconnected Figma canvases, and how reverse-engineering production mobile bytecode enforces zero-friction prototyping parity.
+                </p>
+              </div>
+              <span class="note-meta">[ SEP 2026 • ARCHITECTURE ]</span>
+            </a>
+
+            <!-- Note 2 -->
+            <a href="./blog/building-an-autonomous-product-operating-system/" class="note-item">
+              <div class="note-main">
+                <div class="note-title">Building an Autonomous Product Operating System: Beyond LLM Prompting</div>
+                <p class="note-summary">
+                  Moving from speculative chat assistants to deterministic multi-agent product operations backed by MoSCoW bounds and contract verification.
+                </p>
+              </div>
+              <span class="note-meta">[ SEP 2026 • SYSTEMS ]</span>
+            </a>
+          </div>
+
+          <!-- Competency Drawer / Technical Matrix -->
+          <div class="section-label-bar section-label-bar--spaced">
+            <span class="section-label">Technical Competencies Matrix</span>
+            <span class="section-count">[ 2 DOMAINS ]</span>
+          </div>
+
+          <div class="comp-matrix-grid">
+            <!-- Column 1 -->
+            <div class="comp-col">
+              <div class="comp-col-header">Physical &amp; CAD</div>
+              <ul class="comp-list">
+                <li class="comp-item">Fusion 360</li>
+                <li class="comp-item">Design for Manufacturing (DFM)</li>
+                <li class="comp-item">Rapid Prototyping (FDM / Resin)</li>
+                <li class="comp-item">Ergonomic Testing &amp; Anthropometrics</li>
+              </ul>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="comp-col">
+              <div class="comp-col-header">Software &amp; Data</div>
+              <ul class="comp-list">
+                <li class="comp-item">Finite-State Machines</li>
+                <li class="comp-item">Fault-Tolerant System Architecture</li>
+                <li class="comp-item">SQL &amp; Relational Schemas</li>
+                <li class="comp-item">Python, JS &amp; API Workflows</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
     </div> <!-- /#view-systems -->
 
     <!-- =======================================================================
          VIEW B: CULTURE & TASTE (CREATIVE SANDBOX)
          ======================================================================= -->
     <div id="view-culture" class="view-panel" role="tabpanel" aria-labelledby="tab-mode-culture">
-      <section class="section-culture">
+      <section class="section-culture" id="soundroom">
         <div class="wrap">
           <!-- Aesthetic Statement Banner -->
           <div class="culture-hero-banner">
@@ -466,7 +493,7 @@
     </div> <!-- /#view-culture -->
 
     <!-- =======================================================================
-         SECTION 3: AVAILABILITY // INQUIRIES
+         SECTION 3: AVAILABILITY // INQUIRIES (SHARED)
          ======================================================================= -->
     <section class="section-inquiries" id="inquiries">
       <div class="wrap">
@@ -513,6 +540,6 @@
     </div>
   </footer>
 
-  <script src="./assets/js/main.js?v=3"></script>
+  <script src="./assets/js/main.js?v=4"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 /**
- * naquuuu — Swiss Technical Editorial Script Engine
+ * naquuuu — Personal Product Architecture & Systems Engine
+ * Design System: Deep Crimson & Dark Maroon IDE Palette + Physical Canvas Atelier
  * Working across physical matter, code, and culture.
  */
 
@@ -7,7 +8,36 @@ document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   // ===========================================================================
-  // 1. Live Jakarta Clock (WIB / UTC+7)
+  // 1. Color Theme Engine (Crimson Dark Default vs. Paper Light Mode)
+  // ===========================================================================
+  const themeBtn = document.getElementById('nav-theme-btn');
+  const themeBtnLabel = document.getElementById('theme-btn-label');
+
+  function applyTheme(theme) {
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      if (themeBtnLabel) themeBtnLabel.textContent = 'PAPER';
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      if (themeBtnLabel) themeBtnLabel.textContent = 'CRIMSON';
+    }
+  }
+
+  // Initialize theme from storage (default: crimson dark)
+  const savedTheme = localStorage.getItem('naquuuu_theme') || 'crimson';
+  applyTheme(savedTheme);
+
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      const nextTheme = isLight ? 'crimson' : 'light';
+      applyTheme(nextTheme);
+      localStorage.setItem('naquuuu_theme', nextTheme);
+    });
+  }
+
+  // ===========================================================================
+  // 2. Live Jakarta Clock (WIB / UTC+7)
   // ===========================================================================
   const clockEl = document.getElementById('live-clock');
 
@@ -29,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateJakartaClock, 1000);
 
   // ===========================================================================
-  // 2. Dual-Mode Perspective Switcher: Systems & Matter vs. Culture & Taste
+  // 3. Dual-Mode Perspective Switcher: Systems & Matter vs. Culture & Taste
   // ===========================================================================
   const btnModeSystems = document.getElementById('tab-mode-systems');
   const btnModeCulture = document.getElementById('tab-mode-culture');
@@ -81,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ===========================================================================
-  // 3. Audio Telemetry Engine: Hukum Murphy by Kafin Sulthan (Blog Reliability Standard)
+  // 4. Audio Telemetry Engine: Hukum Murphy by Kafin Sulthan (Gate 4 Standard)
   // ===========================================================================
   const audioEl = document.getElementById('hukum-murphy-audio');
   const navAudioBtn = document.getElementById('nav-audio-pill');
@@ -160,49 +190,14 @@ document.addEventListener('DOMContentLoaded', () => {
       cleanupAutoplayTriggers();
     };
 
-    function cleanupAutoplayTriggers() {
+    const cleanupAutoplayTriggers = () => {
       validInteractionEvents.forEach(evt => {
-        window.removeEventListener(evt, triggerPlayOnGesture);
         document.removeEventListener(evt, triggerPlayOnGesture);
       });
-    }
+    };
 
     validInteractionEvents.forEach(evt => {
-      window.addEventListener(evt, triggerPlayOnGesture, { once: true, passive: true });
       document.addEventListener(evt, triggerPlayOnGesture, { once: true, passive: true });
     });
   }
-
-  // ===========================================================================
-  // 4. Scroll-Spy for Single-Row Monospace Links
-  // ===========================================================================
-  const navLinks = document.querySelectorAll('.nav-link');
-  const trackedSections = document.querySelectorAll('section[id]');
-
-  function updateScrollSpy() {
-    let currentId = '';
-    const scrollPos = window.scrollY + 100;
-
-    trackedSections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-        currentId = section.getAttribute('id');
-      }
-    });
-
-    if (currentId) {
-      navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === `#${currentId}`) {
-          link.classList.add('active');
-        } else if (href && href.startsWith('#')) {
-          link.classList.remove('active');
-        }
-      });
-    }
-  }
-
-  window.addEventListener('scroll', updateScrollSpy, { passive: true });
-  updateScrollSpy();
 });
