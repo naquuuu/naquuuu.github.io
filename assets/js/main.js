@@ -29,57 +29,56 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateJakartaClock, 1000);
 
   // ===========================================================================
-  // 2. Interactive "The Resilient Loop" Schematic State Machine
+  // 2. Dual-Mode Perspective Switcher: Systems & Matter vs. Culture & Taste
   // ===========================================================================
-  const loopStages = [
-    {
-      id: '01',
-      tag: 'STAGE 01 // INPUT & ENVIRONMENT',
-      title: 'Environment / Input',
-      desc: 'Real operating terrain across 17,000 islands: tropical humidity, intermittent mobile networks over open water, and un-airconditioned physical environments. Products are architected assuming hostile, noisy conditions rather than clean cloud lab defaults.'
-    },
-    {
-      id: '02',
-      tag: 'STAGE 02 // LOGIC & PHYSICAL MATTER',
-      title: 'Logic & Matter',
-      desc: 'Deterministic finite-state machine routing, bio-based biopolymer mechanical seal geometry, and local silica sand thermal beds. Systems ground software abstractions in physical constraints.'
-    },
-    {
-      id: '03',
-      tag: 'STAGE 03 // ENTROPY & BREAKDOWN',
-      title: 'The Breakdown',
-      desc: 'Cascading flight schedule collapses, inventory database locks, supply chain bottlenecks during medical emergencies, and thermal degradation of imported chemical batteries in tropical heat. The guaranteed moment of failure.'
-    },
-    {
-      id: '04',
-      tag: 'STAGE 04 // ADAPTIVE RECOVERY',
-      title: 'Adaptive Recovery',
-      desc: 'Automated policy state-machine rollbacks and instant refund execution, 90-day organic biopolymer soil decomposition, and passive thermal microgrid discharge without lithium fire risks. The system absorbs the shock and restores equilibrium.'
+  const btnModeSystems = document.getElementById('tab-mode-systems');
+  const btnModeCulture = document.getElementById('tab-mode-culture');
+  const viewSystems = document.getElementById('view-systems');
+  const viewCulture = document.getElementById('view-culture');
+  const modeStatusLabel = document.getElementById('mode-status-label');
+
+  function switchMode(mode) {
+    if (mode === 'culture') {
+      if (btnModeSystems) {
+        btnModeSystems.classList.remove('active');
+        btnModeSystems.setAttribute('aria-selected', 'false');
+      }
+      if (btnModeCulture) {
+        btnModeCulture.classList.add('active');
+        btnModeCulture.setAttribute('aria-selected', 'true');
+      }
+      if (viewSystems) viewSystems.classList.remove('active');
+      if (viewCulture) viewCulture.classList.add('active');
+      if (modeStatusLabel) modeStatusLabel.textContent = 'PERSPECTIVE: CREATIVE SANDBOX';
+    } else {
+      if (btnModeCulture) {
+        btnModeCulture.classList.remove('active');
+        btnModeCulture.setAttribute('aria-selected', 'false');
+      }
+      if (btnModeSystems) {
+        btnModeSystems.classList.add('active');
+        btnModeSystems.setAttribute('aria-selected', 'true');
+      }
+      if (viewCulture) viewCulture.classList.remove('active');
+      if (viewSystems) viewSystems.classList.add('active');
+      if (modeStatusLabel) modeStatusLabel.textContent = 'PERSPECTIVE: TECHNICAL PROOF';
     }
-  ];
-
-  const stageButtons = document.querySelectorAll('.loop-stage-btn');
-  const stageTagEl = document.getElementById('loop-detail-tag');
-  const stageTextEl = document.getElementById('loop-detail-text');
-
-  function setLoopStage(index) {
-    const stage = loopStages[index];
-    if (!stage) return;
-
-    stageButtons.forEach((btn, idx) => {
-      const isActive = idx === index;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    });
-
-    if (stageTagEl) stageTagEl.textContent = stage.tag;
-    if (stageTextEl) stageTextEl.textContent = stage.desc;
   }
 
-  stageButtons.forEach((btn, idx) => {
-    btn.addEventListener('click', () => setLoopStage(idx));
-    btn.addEventListener('mouseenter', () => setLoopStage(idx));
-  });
+  if (btnModeSystems && btnModeCulture) {
+    btnModeSystems.addEventListener('click', () => switchMode('systems'));
+    btnModeCulture.addEventListener('click', () => switchMode('culture'));
+  }
+
+  // Ensure clicking [ Works ] or [ The Loop ] reveals View A if View B was active
+  const navWorksLink = document.querySelector('a[href="#works"]');
+  const navLoopLink = document.querySelector('a[href="#loop"]');
+  if (navWorksLink) {
+    navWorksLink.addEventListener('click', () => switchMode('systems'));
+  }
+  if (navLoopLink) {
+    navLoopLink.addEventListener('click', () => switchMode('systems'));
+  }
 
   // ===========================================================================
   // 3. Audio Telemetry Engine: Hukum Murphy by Kafin Sulthan (Blog Reliability Standard)

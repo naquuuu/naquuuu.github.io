@@ -94,7 +94,7 @@ a:hover {
 }
 
 /* Flex / grid children never break parent bounds */
-.wrap, .wrap-wide, .nav, .flow-step-card, .dossier-card, .inquiry-card, .comp-col {
+.wrap, .wrap-wide, .nav, .flow-step-card, .dossier-card, .inquiry-card, .comp-col, .view-panel, .loop-card, .culture-card, .pdf-viewer-wrap {
   min-width: 0;
 }
 
@@ -412,19 +412,106 @@ a:hover {
 
 /* Interactive Component: The Resilient Loop */
 .resilient-loop-container {
+/* =============================================================================
+   Dual-Mode Switcher Component (Systems & Matter vs. Culture & Taste)
+   ============================================================================= */
+
+.mode-switch-wrap {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-hairline);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.mode-switcher {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-container);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-xs);
+  padding: 3px;
+  gap: 3px;
+}
+
+.mode-tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.mode-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.mode-tab-btn.active {
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  border-color: var(--border-hairline);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.mode-tab-icon {
+  font-size: 0.85rem;
+}
+
+.mode-status-meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mode-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-green);
+}
+
+/* View Panel Toggle Visibility */
+.view-panel {
+  display: none;
+}
+
+.view-panel.active {
+  display: block;
+}
+
+/* =============================================================================
+   View A: The Simplified 4-Step Horizontal Loop
+   ============================================================================= */
+
+.loop-cards-container {
   margin-top: 2.5rem;
   padding-top: 2rem;
   border-top: 1px solid var(--border-hairline);
 }
 
-.resilient-loop-header {
+.loop-cards-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
-.resilient-loop-title {
+.loop-cards-title {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 700;
@@ -433,14 +520,13 @@ a:hover {
   letter-spacing: 0.04em;
 }
 
-.resilient-loop-hint {
+.loop-cards-sub {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   color: var(--text-muted);
 }
 
-/* 4-Stage Technical Schematic */
-.loop-schematic-grid {
+.loop-cards-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
@@ -448,75 +534,55 @@ a:hover {
   border: 1px solid var(--border-hairline);
 }
 
-.loop-stage-btn {
+.loop-card {
   background: var(--bg-canvas);
-  border: none;
-  padding: 1rem 0.9rem;
-  text-align: left;
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  padding: 1.25rem 1.15rem;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  min-height: 44px;
+  gap: 0.5rem;
+  transition: background 0.15s ease;
 }
 
-.loop-stage-btn:hover {
+.loop-card:hover {
   background: var(--bg-container);
 }
 
-.loop-stage-btn.active {
-  background: var(--bg-container);
-  box-shadow: inset 0 -2px 0 var(--accent-telemetry);
-}
-
-.loop-stage-num {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--text-muted);
-}
-
-.loop-stage-btn.active .loop-stage-num {
-  color: var(--accent-telemetry);
-  font-weight: 700;
-}
-
-.loop-stage-label {
-  font-family: var(--font-display);
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.25;
-}
-
-/* Detail Drawer for Selected Stage */
-.loop-detail-drawer {
-  background: var(--bg-container);
-  border: 1px solid var(--border-hairline);
-  border-top: none;
-  padding: 1.15rem 1.25rem;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1.25rem;
+.loop-card-header {
+  display: flex;
+  justify-content: space-between;
   align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.25rem;
 }
 
-.loop-detail-stage-tag {
+.loop-card-step {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: var(--accent-telemetry);
-  padding: 2px 6px;
-  background: var(--accent-telemetry-dim);
-  border: 1px solid var(--accent-telemetry-border);
-  border-radius: var(--radius-xs);
-  white-space: nowrap;
+  letter-spacing: 0.04em;
 }
 
-.loop-detail-text {
-  font-size: 0.88rem;
+.loop-card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.loop-card-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.loop-card-desc {
+  font-size: 0.82rem;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 /* =============================================================================
@@ -774,6 +840,294 @@ a:hover {
 }
 
 /* =============================================================================
+   VIEW B: CULTURE & TASTE (CREATIVE SANDBOX)
+   ============================================================================= */
+
+.section-culture {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.culture-hero-banner {
+  background: var(--bg-container);
+  border: 1px solid var(--border-hairline);
+  padding: 2.25rem 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.culture-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-hairline);
+  padding: 3px 9px;
+  border-radius: var(--radius-xs);
+  margin-bottom: 1rem;
+}
+
+.culture-badge-icon {
+  color: var(--accent-telemetry);
+}
+
+.culture-statement {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.45;
+  max-width: 65ch;
+}
+
+.culture-dossier-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.culture-card {
+  background: var(--bg-container);
+  border: 1px solid var(--border-hairline);
+  padding: 2rem;
+}
+
+.culture-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-hairline);
+  padding-bottom: 0.5rem;
+}
+
+.culture-card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent-telemetry);
+}
+
+.culture-card-domain {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.culture-card-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.culture-card-prose {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.68;
+  margin-bottom: 1.5rem;
+  max-width: 72ch;
+}
+
+/* Embedded Spotify Container (Strictly Zero Inline Width) */
+.spotify-player-container {
+  width: 100%;
+  border: 1px solid var(--border-hairline);
+  background: var(--bg-canvas);
+  padding: 0.75rem;
+  border-radius: var(--radius-xs);
+}
+
+.spotify-player-frame {
+  width: 100%;
+  height: 152px;
+  border: none;
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+/* Form & Silhouette Visual Matrix */
+.fashion-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border-hairline);
+  border: 1px solid var(--border-hairline);
+  margin-top: 1rem;
+}
+
+.fashion-matrix-col {
+  background: var(--bg-canvas);
+  padding: 1.25rem 1rem;
+}
+
+.fashion-matrix-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.fashion-matrix-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.fashion-matrix-items li {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+}
+
+.fashion-matrix-items li::before {
+  content: "→ ";
+  color: var(--accent-telemetry);
+}
+
+/* Algorithmic Taste Prediction Vector Grid */
+.taste-vector-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.taste-vector-card {
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-hairline);
+  padding: 1rem;
+}
+
+.taste-vector-metric {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent-telemetry);
+  margin-bottom: 0.25rem;
+}
+
+.taste-vector-name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.taste-vector-mapping {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* Creative Links Bar */
+.creative-links-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-hairline);
+}
+
+.creative-btn {
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.creative-btn:hover {
+  background: var(--text-primary);
+  color: var(--bg-canvas);
+  border-color: var(--text-primary);
+}
+
+/* =============================================================================
+   Interactive Google Drive Embed (Individual Case Studies)
+   ============================================================================= */
+
+.pdf-viewer-wrap {
+  width: 100%;
+  margin: 2.5rem 0;
+  border: 1px solid var(--border-hairline);
+  background: var(--bg-container);
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+}
+
+.pdf-viewer-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background: var(--bg-canvas);
+  border-bottom: 1px solid var(--border-hairline);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.pdf-viewer-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.proof-deck-btn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  border: 1px solid var(--border-hairline);
+  padding: 4px 10px;
+  background: var(--bg-container);
+  border-radius: var(--radius-xs);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.proof-deck-btn:hover {
+  background: var(--text-primary);
+  color: var(--bg-canvas);
+}
+
+.pdf-viewer-frame {
+  width: 100%;
+  height: 640px;
+  min-height: 520px;
+  border: none;
+  display: block;
+  background: #ffffff;
+}
+
+/* =============================================================================
    SECTION 4: WRITING / NOTES & TECHNICAL COMPETENCIES
    ============================================================================= */
 
@@ -948,12 +1302,25 @@ a:hover {
     gap: 1rem;
   }
 
-  .loop-schematic-grid {
-    grid-template-columns: 1fr 1fr;
+  .loop-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .comp-matrix-grid {
     grid-template-columns: 1fr;
+  }
+
+  .fashion-matrix-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .taste-vector-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pdf-viewer-frame {
+    height: 480px;
+    min-height: 400px;
   }
 }
 
@@ -980,7 +1347,7 @@ a:hover {
     font-size: 0.72rem;
   }
 
-  .loop-schematic-grid {
+  .loop-cards-grid {
     grid-template-columns: 1fr;
   }
 
@@ -994,5 +1361,10 @@ a:hover {
 
   .dossier-card {
     padding: 1.25rem 1rem;
+  }
+
+  .pdf-viewer-frame {
+    height: 380px;
+    min-height: 300px;
   }
 }

@@ -36,7 +36,6 @@
         <nav class="nav-links" aria-label="Primary Navigation">
           <a href="#works" class="nav-link">[ Works ]</a>
           <a href="#loop" class="nav-link">[ The Loop ]</a>
-          <a href="#notes" class="nav-link">[ Notes ]</a>
           <a href="#inquiries" class="nav-link">[ Inquiries ]</a>
         </nav>
       </div>
@@ -51,20 +50,20 @@
 
   <main>
     <!-- =======================================================================
-         SECTION 1: HERO & CONSOLIDATED "ABOUT + THE LOOP"
+         SECTION 1: HERO & CONSOLIDATED PHILOSOPHY
          ======================================================================= -->
-    <section class="section-hero" id="loop">
+    <section class="section-hero">
       <div class="wrap">
         <div class="hero-editorial-grid">
           <div>
-            <div class="hero-sub-identity">working across physical matter, code, and culture</div>
+            <div class="hero-sub-identity">exploring matter, code, and culture</div>
             <h1 class="hero-headline">
               Things break.<br>
               I design around the recovery.
             </h1>
             <div class="hero-prose">
               <p>
-                Trained in physical engineering, tested across scaled digital platforms, and exploring physical computing. I work at the edge where software logic meets physical matter and cultural nuance. Real environments suffer from operational friction, power constraints, and material wear; a product should never rely on ideal conditions. The craft is in the feedback loop that absorbs the breakdown.
+                Everything that can go wrong, will go wrong. Inspired by "reka semua peluang yang ada"—I approach systems, physical matter, and cultural design with MECE probabilistic mapping: anticipating every breakdown so the system recovers gracefully instead of halting.
               </p>
             </div>
           </div>
@@ -82,41 +81,79 @@
           </div>
         </div>
 
-        <!-- Interactive Component: The Resilient Loop -->
-        <div class="resilient-loop-container">
-          <div class="resilient-loop-header">
-            <span class="resilient-loop-title">The Resilient Loop // Operating Schematic</span>
-            <span class="resilient-loop-hint">Select or hover stage to inspect friction point</span>
-          </div>
-
-          <div class="loop-schematic-grid" role="tablist" aria-label="The Resilient Loop Stages">
-            <button type="button" class="loop-stage-btn active" role="tab" aria-selected="true" id="stage-tab-01" aria-controls="loop-detail-drawer">
-              <span class="loop-stage-num">01 / INPUT</span>
-              <span class="loop-stage-label">Environment / Input</span>
+        <!-- Dual-Mode Perspective Switcher -->
+        <div class="mode-switch-wrap">
+          <div class="mode-switcher" role="tablist" aria-label="Perspective Switcher">
+            <button type="button" class="mode-tab-btn active" id="tab-mode-systems" role="tab" aria-selected="true" aria-controls="view-systems">
+              <span class="mode-tab-icon" aria-hidden="true">⚡</span>
+              <span>Systems &amp; Matter</span>
             </button>
-            <button type="button" class="loop-stage-btn" role="tab" aria-selected="false" id="stage-tab-02" aria-controls="loop-detail-drawer">
-              <span class="loop-stage-num">02 / CRAFT</span>
-              <span class="loop-stage-label">Logic &amp; Matter</span>
-            </button>
-            <button type="button" class="loop-stage-btn" role="tab" aria-selected="false" id="stage-tab-03" aria-controls="loop-detail-drawer">
-              <span class="loop-stage-num">03 / ENTROPY</span>
-              <span class="loop-stage-label">The Breakdown</span>
-            </button>
-            <button type="button" class="loop-stage-btn" role="tab" aria-selected="false" id="stage-tab-04" aria-controls="loop-detail-drawer">
-              <span class="loop-stage-num">04 / RECOVERY</span>
-              <span class="loop-stage-label">Adaptive Recovery</span>
+            <button type="button" class="mode-tab-btn" id="tab-mode-culture" role="tab" aria-selected="false" aria-controls="view-culture">
+              <span class="mode-tab-icon" aria-hidden="true">✦</span>
+              <span>Culture &amp; Taste</span>
             </button>
           </div>
-
-          <div class="loop-detail-drawer" id="loop-detail-drawer" role="tabpanel" aria-labelledby="stage-tab-01">
-            <span class="loop-detail-stage-tag" id="loop-detail-tag">STAGE 01 // INPUT &amp; ENVIRONMENT</span>
-            <p class="loop-detail-text" id="loop-detail-text">
-              Real operating terrain across 17,000 islands: tropical humidity, intermittent mobile networks over open water, and un-airconditioned physical environments. Products are architected assuming hostile, noisy conditions rather than clean cloud lab defaults.
-            </p>
+          <div class="mode-status-meta">
+            <span class="mode-status-dot" aria-hidden="true"></span>
+            <span id="mode-status-label">PERSPECTIVE: TECHNICAL PROOF</span>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- =======================================================================
+         VIEW A: SYSTEMS & MATTER (TECHNICAL PROOF)
+         ======================================================================= -->
+    <div id="view-systems" class="view-panel active" role="tabpanel" aria-labelledby="tab-mode-systems">
+      <!-- 1. The Simplified 4-Step Horizontal Loop -->
+      <section class="section-loop-cards" id="loop">
+        <div class="wrap">
+          <div class="loop-cards-container">
+            <div class="loop-cards-header">
+              <span class="loop-cards-title">The Resilient Loop // Operating Principles</span>
+              <span class="loop-cards-sub">[ 04 MECE PHASES ]</span>
+            </div>
+
+            <div class="loop-cards-grid">
+              <div class="loop-card">
+                <div class="loop-card-header">
+                  <span class="loop-card-step">01 / THE AXIOM</span>
+                  <span class="loop-card-tag">MURPHY'S LAW</span>
+                </div>
+                <h3 class="loop-card-title">Assume Failure from Day One</h3>
+                <p class="loop-card-desc">Murphy's Law. Assume failure and operational breakdown from day one. Systems are designed assuming real-world friction and entropy.</p>
+              </div>
+
+              <div class="loop-card">
+                <div class="loop-card-header">
+                  <span class="loop-card-step">02 / THE REKA</span>
+                  <span class="loop-card-tag">REKA PELUANG</span>
+                </div>
+                <h3 class="loop-card-title">MECE Probabilistic Mapping</h3>
+                <p class="loop-card-desc">"Reka semua peluang." MECE probabilistic mapping of every edge case, error route, and boundary condition before committing code or matter.</p>
+              </div>
+
+              <div class="loop-card">
+                <div class="loop-card-header">
+                  <span class="loop-card-step">03 / THE BUFFER</span>
+                  <span class="loop-card-tag">FAULT TOLERANCE</span>
+                </div>
+                <h3 class="loop-card-title">Slack in Matter &amp; Logic</h3>
+                <p class="loop-card-desc">Building fault-tolerant slack into code state machines, biopolymer structures, and decentralized energy storage to absorb entropy.</p>
+              </div>
+
+              <div class="loop-card">
+                <div class="loop-card-header">
+                  <span class="loop-card-step">04 / THE RECOVERY</span>
+                  <span class="loop-card-tag">ADAPTIVE RECOVERY</span>
+                </div>
+                <h3 class="loop-card-title">Graceful Degradation Loops</h3>
+                <p class="loop-card-desc">Graceful recovery loops where failure is handled as a standard operational state rather than an unexpected system halt.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
     <!-- =======================================================================
          SECTION 2: SELECTED WORKS (THE 3 PROVEN SYSTEMS)
@@ -241,36 +278,6 @@
     </section>
 
     <!-- =======================================================================
-         SECTION 3: AVAILABILITY // INQUIRIES
-         ======================================================================= -->
-    <section class="section-inquiries" id="inquiries">
-      <div class="wrap">
-        <div class="inquiry-card">
-          <div class="inquiry-badge">
-            <span class="inquiry-badge-dot" aria-hidden="true"></span>
-            <span>OPEN TO COLLABORATION</span>
-          </div>
-          <h2 class="inquiry-headline">Building with teams where matter, code, and mindset align.</h2>
-          <p class="inquiry-prose">
-            Open to full-time roles, fractional/part-time initiatives, and contract builds—commercial ventures or non-profit impact. The only constant is mindset: designing systems that hold when the environment doesn't cooperate, valuing craft, and respecting real-world constraints.
-          </p>
-
-          <div class="inquiry-actions">
-            <a href="mailto:rbkrishnamurti@gmail.com" class="inquiry-btn">
-              <span>Gmail ↗</span>
-            </a>
-            <a href="https://wa.me/6282112255009" target="_blank" rel="noopener noreferrer" class="inquiry-btn">
-              <span>WhatsApp ↗</span>
-            </a>
-            <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" class="inquiry-btn">
-              <span>LinkedIn ↗</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
          SECTION 4: WRITING / NOTES & TECHNICAL COMPETENCIES
          ======================================================================= -->
     <section class="section-notes-comp" id="notes">
@@ -335,6 +342,158 @@
         </div>
       </div>
     </section>
+
+    </div> <!-- /#view-systems -->
+
+    <!-- =======================================================================
+         VIEW B: CULTURE & TASTE (CREATIVE SANDBOX)
+         ======================================================================= -->
+    <div id="view-culture" class="view-panel" role="tabpanel" aria-labelledby="tab-mode-culture">
+      <section class="section-culture">
+        <div class="wrap">
+          <!-- Aesthetic Statement Banner -->
+          <div class="culture-hero-banner">
+            <div class="culture-badge">
+              <span class="culture-badge-icon" aria-hidden="true">✦</span>
+              <span>CREATIVE SANDBOX // CULTURE &amp; TASTE</span>
+            </div>
+            <h2 class="culture-statement">
+              "Culture isn't linear. Just like systems engineering, personal style and taste are about navigating nuance, subcultures, and diverse identities."
+            </h2>
+          </div>
+
+          <div class="culture-dossier-stack">
+            <!-- 1. Acoustic Archives (Music Curation) -->
+            <article class="culture-card">
+              <div class="culture-card-header">
+                <span class="culture-card-tag">01 // ACOUSTIC ARCHIVES</span>
+                <span class="culture-card-domain">[ SONIC ROTATIONS ]</span>
+              </div>
+              <h3 class="culture-card-title">Shibuya-kei, City Pop, Latin Jazz &amp; Bossa Nova</h3>
+              <p class="culture-card-prose">
+                Curated streaming rotations and sonic vectors—spanning Shibuya-kei, Japanese city pop, Latin jazz, and bossa nova. Rhythm, harmony, and analog warmth as foundational input for deep focus and spatial awareness.
+              </p>
+
+              <div class="spotify-player-container">
+                <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdbXrPNafg9d" class="spotify-player-frame" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Curated Acoustic Rotation"></iframe>
+              </div>
+            </article>
+
+            <!-- 2. Form & Silhouette (Fashion Curation) -->
+            <article class="culture-card">
+              <div class="culture-card-header">
+                <span class="culture-card-tag">02 // FORM &amp; SILHOUETTE</span>
+                <span class="culture-card-domain">[ WEARABLE SYSTEMS ]</span>
+              </div>
+              <h3 class="culture-card-title">Smart-Casual Tailoring &amp; Textural Balance</h3>
+              <p class="culture-card-prose">
+                Personal curation on smart-casual tailoring, vintage proportions, functional footwear (brogues, classic runners, Mary Janes), and textural balance. Treating personal style not as ephemeral trends, but as ergonomic and wearable systems design.
+              </p>
+
+              <div class="fashion-matrix-grid">
+                <div class="fashion-matrix-col">
+                  <div class="fashion-matrix-title">Tailoring &amp; Frame</div>
+                  <ul class="fashion-matrix-items">
+                    <li>Relaxed Pleated Trousers</li>
+                    <li>Unstructured Wool Blazers</li>
+                    <li>Boxy Heavyweight Tees</li>
+                  </ul>
+                </div>
+                <div class="fashion-matrix-col">
+                  <div class="fashion-matrix-title">Functional Footwear</div>
+                  <ul class="fashion-matrix-items">
+                    <li>Heritage Leather Brogues</li>
+                    <li>Low-Profile Runners</li>
+                    <li>Classic Mary Janes &amp; Loafers</li>
+                  </ul>
+                </div>
+                <div class="fashion-matrix-col">
+                  <div class="fashion-matrix-title">Textural Balance</div>
+                  <ul class="fashion-matrix-items">
+                    <li>High-GSM Raw Denim</li>
+                    <li>Textured Linen &amp; Knitwear</li>
+                    <li>Matte Silver Accents</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <!-- 3. Algorithmic Taste Prediction (Concept Feature) -->
+            <article class="culture-card">
+              <div class="culture-card-header">
+                <span class="culture-card-tag">03 // ALGORITHMIC TASTE PREDICTION</span>
+                <span class="culture-card-domain">[ CONCEPT FEATURE ]</span>
+              </div>
+              <h3 class="culture-card-title">Mapping Raw Audio Signals to Aesthetic Vectors</h3>
+              <p class="culture-card-prose">
+                A design-engineering concept exploring how raw streaming audio features (valence, tempo, acousticness, energy) can algorithmically map to personal wardrobe curation, color palettes, and structural garment choices.
+              </p>
+
+              <div class="taste-vector-grid">
+                <div class="taste-vector-card">
+                  <div class="taste-vector-metric">AUDIO SIGNAL: ACOUSTICNESS ≥ 0.72</div>
+                  <div class="taste-vector-name">Material Selection</div>
+                  <div class="taste-vector-mapping">Maps to organic fibers, breathable heavyweight linen, undyed cottons, and tactile knit textures.</div>
+                </div>
+                <div class="taste-vector-card">
+                  <div class="taste-vector-metric">AUDIO SIGNAL: TEMPO [90-115 BPM]</div>
+                  <div class="taste-vector-name">Silhouette Geometry</div>
+                  <div class="taste-vector-mapping">Maps to mid-tempo relaxed proportions, architectural drape, and non-restrictive waistlines.</div>
+                </div>
+                <div class="taste-vector-card">
+                  <div class="taste-vector-metric">AUDIO SIGNAL: VALENCE [0.45-0.65]</div>
+                  <div class="taste-vector-name">Chromatic Palette</div>
+                  <div class="taste-vector-mapping">Maps to neutral technical earth tones: chalk slate, graphite, warm taupe, and safety accents.</div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Creative Links Bar -->
+          <div class="creative-links-bar">
+            <a href="https://www.tiktok.com/@naquuuu" target="_blank" rel="noopener noreferrer" class="creative-btn">
+              <span>[ TikTok ↗ ]</span>
+            </a>
+            <a href="https://x.com/naquuuu" target="_blank" rel="noopener noreferrer" class="creative-btn">
+              <span>[ X / Twitter ↗ ]</span>
+            </a>
+            <a href="https://open.spotify.com/user/naquuuu" target="_blank" rel="noopener noreferrer" class="creative-btn">
+              <span>[ Spotify Profile ↗ ]</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div> <!-- /#view-culture -->
+
+    <!-- =======================================================================
+         SECTION 3: AVAILABILITY // INQUIRIES
+         ======================================================================= -->
+    <section class="section-inquiries" id="inquiries">
+      <div class="wrap">
+        <div class="inquiry-card">
+          <div class="inquiry-badge">
+            <span class="inquiry-badge-dot" aria-hidden="true"></span>
+            <span>OPEN TO COLLABORATION</span>
+          </div>
+          <h2 class="inquiry-headline">Building with teams where matter, code, and mindset align.</h2>
+          <p class="inquiry-prose">
+            Open to full-time roles, fractional/part-time initiatives, and contract builds—commercial ventures or non-profit impact. The only constant is mindset: designing systems that hold when the environment doesn't cooperate, valuing craft, and respecting real-world constraints.
+          </p>
+
+          <div class="inquiry-actions">
+            <a href="mailto:rbkrishnamurti@gmail.com" class="inquiry-btn">
+              <span>Gmail ↗</span>
+            </a>
+            <a href="https://wa.me/6282112255009" target="_blank" rel="noopener noreferrer" class="inquiry-btn">
+              <span>WhatsApp ↗</span>
+            </a>
+            <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" class="inquiry-btn">
+              <span>LinkedIn ↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- =========================================================================
@@ -349,7 +508,7 @@
         <a href="https://bhanuharya.github.io/" target="_blank" rel="noopener noreferrer">Harya ↗</a>
       </div>
       <div class="footer-live-stamp">
-        <span>Jakarta, Indonesia • WIB / UTC+7 • Built with matter &amp; code.</span>
+        <span>naquuuu.github.io • built with matter and code.</span>
       </div>
     </div>
   </footer>
