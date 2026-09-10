@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(el => el.classList.add('is-visible'));
   }
 
-  // 4. Audio Player & Autoplay Logic for Hukum Murphy (Kafin Sulthan)
+  // 4. Audio Player Logic for Hukum Murphy (Kafin Sulthan) - Single Console Player
   const audioEl = document.getElementById('hukum-murphy-audio');
   const playBtn = document.getElementById('play-toggle-btn');
   const playIcon = document.getElementById('play-icon');
@@ -117,41 +117,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const progressBar = document.getElementById('player-progress-bar');
   const currentTimeEl = document.getElementById('player-current-time');
   const durationEl = document.getElementById('player-duration');
+  const playerHint = document.getElementById('player-hint');
 
-  // Floating Player Elements
-  const floatingBar = document.getElementById('floating-music-bar');
-  const floatingPlayBtn = document.getElementById('floating-play-btn');
-  const floatingPlayIcon = document.getElementById('floating-play-icon');
-  const floatingPauseIcon = document.getElementById('floating-pause-icon');
+  function setHint(text) {
+    if (playerHint) playerHint.textContent = text;
+  }
+  const DEFAULT_HINT = 'Continuous loop \u2022 Tap to start';
 
   // Flag to track intentional user pauses vs OS/browser audio interruptions
   let isUserInitiatedPause = false;
-  let hasAttemptedAutoplay = false;
 
   function updatePlayerUI(isPlaying) {
-    if (isPlaying) {
-      if (playIcon) playIcon.style.display = 'none';
-      if (pauseIcon) pauseIcon.style.display = 'block';
-      if (eqBars) eqBars.classList.add('active');
-
-      if (floatingPlayIcon) floatingPlayIcon.style.display = 'none';
-      if (floatingPauseIcon) floatingPauseIcon.style.display = 'block';
-      if (floatingBar) {
-        floatingBar.classList.add('playing');
-        floatingBar.title = 'Playing Hukum Murphy (Click to pause)';
-      }
-    } else {
-      if (playIcon) playIcon.style.display = 'block';
-      if (pauseIcon) pauseIcon.style.display = 'none';
-      if (eqBars) eqBars.classList.remove('active');
-
-      if (floatingPlayIcon) floatingPlayIcon.style.display = 'block';
-      if (floatingPauseIcon) floatingPauseIcon.style.display = 'none';
-      if (floatingBar) {
-        floatingBar.classList.remove('playing');
-        floatingBar.title = 'Click anywhere to play Hukum Murphy';
-      }
-    }
+    if (playIcon) playIcon.style.display = isPlaying ? 'none' : 'block';
+    if (pauseIcon) pauseIcon.style.display = isPlaying ? 'block' : 'none';
+    if (eqBars) eqBars.classList.toggle('active', isPlaying);
+    if (playBtn) playBtn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
   }
 
   // Toggle audio on user interaction
@@ -169,19 +149,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (playBtn) playBtn.addEventListener('click', toggleAudio);
-  if (floatingPlayBtn) floatingPlayBtn.addEventListener('click', toggleAudio);
-  if (floatingBar) {
-    floatingBar.addEventListener('click', (e) => {
-      if (e.target !== floatingPlayBtn && !floatingPlayBtn.contains(e.target)) {
-        toggleAudio();
-      }
-    });
-  }
 
   if (audioEl) {
     // 1. Single Looping Mechanism: Never use loop attribute or timeupdate seek.
     // Listen exclusively to 'ended' event per Blog Reliability Standard.
     audioEl.loop = false;
+    audioEl.preload = 'metadata';
 
     // 2. Event-driven UI: Synchronize UI with actual hardware audio state
     audioEl.addEventListener('play', () => {
@@ -221,9 +194,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const triggerPlayOnGesture = () => {
       if (audioEl.paused && !isUserInitiatedPause) {
         audioEl.play().then(() => {
+          setHint(DEFAULT_HINT);
           cleanupAutoplayTriggers();
         }).catch(() => {});
       } else {
+        setHint(DEFAULT_HINT);
         cleanupAutoplayTriggers();
       }
     };
@@ -240,26 +215,11 @@ document.addEventListener('DOMContentLoaded', () => {
       document.addEventListener(evt, triggerPlayOnGesture, { once: true, passive: true });
     });
 
-    // 6. Play after loadedmetadata
+    // 6. Dynamic Duration: Render duration strictly from loadedmetadata (never hardcoded)
     audioEl.addEventListener('loadedmetadata', () => {
       if (!isNaN(audioEl.duration) && audioEl.duration > 0) {
         if (durationEl) durationEl.textContent = formatTime(audioEl.duration);
       }
-      if (!isUserInitiatedPause && audioEl.paused && !hasAttemptedAutoplay) {
-        hasAttemptedAutoplay = true;
-        audioEl.play().then(() => {
-          cleanupAutoplayTriggers();
-        }).catch(() => {
-          // Autoplay policy waiting for user gesture
-        });
-      }
-    });
-
-    // Initial silent attempt on DOMContentLoaded
-    audioEl.play().then(() => {
-      cleanupAutoplayTriggers();
-    }).catch(() => {
-      // Normal browser autoplay restriction; gesture listeners will engage
     });
 
     // 7. Timeupdate for progress bar display ONLY (zero seek logic)
@@ -268,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pct = (audioEl.currentTime / audioEl.duration) * 100;
         if (progressFill) progressFill.style.width = pct + '%';
         if (currentTimeEl) currentTimeEl.textContent = formatTime(audioEl.currentTime);
-        if (durationEl) durationEl.textContent = formatTime(audioEl.duration);
+        if (durationEl && durationEl.textContent === '--:--') durationEl.textContent = formatTime(audioEl.duration);
       }
     });
 
@@ -276,9 +236,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (progressBar) {
       progressBar.addEventListener('click', (e) => {
         const rect = progressBar.getBoundingClientRect();
+        if (rect.width <= 0) return;
         const clickPos = (e.clientX - rect.left) / rect.width;
-        if (!isNaN(audioEl.duration)) {
-          audioEl.currentTime = clickPos * audioEl.duration;
+        if (!isNaN(audioEl.duration) && audioEl.duration > 0) {
+          audioEl.currentTime = Math.max(0, Math.min(1, clickPos)) * audioEl.duration;
         }
       });
     }
