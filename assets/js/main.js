@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Dynamic navbar link mapping per active perspective
   const navSectionMap = {
-    philosophy: { systems: '#philosophy', culture: '#culture-philosophy' },
+    philosophy: { systems: '#philosophy', culture: '#philosophy' },
     artifacts: { systems: '#artifacts', culture: '#culture-artifacts' },
     notes: { systems: '#notes', culture: '#culture-notes' },
     inquiries: { systems: '#inquiries', culture: '#inquiries' }
@@ -145,6 +145,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.nav-links a.nav-link').forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
+      if (href === '#philosophy') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        history.replaceState(null, '', href);
+        return;
+      }
       if (href && href.startsWith('#')) {
         const targetEl = document.querySelector(href);
         if (targetEl) {
@@ -155,6 +161,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Nav brand logo smoothly scrolls to top if clicked on home page
+  const navBrand = document.querySelector('.nav-brand');
+  if (navBrand) {
+    navBrand.addEventListener('click', (e) => {
+      const href = navBrand.getAttribute('href');
+      if (href === './' || href === '/') {
+        if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname === '') {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          history.replaceState(null, '', window.location.pathname);
+        }
+      }
+    });
+  }
 
   // ===========================================================================
   // 3. Audio Telemetry Engine: Hukum Murphy by Kafin Sulthan (Gate 4 Standard)

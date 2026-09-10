@@ -428,7 +428,10 @@ body[data-mode="culture"] .nav-link:active {
 }
 
 /* Sticky Header Offset for All Sections */
-#philosophy,
+#philosophy {
+  scroll-margin-top: 0;
+}
+
 #artifacts,
 #notes,
 #inquiries,
