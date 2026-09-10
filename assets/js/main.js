@@ -8,36 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   // ===========================================================================
-  // 1. Color Theme Engine (Crimson Dark Default vs. Paper Light Mode)
-  // ===========================================================================
-  const themeBtn = document.getElementById('nav-theme-btn');
-  const themeBtnLabel = document.getElementById('theme-btn-label');
-
-  function applyTheme(theme) {
-    if (theme === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-      if (themeBtnLabel) themeBtnLabel.textContent = 'PAPER';
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-      if (themeBtnLabel) themeBtnLabel.textContent = 'CRIMSON';
-    }
-  }
-
-  // Initialize theme from storage (default: crimson dark)
-  const savedTheme = localStorage.getItem('naquuuu_theme') || 'crimson';
-  applyTheme(savedTheme);
-
-  if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
-      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-      const nextTheme = isLight ? 'crimson' : 'light';
-      applyTheme(nextTheme);
-      localStorage.setItem('naquuuu_theme', nextTheme);
-    });
-  }
-
-  // ===========================================================================
-  // 2. Live Jakarta Clock (WIB / UTC+7)
+  // 1. Live Jakarta Clock (WIB / UTC+7)
   // ===========================================================================
   const clockEl = document.getElementById('live-clock');
 
@@ -59,16 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateJakartaClock, 1000);
 
   // ===========================================================================
-  // 3. Dual-Mode Perspective Switcher: Systems & Matter vs. Culture & Taste
+  // 2. Dual-Mode Perspective & Dynamic Theme Switcher: Systems vs. Culture
   // ===========================================================================
   const btnModeSystems = document.getElementById('tab-mode-systems');
   const btnModeCulture = document.getElementById('tab-mode-culture');
   const viewSystems = document.getElementById('view-systems');
   const viewCulture = document.getElementById('view-culture');
   const modeStatusLabel = document.getElementById('mode-status-label');
+  const heroSubIdentity = document.getElementById('hero-sub-identity');
 
   function switchMode(mode) {
     if (mode === 'culture') {
+      document.body.setAttribute('data-mode', 'culture');
       if (btnModeSystems) {
         btnModeSystems.classList.remove('active');
         btnModeSystems.setAttribute('aria-selected', 'false');
@@ -80,7 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (viewSystems) viewSystems.classList.remove('active');
       if (viewCulture) viewCulture.classList.add('active');
       if (modeStatusLabel) modeStatusLabel.textContent = 'PERSPECTIVE: CREATIVE SANDBOX';
+      if (heroSubIdentity) heroSubIdentity.textContent = 'exploring sound, silhouette, and human taste';
+      localStorage.setItem('naquuuu_mode', 'culture');
     } else {
+      document.body.setAttribute('data-mode', 'systems');
       if (btnModeCulture) {
         btnModeCulture.classList.remove('active');
         btnModeCulture.setAttribute('aria-selected', 'false');
@@ -92,7 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (viewCulture) viewCulture.classList.remove('active');
       if (viewSystems) viewSystems.classList.add('active');
       if (modeStatusLabel) modeStatusLabel.textContent = 'PERSPECTIVE: TECHNICAL PROOF';
+      if (heroSubIdentity) heroSubIdentity.textContent = 'working across physical matter, code, and culture';
+      localStorage.setItem('naquuuu_mode', 'systems');
     }
+  }
+
+  // Restore saved perspective mode if previously selected
+  const savedMode = localStorage.getItem('naquuuu_mode') || 'systems';
+  if (savedMode === 'culture') {
+    switchMode('culture');
   }
 
   if (btnModeSystems && btnModeCulture) {
@@ -103,15 +87,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // Ensure clicking [ Works ] or [ The Loop ] reveals View A if View B was active
   const navWorksLink = document.querySelector('a[href="#works"]');
   const navLoopLink = document.querySelector('a[href="#loop"]');
+  const navNotesLink = document.querySelector('a[href="#notes"]');
   if (navWorksLink) {
     navWorksLink.addEventListener('click', () => switchMode('systems'));
   }
   if (navLoopLink) {
     navLoopLink.addEventListener('click', () => switchMode('systems'));
   }
+  if (navNotesLink) {
+    navNotesLink.addEventListener('click', () => switchMode('systems'));
+  }
 
   // ===========================================================================
-  // 4. Audio Telemetry Engine: Hukum Murphy by Kafin Sulthan (Gate 4 Standard)
+  // 3. Audio Telemetry Engine: Hukum Murphy by Kafin Sulthan (Gate 4 Standard)
   // ===========================================================================
   const audioEl = document.getElementById('hukum-murphy-audio');
   const navAudioBtn = document.getElementById('nav-audio-pill');
