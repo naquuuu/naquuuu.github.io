@@ -82,49 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ===========================================================================
-  // 3. Open Peer Review: Frictionless WhatsApp Clipboard Formatter
-  // ===========================================================================
-  const reviewTextarea = document.getElementById('review-text');
-  const reviewCopyBtn = document.getElementById('review-copy-btn');
-  const reviewToast = document.getElementById('review-toast');
-  const reviewCharCount = document.getElementById('review-char-count');
-
-  if (reviewTextarea && reviewCharCount) {
-    reviewTextarea.addEventListener('input', () => {
-      const len = reviewTextarea.value.length;
-      reviewCharCount.textContent = `${len} characters`;
-    });
-  }
-
-  if (reviewCopyBtn && reviewTextarea) {
-    reviewCopyBtn.addEventListener('click', () => {
-      const userText = reviewTextarea.value.trim();
-      const payloadText = userText || '(No text entered — general review inquiry)';
-
-      const formattedMessage = [
-        '⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯',
-        'PEER CRITIQUE & BRAINSTORM FOR naquuuu',
-        'Source: naquuuu.github.io',
-        '⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯',
-        payloadText,
-        '⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯'
-      ].join('\n');
-
-      navigator.clipboard.writeText(formattedMessage).then(() => {
-        if (reviewToast) {
-          reviewToast.classList.add('is-visible');
-          setTimeout(() => {
-            reviewToast.classList.remove('is-visible');
-          }, 3500);
-        }
-      }).catch(err => {
-        console.warn('Clipboard write failed:', err);
-      });
-    });
-  }
-
-  // ===========================================================================
-  // 4. Audio Telemetry Engine: Hukum Murphy by Kafin Sulthan (Blog Reliability Standard)
+  // 3. Audio Telemetry Engine: Hukum Murphy by Kafin Sulthan (Blog Reliability Standard)
   // ===========================================================================
   const audioEl = document.getElementById('hukum-murphy-audio');
   const navAudioBtn = document.getElementById('nav-audio-pill');
@@ -217,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ===========================================================================
-  // 5. Scroll-Spy for Single-Row Monospace Links
+  // 4. Scroll-Spy for Single-Row Monospace Links
   // ===========================================================================
   const navLinks = document.querySelectorAll('.nav-link');
   const trackedSections = document.querySelectorAll('section[id]');
