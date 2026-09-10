@@ -521,8 +521,8 @@ body[data-mode="culture"] .section-hero {
 
 .hero-editorial-grid {
   display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  gap: 2.75rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
   align-items: center;
 }
 
@@ -544,11 +544,11 @@ body[data-mode="culture"] .section-hero {
 }
 
 .hero-headline {
-  font-size: 2.4rem;
+  font-size: 2.25rem;
   line-height: 1.18;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.15rem;
   letter-spacing: -0.025em;
 }
 
@@ -2127,13 +2127,14 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
 
 @media (max-width: 900px) {
   .hero-editorial-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: center;
   }
 
   .portrait-technical-wrap {
-    max-width: 380px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     width: 100%;
   }
 
@@ -2309,12 +2310,12 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
     box-shadow: 0 0 12px rgba(200, 82, 80, 0.2);
   }
 
-  /* Mobile Hero: Compact Portrait Thumbnail beside Main Headline */
+  /* Mobile Hero: 50% Text & 50% Picture Split */
   .hero-editorial-grid {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 1fr;
     gap: 0.75rem 1rem;
-    align-items: start;
+    align-items: center;
   }
 
   .hero-text-col {
@@ -2323,37 +2324,44 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
 
   .hero-sub-identity {
     grid-column: 1 / -1;
+    font-size: 0.72rem;
   }
 
   .hero-headline {
     grid-column: 1;
     grid-row: 2;
-    font-size: 1.6rem;
-    line-height: 1.2;
-    margin-bottom: 0.25rem;
+    font-size: clamp(1.2rem, 4vw, 1.55rem);
+    line-height: 1.18;
+    margin-bottom: 0;
   }
 
   .portrait-technical-wrap {
     grid-column: 2;
     grid-row: 2;
-    width: 100px;
-    max-width: 100px;
-    height: 100px;
-    padding: 3px;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding: 0.35rem;
     margin: 0;
     border-radius: var(--radius-sm);
-    align-self: start;
+    align-self: center;
   }
 
   .portrait-technical-wrap .portrait-img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    aspect-ratio: 1066 / 1120;
     object-fit: cover;
     border-radius: 4px;
   }
 
   .portrait-technical-wrap .portrait-meta-strip {
-    display: none;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    color: var(--text-muted);
+    padding: 0.25rem 0.15rem 0.05rem 0.15rem;
   }
 
   .hero-epigraph {
