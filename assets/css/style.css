@@ -68,31 +68,31 @@
 
 /* =============================================================================
    DYNAMIC THEME SHIFT: CULTURE & TASTE MODE
-   Fluidly morphs into Deep Velvet Crimson & Dark Maroon with Sonic Emerald Accents
+   Soft Warm Espresso-Maroon & Terracotta Palette (Sophisticated & Editorial)
    ============================================================================= */
 body[data-mode="culture"] {
-  --bg-primary: #120305;              /* Ultra-deep dark maroon workspace canvas */
-  --bg-surface: #1A0508;              /* Surface panels & cards */
-  --bg-surface-elevated: #24080D;     /* Elevated headers & toolbars */
-  --bg-card: #1C0609;                 /* Card container */
-  --bg-card-hover: #29090E;           /* Hovered card state */
-  --bg-input: #3A0B10;
-  --bg-code: #0B0203;
+  --bg-primary: #1B1214;              /* Warm roasted espresso-maroon canvas */
+  --bg-surface: #241A1C;              /* Refined warm dark panels & cards */
+  --bg-surface-elevated: #2E2225;     /* Elevated headers & toolbars */
+  --bg-card: #261C1E;                 /* Card container */
+  --bg-card-hover: #332629;           /* Hovered card state */
+  --bg-input: #3D2B2F;
+  --bg-code: #120A0C;
 
-  --border-subtle: #2D070B;           /* Subtle dark red borders */
-  --border-active: #4F0E15;           /* Active panel borders */
-  --border-crimson: #E6243A;          /* Accent border */
-  --border-glow: rgba(230, 36, 58, 0.45);
+  --border-subtle: #38282B;           /* Subtle warm espresso borders */
+  --border-active: #5A4045;           /* Active panel borders */
+  --border-crimson: #C85250;          /* Soft terracotta crimson accent border */
+  --border-glow: rgba(200, 82, 80, 0.35);
 
-  --text-primary: #FDE8EA;            /* Crisp off-white with warm rose undertone */
-  --text-secondary: #D4A5A9;          /* Soft rose-gray body text */
-  --text-muted: #B58287;              /* Muted rose (WCAG AA 6.09:1) */
-  --text-code: #FFE2E5;
+  --text-primary: #F5ECE8;            /* Soft warm linen/parchment */
+  --text-secondary: #D4C4C0;          /* Warm taupe body text */
+  --text-muted: #A89591;              /* Muted warm gray-brown */
+  --text-code: #FDE8EA;
 
-  --accent-crimson: #E6243A;          /* Signature bright crimson */
-  --accent-crimson-hover: #FF3B52;
-  --accent-crimson-dim: rgba(230, 36, 58, 0.16);
-  --accent-wine: #9E1522;
+  --accent-crimson: #C85250;          /* Soft terracotta crimson */
+  --accent-crimson-hover: #DF6D6A;
+  --accent-crimson-dim: rgba(200, 82, 80, 0.14);
+  --accent-wine: #9A3836;
 
   --term-cyan: #38BDF8;
   --term-green: #34D399;
@@ -100,9 +100,9 @@ body[data-mode="culture"] {
   --term-red: #F87171;
   --spotify-green: #1DB954;
 
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 30px rgba(230, 36, 58, 0.25);
-  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.75);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 25px rgba(200, 82, 80, 0.2);
+  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.65);
 }
 
 /* =============================================================================
@@ -838,9 +838,9 @@ body[data-mode="culture"] .mode-status-dot {
 }
 
 body[data-mode="culture"] .sticky-perspective-inner {
-  background: rgba(18, 3, 5, 0.94);
+  background: rgba(27, 18, 20, 0.94);
   border-color: var(--border-active);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 20px rgba(230, 36, 58, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 20px rgba(200, 82, 80, 0.15);
 }
 
 .sticky-perspective-inner .mode-tab-btn {
@@ -1208,6 +1208,13 @@ body[data-mode="culture"] .sticky-perspective-inner {
   gap: 1rem;
 }
 
+.note-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  flex: 1;
+}
+
 .note-item {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
@@ -1224,6 +1231,43 @@ body[data-mode="culture"] .sticky-perspective-inner {
 .note-item:hover {
   border-color: var(--border-crimson);
   transform: translateX(4px);
+}
+
+.note-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.note-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.note-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  background: rgba(220, 38, 38, 0.08);
+  color: var(--accent-crimson);
+  border: 1px solid var(--border-crimson);
+  letter-spacing: 0.04em;
+}
+
+body[data-mode="culture"] .note-tag {
+  background: rgba(200, 82, 80, 0.15);
+  color: var(--accent-crimson);
+  border-color: var(--border-crimson);
+}
+
+.note-date {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
 }
 
 .note-title {
@@ -1312,8 +1356,8 @@ body[data-mode="culture"] .sticky-perspective-inner {
 }
 
 .culture-hero-banner {
-  background: radial-gradient(circle at 10% 20%, rgba(230, 36, 58, 0.16) 0%, transparent 60%),
-              radial-gradient(circle at 80% 80%, rgba(251, 191, 36, 0.1) 0%, transparent 60%),
+  background: radial-gradient(circle at 10% 20%, rgba(200, 82, 80, 0.16) 0%, transparent 60%),
+              radial-gradient(circle at 80% 80%, rgba(251, 191, 36, 0.08) 0%, transparent 60%),
               var(--bg-surface);
   border: 1px solid var(--border-active);
   border-radius: var(--radius-md);
@@ -1369,6 +1413,8 @@ body[data-mode="culture"] .sticky-perspective-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   margin-bottom: 0.75rem;
 }
 
@@ -1377,12 +1423,14 @@ body[data-mode="culture"] .sticky-perspective-inner {
   font-size: 0.72rem;
   font-weight: 700;
   color: var(--accent-crimson);
+  letter-spacing: 0.04em;
 }
 
 .culture-card-domain {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
 .culture-card-title {
@@ -1408,9 +1456,59 @@ body[data-mode="culture"] .sticky-perspective-inner {
 
 .spotify-player-frame {
   width: 100%;
-  height: 152px;
+  height: 352px;
   border: none;
   display: block;
+  border-radius: 12px;
+}
+
+/* Instagram Feature Card (Wearable Systems & Sartorial Outfits) */
+.instagram-feature-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border-active);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.instagram-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.instagram-avatar-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 1.15rem;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(221, 42, 123, 0.35);
+  flex-shrink: 0;
+}
+
+.instagram-handle-title {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.instagram-handle-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
 }
 
 /* Fashion Matrix Grid */
@@ -2168,19 +2266,145 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
     padding: 0 0.2rem;
   }
 
-  .mobile-dock-link:hover,
-  .mobile-dock-link.active {
-    color: var(--text-primary);
-    background: rgba(220, 38, 38, 0.08);
-    border-color: rgba(220, 38, 38, 0.25);
+  @media (hover: hover) {
+    .mobile-dock-link:hover {
+      color: var(--text-primary);
+      background: rgba(220, 38, 38, 0.06);
+      border-color: rgba(220, 38, 38, 0.2);
+    }
+    body[data-mode="culture"] .mobile-dock-link:hover {
+      color: var(--text-primary);
+      background: rgba(200, 82, 80, 0.12);
+      border-color: rgba(200, 82, 80, 0.3);
+    }
   }
 
-  body[data-mode="culture"] .mobile-dock-link:hover,
+  .mobile-dock-link.active {
+    color: var(--text-primary);
+    background: rgba(220, 38, 38, 0.1);
+    border-color: rgba(220, 38, 38, 0.3);
+  }
+
   body[data-mode="culture"] .mobile-dock-link.active {
     color: #FFFFFF;
-    background: rgba(230, 36, 58, 0.16);
-    border-color: rgba(230, 36, 58, 0.4);
-    box-shadow: 0 0 10px rgba(230, 36, 58, 0.25);
+    background: rgba(200, 82, 80, 0.22);
+    border-color: rgba(200, 82, 80, 0.45);
+    box-shadow: 0 0 12px rgba(200, 82, 80, 0.2);
+  }
+
+  /* Mobile Hero: Compact Portrait Thumbnail beside Main Headline */
+  .hero-editorial-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.75rem 1rem;
+    align-items: start;
+  }
+
+  .hero-text-col {
+    display: contents;
+  }
+
+  .hero-sub-identity {
+    grid-column: 1 / -1;
+  }
+
+  .hero-headline {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+  }
+
+  .portrait-technical-wrap {
+    grid-column: 2;
+    grid-row: 2;
+    width: 100px;
+    max-width: 100px;
+    height: 100px;
+    padding: 3px;
+    margin: 0;
+    border-radius: var(--radius-sm);
+    align-self: start;
+  }
+
+  .portrait-technical-wrap .portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .portrait-technical-wrap .portrait-meta-strip {
+    display: none;
+  }
+
+  .hero-epigraph {
+    grid-column: 1 / -1;
+    margin: 0.75rem 0 1rem 0;
+  }
+
+  .hero-prose {
+    grid-column: 1 / -1;
+  }
+
+  .hero-cta-group {
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+  }
+
+  /* Compact Spotify Player on Mobile */
+  .spotify-player-frame {
+    height: 152px;
+  }
+
+  /* Cultural Cards & Notes Wrapping on Mobile */
+  .culture-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  .culture-card-tag {
+    white-space: nowrap;
+    font-size: 0.72rem;
+  }
+
+  .culture-card-domain {
+    white-space: nowrap;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .note-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 1.15rem 1rem;
+  }
+
+  .note-main {
+    width: 100%;
+  }
+
+  .note-title {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .note-summary {
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .note-meta {
+    align-self: flex-start;
+    white-space: nowrap;
+    font-size: 0.68rem;
+  }
+
+  .fashion-matrix-grid, .taste-vector-grid {
+    grid-template-columns: 1fr;
   }
 
   /* Safe padding so bottom content is not obscured by the mobile dock */
