@@ -15,9 +15,23 @@
   <header class="site-header">
     <div class="wrap nav">
       <a href="./" class="site-title">
-        <span class="prompt-user">naquuuu</span><span class="prompt-at">@</span><span class="prompt-host">builder</span>
-        <span class="prompt-badge">bits + atoms</span>
+        <span class="prompt-user">naquuuu</span><span class="prompt-cursor"></span>
       </a>
+
+      <!-- Sticky Header Audio Control (Synced with Soundroom) -->
+      <button type="button" class="nav-audio-btn" id="nav-audio-btn" aria-label="Toggle Audio Playback" title="Hukum Murphy - Kafin Sulthan (Tap to play/pause)">
+        <span class="nav-audio-icon-wrap">
+          <svg id="nav-play-icon" width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          <svg id="nav-pause-icon" style="display:none;" width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+        </span>
+        <span class="nav-audio-text">Hukum Murphy</span>
+        <span class="nav-wave-bars">
+          <span class="nav-wave-bar"></span>
+          <span class="nav-wave-bar"></span>
+          <span class="nav-wave-bar"></span>
+        </span>
+      </button>
+
       <nav class="nav-links">
         <a href="#about" class="active">About</a>
         <a href="#loop"><span class="nav-full">Thinking Loop</span><span class="nav-short">Loop</span></a>
@@ -44,6 +58,13 @@
           <h1 class="hero-name">Ramadhana Bhanuharya Krishnamurti</h1>
           <div class="hero-tagline">Building systems that don't break when real life gets messy.</div>
 
+          <blockquote class="hero-epigraph" style="border-left: 2px solid var(--accent-crimson); padding-left: 0.85rem; margin: 0.85rem 0 1.15rem 0; font-style: italic; color: var(--text-secondary); font-size: 0.95rem;">
+            "Yang bisa gagal 'kan gagal juga pada akhirnya"
+            <cite style="display: block; font-style: normal; font-size: 0.78rem; color: var(--text-muted); margin-top: 0.35rem;">
+              — Kafin Sulthan, <a href="https://genius.com/Kafin-sulthan-hukum-murphy-lyrics" target="_blank" rel="noopener noreferrer" style="color: var(--accent-crimson-hover); text-decoration: underline;">"Hukum Murphy" ↗</a>
+            </cite>
+          </blockquote>
+
           <p class="hero-bio">
             Hey, I'm <strong>Krishna (naquuuu)</strong>. Most tech today assumes high-speed WiFi, air-conditioned server rooms, and infinite cloud power. But Indonesia is an archipelago of <strong>17,000 islands</strong> where internet drops on open water, hardware takes a beating in tropical humidity, and systems must work anyway.
           </p>
@@ -63,9 +84,9 @@
           </div>
         </div>
 
-        <!-- Right: Top Photo (Crop Focused Strictly on Face) -->
+        <!-- Right: Top Photo (Updated Portrait) -->
         <div class="hero-photo-card reveal-on-scroll">
-          <img src="./assets/img/krishna-face-only.jpeg" alt="Ramadhana Bhanuharya Krishnamurti (naquuuu)" class="hero-photo-img">
+          <img src="./assets/img/krishna-hero-portrait.jpeg" alt="Ramadhana Bhanuharya Krishnamurti (naquuuu)" class="hero-photo-img" loading="eager" decoding="async">
           <div class="hero-photo-caption">
             <div>
               <div class="hero-photo-name">naquuuu</div>
@@ -131,12 +152,15 @@
       </div>
     </section>
 
-    <!-- 1. The Thinking Loop: Personal Life Decision Engine (Bits & Atoms) -->
+    <!-- 1. The Thinking Loop: Failure as the Architect's License (Bits & Atoms) -->
     <section id="loop" class="reveal-on-scroll">
       <div class="section-header">
-        <h2 class="section-title">The Thinking Loop: Personal Decision Tree</h2>
-        <span class="section-sub">life_principles.decision_tree</span>
+        <h2 class="section-title">The Thinking Loop: Failure as the Architect's License</h2>
+        <span class="section-sub">hukum_murphy.decision_tree</span>
       </div>
+      <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 1.25rem;">
+        Kafin Sulthan turned Murphy's Law from a warning into a blueprint: <em>what can fail will fail — so prepare, create, ship.</em> The decision tree below is how that principle becomes software.
+      </p>
 
       <div class="flowchart-whiteboard-box">
         <!-- Whiteboard Header Toolbar (Monochromatic Gray Theme) -->
@@ -346,8 +370,8 @@
         <!-- Live Audio Player: Hukum Murphy by Kafin Sulthan (Continuous Seamless Loop) -->
         <div class="soundroom-player-box">
           <audio id="hukum-murphy-audio" preload="metadata" playsinline>
+            <source src="./assets/audio/hukum-murphy-full.mp3" type="audio/mpeg">
             <source src="./assets/audio/hukum-murphy-preview.m4a" type="audio/mp4">
-            <source src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/85/19/0e/85190ee9-b8b9-7a4d-3fa2-61afada97252/mzaf_11279198995228694862.plus.aac.p.m4a" type="audio/mp4">
           </audio>
 
           <div class="player-header">
@@ -386,11 +410,11 @@
             </div>
           </div>
 
-          <!-- Direct Full-Length Spotify Player Link -->
+          <!-- Direct Full-Length Spotify Player Link & Philosophy Credit -->
           <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 0.65rem; font-size: 0.74rem;">
-            <span style="color: var(--text-muted);">Want to hear the complete 3-minute studio recording on Spotify?</span>
+            <span style="color: var(--text-muted);">Philosophy and sound by Kafin Sulthan.</span>
             <a href="https://open.spotify.com/search/Kafin%20Sulthan%20Hukum%20Murphy" target="_blank" rel="noopener noreferrer" style="color: var(--spotify-green); font-weight: 700;">
-              Open Full Song on Spotify ↗
+              Listen on Spotify ↗
             </a>
           </div>
         </div>
@@ -520,7 +544,7 @@
     </section>
 
     <!-- 4. Selected Innovations (Sub-Page Link Included) -->
-    <section id="innovations" class="reveal-on-scroll">
+    <section id="innovations" data-nav-parent="experience" class="reveal-on-scroll">
       <div class="section-header">
         <h2 class="section-title">Selected Innovations</h2>
         <a href="./portfolio/" class="section-sub" style="color: var(--accent-crimson-hover);">View All Decks →</a>
@@ -562,7 +586,7 @@
     </section>
 
     <!-- 5. The Physical Atelier: Canvas & Pigment (With Real Artwork Image) -->
-    <section id="atelier" class="reveal-on-scroll">
+    <section id="atelier" data-nav-parent="about" class="reveal-on-scroll">
       <div class="section-header">
         <h2 class="section-title">The Physical Atelier: Canvas &amp; Pigment</h2>
         <span class="section-sub">acrylic_on_linen.art</span>
@@ -640,8 +664,8 @@
     <div class="wrap footer-content">
       <div>
         <strong>naquuuu (Ramadhana Bhanuharya Krishnamurti)</strong>
-        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">
-          Bits &amp; Atoms • Cyber-Physical Product Architecture
+        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--term-green); margin-top: 4px;">
+          $ hukum-murphy --still-trying // inspired by @kafinsulthan
         </div>
       </div>
       <div class="footer-links">
