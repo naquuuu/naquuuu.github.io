@@ -226,9 +226,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Smooth scroll handler targeting active perspective's sections
+  let isNavClickScrolling = false;
+  let navScrollTimeout = null;
+
   document.querySelectorAll('.nav-links a.nav-link, .mobile-bottom-dock a.mobile-dock-link, .hero-cta-btn').forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
+
+      // If it's a mobile dock link, immediately enforce strictly single active highlight
+      if (link.classList.contains('mobile-dock-link')) {
+        document.querySelectorAll('.mobile-bottom-dock a.mobile-dock-link').forEach(l => {
+          l.classList.remove('active');
+        });
+        link.classList.add('active');
+        link.blur();
+
+        isNavClickScrolling = true;
+        clearTimeout(navScrollTimeout);
+        navScrollTimeout = setTimeout(() => {
+          isNavClickScrolling = false;
+          updateActiveNavOnScroll();
+        }, 750);
+      }
+
       if (href === '#philosophy') {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -264,12 +284,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Active section scroll spy for mobile dock
   const sectionIds = ['philosophy', 'operating-philosophy', 'culture-philosophy', 'artifacts', 'culture-artifacts', 'notes', 'culture-notes', 'inquiries'];
   function updateActiveNavOnScroll() {
-    const scrollPos = window.scrollY + 120;
+    if (isNavClickScrolling) return;
+
+    const scrollPos = window.scrollY + 140;
     let currentActive = 'philosophy';
 
     for (let i = sectionIds.length - 1; i >= 0; i--) {
       const sec = document.getElementById(sectionIds[i]);
-      if (sec && sec.offsetTop <= scrollPos) {
+      // Skip hidden sections inside inactive perspective tab
+      if (!sec || sec.offsetParent === null) continue;
+
+      if (sec.offsetTop <= scrollPos) {
         const id = sec.id;
         if (id.includes('philosophy')) currentActive = 'philosophy';
         else if (id.includes('artifacts')) currentActive = 'artifacts';
@@ -279,7 +304,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    document.querySelectorAll('.mobile-bottom-dock a.mobile-dock-link').forEach(link => {
+    const dockLinks = document.querySelectorAll('.mobile-bottom-dock a.mobile-dock-link');
+    dockLinks.forEach(link => {
       link.classList.toggle('active', link.getAttribute('data-nav') === currentActive);
     });
   }
@@ -397,14 +423,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ===========================================================================
   // 4. Spotify Embed Coordination (Halts Main Audio when Spotify Plays)
+  //    Custom Playlist: 2HWdPGCLLFI87mBu806kip
   // ===========================================================================
+  const spotifyIframe = document.getElementById('spotify-embed-iframe');
+  function syncSpotifyEmbedResponsive() {
+    if (!spotifyIframe) return;
+    const isMobile = window.innerWidth <= 768;
+    const desktopSrc = 'https://open.spotify.com/embed/playlist/2HWdPGCLLFI87mBu806kip?utm_source=generator&theme=0&si=da6288fc6fc7457a';
+    const mobileSrc = 'https://open.spotify.com/embed/playlist/2HWdPGCLLFI87mBu806kip?utm_source=generator&si=6ce925a120964aa9';
+    const targetSrc = isMobile ? mobileSrc : desktopSrc;
+
+    const currentSrc = spotifyIframe.getAttribute('src');
+    if (currentSrc && !currentSrc.includes(isMobile ? 'si=6ce925a120964aa9' : 'theme=0')) {
+      spotifyIframe.setAttribute('src', targetSrc);
+    }
+  }
+
+  syncSpotifyEmbedResponsive();
+  window.addEventListener('resize', syncSpotifyEmbedResponsive, { passive: true });
+
   window.onSpotifyIframeApiReady = (IFrameAPI) => {
     const rootEl = document.getElementById('spotify-embed-root');
     if (!rootEl) return;
+    const isMobile = window.innerWidth <= 768;
     const options = {
-      uri: 'spotify:playlist:37i9dQZF1DXdbXrPNafg9d',
+      uri: 'spotify:playlist:2HWdPGCLLFI87mBu806kip',
       width: '100%',
-      height: 352
+      height: isMobile ? 152 : 352
     };
     const callback = (EmbedController) => {
       EmbedController.addListener('playback_update', e => {
