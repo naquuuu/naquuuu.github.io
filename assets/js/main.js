@@ -449,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const options = {
       uri: 'spotify:playlist:2HWdPGCLLFI87mBu806kip',
       width: '100%',
-      height: isMobile ? 152 : 352
+      height: 152
     };
     const callback = (EmbedController) => {
       EmbedController.addListener('playback_update', e => {
