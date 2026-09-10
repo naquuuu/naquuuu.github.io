@@ -1,0 +1,42 @@
+# ==============================================================================
+# naquuuu.github.io — Jekyll Configuration (GitHub Pages Native)
+# ==============================================================================
+
+title: "naquuuu"
+tagline: "Building systems that don't break when real life gets messy."
+description: "Personal portfolio and systems architecture journey of Ramadhana Bhanuharya Krishnamurti (naquuuu)."
+url: "https://naquuuu.github.io"
+baseurl: ""
+
+# Author metadata
+author:
+  name: "Ramadhana Bhanuharya Krishnamurti"
+  handle: "naquuuu"
+  location: "Bandung / Jakarta, Indonesia"
+  linkedin: "https://www.linkedin.com/in/rbkrishnamurti/"
+  brother_site: "https://bhanuharya.github.io/"
+
+# Build & Markdown Settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+
+# Permalinks for essays / posts
+permalink: /blog/:title/
+
+# GitHub Pages Native Plugins (Whitelisted by GitHub Pages)
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Exclude local scratch files and discontinued revamp context
+exclude:
+  - _revamp
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor

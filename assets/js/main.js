@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
       if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-        currentId = section.getAttribute('id');
+        currentId = section.getAttribute('data-nav-parent') || section.getAttribute('id');
       }
     });
 
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(el => el.classList.add('is-visible'));
   }
 
-  // 4. Audio Player Logic for Hukum Murphy (Kafin Sulthan) - Single Console Player
+  // 4. Audio Player Logic for Hukum Murphy (Kafin Sulthan) - Synced Header & Console Player
   const audioEl = document.getElementById('hukum-murphy-audio');
   const playBtn = document.getElementById('play-toggle-btn');
   const playIcon = document.getElementById('play-icon');
@@ -119,6 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const durationEl = document.getElementById('player-duration');
   const playerHint = document.getElementById('player-hint');
 
+  // Sticky Header Audio Elements
+  const navAudioBtn = document.getElementById('nav-audio-btn');
+  const navPlayIcon = document.getElementById('nav-play-icon');
+  const navPauseIcon = document.getElementById('nav-pause-icon');
+
   function setHint(text) {
     if (playerHint) playerHint.textContent = text;
   }
@@ -128,10 +133,19 @@ document.addEventListener('DOMContentLoaded', () => {
   let isUserInitiatedPause = false;
 
   function updatePlayerUI(isPlaying) {
+    // Soundroom Console Controls
     if (playIcon) playIcon.style.display = isPlaying ? 'none' : 'block';
     if (pauseIcon) pauseIcon.style.display = isPlaying ? 'block' : 'none';
     if (eqBars) eqBars.classList.toggle('active', isPlaying);
     if (playBtn) playBtn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+
+    // Sticky Header Controls
+    if (navPlayIcon) navPlayIcon.style.display = isPlaying ? 'none' : 'block';
+    if (navPauseIcon) navPauseIcon.style.display = isPlaying ? 'block' : 'none';
+    if (navAudioBtn) {
+      navAudioBtn.classList.toggle('playing', isPlaying);
+      navAudioBtn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+    }
   }
 
   // Toggle audio on user interaction
@@ -149,6 +163,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (playBtn) playBtn.addEventListener('click', toggleAudio);
+  if (navAudioBtn) navAudioBtn.addEventListener('click', toggleAudio);
+
+  // 5. Subtle Terminal Typewriter for Hero Tagline (inspired by bhanuharya@sec)
+  const taglineEl = document.querySelector('.hero-tagline');
+  if (taglineEl) {
+    const originalText = taglineEl.textContent.trim();
+    taglineEl.textContent = '';
+    let charIdx = 0;
+    function typeTagline() {
+      if (charIdx < originalText.length) {
+        taglineEl.textContent += originalText.charAt(charIdx);
+        charIdx++;
+        setTimeout(typeTagline, 24);
+      }
+    }
+    setTimeout(typeTagline, 250);
+  }
 
   if (audioEl) {
     // 1. Single Looping Mechanism: Never use loop attribute or timeupdate seek.
