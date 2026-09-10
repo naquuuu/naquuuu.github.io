@@ -1,8 +1,8 @@
 /**
- * naquuuu — Personal Product Architecture & Systems Engine
- * Dual-Mode Dynamic Architecture:
- *   - [ ⚡ Systems & Matter ]: Swiss Technical Architectural Paper (#FBFBFA)
- *   - [ ✦ Culture & Taste ]: Deep Velvet Crimson & Dark Maroon Palette (#120305)
+ * naquuuu: personal product architecture & systems engine
+ * Operating with strict MECE boundaries & dual-mode aesthetic:
+ *   - [ systems & matter ]: Swiss Technical Architectural Paper (#FBFBFA)
+ *   - [ culture & taste ]: Deep Velvet Crimson & Dark Maroon Palette (#120305)
  * Working across physical matter, code, and culture.
  */
 
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (viewSystems) viewSystems.classList.remove('active');
       if (viewCulture) viewCulture.classList.add('active');
-      if (modeStatusLabel) modeStatusLabel.textContent = 'PERSPECTIVE: CREATIVE SANDBOX';
+      if (modeStatusLabel) modeStatusLabel.textContent = 'perspective: creative sandbox';
       if (heroSubIdentity) heroSubIdentity.textContent = 'exploring sound, silhouette, and human taste';
 
       // Update CTA buttons for Culture perspective
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         heroPortraitImg.style.opacity = '0';
         setTimeout(() => {
           heroPortraitImg.src = './assets/img/krishna-culture-portrait.jpeg?v=20260911';
-          heroPortraitMeta.innerHTML = '<span>SHIBUYA-KEI</span><span>[ SONIC ROTATIONS ]</span><span>TASTE VECTORS</span>';
+          heroPortraitMeta.innerHTML = '<span>shibuya-kei</span><span>[ sonic rotations ]</span><span>taste vectors</span>';
           heroPortraitImg.style.opacity = '1';
         }, 180);
       }
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (viewCulture) viewCulture.classList.remove('active');
       if (viewSystems) viewSystems.classList.add('active');
-      if (modeStatusLabel) modeStatusLabel.textContent = 'PERSPECTIVE: TECHNICAL PROOF';
+      if (modeStatusLabel) modeStatusLabel.textContent = 'perspective: technical proof';
       if (heroSubIdentity) heroSubIdentity.textContent = 'working across physical matter, code, and culture';
 
       // Update CTA buttons for Systems perspective
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         heroPortraitImg.style.opacity = '0';
         setTimeout(() => {
           heroPortraitImg.src = './assets/img/naquuuu-studio-bw.jpeg?v=20260911';
-          heroPortraitMeta.innerHTML = '<span>LOC: 6°12\'S 106°49\'E</span><span>[ WIB / UTC+7 ]</span><span>MATTER + CODE</span>';
+          heroPortraitMeta.innerHTML = '<span>loc: 6°12\'s 106°49\'e</span><span>[ wib / utc+7 ]</span><span>matter + code</span>';
           heroPortraitImg.style.opacity = '1';
         }, 180);
       }
