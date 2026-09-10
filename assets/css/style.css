@@ -1,9 +1,8 @@
 /* =============================================================================
-   naquuuu — Personal Product Architecture & Systems Workstation
-   Dual-Mode Dynamic Architecture:
-     - [ ⚡ Systems & Matter ]: Swiss Technical Architectural Paper (#FBFBFA)
-     - [ ✦ Culture & Taste ]: Deep Velvet Crimson & Dark Maroon Palette (#120305)
-   Typography: Open Sans (Body & Headings), JetBrains Mono (Code & Telemetry)
+   naquuuu: personal product architecture & systems workstation
+   Operating with strict MECE boundaries & dual-mode aesthetic:
+     - [ systems & matter ]: Swiss Technical Architectural Paper (#FBFBFA)
+     - [ culture & taste ]: Deep Velvet Crimson & Dark Maroon Palette (#120305)
    ============================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Space+Grotesk:wght@500;600;700&display=swap');
@@ -530,7 +529,7 @@ body[data-mode="culture"] .section-hero {
 .hero-sub-identity {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  text-transform: uppercase;
+  text-transform: lowercase;
   letter-spacing: 0.08em;
   color: var(--accent-crimson);
   margin-bottom: 0.75rem;
@@ -541,8 +540,7 @@ body[data-mode="culture"] .section-hero {
 }
 
 .hero-sub-identity::before {
-  content: "●";
-  font-size: 0.65rem;
+  display: none;
 }
 
 .hero-headline {
@@ -890,7 +888,7 @@ body[data-mode="culture"] .sticky-perspective-inner {
   font-size: 0.82rem;
   font-weight: 700;
   color: var(--text-primary);
-  text-transform: uppercase;
+  text-transform: lowercase;
   letter-spacing: 0.04em;
 }
 
@@ -987,7 +985,7 @@ body[data-mode="culture"] .sticky-perspective-inner {
   font-family: var(--font-mono);
   font-size: 0.82rem;
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: lowercase;
   letter-spacing: 0.04em;
   color: var(--text-primary);
 }
@@ -1073,7 +1071,7 @@ body[data-mode="culture"] .sticky-perspective-inner {
   font-family: var(--font-mono);
   font-size: 0.74rem;
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: lowercase;
   letter-spacing: 0.06em;
   color: var(--text-muted);
   margin-bottom: 0.35rem;
@@ -1173,7 +1171,7 @@ body[data-mode="culture"] .sticky-perspective-inner {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--term-yellow);
-  text-transform: uppercase;
+  text-transform: lowercase;
   letter-spacing: 0.05em;
   display: inline-flex;
   align-items: center;
@@ -1315,7 +1313,7 @@ body[data-mode="culture"] .note-tag {
   font-size: 0.8rem;
   font-weight: 700;
   color: var(--accent-crimson);
-  text-transform: uppercase;
+  text-transform: lowercase;
   letter-spacing: 0.05em;
   margin-bottom: 0.85rem;
   padding-bottom: 0.4rem;
@@ -1555,8 +1553,8 @@ body[data-mode="culture"] .note-tag {
 }
 
 .fashion-matrix-items li::before {
-  content: "✦";
-  font-size: 0.65rem;
+  content: "-";
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
@@ -1851,6 +1849,17 @@ body[data-mode="culture"] .pdf-viewer-wrap {
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   box-shadow: var(--shadow-card);
+  color: var(--text-primary);
+}
+
+.concept-box h1,
+.concept-box h2,
+.concept-box h3,
+.concept-box h4,
+.concept-box p,
+.concept-box li,
+.concept-box span {
+  color: var(--text-primary);
 }
 
 body[data-mode="culture"] .proof-card,
@@ -1938,17 +1947,21 @@ body[data-mode="culture"] .concept-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
   background: #181817;
   padding: 0.5rem 0.85rem;
   border-bottom: 1px solid #282826;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: #D4D4CE;
+  text-transform: lowercase;
 }
 
 .flowchart-toolbar-left, .flowchart-toolbar-right {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
@@ -2048,7 +2061,7 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--text-muted);
-  text-transform: uppercase;
+  text-transform: lowercase;
   margin-bottom: 0.5rem;
 }
 

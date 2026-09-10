@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#120305">
   
-  <title>Reverse-Engineering Client Binaries: Extracting Ground-Truth Design Systems for High-Velocity Prototyping — naquuuu@pm</title>
+  <title>reverse-engineering client binaries: extracting ground-truth design systems for high-velocity prototyping: naquuuu</title>
   <meta name="description" content="How to eliminate Figma specification drift by decompiling production Android APKs into hardware-accurate tokens, component schemas, and zero-friction edge prototypes.">
   <link rel="canonical" href="https://naquuuu.github.io/blog/reverse-engineering-client-binaries/">
   
@@ -56,7 +56,7 @@
 
       <!-- Executive Summary Callout -->
       <div class="concept-box" style="border-left: 4px solid var(--accent-crimson);">
-        <h3 style="font-size: 1.15rem; color: #ffffff; margin-bottom: 0.5rem;">💡 The Core Thesis in 30 Seconds</h3>
+        <h3 style="font-size: 1.15rem; color: var(--text-primary); margin-bottom: 0.5rem;">the core thesis in 30 seconds</h3>
         <p style="margin: 0; font-size: 0.94rem; color: var(--text-secondary); line-height: 1.7;">
           In enterprise retail and fintech apps, design files in Figma almost never match what is compiled in production. Disorganized multi-brand design debt, deprecated color variables, and missing edge-state screens cause massive sprint delays. In this post, I detail how we bypass Figma bottlenecks entirely: decompiling compiled client binaries (APKs), programmatically harvesting raw vector drawables and variable fonts into a unified CSS/JS design engine, and serving pixel-perfect interactive mobile prototypes through zero-friction Vercel Edge gates.
         </p>
@@ -72,7 +72,7 @@
         <li><strong>Stakeholder Review Latency:</strong> Executive leadership and brand directors cannot evaluate static screenshots. They demand to touch and tap real interactive prototypes on physical mobile hardware before signing off on business requirements.</li>
       </ul>
       <p>
-        If your prototyping workflow relies on waiting for designers to tidy up a 200-page Figma file, you have already lost the velocity war. The fastest, most accurate source of truth is not the design tool—it is the <strong>compiled binary currently running in production</strong>.
+        If your prototyping workflow relies on waiting for designers to tidy up a 200-page Figma file, you have already lost the velocity war. The fastest, most accurate source of truth is not the design tool: it is the <strong>compiled binary currently running in production</strong>.
       </p>
 
       <h2>2. The Architecture: Ground-Truth Binary Extraction Pipeline</h2>
@@ -80,122 +80,161 @@
         Instead of hand-crafting CSS tokens from visual inspection, I architected an automated harvesting pipeline inside our product workspace. The pipeline treats the compiled Android application archive (APK) as a structured database of compiled vectors, binary XML layouts, variable fonts, and brand hex codes:
       </p>
 
-      <!-- Whiteboard SVG Flowchart: The Binary Extraction & Edge Prototyping Pipeline -->
+      <!-- Whiteboard SVG User Action Diagram: The Binary Extraction & Edge Prototyping Pipeline -->
       <div class="flowchart-whiteboard-box" style="margin: 2rem 0;">
         <div class="flowchart-board-toolbar">
           <div class="flowchart-toolbar-left">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            <span>Binary Harvesting &amp; Edge Prototyping Pipeline</span>
-            <span style="font-size: 0.65rem; background: #27272A; color: #D4D4D8; border: 1px solid #3F3F46; padding: 2px 7px; border-radius: 4px;">SYSTEMS ARCHITECTURE</span>
+            <span>binary harvesting &amp; edge prototyping user action diagram</span>
+            <span style="font-size: 0.65rem; background: #27272A; color: #D4D4D8; border: 1px solid #3F3F46; padding: 2px 7px; border-radius: 4px;">systems architecture</span>
           </div>
           <div class="flowchart-toolbar-right">
-            <span>🔍 100%</span>
-            <span>👤 naquuuu</span>
-            <span style="color: #A1A1AA;">● Ground-Truth Extraction</span>
+            <span>100%</span>
+            <span>naquuuu</span>
+            <span style="color: #A1A1AA;">ground-truth extraction</span>
           </div>
         </div>
 
         <div class="flowchart-board-canvas scroll-x">
-          <svg class="flowchart-svg" viewBox="0 0 660 595" xmlns="http://www.w3.org/2000/svg">
+          <svg class="flowchart-svg" viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <marker id="arrow-gray-bin" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                 <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#71717A" />
               </marker>
             </defs>
 
-            <!-- 1. START NODE: Production APK Binary -->
-            <rect x="200" y="20" width="240" height="36" rx="18" ry="18" fill="#27272A" stroke="#52525B" stroke-width="1.5" />
-            <text x="320" y="43" font-family="'Open Sans', sans-serif" font-size="11.5" font-weight="700" fill="#F4F4F5" text-anchor="middle">
-              START: Production Client APK (v5.0.0)
+            <!-- Column Headers -->
+            <rect x="24" y="16" width="210" height="28" rx="4" fill="#1C1917" stroke="#44403C" stroke-width="1" />
+            <text x="129" y="34" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" fill="#D97706" text-anchor="middle">
+              user / operator action
             </text>
 
-            <!-- Connector Down to Process 1 -->
-            <path d="M 320 56 L 320 90" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
-
-            <!-- 2. PROCESS 1: Binary Inspection & Decompilation -->
-            <rect x="190" y="90" width="260" height="46" rx="4" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
-            <text x="320" y="110" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              Zip Stream &amp; Asset Harvester
-            </text>
-            <text x="320" y="125" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="400" fill="#A1A1AA" text-anchor="middle">
-              Parse res/drawable, res/values &amp; assets/
+            <rect x="260" y="16" width="240" height="28" rx="4" fill="#18181B" stroke="#3F3F46" stroke-width="1" />
+            <text x="380" y="34" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" fill="#60A5FA" text-anchor="middle">
+              automated pipeline execution
             </text>
 
-            <!-- Connector Down to Decision 1 -->
-            <path d="M 320 136 L 320 170" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
-
-            <!-- 3. DECISION 1: Vector Format? -->
-            <polygon points="320,170 415,205 320,240 225,205" fill="#18181B" stroke="#52525B" stroke-width="1.5" />
-            <text x="320" y="202" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              Android Vector
-            </text>
-            <text x="320" y="216" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              Drawable XML?
+            <rect x="526" y="16" width="210" height="28" rx="4" fill="#141C1A" stroke="#27443E" stroke-width="1" />
+            <text x="631" y="34" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" fill="#34D399" text-anchor="middle">
+              deliverable artifacts
             </text>
 
-            <!-- Branch YES -> Right: XML to SVG Converter -->
-            <path d="M 415 205 L 485 205" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
-            <text x="450" y="197" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#A1A1AA" text-anchor="middle">[Yes]</text>
+            <!-- Column Dividing Guideline Tracks -->
+            <line x1="247" y1="52" x2="247" y2="450" stroke="#27272A" stroke-width="1" stroke-dasharray="3" />
+            <line x1="513" y1="52" x2="513" y2="450" stroke="#27272A" stroke-width="1" stroke-dasharray="3" />
 
-            <rect x="485" y="183" width="160" height="44" rx="4" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
-            <text x="565" y="202" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="600" fill="#E4E4E7" text-anchor="middle">
-              Vector XML to SVG
+            <!-- Row 1: Trigger & Harvester -->
+            <rect x="24" y="60" width="210" height="50" rx="6" fill="#27272A" stroke="#52525B" stroke-width="1.5" />
+            <text x="129" y="81" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              1. trigger apk ingestion
             </text>
-            <text x="565" y="216" font-family="'Open Sans', sans-serif" font-size="9" font-weight="400" fill="#A1A1AA" text-anchor="middle">
-              Translate pathData &amp; fills
-            </text>
-
-            <!-- Route converted SVGs down to Token Generator -->
-            <path d="M 565 227 L 565 315 L 450 315" stroke="#52525B" stroke-width="1.2" stroke-dasharray="3" fill="none" marker-end="url(#arrow-gray-bin)" />
-
-            <!-- Branch NO -> Down: Raw Assets & TTF/WOFF -->
-            <path d="M 320 240 L 320 270" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
-            <text x="336" y="258" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#E4E4E7">[Raw Assets]</text>
-
-            <!-- 4. PROCESS 2: Variable Font & Palette Extractor -->
-            <rect x="200" y="270" width="240" height="44" rx="4" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
-            <text x="320" y="289" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              Token &amp; Font Compiler
-            </text>
-            <text x="320" y="303" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="400" fill="#A1A1AA" text-anchor="middle">
-              Harvest colors.xml, TTFs &amp; tier badges
+            <text x="129" y="97" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
+              supply production client apk (v5.0.0)
             </text>
 
-            <!-- Connector Down to Process 3 -->
-            <path d="M 320 314 L 320 345" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
-
-            <!-- 5. PROCESS 3: mapclub-tokens.css & UI Lego Engine -->
-            <rect x="180" y="345" width="280" height="50" rx="4" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
-            <text x="320" y="366" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              Emit mapclub-tokens.css &amp; UI Lego
+            <rect x="260" y="60" width="240" height="50" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
+            <text x="380" y="81" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              zip stream &amp; asset harvester
             </text>
-            <text x="320" y="382" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="400" fill="#A1A1AA" text-anchor="middle">
-              Hardware frame, bottom navigation &amp; cards
+            <text x="380" y="97" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
+              parse res/drawable, values &amp; assets/
             </text>
 
-            <!-- Connector Down to Process 4 -->
-            <path d="M 320 395 L 320 425" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
+            <!-- Connector: U1 -> P1 -->
+            <path d="M 234 85 L 260 85" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
 
-            <!-- 6. PROCESS 4: Edge Gating & Zero-Friction Preview -->
-            <rect x="180" y="425" width="280" height="50" rx="4" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
-            <text x="320" y="446" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              Vercel Edge Security Gate
+            <!-- Connector: P1 down to P2 -->
+            <path d="M 380 110 L 380 144" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
+
+            <!-- Row 2: Vector Transpile & SVG Library -->
+            <rect x="260" y="144" width="240" height="50" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
+            <text x="380" y="165" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              android vector xml parser
             </text>
-            <text x="320" y="462" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="400" fill="#A1A1AA" text-anchor="middle">
-              Cookie auth with 1-click WhatsApp Magic Link
+            <text x="380" y="181" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
+              transpile pathdata &amp; fills to svg
             </text>
 
-            <!-- Connector Down to Output -->
-            <path d="M 320 475 L 320 510" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
+            <rect x="526" y="144" width="210" height="50" rx="6" fill="#1C1917" stroke="#3F3F46" stroke-width="1.5" />
+            <text x="631" y="165" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              lossless svg asset library
+            </text>
+            <text x="631" y="181" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
+              loyalty tier badges &amp; clean vectors
+            </text>
 
-            <!-- 7. OUTPUT: Verified Stakeholder Prototype -->
-            <rect x="175" y="510" width="290" height="42" rx="4" fill="#18181B" stroke="#52525B" stroke-width="2" />
-            <text x="320" y="528" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              OUTPUT: Verified Native Prototype
+            <!-- Connector: P2 -> A1 -->
+            <path d="M 500 169 L 526 169" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
+
+            <!-- Connector: P2 down to P3 -->
+            <path d="M 380 194 L 380 230" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
+
+            <!-- Row 3: Audit, Token Compiler & Tokens CSS -->
+            <rect x="24" y="230" width="210" height="50" rx="6" fill="#27272A" stroke="#52525B" stroke-width="1.5" />
+            <text x="129" y="251" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              2. review asset &amp; font audit
             </text>
-            <text x="320" y="542" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="600" fill="#D4D4D8" text-anchor="middle">
-              Zero Specification Drift • Instant Executive Sign-Off
+            <text x="129" y="267" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
+              verify hex codes &amp; variable glyphs
             </text>
+
+            <rect x="260" y="230" width="240" height="50" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
+            <text x="380" y="251" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              token &amp; font compiler
+            </text>
+            <text x="380" y="267" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
+              harvest colors.xml &amp; ttf webfonts
+            </text>
+
+            <rect x="526" y="230" width="210" height="50" rx="6" fill="#1C1917" stroke="#3F3F46" stroke-width="1.5" />
+            <text x="631" y="251" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              mapclub-tokens.css &amp; ui lego
+            </text>
+            <text x="631" y="267" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
+              mobile shell, nav bar &amp; design tokens
+            </text>
+
+            <!-- Connector: U2 -> P3 (user audits token compiler) -->
+            <path d="M 234 255 L 260 255" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
+
+            <!-- Connector: P3 -> A2 -->
+            <path d="M 500 255 L 526 255" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
+
+            <!-- Connector: P3 down to P4 -->
+            <path d="M 380 280 L 380 316" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
+
+            <!-- Row 4: Edge Security Gate & Native Prototype -->
+            <rect x="260" y="316" width="240" height="50" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
+            <text x="380" y="337" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              vercel edge security gate
+            </text>
+            <text x="380" y="353" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
+              server-side cookie auth &amp; magic link
+            </text>
+
+            <rect x="526" y="316" width="210" height="50" rx="6" fill="#1C1917" stroke="#3F3F46" stroke-width="1.5" />
+            <text x="631" y="337" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              verified native prototype
+            </text>
+            <text x="631" y="353" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
+              hardware-accurate mobile preview
+            </text>
+
+            <!-- Connector: P4 -> A3 -->
+            <path d="M 500 341 L 526 341" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
+
+            <!-- Row 5: Final User Sign-off and Delivery -->
+            <rect x="24" y="396" width="210" height="50" rx="6" fill="#27272A" stroke="#52525B" stroke-width="1.5" />
+            <text x="129" y="417" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              3. executive sign-off
+            </text>
+            <text x="129" y="433" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
+              1-click magic link on physical mobile
+            </text>
+
+            <!-- Connector: A3 down and across to U3 -->
+            <path d="M 631 366 L 631 421 L 234 421" stroke="#52525B" stroke-width="1.5" stroke-dasharray="4" fill="none" marker-end="url(#arrow-gray-bin)" />
+            <text x="430" y="414" font-family="'JetBrains Mono', monospace" font-size="9" fill="#A1A1AA" text-anchor="middle">[zero specification drift: instant sign-off]</text>
           </svg>
         </div>
       </div>
@@ -212,7 +251,7 @@
 
       <h3>B. Variable Typography and Tier Badge Assets</h3>
       <p>
-        Rather than guessing web font fallbacks, we pull the exact font files shipped in the APK's <code>assets/fonts/</code> directory. Brand-critical assets—such as the MAPCLUB Gold/Platinum loyalty tier badges, partner logos, and barcode glyphs—are extracted as clean, lossless vectors and placed directly into our workspace design library.
+        Rather than guessing web font fallbacks, we pull the exact font files shipped in the APK's <code>assets/fonts/</code> directory. Brand-critical assets (such as the MAPCLUB Gold/Platinum loyalty tier badges, partner logos, and barcode glyphs) are extracted as clean, lossless vectors and placed directly into our workspace design library.
       </p>
 
       <h3>C. The Hardware-Accurate Mobile Shell</h3>
