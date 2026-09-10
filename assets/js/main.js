@@ -43,6 +43,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroPortraitImg = document.getElementById('hero-portrait-img');
   const heroPortraitMeta = document.getElementById('hero-portrait-meta');
 
+  // Dynamic navbar link mapping per active perspective
+  const navSectionMap = {
+    philosophy: { systems: '#philosophy', culture: '#culture-philosophy' },
+    artifacts: { systems: '#artifacts', culture: '#culture-artifacts' },
+    notes: { systems: '#notes', culture: '#culture-notes' },
+    inquiries: { systems: '#inquiries', culture: '#inquiries' }
+  };
+
+  const navLinks = {
+    philosophy: document.querySelector('.nav-links a[href*="philosophy"]'),
+    artifacts: document.querySelector('.nav-links a[href*="artifacts"]'),
+    notes: document.querySelector('.nav-links a[href*="notes"]'),
+    inquiries: document.querySelector('.nav-links a[href*="inquiries"]')
+  };
+
+  function updateNavHrefs(activeMode) {
+    Object.keys(navSectionMap).forEach(key => {
+      const linkEl = navLinks[key];
+      if (linkEl) {
+        const targetId = navSectionMap[key][activeMode] || navSectionMap[key].systems;
+        linkEl.setAttribute('href', targetId);
+      }
+    });
+  }
+
   function switchMode(mode) {
     if (mode === 'culture') {
       document.body.setAttribute('data-mode', 'culture');
@@ -58,6 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (viewCulture) viewCulture.classList.add('active');
       if (modeStatusLabel) modeStatusLabel.textContent = 'PERSPECTIVE: CREATIVE SANDBOX';
       if (heroSubIdentity) heroSubIdentity.textContent = 'exploring sound, silhouette, and human taste';
+
+      updateNavHrefs('culture');
 
       // Animate single hero portrait change
       if (heroPortraitImg && heroPortraitMeta) {
@@ -85,6 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (modeStatusLabel) modeStatusLabel.textContent = 'PERSPECTIVE: TECHNICAL PROOF';
       if (heroSubIdentity) heroSubIdentity.textContent = 'working across physical matter, code, and culture';
 
+      updateNavHrefs('systems');
+
       // Animate single hero portrait change
       if (heroPortraitImg && heroPortraitMeta) {
         heroPortraitImg.style.opacity = '0';
@@ -103,6 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const savedMode = localStorage.getItem('naquuuu_mode') || 'systems';
   if (savedMode === 'culture') {
     switchMode('culture');
+  } else {
+    updateNavHrefs('systems');
   }
 
   if (btnModeSystems && btnModeCulture) {
@@ -110,28 +141,19 @@ document.addEventListener('DOMContentLoaded', () => {
     btnModeCulture.addEventListener('click', () => switchMode('culture'));
   }
 
-  // Dual-mode in-page navigation: keep user in their active perspective
-  const navSectionMap = {
-    '#philosophy': { systems: '#philosophy', culture: '#culture-philosophy' },
-    '#artifacts': { systems: '#artifacts', culture: '#culture-artifacts' },
-    '#notes': { systems: '#notes', culture: '#culture-notes' },
-    '#inquiries': { systems: '#inquiries', culture: '#inquiries' }
-  };
-
+  // Smooth scroll handler targeting active perspective's sections
   document.querySelectorAll('.nav-links a.nav-link').forEach(link => {
-    const href = link.getAttribute('href');
-    if (navSectionMap[href]) {
-      link.addEventListener('click', (e) => {
-        const currentMode = document.body.getAttribute('data-mode') || 'systems';
-        const targetSelector = navSectionMap[href][currentMode] || href;
-        const targetEl = document.querySelector(targetSelector);
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const targetEl = document.querySelector(href);
         if (targetEl) {
           e.preventDefault();
           targetEl.scrollIntoView({ behavior: 'smooth' });
           history.replaceState(null, '', href);
         }
-      });
-    }
+      }
+    });
   });
 
   // ===========================================================================
