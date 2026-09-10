@@ -403,6 +403,29 @@ body[data-mode="culture"] .nav-audio-pill.playing {
   background: rgba(220, 38, 38, 0.08);
 }
 
+.nav-back-link {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent-crimson);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-active);
+  background: var(--accent-crimson-dim);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.nav-back-link:hover {
+  background: var(--accent-crimson);
+  color: #FFFFFF;
+  border-color: var(--accent-crimson-hover);
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
+}
+
 /* Subpage Legacy Header Styles */
 .nav {
   display: flex;
@@ -1130,7 +1153,10 @@ body[data-mode="culture"] .mode-status-dot {
    VIEW B: CULTURE & TASTE (CREATIVE SANDBOX)
    ============================================================================= */
 
-.section-culture {
+.section-culture,
+.section-culture-philosophy,
+.section-culture-artifacts,
+.section-culture-notes {
   padding: 3rem 0;
   border-bottom: 1px solid var(--border-subtle);
 }

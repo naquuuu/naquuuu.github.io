@@ -34,8 +34,8 @@
         </button>
 
         <nav class="nav-links" aria-label="Primary Navigation">
-          <a href="#works" class="nav-link">[ Works ]</a>
-          <a href="#loop" class="nav-link">[ The Loop ]</a>
+          <a href="#philosophy" class="nav-link">[ Philosophy ]</a>
+          <a href="#artifacts" class="nav-link">[ Artifacts ]</a>
           <a href="#notes" class="nav-link">[ Notes ]</a>
           <a href="#inquiries" class="nav-link">[ Inquiries ]</a>
         </nav>
@@ -117,11 +117,11 @@
          VIEW A: SYSTEMS & MATTER (TECHNICAL PROOF — WHITE PAPER THEME)
          ======================================================================= -->
     <div id="view-systems" class="view-panel active" role="tabpanel" aria-labelledby="tab-mode-systems">
-      <!-- 1. The Persistent 4-Card Responsive Grid -->
-      <section class="section-loop-cards" id="loop">
+      <!-- 1. Philosophy: The Persistent 4-Card Responsive Grid -->
+      <section class="section-loop-cards" id="philosophy">
         <div class="wrap">
           <div class="loop-cards-header">
-            <span class="loop-cards-title">The Resilient Loop // Operating Principles</span>
+            <span class="loop-cards-title">The Resilient Loop // Operating Philosophy</span>
             <span class="loop-cards-sub">[ 04 PERSISTENT PHASES ]</span>
           </div>
 
@@ -165,11 +165,11 @@
         </div>
       </section>
 
-      <!-- 2. Selected Works (The 3 Proven Systems + Physical Atelier) -->
-      <section class="section-works" id="works">
+      <!-- 2. Selected Artifacts (The 3 Proven Systems + Physical Atelier) -->
+      <section class="section-works" id="artifacts">
         <div class="wrap">
           <div class="section-label-bar">
-            <span class="section-label">Selected Works // Shipped Systems</span>
+            <span class="section-label">Selected Artifacts // Shipped Systems</span>
             <span class="section-count">[ 03 PROVEN ARTIFACTS + ATELIER ]</span>
           </div>
 
@@ -371,9 +371,15 @@
          VIEW B: CULTURE & TASTE (CREATIVE SANDBOX — DARK VELVET CRIMSON THEME)
          ======================================================================= -->
     <div id="view-culture" class="view-panel" role="tabpanel" aria-labelledby="tab-mode-culture">
-      <section class="section-culture">
+      <!-- 1. Aesthetic Philosophy (Cultural Drivers & Axioms) -->
+      <section class="section-culture-philosophy" id="culture-philosophy">
         <div class="wrap">
-          <!-- Aesthetic Statement Banner -->
+          <div class="section-label-bar">
+            <span class="section-label">Aesthetic Philosophy // Cultural Drivers</span>
+            <span class="section-count">[ 04 PLURALISTIC VECTORS ]</span>
+          </div>
+
+          <!-- Statement Banner -->
           <div class="culture-hero-banner">
             <div class="culture-badge">
               <span class="culture-badge-icon" aria-hidden="true">✦</span>
@@ -382,6 +388,55 @@
             <h2 class="culture-statement">
               "Culture isn't linear. Just like systems engineering, personal style and taste are about navigating nuance, subcultures, and diverse identities."
             </h2>
+          </div>
+
+          <!-- 4-Card Cultural Philosophy Grid -->
+          <div class="loop-cards-grid">
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <span class="loop-card-step">01 / PLURALISM</span>
+                <span class="loop-card-tag">NON-LINEAR</span>
+              </div>
+              <h3 class="loop-card-title">Fluid Subcultural Identity</h3>
+              <p class="loop-card-desc">Rejecting mono-narratives. Navigating disparate subcultures—from Shibuya-kei soundscapes to industrial tailoring—as interconnected living systems.</p>
+            </div>
+
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <span class="loop-card-step">02 / ANALOG WARMTH</span>
+                <span class="loop-card-tag">ACOUSTIC GRAIN</span>
+              </div>
+              <h3 class="loop-card-title">Texture Over Optimization</h3>
+              <p class="loop-card-desc">Prioritizing analog saturation, acoustic warmth, and tactile grain over sterile digital perfection in both auditory curation and daily ritual.</p>
+            </div>
+
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <span class="loop-card-step">03 / PROPORTION</span>
+                <span class="loop-card-tag">ERGONOMICS</span>
+              </div>
+              <h3 class="loop-card-title">Wearable Systems Craft</h3>
+              <p class="loop-card-desc">Treating personal style, smart tailoring, and functional footwear as physical ergonomic interfaces between the human body and city architecture.</p>
+            </div>
+
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <span class="loop-card-step">04 / INTUITION</span>
+                <span class="loop-card-tag">HUMAN NUANCE</span>
+              </div>
+              <h3 class="loop-card-title">Algorithmic Restraint</h3>
+              <p class="loop-card-desc">Leveraging machine telemetry and taste vector mapping to reveal hidden affinities without extinguishing idiosyncratic human intuition.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Selected Artifacts (Music, Fashion & Algorithmic Taste) -->
+      <section class="section-culture-artifacts" id="culture-artifacts">
+        <div class="wrap">
+          <div class="section-label-bar">
+            <span class="section-label">Selected Artifacts // Acoustic Archives &amp; Wearable Systems</span>
+            <span class="section-count">[ 03 CURATED SUITES ]</span>
           </div>
 
           <div class="culture-dossier-stack">
@@ -397,7 +452,9 @@
               </p>
 
               <div class="spotify-player-container">
-                <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdbXrPNafg9d" class="spotify-player-frame" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Curated Acoustic Rotation"></iframe>
+                <div id="spotify-embed-root">
+                  <iframe id="spotify-embed-iframe" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdbXrPNafg9d" class="spotify-player-frame" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Curated Acoustic Rotation"></iframe>
+                </div>
               </div>
             </article>
 
@@ -470,9 +527,53 @@
               </div>
             </article>
           </div>
+        </div>
+      </section>
+
+      <!-- 3. Cultural Notes (Aesthetic Field Records & Channels) -->
+      <section class="section-culture-notes" id="culture-notes">
+        <div class="wrap">
+          <div class="section-label-bar">
+            <span class="section-label">Cultural Notes // Aesthetic Field Records</span>
+            <span class="section-count">[ 02 ESSAYS &amp; CHANNELS ]</span>
+          </div>
+
+          <div class="notes-grid">
+            <article class="note-item">
+              <div class="note-content">
+                <div class="note-tag-row">
+                  <span class="note-tag" style="background: rgba(230, 36, 58, 0.12); color: var(--accent-crimson); border-color: var(--border-crimson);">ACOUSTIC ESSAY</span>
+                  <span class="note-date">2026 // FIELD RECORD</span>
+                </div>
+                <h3 class="note-title">The Geometry of Shibuya-kei: Analog Warmth in Digital Workspaces</h3>
+                <p class="note-summary">
+                  Examining why Cornelius, Pizzicato Five, and Tokyo 90s sample architecture form the ideal acoustic substrate for complex engineering workflows and flow-state endurance.
+                </p>
+              </div>
+              <div class="note-meta">
+                <span>[ SONIC ARCHITECTURE ]</span>
+              </div>
+            </article>
+
+            <article class="note-item">
+              <div class="note-content">
+                <div class="note-tag-row">
+                  <span class="note-tag" style="background: rgba(230, 36, 58, 0.12); color: var(--accent-crimson); border-color: var(--border-crimson);">SARTORIAL ESSAY</span>
+                  <span class="note-date">2026 // FIELD RECORD</span>
+                </div>
+                <h3 class="note-title">Smart Tailoring as Kinetic Infrastructure: Proportions for City Walking</h3>
+                <p class="note-summary">
+                  Deconstructing relaxed pleated trousers, unstructured wool jackets, and heritage leather footwear as functional daily interfaces for tropical transit and active studio work.
+                </p>
+              </div>
+              <div class="note-meta">
+                <span>[ WEARABLE SYSTEMS ]</span>
+              </div>
+            </article>
+          </div>
 
           <!-- Creative Links Bar -->
-          <div class="creative-links-bar">
+          <div class="creative-links-bar" style="margin-top: 2.25rem;">
             <a href="https://www.tiktok.com/@naquuuu" target="_blank" rel="noopener noreferrer" class="creative-btn">
               <span>[ TikTok ↗ ]</span>
             </a>
@@ -535,6 +636,7 @@
     </div>
   </footer>
 
+  <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
   <script src="./assets/js/main.js?v=20260911"></script>
 </body>
 </html>
