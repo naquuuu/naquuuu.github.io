@@ -6,79 +6,174 @@
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#120305">
   
-  <title>Systems Experience — naquuuu (Krishna)</title>
-  <meta name="description" content="Production systems experience across MAPCLUB, Traveloka, and Boston Consulting Group (BCG) by Ramadhana Bhanuharya Krishnamurti (naquuuu).">
+  <title>Operational Disruption Architecture — naquuuu</title>
+  <meta name="description" content="Operational disruption architecture, state machines, and failure recovery across Traveloka, MAPCLUB, and BCG by naquuuu.">
   <link rel="canonical" href="https://naquuuu.github.io/experience/">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
-  <link rel="alternate icon" href="../favicon.ico">
 </head>
 <body>
 
-  <!-- Site Header -->
+  <!-- Site Header (Single-Row) -->
   <header class="site-header">
     <div class="wrap nav">
       <a class="site-title" href="../">
-        <span class="prompt-user">naquuuu</span><span class="prompt-at">@</span><span class="prompt-host">builder</span>
-        <span class="prompt-badge">BITS &amp; ATOMS</span>
+        <span class="prompt-user">naquuuu</span><span class="prompt-at">@</span><span class="prompt-host">systems</span>
+        <span class="prompt-badge">DISRUPTION RECOVERY</span>
       </a>
       <nav class="nav-links">
-        <a href="../">Home</a>
-        <a href="./" class="active">Experience</a>
-        <a href="../portfolio/">Innovations</a>
-        <a href="../blog/">Essays</a>
-        <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-crimson-hover);">LinkedIn ↗</a>
+        <a href="../#works" class="active">← Back to Works</a>
+        <a href="../#loop">The Loop</a>
+        <a href="../blog/">Notes</a>
+        <a href="#inquiries">Inquiries</a>
       </nav>
     </div>
   </header>
 
   <!-- Main Content -->
-  <main class="wrap" style="padding-top: 2rem; padding-bottom: 4rem;">
+  <main class="wrap essay-article" style="padding-top: 2.5rem; padding-bottom: 4rem;">
 
-    <div class="section-header">
-      <h1 class="section-title">Systems Experience in Production</h1>
-      <span class="section-sub">production_systems.map</span>
+    <div class="essay-header">
+      <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-crimson); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+        SYSTEMS RECOVERY // TRAVELOKA &amp; MAP CLUB
+      </div>
+      <h1 class="essay-header-title">Operational Disruption Architecture</h1>
+      <div class="essay-meta-row">
+        <span>● State Machine Design</span>
+        <span>•</span>
+        <span>SSOT Policy Engines</span>
+        <span>•</span>
+        <span>Fault-Tolerant Logic</span>
+      </div>
     </div>
 
-    <p class="section-subtitle-wide" style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.95rem; line-height: 1.7;">
-      A detailed look at where software meets high-stress operations: from omnichannel retail loyalty at <strong>MAPCLUB</strong> to high-scale aviation flight refund algorithms at <strong>Traveloka</strong> and industrial heavy-energy capital bids at <strong>BCG</strong>.
-    </p>
+    <!-- The Architectural Axiom -->
+    <div class="concept-box" style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; color: #ffffff; margin-bottom: 0.75rem;">The Architectural Axiom</h2>
+      <p style="color: var(--text-secondary); font-size: 0.94rem; line-height: 1.7; margin: 0;">
+        "When flight schedules collapse, payment gateways timeout, or invoices drift, the product is not the happy path—it is the state machine that catches the failure."
+      </p>
+    </div>
+
+    <!-- Visual Component 1: Interactive State-Machine Flowchart -->
+    <div class="flowchart-whiteboard-box">
+      <div class="flowchart-board-toolbar">
+        <div class="flowchart-toolbar-left">
+          <span>DISRUPTION STATE MACHINE // SSOT POLICY ROUTING</span>
+        </div>
+        <div class="flowchart-toolbar-right">
+          <span>● AUTOMATED RESOLUTION</span>
+        </div>
+      </div>
+
+      <div class="flowchart-board-canvas scroll-x" style="padding: 1.25rem 0.75rem;">
+        <svg class="flowchart-svg" viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrow-crimson" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#E6243A" />
+            </marker>
+          </defs>
+
+          <!-- Origin Event -->
+          <rect x="15" y="65" width="160" height="70" rx="6" fill="#1C0609" stroke="#E6243A" stroke-width="1.5" />
+          <text x="95" y="93" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#E6243A" text-anchor="middle">TRIGGER EVENT</text>
+          <text x="95" y="112" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">Carrier Disruption</text>
+          <text x="95" y="125" font-family="'Open Sans', sans-serif" font-size="9" fill="#D4A5A9" text-anchor="middle">Flight Delay / Schedule Cut</text>
+
+          <!-- Path 1 -> SSOT Engine -->
+          <path d="M 175 100 L 225 100" stroke="#E6243A" stroke-width="1.5" fill="none" marker-end="url(#arrow-crimson)" />
+
+          <!-- SSOT Policy Engine -->
+          <rect x="235" y="55" width="190" height="90" rx="6" fill="#24080D" stroke="#871622" stroke-width="1.5" />
+          <text x="330" y="83" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#FBBF24" text-anchor="middle">POLICY DECISION TREE</text>
+          <text x="330" y="103" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">Automated SSOT Engine</text>
+          <text x="330" y="120" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#D4A5A9" text-anchor="middle">Fare Rule Hierarchy Check</text>
+          <text x="330" y="133" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#B58287" text-anchor="middle">PM 185/2015 &amp; Carrier Matrix</text>
+
+          <!-- Branch A: Easy Reschedule -->
+          <path d="M 425 80 L 485 50" stroke="#E6243A" stroke-width="1.5" fill="none" marker-end="url(#arrow-crimson)" />
+          <rect x="495" y="20" width="210" height="60" rx="6" fill="#1A0508" stroke="#34D399" stroke-width="1.5" />
+          <text x="600" y="42" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#34D399" text-anchor="middle">ROUTE A // ELIGIBLE</text>
+          <text x="600" y="58" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">Self-Service Easy Reschedule</text>
+          <text x="600" y="71" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9" text-anchor="middle">Direct Seat Re-Allocation Flow</text>
+
+          <!-- Branch B: Split Refund -->
+          <path d="M 425 120 L 485 150" stroke="#E6243A" stroke-width="1.5" fill="none" marker-end="url(#arrow-crimson)" />
+          <rect x="495" y="120" width="210" height="60" rx="6" fill="#1A0508" stroke="#38BDF8" stroke-width="1.5" />
+          <text x="600" y="142" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#38BDF8" text-anchor="middle">ROUTE B // EXCEPTION</text>
+          <text x="600" y="158" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">Split Refund Engine</text>
+          <text x="600" y="171" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9" text-anchor="middle">Cash to Original Card + Re-Credit Points</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Visual Component 2: MECE Failure Tree (Inspection Cards) -->
+    <div class="section-label-bar" style="margin-top: 2.5rem;">
+      <span class="section-label">MECE Failure Tree // System Edge Cases</span>
+      <span class="section-count">[ 04 RESOLVED BREAKDOWNS ]</span>
+    </div>
+
+    <div class="failure-tree-grid">
+      <!-- Card 1 -->
+      <div class="failure-tree-card">
+        <div class="failure-tree-header">
+          <span>⚠️</span> Carrier Inventory Lock
+        </div>
+        <div class="failure-tree-text">
+          Resolving stale seat holds during high-concurrency rebooking surges. Implemented optimistic locking with automated timeout releases to prevent phantom inventory drops.
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="failure-tree-card">
+        <div class="failure-tree-header">
+          <span>⚡</span> Gateway Asynchrony
+        </div>
+        <div class="failure-tree-text">
+          Preventing duplicate refund execution and ledger drift during payment gateway network dropouts via idempotent transaction keys and deterministic ledger reconciliation.
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="failure-tree-card">
+        <div class="failure-tree-header">
+          <span>📜</span> Policy Ambiguity
+        </div>
+        <div class="failure-tree-text">
+          Standardizing conflicting multi-airline fare rules into deterministic code decision trees, eliminating customer support manual interpretation variance.
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="failure-tree-card">
+        <div class="failure-tree-header">
+          <span>📊</span> Invoicing Reconciliation
+        </div>
+        <div class="failure-tree-text">
+          Automated SIT/UAT validation gates catching transactional discrepancies across omnichannel retail campaigns and corporate finance ledgers (MAP Club).
+        </div>
+      </div>
+    </div>
+
+    <!-- Proven Track Record Cards -->
+    <div class="section-label-bar" style="margin-top: 3rem;">
+      <span class="section-label">Production Environments</span>
+      <span class="section-count">[ 03 PROVEN SECTORS ]</span>
+    </div>
 
     <div class="battle-grid">
-      <!-- 1. MAPCLUB (Top / Latest) -->
+      <!-- 1. MAPCLUB -->
       <div class="battle-card">
         <div class="battle-card-top">
           <div>
-            <div class="battle-role">Technical Product Owner (TPO)</div>
-            <div class="battle-company">PT. MAPCLUB Digital Asia • Omnichannel Retail Loyalty</div>
+            <div class="battle-role">Technical Product Owner</div>
+            <div class="battle-company">MAPCLUB • Omnichannel Retail Loyalty</div>
           </div>
-          <span class="battle-time" style="color: var(--term-green); border: 1px solid rgba(52, 211, 153, 0.4);">2026 — Present (Active)</span>
+          <span class="battle-time" style="color: var(--term-green); border-color: rgba(52, 211, 153, 0.4);">2026 — Present</span>
         </div>
-
-        <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 0.75rem;">
-          Powering omnichannel retail loyalty and digital engagement for hundreds of international brands across Indonesia. Replacing fragile manual workflows with automated, verified enterprise software.
+        <p class="proof-thesis">
+          Automating enterprise marketing services invoicing and loyalty point settlement across hundreds of retail brands. Replacing vulnerable spreadsheet handoffs with deterministic API verification contracts and zero-defect validation gates.
         </p>
-
-        <div class="battle-model-grid">
-          <div class="model-col">
-            <span class="model-tag model-tag-problem">The Operational Friction</span>
-            <div class="model-text">
-              Marketing campaigns and corporate finance were separated by dozens of disconnected Excel workbooks. Verifying campaign billing took weeks of manual cross-checking with high error risk.
-            </div>
-          </div>
-          <div class="model-col">
-            <span class="model-tag model-tag-system">The Engineering Architecture</span>
-            <div class="model-text">
-              Engineered an automated Marketing Services invoicing pipeline. Instituted strict soft API contracts, deterministic MoSCoW scoping, and zero-defect verification gates across squads.
-            </div>
-          </div>
-          <div class="model-col">
-            <span class="model-tag model-tag-impact">The Measurable Impact</span>
-            <div class="model-text">
-              Eliminated manual billing bottlenecks, secured C-suite executive sign-off, and accelerated specification handoffs from weeks to hours.
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- 2. Traveloka -->
@@ -90,31 +185,9 @@
           </div>
           <span class="battle-time">2024 — 2026</span>
         </div>
-
-        <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 0.75rem;">
-          When flights are canceled or delayed, passengers experience extreme anxiety while airlines operate on cryptic fare rules and strict government regulations (PM 185/2015).
+        <p class="proof-thesis">
+          Overhauled the refund calculation engine accuracy from 87.9% to 94.2% across 10+ flight provider APIs. Doubled automated resolutions (16.8% → 34.4%) and unlocked ~Rp10 Billion in net business revenue in 3 months.
         </p>
-
-        <div class="battle-model-grid">
-          <div class="model-col">
-            <span class="model-tag model-tag-problem">The Operational Friction</span>
-            <div class="model-text">
-              Airline delay policies varied wildly across 10+ flight provider APIs. Manual calculation discrepancies caused customer disputes and delayed refund payouts for days.
-            </div>
-          </div>
-          <div class="model-col">
-            <span class="model-tag model-tag-system">The Engineering Architecture</span>
-            <div class="model-text">
-              Overhauled the calculation engine accuracy from 87.9% to 94.2% using intelligent fare-rule parsing algorithms, automated tax reconciliation, and instant customer status updates.
-            </div>
-          </div>
-          <div class="model-col">
-            <span class="model-tag model-tag-impact">The Measurable Impact</span>
-            <div class="model-text">
-              Doubled automated resolutions (16.8% → 34.4%), slashed customer dispute complaints by 50%, and unlocked ~Rp10 Billion in net business revenue in 3 months.
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- 3. BCG -->
@@ -122,58 +195,60 @@
         <div class="battle-card-top">
           <div>
             <div class="battle-role">Project Specialist (Heavy Industry &amp; Energy)</div>
-            <div class="battle-company">Boston Consulting Group (BCG) • Industrial Mega-Projects</div>
+            <div class="battle-company">Boston Consulting Group (BCG)</div>
           </div>
           <span class="battle-time">2023 — 2024</span>
         </div>
-
-        <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 0.75rem;">
-          Deploying industrial engineering on the ground: wearing hard hats and steel-toed boots in nickel mining, smelters, and geothermal energy sites across Indonesia.
+        <p class="proof-thesis">
+          Modeled capital engineering bids and full lifecycle O&amp;M schedules for $400M industrial proposals across nickel smelters and geothermal power sites, bridging boardroom financials with heavy machine reliability.
         </p>
-
-        <div class="battle-model-grid">
-          <div class="model-col">
-            <span class="model-tag model-tag-problem">The Operational Friction</span>
-            <div class="model-text">
-              $400M capital engineering proposals where corporate financial models failed to account for heavy equipment breakdown in harsh tropical field conditions.
-            </div>
-          </div>
-          <div class="model-col">
-            <span class="model-tag model-tag-system">The Engineering Architecture</span>
-            <div class="model-text">
-              Structured 10+ commercial engineering tenders and modeled full lifecycle Operations &amp; Maintenance (O&amp;M) schedules grounded in plant-floor realities.
-            </div>
-          </div>
-          <div class="model-col">
-            <span class="model-tag model-tag-impact">The Measurable Impact</span>
-            <div class="model-text">
-              Advanced 30% of competitive bids to final contract awards, bridging the gap between boardroom financial targets and physical machinery.
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 
-    <div style="margin-top: 3rem; text-align: center;">
-      <a href="../#loop" class="btn-primary">Explore The Thinking Loop Flowchart ↑</a>
-      <a href="../#about" class="btn-secondary" style="margin-left: 0.75rem;">Back to About</a>
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="../#works" class="btn-primary">← Return to Main Workstation Overview</a>
     </div>
 
   </main>
 
-  <footer class="site-footer">
-    <div class="wrap footer-content">
-      <div>
-        <strong>Ramadhana Bhanuharya Krishnamurti (naquuuu)</strong>
-        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">
-          Bits &amp; Atoms • Cyber-Physical Product Architecture
+  <!-- Collaborative Inquiries Section (Shared) -->
+  <section class="section-inquiries" id="inquiries">
+    <div class="wrap">
+      <div class="inquiry-card">
+        <div class="inquiry-badge">
+          <span class="inquiry-badge-dot" aria-hidden="true"></span>
+          <span>OPEN TO COLLABORATION</span>
+        </div>
+        <h2 class="inquiry-headline">Building with teams where matter, code, and mindset align.</h2>
+        <p class="inquiry-prose">
+          Open to full-time roles, fractional/part-time initiatives, and contract builds—commercial ventures or non-profit impact. The only constant is mindset: designing systems that hold when the environment doesn't cooperate, valuing craft, and respecting real-world constraints.
+        </p>
+
+        <div class="inquiry-actions">
+          <a href="mailto:rbkrishnamurti@gmail.com" class="inquiry-btn">
+            <span>Gmail ↗</span>
+          </a>
+          <a href="https://wa.me/6282112255009" target="_blank" rel="noopener noreferrer" class="inquiry-btn">
+            <span>WhatsApp ↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" class="inquiry-btn">
+            <span>LinkedIn ↗</span>
+          </a>
         </div>
       </div>
-      <div class="footer-links">
-        <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf" target="_blank" rel="noopener noreferrer">Spotify</a>
-        <a href="https://bhanuharya.github.io/" target="_blank" rel="noopener noreferrer">Twin Brother (Harya) ↗</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap footer-content">
+      <div class="footer-channels">
+        <a href="https://github.com/naquuuu" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="mailto:rbkrishnamurti@gmail.com">Email</a>
+        <a href="../blog/">Notes</a>
+        <a href="https://bhanuharya.github.io/" target="_blank" rel="noopener noreferrer">Harya ↗</a>
+      </div>
+      <div class="footer-live-stamp">
+        <span>naquuuu.github.io • built with matter and code.</span>
       </div>
     </div>
   </footer>
