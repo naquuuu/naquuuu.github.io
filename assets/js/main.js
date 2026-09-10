@@ -1,6 +1,8 @@
 /**
  * naquuuu — Personal Product Architecture & Systems Engine
- * Design System: Deep Crimson & Dark Maroon IDE Palette + Physical Canvas Atelier
+ * Dual-Mode Dynamic Architecture:
+ *   - [ ⚡ Systems & Matter ]: Swiss Technical Architectural Paper (#FBFBFA)
+ *   - [ ✦ Culture & Taste ]: Deep Velvet Crimson & Dark Maroon Palette (#120305)
  * Working across physical matter, code, and culture.
  */
 
@@ -38,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const viewCulture = document.getElementById('view-culture');
   const modeStatusLabel = document.getElementById('mode-status-label');
   const heroSubIdentity = document.getElementById('hero-sub-identity');
+  const heroPortraitImg = document.getElementById('hero-portrait-img');
+  const heroPortraitMeta = document.getElementById('hero-portrait-meta');
 
   function switchMode(mode) {
     if (mode === 'culture') {
@@ -54,6 +58,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (viewCulture) viewCulture.classList.add('active');
       if (modeStatusLabel) modeStatusLabel.textContent = 'PERSPECTIVE: CREATIVE SANDBOX';
       if (heroSubIdentity) heroSubIdentity.textContent = 'exploring sound, silhouette, and human taste';
+
+      // Animate single hero portrait change
+      if (heroPortraitImg && heroPortraitMeta) {
+        heroPortraitImg.style.opacity = '0';
+        setTimeout(() => {
+          heroPortraitImg.src = './assets/img/krishna-hero-portrait.jpeg';
+          heroPortraitMeta.innerHTML = '<span>SHIBUYA-KEI</span><span>[ SONIC ROTATIONS ]</span><span>TASTE VECTORS</span>';
+          heroPortraitImg.style.opacity = '1';
+        }, 180);
+      }
+
       localStorage.setItem('naquuuu_mode', 'culture');
     } else {
       document.body.setAttribute('data-mode', 'systems');
@@ -69,6 +84,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (viewSystems) viewSystems.classList.add('active');
       if (modeStatusLabel) modeStatusLabel.textContent = 'PERSPECTIVE: TECHNICAL PROOF';
       if (heroSubIdentity) heroSubIdentity.textContent = 'working across physical matter, code, and culture';
+
+      // Animate single hero portrait change
+      if (heroPortraitImg && heroPortraitMeta) {
+        heroPortraitImg.style.opacity = '0';
+        setTimeout(() => {
+          heroPortraitImg.src = './assets/img/naquuuu-studio-bw.jpeg';
+          heroPortraitMeta.innerHTML = '<span>LOC: 6°12\'S 106°49\'E</span><span>[ WIB / UTC+7 ]</span><span>MATTER + CODE</span>';
+          heroPortraitImg.style.opacity = '1';
+        }, 180);
+      }
+
       localStorage.setItem('naquuuu_mode', 'systems');
     }
   }
@@ -84,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnModeCulture.addEventListener('click', () => switchMode('culture'));
   }
 
-  // Ensure clicking [ Works ] or [ The Loop ] reveals View A if View B was active
+  // Ensure clicking [ Works ], [ The Loop ], or [ Notes ] reveals View A if View B was active
   const navWorksLink = document.querySelector('a[href="#works"]');
   const navLoopLink = document.querySelector('a[href="#loop"]');
   const navNotesLink = document.querySelector('a[href="#notes"]');
