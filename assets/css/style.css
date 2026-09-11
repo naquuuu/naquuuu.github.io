@@ -3371,11 +3371,15 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
     box-shadow: 0 0 12px rgba(200, 82, 80, 0.2);
   }
 
-  /* Mobile Hero: 54% Text & 46% Picture Split */
+  /* Mobile Hero: Compact Ergonomic Spacing & Split */
+  .section-hero {
+    padding: 1.25rem 0 1rem 0;
+  }
+
   .hero-editorial-grid {
     display: grid;
     grid-template-columns: 1.14fr 0.86fr;
-    gap: 0.75rem 0.85rem;
+    gap: 0.5rem 0.75rem;
     align-items: center;
   }
 
@@ -3385,14 +3389,16 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
 
   .hero-sub-identity {
     grid-column: 1 / -1;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
+    margin-bottom: 0.45rem;
+    padding: 2px 10px;
   }
 
   .hero-headline {
     grid-column: 1;
     grid-row: 2;
-    font-size: clamp(1.42rem, 5.2vw, 1.78rem);
-    line-height: 1.22;
+    font-size: clamp(1.35rem, 5vw, 1.65rem);
+    line-height: 1.2;
     margin-bottom: 0;
     align-self: center;
     letter-spacing: -0.02em;
@@ -3404,7 +3410,7 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
     width: 100%;
     max-width: 100%;
     height: auto;
-    padding: 0.35rem;
+    padding: 0.3rem;
     margin: 0;
     border-radius: var(--radius-sm);
     align-self: center;
@@ -3422,18 +3428,62 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
     display: flex;
     justify-content: space-between;
     font-family: var(--font-mono);
-    font-size: 0.58rem;
+    font-size: 0.56rem;
     color: var(--text-muted);
-    padding: 0.25rem 0.15rem 0.05rem 0.15rem;
+    padding: 0.2rem 0.15rem 0.05rem 0.15rem;
   }
 
   .hero-epigraph {
     grid-column: 1 / -1;
-    margin: 0.75rem 0 1rem 0;
+    margin: 0.45rem 0 0.65rem 0;
+    padding: 0.25rem 0 0.25rem 0.85rem;
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+
+  .hero-epigraph cite {
+    margin-top: 0.2rem;
+    font-size: 0.72rem;
   }
 
   .hero-prose {
     grid-column: 1 / -1;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    gap: 0.55rem;
+  }
+
+  .hero-prose p {
+    margin: 0;
+  }
+
+  /* Compact Mode Switcher & Section Spacing on Mobile */
+  .mode-switch-wrap {
+    margin-top: 1.15rem;
+    padding-top: 0.85rem;
+    gap: 0.65rem;
+  }
+
+  .mode-switcher-container {
+    gap: 0.35rem;
+  }
+
+  .mode-switcher .mode-tab-btn {
+    padding: 0.35rem 0.85rem;
+    font-size: 0.76rem;
+  }
+
+  .mode-status-meta {
+    font-size: 0.68rem;
+  }
+
+  .section-loop-cards,
+  .section-culture-philosophy {
+    padding: 1.25rem 0 2rem 0;
+  }
+
+  .loop-cards-header {
+    margin-bottom: 0.85rem;
   }
 
   /* Compact Spotify Player on Mobile */
@@ -3504,6 +3554,32 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
 }
 
 @media (max-width: 480px) {
+  .section-hero {
+    padding: 1rem 0 0.85rem 0;
+  }
+  .hero-sub-identity {
+    font-size: 0.68rem;
+    margin-bottom: 0.35rem;
+    padding: 2px 8px;
+  }
+  .hero-epigraph {
+    margin: 0.35rem 0 0.55rem 0;
+    padding: 0.2rem 0 0.2rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  .hero-prose {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    gap: 0.45rem;
+  }
+  .mode-switch-wrap {
+    margin-top: 0.95rem;
+    padding-top: 0.75rem;
+  }
+  .section-loop-cards,
+  .section-culture-philosophy {
+    padding: 1rem 0 1.75rem 0;
+  }
   .inquiry-card {
     padding: 1.35rem 0.85rem;
   }
