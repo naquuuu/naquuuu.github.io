@@ -96,66 +96,223 @@
       </div>
     </div>
 
-    <!-- Closed-Loop Lifecycle Whiteboard Flowchart -->
-    <div class="flowchart-whiteboard-box">
-      <div class="flowchart-board-toolbar">
-        <div class="flowchart-toolbar-left">
-          <span>3m phb bio-mask // lifecycle</span>
+    <!-- Closed-Loop Circular Bio-Economy System Simulation -->
+    <div class="sim-system-box" id="3m-sim-box">
+      <div class="sim-toolbar">
+        <div class="sim-toolbar-title">
+          <span style="color: var(--accent-crimson);">✦</span>
+          <span>biopolymer system model // physical &amp; circular simulation</span>
         </div>
-        <div class="flowchart-toolbar-right">
-          <span>100% biodegradable</span>
+        <div class="sim-mode-group" role="tablist" aria-label="3M Simulation Perspectives">
+          <button type="button" class="sim-mode-btn active" data-sim-mode="flywheel" role="tab" aria-selected="true">
+            circular bio-flywheel
+          </button>
+          <button type="button" class="sim-mode-btn" data-sim-mode="nanofiber" role="tab" aria-selected="false">
+            3-ply nanofiber micro-architecture
+          </button>
         </div>
       </div>
 
-      <div class="flowchart-board-canvas scroll-x" style="padding: 1.25rem 0.75rem;">
-        <svg class="flowchart-svg" viewBox="0 0 660 160" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <marker id="arrow-gray-3m" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#71717A" />
-            </marker>
-          </defs>
+      <div class="sim-canvas-wrap">
+        <!-- View 1: Circular Bio-Flywheel -->
+        <div class="sim-canvas-view active scroll-x" data-view="flywheel">
+          <svg class="flowchart-svg" viewBox="0 0 860 380" xmlns="http://www.w3.org/2000/svg">
+            <!-- Defs -->
+            <defs>
+              <linearGradient id="flywheelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#34D399" stop-opacity="0.25" />
+                <stop offset="50%" stop-color="#E6243A" stop-opacity="0.15" />
+                <stop offset="100%" stop-color="#60A5FA" stop-opacity="0.2" />
+              </linearGradient>
+              <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#34D399" />
+              </marker>
+              <marker id="arrow-crim" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#E6243A" />
+              </marker>
+            </defs>
 
-          <!-- Step 1 -->
-          <rect x="10" y="35" width="135" height="90" rx="6" fill="#18181B" stroke="#3F3F46" stroke-width="1.5" />
-          <rect x="20" y="47" width="55" height="18" rx="3" fill="#27272A" stroke="#52525B" stroke-width="1" />
-          <text x="47" y="60" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="700" fill="#A1A1AA" text-anchor="middle">step 01</text>
-          <text x="77" y="85" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">plant waste</text>
-          <text x="77" y="102" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">sugarcane molasses</text>
-          <text x="77" y="115" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">&amp; cassava waste</text>
+            <!-- Center Orbital Hub -->
+            <circle cx="430" cy="190" r="88" fill="url(#flywheelGrad)" stroke="#E6243A" stroke-width="1.5" stroke-dasharray="4 3" />
+            <circle cx="430" cy="190" r="68" fill="#150406" stroke="#871622" stroke-width="1" />
+            <text x="430" y="178" font-family="'Open Sans', sans-serif" font-size="10" font-weight="700" fill="#E6243A" text-anchor="middle">CLOSED LOOP</text>
+            <text x="430" y="196" font-family="'Open Sans', sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">PHB Matrix</text>
+            <text x="430" y="212" font-family="'Open Sans', sans-serif" font-size="9" fill="#34D399" text-anchor="middle">0% fossil petroleum</text>
 
-          <!-- Arrow 1 -> 2 -->
-          <path d="M 145 80 L 175 80" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-3m)" />
+            <!-- Circular Orbit Path -->
+            <path d="M 430 35 A 155 155 0 1 1 429 35" fill="none" stroke="#2D1115" stroke-width="2" stroke-dasharray="6 4" />
 
-          <!-- Step 2 -->
-          <rect x="180" y="35" width="135" height="90" rx="6" fill="#18181B" stroke="#3F3F46" stroke-width="1.5" />
-          <rect x="190" y="47" width="55" height="18" rx="3" fill="#27272A" stroke="#52525B" stroke-width="1" />
-          <text x="217" y="60" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="700" fill="#A1A1AA" text-anchor="middle">step 02</text>
-          <text x="247" y="85" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">fermentation</text>
-          <text x="247" y="102" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">bacteria synthesize</text>
-          <text x="247" y="115" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">natural biopolymer</text>
+            <!-- Node 1: Agro-Waste Feedstock (Top Left) -->
+            <g transform="translate(140, 20)">
+              <rect x="0" y="0" width="180" height="74" rx="8" fill="#18181B" stroke="#34D399" stroke-width="1.5" />
+              <text x="14" y="22" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#34D399">01 // DOMESTIC FEEDSTOCK</text>
+              <text x="14" y="42" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Agro-Waste Streams</text>
+              <text x="14" y="60" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA">Sugarcane molasses &amp; cassava starch</text>
+            </g>
 
-          <!-- Arrow 2 -> 3 -->
-          <path d="M 315 80 L 345 80" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-3m)" />
+            <!-- Vector 1 -> 2 -->
+            <path d="M 320 57 C 370 57 490 57 540 57" fill="none" stroke="#34D399" stroke-width="1.5" marker-end="url(#arrow-green)" />
 
-          <!-- Step 3 -->
-          <rect x="350" y="35" width="135" height="90" rx="6" fill="#18181B" stroke="#3F3F46" stroke-width="1.5" />
-          <rect x="360" y="47" width="55" height="18" rx="3" fill="#27272A" stroke="#52525B" stroke-width="1" />
-          <text x="387" y="60" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="700" fill="#A1A1AA" text-anchor="middle">step 03</text>
-          <text x="417" y="85" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">fiber spinning</text>
-          <text x="417" y="102" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">protective mesh</text>
-          <text x="417" y="115" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">98%+ bfe filtration</text>
+            <!-- Node 2: Bacterial Fermentation (Top Right) -->
+            <g transform="translate(540, 20)">
+              <rect x="0" y="0" width="180" height="74" rx="8" fill="#18181B" stroke="#60A5FA" stroke-width="1.5" />
+              <text x="14" y="22" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#60A5FA">02 // BIO-SYNTHESIS</text>
+              <text x="14" y="42" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Microbial Bioreactor</text>
+              <text x="14" y="60" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA">C. necator yields 80% PHB granule wt</text>
+            </g>
 
-          <!-- Arrow 3 -> 4 -->
-          <path d="M 485 80 L 515 80" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-3m)" />
+            <!-- Vector 2 -> 3 -->
+            <path d="M 720 70 C 770 110 770 170 720 200" fill="none" stroke="#60A5FA" stroke-width="1.5" marker-end="url(#arrow-green)" />
 
-          <!-- Step 4 -->
-          <rect x="520" y="35" width="130" height="90" rx="6" fill="#18181B" stroke="#3F3F46" stroke-width="1.5" />
-          <rect x="530" y="47" width="55" height="18" rx="3" fill="#27272A" stroke="#52525B" stroke-width="1" />
-          <text x="557" y="60" font-family="'Open Sans', sans-serif" font-size="9.5" font-weight="700" fill="#A1A1AA" text-anchor="middle">step 04</text>
-          <text x="585" y="85" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">natural breakdown</text>
-          <text x="585" y="102" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">6-12 mo in soil</text>
-          <text x="585" y="115" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">zero microplastics</text>
-        </svg>
+            <!-- Node 3: Electrospun Matrix (Mid-Right) -->
+            <g transform="translate(540, 155)">
+              <rect x="0" y="0" width="180" height="74" rx="8" fill="#1C0609" stroke="#E6243A" stroke-width="1.5" />
+              <text x="14" y="22" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#E6243A">03 // NANOFIBER FABRICATION</text>
+              <text x="14" y="42" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Electrospun Lattice</text>
+              <text x="14" y="60" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#D4A5A9">200nm tortuous virus-capture mesh</text>
+            </g>
+
+            <!-- Vector 3 -> 4 -->
+            <path d="M 630 230 L 630 275" fill="none" stroke="#E6243A" stroke-width="1.5" marker-end="url(#arrow-crim)" />
+
+            <!-- Node 4: 3D Ergonomic Mask (Bottom Right) -->
+            <g transform="translate(540, 280)">
+              <rect x="0" y="0" width="180" height="74" rx="8" fill="#1C0609" stroke="#E6243A" stroke-width="1.5" />
+              <text x="14" y="22" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#E6243A">04 // ANTHROPOMETRIC FIT</text>
+              <text x="14" y="42" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">3D Ergonomic Seal</text>
+              <text x="14" y="60" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#D4A5A9">&lt; 2% edge leakage bypass</text>
+            </g>
+
+            <!-- Vector 4 -> 5 -->
+            <path d="M 540 317 C 470 317 390 317 320 317" fill="none" stroke="#34D399" stroke-width="1.5" marker-end="url(#arrow-green)" />
+
+            <!-- Node 5: Soil Depolymerization (Bottom Left) -->
+            <g transform="translate(140, 280)">
+              <rect x="0" y="0" width="180" height="74" rx="8" fill="#18181B" stroke="#34D399" stroke-width="1.5" />
+              <text x="14" y="22" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#34D399">05 // RAPID BIODEGRADATION</text>
+              <text x="14" y="42" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Soil Enzymatic Lysis</text>
+              <text x="14" y="60" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA">Depolymerase breaks ester bonds</text>
+            </g>
+
+            <!-- Vector 5 -> 6 -->
+            <path d="M 140 300 C 90 260 90 190 140 160" fill="none" stroke="#34D399" stroke-width="1.5" marker-end="url(#arrow-green)" />
+
+            <!-- Node 6: Regenerative Humus (Mid-Left) -->
+            <g transform="translate(140, 155)">
+              <rect x="0" y="0" width="180" height="74" rx="8" fill="#18181B" stroke="#34D399" stroke-width="1.5" />
+              <text x="14" y="22" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#34D399">06 // NUTRIENT RECIRCULATION</text>
+              <text x="14" y="42" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Compost Mineralization</text>
+              <text x="14" y="60" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA">Enriches soil for next crop cycle</text>
+            </g>
+
+            <!-- Vector 6 -> 1 (Complete Loop) -->
+            <path d="M 230 155 L 230 100" fill="none" stroke="#34D399" stroke-width="1.5" marker-end="url(#arrow-green)" />
+          </svg>
+        </div>
+
+        <!-- View 2: 3-Ply Nanofiber Micro-Architecture -->
+        <div class="sim-canvas-view scroll-x" data-view="nanofiber">
+          <svg class="flowchart-svg" viewBox="0 0 860 380" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="airflow-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#60A5FA" />
+              </marker>
+            </defs>
+
+            <!-- Background Microscopic Stage -->
+            <rect x="20" y="20" width="820" height="340" rx="8" fill="#120406" stroke="#3D1217" stroke-width="1.5" />
+
+            <!-- Inhalation Airflow Track -->
+            <path d="M 50 190 L 140 190" stroke="#60A5FA" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#airflow-arr)" />
+            <text x="70" y="175" font-family="'Open Sans', sans-serif" font-size="10" font-weight="700" fill="#60A5FA">INHALATION AIRFLOW</text>
+            <text x="70" y="215" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA">Viral droplets &amp; PM2.5</text>
+
+            <!-- Layer 1: Outer Hydrophobic Shell -->
+            <rect x="150" y="45" width="160" height="290" rx="6" fill="#1E070B" stroke="#E6243A" stroke-width="1.5" />
+            <rect x="162" y="60" width="136" height="24" rx="4" fill="#360E14" />
+            <text x="230" y="76" font-family="'Open Sans', sans-serif" font-size="10" font-weight="700" fill="#E6243A" text-anchor="middle">LAYER 1: EXTERIOR</text>
+            <text x="230" y="115" font-family="'Open Sans', sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Spunbond PHB Shell</text>
+            <text x="230" y="140" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#D4A5A9" text-anchor="middle">25 gsm structural density</text>
+            <text x="230" y="165" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#D4A5A9" text-anchor="middle">Hydrophobic barrier blocks</text>
+            <text x="230" y="180" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#D4A5A9" text-anchor="middle">macro-droplets &gt; 100 µm</text>
+            <line x1="170" y1="210" x2="290" y2="210" stroke="#871622" stroke-width="1" />
+            <text x="230" y="235" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">Mechanical splash barrier</text>
+            <text x="230" y="255" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">Fluid penetration resistance</text>
+            <rect x="175" y="280" width="110" height="24" rx="12" fill="#290A0E" stroke="#871622" />
+            <text x="230" y="296" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#E6243A" text-anchor="middle">FLUID REPELLENT</text>
+
+            <!-- Layer 2: Core Electrospun Nanofiber -->
+            <rect x="350" y="45" width="190" height="290" rx="6" fill="#150407" stroke="#34D399" stroke-width="2" />
+            <rect x="365" y="60" width="160" height="24" rx="4" fill="#062E1E" />
+            <text x="445" y="76" font-family="'Open Sans', sans-serif" font-size="10" font-weight="700" fill="#34D399" text-anchor="middle">LAYER 2: FILTER MATRIX</text>
+            <text x="445" y="115" font-family="'Open Sans', sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Electrospun Nanofiber</text>
+            <text x="445" y="140" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A7F3D0" text-anchor="middle">200 nm mean fiber diameter</text>
+            <text x="445" y="165" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A7F3D0" text-anchor="middle">Brownian motion interception</text>
+            <text x="445" y="180" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A7F3D0" text-anchor="middle">Sub-micron pathogen trap</text>
+            <line x1="375" y1="210" x2="515" y2="210" stroke="#065F46" stroke-width="1" />
+            <text x="445" y="235" font-family="'Open Sans', sans-serif" font-size="9" fill="#34D399" text-anchor="middle">&gt; 98.4% BFE @ 0.3 µm</text>
+            <text x="445" y="255" font-family="'Open Sans', sans-serif" font-size="9" fill="#34D399" text-anchor="middle">Delta-P &lt; 28 Pa/cm²</text>
+            <rect x="385" y="280" width="120" height="24" rx="12" fill="#064E3B" stroke="#34D399" />
+            <text x="445" y="296" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle">HIGH-EFFICIENCY MESH</text>
+
+            <!-- Layer 3: Inner Hypoallergenic Liner -->
+            <rect x="580" y="45" width="160" height="290" rx="6" fill="#18181B" stroke="#52525B" stroke-width="1.5" />
+            <rect x="592" y="60" width="136" height="24" rx="4" fill="#27272A" />
+            <text x="660" y="76" font-family="'Open Sans', sans-serif" font-size="10" font-weight="700" fill="#A1A1AA" text-anchor="middle">LAYER 3: CONTACT</text>
+            <text x="660" y="115" font-family="'Open Sans', sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Comfort Inner Liner</text>
+            <text x="660" y="140" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#D4D4D8" text-anchor="middle">20 gsm unbleached fiber</text>
+            <text x="660" y="165" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#D4D4D8" text-anchor="middle">Moisture &amp; sweat absorption</text>
+            <text x="660" y="180" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#D4D4D8" text-anchor="middle">Zero dermatological toxicity</text>
+            <line x1="600" y1="210" x2="720" y2="210" stroke="#3F3F46" stroke-width="1" />
+            <text x="660" y="235" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">Breathable skin boundary</text>
+            <text x="660" y="255" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">Anti-fogging vapor exit</text>
+            <rect x="605" y="280" width="110" height="24" rx="12" fill="#27272A" stroke="#52525B" />
+            <text x="660" y="296" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#D4D4D8" text-anchor="middle">SKIN-SAFE CONTACT</text>
+
+            <!-- Exhalation Clean Airflow -->
+            <path d="M 750 190 L 820 190" stroke="#34D399" stroke-width="2" marker-end="url(#arrow-green)" />
+            <text x="755" y="175" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#34D399">CLEAN AIR</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Live Simulation Telemetry -->
+      <div class="sim-telemetry-grid" data-telemetry="flywheel">
+        <div class="sim-metric-card">
+          <div class="sim-metric-val metric-green">80% wt/wt</div>
+          <div class="sim-metric-label">Intracellular PHB Yield</div>
+        </div>
+        <div class="sim-metric-card">
+          <div class="sim-metric-val metric-accent">100% Closed</div>
+          <div class="sim-metric-label">Circular Carbon Flywheel</div>
+        </div>
+        <div class="sim-metric-card">
+          <div class="sim-metric-val metric-glow">0 kg</div>
+          <div class="sim-metric-label">Virgin Petroleum Usage</div>
+        </div>
+        <div class="sim-metric-card">
+          <div class="sim-metric-val">180 Days</div>
+          <div class="sim-metric-label">Soil Mineralization Half-Life</div>
+        </div>
+      </div>
+
+      <div class="sim-telemetry-grid" data-telemetry="nanofiber" style="display: none;">
+        <div class="sim-metric-card">
+          <div class="sim-metric-val metric-green">98.4%</div>
+          <div class="sim-metric-label">BFE / PFE Filtration Efficiency</div>
+        </div>
+        <div class="sim-metric-card">
+          <div class="sim-metric-val metric-accent">28 Pa/cm²</div>
+          <div class="sim-metric-label">Airflow Resistance (Delta-P)</div>
+        </div>
+        <div class="sim-metric-card">
+          <div class="sim-metric-val metric-glow">&lt; 2.0%</div>
+          <div class="sim-metric-label">3D Contour Edge Bypass</div>
+        </div>
+        <div class="sim-metric-card">
+          <div class="sim-metric-val">200 nm</div>
+          <div class="sim-metric-label">Electrospun Mean Fiber Diameter</div>
+        </div>
       </div>
     </div>
 
@@ -220,5 +377,6 @@
     </div>
   </footer>
 
+  <script src="../../assets/js/main.js"></script>
 </body>
 </html>

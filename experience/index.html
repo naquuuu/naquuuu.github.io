@@ -6,20 +6,21 @@
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#120305">
   
-  <title>Operational Disruption Architecture: naquuuu</title>
-  <meta name="description" content="Operational disruption architecture, state machines, and failure recovery across Traveloka, MAPCLUB, and BCG by naquuuu.">
+  <title>Work Experience &amp; Shipped Systems: Krishna (naquuuu)</title>
+  <meta name="description" content="Detailed engineering and product management track record across MAPCLUB, Traveloka, and Boston Consulting Group (BCG) by Krishna (naquuuu).">
   <link rel="canonical" href="https://naquuuu.github.io/experience/">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260911v">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="alternate icon" href="../favicon.ico">
 </head>
 <body>
 
-  <!-- Site Header (Single-Row) -->
+  <!-- Site Header -->
   <header class="site-header">
     <div class="wrap nav">
       <a class="site-title" href="../">
         <span class="prompt-user">naquuuu</span><span class="prompt-at">@</span><span class="prompt-host">systems</span>
-        <span class="prompt-badge">disruption recovery</span>
+        <span class="prompt-badge">experience hub</span>
       </a>
       <nav class="nav-links">
         <a href="https://naquuuu.github.io/" class="nav-back-link">[ ← naquuuu.github.io ]</a>
@@ -32,194 +33,178 @@
 
     <div class="essay-header">
       <div style="font-family: var(--font-sans); font-size: 0.78rem; color: var(--accent-crimson); margin-bottom: 0.5rem; text-transform: lowercase; letter-spacing: 0.05em;">
-        systems recovery // traveloka &amp; mapclub
+        career track record // shipped systems
       </div>
-      <h1 class="essay-header-title">operational disruption systems</h1>
+      <h1 class="essay-header-title">work experience &amp; system case studies</h1>
       <div class="essay-meta-row">
-        <span>state machine design</span>
+        <span>3 organizations</span>
         <span>•</span>
-        <span>policy engines</span>
+        <span>omnichannel loyalty</span>
         <span>•</span>
-        <span>fault-tolerant logic</span>
+        <span>aviation disruption</span>
+        <span>•</span>
+        <span>heavy industry</span>
       </div>
     </div>
 
-    <!-- Core Lesson -->
-    <div class="concept-box" style="margin-bottom: 2rem;">
-      <h2 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">a lesson from shipping systems</h2>
+    <!-- Core Philosophy -->
+    <div class="concept-box" style="margin-bottom: 2.5rem;">
+      <h2 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">building for operational reality</h2>
       <p style="color: var(--text-secondary); font-size: 0.94rem; line-height: 1.7; margin: 0;">
-        When flight schedules collapse or warehouse sync fails, automated recovery cannot rely on hope. Systems must evaluate rules deterministically, route customers clearly, and preserve financial integrity.
+        From volatile airline schedule collapses and retail partner ledger settlements to capital allocation for $400M heavy industrial infrastructure, my focus is designing deterministic systems that withstand real-world operational stress. Explore each dedicated deep-dive below.
       </p>
     </div>
 
-    <!-- Visual Component 1: Whiteboard Flowchart -->
-    <div class="flowchart-whiteboard-box">
-      <div class="flowchart-board-toolbar">
-        <div class="flowchart-toolbar-left">
-          <span>disruption flow // deterministic recovery</span>
+    <!-- 3 Case Study Stack -->
+    <div class="dossier-stack">
+
+      <!-- Case 01: MAPCLUB -->
+      <article class="dossier-card">
+        <div class="dossier-tab">
+          <span>exp 01</span>
+          <span class="dossier-tab-sep">/</span>
+          <span class="dossier-tab-name">mapclub</span>
         </div>
-        <div class="flowchart-toolbar-right">
-          <span>state machine architecture</span>
-        </div>
-      </div>
-
-      <div class="flowchart-board-canvas scroll-x" style="padding: 1.25rem 0.75rem;">
-        <svg class="flowchart-svg" viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <marker id="arrow-crimson" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#E6243A" />
-            </marker>
-          </defs>
-
-          <!-- Origin Event -->
-          <rect x="15" y="65" width="160" height="70" rx="6" fill="#1C0609" stroke="#E6243A" stroke-width="1.5" />
-          <text x="95" y="93" font-family="'Open Sans', sans-serif" font-size="10" font-weight="700" fill="#E6243A" text-anchor="middle">TRIGGER EVENT</text>
-          <text x="95" y="112" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">Carrier Disruption</text>
-          <text x="95" y="125" font-family="'Open Sans', sans-serif" font-size="9" fill="#D4A5A9" text-anchor="middle">Flight Delay / Schedule Cut</text>
-
-          <!-- Path 1 -> SSOT Engine -->
-          <path d="M 175 100 L 225 100" stroke="#E6243A" stroke-width="1.5" fill="none" marker-end="url(#arrow-crimson)" />
-
-          <!-- SSOT Policy Engine -->
-          <rect x="235" y="55" width="190" height="90" rx="6" fill="#24080D" stroke="#871622" stroke-width="1.5" />
-          <text x="330" y="83" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#D4A5A9" text-anchor="middle">POLICY DECISION TREE</text>
-          <text x="330" y="103" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">Automated SSOT Engine</text>
-          <text x="330" y="120" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#D4A5A9" text-anchor="middle">Fare Rule Hierarchy Check</text>
-          <text x="330" y="133" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#B58287" text-anchor="middle">PM 185/2015 &amp; Carrier Matrix</text>
-
-          <!-- Branch A: Easy Reschedule -->
-          <path d="M 425 80 L 485 50" stroke="#E6243A" stroke-width="1.5" fill="none" marker-end="url(#arrow-crimson)" />
-          <rect x="495" y="20" width="210" height="60" rx="6" fill="#1A0508" stroke="#E6243A" stroke-width="1.5" />
-          <text x="600" y="42" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#E6243A" text-anchor="middle">ROUTE A // ELIGIBLE</text>
-          <text x="600" y="58" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">Self-Service Easy Reschedule</text>
-          <text x="600" y="71" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9" text-anchor="middle">Direct Seat Re-Allocation Flow</text>
-
-          <!-- Branch B: Split Refund -->
-          <path d="M 425 120 L 485 150" stroke="#E6243A" stroke-width="1.5" fill="none" marker-end="url(#arrow-crimson)" />
-          <rect x="495" y="120" width="210" height="60" rx="6" fill="#1A0508" stroke="#871622" stroke-width="1.5" />
-          <text x="600" y="142" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#D4A5A9" text-anchor="middle">ROUTE B // EXCEPTION</text>
-          <text x="600" y="158" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">Split Refund Engine</text>
-          <text x="600" y="171" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9" text-anchor="middle">Cash to Original Card + Re-Credit Points</text>
-        </svg>
-      </div>
-    </div>
-
-    <!-- Visual Component 2: MECE Failure Tree (Inspection Cards) -->
-    <div class="section-label-bar" style="margin-top: 2.5rem;">
-      <span class="section-label">handling failure in production // edge cases</span>
-      <span class="section-count">[ 04 resolved edge cases ]</span>
-    </div>
-
-    <div class="failure-tree-grid">
-      <!-- Card 1 -->
-      <div class="failure-tree-card">
-        <div class="failure-tree-header">
-          carrier inventory locks
-        </div>
-        <div class="failure-tree-text">
-          resolving stale seat holds during rebooking surges. added optimistic locks with automated timeout releases to prevent phantom inventory drops.
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="failure-tree-card">
-        <div class="failure-tree-header">
-          gateway timeouts
-        </div>
-        <div class="failure-tree-text">
-          preventing duplicate refund execution and ledger drift during bank network dropouts by using idempotent transaction keys and automated reconciliation.
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="failure-tree-card">
-        <div class="failure-tree-header">
-          messy airline fare rules
-        </div>
-        <div class="failure-tree-text">
-          standardizing conflicting multi-airline refund and reschedule policies into clear automated rules, removing manual guesswork from customer support.
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="failure-tree-card">
-        <div class="failure-tree-header">
-          retail invoicing reconciliation
-        </div>
-        <div class="failure-tree-text">
-          automated validation gates catching transactional discrepancies across multi-brand campaigns and corporate finance ledgers at mapclub.
-        </div>
-      </div>
-    </div>
-
-    <!-- Proven Track Record Cards -->
-    <div class="section-label-bar" style="margin-top: 3rem;">
-      <span class="section-label">where i've worked</span>
-      <span class="section-count">[ 03 companies ]</span>
-    </div>
-
-    <div class="battle-grid">
-      <!-- 1. MAPCLUB -->
-      <div class="battle-card">
-        <div class="battle-card-top">
-          <div>
-            <div class="battle-role">Technical Product Owner</div>
-            <div class="battle-company">MAPCLUB • Omnichannel Retail Loyalty</div>
+        <div class="dossier-header">
+          <div class="dossier-badge">
+            <span class="dossier-badge-dot" aria-hidden="true"></span>
+            <span>2026 - present</span>
           </div>
-          <span class="battle-time" style="color: var(--term-green); border-color: rgba(52, 211, 153, 0.4);">2026 - Present</span>
+          <span class="dossier-category">omnichannel loyalty // technical product owner</span>
         </div>
-        <p class="proof-thesis">
-          automating marketing service invoicing and loyalty point settlement across hundreds of retail brands. replacing manual spreadsheets with verified api workflows and clean financial reconciliation.
-        </p>
-      </div>
+        <h2 class="dossier-title">enterprise omnichannel loyalty &amp; automation</h2>
 
-      <!-- 2. Traveloka -->
-      <div class="battle-card">
-        <div class="battle-card-top">
+        <div class="dossier-body-grid">
           <div>
-            <div class="battle-role">Product Manager (Flight Refunds &amp; Disruptions)</div>
-            <div class="battle-company">Traveloka • Aviation Systems</div>
+            <div class="dossier-subheading">the challenge</div>
+            <p class="dossier-prose">
+              Manual spreadsheet-based marketing service invoicing, discount coupon leakage across retail chains, and complex partner banking checkout handshakes.
+            </p>
           </div>
-          <span class="battle-time">2024 - 2026</span>
+          <div>
+            <div class="dossier-subheading">what i built</div>
+            <p class="dossier-prose">
+              Automated marketing service invoicing, Employee Discount Scheme (EDS) key validation, Mandiri Livin' Sukha webview (RaaS) checkout routing, and unified telemetry.
+            </p>
+          </div>
         </div>
-        <p class="proof-thesis">
-          overhauled the flight refund calculation engine accuracy from 87.9% to 94.2% across 10+ airline partner apis. doubled automated refund handling (16.8% → 34.4%) and unlocked ~rp10 billion in net business revenue in 3 months.
-        </p>
-      </div>
 
-      <!-- 3. BCG -->
-      <div class="battle-card">
-        <div class="battle-card-top">
-          <div>
-            <div class="battle-role">Project Specialist (Heavy Industry &amp; Energy)</div>
-            <div class="battle-company">Boston Consulting Group (BCG)</div>
+        <div class="dossier-footer">
+          <div class="dossier-tags">
+            <span class="dossier-tag">invoicing automation</span>
+            <span class="dossier-tag">eds validation</span>
+            <span class="dossier-tag">raas webview</span>
+            <span class="dossier-tag">insider &amp; optimus</span>
           </div>
-          <span class="battle-time">2023 - 2024</span>
+          <a href="./mapclub/" class="dossier-link">view mapclub case study ↗</a>
         </div>
-        <p class="proof-thesis">
-          modeled engineering proposals and maintenance plans for $400m industrial projects across nickel smelters and geothermal power sites, bridging board-level financials with machine reliability.
-        </p>
-      </div>
+      </article>
+
+      <!-- Case 02: Traveloka -->
+      <article class="dossier-card">
+        <div class="dossier-tab">
+          <span>exp 02</span>
+          <span class="dossier-tab-sep">/</span>
+          <span class="dossier-tab-name">traveloka</span>
+        </div>
+        <div class="dossier-header">
+          <div class="dossier-badge">
+            <span class="dossier-badge-dot" aria-hidden="true"></span>
+            <span>2024 - 2026</span>
+          </div>
+          <span class="dossier-category">aviation systems // product manager</span>
+        </div>
+        <h2 class="dossier-title">flight disruption recovery &amp; refund engine</h2>
+
+        <div class="dossier-body-grid">
+          <div>
+            <div class="dossier-subheading">the challenge</div>
+            <p class="dossier-prose">
+              Mass flight cancellations overwhelming support queues, conflicting airline fare matrices, carrier seat locks, and banking gateway timeout drops.
+            </p>
+          </div>
+          <div>
+            <div class="dossier-subheading">what i built</div>
+            <p class="dossier-prose">
+              State machine policy decision engine (PM 185/2015), self-service Easy Reschedule, Split Refund engine (cash to card + loyalty points re-credit), and idempotent locks.
+            </p>
+          </div>
+        </div>
+
+        <div class="dossier-footer">
+          <div class="dossier-tags">
+            <span class="dossier-tag">state machines</span>
+            <span class="dossier-tag">easy reschedule</span>
+            <span class="dossier-tag">split refund</span>
+            <span class="dossier-tag">87.9% → 94.2% accuracy</span>
+          </div>
+          <a href="./traveloka/" class="dossier-link">view traveloka case study ↗</a>
+        </div>
+      </article>
+
+      <!-- Case 03: BCG -->
+      <article class="dossier-card">
+        <div class="dossier-tab">
+          <span>exp 03</span>
+          <span class="dossier-tab-sep">/</span>
+          <span class="dossier-tab-name">boston consulting group</span>
+        </div>
+        <div class="dossier-header">
+          <div class="dossier-badge">
+            <span class="dossier-badge-dot" aria-hidden="true"></span>
+            <span>2023 - 2024</span>
+          </div>
+          <span class="dossier-category">energy &amp; heavy industry // project specialist</span>
+        </div>
+        <h2 class="dossier-title">heavy industry economics &amp; energy modeling</h2>
+
+        <div class="dossier-body-grid">
+          <div>
+            <div class="dossier-subheading">the challenge</div>
+            <p class="dossier-prose">
+              Evaluating $400M industrial proposals where financial models risk detaching from plant turnaround downtime, machine degradation, and equipment lead times.
+            </p>
+          </div>
+          <div>
+            <div class="dossier-subheading">what i built</div>
+            <p class="dossier-prose">
+              Parametric Capex/Opex valuation models connecting furnace maintenance schedules at nickel smelters and turbine heat rates at geothermal plants with financial yield curves.
+            </p>
+          </div>
+        </div>
+
+        <div class="dossier-footer">
+          <div class="dossier-tags">
+            <span class="dossier-tag">capex/opex models</span>
+            <span class="dossier-tag">nickel smelters</span>
+            <span class="dossier-tag">geothermal power</span>
+            <span class="dossier-tag">supply chain</span>
+          </div>
+          <a href="./bcg/" class="dossier-link">view bcg case study ↗</a>
+        </div>
+      </article>
+
     </div>
 
-    <div style="text-align: center; margin-top: 3rem;">
+    <!-- Return Actions -->
+    <div style="text-align: center; margin-top: 3.5rem;">
       <a href="https://naquuuu.github.io/" class="btn-primary">← return to home</a>
     </div>
 
   </main>
 
-  <!-- Collaborative Inquiries Section (Shared) -->
+  <!-- Collaborative Inquiries Section -->
   <section class="section-inquiries" id="inquiries">
     <div class="wrap">
-        <div class="inquiry-card">
-          <div class="inquiry-badge">
-            <span class="inquiry-badge-dot" aria-hidden="true"></span>
-            <span>open to collaboration</span>
-          </div>
-          <h2 class="inquiry-headline">let's build something thoughtful together.</h2>
-          <p class="inquiry-prose">
-            i'm open to full-time product roles, freelance projects, and collaborations. whether it's untangling complex software workflows or hands-on industrial design, i care about working with teams who value craft and solving real problems.
-          </p>
+      <div class="inquiry-card">
+        <div class="inquiry-badge">
+          <span class="inquiry-badge-dot" aria-hidden="true"></span>
+          <span>open to collaboration</span>
+        </div>
+        <h2 class="inquiry-headline">let's build something thoughtful together.</h2>
+        <p class="inquiry-prose">
+          i'm open to full-time product roles, freelance projects, and collaborations. whether it's untangling complex software workflows or hands-on industrial design, i care about working with teams who value craft and solving real problems.
+        </p>
 
         <div class="inquiry-actions">
           <a href="mailto:rbkrishnamurti@gmail.com" class="inquiry-btn">
@@ -236,12 +221,14 @@
     </div>
   </section>
 
+  <!-- Site Footer -->
   <footer class="site-footer">
     <div class="wrap footer-content">
       <div class="footer-channels">
         <a href="https://github.com/naquuuu" target="_blank" rel="noopener noreferrer">github</a>
         <a href="mailto:rbkrishnamurti@gmail.com">email</a>
         <a href="../blog/">notes</a>
+        <a href="../">home</a>
       </div>
       <div class="footer-live-stamp">
         <span>naquuuu.github.io • built with matter and code.</span>

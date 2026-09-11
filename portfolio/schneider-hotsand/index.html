@@ -46,56 +46,311 @@
       </p>
     </div>
 
-    <!-- Closed-Loop Clean Energy Flowchart -->
-    <div class="flowchart-whiteboard-box">
-      <div class="flowchart-board-toolbar">
-        <div class="flowchart-toolbar-left">
-          <span>energy cycle // thermal battery system</span>
+    <!-- Thermodynamic Microgrid System Simulation & Modeling -->
+    <div class="sim-system-box" id="schneider-sim-box">
+      <div class="sim-toolbar">
+        <div class="sim-toolbar-title">
+          <span style="color: var(--accent-crimson);">✦</span>
+          <span>thermodynamic microgrid simulation // archipelagic energy balance</span>
         </div>
-        <div class="flowchart-toolbar-right">
-          <span>indonesian archipelago</span>
+        <div class="sim-mode-group" role="tablist" aria-label="HotSand Simulation Perspectives">
+          <button type="button" class="sim-mode-btn active" data-sim-mode="daytime" role="tab" aria-selected="true">
+            daytime solar charging // 540°c thermal flux
+          </button>
+          <button type="button" class="sim-mode-btn" data-sim-mode="night" role="tab" aria-selected="false">
+            night &amp; monsoon dispatch // stirling microgrid
+          </button>
         </div>
       </div>
 
-      <div class="flowchart-board-canvas scroll-x" style="padding: 1.25rem 0.75rem;">
-        <svg class="flowchart-svg" viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <marker id="arrow-sand" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#E6243A" />
-            </marker>
-          </defs>
+      <div class="sim-canvas-wrap">
+        <!-- View 1: Daytime Solar Thermal Charging & Agricultural Co-Gen -->
+        <div class="sim-canvas-view active scroll-x" data-view="daytime">
+          <svg class="flowchart-svg" viewBox="0 0 860 380" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="solarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.25" />
+                <stop offset="100%" stop-color="#EF4444" stop-opacity="0.1" />
+              </linearGradient>
+              <linearGradient id="sandCoreGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#7F1D1D" stop-opacity="0.9" />
+                <stop offset="50%" stop-color="#DC2626" stop-opacity="0.85" />
+                <stop offset="100%" stop-color="#F59E0B" stop-opacity="0.9" />
+              </linearGradient>
+              <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#F59E0B" />
+              </marker>
+              <marker id="arrow-green-hs" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#34D399" />
+              </marker>
+              <marker id="arrow-blue-hs" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#60A5FA" />
+              </marker>
+            </defs>
 
-          <!-- Step 1: Solar Input -->
-          <rect x="15" y="45" width="135" height="90" rx="6" fill="#1C0609" stroke="#E6243A" stroke-width="1.5" />
-          <text x="82" y="70" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#E6243A" text-anchor="middle">solar pv &amp; thermal</text>
-          <text x="82" y="92" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">excess daytime</text>
-          <text x="82" y="108" font-family="'Open Sans', sans-serif" font-size="9" fill="#D4A5A9" text-anchor="middle">power capture</text>
+            <!-- Grid backdrop lines -->
+            <line x1="20" y1="190" x2="840" y2="190" stroke="#220B10" stroke-width="1" stroke-dasharray="4 6" />
 
-          <path d="M 150 90 L 190 90" stroke="#E6243A" stroke-width="1.5" fill="none" marker-end="url(#arrow-sand)" />
+            <!-- Subsystem 1: Solar PV Capture Field (Left) -->
+            <g transform="translate(25, 40)">
+              <rect x="0" y="0" width="220" height="300" rx="8" fill="#16080B" stroke="#F59E0B" stroke-width="1.5" />
+              <text x="14" y="24" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#F59E0B">01 // EQUATORIAL GENERATION</text>
+              <text x="14" y="44" font-family="'Open Sans', sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">1.2 MWp Bifacial Solar PV</text>
+              <text x="14" y="62" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA">Peak Solar Irradiance: 950 W/m²</text>
 
-          <!-- Step 2: Resistive Heating -->
-          <rect x="200" y="45" width="130" height="90" rx="6" fill="#24080D" stroke="#871622" stroke-width="1.5" />
-          <text x="265" y="70" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#D4A5A9" text-anchor="middle">resistive heater</text>
-          <text x="265" y="92" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">electric-to-heat</text>
-          <text x="265" y="108" font-family="'Open Sans', sans-serif" font-size="9" fill="#D4A5A9" text-anchor="middle">thermal conversion</text>
+              <!-- Solar Array Visual Mini-Cells -->
+              <g transform="translate(14, 75)">
+                <rect x="0" y="0" width="90" height="42" rx="4" fill="#0C2340" stroke="#38BDF8" stroke-width="1" />
+                <line x1="30" y1="0" x2="30" y2="42" stroke="#38BDF8" stroke-width="0.5" stroke-opacity="0.6" />
+                <line x1="60" y1="0" x2="60" y2="42" stroke="#38BDF8" stroke-width="0.5" stroke-opacity="0.6" />
+                <line x1="0" y1="21" x2="90" y2="21" stroke="#38BDF8" stroke-width="0.5" stroke-opacity="0.6" />
 
-          <path d="M 330 90 L 370 90" stroke="#E6243A" stroke-width="1.5" fill="none" marker-end="url(#arrow-sand)" />
+                <rect x="102" y="0" width="90" height="42" rx="4" fill="#0C2340" stroke="#38BDF8" stroke-width="1" />
+                <line x1="132" y1="0" x2="132" y2="42" stroke="#38BDF8" stroke-width="0.5" stroke-opacity="0.6" />
+                <line x1="162" y1="0" x2="162" y2="42" stroke="#38BDF8" stroke-width="0.5" stroke-opacity="0.6" />
+                <line x1="102" y1="21" x2="192" y2="21" stroke="#38BDF8" stroke-width="0.5" stroke-opacity="0.6" />
 
-          <!-- Step 3: Sand Core -->
-          <rect x="380" y="35" width="150" height="110" rx="6" fill="#180508" stroke="#E6243A" stroke-width="1.5" />
-          <text x="455" y="62" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#E6243A" text-anchor="middle">silica sand core</text>
-          <text x="455" y="85" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">500°c+ fluidized bed</text>
-          <text x="455" y="102" font-family="'Open Sans', sans-serif" font-size="9" fill="#D4A5A9" text-anchor="middle">vacuum insulation</text>
-          <text x="455" y="117" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9" text-anchor="middle">0 thermal runaway risk</text>
+                <rect x="0" y="52" width="90" height="42" rx="4" fill="#0C2340" stroke="#38BDF8" stroke-width="1" />
+                <line x1="30" y1="52" x2="30" y2="94" stroke="#38BDF8" stroke-width="0.5" stroke-opacity="0.6" />
+                <line x1="60" y1="52" x2="60" y2="94" stroke="#38BDF8" stroke-width="0.5" stroke-opacity="0.6" />
+                <line x1="0" y1="73" x2="90" y2="73" stroke="#38BDF8" stroke-width="0.5" stroke-opacity="0.6" />
 
-          <path d="M 530 90 L 570 90" stroke="#E6243A" stroke-width="1.5" fill="none" marker-end="url(#arrow-sand)" />
+                <rect x="102" y="52" width="90" height="42" rx="4" fill="#0C2340" stroke="#38BDF8" stroke-width="1" />
+                <line x1="132" y1="52" x2="132" y2="94" stroke="#38BDF8" stroke-width="0.5" stroke-opacity="0.6" />
+                <line x1="162" y1="52" x2="162" y2="94" stroke="#38BDF8" stroke-width="0.5" stroke-opacity="0.6" />
+                <line x1="102" y1="73" x2="192" y2="73" stroke="#38BDF8" stroke-width="0.5" stroke-opacity="0.6" />
+              </g>
 
-          <!-- Step 4: Stirling Generator / Microgrid -->
-          <rect x="580" y="45" width="105" height="90" rx="6" fill="#1C0609" stroke="#871622" stroke-width="1.5" />
-          <text x="632" y="70" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#E6243A" text-anchor="middle">stirling &amp; microgrid</text>
-          <text x="632" y="92" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">ac microgrid</text>
-          <text x="632" y="108" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9" text-anchor="middle">crop drying &amp; power</text>
-        </svg>
+              <!-- Inverter Conversion Specs -->
+              <rect x="14" y="185" width="192" height="100" rx="5" fill="#200B10" stroke="#52121B" stroke-width="1" />
+              <text x="24" y="206" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#F59E0B">DC/DC VOLTAGE BUS</text>
+              <text x="24" y="224" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">1,000V DC Immersion Drive</text>
+              <text x="24" y="242" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9">98.4% solid-state efficiency</text>
+              <text x="24" y="258" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9">Direct resistive loop coupling</text>
+              <text x="24" y="274" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#34D399">✦ 0 inverter clipping loss</text>
+            </g>
+
+            <!-- Flux Connection 1 -> 2 -->
+            <path d="M 245 190 L 305 190" stroke="#F59E0B" stroke-width="3" fill="none" marker-end="url(#arrow-amber)" />
+            <text x="275" y="178" font-family="'Open Sans', sans-serif" font-size="8.5" font-weight="700" fill="#F59E0B" text-anchor="middle">1.15 MW FLUX</text>
+
+            <!-- Subsystem 2: Fluidized Silica Sand Core (Center) -->
+            <g transform="translate(315, 20)">
+              <!-- Vacuum Outer Shell -->
+              <rect x="0" y="0" width="245" height="340" rx="10" fill="#130406" stroke="#871622" stroke-width="2" />
+              <rect x="8" y="8" width="229" height="324" rx="8" fill="#1C0609" stroke="#E6243A" stroke-width="1" stroke-dasharray="4 3" />
+
+              <text x="18" y="28" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#E6243A">02 // SENSIBLE THERMAL CORE</text>
+              <text x="18" y="48" font-family="'Open Sans', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">Fluidized Sand Battery</text>
+              <text x="18" y="66" font-family="'Open Sans', sans-serif" font-size="9" fill="#F87171">SiO₂ Natural Sand Matrix • 2,400 Tonnes</text>
+
+              <!-- Sand Thermal Chamber Graphic -->
+              <rect x="18" y="78" width="209" height="155" rx="6" fill="url(#sandCoreGrad)" stroke="#B91C1C" stroke-width="1" />
+
+              <!-- Fluidization Bubbles & Thermal Convection Vectors -->
+              <circle cx="50" cy="180" r="4" fill="#FEF08A" opacity="0.7" />
+              <circle cx="85" cy="140" r="5" fill="#FEF08A" opacity="0.6" />
+              <circle cx="140" cy="190" r="3.5" fill="#FEF08A" opacity="0.8" />
+              <circle cx="175" cy="130" r="4.5" fill="#FEF08A" opacity="0.7" />
+              <circle cx="110" cy="100" r="6" fill="#FFFFFF" opacity="0.8" />
+
+              <!-- Resistance Heater Coil Graphics -->
+              <path d="M 38 120 L 58 110 L 78 130 L 98 110 L 118 130 L 138 110 L 158 130 L 178 110 L 198 125" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+              <path d="M 38 160 L 58 150 L 78 170 L 98 150 L 118 170 L 138 150 L 158 170 L 178 150 L 198 165" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+
+              <text x="122" y="218" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">540°C OPERATING CORE</text>
+
+              <!-- Technical Sub-Properties -->
+              <g transform="translate(18, 245)">
+                <rect x="0" y="0" width="209" height="78" rx="4" fill="#130406" stroke="#52121B" stroke-width="1" />
+                <text x="10" y="18" font-family="'Open Sans', sans-serif" font-size="8.5" font-weight="700" fill="#E6243A">THERMAL CONTAINMENT SPECS</text>
+                <text x="10" y="34" font-family="'Open Sans', sans-serif" font-size="8" fill="#D4A5A9">• Vacuum-perlite double envelope</text>
+                <text x="10" y="48" font-family="'Open Sans', sans-serif" font-size="8" fill="#D4A5A9">• Standing thermal loss: &lt; 1.2% / 24 hrs</text>
+                <text x="10" y="62" font-family="'Open Sans', sans-serif" font-size="8" fill="#34D399">• Zero chemical fire risk (non-combustible)</text>
+              </g>
+            </g>
+
+            <!-- Upper Vector: Direct Thermal Co-Gen to Kiln -->
+            <path d="M 560 100 C 600 100 610 80 635 80" stroke="#34D399" stroke-width="2" fill="none" marker-end="url(#arrow-green-hs)" />
+            <text x="598" y="70" font-family="'Open Sans', sans-serif" font-size="8" font-weight="700" fill="#34D399" text-anchor="middle">75°C DRY AIR</text>
+
+            <!-- Subsystem 3A: Agricultural Drying Kilns (Top Right) -->
+            <g transform="translate(645, 30)">
+              <rect x="0" y="0" width="190" height="150" rx="8" fill="#16080B" stroke="#34D399" stroke-width="1.5" />
+              <text x="12" y="22" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#34D399">03A // AGRICULTURAL VALUE</text>
+              <text x="12" y="40" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Crop Dehydration Kiln</text>
+              <text x="12" y="56" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#A1A1AA">Direct Clean Thermal Air Exchange</text>
+
+              <rect x="12" y="68" width="166" height="70" rx="4" fill="#1A0A0E" stroke="#2D1115" stroke-width="1" />
+              <text x="20" y="86" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9">• Copra, nutmeg &amp; clove processing</text>
+              <text x="20" y="102" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9">• Replaces dirty diesel/wood burners</text>
+              <text x="20" y="118" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#34D399">• Preserves 98% harvest market value</text>
+            </g>
+
+            <!-- Lower Vector: Village Microgrid Baseload Arbitrage -->
+            <path d="M 560 270 C 600 270 610 275 635 275" stroke="#60A5FA" stroke-width="2" fill="none" marker-end="url(#arrow-blue-hs)" />
+            <text x="598" y="260" font-family="'Open Sans', sans-serif" font-size="8" font-weight="700" fill="#60A5FA" text-anchor="middle">SURPLUS MGMT</text>
+
+            <!-- Subsystem 3B: Dynamic Power Arbitrage (Bottom Right) -->
+            <g transform="translate(645, 200)">
+              <rect x="0" y="0" width="190" height="150" rx="8" fill="#16080B" stroke="#60A5FA" stroke-width="1.5" />
+              <text x="12" y="22" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#60A5FA">03B // GRID ARBITRAGE</text>
+              <text x="12" y="40" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Dynamic Baseload Balancing</text>
+              <text x="12" y="56" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#A1A1AA">Automatic Island Surplus Shunt</text>
+
+              <rect x="12" y="68" width="166" height="70" rx="4" fill="#1A0A0E" stroke="#2D1115" stroke-width="1" />
+              <text x="20" y="86" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9">• Village morning demand satisfied</text>
+              <text x="20" y="102" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9">• Excess solar routed to thermal sand</text>
+              <text x="20" y="118" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#60A5FA">• $0.04/kWh levelized storage cost</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- View 2: Night & Monsoon Storm Dispatch Simulation -->
+        <div class="sim-canvas-view scroll-x" data-view="night">
+          <svg class="flowchart-svg" viewBox="0 0 860 380" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow-crim-hs" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#E6243A" />
+              </marker>
+              <marker id="arrow-cyan-hs" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#38BDF8" />
+              </marker>
+              <marker id="arrow-emerald-hs" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#34D399" />
+              </marker>
+            </defs>
+
+            <!-- Background Grid line -->
+            <line x1="20" y1="190" x2="840" y2="190" stroke="#220B10" stroke-width="1" stroke-dasharray="4 6" />
+
+            <!-- Subsystem 1: Ambient Monsoon Storm (Left) -->
+            <g transform="translate(25, 40)">
+              <rect x="0" y="0" width="220" height="300" rx="8" fill="#11070A" stroke="#64748B" stroke-width="1.5" />
+              <text x="14" y="24" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#94A3B8">01 // MONSOON RESILIENCE</text>
+              <text x="14" y="44" font-family="'Open Sans', sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">Torrential Tropical Storm</text>
+              <text x="14" y="62" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA">0 W/m² Solar Input • 95% Humidity</text>
+
+              <!-- Rain Vectors Visual -->
+              <g transform="translate(14, 75)">
+                <rect x="0" y="0" width="192" height="95" rx="5" fill="#150E14" stroke="#334155" stroke-width="1" />
+                <path d="M 30 15 L 18 45 M 65 10 L 53 40 M 100 18 L 88 48 M 140 12 L 128 42 M 175 20 L 163 50" stroke="#60A5FA" stroke-width="1.5" stroke-dasharray="4 4" />
+                <path d="M 45 55 L 33 85 M 80 50 L 68 80 M 120 58 L 108 88 M 160 52 L 148 82" stroke="#60A5FA" stroke-width="1.5" stroke-dasharray="4 4" />
+              </g>
+
+              <rect x="14" y="185" width="192" height="100" rx="5" fill="#1C0A0F" stroke="#52121B" stroke-width="1" />
+              <text x="24" y="206" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#F87171">BATTERY FAILURE AUDIT</text>
+              <text x="24" y="224" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9">• Lithium cells: rapid tropical fade</text>
+              <text x="24" y="240" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9">• Moisture &amp; salt corrosion hazard</text>
+              <text x="24" y="256" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#34D399">• Sand storage: immune to moisture</text>
+              <text x="24" y="272" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#34D399">✦ 72+ hrs continuous autonomy</text>
+            </g>
+
+            <!-- Vector 1 -> 2: Heat Extraction Pipe -->
+            <path d="M 245 190 L 305 190" stroke="#E6243A" stroke-width="3" fill="none" marker-end="url(#arrow-crim-hs)" />
+            <text x="275" y="178" font-family="'Open Sans', sans-serif" font-size="8.5" font-weight="700" fill="#E6243A" text-anchor="middle">500°C ENTHALPY</text>
+
+            <!-- Subsystem 2: Sand Core Enthalpy Discharge (Center) -->
+            <g transform="translate(315, 20)">
+              <rect x="0" y="0" width="245" height="340" rx="10" fill="#130406" stroke="#871622" stroke-width="2" />
+              <rect x="8" y="8" width="229" height="324" rx="8" fill="#1C0609" stroke="#E6243A" stroke-width="1" stroke-dasharray="4 3" />
+
+              <text x="18" y="28" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#E6243A">02 // DISCHARGE MANIFOLD</text>
+              <text x="18" y="48" font-family="'Open Sans', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">Controlled Heat Transfer</text>
+              <text x="18" y="66" font-family="'Open Sans', sans-serif" font-size="9" fill="#F87171">500°C → 320°C Stored Thermal Working Head</text>
+
+              <!-- Discharge Coils & Working Fluid Circulation -->
+              <rect x="18" y="78" width="209" height="155" rx="6" fill="#2E0A10" stroke="#B91C1C" stroke-width="1" />
+
+              <!-- Closed loop helium / air tubes -->
+              <path d="M 40 95 C 190 95 190 130 40 130 C 190 130 190 165 40 165 C 190 165 190 200 40 200" fill="none" stroke="#F59E0B" stroke-width="2.5" />
+              <path d="M 60 105 L 180 105 M 60 140 L 180 140 M 60 175 L 180 175" fill="none" stroke="#EF4444" stroke-width="1" stroke-dasharray="3 3" />
+
+              <text x="122" y="222" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">CLOSED-CYCLE HELIUM LOOP</text>
+
+              <!-- Technical Sub-Properties -->
+              <g transform="translate(18, 245)">
+                <rect x="0" y="0" width="209" height="78" rx="4" fill="#130406" stroke="#52121B" stroke-width="1" />
+                <text x="10" y="18" font-family="'Open Sans', sans-serif" font-size="8.5" font-weight="700" fill="#E6243A">THERMODYNAMIC CYCLE</text>
+                <text x="10" y="34" font-family="'Open Sans', sans-serif" font-size="8" fill="#D4A5A9">• High Carnot thermal gradient</text>
+                <text x="10" y="48" font-family="'Open Sans', sans-serif" font-size="8" fill="#D4A5A9">• 30+ years service life without wear</text>
+                <text x="10" y="62" font-family="'Open Sans', sans-serif" font-size="8" fill="#34D399">• Zero harmful waste or battery disposal</text>
+              </g>
+            </g>
+
+            <!-- Vector 2 -> 3A: Stirling Mechanical Power Flow -->
+            <path d="M 560 100 C 595 100 605 85 635 85" stroke="#E6243A" stroke-width="2" fill="none" marker-end="url(#arrow-crim-hs)" />
+            <text x="598" y="75" font-family="'Open Sans', sans-serif" font-size="8" font-weight="700" fill="#E6243A" text-anchor="middle">HEAT TO SHAFT</text>
+
+            <!-- Subsystem 3A: Stirling Engine Generator (Top Right) -->
+            <g transform="translate(645, 30)">
+              <rect x="0" y="0" width="190" height="150" rx="8" fill="#16080B" stroke="#E6243A" stroke-width="1.5" />
+              <text x="12" y="22" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#E6243A">03 // POWER GENERATION</text>
+              <text x="12" y="40" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Stirling Engine Power Block</text>
+              <text x="12" y="56" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#A1A1AA">Closed External Expansion Engine</text>
+
+              <rect x="12" y="68" width="166" height="70" rx="4" fill="#1A0A0E" stroke="#2D1115" stroke-width="1" />
+              <text x="20" y="86" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9">• Dual-opposed helium piston stroke</text>
+              <text x="20" y="102" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D4A5A9">• Permanent magnet alternator drive</text>
+              <text x="20" y="118" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#34D399">• 230V / 50Hz clean sinusoidal AC</text>
+            </g>
+
+            <!-- Vector 3A -> 4: AC Island Grid Output -->
+            <path d="M 740 180 L 740 195" stroke="#38BDF8" stroke-width="2" fill="none" marker-end="url(#arrow-cyan-hs)" />
+
+            <!-- Subsystem 3B: Critical Island Community Loads (Bottom Right) -->
+            <g transform="translate(645, 200)">
+              <rect x="0" y="0" width="190" height="150" rx="8" fill="#16080B" stroke="#38BDF8" stroke-width="1.5" />
+              <text x="12" y="22" font-family="'Open Sans', sans-serif" font-size="9" font-weight="700" fill="#38BDF8">04 // ARCHIPELAGIC GRID</text>
+              <text x="12" y="40" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Critical Village Microgrid</text>
+              <text x="12" y="56" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#A1A1AA">Non-Negotiable Island Services</text>
+
+              <rect x="12" y="68" width="166" height="70" rx="4" fill="#1A0A0E" stroke="#2D1115" stroke-width="1" />
+              <text x="20" y="86" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#38BDF8">• 4°C Health Clinic vaccine storage</text>
+              <text x="20" y="102" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#38BDF8">• Desalination fresh water pump</text>
+              <text x="20" y="118" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#34D399">• 0 liters diesel fuel consumed</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Live Simulation Telemetry Panels -->
+      <div class="sim-telemetry-grid" data-telemetry="daytime">
+        <div class="sim-metric-card">
+          <div class="sim-metric-val metric-accent">540°C</div>
+          <div class="sim-metric-label">Sand Core Sensible Temp</div>
+        </div>
+        <div class="sim-metric-card">
+          <div class="sim-metric-val metric-glow">1.2 MWp</div>
+          <div class="sim-metric-label">Daytime Solar PV Peak</div>
+        </div>
+        <div class="sim-metric-card">
+          <div class="sim-metric-val metric-green">85%</div>
+          <div class="sim-metric-label">Co-Gen Total System Eff.</div>
+        </div>
+        <div class="sim-metric-card">
+          <div class="sim-metric-val">$0.04 / kWh</div>
+          <div class="sim-metric-label">Levelized Storage Cost</div>
+        </div>
+      </div>
+
+      <div class="sim-telemetry-grid" data-telemetry="night" style="display: none;">
+        <div class="sim-metric-card">
+          <div class="sim-metric-val metric-glow">72+ hrs</div>
+          <div class="sim-metric-label">Monsoon Autonomy Duration</div>
+        </div>
+        <div class="sim-metric-card">
+          <div class="sim-metric-val metric-green">230V / 50Hz</div>
+          <div class="sim-metric-label">Stabilized AC Island Output</div>
+        </div>
+        <div class="sim-metric-card">
+          <div class="sim-metric-val metric-accent">100%</div>
+          <div class="sim-metric-label">Diesel Generator Offset</div>
+        </div>
+        <div class="sim-metric-card">
+          <div class="sim-metric-val">30+ years</div>
+          <div class="sim-metric-label">Zero Chemical Degradation</div>
+        </div>
       </div>
     </div>
 
@@ -195,5 +450,6 @@
     </div>
   </footer>
 
+  <script src="../../assets/js/main.js"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@
   <title>Essays &amp; Systems Thinking: Krishna (naquuuu)</title>
   <meta name="description" content="Systems architecture, product thinking, and engineering frameworks by Ramadhana Bhanuharya Krishnamurti (naquuuu).">
   <link rel="canonical" href="https://naquuuu.github.io/blog/">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260911v">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
   <link rel="alternate icon" href="../favicon.ico">
 </head>
@@ -29,90 +29,136 @@
   </header>
 
   <!-- Main Content -->
-  <main class="wrap" style="padding-top: 2rem; padding-bottom: 4rem;">
+  <main class="wrap archive-container">
 
     <div class="section-header">
       <h1 class="section-title">essays &amp; notes</h1>
       <span class="section-sub">archive.log</span>
     </div>
 
-    <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.95rem; line-height: 1.7;">
+    <p class="archive-intro">
       notes on building software, physical products, music, and everyday design. written simply based on things i learn while building products.
     </p>
 
-    <!-- Essay List -->
+    <!-- Essay Theme Filter Bar -->
+    <div class="essay-filter-bar" role="toolbar" aria-label="Filter essays by theme">
+      <button type="button" class="essay-filter-btn active" data-filter="all" aria-pressed="true">
+        <span>all notes</span>
+        <span class="filter-count">[ 04 ]</span>
+      </button>
+      <button type="button" class="essay-filter-btn" data-filter="systems" aria-pressed="false">
+        <span class="filter-dot systems-dot" aria-hidden="true"></span>
+        <span>systems &amp; matter (white theme)</span>
+        <span class="filter-count">[ 02 ]</span>
+      </button>
+      <button type="button" class="essay-filter-btn" data-filter="culture" aria-pressed="false">
+        <span class="filter-dot culture-dot" aria-hidden="true"></span>
+        <span>culture &amp; taste (red theme)</span>
+        <span class="filter-count">[ 02 ]</span>
+      </button>
+    </div>
+
+    <!-- Essay List (Sorted Chronologically: Latest First) -->
     <div class="essay-grid">
-      <!-- Post 2 -->
-      <a href="./reverse-engineering-client-binaries/" class="essay-card">
-        <div class="essay-meta">
-          <time datetime="2026-09-09">sep 2026</time>
-          <span>•</span>
-          <span>9 min read</span>
-          <span>•</span>
-          <span class="hero-badge" style="font-size: 0.68rem; padding: 2px 6px;">design systems</span>
-          <span class="hero-badge hero-badge-art" style="font-size: 0.68rem; padding: 2px 6px;">reverse engineering</span>
-        </div>
-        <h2 class="essay-title">
-          reverse-engineering client binaries: extracting ground-truth design tokens from mobile apks
-        </h2>
-        <p class="essay-excerpt">
-          how inspecting compiled Android APKs helps eliminate design drift between Figma and production code, making it fast and easy to build interactive prototypes.
-        </p>
-      </a>
+      <!-- Post 4: Sep 11, 2026 (Culture / Red Theme) -->
+      <article class="essay-card" data-theme="culture">
+        <a href="./smart-tailoring-as-kinetic-infrastructure/" class="essay-card-link">
+          <div class="essay-meta">
+            <span class="essay-theme-pill theme-culture">
+              <span class="essay-theme-dot culture-dot" aria-hidden="true"></span>
+              <span>culture &amp; taste</span>
+            </span>
+            <span class="meta-dot">•</span>
+            <time datetime="2026-09-11">sep 11, 2026</time>
+            <span class="meta-dot">•</span>
+            <span>6 min read</span>
+            <span class="meta-dot">•</span>
+            <span class="essay-tag-pill">style essay</span>
+            <span class="essay-tag-pill">everyday design</span>
+          </div>
+          <h2 class="essay-title">
+            smart tailoring for everyday life: clothes for city walking
+          </h2>
+          <p class="essay-excerpt">
+            why relaxed pleats, breathable textiles, and good shoes make navigating humid cities comfortable and effortless.
+          </p>
+        </a>
+      </article>
 
-      <!-- Post 1 -->
-      <a href="./building-an-autonomous-product-operating-system/" class="essay-card">
-        <div class="essay-meta">
-          <time datetime="2026-09-09">sep 2026</time>
-          <span>•</span>
-          <span>7 min read</span>
-          <span>•</span>
-          <span class="hero-badge" style="font-size: 0.68rem; padding: 2px 6px;">systems architecture</span>
-          <span class="hero-badge hero-badge-art" style="font-size: 0.68rem; padding: 2px 6px;">workspace design</span>
-        </div>
-        <h2 class="essay-title">
-          building an autonomous product operating system: reliable enterprise specifications with ai agents
-        </h2>
-        <p class="essay-excerpt">
-          why simple chatbot prompts fail for complex enterprise product requirements, and how a structured product operations workspace helps teams write clear, verified specifications.
-        </p>
-      </a>
+      <!-- Post 3: Sep 11, 2026 (Culture / Red Theme) -->
+      <article class="essay-card" data-theme="culture">
+        <a href="./the-geometry-of-shibuya-kei/" class="essay-card-link">
+          <div class="essay-meta">
+            <span class="essay-theme-pill theme-culture">
+              <span class="essay-theme-dot culture-dot" aria-hidden="true"></span>
+              <span>culture &amp; taste</span>
+            </span>
+            <span class="meta-dot">•</span>
+            <time datetime="2026-09-11">sep 11, 2026</time>
+            <span class="meta-dot">•</span>
+            <span>5 min read</span>
+            <span class="meta-dot">•</span>
+            <span class="essay-tag-pill">music essay</span>
+            <span class="essay-tag-pill">shibuya-kei</span>
+          </div>
+          <h2 class="essay-title">
+            the geometry of shibuya-kei: analog warmth in digital workspaces
+          </h2>
+          <p class="essay-excerpt">
+            why cornelius, pizzicato five, and 90s tokyo sampling form an inspiring soundtrack for deep focus and problem-solving.
+          </p>
+        </a>
+      </article>
 
-      <!-- Post 3 -->
-      <a href="./the-geometry-of-shibuya-kei/" class="essay-card">
-        <div class="essay-meta">
-          <time datetime="2026-09-11">sep 2026</time>
-          <span>•</span>
-          <span>5 min read</span>
-          <span>•</span>
-          <span class="hero-badge" style="font-size: 0.68rem; padding: 2px 6px;">music essay</span>
-          <span class="hero-badge hero-badge-art" style="font-size: 0.68rem; padding: 2px 6px;">shibuya-kei</span>
-        </div>
-        <h2 class="essay-title">
-          the geometry of shibuya-kei: analog warmth in digital workspaces
-        </h2>
-        <p class="essay-excerpt">
-          why cornelius, pizzicato five, and 90s tokyo sampling form an inspiring soundtrack for deep focus and problem-solving.
-        </p>
-      </a>
+      <!-- Post 2: Sep 10, 2026 (Systems / White Theme) -->
+      <article class="essay-card" data-theme="systems">
+        <a href="./reverse-engineering-client-binaries/" class="essay-card-link">
+          <div class="essay-meta">
+            <span class="essay-theme-pill theme-systems">
+              <span class="essay-theme-dot systems-dot" aria-hidden="true"></span>
+              <span>systems &amp; matter</span>
+            </span>
+            <span class="meta-dot">•</span>
+            <time datetime="2026-09-10">sep 10, 2026</time>
+            <span class="meta-dot">•</span>
+            <span>9 min read</span>
+            <span class="meta-dot">•</span>
+            <span class="essay-tag-pill">design systems</span>
+            <span class="essay-tag-pill">reverse engineering</span>
+          </div>
+          <h2 class="essay-title">
+            reverse-engineering client binaries: extracting ground-truth design tokens from mobile apks
+          </h2>
+          <p class="essay-excerpt">
+            how inspecting compiled Android APKs helps eliminate design drift between Figma and production code, making it fast and easy to build interactive prototypes.
+          </p>
+        </a>
+      </article>
 
-      <!-- Post 4 -->
-      <a href="./smart-tailoring-as-kinetic-infrastructure/" class="essay-card">
-        <div class="essay-meta">
-          <time datetime="2026-09-11">sep 2026</time>
-          <span>•</span>
-          <span>6 min read</span>
-          <span>•</span>
-          <span class="hero-badge" style="font-size: 0.68rem; padding: 2px 6px;">style essay</span>
-          <span class="hero-badge hero-badge-art" style="font-size: 0.68rem; padding: 2px 6px;">everyday design</span>
-        </div>
-        <h2 class="essay-title">
-          smart tailoring for everyday life: clothes for city walking
-        </h2>
-        <p class="essay-excerpt">
-          why relaxed pleats, breathable textiles, and good shoes make navigating humid cities comfortable and effortless.
-        </p>
-      </a>
+      <!-- Post 1: Sep 09, 2026 (Systems / White Theme) -->
+      <article class="essay-card" data-theme="systems">
+        <a href="./building-an-autonomous-product-operating-system/" class="essay-card-link">
+          <div class="essay-meta">
+            <span class="essay-theme-pill theme-systems">
+              <span class="essay-theme-dot systems-dot" aria-hidden="true"></span>
+              <span>systems &amp; matter</span>
+            </span>
+            <span class="meta-dot">•</span>
+            <time datetime="2026-09-09">sep 09, 2026</time>
+            <span class="meta-dot">•</span>
+            <span>7 min read</span>
+            <span class="meta-dot">•</span>
+            <span class="essay-tag-pill">systems architecture</span>
+            <span class="essay-tag-pill">workspace design</span>
+          </div>
+          <h2 class="essay-title">
+            building an autonomous product operating system: reliable enterprise specifications with ai agents
+          </h2>
+          <p class="essay-excerpt">
+            why simple chatbot prompts fail for complex enterprise product requirements, and how a structured product operations workspace helps teams write clear, verified specifications.
+          </p>
+        </a>
+      </article>
     </div>
 
   </main>
