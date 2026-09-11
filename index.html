@@ -6,7 +6,7 @@
   <title>krishna (naquuuu) • product manager</title>
   <meta name="description" content="Personal portfolio and notes of Krishna (naquuuu). Product manager based in Jakarta, building software and everyday physical design.">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
-  <link rel="stylesheet" href="./assets/css/style.css?v=20260911z">
+  <link rel="stylesheet" href="./assets/css/style.css?v=20260911ca">
 </head>
 <body data-mode="systems">
 
@@ -631,12 +631,44 @@
                     </div>
                   </div>
 
+                  <!-- Spotify Carousel Navigation Bar -->
+                  <div class="spotify-carousel-header">
+                    <div class="spotify-carousel-counter">
+                      <span class="spotify-carousel-badge">curated archive</span>
+                      <span class="spotify-carousel-index" id="spotify-carousel-index">01 / 04</span>
+                    </div>
+                    <div class="spotify-carousel-controls">
+                      <button type="button" class="spotify-nav-arrow" id="spotify-prev-btn" aria-label="Previous playlist">‹</button>
+                      <button type="button" class="spotify-nav-arrow" id="spotify-next-btn" aria-label="Next playlist">›</button>
+                    </div>
+                  </div>
+
+                  <!-- Spotify Carousel Quick Tabs -->
+                  <div class="spotify-carousel-tabs" role="tablist" aria-label="Curated Playlists">
+                    <button type="button" class="spotify-carousel-tab active" data-playlist-idx="0" role="tab" aria-selected="true">
+                      <span class="spotify-tab-num">01</span>
+                      <span class="spotify-tab-name">shibuya-kei</span>
+                    </button>
+                    <button type="button" class="spotify-carousel-tab" data-playlist-idx="1" role="tab" aria-selected="false">
+                      <span class="spotify-tab-num">02</span>
+                      <span class="spotify-tab-name">pop mega raya</span>
+                    </button>
+                    <button type="button" class="spotify-carousel-tab" data-playlist-idx="2" role="tab" aria-selected="false">
+                      <span class="spotify-tab-num">03</span>
+                      <span class="spotify-tab-name">trop chic</span>
+                    </button>
+                    <button type="button" class="spotify-carousel-tab" data-playlist-idx="3" role="tab" aria-selected="false">
+                      <span class="spotify-tab-num">04</span>
+                      <span class="spotify-tab-name">zetaa</span>
+                    </button>
+                  </div>
+
                   <div class="culture-card-header">
                     <span class="culture-card-tag">02 // music playlist</span>
                     <span class="culture-card-domain">[ @naquuuu ]</span>
                   </div>
-                  <h3 class="culture-card-title">shibuya-kei, city pop, latin jazz &amp; bossa nova</h3>
-                  <p class="culture-card-prose">
+                  <h3 class="culture-card-title" id="spotify-playlist-title">shibuya-kei, city pop, latin jazz &amp; bossa nova</h3>
+                  <p class="culture-card-prose" id="spotify-playlist-prose">
                     my personal listening playlist on spotify: a mix of 90s tokyo shibuya-kei, japanese city pop, latin jazz, and bossa nova. rhythm and analog warmth that i listen to during deep work and focus.
                   </p>
 
@@ -644,36 +676,42 @@
                   <div class="spotify-direction-grid">
                     <div class="spotify-direction-item">
                       <span class="spotify-direction-label">direction:</span>
-                      <span class="spotify-direction-val">90s tokyo shibuya-kei, bossa nova chords, analog rhodes &amp; acoustic jazz sampling</span>
+                      <span class="spotify-direction-val" id="spotify-direction-val">90s tokyo shibuya-kei, bossa nova chords, analog rhodes &amp; acoustic jazz sampling</span>
                     </div>
                     <div class="spotify-direction-item">
                       <span class="spotify-direction-label">tempo:</span>
-                      <span class="spotify-direction-val">buoyant, medium-tempo rhythm for sustained focus, writing specs, and deep problem solving</span>
+                      <span class="spotify-direction-val" id="spotify-tempo-val">buoyant, medium-tempo rhythm for sustained focus, writing specs, and deep problem solving</span>
                     </div>
                     <div class="spotify-direction-item">
                       <span class="spotify-direction-label">artists:</span>
-                      <span class="spotify-direction-val">cornelius, pizzicato five, lamp, towa tei, marcos valle &amp; contemporary indie jazz</span>
+                      <span class="spotify-direction-val" id="spotify-artists-val">cornelius, pizzicato five, lamp, towa tei, marcos valle &amp; contemporary indie jazz</span>
                     </div>
                   </div>
                 </div>
 
                 <!-- Spotify Player Media Column (Half Embed) -->
                 <div class="spotify-media-col">
-                  <div class="spotify-player-container">
+                  <div class="spotify-player-container" id="spotify-player-container">
                     <iframe id="spotify-embed-iframe" src="https://open.spotify.com/embed/playlist/2HWdPGCLLFI87mBu806kip?utm_source=generator&amp;theme=0&amp;si=da6288fc6fc7457a" class="spotify-player-frame" width="100%" height="450" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Curated playlist by Krishna (naquuuu)"></iframe>
+                  </div>
+                  <div class="spotify-media-indicators" aria-hidden="true">
+                    <span class="spotify-indicator-dot active" data-dot-idx="0"></span>
+                    <span class="spotify-indicator-dot" data-dot-idx="1"></span>
+                    <span class="spotify-indicator-dot" data-dot-idx="2"></span>
+                    <span class="spotify-indicator-dot" data-dot-idx="3"></span>
                   </div>
                 </div>
 
                 <!-- Direction Links & Curated Tags -->
                 <div class="spotify-footer-col">
-                  <div class="spotify-card-pills">
+                  <div class="spotify-card-pills" id="spotify-card-pills">
                     <span class="spotify-pill">shibuya-kei</span>
                     <span class="spotify-pill">bossa nova</span>
                     <span class="spotify-pill">latin jazz</span>
                     <span class="spotify-pill">analog warmth</span>
                     <span class="spotify-pill">deep focus</span>
                   </div>
-                  <div class="spotify-card-links">
+                  <div class="spotify-card-links" id="spotify-card-links">
                     <a href="./blog/the-geometry-of-shibuya-kei/" class="dossier-link">
                       read music essay ↗
                     </a>
@@ -834,6 +872,6 @@
     </div>
   </nav>
 
-  <script src="./assets/js/main.js?v=20260911z"></script>
+  <script src="./assets/js/main.js?v=20260911ca"></script>
 </body>
 </html>

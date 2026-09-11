@@ -468,25 +468,199 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ===========================================================================
-  // 4. Spotify Embed Coordination (Halts Main Audio when Spotify Plays)
-  //    Custom Playlist: 2HWdPGCLLFI87mBu806kip
+  // 4. Spotify Embed & Curated Playlists Carousel Coordination
+  //    (Halts Main Audio when Spotify Plays; Multi-Playlist Carousel)
   // ===========================================================================
+  const SPOTIFY_PLAYLISTS = [
+    {
+      id: '2HWdPGCLLFI87mBu806kip',
+      name: 'shibuya-kei',
+      title: 'shibuya-kei, city pop, latin jazz & bossa nova',
+      prose: 'my personal listening playlist on spotify: a mix of 90s tokyo shibuya-kei, japanese city pop, latin jazz, and bossa nova. rhythm and analog warmth that i listen to during deep work and focus.',
+      direction: '90s tokyo shibuya-kei, bossa nova chords, analog rhodes & acoustic jazz sampling',
+      tempo: 'buoyant, medium-tempo rhythm for sustained focus, writing specs, and deep problem solving',
+      artists: 'cornelius, pizzicato five, lamp, towa tei, marcos valle & contemporary indie jazz',
+      pills: ['shibuya-kei', 'bossa nova', 'latin jazz', 'analog warmth', 'deep focus'],
+      essayLink: './blog/the-geometry-of-shibuya-kei/',
+      spotifyUrl: 'https://open.spotify.com/playlist/2HWdPGCLLFI87mBu806kip?si=da6288fc6fc7457a',
+      embedDesktop: 'https://open.spotify.com/embed/playlist/2HWdPGCLLFI87mBu806kip?utm_source=generator&theme=0&si=da6288fc6fc7457a',
+      embedMobile: 'https://open.spotify.com/embed/playlist/2HWdPGCLLFI87mBu806kip?utm_source=generator&theme=0&si=6ce925a120964aa9'
+    },
+    {
+      id: '4wKJqsG3yNAEl47lWPc3Et',
+      name: 'pop mega raya',
+      title: 'pop mega raya',
+      prose: 'nostalgic indonesian pop, celebratory melodies, and retro disco rhythms. vibrant brass sections and warm harmonies that drive high-energy creative sessions.',
+      direction: 'classic indonesian pop, retro disco groove, lively brass & celebratory melodies',
+      tempo: 'upbeat, high-energy momentum for dynamic creative sprints and joyful listening',
+      artists: 'chrisye, guruh gipsy, vira talisa, fariz rm & evergreen indonesian groove',
+      pills: ['pop mega raya', 'indonesian pop', 'retro groove', 'festive brass', 'high energy'],
+      essayLink: null,
+      spotifyUrl: 'https://open.spotify.com/playlist/4wKJqsG3yNAEl47lWPc3Et?si=039d4b675b194de9',
+      embedDesktop: 'https://open.spotify.com/embed/playlist/4wKJqsG3yNAEl47lWPc3Et?utm_source=generator&theme=0&si=039d4b675b194de9',
+      embedMobile: 'https://open.spotify.com/embed/playlist/4wKJqsG3yNAEl47lWPc3Et?utm_source=generator&theme=0&si=039d4b675b194de9'
+    },
+    {
+      id: '5rMH1EaSOENPgWTZf0sysT',
+      name: 'trop chic',
+      title: 'trop chic pour pleurer',
+      prose: 'french touch, sophisticated nu-disco, and melancholic synth-pop. elegant basslines and cinematic dancefloor textures curated for late-night building and aesthetic flow.',
+      direction: 'french pop, nu-disco basslines, chic melancholia & filtered analog synths',
+      tempo: 'hypnotic mid-tempo pulse for fluid architectural thinking and aesthetic momentum',
+      artists: "paradis, l'impératrice, polo & pan, sébastien tellier & phoenix",
+      pills: ['french touch', 'nu-disco', 'synth-pop', 'chic groove', 'melancholic dance'],
+      essayLink: null,
+      spotifyUrl: 'https://open.spotify.com/playlist/5rMH1EaSOENPgWTZf0sysT?si=bf9f082bbe5e42ce',
+      embedDesktop: 'https://open.spotify.com/embed/playlist/5rMH1EaSOENPgWTZf0sysT?utm_source=generator&theme=0&si=bf9f082bbe5e42ce',
+      embedMobile: 'https://open.spotify.com/embed/playlist/5rMH1EaSOENPgWTZf0sysT?utm_source=generator&theme=0&si=bf9f082bbe5e42ce'
+    },
+    {
+      id: '6x6WTV9mBXwESfDOd28v74',
+      name: 'zetaa',
+      title: 'zetaa',
+      prose: "let's go to the space: ambient soundscapes, cosmic modular synths, and downtempo electronic exploration for immersive deep-focus problem solving.",
+      direction: 'space ambient, modular synth pulses, cosmic reverbs & cinematic downtempo',
+      tempo: 'slow, floating atmospheric rhythm for late-night architecture and cognitive immersion',
+      artists: 'brian eno, vangelis, tycho, boards of canada & space-age synthesists',
+      pills: ['space ambient', 'downtempo', 'modular synths', 'cosmic soundscape', 'deep focus'],
+      essayLink: null,
+      spotifyUrl: 'https://open.spotify.com/playlist/6x6WTV9mBXwESfDOd28v74?si=7dfcba9260b947f2',
+      embedDesktop: 'https://open.spotify.com/embed/playlist/6x6WTV9mBXwESfDOd28v74?utm_source=generator&theme=0&si=7dfcba9260b947f2',
+      embedMobile: 'https://open.spotify.com/embed/playlist/6x6WTV9mBXwESfDOd28v74?utm_source=generator&theme=0&si=7dfcba9260b947f2'
+    }
+  ];
+
+  let currentSpotifyIdx = 0;
   const spotifyIframe = document.getElementById('spotify-embed-iframe');
+
+  function setSpotifyPlaylist(index) {
+    if (index < 0) index = SPOTIFY_PLAYLISTS.length - 1;
+    if (index >= SPOTIFY_PLAYLISTS.length) index = 0;
+    currentSpotifyIdx = index;
+
+    const playlist = SPOTIFY_PLAYLISTS[index];
+    const isMobile = window.innerWidth <= 768;
+    const targetSrc = isMobile ? playlist.embedMobile : playlist.embedDesktop;
+
+    if (spotifyIframe) {
+      spotifyIframe.style.opacity = '0';
+      setTimeout(() => {
+        spotifyIframe.setAttribute('src', targetSrc);
+        spotifyIframe.style.opacity = '1';
+      }, 150);
+    }
+
+    const indexEl = document.getElementById('spotify-carousel-index');
+    if (indexEl) {
+      indexEl.textContent = `0${index + 1} / 0${SPOTIFY_PLAYLISTS.length}`;
+    }
+
+    document.querySelectorAll('.spotify-carousel-tab').forEach((tab, i) => {
+      tab.classList.toggle('active', i === index);
+      tab.setAttribute('aria-selected', i === index ? 'true' : 'false');
+    });
+
+    document.querySelectorAll('.spotify-indicator-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+
+    const titleEl = document.getElementById('spotify-playlist-title');
+    if (titleEl) titleEl.textContent = playlist.title;
+
+    const proseEl = document.getElementById('spotify-playlist-prose');
+    if (proseEl) proseEl.textContent = playlist.prose;
+
+    const directionEl = document.getElementById('spotify-direction-val');
+    if (directionEl) directionEl.textContent = playlist.direction;
+
+    const tempoEl = document.getElementById('spotify-tempo-val');
+    if (tempoEl) tempoEl.textContent = playlist.tempo;
+
+    const artistsEl = document.getElementById('spotify-artists-val');
+    if (artistsEl) artistsEl.textContent = playlist.artists;
+
+    const pillsContainer = document.getElementById('spotify-card-pills');
+    if (pillsContainer) {
+      pillsContainer.innerHTML = playlist.pills.map(pill => `<span class="spotify-pill">${pill}</span>`).join('');
+    }
+
+    const linksContainer = document.getElementById('spotify-card-links');
+    if (linksContainer) {
+      let html = '';
+      if (playlist.essayLink) {
+        html += `<a href="${playlist.essayLink}" class="dossier-link">read music essay ↗</a>\n`;
+      }
+      html += `<a href="${playlist.spotifyUrl}" target="_blank" rel="noopener noreferrer" class="dossier-link">open playlist on spotify ↗</a>`;
+      linksContainer.innerHTML = html;
+    }
+  }
+
   function syncSpotifyEmbedResponsive() {
     if (!spotifyIframe) return;
+    const playlist = SPOTIFY_PLAYLISTS[currentSpotifyIdx];
+    if (!playlist) return;
     const isMobile = window.innerWidth <= 768;
-    const desktopSrc = 'https://open.spotify.com/embed/playlist/2HWdPGCLLFI87mBu806kip?utm_source=generator&theme=0&si=da6288fc6fc7457a';
-    const mobileSrc = 'https://open.spotify.com/embed/playlist/2HWdPGCLLFI87mBu806kip?utm_source=generator&si=6ce925a120964aa9';
-    const targetSrc = isMobile ? mobileSrc : desktopSrc;
-
+    const targetSrc = isMobile ? playlist.embedMobile : playlist.embedDesktop;
     const currentSrc = spotifyIframe.getAttribute('src');
-    if (currentSrc && !currentSrc.includes(isMobile ? 'si=6ce925a120964aa9' : 'theme=0')) {
+    if (currentSrc !== targetSrc) {
       spotifyIframe.setAttribute('src', targetSrc);
     }
   }
 
-  syncSpotifyEmbedResponsive();
   window.addEventListener('resize', syncSpotifyEmbedResponsive, { passive: true });
+
+  // Carousel Prev / Next Button Listeners
+  const spotifyPrevBtn = document.getElementById('spotify-prev-btn');
+  const spotifyNextBtn = document.getElementById('spotify-next-btn');
+
+  if (spotifyPrevBtn) {
+    spotifyPrevBtn.addEventListener('click', () => setSpotifyPlaylist(currentSpotifyIdx - 1));
+  }
+  if (spotifyNextBtn) {
+    spotifyNextBtn.addEventListener('click', () => setSpotifyPlaylist(currentSpotifyIdx + 1));
+  }
+
+  // Carousel Tab Listeners
+  document.querySelectorAll('.spotify-carousel-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const idx = parseInt(tab.getAttribute('data-playlist-idx'), 10);
+      if (!isNaN(idx)) setSpotifyPlaylist(idx);
+    });
+  });
+
+  // Carousel Indicator Dot Listeners
+  document.querySelectorAll('.spotify-indicator-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.getAttribute('data-dot-idx'), 10);
+      if (!isNaN(idx)) setSpotifyPlaylist(idx);
+    });
+  });
+
+  // Mobile Touch Swipe Navigation for Spotify Card
+  const spotifyCard = document.querySelector('.spotify-dossier-card');
+  if (spotifyCard) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    spotifyCard.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches[0]) {
+        touchStartX = e.touches[0].screenX;
+      }
+    }, { passive: true });
+
+    spotifyCard.addEventListener('touchend', (e) => {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchEndX = e.changedTouches[0].screenX;
+        const diffX = touchEndX - touchStartX;
+        if (Math.abs(diffX) > 44) {
+          if (diffX < 0) {
+            setSpotifyPlaylist(currentSpotifyIdx + 1);
+          } else {
+            setSpotifyPlaylist(currentSpotifyIdx - 1);
+          }
+        }
+      }
+    }, { passive: true });
+  }
 
   // Immediate Click / Focus Handshake for Spotify Iframe (Native 450px Player)
   if (spotifyIframe) {
