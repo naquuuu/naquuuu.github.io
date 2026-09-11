@@ -556,8 +556,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.querySelectorAll('.spotify-carousel-tab').forEach((tab, i) => {
-      tab.classList.toggle('active', i === index);
-      tab.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      const isActive = i === index;
+      tab.classList.toggle('active', isActive);
+      tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      if (isActive && typeof tab.scrollIntoView === 'function') {
+        tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+      }
     });
 
     document.querySelectorAll('.spotify-indicator-dot').forEach((dot, i) => {
