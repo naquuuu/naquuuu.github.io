@@ -6,7 +6,7 @@
   <title>krishna (naquuuu) • product manager</title>
   <meta name="description" content="Personal portfolio and notes of Krishna (naquuuu). Product manager based in Jakarta, building software and everyday physical design.">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
-  <link rel="stylesheet" href="./assets/css/style.css?v=20260911u">
+  <link rel="stylesheet" href="./assets/css/style.css?v=20260911z">
 </head>
 <body data-mode="systems">
 
@@ -46,13 +46,13 @@
   <!-- Floating Sticky Perspective Switcher (Floats on scroll past Hero) -->
   <div class="sticky-perspective-wrap" id="sticky-perspective-bar" aria-hidden="true">
     <div class="sticky-perspective-inner mode-switcher" role="tablist" aria-label="Quick Perspective Switcher">
-      <button type="button" class="mode-tab-btn active" id="sticky-tab-mode-systems" role="tab" aria-selected="true" aria-controls="view-systems">
+      <button type="button" class="mode-tab-btn active" id="sticky-tab-mode-systems" data-mode-tab="systems" role="tab" aria-selected="true" aria-controls="view-systems">
         <span class="mode-tab-text">systems &amp; matter</span>
-        <span class="mode-cta-badge" id="sticky-badge-mode-systems"></span>
+        <span class="mode-cta-badge" id="sticky-badge-mode-systems" data-mode-badge="systems"></span>
       </button>
-      <button type="button" class="mode-tab-btn" id="sticky-tab-mode-culture" role="tab" aria-selected="false" aria-controls="view-culture">
+      <button type="button" class="mode-tab-btn" id="sticky-tab-mode-culture" data-mode-tab="culture" role="tab" aria-selected="false" aria-controls="view-culture">
         <span class="mode-tab-text">culture &amp; taste</span>
-        <span class="mode-cta-badge active" id="sticky-badge-mode-culture">switch →</span>
+        <span class="mode-cta-badge active" id="sticky-badge-mode-culture" data-mode-badge="culture">switch →</span>
       </button>
     </div>
   </div>
@@ -117,13 +117,13 @@
               <span>switch theme &amp; perspective:</span>
             </div>
             <div class="mode-switcher" role="tablist" aria-label="Perspective Switcher">
-              <button type="button" class="mode-tab-btn active" id="tab-mode-systems" role="tab" aria-selected="true" aria-controls="view-systems">
+              <button type="button" class="mode-tab-btn active" id="tab-mode-systems" data-mode-tab="systems" role="tab" aria-selected="true" aria-controls="view-systems">
                 <span class="mode-tab-text">systems &amp; matter</span>
-                <span class="mode-cta-badge" id="badge-mode-systems"></span>
+                <span class="mode-cta-badge" id="badge-mode-systems" data-mode-badge="systems"></span>
               </button>
-              <button type="button" class="mode-tab-btn" id="tab-mode-culture" role="tab" aria-selected="false" aria-controls="view-culture">
+              <button type="button" class="mode-tab-btn" id="tab-mode-culture" data-mode-tab="culture" role="tab" aria-selected="false" aria-controls="view-culture">
                 <span class="mode-tab-text">culture &amp; taste</span>
-                <span class="mode-cta-badge active" id="badge-mode-culture">switch →</span>
+                <span class="mode-cta-badge active" id="badge-mode-culture" data-mode-badge="culture">switch →</span>
               </button>
             </div>
           </div>
@@ -834,6 +834,6 @@
     </div>
   </nav>
 
-  <script src="./assets/js/main.js?v=20260911k"></script>
+  <script src="./assets/js/main.js?v=20260911z"></script>
 </body>
 </html>
