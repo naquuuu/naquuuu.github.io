@@ -537,26 +537,7 @@ document.addEventListener('DOMContentLoaded', () => {
   syncSpotifyEmbedResponsive();
   window.addEventListener('resize', syncSpotifyEmbedResponsive, { passive: true });
 
-  // Official Spotify iFrame API Ready Hook
-  window.onSpotifyIframeApiReady = (IFrameAPI) => {
-    if (!spotifyIframe) return;
-    const options = {
-      uri: 'spotify:playlist:2HWdPGCLLFI87mBu806kip'
-    };
-    IFrameAPI.createController(spotifyIframe, options, (EmbedController) => {
-      window.spotifyEmbedController = EmbedController;
-      EmbedController.addListener('playback_update', (e) => {
-        if (!e || !e.data) return;
-        if (e.data.isPaused === false) {
-          pauseMainAudioForSpotify();
-        } else if (e.data.isPaused === true) {
-          resumeMainAudioFromSpotify();
-        }
-      });
-    });
-  };
-
-  // Immediate Click / Focus Handshake for Spotify Iframe
+  // Immediate Click / Focus Handshake for Spotify Iframe (Native 450px Player)
   if (spotifyIframe) {
     window.addEventListener('blur', () => {
       setTimeout(() => {
