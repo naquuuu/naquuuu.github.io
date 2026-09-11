@@ -78,56 +78,57 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function syncPerspectiveSwitchers(activeMode) {
+    const isCulture = activeMode === 'culture';
+
+    // Query all systems and culture buttons and badges across all switchers (hero, sticky, etc.)
+    const systemsButtons = document.querySelectorAll('#tab-mode-systems, #sticky-tab-mode-systems, [data-mode-tab="systems"]');
+    const cultureButtons = document.querySelectorAll('#tab-mode-culture, #sticky-tab-mode-culture, [data-mode-tab="culture"]');
+    const systemsBadges = document.querySelectorAll('#badge-mode-systems, #sticky-badge-mode-systems, [data-mode-badge="systems"]');
+    const cultureBadges = document.querySelectorAll('#badge-mode-culture, #sticky-badge-mode-culture, [data-mode-badge="culture"]');
+
+    // Systems buttons & badges
+    systemsButtons.forEach(btn => {
+      btn.classList.toggle('active', !isCulture);
+      btn.setAttribute('aria-selected', !isCulture ? 'true' : 'false');
+    });
+    systemsBadges.forEach(badge => {
+      if (isCulture) {
+        badge.textContent = '← switch';
+        badge.classList.add('active');
+      } else {
+        badge.textContent = '';
+        badge.classList.remove('active');
+      }
+    });
+
+    // Culture buttons & badges
+    cultureButtons.forEach(btn => {
+      btn.classList.toggle('active', isCulture);
+      btn.setAttribute('aria-selected', isCulture ? 'true' : 'false');
+    });
+    cultureBadges.forEach(badge => {
+      if (!isCulture) {
+        badge.textContent = 'switch →';
+        badge.classList.add('active');
+      } else {
+        badge.textContent = '';
+        badge.classList.remove('active');
+      }
+    });
+  }
+
   function switchMode(mode) {
-    if (mode === 'culture') {
-      document.body.setAttribute('data-mode', 'culture');
+    const targetMode = mode === 'culture' ? 'culture' : 'systems';
+    document.body.setAttribute('data-mode', targetMode);
 
-      // Primary Hero Switcher
-      if (btnModeSystems) {
-        btnModeSystems.classList.remove('active');
-        btnModeSystems.setAttribute('aria-selected', 'false');
-      }
-      if (btnModeCulture) {
-        btnModeCulture.classList.add('active');
-        btnModeCulture.setAttribute('aria-selected', 'true');
-      }
+    syncPerspectiveSwitchers(targetMode);
 
-      // Secondary Sticky Switcher
-      if (stickyBtnSystems) {
-        stickyBtnSystems.classList.remove('active');
-        stickyBtnSystems.setAttribute('aria-selected', 'false');
-      }
-      if (stickyBtnCulture) {
-        stickyBtnCulture.classList.add('active');
-        stickyBtnCulture.setAttribute('aria-selected', 'true');
-      }
-
+    if (targetMode === 'culture') {
       if (viewSystems) viewSystems.classList.remove('active');
       if (viewCulture) viewCulture.classList.add('active');
       if (modeStatusLabel) modeStatusLabel.textContent = 'active: culture & taste (tap tab to switch)';
       if (heroSubIdentity) heroSubIdentity.textContent = 'sound, tailoring, and visual art';
-
-      // Update CTA badges for Primary Hero Switcher
-      if (badgeModeCulture) {
-        badgeModeCulture.textContent = '';
-        badgeModeCulture.classList.remove('active');
-      }
-      if (badgeModeSystems) {
-        badgeModeSystems.textContent = '← switch';
-        badgeModeSystems.classList.add('active');
-      }
-
-      // Update CTA badges for Secondary Sticky Switcher
-      if (stickyBadgeCulture) {
-        stickyBadgeCulture.textContent = '';
-        stickyBadgeCulture.classList.remove('active');
-      }
-      if (stickyBadgeSystems) {
-        stickyBadgeSystems.textContent = '← switch';
-        stickyBadgeSystems.classList.add('active');
-      }
-
-      updateNavHrefs('culture');
 
       // Animate single hero portrait change
       if (heroPortraitImg && heroPortraitMeta) {
@@ -138,57 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
           heroPortraitImg.style.opacity = '1';
         }, 180);
       }
-
-      localStorage.setItem('naquuuu_mode', 'culture');
     } else {
-      document.body.setAttribute('data-mode', 'systems');
-
-      // Primary Hero Switcher
-      if (btnModeCulture) {
-        btnModeCulture.classList.remove('active');
-        btnModeCulture.setAttribute('aria-selected', 'false');
-      }
-      if (btnModeSystems) {
-        btnModeSystems.classList.add('active');
-        btnModeSystems.setAttribute('aria-selected', 'true');
-      }
-
-      // Secondary Sticky Switcher
-      if (stickyBtnCulture) {
-        stickyBtnCulture.classList.remove('active');
-        stickyBtnCulture.setAttribute('aria-selected', 'false');
-      }
-      if (stickyBtnSystems) {
-        stickyBtnSystems.classList.add('active');
-        stickyBtnSystems.setAttribute('aria-selected', 'true');
-      }
-
       if (viewCulture) viewCulture.classList.remove('active');
       if (viewSystems) viewSystems.classList.add('active');
       if (modeStatusLabel) modeStatusLabel.textContent = 'active: systems & matter (tap tab to switch)';
       if (heroSubIdentity) heroSubIdentity.textContent = 'product manager • industrial engineering, itb';
-
-      // Update CTA badges for Primary Hero Switcher
-      if (badgeModeSystems) {
-        badgeModeSystems.textContent = '';
-        badgeModeSystems.classList.remove('active');
-      }
-      if (badgeModeCulture) {
-        badgeModeCulture.textContent = 'switch →';
-        badgeModeCulture.classList.add('active');
-      }
-
-      // Update CTA badges for Secondary Sticky Switcher
-      if (stickyBadgeSystems) {
-        stickyBadgeSystems.textContent = '';
-        stickyBadgeSystems.classList.remove('active');
-      }
-      if (stickyBadgeCulture) {
-        stickyBadgeCulture.textContent = 'switch →';
-        stickyBadgeCulture.classList.add('active');
-      }
-
-      updateNavHrefs('systems');
 
       // Animate single hero portrait change
       if (heroPortraitImg && heroPortraitMeta) {
@@ -199,30 +154,26 @@ document.addEventListener('DOMContentLoaded', () => {
           heroPortraitImg.style.opacity = '1';
         }, 180);
       }
-
-      localStorage.setItem('naquuuu_mode', 'systems');
     }
+
+    updateNavHrefs(targetMode);
+    localStorage.setItem('naquuuu_mode', targetMode);
   }
 
-  // Restore saved perspective mode if previously selected
+  // Restore saved perspective mode if previously selected (always run on load!)
   const savedMode = localStorage.getItem('naquuuu_mode') || 'systems';
-  if (savedMode === 'culture') {
-    switchMode('culture');
-  } else {
-    updateNavHrefs('systems');
-  }
+  switchMode(savedMode);
 
-  // Bind click listeners for hero switcher
-  if (btnModeSystems && btnModeCulture) {
-    btnModeSystems.addEventListener('click', () => switchMode('systems'));
-    btnModeCulture.addEventListener('click', () => switchMode('culture'));
-  }
-
-  // Bind click listeners for sticky secondary switcher
-  if (stickyBtnSystems && stickyBtnCulture) {
-    stickyBtnSystems.addEventListener('click', () => switchMode('systems'));
-    stickyBtnCulture.addEventListener('click', () => switchMode('culture'));
-  }
+  // Bind click listeners for all perspective switch buttons (hero & sticky secondary bars)
+  document.querySelectorAll('.mode-tab-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isSystems = btn.id === 'tab-mode-systems' ||
+                        btn.id === 'sticky-tab-mode-systems' ||
+                        btn.getAttribute('data-mode-tab') === 'systems';
+      switchMode(isSystems ? 'systems' : 'culture');
+    });
+  });
 
   // IntersectionObserver: Float in sticky perspective bar when hero switcher scrolls out
   if (heroModeBar && stickyPerspectiveBar) {

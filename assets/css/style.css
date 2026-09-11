@@ -813,6 +813,11 @@ body[data-mode="culture"] .mode-tab-btn.active {
   animation: badgePopIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Strict guarantee: Active mode buttons never display a switch badge */
+.mode-tab-btn.active .mode-cta-badge {
+  display: none !important;
+}
+
 .mode-tab-btn:hover .mode-cta-badge {
   background: var(--accent-crimson);
   color: #FFFFFF;
