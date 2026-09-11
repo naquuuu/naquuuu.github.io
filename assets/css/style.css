@@ -183,7 +183,8 @@ a:hover {
 .fashion-matrix-grid, .taste-vector-grid, .creative-links-bar, .battle-card,
 .proof-card, .flowchart-whiteboard-box, .concept-box, .essay-article, .essay-content,
 .failure-tree-grid, .degrade-grid, .portrait-technical-wrap,
-.instagram-dossier-grid, .instagram-info-col, .instagram-media-col, .instagram-footer-col {
+.instagram-dossier-grid, .instagram-info-col, .instagram-media-col, .instagram-footer-col,
+.spotify-direction-grid, .spotify-direction-item, .spotify-card-footer {
   min-width: 0;
 }
 
@@ -1476,6 +1477,73 @@ body[data-mode="culture"] .note-tag {
   border: none;
   display: block;
   border-radius: 12px;
+}
+
+/* Spotify Playlist Direction & Footer */
+.spotify-direction-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+  padding: 0.85rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.spotify-direction-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.spotify-direction-label {
+  font-weight: 700;
+  color: var(--text-accent);
+  font-size: 0.74rem;
+  min-width: 62px;
+  text-transform: lowercase;
+}
+
+.spotify-direction-val {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+}
+
+.spotify-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.spotify-card-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.spotify-pill {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 0.2rem 0.6rem;
+  font-family: var(--font-sans);
+}
+
+.spotify-card-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 /* Instagram Dossier & Profile Embed */
