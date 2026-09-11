@@ -182,7 +182,8 @@ a:hover {
 .view-panel, .culture-card, .pdf-viewer-wrap, .notes-stack, .note-item,
 .fashion-matrix-grid, .taste-vector-grid, .creative-links-bar, .battle-card,
 .proof-card, .flowchart-whiteboard-box, .concept-box, .essay-article, .essay-content,
-.failure-tree-grid, .degrade-grid, .portrait-technical-wrap {
+.failure-tree-grid, .degrade-grid, .portrait-technical-wrap,
+.instagram-dossier-grid, .instagram-info-col, .instagram-media-col, .instagram-footer-col {
   min-width: 0;
 }
 
@@ -1477,14 +1478,81 @@ body[data-mode="culture"] .note-tag {
   border-radius: 12px;
 }
 
-/* Instagram Profile Embed */
-.instagram-player-container {
-  width: 100%;
-  max-width: 540px;
-  margin-top: 1.25rem;
+/* Instagram Dossier & Profile Embed */
+.instagram-dossier-card {
+  overflow: hidden;
+}
+
+.instagram-dossier-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "info  media"
+    "footer media";
+  column-gap: 2.25rem;
+  row-gap: 1.25rem;
+  align-items: start;
+}
+
+.instagram-info-col {
+  grid-area: info;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.instagram-info-col .culture-card-header {
+  margin-bottom: 0;
+}
+
+.instagram-info-col .culture-card-title {
+  margin-bottom: 0;
+}
+
+.instagram-info-col .culture-card-prose {
+  margin-bottom: 0;
+}
+
+.instagram-desktop-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 0.4rem;
+  padding: 0.85rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.instagram-spec-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.instagram-spec-label {
+  font-weight: 700;
+  color: var(--text-accent);
+  font-size: 0.74rem;
+  min-width: 62px;
+  text-transform: lowercase;
+}
+
+.instagram-spec-val {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+}
+
+.instagram-media-col {
+  grid-area: media;
+  width: 100%;
+  max-width: 420px;
+  justify-self: end;
+  min-width: 0;
 }
 
 .instagram-embed-frame {
@@ -1494,15 +1562,18 @@ body[data-mode="culture"] .note-tag {
   border-radius: var(--radius-sm);
   background: var(--bg-surface);
   display: block;
+  box-shadow: var(--shadow-card);
 }
 
-.instagram-embed-footer {
+.instagram-footer-col {
+  grid-area: footer;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  padding-top: 0.25rem;
+  flex-direction: column;
+  gap: 0.85rem;
+  align-self: end;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+  min-width: 0;
 }
 
 .instagram-embed-pills {
@@ -1519,6 +1590,35 @@ body[data-mode="culture"] .note-tag {
   border-radius: var(--radius-xs);
   padding: 0.2rem 0.6rem;
   font-family: var(--font-sans);
+}
+
+/* Mobile: 100% UNTOUCHED layout */
+@media (max-width: 768px) {
+  .instagram-dossier-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .instagram-desktop-notes {
+    display: none;
+  }
+
+  .instagram-media-col {
+    max-width: 540px;
+    margin: 0;
+    justify-self: start;
+  }
+
+  .instagram-footer-col {
+    border-top: none;
+    padding-top: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
 }
 
 /* Algorithmic Taste Prediction */
