@@ -341,14 +341,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ===========================================================================
   // 3. Audio Telemetry Engine: Hukum Murphy by Kafin Sulthan (Gate 4 Standard)
-  //    + Bidirectional Spotify Embed Coordination
+  //    + Bidirectional Spotify Embed Coordination (Strict Single-Source Mutex)
   // ===========================================================================
   const audioEl = document.getElementById('hukum-murphy-audio');
   const navAudioBtn = document.getElementById('nav-audio-pill');
   const navAudioStatus = document.getElementById('nav-audio-status');
 
+  // Hard clamp volume to 50% max so visitors on high device volume don't get startled
+  const MAX_AUDIO_VOLUME = 0.5;
+
   let isUserInitiatedPause = false;
   let pausedBySpotify = false;
+  let isSpotifyPlaying = false;
 
   function updateAudioUI(isPlaying) {
     if (navAudioBtn) {
@@ -361,16 +365,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function pauseMainAudioForSpotify() {
+    isSpotifyPlaying = true;
+    pausedBySpotify = true;
     if (audioEl && !audioEl.paused) {
-      pausedBySpotify = true;
       audioEl.pause();
     }
   }
 
   function resumeMainAudioFromSpotify() {
+    isSpotifyPlaying = false;
+    // Resume loop only if previously paused by Spotify and user hasn't explicitly clicked [PAUSE]
     if (audioEl && pausedBySpotify && !isUserInitiatedPause) {
       pausedBySpotify = false;
+      audioEl.volume = MAX_AUDIO_VOLUME;
       audioEl.play().catch(() => {});
+    } else {
+      pausedBySpotify = false;
     }
   }
 
@@ -379,6 +389,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (audioEl.paused) {
       isUserInitiatedPause = false;
       pausedBySpotify = false;
+      isSpotifyPlaying = false;
+
+      // If Spotify controller is available, pause Spotify to prevent simultaneous playback
+      if (window.spotifyEmbedController) {
+        try {
+          window.spotifyEmbedController.pause();
+        } catch (err) {}
+      }
+
+      audioEl.volume = MAX_AUDIO_VOLUME;
       audioEl.play().catch(err => {
         console.log('Audio playback request handled:', err);
       });
@@ -397,15 +417,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Single Looping Mechanism via 'ended' event only (no loop attribute)
     audioEl.loop = false;
     audioEl.preload = 'metadata';
+    audioEl.volume = MAX_AUDIO_VOLUME;
 
-    // 2. Hardware event-driven UI synchronization
-    audioEl.addEventListener('play', () => updateAudioUI(true));
+    // Enforce 50% volume ceiling
+    audioEl.addEventListener('volumechange', () => {
+      if (audioEl.volume > MAX_AUDIO_VOLUME) {
+        audioEl.volume = MAX_AUDIO_VOLUME;
+      }
+    });
+
+    // 2. Hardware event-driven UI synchronization & Mutual Exclusion
+    audioEl.addEventListener('play', () => {
+      if (audioEl.volume > MAX_AUDIO_VOLUME) {
+        audioEl.volume = MAX_AUDIO_VOLUME;
+      }
+      // Never allow main audio to play if Spotify is active
+      if (pausedBySpotify || isSpotifyPlaying) {
+        audioEl.pause();
+        updateAudioUI(false);
+        return;
+      }
+      updateAudioUI(true);
+    });
+
     audioEl.addEventListener('pause', () => {
       updateAudioUI(false);
-      // Auto-resume resilience: recover from OS/browser interruptions only when not Spotify-paused
-      if (!isUserInitiatedPause && !pausedBySpotify) {
+      // Auto-resume resilience: recover from OS/browser interruptions only when not Spotify-paused and not user-paused
+      if (!isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying) {
         setTimeout(() => {
-          if (!isUserInitiatedPause && !pausedBySpotify && audioEl.paused) {
+          if (!isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying && audioEl.paused) {
+            audioEl.volume = MAX_AUDIO_VOLUME;
             audioEl.play().catch(() => {});
           }
         }, 300);
@@ -414,7 +455,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Tab visibility resilience
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible' && !isUserInitiatedPause && !pausedBySpotify && audioEl.paused) {
+      if (document.visibilityState === 'visible' && !isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying && audioEl.paused) {
+        audioEl.volume = MAX_AUDIO_VOLUME;
         audioEl.play().catch(() => {});
       }
     });
@@ -422,16 +464,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Single deterministic loop restart
     audioEl.addEventListener('ended', () => {
       audioEl.currentTime = 0;
-      audioEl.play().catch(err => {
-        console.warn('Seamless loop restart caught:', err);
-      });
+      if (!isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying) {
+        audioEl.volume = MAX_AUDIO_VOLUME;
+        audioEl.play().catch(err => {
+          console.warn('Seamless loop restart caught:', err);
+        });
+      }
     });
 
     // 5. Valid gestures only (NO scroll, NO mousemove)
     const validInteractionEvents = ['pointerdown', 'touchstart', 'click', 'keydown'];
 
     const triggerPlayOnGesture = () => {
-      if (audioEl.paused && !isUserInitiatedPause && !pausedBySpotify) {
+      if (audioEl.paused && !isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying) {
+        audioEl.volume = MAX_AUDIO_VOLUME;
         audioEl.play().catch(() => {});
       }
       cleanupAutoplayTriggers();
@@ -469,20 +515,76 @@ document.addEventListener('DOMContentLoaded', () => {
   syncSpotifyEmbedResponsive();
   window.addEventListener('resize', syncSpotifyEmbedResponsive, { passive: true });
 
-
-  // PostMessage fallback for Spotify iframe events
-  window.addEventListener('message', (event) => {
-    if (typeof event.data === 'string' && event.data.includes('playback_update')) {
-      try {
-        const payload = JSON.parse(event.data);
-        if (payload && payload.data) {
-          if (payload.data.isPaused === false) {
-            pauseMainAudioForSpotify();
-          } else if (payload.data.isPaused === true) {
-            resumeMainAudioFromSpotify();
-          }
+  // Official Spotify iFrame API Ready Hook
+  window.onSpotifyIframeApiReady = (IFrameAPI) => {
+    if (!spotifyIframe) return;
+    const options = {
+      uri: 'spotify:playlist:2HWdPGCLLFI87mBu806kip'
+    };
+    IFrameAPI.createController(spotifyIframe, options, (EmbedController) => {
+      window.spotifyEmbedController = EmbedController;
+      EmbedController.addListener('playback_update', (e) => {
+        if (!e || !e.data) return;
+        if (e.data.isPaused === false) {
+          pauseMainAudioForSpotify();
+        } else if (e.data.isPaused === true) {
+          resumeMainAudioFromSpotify();
         }
-      } catch (err) {}
+      });
+    });
+  };
+
+  // Immediate Click / Focus Handshake for Spotify Iframe
+  if (spotifyIframe) {
+    window.addEventListener('blur', () => {
+      setTimeout(() => {
+        if (document.activeElement === spotifyIframe) {
+          // User clicked into Spotify player; pause background audio immediately
+          pauseMainAudioForSpotify();
+        }
+      }, 50);
+    });
+  }
+
+  // Cross-Origin PostMessage fallback for Spotify iframe events (handles both Object and String)
+  function handleSpotifyMessagePayload(data) {
+    if (!data) return;
+    let payload = data;
+    if (typeof payload === 'string') {
+      try {
+        payload = JSON.parse(payload);
+      } catch (err) {
+        return;
+      }
+    }
+    if (typeof payload !== 'object' || payload === null) return;
+
+    const eventType = payload.type || payload.event;
+    if (eventType && (eventType.includes('playback_update') || eventType.includes('playback_state') || eventType.includes('track_update'))) {
+      const stateData = payload.data || payload.body || payload;
+      if (typeof stateData.isPaused === 'boolean') {
+        if (!stateData.isPaused) {
+          pauseMainAudioForSpotify();
+        } else {
+          resumeMainAudioFromSpotify();
+        }
+      } else if (typeof stateData.isPlaying === 'boolean') {
+        if (stateData.isPlaying) {
+          pauseMainAudioForSpotify();
+        } else {
+          resumeMainAudioFromSpotify();
+        }
+      }
+    }
+  }
+
+  window.addEventListener('message', (event) => {
+    if (event.origin && event.origin.includes('spotify.com')) {
+      handleSpotifyMessagePayload(event.data);
+    } else if (typeof event.data === 'string' && event.data.includes('playback')) {
+      handleSpotifyMessagePayload(event.data);
+    } else if (typeof event.data === 'object' && event.data && event.data.type && event.data.type.includes('playback')) {
+      handleSpotifyMessagePayload(event.data);
     }
   });
 
