@@ -473,20 +473,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===========================================================================
   const SPOTIFY_PLAYLISTS = [
     {
-      id: '2HWdPGCLLFI87mBu806kip',
-      name: 'shibuya-kei',
-      title: 'shibuya-kei, city pop, latin jazz & bossa nova',
-      prose: 'my personal listening playlist on spotify: a mix of 90s tokyo shibuya-kei, japanese city pop, latin jazz, and bossa nova. rhythm and analog warmth that i listen to during deep work and focus.',
-      direction: '90s tokyo shibuya-kei, bossa nova chords, analog rhodes & acoustic jazz sampling',
-      tempo: 'buoyant, medium-tempo rhythm for sustained focus, writing specs, and deep problem solving',
-      artists: 'cornelius, pizzicato five, lamp, towa tei, marcos valle & contemporary indie jazz',
-      pills: ['shibuya-kei', 'bossa nova', 'latin jazz', 'analog warmth', 'deep focus'],
-      essayLink: './blog/the-geometry-of-shibuya-kei/',
-      spotifyUrl: 'https://open.spotify.com/playlist/2HWdPGCLLFI87mBu806kip?si=da6288fc6fc7457a',
-      embedDesktop: 'https://open.spotify.com/embed/playlist/2HWdPGCLLFI87mBu806kip?utm_source=generator&theme=0&si=da6288fc6fc7457a',
-      embedMobile: 'https://open.spotify.com/embed/playlist/2HWdPGCLLFI87mBu806kip?utm_source=generator&theme=0&si=6ce925a120964aa9'
-    },
-    {
       id: '4wKJqsG3yNAEl47lWPc3Et',
       name: 'pop mega raya',
       title: 'pop mega raya',
@@ -495,10 +481,24 @@ document.addEventListener('DOMContentLoaded', () => {
       tempo: 'upbeat, high-energy momentum for dynamic creative sprints and joyful listening',
       artists: 'chrisye, guruh gipsy, vira talisa, fariz rm & evergreen indonesian groove',
       pills: ['pop mega raya', 'indonesian pop', 'retro groove', 'festive brass', 'high energy'],
-      essayLink: null,
+      essayLink: './blog/the-geometry-of-shibuya-kei/',
       spotifyUrl: 'https://open.spotify.com/playlist/4wKJqsG3yNAEl47lWPc3Et?si=039d4b675b194de9',
       embedDesktop: 'https://open.spotify.com/embed/playlist/4wKJqsG3yNAEl47lWPc3Et?utm_source=generator&theme=0&si=039d4b675b194de9',
       embedMobile: 'https://open.spotify.com/embed/playlist/4wKJqsG3yNAEl47lWPc3Et?utm_source=generator&theme=0&si=039d4b675b194de9'
+    },
+    {
+      id: '0rJhjrVzkmbxwdPHADN7GC',
+      name: "honda city '05",
+      title: "honda city '05",
+      prose: 'retro coastal groove, 80s city pop, and timeless late-night aor. analog synth brass, warm basslines, and breezy melodies for late-night cruising and focused engineering.',
+      direction: '80s japanese city pop, coastal aor, analog synth brass & breezy summer chords',
+      tempo: 'relaxed cruising tempo for late-night drives, calm focus, and contemplative writing',
+      artists: 's. kiyotaka & omega tribe, classic city pop icons, smooth jazz & nostalgic aor',
+      pills: ["honda city '05", 'city pop', 'coastal aor', 'analog breeze', 'night drive'],
+      essayLink: './blog/the-geometry-of-shibuya-kei/',
+      spotifyUrl: 'https://open.spotify.com/playlist/0rJhjrVzkmbxwdPHADN7GC?si=c0faed9859bc473e',
+      embedDesktop: 'https://open.spotify.com/embed/playlist/0rJhjrVzkmbxwdPHADN7GC?utm_source=generator&theme=0&si=c0faed9859bc473e',
+      embedMobile: 'https://open.spotify.com/embed/playlist/0rJhjrVzkmbxwdPHADN7GC?utm_source=generator&theme=0&si=c0faed9859bc473e'
     },
     {
       id: '5rMH1EaSOENPgWTZf0sysT',
@@ -509,7 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tempo: 'hypnotic mid-tempo pulse for fluid architectural thinking and aesthetic momentum',
       artists: "paradis, l'impératrice, polo & pan, sébastien tellier & phoenix",
       pills: ['french touch', 'nu-disco', 'synth-pop', 'chic groove', 'melancholic dance'],
-      essayLink: null,
+      essayLink: './blog/the-geometry-of-shibuya-kei/',
       spotifyUrl: 'https://open.spotify.com/playlist/5rMH1EaSOENPgWTZf0sysT?si=bf9f082bbe5e42ce',
       embedDesktop: 'https://open.spotify.com/embed/playlist/5rMH1EaSOENPgWTZf0sysT?utm_source=generator&theme=0&si=bf9f082bbe5e42ce',
       embedMobile: 'https://open.spotify.com/embed/playlist/5rMH1EaSOENPgWTZf0sysT?utm_source=generator&theme=0&si=bf9f082bbe5e42ce'
@@ -523,7 +523,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tempo: 'slow, floating atmospheric rhythm for late-night architecture and cognitive immersion',
       artists: 'brian eno, vangelis, tycho, boards of canada & space-age synthesists',
       pills: ['space ambient', 'downtempo', 'modular synths', 'cosmic soundscape', 'deep focus'],
-      essayLink: null,
+      essayLink: './blog/the-geometry-of-shibuya-kei/',
       spotifyUrl: 'https://open.spotify.com/playlist/6x6WTV9mBXwESfDOd28v74?si=7dfcba9260b947f2',
       embedDesktop: 'https://open.spotify.com/embed/playlist/6x6WTV9mBXwESfDOd28v74?utm_source=generator&theme=0&si=7dfcba9260b947f2',
       embedMobile: 'https://open.spotify.com/embed/playlist/6x6WTV9mBXwESfDOd28v74?utm_source=generator&theme=0&si=7dfcba9260b947f2'
