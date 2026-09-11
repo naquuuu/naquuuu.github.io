@@ -42,8 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const stickyBtnCulture = document.getElementById('sticky-tab-mode-culture');
   const stickyPerspectiveBar = document.getElementById('sticky-perspective-bar');
   const heroModeBar = document.querySelector('.mode-switch-wrap');
-  const ctaPrimary = document.getElementById('hero-cta-primary');
-  const ctaSecondary = document.getElementById('hero-cta-secondary');
 
   const viewSystems = document.getElementById('view-systems');
   const viewCulture = document.getElementById('view-culture');
@@ -117,18 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
         badgeModeSystems.classList.add('active');
       }
 
-      // Update CTA buttons for Culture perspective
-      if (ctaPrimary) {
-        ctaPrimary.setAttribute('href', '#culture-artifacts');
-        const lbl = ctaPrimary.querySelector('.hero-cta-label');
-        if (lbl) lbl.textContent = 'music & personal style ↓';
-      }
-      if (ctaSecondary) {
-        ctaSecondary.setAttribute('href', '#culture-philosophy');
-        const lbl = ctaSecondary.querySelector('.hero-cta-label');
-        if (lbl) lbl.textContent = 'what inspires me ↓';
-      }
-
       updateNavHrefs('culture');
 
       // Animate single hero portrait change
@@ -178,18 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (badgeModeCulture) {
         badgeModeCulture.textContent = 'switch →';
         badgeModeCulture.classList.add('active');
-      }
-
-      // Update CTA buttons for Systems perspective
-      if (ctaPrimary) {
-        ctaPrimary.setAttribute('href', '#artifacts');
-        const lbl = ctaPrimary.querySelector('.hero-cta-label');
-        if (lbl) lbl.textContent = 'explore my work ↓';
-      }
-      if (ctaSecondary) {
-        ctaSecondary.setAttribute('href', '#operating-philosophy');
-        const lbl = ctaSecondary.querySelector('.hero-cta-label');
-        if (lbl) lbl.textContent = 'how i think ↓';
       }
 
       updateNavHrefs('systems');
@@ -271,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let isNavClickScrolling = false;
   let navScrollTimeout = null;
 
-  document.querySelectorAll('.nav-links a.nav-link, .mobile-bottom-dock a.mobile-dock-link, .hero-cta-btn').forEach(link => {
+  document.querySelectorAll('.nav-links a.nav-link, .mobile-bottom-dock a.mobile-dock-link').forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
 
