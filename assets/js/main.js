@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===========================================================================
   const btnModeSystems = document.getElementById('tab-mode-systems');
   const btnModeCulture = document.getElementById('tab-mode-culture');
+  const badgeModeSystems = document.getElementById('badge-mode-systems');
+  const badgeModeCulture = document.getElementById('badge-mode-culture');
   const stickyBtnSystems = document.getElementById('sticky-tab-mode-systems');
   const stickyBtnCulture = document.getElementById('sticky-tab-mode-culture');
   const stickyPerspectiveBar = document.getElementById('sticky-perspective-bar');
@@ -102,8 +104,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (viewSystems) viewSystems.classList.remove('active');
       if (viewCulture) viewCulture.classList.add('active');
-      if (modeStatusLabel) modeStatusLabel.textContent = 'perspective: culture & taste';
+      if (modeStatusLabel) modeStatusLabel.textContent = 'active: culture & taste (tap tab to switch)';
       if (heroSubIdentity) heroSubIdentity.textContent = 'sound, tailoring, and visual art';
+
+      // Update CTA badges for Perspective Switcher
+      if (badgeModeCulture) {
+        badgeModeCulture.textContent = '';
+        badgeModeCulture.classList.remove('active');
+      }
+      if (badgeModeSystems) {
+        badgeModeSystems.textContent = 'switch →';
+        badgeModeSystems.classList.add('active');
+      }
 
       // Update CTA buttons for Culture perspective
       if (ctaPrimary) {
@@ -155,8 +167,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (viewCulture) viewCulture.classList.remove('active');
       if (viewSystems) viewSystems.classList.add('active');
-      if (modeStatusLabel) modeStatusLabel.textContent = 'perspective: systems & matter';
+      if (modeStatusLabel) modeStatusLabel.textContent = 'active: systems & matter (tap tab to switch)';
       if (heroSubIdentity) heroSubIdentity.textContent = 'product manager • industrial engineering, itb';
+
+      // Update CTA badges for Perspective Switcher
+      if (badgeModeSystems) {
+        badgeModeSystems.textContent = '';
+        badgeModeSystems.classList.remove('active');
+      }
+      if (badgeModeCulture) {
+        badgeModeCulture.textContent = 'switch →';
+        badgeModeCulture.classList.add('active');
+      }
 
       // Update CTA buttons for Systems perspective
       if (ctaPrimary) {
@@ -225,6 +247,26 @@ document.addEventListener('DOMContentLoaded', () => {
     stickyObserver.observe(heroModeBar);
   }
 
+  // Tactile animation when clicking a nav link while already at that section
+  function triggerAlreadyHereAnimation(targetEl, linkEl) {
+    if (!targetEl) return;
+    const contentToShake = targetEl.querySelector('.hero-headline, .section-label-bar, .inquiry-headline, .loop-cards-header') || targetEl;
+    contentToShake.classList.remove('already-here-shake');
+    void contentToShake.offsetWidth;
+    contentToShake.classList.add('already-here-shake');
+
+    if (linkEl) {
+      linkEl.classList.remove('nav-click-feedback');
+      void linkEl.offsetWidth;
+      linkEl.classList.add('nav-click-feedback');
+    }
+
+    setTimeout(() => {
+      contentToShake.classList.remove('already-here-shake');
+      if (linkEl) linkEl.classList.remove('nav-click-feedback');
+    }, 600);
+  }
+
   // Smooth scroll handler targeting active perspective's sections
   let isNavClickScrolling = false;
   let navScrollTimeout = null;
@@ -251,7 +293,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (href === '#philosophy') {
         e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const isAtTop = window.scrollY <= 45;
+        if (isAtTop) {
+          triggerAlreadyHereAnimation(document.getElementById('philosophy'), link);
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
         history.replaceState(null, '', href);
         return;
       }
@@ -259,7 +306,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetEl = document.querySelector(href);
         if (targetEl) {
           e.preventDefault();
-          targetEl.scrollIntoView({ behavior: 'smooth' });
+          const rect = targetEl.getBoundingClientRect();
+          const isAlreadyAtSection = Math.abs(rect.top - 56) < 45 || Math.abs(rect.top) < 45;
+          if (isAlreadyAtSection) {
+            triggerAlreadyHereAnimation(targetEl, link);
+          } else {
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
           history.replaceState(null, '', href);
         }
       }

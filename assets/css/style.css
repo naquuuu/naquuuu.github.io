@@ -188,7 +188,8 @@ a:hover {
 .spotify-profile-header, .spotify-profile-meta,
 .spotify-direction-grid, .spotify-direction-item, .spotify-card-footer,
 .tiktok-dossier-card, .tiktok-dossier-grid, .tiktok-info-col, .tiktok-media-col, .tiktok-footer-col,
-.tiktok-desktop-notes, .tiktok-spec-item, .tiktok-profile-card, .tiktok-card-top, .tiktok-video-stage, .tiktok-card-bottom, .tiktok-user-meta {
+.tiktok-desktop-notes, .tiktok-spec-item, .tiktok-profile-card, .tiktok-card-top, .tiktok-video-stage, .tiktok-card-bottom, .tiktok-user-meta,
+.mode-switcher-container, .mode-switcher-label, .mode-cta-badge {
   min-width: 0;
 }
 
@@ -753,6 +754,35 @@ body[data-mode="culture"] .hero-cta-secondary:hover {
   border-top: 1px solid var(--border-subtle);
 }
 
+.mode-switcher-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.mode-switcher-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-crimson);
+}
+
+.mode-switcher-spark {
+  font-size: 0.76rem;
+  display: inline-block;
+  animation: sparkPulse 2.4s infinite ease-in-out;
+}
+
+@keyframes sparkPulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.92); }
+  50% { opacity: 1; transform: scale(1.18); }
+}
+
 .mode-switcher {
   position: relative;
   display: inline-flex;
@@ -776,6 +806,8 @@ body[data-mode="culture"] .hero-cta-secondary:hover {
   padding: 0 1.25rem;
   border-radius: var(--radius-xs);
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
   gap: 0.5rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -793,6 +825,31 @@ body[data-mode="culture"] .hero-cta-secondary:hover {
 
 body[data-mode="culture"] .mode-tab-btn.active {
   background: var(--bg-surface-elevated);
+}
+
+.mode-cta-badge {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent-crimson);
+  background: var(--accent-crimson-dim);
+  border: 1px solid var(--border-active);
+  padding: 1px 6px;
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.03em;
+  transition: all 0.2s ease;
+}
+
+.mode-cta-badge.active {
+  display: inline-flex;
+  align-items: center;
+}
+
+.mode-tab-btn:hover .mode-cta-badge {
+  background: var(--accent-crimson);
+  color: #FFFFFF;
+  border-color: var(--accent-crimson);
 }
 
 .mode-tab-icon {
@@ -821,6 +878,34 @@ body[data-mode="culture"] .mode-tab-btn.active {
 body[data-mode="culture"] .mode-status-dot {
   background: var(--accent-crimson);
   box-shadow: 0 0 8px var(--border-glow);
+}
+
+/* Tactile "Already at this section" feedback animation */
+@keyframes alreadyHereShake {
+  0% { transform: translateX(0); }
+  15% { transform: translateX(-7px); }
+  30% { transform: translateX(6px); }
+  45% { transform: translateX(-4px); }
+  60% { transform: translateX(3px); }
+  75% { transform: translateX(-1.5px); }
+  90% { transform: translateX(1px); }
+  100% { transform: translateX(0); }
+}
+
+.already-here-shake {
+  animation: alreadyHereShake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  will-change: transform;
+}
+
+@keyframes navClickFeedback {
+  0% { transform: scale(1); }
+  30% { transform: scale(0.92); }
+  60% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+.nav-click-feedback {
+  animation: navClickFeedback 0.35s ease both;
 }
 
 /* Floating Sticky Secondary Perspective Switcher (Scroll Past Hero) */

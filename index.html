@@ -6,7 +6,7 @@
   <title>krishna (naquuuu) • product manager</title>
   <meta name="description" content="Personal portfolio and notes of Krishna (naquuuu). Product manager based in Jakarta, building software and everyday physical design.">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
-  <link rel="stylesheet" href="./assets/css/style.css?v=20260911p">
+  <link rel="stylesheet" href="./assets/css/style.css?v=20260911q">
 </head>
 <body data-mode="systems">
 
@@ -71,7 +71,7 @@
           <div class="hero-text-col">
             <div class="hero-sub-identity" id="hero-sub-identity">product manager • industrial engineering, itb</div>
             <h1 class="hero-headline">
-              hi, i'm krishna.<br>
+              hi, i'm krishna (alias naquuuu).<br>
               i love building products.
             </h1>
 
@@ -84,7 +84,7 @@
 
             <div class="hero-prose">
               <p>
-                i'm a product manager based in jakarta. i studied industrial engineering at itb and currently work as a technical product owner at mapclub, focused on retail loyalty and backend systems. before this, i worked on flight disruption and refund systems at traveloka, and industrial energy models at bcg.
+                i'm krishna (alias naquuuu), a product manager based in jakarta. i studied industrial engineering at itb and currently work as a technical product owner at mapclub, focused on retail loyalty and backend systems. before this, i worked on flight disruption and refund systems at traveloka, and industrial energy models at bcg.
               </p>
               <p>
                 outside of software, i spend time painting, listening to music (mostly 90s shibuya-kei and bossa nova), and experimenting with everyday tailoring.
@@ -119,17 +119,25 @@
 
         <!-- Dual-Mode Perspective Switcher (Direct Theme & Visuals Controller) -->
         <div class="mode-switch-wrap">
-          <div class="mode-switcher" role="tablist" aria-label="Perspective Switcher">
-            <button type="button" class="mode-tab-btn active" id="tab-mode-systems" role="tab" aria-selected="true" aria-controls="view-systems">
-              <span>systems &amp; matter</span>
-            </button>
-            <button type="button" class="mode-tab-btn" id="tab-mode-culture" role="tab" aria-selected="false" aria-controls="view-culture">
-              <span>culture &amp; taste</span>
-            </button>
+          <div class="mode-switcher-container">
+            <div class="mode-switcher-label">
+              <span class="mode-switcher-spark" aria-hidden="true">✦</span>
+              <span>switch theme &amp; perspective:</span>
+            </div>
+            <div class="mode-switcher" role="tablist" aria-label="Perspective Switcher">
+              <button type="button" class="mode-tab-btn active" id="tab-mode-systems" role="tab" aria-selected="true" aria-controls="view-systems">
+                <span class="mode-tab-text">systems &amp; matter</span>
+                <span class="mode-cta-badge" id="badge-mode-systems"></span>
+              </button>
+              <button type="button" class="mode-tab-btn" id="tab-mode-culture" role="tab" aria-selected="false" aria-controls="view-culture">
+                <span class="mode-tab-text">culture &amp; taste</span>
+                <span class="mode-cta-badge active" id="badge-mode-culture">switch →</span>
+              </button>
+            </div>
           </div>
           <div class="mode-status-meta">
             <span class="mode-status-dot" aria-hidden="true"></span>
-            <span id="mode-status-label">perspective: systems &amp; matter</span>
+            <span id="mode-status-label">active: systems &amp; matter (tap tab to switch)</span>
           </div>
         </div>
       </div>
