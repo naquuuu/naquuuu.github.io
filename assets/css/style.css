@@ -184,6 +184,8 @@ a:hover {
 .proof-card, .flowchart-whiteboard-box, .concept-box, .essay-article, .essay-content,
 .failure-tree-grid, .degrade-grid, .portrait-technical-wrap,
 .instagram-dossier-grid, .instagram-info-col, .instagram-media-col, .instagram-footer-col,
+.spotify-dossier-card, .spotify-dossier-grid, .spotify-info-col, .spotify-media-col, .spotify-footer-col,
+.spotify-profile-header, .spotify-profile-meta,
 .spotify-direction-grid, .spotify-direction-item, .spotify-card-footer {
   min-width: 0;
 }
@@ -1460,35 +1462,118 @@ body[data-mode="culture"] .note-tag {
   margin-bottom: 1.25rem;
 }
 
-.spotify-player-container {
-  height: 152px;
-  max-height: 152px;
-  border-radius: 12px;
+/* Spotify Dossier & Profile Embed */
+.spotify-dossier-card {
   overflow: hidden;
-  border: none;
-  background: transparent;
+}
+
+.spotify-dossier-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "info  media"
+    "footer media";
+  column-gap: 2.25rem;
+  row-gap: 1.25rem;
+  align-items: start;
+}
+
+.spotify-info-col {
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.spotify-info-col .culture-card-header,
+.spotify-info-col .culture-card-title,
+.spotify-info-col .culture-card-prose {
+  margin-bottom: 0;
+}
+
+/* Spotify Curator Profile Header (Avatar + Username) */
+.spotify-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.25rem;
+  min-width: 0;
+}
+
+.spotify-profile-avatar-link {
+  display: block;
+  flex-shrink: 0;
   line-height: 0;
 }
 
-.spotify-player-frame {
-  width: 100%;
-  height: 152px;
-  max-height: 152px;
-  border: none;
-  display: block;
-  border-radius: 12px;
+.spotify-profile-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--border-active);
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-/* Spotify Playlist Direction & Footer */
+.spotify-profile-avatar-link:hover .spotify-profile-img {
+  border-color: var(--accent-crimson);
+  transform: scale(1.04);
+}
+
+.spotify-profile-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.spotify-profile-name-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.spotify-profile-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.spotify-profile-name:hover {
+  color: var(--accent-crimson-hover);
+}
+
+.spotify-profile-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-accent);
+  letter-spacing: 0.03em;
+}
+
+.spotify-profile-subtitle {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+/* Spotify Direction & Sonic Pillars */
 .spotify-direction-grid {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
-  margin-top: 1.25rem;
+  margin-top: 0.4rem;
   padding: 0.85rem 1rem;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
+  min-width: 0;
 }
 
 .spotify-direction-item {
@@ -1497,6 +1582,7 @@ body[data-mode="culture"] .note-tag {
   gap: 0.6rem;
   font-size: 0.82rem;
   line-height: 1.5;
+  min-width: 0;
 }
 
 .spotify-direction-label {
@@ -1512,15 +1598,46 @@ body[data-mode="culture"] .note-tag {
   font-size: 0.82rem;
 }
 
-.spotify-card-footer {
+/* Spotify Player Media Column */
+.spotify-media-col {
+  grid-area: media;
+  width: 100%;
+  max-width: 420px;
+  justify-self: end;
+  min-width: 0;
+  height: 100%;
+}
+
+.spotify-player-container {
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  line-height: 0;
+}
+
+.spotify-player-frame {
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  border: none;
+  display: block;
+  border-radius: 12px;
+}
+
+/* Spotify Footer Column */
+.spotify-footer-col {
+  grid-area: footer;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.85rem;
-  margin-top: 1.25rem;
-  padding-top: 0.85rem;
+  align-self: end;
+  padding-top: 0.75rem;
   border-top: 1px solid var(--border-subtle);
+  min-width: 0;
 }
 
 .spotify-card-pills {
@@ -1544,6 +1661,43 @@ body[data-mode="culture"] .note-tag {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .spotify-dossier-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .spotify-media-col {
+    max-width: 100%;
+    margin: 0;
+    justify-self: start;
+    height: auto;
+  }
+
+  .spotify-player-container {
+    height: 152px;
+    min-height: 152px;
+    max-height: 152px;
+  }
+
+  .spotify-player-frame {
+    height: 152px;
+    min-height: 152px;
+    max-height: 152px;
+  }
+
+  .spotify-footer-col {
+    border-top: none;
+    padding-top: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
 }
 
 /* Instagram Dossier & Profile Embed */
