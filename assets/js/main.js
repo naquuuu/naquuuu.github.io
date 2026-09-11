@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         badgeModeCulture.classList.remove('active');
       }
       if (badgeModeSystems) {
-        badgeModeSystems.textContent = 'switch →';
+        badgeModeSystems.textContent = '← switch';
         badgeModeSystems.classList.add('active');
       }
 
@@ -485,4 +485,75 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {}
     }
   });
+
+  // ===========================================================================
+  // 5. Blog Essays Archive Theme Filter (Systems / White vs Culture / Red)
+  // ===========================================================================
+  const essayFilterBtns = document.querySelectorAll('.essay-filter-btn');
+  const essayCards = document.querySelectorAll('.essay-card');
+
+  if (essayFilterBtns.length && essayCards.length) {
+    essayFilterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filterVal = btn.dataset.filter;
+
+        essayFilterBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+
+        essayCards.forEach(card => {
+          const cardTheme = card.dataset.theme;
+          if (filterVal === 'all' || cardTheme === filterVal) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  // ===========================================================================
+  // 6. Interactive System Model & Simulation Toggles (3M Mask & Schneider)
+  // ===========================================================================
+  const simBoxes = document.querySelectorAll('.sim-system-box');
+  if (simBoxes.length) {
+    simBoxes.forEach(box => {
+      const modeBtns = box.querySelectorAll('.sim-mode-btn');
+      const views = box.querySelectorAll('.sim-canvas-view');
+      const telemetryPanels = box.querySelectorAll('.sim-telemetry-grid');
+
+      modeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetMode = btn.dataset.simMode;
+
+          modeBtns.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+
+          views.forEach(v => {
+            if (v.dataset.view === targetMode) {
+              v.classList.add('active');
+            } else {
+              v.classList.remove('active');
+            }
+          });
+
+          telemetryPanels.forEach(tp => {
+            if (tp.dataset.telemetry === targetMode) {
+              tp.style.display = 'grid';
+            } else {
+              tp.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  }
 });

@@ -71,8 +71,8 @@
           <div class="hero-text-col">
             <div class="hero-sub-identity" id="hero-sub-identity">product manager • industrial engineering, itb</div>
             <h1 class="hero-headline">
-              hi, i'm krishna (alias naquuuu).<br>
-              i love building products.
+              <span class="hero-headline-name">hi, i'm krishna (alias naquuuu).</span><br>
+              <span class="hero-headline-sub">i love building products.</span>
             </h1>
 
             <blockquote class="hero-epigraph">
@@ -202,37 +202,78 @@
         <div class="wrap">
           <div class="section-label-bar">
             <span class="section-label">things i've built // shipped systems</span>
-            <span class="section-count">[ 03 systems ]</span>
+            <span class="section-count">[ 05 systems ]</span>
           </div>
 
           <div class="dossier-stack">
-            <!-- Dossier 1: Operational Disruption Architecture -->
+            <!-- Dossier 1: MAPCLUB -->
             <article class="dossier-card">
               <div class="dossier-tab">
                 <span>doc 01</span>
                 <span class="dossier-tab-sep">/</span>
-                <span class="dossier-tab-name">traveloka &amp; mapclub</span>
+                <span class="dossier-tab-name">mapclub</span>
+              </div>
+              <div class="dossier-header">
+                <div class="dossier-badge">
+                  <span class="dossier-badge-dot" aria-hidden="true"></span>
+                  <span>2026 - present</span>
+                </div>
+                <span class="dossier-category">omnichannel retail loyalty // mapclub</span>
+              </div>
+              <h2 class="dossier-title">enterprise omnichannel loyalty &amp; automation</h2>
+
+              <div class="dossier-body-grid">
+                <div>
+                  <div class="dossier-subheading">the problem</div>
+                  <p class="dossier-prose">
+                    manual spreadsheet-based marketing invoicing, coupon leakage across retail chains, and complex partner banking checkout handshakes.
+                  </p>
+                </div>
+                <div>
+                  <div class="dossier-subheading">what i built</div>
+                  <p class="dossier-prose">
+                    automated marketing service invoicing, Employee Discount Scheme (EDS) key validation, Mandiri Livin' Sukha webview (RaaS) checkout routing, and telemetry.
+                  </p>
+                </div>
+              </div>
+
+              <div class="dossier-footer">
+                <div class="dossier-tags">
+                  <span class="dossier-tag">invoicing automation</span>
+                  <span class="dossier-tag">eds validation</span>
+                  <span class="dossier-tag">raas webview</span>
+                </div>
+                <a href="./experience/mapclub/" class="dossier-link">view case study ↗</a>
+              </div>
+            </article>
+
+            <!-- Dossier 2: Traveloka -->
+            <article class="dossier-card">
+              <div class="dossier-tab">
+                <span>doc 02</span>
+                <span class="dossier-tab-sep">/</span>
+                <span class="dossier-tab-name">traveloka</span>
               </div>
               <div class="dossier-header">
                 <div class="dossier-badge">
                   <span class="dossier-badge-dot" aria-hidden="true"></span>
                   <span>shipped production</span>
                 </div>
-                <span class="dossier-category">high-scale digital systems // traveloka &amp; mapclub</span>
+                <span class="dossier-category">aviation systems // traveloka</span>
               </div>
-              <h2 class="dossier-title">operational disruption systems</h2>
+              <h2 class="dossier-title">flight disruption recovery &amp; refund engine</h2>
 
               <div class="dossier-body-grid">
                 <div>
                   <div class="dossier-subheading">the problem</div>
                   <p class="dossier-prose">
-                    flight cancellations, retail checkout inventory locks, and broken refund calculations when partner apis fail during high-concurrency rebooking.
+                    flight cancellations overwhelming support queues, conflicting airline fare matrices, carrier seat locks, and banking gateway timeout drops.
                   </p>
                 </div>
                 <div>
                   <div class="dossier-subheading">what i built</div>
                   <p class="dossier-prose">
-                    designed state machine routing, policy engines, self-service flight rescheduling, and split refund flows (returning cash to card while re-crediting loyalty points) across traveloka and mapclub.
+                    state machine policy decision engine (PM 185/2015), self-service Easy Reschedule, Split Refund engine (cash to card + loyalty points re-credit), and idempotent locks.
                   </p>
                 </div>
               </div>
@@ -240,17 +281,58 @@
               <div class="dossier-footer">
                 <div class="dossier-tags">
                   <span class="dossier-tag">state machines</span>
+                  <span class="dossier-tag">easy reschedule</span>
                   <span class="dossier-tag">split refunds</span>
-                  <span class="dossier-tag">policy engine</span>
                 </div>
-                <a href="./experience/" class="dossier-link">view work experience ↗</a>
+                <a href="./experience/traveloka/" class="dossier-link">view case study ↗</a>
               </div>
             </article>
 
-            <!-- Dossier 2: 3M PHB Bio-Mask -->
+            <!-- Dossier 3: Boston Consulting Group (BCG) -->
             <article class="dossier-card">
               <div class="dossier-tab">
-                <span>doc 02</span>
+                <span>doc 03</span>
+                <span class="dossier-tab-sep">/</span>
+                <span class="dossier-tab-name">boston consulting group</span>
+              </div>
+              <div class="dossier-header">
+                <div class="dossier-badge">
+                  <span class="dossier-badge-dot" aria-hidden="true"></span>
+                  <span>industrial energy</span>
+                </div>
+                <span class="dossier-category">energy &amp; heavy industry // bcg</span>
+              </div>
+              <h2 class="dossier-title">heavy industry economics &amp; energy modeling</h2>
+
+              <div class="dossier-body-grid">
+                <div>
+                  <div class="dossier-subheading">the problem</div>
+                  <p class="dossier-prose">
+                    evaluating $400m industrial proposals where financial models risk detaching from plant turnaround downtime, machine degradation, and equipment lead times.
+                  </p>
+                </div>
+                <div>
+                  <div class="dossier-subheading">what i built</div>
+                  <p class="dossier-prose">
+                    parametric Capex/Opex valuation models connecting furnace maintenance schedules at nickel smelters and turbine heat rates at geothermal plants with financial yield curves.
+                  </p>
+                </div>
+              </div>
+
+              <div class="dossier-footer">
+                <div class="dossier-tags">
+                  <span class="dossier-tag">capex/opex models</span>
+                  <span class="dossier-tag">nickel smelters</span>
+                  <span class="dossier-tag">geothermal power</span>
+                </div>
+                <a href="./experience/bcg/" class="dossier-link">view case study ↗</a>
+              </div>
+            </article>
+
+            <!-- Dossier 4: 3M PHB Bio-Mask -->
+            <article class="dossier-card">
+              <div class="dossier-tab">
+                <span>doc 04</span>
                 <span class="dossier-tab-sep">/</span>
                 <span class="dossier-tab-name">3m biodesign</span>
               </div>
@@ -288,10 +370,10 @@
               </div>
             </article>
 
-            <!-- Dossier 3: HotSand Clean Thermal Microgrid -->
+            <!-- Dossier 5: HotSand Clean Thermal Microgrid -->
             <article class="dossier-card">
               <div class="dossier-tab">
-                <span>doc 03</span>
+                <span>doc 05</span>
                 <span class="dossier-tab-sep">/</span>
                 <span class="dossier-tab-name">schneider electric</span>
               </div>
@@ -375,29 +457,49 @@
           <!-- Competency Drawer / Technical Matrix -->
           <div class="section-label-bar section-label-bar--spaced">
             <span class="section-label">technical toolkit</span>
-            <span class="section-count">[ 2 domains ]</span>
+            <span class="section-count">[ 3 domains ]</span>
           </div>
 
           <div class="comp-matrix-grid">
-            <!-- Column 1 -->
+            <!-- Column 1: Physical & CAD -->
             <div class="comp-col">
               <div class="comp-col-header">physical &amp; cad</div>
               <ul class="comp-list">
-                <li class="comp-item">fusion 360</li>
+                <li class="comp-item">solidworks</li>
+                <li class="comp-item">energy project cost estimations</li>
+                <li class="comp-item">supply chain</li>
                 <li class="comp-item">design for manufacturing (dfm)</li>
                 <li class="comp-item">rapid prototyping (fdm / resin)</li>
                 <li class="comp-item">ergonomics &amp; fit</li>
               </ul>
             </div>
 
-            <!-- Column 2 -->
+            <!-- Column 2: Software & Data -->
             <div class="comp-col">
               <div class="comp-col-header">software &amp; data</div>
               <ul class="comp-list">
+                <li class="comp-item">product management</li>
+                <li class="comp-item">crm</li>
+                <li class="comp-item">marketing analytics</li>
+                <li class="comp-item">data analytics</li>
+                <li class="comp-item">ai / llm</li>
                 <li class="comp-item">state machine architecture</li>
                 <li class="comp-item">fault-tolerant workflows</li>
                 <li class="comp-item">sql &amp; relational schemas</li>
                 <li class="comp-item">python, js &amp; api integration</li>
+              </ul>
+            </div>
+
+            <!-- Column 3: Industry Experience -->
+            <div class="comp-col">
+              <div class="comp-col-header">industries &amp; domains</div>
+              <ul class="comp-list">
+                <li class="comp-item">education</li>
+                <li class="comp-item">fintech</li>
+                <li class="comp-item">energy</li>
+                <li class="comp-item">retail</li>
+                <li class="comp-item">consumer apps</li>
+                <li class="comp-item">logistics</li>
               </ul>
             </div>
           </div>
