@@ -102,19 +102,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (viewSystems) viewSystems.classList.remove('active');
       if (viewCulture) viewCulture.classList.add('active');
-      if (modeStatusLabel) modeStatusLabel.textContent = 'perspective: creative sandbox';
-      if (heroSubIdentity) heroSubIdentity.textContent = 'exploring sound, silhouette, and human taste';
+      if (modeStatusLabel) modeStatusLabel.textContent = 'perspective: culture & taste';
+      if (heroSubIdentity) heroSubIdentity.textContent = 'sound, tailoring, and visual art';
 
       // Update CTA buttons for Culture perspective
       if (ctaPrimary) {
         ctaPrimary.setAttribute('href', '#culture-artifacts');
         const lbl = ctaPrimary.querySelector('.hero-cta-label');
-        if (lbl) lbl.textContent = '[ Explore Sonic & Aesthetic Archives ↓ ]';
+        if (lbl) lbl.textContent = 'music & personal style ↓';
       }
       if (ctaSecondary) {
         ctaSecondary.setAttribute('href', '#culture-philosophy');
         const lbl = ctaSecondary.querySelector('.hero-cta-label');
-        if (lbl) lbl.textContent = '[ Aesthetic Axioms ↓ ]';
+        if (lbl) lbl.textContent = 'what inspires me ↓';
       }
 
       updateNavHrefs('culture');
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         heroPortraitImg.style.opacity = '0';
         setTimeout(() => {
           heroPortraitImg.src = './assets/img/krishna-culture-portrait.jpeg?v=20260911';
-          heroPortraitMeta.innerHTML = '<span>shibuya-kei</span><span>[ sonic rotations ]</span><span>taste vectors</span>';
+          heroPortraitMeta.innerHTML = '<span>jakarta, indonesia</span><span>culture &amp; taste</span>';
           heroPortraitImg.style.opacity = '1';
         }, 180);
       }
@@ -155,19 +155,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (viewCulture) viewCulture.classList.remove('active');
       if (viewSystems) viewSystems.classList.add('active');
-      if (modeStatusLabel) modeStatusLabel.textContent = 'perspective: technical proof';
-      if (heroSubIdentity) heroSubIdentity.textContent = 'working across physical matter, code, and culture';
+      if (modeStatusLabel) modeStatusLabel.textContent = 'perspective: systems & matter';
+      if (heroSubIdentity) heroSubIdentity.textContent = 'product manager • industrial engineering, itb';
 
       // Update CTA buttons for Systems perspective
       if (ctaPrimary) {
         ctaPrimary.setAttribute('href', '#artifacts');
         const lbl = ctaPrimary.querySelector('.hero-cta-label');
-        if (lbl) lbl.textContent = '[ Explore Systems Proof ↓ ]';
+        if (lbl) lbl.textContent = 'explore my work ↓';
       }
       if (ctaSecondary) {
         ctaSecondary.setAttribute('href', '#operating-philosophy');
         const lbl = ctaSecondary.querySelector('.hero-cta-label');
-        if (lbl) lbl.textContent = '[ Operating Framework ↓ ]';
+        if (lbl) lbl.textContent = 'how i think ↓';
       }
 
       updateNavHrefs('systems');
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         heroPortraitImg.style.opacity = '0';
         setTimeout(() => {
           heroPortraitImg.src = './assets/img/naquuuu-studio-bw.jpeg?v=20260911';
-          heroPortraitMeta.innerHTML = '<span>loc: 6°12\'s 106°49\'e</span><span>[ wib / utc+7 ]</span><span>matter + code</span>';
+          heroPortraitMeta.innerHTML = '<span>jakarta, indonesia</span><span>matter + code</span>';
           heroPortraitImg.style.opacity = '1';
         }, 180);
       }

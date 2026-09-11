@@ -23,7 +23,7 @@
     <div class="wrap nav">
       <a class="site-title" href="../../">
         <span class="prompt-user">naquuuu</span><span class="prompt-at">@</span><span class="prompt-host">builder</span>
-        <span class="prompt-badge">BITS &amp; ATOMS</span>
+        <span class="prompt-badge">bits &amp; atoms</span>
       </a>
       <nav class="nav-links">
         <a href="https://naquuuu.github.io/" class="nav-back-link">[ ← naquuuu.github.io ]</a>
@@ -36,19 +36,19 @@
 
     <header class="essay-header">
       <div class="essay-meta">
-        <time datetime="2026-09-09">September 2026</time>
+        <time datetime="2026-09-09">september 2026</time>
         <span>•</span>
         <span>9 min read</span>
         <span>•</span>
-        <span class="hero-badge">Design Systems</span>
-        <span class="hero-badge hero-badge-art">Reverse Engineering</span>
-        <span class="hero-badge">Edge Architecture</span>
+        <span class="hero-badge">design systems</span>
+        <span class="hero-badge hero-badge-art">reverse engineering</span>
+        <span class="hero-badge">edge architecture</span>
       </div>
       <h1 class="essay-header-title">
-        Reverse-Engineering Client Binaries: Extracting Ground-Truth Design Systems for High-Velocity Prototyping
+        reverse-engineering client binaries: extracting ground-truth design tokens from mobile apks
       </h1>
       <p style="color: var(--text-muted); font-size: 1.02rem; font-style: italic; margin-top: 0.5rem;">
-        By Ramadhana Bhanuharya Krishnamurti (Krishna / naquuuu) • Technical Product Owner
+        by ramadhana bhanuharya krishnamurti (krishna / naquuuu) • technical product owner
       </p>
     </header>
 
@@ -58,7 +58,7 @@
       <div class="concept-box" style="border-left: 4px solid var(--accent-crimson);">
         <h3 style="font-size: 1.15rem; color: var(--text-primary); margin-bottom: 0.5rem;">the core thesis in 30 seconds</h3>
         <p style="margin: 0; font-size: 0.94rem; color: var(--text-secondary); line-height: 1.7;">
-          In enterprise retail and fintech apps, design files in Figma almost never match what is compiled in production. Disorganized multi-brand design debt, deprecated color variables, and missing edge-state screens cause massive sprint delays. In this post, I detail how we bypass Figma bottlenecks entirely: decompiling compiled client binaries (APKs), programmatically harvesting raw vector drawables and variable fonts into a unified CSS/JS design engine, and serving pixel-perfect interactive mobile prototypes through zero-friction Vercel Edge gates.
+          In large mobile apps, design files in Figma often drift from what actually runs in production. Outdated color variables, missing edge cases, and hardcoded native elements slow teams down during development. In this post, I share how we solved this problem: inspecting production Android APKs to extract the actual vector icons, colors, and typography used in the live app. This gives us an accurate design foundation to build and share interactive mobile prototypes that stakeholders can test directly on their phones.
         </p>
       </div>
 
@@ -75,9 +75,9 @@
         If your prototyping workflow relies on waiting for designers to tidy up a 200-page Figma file, you have already lost the velocity war. The fastest, most accurate source of truth is not the design tool: it is the <strong>compiled binary currently running in production</strong>.
       </p>
 
-      <h2>2. The Architecture: Ground-Truth Binary Extraction Pipeline</h2>
+      <h2>2. The Extraction Workflow: Getting Styles from the Live App</h2>
       <p>
-        Instead of hand-crafting CSS tokens from visual inspection, I architected an automated harvesting pipeline inside our product workspace. The pipeline treats the compiled Android application archive (APK) as a structured database of compiled vectors, binary XML layouts, variable fonts, and brand hex codes:
+        Instead of guessing styles by eye, we built a small script to extract design tokens directly from the Android APK: pulling vector graphics, fonts, and hex colors straight from the production build:
       </p>
 
       <!-- Whiteboard SVG User Action Diagram: The Binary Extraction & Edge Prototyping Pipeline -->
@@ -105,17 +105,17 @@
 
             <!-- Column Headers -->
             <rect x="24" y="16" width="210" height="28" rx="4" fill="#1C1917" stroke="#44403C" stroke-width="1" />
-            <text x="129" y="34" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" fill="#D97706" text-anchor="middle">
+            <text x="129" y="34" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">
               user / operator action
             </text>
 
             <rect x="260" y="16" width="240" height="28" rx="4" fill="#18181B" stroke="#3F3F46" stroke-width="1" />
-            <text x="380" y="34" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" fill="#60A5FA" text-anchor="middle">
+            <text x="380" y="34" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">
               automated pipeline execution
             </text>
 
             <rect x="526" y="16" width="210" height="28" rx="4" fill="#141C1A" stroke="#27443E" stroke-width="1" />
-            <text x="631" y="34" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" fill="#34D399" text-anchor="middle">
+            <text x="631" y="34" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">
               deliverable artifacts
             </text>
 
@@ -169,7 +169,7 @@
             <!-- Connector: P2 down to P3 -->
             <path d="M 380 194 L 380 230" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray-bin)" />
 
-            <!-- Row 3: Audit, Token Compiler & Tokens CSS -->
+            <!-- Row 3: Audit, Token Extractor & Tokens CSS -->
             <rect x="24" y="230" width="210" height="50" rx="6" fill="#27272A" stroke="#52525B" stroke-width="1.5" />
             <text x="129" y="251" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
               2. review asset &amp; font audit
@@ -180,7 +180,7 @@
 
             <rect x="260" y="230" width="240" height="50" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
             <text x="380" y="251" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
-              token &amp; font compiler
+              token &amp; font extractor
             </text>
             <text x="380" y="267" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
               harvest colors.xml &amp; ttf webfonts
@@ -234,7 +234,7 @@
 
             <!-- Connector: A3 down and across to U3 -->
             <path d="M 631 366 L 631 421 L 234 421" stroke="#52525B" stroke-width="1.5" stroke-dasharray="4" fill="none" marker-end="url(#arrow-gray-bin)" />
-            <text x="430" y="414" font-family="'JetBrains Mono', monospace" font-size="9" fill="#A1A1AA" text-anchor="middle">[zero specification drift: instant sign-off]</text>
+            <text x="430" y="414" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">[zero specification drift: instant sign-off]</text>
           </svg>
         </div>
       </div>
@@ -288,7 +288,7 @@
       <div class="concept-box" style="margin: 1.5rem 0;">
         <div style="display: grid; grid-template-columns: 1fr; gap: 1rem;">
           <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem;">
-            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--term-green); font-weight: 700; margin-bottom: 0.3rem;">
+            <div style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-accent); font-weight: 700; margin-bottom: 0.3rem;">
               4x Reduction in Alignment Latency
             </div>
             <div style="font-size: 0.9rem; color: var(--text-secondary);">
@@ -296,7 +296,7 @@
             </div>
           </div>
           <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem;">
-            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--term-cyan); font-weight: 700; margin-bottom: 0.3rem;">
+            <div style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-primary); font-weight: 700; margin-bottom: 0.3rem;">
               Zero Estimation Re-work
             </div>
             <div style="font-size: 0.9rem; color: var(--text-secondary);">
@@ -306,19 +306,19 @@
         </div>
       </div>
 
-      <h2>6. Summary: The PM as a Systems Compiler</h2>
+      <h2>6. Summary: Bridging Design and Production Code</h2>
       <p>
-        Modern digital leadership is no longer about writing descriptive prose and passing tickets over a wall. As product managers, our responsibility is to build <strong>closed-loop systems</strong> where commercial goals, ground-truth code, and user empathy converge. When you ground your prototypes in the physical reality of compiled code, your velocity is unbeatable.
+        Effective product work isn't about writing vague documents and tossing tickets over a wall. It's about bridging the gap between design and engineering with real code, clear requirements, and working prototypes that stakeholders can actually try.
       </p>
 
     </article>
 
     <!-- Post Footer Navigation -->
     <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-      <a href="https://naquuuu.github.io/" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-crimson-hover);">← Back to naquuuu.github.io</a>
-      <div style="display: flex; gap: 1rem; font-family: var(--font-mono); font-size: 0.8rem;">
-        <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary);">Share on LinkedIn</a>
-        <a href="mailto:rbkrishnamurti@gmail.com" style="color: var(--text-secondary);">Send Feedback</a>
+      <a href="https://naquuuu.github.io/" style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--accent-crimson-hover);">← return to home</a>
+      <div style="display: flex; gap: 1rem; font-family: var(--font-sans); font-size: 0.8rem;">
+        <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary);">linkedin ↗</a>
+        <a href="mailto:rbkrishnamurti@gmail.com" style="color: var(--text-secondary);">email ↗</a>
       </div>
     </div>
 
@@ -327,17 +327,13 @@
   <!-- Site Footer -->
   <footer class="site-footer">
     <div class="wrap footer-content">
-      <div>
-        <strong>Ramadhana Bhanuharya Krishnamurti (naquuuu)</strong>
-        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">
-          Bits &amp; Atoms • Cyber-Physical Product Architecture
-        </div>
+      <div class="footer-channels">
+        <a href="https://github.com/naquuuu" target="_blank" rel="noopener noreferrer">github</a>
+        <a href="mailto:rbkrishnamurti@gmail.com">email</a>
+        <a href="https://naquuuu.github.io/">home</a>
       </div>
-      <div class="footer-links">
-        <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf" target="_blank" rel="noopener noreferrer">Spotify</a>
-        <a href="https://bhanuharya.github.io/" target="_blank" rel="noopener noreferrer">Twin Brother (Harya) ↗</a>
-        <a href="mailto:rbkrishnamurti@gmail.com">Email</a>
+      <div class="footer-live-stamp">
+        <span>naquuuu.github.io • built with matter and code.</span>
       </div>
     </div>
   </footer>
