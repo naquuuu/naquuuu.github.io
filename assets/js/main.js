@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const badgeModeCulture = document.getElementById('badge-mode-culture');
   const stickyBtnSystems = document.getElementById('sticky-tab-mode-systems');
   const stickyBtnCulture = document.getElementById('sticky-tab-mode-culture');
+  const stickyBadgeSystems = document.getElementById('sticky-badge-mode-systems');
+  const stickyBadgeCulture = document.getElementById('sticky-badge-mode-culture');
   const stickyPerspectiveBar = document.getElementById('sticky-perspective-bar');
   const heroModeBar = document.querySelector('.mode-switch-wrap');
 
@@ -105,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (modeStatusLabel) modeStatusLabel.textContent = 'active: culture & taste (tap tab to switch)';
       if (heroSubIdentity) heroSubIdentity.textContent = 'sound, tailoring, and visual art';
 
-      // Update CTA badges for Perspective Switcher
+      // Update CTA badges for Primary Hero Switcher
       if (badgeModeCulture) {
         badgeModeCulture.textContent = '';
         badgeModeCulture.classList.remove('active');
@@ -113,6 +115,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (badgeModeSystems) {
         badgeModeSystems.textContent = '← switch';
         badgeModeSystems.classList.add('active');
+      }
+
+      // Update CTA badges for Secondary Sticky Switcher
+      if (stickyBadgeCulture) {
+        stickyBadgeCulture.textContent = '';
+        stickyBadgeCulture.classList.remove('active');
+      }
+      if (stickyBadgeSystems) {
+        stickyBadgeSystems.textContent = '← switch';
+        stickyBadgeSystems.classList.add('active');
       }
 
       updateNavHrefs('culture');
@@ -156,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (modeStatusLabel) modeStatusLabel.textContent = 'active: systems & matter (tap tab to switch)';
       if (heroSubIdentity) heroSubIdentity.textContent = 'product manager • industrial engineering, itb';
 
-      // Update CTA badges for Perspective Switcher
+      // Update CTA badges for Primary Hero Switcher
       if (badgeModeSystems) {
         badgeModeSystems.textContent = '';
         badgeModeSystems.classList.remove('active');
@@ -164,6 +176,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (badgeModeCulture) {
         badgeModeCulture.textContent = 'switch →';
         badgeModeCulture.classList.add('active');
+      }
+
+      // Update CTA badges for Secondary Sticky Switcher
+      if (stickyBadgeSystems) {
+        stickyBadgeSystems.textContent = '';
+        stickyBadgeSystems.classList.remove('active');
+      }
+      if (stickyBadgeCulture) {
+        stickyBadgeCulture.textContent = 'switch →';
+        stickyBadgeCulture.classList.add('active');
       }
 
       updateNavHrefs('systems');
