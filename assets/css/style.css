@@ -767,15 +767,29 @@ body[data-mode="culture"] .hero-epigraph {
   color: var(--text-primary);
 }
 
+@keyframes tabActivePop {
+  0% { transform: scale(0.97); }
+  60% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+@keyframes badgePopIn {
+  0% { opacity: 0; transform: scale(0.85) translateX(-3px); }
+  100% { opacity: 1; transform: scale(1) translateX(0); }
+}
+
 .mode-tab-btn.active {
   background: var(--bg-card);
   color: var(--text-primary);
   border-color: var(--border-crimson);
   box-shadow: var(--shadow-glow);
+  animation: tabActivePop 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 body[data-mode="culture"] .mode-tab-btn.active {
   background: var(--bg-surface-elevated);
+  border-color: var(--border-crimson);
+  box-shadow: var(--shadow-glow);
 }
 
 .mode-cta-badge {
@@ -789,18 +803,21 @@ body[data-mode="culture"] .mode-tab-btn.active {
   padding: 1px 6px;
   border-radius: var(--radius-xs);
   letter-spacing: 0.03em;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
 }
 
 .mode-cta-badge.active {
   display: inline-flex;
   align-items: center;
+  animation: badgePopIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .mode-tab-btn:hover .mode-cta-badge {
   background: var(--accent-crimson);
   color: #FFFFFF;
   border-color: var(--accent-crimson);
+  transform: translateY(-1px);
 }
 
 .mode-tab-icon {
@@ -880,6 +897,7 @@ body[data-mode="culture"] .mode-status-dot {
 
 .sticky-perspective-inner {
   display: inline-flex;
+  align-items: center;
   background: rgba(251, 251, 250, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -888,6 +906,7 @@ body[data-mode="culture"] .mode-status-dot {
   padding: 4px;
   gap: 4px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.45s ease, background-color 0.45s ease, box-shadow 0.45s ease;
 }
 
 body[data-mode="culture"] .sticky-perspective-inner {
@@ -897,8 +916,9 @@ body[data-mode="culture"] .sticky-perspective-inner {
 }
 
 .sticky-perspective-inner .mode-tab-btn {
-  font-size: 0.78rem;
-  padding: 0.35rem 0.95rem;
+  font-size: 0.8rem;
+  padding: 0.38rem 1.05rem;
+  white-space: nowrap;
 }
 
 /* Animated Tab Panels */
@@ -2999,6 +3019,12 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
     justify-content: center;
     padding: 0.38rem 0.5rem;
     font-size: 0.74rem;
+    gap: 0.35rem;
+  }
+
+  .sticky-perspective-inner .mode-cta-badge {
+    font-size: 0.6rem;
+    padding: 1px 4px;
   }
 
   /* Fixed ergonomic bottom dock */

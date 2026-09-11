@@ -45,12 +45,14 @@
 
   <!-- Floating Sticky Perspective Switcher (Floats on scroll past Hero) -->
   <div class="sticky-perspective-wrap" id="sticky-perspective-bar" aria-hidden="true">
-    <div class="sticky-perspective-inner" role="tablist" aria-label="Quick Perspective Switcher">
-      <button type="button" class="mode-tab-btn active" id="sticky-tab-mode-systems" role="tab" aria-selected="true">
-        <span>systems &amp; matter</span>
+    <div class="sticky-perspective-inner mode-switcher" role="tablist" aria-label="Quick Perspective Switcher">
+      <button type="button" class="mode-tab-btn active" id="sticky-tab-mode-systems" role="tab" aria-selected="true" aria-controls="view-systems">
+        <span class="mode-tab-text">systems &amp; matter</span>
+        <span class="mode-cta-badge" id="sticky-badge-mode-systems"></span>
       </button>
-      <button type="button" class="mode-tab-btn" id="sticky-tab-mode-culture" role="tab" aria-selected="false">
-        <span>culture &amp; taste</span>
+      <button type="button" class="mode-tab-btn" id="sticky-tab-mode-culture" role="tab" aria-selected="false" aria-controls="view-culture">
+        <span class="mode-tab-text">culture &amp; taste</span>
+        <span class="mode-cta-badge active" id="sticky-badge-mode-culture">switch →</span>
       </button>
     </div>
   </div>
