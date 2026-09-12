@@ -790,4 +790,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // Instagram Live Embed Handshake
+  if (window.instgrm && window.instgrm.Embeds) {
+    try {
+      window.instgrm.Embeds.process();
+    } catch (e) {
+      // Graceful ignore
+    }
+  }
 });
