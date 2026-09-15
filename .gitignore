@@ -2,3 +2,6 @@
 _revamp/
 .DS_Store
 Thumbs.db
+.env
+.env.*
+.vscode/
