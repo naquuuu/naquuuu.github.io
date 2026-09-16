@@ -19,7 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CSS_PATH = ROOT / "assets" / "css" / "style.css"
 JS_PATH = ROOT / "assets" / "js" / "main.js"
-CURRENT_ASSET_VERSION = "20260917g"
+CURRENT_ASSET_VERSION = "20260917h"
 EXCLUDE_PARTS = {"_revamp", "drafts", ".git", ".github", ".vscode", "node_modules"}
 
 failures: list[str] = []
