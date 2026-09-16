@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const badgeModeSystems = document.getElementById('badge-mode-systems');
   const badgeModeCulture = document.getElementById('badge-mode-culture');
   const stickyPerspectiveBar = document.getElementById('sticky-perspective-bar');
+  const heroModeBar = document.querySelector('.mode-switch-wrap');
 
   const viewSystems = document.getElementById('view-systems');
   const viewCulture = document.getElementById('view-culture');
@@ -171,9 +172,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // IntersectionObserver (desktop only, >=769px): float the sticky lens switcher
+  // in once the hero switcher scrolls out of view. Mobile (<=768px) uses the
+  // scroll-driven toggle in updateActiveNavOnScroll instead.
+  if (heroModeBar && stickyPerspectiveBar) {
+    const stickyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (window.innerWidth <= 768) return;
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+          stickyPerspectiveBar.classList.add('visible');
+          stickyPerspectiveBar.setAttribute('aria-hidden', 'false');
+        } else {
+          stickyPerspectiveBar.classList.remove('visible');
+          stickyPerspectiveBar.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }, {
+      threshold: 0,
+      rootMargin: '-52px 0px 0px 0px'
+    });
+    stickyObserver.observe(heroModeBar);
+  }
+
   // Tactile animation when clicking a nav link while already at that section
-  function triggerAlreadyHereAnimation(targetEl, linkEl) {
-    if (!targetEl) return;
+  function triggerAlreadyHereAnimation(targetEl, linkEl) {    if (!targetEl) return;
     const contentToShake = targetEl.querySelector('.hero-headline, .section-label-bar, .inquiry-headline, .loop-cards-header') || targetEl;
     contentToShake.classList.remove('already-here-shake');
     void contentToShake.offsetWidth;
