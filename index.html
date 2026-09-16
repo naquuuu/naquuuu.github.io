@@ -6,7 +6,7 @@
   <title>krishna (naquuuu) • product manager</title>
   <meta name="description" content="Personal portfolio and notes of Krishna (naquuuu). Product manager based in Jakarta, building software and everyday physical design.">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
-  <link rel="stylesheet" href="./assets/css/style.css?v=20260912a">
+  <link rel="stylesheet" href="./assets/css/style.css?v=20260917a">
 </head>
 <body data-mode="systems">
 
@@ -33,6 +33,16 @@
           <span id="nav-audio-status">[ SOUND ]</span>
         </button>
 
+        <!-- Header Lens Switcher: compact always-visible perspective control -->
+        <div class="nav-mode-switch" role="tablist" aria-label="Perspective Switcher">
+          <button type="button" class="mode-tab-btn active" id="header-tab-mode-systems" data-mode-tab="systems" role="tab" aria-selected="true" aria-controls="view-systems">
+            <span class="mode-tab-text">systems &amp; matter</span>
+          </button>
+          <button type="button" class="mode-tab-btn" id="header-tab-mode-culture" data-mode-tab="culture" role="tab" aria-selected="false" aria-controls="view-culture">
+            <span class="mode-tab-text">culture &amp; taste</span>
+          </button>
+        </div>
+
         <nav class="nav-links" aria-label="Primary Navigation">
           <a href="#philosophy" class="nav-link" data-nav="philosophy">philosophy</a>
           <a href="#artifacts" class="nav-link" data-nav="artifacts">builts</a>
@@ -43,16 +53,14 @@
     </div>
   </header>
 
-  <!-- Floating Sticky Perspective Switcher (Floats on scroll past Hero) -->
+  <!-- Floating Lens Switcher (mobile-only, appears on scroll past the hero name) -->
   <div class="sticky-perspective-wrap" id="sticky-perspective-bar" aria-hidden="true">
     <div class="sticky-perspective-inner mode-switcher" role="tablist" aria-label="Quick Perspective Switcher">
-      <button type="button" class="mode-tab-btn active" id="sticky-tab-mode-systems" data-mode-tab="systems" role="tab" aria-selected="true" aria-controls="view-systems">
+      <button type="button" class="mode-tab-btn" id="mobile-tab-mode-systems" data-mode-tab="systems" role="tab" aria-selected="true" aria-controls="view-systems">
         <span class="mode-tab-text">systems &amp; matter</span>
-        <span class="mode-cta-badge" id="sticky-badge-mode-systems" data-mode-badge="systems"></span>
       </button>
-      <button type="button" class="mode-tab-btn" id="sticky-tab-mode-culture" data-mode-tab="culture" role="tab" aria-selected="false" aria-controls="view-culture">
+      <button type="button" class="mode-tab-btn" id="mobile-tab-mode-culture" data-mode-tab="culture" role="tab" aria-selected="false" aria-controls="view-culture">
         <span class="mode-tab-text">culture &amp; taste</span>
-        <span class="mode-cta-badge active" id="sticky-badge-mode-culture" data-mode-badge="culture">switch →</span>
       </button>
     </div>
   </div>
@@ -71,10 +79,11 @@
       <div class="wrap">
         <div class="hero-editorial-grid">
           <div class="hero-text-col">
-            <div class="hero-sub-identity" id="hero-sub-identity">product manager • industrial engineering, itb</div>
+            <div class="hero-sub-identity" id="hero-sub-identity">krishna, alias naquuuu • product manager • industrial engineering, itb</div>
             <h1 class="hero-headline">
-              <span class="hero-headline-name">hi, i'm krishna (alias naquuuu).</span><br>
-              <span class="hero-headline-sub">i love building products.</span>
+              <span class="hero-headline-name">naquuuu.<wbr>build</span>
+              <span class="hero-headline-thesis">systems that anticipate <em>failure</em>. taste that anticipates <em>feeling</em>.</span>
+              <span class="hero-headline-subthesis">mapping every possibility, from code to culture.</span>
             </h1>
 
             <blockquote class="hero-epigraph">
@@ -86,14 +95,38 @@
 
             <div class="hero-prose">
               <p>
-                i'm krishna (alias naquuuu), a product manager based in jakarta. i studied industrial engineering at itb and currently work as a technical product owner at mapclub, focused on retail loyalty and backend systems. before this, i worked on flight disruption and refund systems at traveloka, and industrial energy models at bcg.
+                murphy's law is my working philosophy: whatever can fail, will fail. so i sweat the details and map every scenario before it maps me. but scenarios don't only live in systems. art, culture, and politics each hold possibilities that engineering alone can't see.
               </p>
               <p>
-                outside of building things, i spend time painting, listening to music (my music taste is really wide, as you can see on my playlist), and experimenting with everyday tailoring.
+                that's why this portfolio runs two lenses. systems &amp; matter holds the professional work: loyalty, refunds, energy models. culture &amp; taste holds the rest: painting, playlists, tailoring. flip the switch and you get the other side of the same person.
               </p>
               <p>
-                partly inspired by my twin brother <a href="https://bhanuharya.github.io/" target="_blank" rel="noopener noreferrer">harya</a>, i put this website together to share what i build and what i learn along the way. feel free to explore or reach out if you'd like to connect.
+                partly inspired by my twin brother <a href="https://bhanuharya.github.io/" target="_blank" rel="noopener noreferrer">harya</a>, i put this website together to share what i build and what i learn along the way. feel free to explore or reach out.
               </p>
+            </div>
+          </div>
+
+          <!-- Dual-Mode Perspective Switcher (Direct Theme & Visuals Controller) -->
+          <div class="mode-switch-wrap">
+            <div class="mode-switcher-container">
+              <div class="mode-switcher-label">
+                <span class="mode-switcher-spark" aria-hidden="true">✦</span>
+                <span>switch theme &amp; perspective:</span>
+              </div>
+              <div class="mode-switcher" role="tablist" aria-label="Perspective Switcher">
+                <button type="button" class="mode-tab-btn active" id="tab-mode-systems" data-mode-tab="systems" role="tab" aria-selected="true" aria-controls="view-systems">
+                  <span class="mode-tab-text">systems &amp; matter</span>
+                  <span class="mode-cta-badge" id="badge-mode-systems" data-mode-badge="systems"></span>
+                </button>
+                <button type="button" class="mode-tab-btn" id="tab-mode-culture" data-mode-tab="culture" role="tab" aria-selected="false" aria-controls="view-culture">
+                  <span class="mode-tab-text">culture &amp; taste</span>
+                  <span class="mode-cta-badge active" id="badge-mode-culture" data-mode-badge="culture">switch →</span>
+                </button>
+              </div>
+            </div>
+            <div class="mode-status-meta">
+              <span class="mode-status-dot" aria-hidden="true"></span>
+              <span id="mode-status-label">lens: systems &amp; matter (tap to switch)</span>
             </div>
           </div>
 
@@ -108,32 +141,16 @@
             </div>
           </div>
         </div>
-
-        <!-- Dual-Mode Perspective Switcher (Direct Theme & Visuals Controller) -->
-        <div class="mode-switch-wrap">
-          <div class="mode-switcher-container">
-            <div class="mode-switcher-label">
-              <span class="mode-switcher-spark" aria-hidden="true">✦</span>
-              <span>switch theme &amp; perspective:</span>
-            </div>
-            <div class="mode-switcher" role="tablist" aria-label="Perspective Switcher">
-              <button type="button" class="mode-tab-btn active" id="tab-mode-systems" data-mode-tab="systems" role="tab" aria-selected="true" aria-controls="view-systems">
-                <span class="mode-tab-text">systems &amp; matter</span>
-                <span class="mode-cta-badge" id="badge-mode-systems" data-mode-badge="systems"></span>
-              </button>
-              <button type="button" class="mode-tab-btn" id="tab-mode-culture" data-mode-tab="culture" role="tab" aria-selected="false" aria-controls="view-culture">
-                <span class="mode-tab-text">culture &amp; taste</span>
-                <span class="mode-cta-badge active" id="badge-mode-culture" data-mode-badge="culture">switch →</span>
-              </button>
-            </div>
-          </div>
-          <div class="mode-status-meta">
-            <span class="mode-status-dot" aria-hidden="true"></span>
-            <span id="mode-status-label">active: systems &amp; matter (tap tab to switch)</span>
-          </div>
-        </div>
       </div>
     </section>
+
+    <!-- Marquee Strip: identity ticker (decorative, reduced-motion safe) -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-chunk"><span>systems &amp; matter</span><span class="marquee-sep">✦</span><span>culture &amp; taste</span><span class="marquee-sep">✦</span><span>naquuuu.build</span><span class="marquee-sep">✦</span><span>mapclub</span><span class="marquee-sep">✦</span><span>traveloka</span><span class="marquee-sep">✦</span><span>bcg</span><span class="marquee-sep">✦</span><span>matter + code</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-chunk"><span>systems &amp; matter</span><span class="marquee-sep">✦</span><span>culture &amp; taste</span><span class="marquee-sep">✦</span><span>naquuuu.build</span><span class="marquee-sep">✦</span><span>mapclub</span><span class="marquee-sep">✦</span><span>traveloka</span><span class="marquee-sep">✦</span><span>bcg</span><span class="marquee-sep">✦</span><span>matter + code</span><span class="marquee-sep">✦</span></div>
+      </div>
+    </div>
 
     <!-- =======================================================================
          view a: systems & matter (technical proof, white paper theme)
@@ -142,9 +159,9 @@
       <!-- 1. Operating Philosophy: The Resilient Loop (4 Persistent Phases) -->
       <section class="section-loop-cards" id="operating-philosophy">
         <div class="wrap">
-          <div class="loop-cards-header">
+          <div class="loop-cards-header" data-reveal>
             <span class="loop-cards-title">how i think about systems</span>
-            <span class="loop-cards-sub">[ 04 simple principles ]</span>
+            <span class="loop-cards-sub">[ 04 principles ]</span>
           </div>
 
           <div class="loop-cards-grid">
@@ -156,8 +173,8 @@
                 </div>
                 <span class="loop-card-tag">expect failure</span>
               </div>
-              <h3 class="loop-card-title">expect things to break</h3>
-              <p class="loop-card-desc">delays, network drops, and messy inputs happen in the real world. i design systems assuming friction from day one instead of hoping everything works smoothly.</p>
+              <h3 class="loop-card-title">plan for bad days</h3>
+              <p class="loop-card-desc">buses stall, signals drop, forms get messy. i assume that chaos in my designs, so people still get through calmly.</p>
             </div>
 
             <div class="loop-card">
@@ -168,8 +185,8 @@
                 </div>
                 <span class="loop-card-tag">edge cases</span>
               </div>
-              <h3 class="loop-card-title">map out the edge cases</h3>
-              <p class="loop-card-desc">"reka semua peluang yang ada." map out timeouts, race conditions, and user mistakes before writing code or building prototypes.</p>
+              <h3 class="loop-card-title">map the edge cases early</h3>
+              <p class="loop-card-desc">"reka semua peluang yang ada." i list timeouts, race conditions, and wrong taps before i build, then test the ugly paths first.</p>
             </div>
 
             <div class="loop-card">
@@ -180,8 +197,8 @@
                 </div>
                 <span class="loop-card-tag">margin</span>
               </div>
-              <h3 class="loop-card-title">build in buffers</h3>
-              <p class="loop-card-desc">give systems room to breathe. whether that's retry limits in flight APIs or thermal storage in hardware, good buffers absorb unexpected shocks.</p>
+              <h3 class="loop-card-title">keep a little slack</h3>
+              <p class="loop-card-desc">i add retries, pauses, and extra space. that slack keeps systems steady when traffic jumps.</p>
             </div>
 
             <div class="loop-card">
@@ -192,8 +209,8 @@
                 </div>
                 <span class="loop-card-tag">resilience</span>
               </div>
-              <h3 class="loop-card-title">recover cleanly</h3>
-              <p class="loop-card-desc">when errors happen, handle them smoothly. never leave a user with a blank screen or an unconfirmed transaction.</p>
+              <h3 class="loop-card-title">help people recover fast</h3>
+              <p class="loop-card-desc">when things fail, show clear status, save progress, and offer a next step. never leave a user with a blank screen or an unconfirmed transaction.</p>
             </div>
           </div>
         </div>
@@ -202,9 +219,9 @@
       <!-- 2. Selected Artifacts (The 3 Shipped Systems) -->
       <section class="section-works" id="artifacts">
         <div class="wrap">
-          <div class="section-label-bar">
-            <span class="section-label">things i've built // shipped systems</span>
-            <span class="section-count">[ 05 systems ]</span>
+          <div class="section-label-bar" data-reveal>
+            <span class="section-label">shipped systems</span>
+            <span class="section-count">[ 05 built ]</span>
           </div>
 
           <div class="dossier-stack">
@@ -228,13 +245,13 @@
                 <div>
                   <div class="dossier-subheading">the problem</div>
                   <p class="dossier-prose">
-                    manual spreadsheet-based marketing invoicing, coupon leakage across retail chains, and complex partner banking checkout handshakes.
+                    stores juggle paper invoices, leaky coupons, and tricky bank checkouts that slow the line.
                   </p>
                 </div>
                 <div>
                   <div class="dossier-subheading">what i built</div>
                   <p class="dossier-prose">
-                    automated marketing service invoicing, Employee Discount Scheme (EDS) key validation, Mandiri Livin' Sukha webview (RaaS) checkout routing, and telemetry.
+                    marketing service invoicing automation, Employee Discount Scheme (EDS) key validation, Mandiri Livin' Sukha webview (RaaS) checkout routing, plus telemetry.
                   </p>
                 </div>
               </div>
@@ -269,7 +286,7 @@
                 <div>
                   <div class="dossier-subheading">the problem</div>
                   <p class="dossier-prose">
-                    flight cancellations overwhelming support queues, conflicting airline fare matrices, carrier seat locks, and banking gateway timeout drops.
+                    when flights cancel, lines spike, fare maps clash, seat locks stick, and bank gateways time out.
                   </p>
                 </div>
                 <div>
@@ -310,13 +327,13 @@
                 <div>
                   <div class="dossier-subheading">the problem</div>
                   <p class="dossier-prose">
-                    evaluating $400m industrial proposals where financial models risk detaching from plant turnaround downtime, machine degradation, and equipment lead times.
+                    teams weigh $400m proposals while models drift from turnaround downtime, machine wear, and long equipment lead times.
                   </p>
                 </div>
                 <div>
                   <div class="dossier-subheading">what i built</div>
                   <p class="dossier-prose">
-                    parametric Capex/Opex valuation models connecting furnace maintenance schedules at nickel smelters and turbine heat rates at geothermal plants with financial yield curves.
+                    capex/opex models linking furnace upkeep at nickel smelters and geothermal heat rates to yield curves.
                   </p>
                 </div>
               </div>
@@ -351,13 +368,13 @@
                 <div>
                   <div class="dossier-subheading">the problem</div>
                   <p class="dossier-prose">
-                    single-use surgical masks generate tons of non-biodegradable polypropylene plastic waste and rely on vulnerable petroleum supply chains.
+                    single-use surgical masks pile up polypropylene plastic waste and lean on fragile petroleum supply chains.
                   </p>
                 </div>
                 <div>
                   <div class="dossier-subheading">what i built</div>
                   <p class="dossier-prose">
-                    a biodegradable face mask made from bacterial phb biopolymers grown on sugarcane waste. features 3d facial contours that stop air leaks, degrading safely in soil within 6 to 12 months.
+                    grew phb biopolymer on sugarcane waste into a mask with 3d facial contours that degrades in 6 to 12 months.
                   </p>
                 </div>
               </div>
@@ -392,13 +409,13 @@
                 <div>
                   <div class="dossier-subheading">the problem</div>
                   <p class="dossier-prose">
-                    remote archipelagic islands often lack reliable power grids. importing chemical lithium batteries is expensive, poses fire risks, and degrades rapidly in tropical heat.
+                    island villages need power without costly lithium packs that hate heat and risk fire.
                   </p>
                 </div>
                 <div>
                   <div class="dossier-subheading">what i built</div>
                   <p class="dossier-prose">
-                    a sand-based thermal energy storage system using local silica heated to 500°c+, paired with vacuum insulation and a stirling generator to supply clean electricity and heat.
+                    a storage system from silica sand at 500°c+ with vacuum insulation and a stirling generator for clean power and heat.
                   </p>
                 </div>
               </div>
@@ -419,8 +436,8 @@
       <!-- 3. Writing / Notes & Technical Competencies -->
       <section class="section-notes-comp" id="notes">
         <div class="wrap">
-          <div class="section-label-bar">
-            <span class="section-label">notes // software &amp; systems</span>
+          <div class="section-label-bar" data-reveal>
+            <span class="section-label">notes: software and systems</span>
             <a href="./blog/" class="section-count">view all notes →</a>
           </div>
 
@@ -434,7 +451,7 @@
                 </div>
                 <div class="note-title">reverse-engineering client binaries: extracting ground-truth design systems</div>
                 <p class="note-summary">
-                  why design files in figma often drift from the live app, and how inspecting compiled production apks gives teams an accurate foundation for rapid prototyping.
+                  figma drifts from the live app. i inspect compiled production apks to lock a true base for rapid prototyping.
                 </p>
               </div>
               <span class="note-meta">[ architecture ]</span>
@@ -449,7 +466,7 @@
                 </div>
                 <div class="note-title">building a product operating system: beyond generic prompts</div>
                 <p class="note-summary">
-                  why simple chatbot prompts fail for complex enterprise product requirements, and how structured product operations workspaces help teams write verified specifications.
+                  plain chatbot prompts flop on enterprise product needs. i use structured product operations workspaces to write verified specs.
                 </p>
               </div>
               <span class="note-meta">[ systems ]</span>
@@ -457,7 +474,7 @@
           </div>
 
           <!-- Competency Drawer / Technical Matrix -->
-          <div class="section-label-bar section-label-bar--spaced">
+          <div class="section-label-bar section-label-bar--spaced" data-reveal>
             <span class="section-label">technical toolkit</span>
             <span class="section-count">[ 3 domains ]</span>
           </div>
@@ -516,9 +533,9 @@
       <!-- 1. Aesthetic Philosophy (Themes & Inspiration) -->
       <section class="section-culture-philosophy" id="culture-philosophy">
         <div class="wrap">
-          <div class="loop-cards-header">
-            <span class="loop-cards-title">how i explore through culture</span>
-            <span class="loop-cards-sub">[ 04 creative pillars ]</span>
+          <div class="loop-cards-header" data-reveal>
+            <span class="section-label">culture as fuel</span>
+            <span class="loop-cards-sub">[ 04 pillars ]</span>
           </div>
 
           <!-- 4-Card Cultural Exploration Grid -->
@@ -531,8 +548,8 @@
                 </div>
                 <span class="loop-card-tag">exploration</span>
               </div>
-              <h3 class="loop-card-title">exploring on physical canvas</h3>
-              <p class="loop-card-desc">painting without ctrl+z forces me to work with real-world constraints, wet layers, and irreversible decisions—exploring composition by getting my hands dirty.</p>
+              <h3 class="loop-card-title">paint without undo</h3>
+              <p class="loop-card-desc">i paint without ctrl+z, working wet layers and fixed marks. hands learn composition through mess, not perfect strokes.</p>
             </div>
 
             <div class="loop-card">
@@ -543,8 +560,8 @@
                 </div>
                 <span class="loop-card-tag">structure</span>
               </div>
-              <h3 class="loop-card-title">tailoring as tactile engineering</h3>
-              <p class="loop-card-desc">approaching fashion as a study in proportion, silhouette, and movement. experimenting with textiles and everyday cuts teaches how physical craft meets human ergonomics.</p>
+              <h3 class="loop-card-title">cut cloth like a plan</h3>
+              <p class="loop-card-desc">i study proportion, silhouette, and movement in everyday cuts. cloth teaches fit the way specs teach flow.</p>
             </div>
 
             <div class="loop-card">
@@ -555,8 +572,8 @@
                 </div>
                 <span class="loop-card-tag">atmosphere</span>
               </div>
-              <h3 class="loop-card-title">curating sonic landscapes</h3>
-              <p class="loop-card-desc">exploring across retro Indonesian pop, 80s city pop, and space ambient. music is mood architecture that sets the rhythm for focused thinking and deep work.</p>
+              <h3 class="loop-card-title">music that steadies me</h3>
+              <p class="loop-card-desc">from retro indonesian pop to 80s city pop and space ambient, tunes shape my pace for focused making.</p>
             </div>
 
             <div class="loop-card">
@@ -567,8 +584,8 @@
                 </div>
                 <span class="loop-card-tag">cross-medium</span>
               </div>
-              <h3 class="loop-card-title">taste as an exploratory lens</h3>
-              <p class="loop-card-desc">caring about art, sound, and clothes isn't a distraction—it's how i explore ideas freely. tactile exploration keeps my perspective fresh when designing digital systems.</p>
+              <h3 class="loop-card-title">taste keeps work fresh</h3>
+              <p class="loop-card-desc">art, sound, and clothes free my thinking. hands on craft returns me to screens with sharper eyes.</p>
             </div>
           </div>
         </div>
@@ -577,8 +594,8 @@
       <!-- 2. Selected Artifacts (Music, Fashion & Algorithmic Taste) -->
       <section class="section-culture-artifacts" id="culture-artifacts">
         <div class="wrap">
-          <div class="section-label-bar">
-            <span class="section-label">craft, music &amp; style</span>
+          <div class="section-label-bar" data-reveal>
+            <span class="section-label">hands, ears, closet</span>
             <span class="section-count">[ 03 features ]</span>
           </div>
 
@@ -586,7 +603,10 @@
             <!-- 1. Physical Canvas (Painting in Tebet) -->
             <article class="culture-card atelier-card">
               <div class="atelier-photo-wrap">
-                <img src="./assets/img/krishna-artwork.jpeg?v=20260911n" alt="Painting on canvas by naquuuu, painted at a coffee shop in Tebet" class="atelier-img" loading="lazy">
+                <picture>
+                  <source srcset="./assets/img/krishna-artwork-720.webp?v=20260917a" type="image/webp">
+                  <img src="./assets/img/krishna-artwork-720.jpeg?v=20260917a" alt="Painting on canvas by naquuuu, painted at a coffee shop in Tebet" class="atelier-img" width="720" height="544" loading="lazy">
+                </picture>
               </div>
               <div class="atelier-info">
                 <div class="culture-card-header">
@@ -595,10 +615,10 @@
                 </div>
                 <h3 class="culture-card-title">painting at a coffee shop: no ctrl+z on canvas</h3>
                 <p class="atelier-prose">
-                  i painted this on a generic canvas with some paint at a coffee shop in tebet. no fancy belgian linen or dedicated studio setup—just spending an afternoon layering colors and seeing what happens.
+                  i painted this with some paint on generic canvas at a coffee shop in tebet. no belgian linen, no studio, just an afternoon of layering color to see what sticks.
                 </p>
                 <p class="atelier-prose">
-                  in software, if something breaks, rollback is cheap and you can hit ctrl+z. on physical canvas with wet paint, you have to work with what's already there. it's a good reminder of patience and working with real-world constraints.
+                  code lets you roll back fast with ctrl+z. wet paint does not. you work with the mark you made and stay patient.
                 </p>
               </div>
             </article>
@@ -654,7 +674,7 @@
                   </div>
                   <h3 class="culture-card-title" id="spotify-playlist-title">pop mega raya</h3>
                   <p class="culture-card-prose" id="spotify-playlist-prose">
-                    nostalgic indonesian pop, celebratory melodies, and retro disco rhythms. vibrant brass sections and warm harmonies that drive high-energy creative sessions.
+                    nostalgic indonesian pop with retro disco lift, brass warmth, and high spirits for making.
                   </p>
 
                   <!-- Musical Direction & Sonic Pillars -->
@@ -665,7 +685,7 @@
                     </div>
                     <div class="spotify-direction-item">
                       <span class="spotify-direction-label">tempo:</span>
-                      <span class="spotify-direction-val" id="spotify-tempo-val">upbeat, high-energy momentum for dynamic creative sprints and joyful listening</span>
+                      <span class="spotify-direction-val" id="spotify-tempo-val">upbeat push for creative sprints and joyful listening</span>
                     </div>
                     <div class="spotify-direction-item">
                       <span class="spotify-direction-label">artists:</span>
@@ -679,11 +699,11 @@
                   <div class="spotify-player-container" id="spotify-player-container">
                     <iframe id="spotify-embed-iframe" src="https://open.spotify.com/embed/playlist/4wKJqsG3yNAEl47lWPc3Et?utm_source=generator&amp;theme=0&amp;si=039d4b675b194de9" class="spotify-player-frame" width="100%" height="450" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Curated playlist by Krishna (naquuuu)"></iframe>
                   </div>
-                  <div class="spotify-media-indicators" aria-hidden="true">
-                    <span class="spotify-indicator-dot active" data-dot-idx="0"></span>
-                    <span class="spotify-indicator-dot" data-dot-idx="1"></span>
-                    <span class="spotify-indicator-dot" data-dot-idx="2"></span>
-                    <span class="spotify-indicator-dot" data-dot-idx="3"></span>
+                  <div class="spotify-media-indicators">
+                    <button type="button" class="spotify-indicator-dot active" data-dot-idx="0" aria-label="Show playlist 01"></button>
+                    <button type="button" class="spotify-indicator-dot" data-dot-idx="1" aria-label="Show playlist 02"></button>
+                    <button type="button" class="spotify-indicator-dot" data-dot-idx="2" aria-label="Show playlist 03"></button>
+                    <button type="button" class="spotify-indicator-dot" data-dot-idx="3" aria-label="Show playlist 04"></button>
                   </div>
                 </div>
 
@@ -716,7 +736,7 @@
                     <span class="culture-card-tag">03 // personal style</span>
                     <span class="culture-card-domain">[ @bhanuharya ]</span>
                   </div>
-                  <h3 class="culture-card-title">everyday tailoring &amp; functional footwear</h3>
+                  <h3 class="culture-card-title">soft clothes for hot cities</h3>
                   <p class="culture-card-prose">
                     relaxed pleated trousers, soft unlined jackets, and comfortable shoes built for city walking. i archive daily fits, textures, and tailoring on instagram.
                   </p>
@@ -773,8 +793,8 @@
       <!-- 3. Cultural Notes (Aesthetic Field Records & Channels) -->
       <section class="section-culture-notes" id="culture-notes">
         <div class="wrap">
-          <div class="section-label-bar">
-            <span class="section-label">notes // music &amp; clothes</span>
+          <div class="section-label-bar" data-reveal>
+            <span class="section-label">notes: music, clothes</span>
             <span class="section-count">[ 02 essays ]</span>
           </div>
 
@@ -788,7 +808,7 @@
                 </div>
                 <h3 class="note-title">the geometry of shibuya-kei: analog warmth in digital workspaces</h3>
                 <p class="note-summary">
-                  why cornelius, pizzicato five, and 90s tokyo sampling form an inspiring soundtrack for deep focus and problem-solving.
+                  i lean on cornelius, pizzicato five, and 90s tokyo sampling for steady focus and gentle lift.
                 </p>
               </div>
               <span class="note-meta">[ music &amp; focus ]</span>
@@ -803,7 +823,7 @@
                 </div>
                 <h3 class="note-title">smart tailoring for everyday life: clothes for city walking</h3>
                 <p class="note-summary">
-                  why relaxed pleats, breathable textiles, and good shoes make navigating humid cities comfortable and effortless.
+                  relaxed pleats, breathable textiles, and good shoes make humid cities feel easy.
                 </p>
               </div>
               <span class="note-meta">[ everyday design ]</span>
@@ -813,19 +833,27 @@
       </section>
     </div> <!-- /#view-culture -->
 
+    <!-- Marquee Strip: closing ticker above inquiries (decorative) -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-chunk"><span>open to connect</span><span class="marquee-sep">✦</span><span>gmail</span><span class="marquee-sep">✦</span><span>whatsapp</span><span class="marquee-sep">✦</span><span>linkedin</span><span class="marquee-sep">✦</span><span>say hi anytime</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-chunk"><span>open to connect</span><span class="marquee-sep">✦</span><span>gmail</span><span class="marquee-sep">✦</span><span>whatsapp</span><span class="marquee-sep">✦</span><span>linkedin</span><span class="marquee-sep">✦</span><span>say hi anytime</span><span class="marquee-sep">✦</span></div>
+      </div>
+    </div>
+
     <!-- =======================================================================
          SECTION 3: AVAILABILITY // INQUIRIES (SHARED CLOSING CARD)
          ======================================================================= -->
     <section class="section-inquiries" id="inquiries">
       <div class="wrap">
-        <div class="inquiry-card">
+        <div class="inquiry-card" data-reveal>
           <div class="inquiry-badge">
             <span class="inquiry-badge-dot" aria-hidden="true"></span>
             <span>open to connect</span>
           </div>
           <h2 class="inquiry-headline">let's build something thoughtful together.</h2>
           <p class="inquiry-prose">
-            i'm open to full-time product roles, interesting side projects, and collaborations. whether you want to chat about product management, systems design, or just say hi, feel free to reach out.
+            i'm open to product roles, playful experiments, and shared work. if systems, music, or clothes interest you, my inbox is open.
           </p>
 
           <div class="inquiry-actions">
@@ -848,6 +876,7 @@
        Footer: Direct Channels & Industrial Monospace Live Stamp
        ========================================================================= -->
   <footer class="site-footer">
+    <div class="footer-wordmark" aria-hidden="true">naquuuu</div>
     <div class="wrap footer-content">
       <div class="footer-channels">
         <a href="https://github.com/naquuuu" target="_blank" rel="noopener noreferrer">github</a>
@@ -871,6 +900,6 @@
   </nav>
 
   <script async src="https://www.instagram.com/embed.js"></script>
-  <script src="./assets/js/main.js?v=20260912a"></script>
+  <script src="./assets/js/main.js?v=20260917a"></script>
 </body>
 </html>
