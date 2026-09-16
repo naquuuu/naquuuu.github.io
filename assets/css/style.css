@@ -745,7 +745,8 @@ body[data-mode="culture"] .hero-epigraph {
 .portrait-technical-wrap {
   position: relative;
   grid-column: 2;
-  grid-row: 1;
+  grid-row: 1 / span 3;
+  align-self: start;
   background: var(--bg-surface);
   border: 1px solid var(--border-active);
   border-radius: var(--radius-md);
@@ -801,16 +802,30 @@ body[data-mode="culture"] .hero-epigraph {
    DUAL-MODE PERSPECTIVE SWITCHER: ANIMATED PILL
    ============================================================================= */
 
+.hero-head-block,
+.hero-body-block {
+  grid-column: 1;
+  min-width: 0;
+}
+
+.hero-head-block {
+  grid-row: 1;
+}
+
+.hero-body-block {
+  grid-row: 3;
+}
+
 .mode-switch-wrap {
-  grid-column: 1 / -1;
+  grid-column: 1;
   grid-row: 2;
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
-  padding-top: 1.5rem;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--border-subtle);
 }
 
@@ -3607,6 +3622,15 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
     margin: 0;
     width: 100%;
     justify-self: end;
+    align-self: start;
+  }
+
+  .mode-switch-wrap {
+    grid-row: auto;
+  }
+
+  .hero-body-block {
+    grid-row: auto;
   }
 
   .loop-cards-grid {
@@ -3768,7 +3792,11 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
     align-items: center;
   }
 
-  .hero-text-col {
+  .hero-head-block {
+    display: contents;
+  }
+
+  .hero-body-block {
     display: contents;
   }
 
