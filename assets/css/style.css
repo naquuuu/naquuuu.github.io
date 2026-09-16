@@ -432,57 +432,66 @@ body[data-mode="culture"] .nav-audio-pill.playing {
   }
 }
 
-/* Floating Lens Switcher (mobile-only): scroll-driven via JS, desktop uses header pill */
+/* Floating Lens Switcher: desktop appears after the hero switcher scrolls out
+   (IntersectionObserver); mobile (<=768px) is scroll-driven via JS instead.
+   Desktop ALSO keeps the header pill; both sync via [data-mode-tab]. */
 .sticky-perspective-wrap {
-  display: none;
+  position: fixed;
+  top: 68px; /* sits below the 58px desktop header */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 995;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s var(--ease-editorial);
+}
+
+.sticky-perspective-wrap.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sticky-perspective-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  gap: 3px;
+  background: rgba(251, 251, 250, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-active);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: border-color 0.45s ease, background-color 0.45s ease, box-shadow 0.45s ease;
+}
+
+body[data-mode="culture"] .sticky-perspective-inner {
+  background: rgba(27, 18, 20, 0.94);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.sticky-perspective-inner .mode-tab-btn {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.72rem;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
   .sticky-perspective-wrap {
-    display: block;
-    position: fixed;
     top: 58px;
-    left: 50%;
-    transform: translateX(-50%);
     width: calc(100% - 2rem);
     max-width: 360px;
-    z-index: 995;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s var(--ease-editorial);
-  }
-
-  .sticky-perspective-wrap.visible {
-    opacity: 1;
-    pointer-events: auto;
   }
 
   .sticky-perspective-inner {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
-    padding: 3px;
-    gap: 3px;
-    background: rgba(251, 251, 250, 0.94);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid var(--border-active);
-    border-radius: var(--radius-sm);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  }
-
-  body[data-mode="culture"] .sticky-perspective-inner {
-    background: rgba(27, 18, 20, 0.94);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
   }
 
   .sticky-perspective-inner .mode-tab-btn {
     flex: 1;
     justify-content: center;
     padding: 0.3rem 0.5rem;
-    font-size: 0.72rem;
-    white-space: nowrap;
   }
 }
 
