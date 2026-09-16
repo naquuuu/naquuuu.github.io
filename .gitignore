@@ -1,5 +1,7 @@
 # Local development artifacts & revamp experiments
 _revamp/
+drafts/
+_draft-preview*.html
 .DS_Store
 Thumbs.db
 .env
