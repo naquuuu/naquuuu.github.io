@@ -9,6 +9,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
+  // Mark JS availability for no-JS-safe CSS hooks (reveal system)
+  document.documentElement.classList.add('js');
+
   // ===========================================================================
   // 1. Live Jakarta Clock (WIB / UTC+7)
   // ===========================================================================
@@ -38,12 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnModeCulture = document.getElementById('tab-mode-culture');
   const badgeModeSystems = document.getElementById('badge-mode-systems');
   const badgeModeCulture = document.getElementById('badge-mode-culture');
-  const stickyBtnSystems = document.getElementById('sticky-tab-mode-systems');
-  const stickyBtnCulture = document.getElementById('sticky-tab-mode-culture');
-  const stickyBadgeSystems = document.getElementById('sticky-badge-mode-systems');
-  const stickyBadgeCulture = document.getElementById('sticky-badge-mode-culture');
   const stickyPerspectiveBar = document.getElementById('sticky-perspective-bar');
-  const heroModeBar = document.querySelector('.mode-switch-wrap');
 
   const viewSystems = document.getElementById('view-systems');
   const viewCulture = document.getElementById('view-culture');
@@ -81,11 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function syncPerspectiveSwitchers(activeMode) {
     const isCulture = activeMode === 'culture';
 
-    // Query all systems and culture buttons and badges across all switchers (hero, sticky, etc.)
-    const systemsButtons = document.querySelectorAll('#tab-mode-systems, #sticky-tab-mode-systems, [data-mode-tab="systems"]');
-    const cultureButtons = document.querySelectorAll('#tab-mode-culture, #sticky-tab-mode-culture, [data-mode-tab="culture"]');
-    const systemsBadges = document.querySelectorAll('#badge-mode-systems, #sticky-badge-mode-systems, [data-mode-badge="systems"]');
-    const cultureBadges = document.querySelectorAll('#badge-mode-culture, #sticky-badge-mode-culture, [data-mode-badge="culture"]');
+    // Query all systems and culture buttons and badges across all switchers (hero, header)
+    const systemsButtons = document.querySelectorAll('#tab-mode-systems, #header-tab-mode-systems, [data-mode-tab="systems"]');
+    const cultureButtons = document.querySelectorAll('#tab-mode-culture, #header-tab-mode-culture, [data-mode-tab="culture"]');
+    const systemsBadges = document.querySelectorAll('#badge-mode-systems, [data-mode-badge="systems"]');
+    const cultureBadges = document.querySelectorAll('#badge-mode-culture, [data-mode-badge="culture"]');
 
     // Systems buttons & badges
     systemsButtons.forEach(btn => {
@@ -127,8 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (targetMode === 'culture') {
       if (viewSystems) viewSystems.classList.remove('active');
       if (viewCulture) viewCulture.classList.add('active');
-      if (modeStatusLabel) modeStatusLabel.textContent = 'active: culture & taste (tap tab to switch)';
-      if (heroSubIdentity) heroSubIdentity.textContent = 'sound, tailoring, and visual art';
+      if (modeStatusLabel) modeStatusLabel.textContent = 'lens: culture & taste (tap to switch)';
+      if (heroSubIdentity) heroSubIdentity.textContent = 'krishna, alias naquuuu • visual art, sound & tailoring';
 
       // Animate single hero portrait change
       if (heroPortraitImg && heroPortraitMeta) {
@@ -142,8 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       if (viewCulture) viewCulture.classList.remove('active');
       if (viewSystems) viewSystems.classList.add('active');
-      if (modeStatusLabel) modeStatusLabel.textContent = 'active: systems & matter (tap tab to switch)';
-      if (heroSubIdentity) heroSubIdentity.textContent = 'product manager • industrial engineering, itb';
+      if (modeStatusLabel) modeStatusLabel.textContent = 'lens: systems & matter (tap to switch)';
+      if (heroSubIdentity) heroSubIdentity.textContent = 'krishna, alias naquuuu • product manager • industrial engineering, itb';
 
       // Animate single hero portrait change
       if (heroPortraitImg && heroPortraitMeta) {
@@ -164,35 +162,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const savedMode = localStorage.getItem('naquuuu_mode') || 'systems';
   switchMode(savedMode);
 
-  // Bind click listeners for all perspective switch buttons (hero & sticky secondary bars)
+  // Bind click listeners for all perspective switch buttons (hero + header)
   document.querySelectorAll('.mode-tab-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      const isSystems = btn.id === 'tab-mode-systems' ||
-                        btn.id === 'sticky-tab-mode-systems' ||
-                        btn.getAttribute('data-mode-tab') === 'systems';
+      const isSystems = btn.getAttribute('data-mode-tab') === 'systems';
       switchMode(isSystems ? 'systems' : 'culture');
     });
   });
-
-  // IntersectionObserver: Float in sticky perspective bar when hero switcher scrolls out
-  if (heroModeBar && stickyPerspectiveBar) {
-    const stickyObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
-          stickyPerspectiveBar.classList.add('visible');
-          stickyPerspectiveBar.setAttribute('aria-hidden', 'false');
-        } else {
-          stickyPerspectiveBar.classList.remove('visible');
-          stickyPerspectiveBar.setAttribute('aria-hidden', 'true');
-        }
-      });
-    }, {
-      threshold: 0,
-      rootMargin: '-52px 0px 0px 0px'
-    });
-    stickyObserver.observe(heroModeBar);
-  }
 
   // Tactile animation when clicking a nav link while already at that section
   function triggerAlreadyHereAnimation(targetEl, linkEl) {
@@ -284,6 +261,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Active section scroll spy for mobile dock
   const sectionIds = ['philosophy', 'operating-philosophy', 'culture-philosophy', 'artifacts', 'culture-artifacts', 'notes', 'culture-notes', 'inquiries'];
   function updateActiveNavOnScroll() {
+    // WP3.6: mobile (<=768px) floating lens switcher engages past the hero name,
+    // keeps the lens reachable mid-scroll. Desktop uses the header pill instead.
+    if (stickyPerspectiveBar && window.innerWidth <= 768) {
+      const showSticky = window.scrollY > 180;
+      stickyPerspectiveBar.classList.toggle('visible', showSticky);
+      stickyPerspectiveBar.setAttribute('aria-hidden', showSticky ? 'false' : 'true');
+    }
+
     if (isNavClickScrolling) return;
 
     const scrollPos = window.scrollY + 140;
@@ -445,26 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 5. Valid gestures only (NO scroll, NO mousemove)
-    const validInteractionEvents = ['pointerdown', 'touchstart', 'click', 'keydown'];
-
-    const triggerPlayOnGesture = () => {
-      if (audioEl.paused && !isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying) {
-        audioEl.volume = MAX_AUDIO_VOLUME;
-        audioEl.play().catch(() => {});
-      }
-      cleanupAutoplayTriggers();
-    };
-
-    const cleanupAutoplayTriggers = () => {
-      validInteractionEvents.forEach(evt => {
-        document.removeEventListener(evt, triggerPlayOnGesture);
-      });
-    };
-
-    validInteractionEvents.forEach(evt => {
-      document.addEventListener(evt, triggerPlayOnGesture, { once: true, passive: true });
-    });
+    // 5. Audio is strictly button-driven (WP3: legacy once-gesture autoplay trigger removed)
   }
 
   // ===========================================================================
@@ -476,9 +442,9 @@ document.addEventListener('DOMContentLoaded', () => {
       id: '4wKJqsG3yNAEl47lWPc3Et',
       name: 'pop mega raya',
       title: 'pop mega raya',
-      prose: 'nostalgic indonesian pop, celebratory melodies, and retro disco rhythms. vibrant brass sections and warm harmonies that drive high-energy creative sessions.',
+      prose: 'nostalgic indonesian pop with retro disco lift, brass warmth, and high spirits for making.',
       direction: 'classic indonesian pop, retro disco groove, lively brass & celebratory melodies',
-      tempo: 'upbeat, high-energy momentum for dynamic creative sprints and joyful listening',
+      tempo: 'upbeat push for creative sprints and joyful listening',
       artists: 'chrisye, guruh gipsy, vira talisa, fariz rm & evergreen indonesian groove',
       pills: ['pop mega raya', 'indonesian pop', 'retro groove', 'festive brass', 'high energy'],
       essayLink: './blog/the-geometry-of-shibuya-kei/',
@@ -490,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: '0rJhjrVzkmbxwdPHADN7GC',
       name: "honda city '05",
       title: "honda city '05",
-      prose: 'retro coastal groove, 80s city pop, and timeless late-night aor. analog synth brass, warm basslines, and breezy melodies for late-night cruising and focused engineering.',
+      prose: 'retro coastal groove with 80s city pop brass. analog warmth and breezy melodies for night drives and calm engineering.',
       direction: '80s japanese city pop, coastal aor, analog synth brass & breezy summer chords',
       tempo: 'relaxed cruising tempo for late-night drives, calm focus, and contemplative writing',
       artists: 's. kiyotaka & omega tribe, classic city pop icons, smooth jazz & nostalgic aor',
@@ -504,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: '5rMH1EaSOENPgWTZf0sysT',
       name: 'trop chic',
       title: 'trop chic pour pleurer',
-      prose: 'french touch, sophisticated nu-disco, and melancholic synth-pop. elegant basslines and cinematic dancefloor textures curated for late-night building and aesthetic flow.',
+      prose: "french touch with melancholic synth-pop. elegant basslines and cinematic haze for late-night building and aesthetic flow.",
       direction: 'french pop, nu-disco basslines, chic melancholia & filtered analog synths',
       tempo: 'hypnotic mid-tempo pulse for fluid architectural thinking and aesthetic momentum',
       artists: "paradis, l'impératrice, polo & pan, sébastien tellier & phoenix",
@@ -518,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: '6x6WTV9mBXwESfDOd28v74',
       name: 'zetaa',
       title: 'zetaa',
-      prose: "let's go to the space: ambient soundscapes, cosmic modular synths, and downtempo electronic exploration for immersive deep-focus problem solving.",
+      prose: "space ambient with modular synth pulses. cosmic drift and slow reverb for immersive deep-focus problem solving.",
       direction: 'space ambient, modular synth pulses, cosmic reverbs & cinematic downtempo',
       tempo: 'slow, floating atmospheric rhythm for late-night architecture and cognitive immersion',
       artists: 'brian eno, vangelis, tycho, boards of canada & space-age synthesists',
@@ -612,6 +578,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   window.addEventListener('resize', syncSpotifyEmbedResponsive, { passive: true });
+
+  // Carousel strip fade: mark .is-scrollable only when the tab strip actually
+  // overflows (desktop single-row strip); wrapped mobile chips are never scrollable.
+  const spotifyTabsStrip = document.querySelector('.spotify-carousel-tabs');
+  function syncSpotifyTabsScrollable() {
+    if (!spotifyTabsStrip) return;
+    const isScrollable = spotifyTabsStrip.scrollWidth > spotifyTabsStrip.clientWidth + 1;
+    spotifyTabsStrip.classList.toggle('is-scrollable', isScrollable);
+  }
+
+  syncSpotifyTabsScrollable();
+  window.addEventListener('resize', syncSpotifyTabsScrollable, { passive: true });
 
   // Carousel Prev / Next Button Listeners
   const spotifyPrevBtn = document.getElementById('spotify-prev-btn');
@@ -789,6 +767,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
     });
+  }
+
+  // ===========================================================================
+  // 7. Scroll Reveal System (dual-panel safe, reduced-motion respected)
+  //     Sections in hidden mode panels never intersect; they reveal on first
+  //     scroll-in after a lens switch. No-JS users see everything (no .js class).
+  // ===========================================================================
+  const revealTargets = document.querySelectorAll('[data-reveal]');
+  if (revealTargets.length && 'IntersectionObserver' in window) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) {
+      revealTargets.forEach(el => el.classList.add('revealed'));
+    } else {
+      const revealIO = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealIO.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealTargets.forEach(el => revealIO.observe(el));
+    }
   }
 
   // Instagram Live Embed Handshake
