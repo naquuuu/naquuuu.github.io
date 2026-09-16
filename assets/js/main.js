@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const badgeModeSystems = document.getElementById('badge-mode-systems');
   const badgeModeCulture = document.getElementById('badge-mode-culture');
   const stickyPerspectiveBar = document.getElementById('sticky-perspective-bar');
-  const heroModeBar = document.querySelector('.mode-switch-wrap');
 
   const viewSystems = document.getElementById('view-systems');
   const viewCulture = document.getElementById('view-culture');
@@ -80,9 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function syncPerspectiveSwitchers(activeMode) {
     const isCulture = activeMode === 'culture';
 
-    // Query all systems and culture buttons and badges across all switchers (hero, header)
-    const systemsButtons = document.querySelectorAll('#tab-mode-systems, #header-tab-mode-systems, [data-mode-tab="systems"]');
-    const cultureButtons = document.querySelectorAll('#tab-mode-culture, #header-tab-mode-culture, [data-mode-tab="culture"]');
+    // Query all systems and culture buttons and badges across all switchers (hero + floating)
+    const systemsButtons = document.querySelectorAll('#tab-mode-systems, [data-mode-tab="systems"]');
+    const cultureButtons = document.querySelectorAll('#tab-mode-culture, [data-mode-tab="culture"]');
     const systemsBadges = document.querySelectorAll('#badge-mode-systems, [data-mode-badge="systems"]');
     const cultureBadges = document.querySelectorAll('#badge-mode-culture, [data-mode-badge="culture"]');
 
@@ -171,28 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
       switchMode(isSystems ? 'systems' : 'culture');
     });
   });
-
-  // IntersectionObserver (desktop only, >=769px): float the sticky lens switcher
-  // in once the hero switcher scrolls out of view. Mobile (<=768px) uses the
-  // scroll-driven toggle in updateActiveNavOnScroll instead.
-  if (heroModeBar && stickyPerspectiveBar) {
-    const stickyObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (window.innerWidth <= 768) return;
-        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
-          stickyPerspectiveBar.classList.add('visible');
-          stickyPerspectiveBar.setAttribute('aria-hidden', 'false');
-        } else {
-          stickyPerspectiveBar.classList.remove('visible');
-          stickyPerspectiveBar.setAttribute('aria-hidden', 'true');
-        }
-      });
-    }, {
-      threshold: 0,
-      rootMargin: '-52px 0px 0px 0px'
-    });
-    stickyObserver.observe(heroModeBar);
-  }
 
   // Tactile animation when clicking a nav link while already at that section
   function triggerAlreadyHereAnimation(targetEl, linkEl) {    if (!targetEl) return;
@@ -283,9 +260,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Active section scroll spy for mobile dock
   const sectionIds = ['philosophy', 'operating-philosophy', 'culture-philosophy', 'artifacts', 'culture-artifacts', 'notes', 'culture-notes', 'inquiries'];
   function updateActiveNavOnScroll() {
-    // WP3.6: mobile (<=768px) floating lens switcher engages past the hero name,
-    // keeps the lens reachable mid-scroll. Desktop uses the header pill instead.
-    if (stickyPerspectiveBar && window.innerWidth <= 768) {
+    // ADR-010: the floating lens switcher is the single post-load lens control
+    // on every breakpoint: visible past the hero name (scrollY > 180), hidden at
+    // top. One unified trigger, no breakpoint guards, no observer.
+    if (stickyPerspectiveBar) {
       const showSticky = window.scrollY > 180;
       stickyPerspectiveBar.classList.toggle('visible', showSticky);
       stickyPerspectiveBar.setAttribute('aria-hidden', showSticky ? 'false' : 'true');

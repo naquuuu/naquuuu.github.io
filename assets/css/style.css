@@ -408,33 +408,8 @@ body[data-mode="culture"] .nav-audio-pill.playing {
   50% { height: 12px; }
 }
 
-/* Header Lens Switcher: compact always-visible perspective control (>=769px) */
-.nav-mode-switch {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 3px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-active);
-  border-radius: var(--radius-sm);
-  transition: border-color 0.45s ease, background-color 0.45s ease;
-}
-
-.nav-mode-switch .mode-tab-btn {
-  padding: 0.25rem 0.7rem;
-  font-size: 0.72rem;
-  white-space: nowrap;
-}
-
-@media (max-width: 768px) {
-  .nav-mode-switch {
-    display: none;
-  }
-}
-
-/* Floating Lens Switcher: desktop appears after the hero switcher scrolls out
-   (IntersectionObserver); mobile (<=768px) is scroll-driven via JS instead.
-   Desktop ALSO keeps the header pill; both sync via [data-mode-tab]. */
+/* Floating Lens Switcher: the single post-load lens control on every viewport.
+   Visible past the hero name (scrollY > 180, JS-driven), hidden at top. */
 .sticky-perspective-wrap {
   position: fixed;
   top: 68px; /* sits below the 58px desktop header */
