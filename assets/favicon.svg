@@ -1,5 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#120305" stroke="#E6243A" stroke-width="3"/>
-  <path d="M18 44V20L34 38V20H42V44L26 26V44H18Z" fill="#E6243A"/>
-  <rect x="44" y="38" width="6" height="6" fill="#38BDF8"/>
+  <!-- naquuuu.build two-lens mark: systems & matter (paper) / culture & taste (red),
+       one lowercase n color-inverted across the seam, seam dot = the recovery node.
+       murphy's law as a mark: both scenarios drawn, nothing unaccounted for. -->
+  <defs>
+    <clipPath id="tile">
+      <rect x="2" y="2" width="60" height="60" rx="14"/>
+    </clipPath>
+    <clipPath id="half-white">
+      <polygon points="2,2 62,2 2,62"/>
+    </clipPath>
+    <clipPath id="half-red">
+      <polygon points="62,2 62,62 2,62"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#tile)">
+    <rect x="2" y="2" width="60" height="60" fill="#FBFBFA"/>
+    <g clip-path="url(#half-red)">
+      <rect x="2" y="2" width="60" height="60" fill="#DC2626"/>
+    </g>
+    <!-- lowercase n: red copy on the white half -->
+    <g clip-path="url(#half-white)">
+      <path d="M24 47 V26 A9 9 0 0 1 42 26 V47" fill="none" stroke="#DC2626" stroke-width="9" stroke-linecap="butt"/>
+    </g>
+    <!-- lowercase n: white copy on the red half -->
+    <g clip-path="url(#half-red)">
+      <path d="M24 47 V26 A9 9 0 0 1 42 26 V47" fill="none" stroke="#FBFBFA" stroke-width="9" stroke-linecap="butt"/>
+    </g>
+    <!-- seam dot: the recovery node on the boundary -->
+    <g clip-path="url(#half-white)">
+      <circle cx="33" cy="33" r="4" fill="#DC2626"/>
+    </g>
+    <g clip-path="url(#half-red)">
+      <circle cx="33" cy="33" r="4" fill="#FBFBFA"/>
+    </g>
+  </g>
 </svg>
