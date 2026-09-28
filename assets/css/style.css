@@ -5,7 +5,6 @@
      - [ culture & taste ]: Deep Velvet Crimson & Dark Maroon Palette (#120305)
    ============================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600;700&display=swap');
 
 :root {
   /* --- Swiss Technical Editorial Light Palette (Default: Systems & Matter) --- */
@@ -4075,3 +4074,17 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
     padding: 0 0.1rem;
   }
 }
+
+/* Keyboard access and intrinsic media sizing. */
+.skip-link { position: fixed; top: -5rem; left: 1rem; z-index: 10000; padding: .75rem; background: var(--bg-primary, #fff); color: var(--text-primary, #111); }
+.skip-link:focus { top: 1rem; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+img { max-width: 100%; height: auto; }
+.essay-meta-row { flex-wrap: wrap; }
+.recovery-table { width: 100%; border-collapse: collapse; }
+.recovery-table th, .recovery-table td { padding: .75rem; border-bottom: 1px solid var(--border-subtle); text-align: left; overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+@media (max-width: 380px) { .mode-switcher { display: flex; flex-wrap: wrap; max-width: 100%; } .mode-tab-btn { flex: 1 1 100%; } }
+.essay-content code { overflow-wrap: anywhere; white-space: normal; } .essay-content pre code { white-space: pre; }

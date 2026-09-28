@@ -54,4 +54,9 @@
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
+  <url><loc>https://naquuuu.github.io/portfolio/</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://naquuuu.github.io/blog/reverse-engineering-client-binaries/</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://naquuuu.github.io/blog/smart-tailoring-as-kinetic-infrastructure/</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://naquuuu.github.io/blog/the-geometry-of-shibuya-kei/</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://naquuuu.github.io/performance/recovery/</loc><lastmod>2026-09-28</lastmod></url>
 </urlset>
