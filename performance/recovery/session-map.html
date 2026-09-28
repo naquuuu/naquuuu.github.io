@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" data-lens="culture">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#1B1214">
+<title>session map: recovery on 28 september 2026 | naquuuu agent viz</title>
+<meta name="description" content="lowercase game bot map of the seven agent roster, its task board, and its handoffs for one opencode session.">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+html[data-lens="culture"] {
+  --bg-primary: #120305;
+  --bg-surface: #1B1214;
+  --bg-elevated: #241A1C;
+  --bg-input: #2C2023;
+  --border-subtle: #362529;
+  --border-active: #4F353B;
+  --text-primary: #F5ECE8;
+  --text-muted: #B5A5A0;
+  --text-soft: #B58287;
+  --accent-crimson: #C85250;
+  --accent-wine: #9A3836;
+  --accent-dim: rgba(200, 82, 80, 0.14);
+  --led-active: #C85250;
+  --led-idle: #6A5459;
+  --led-done: #8AA47C;
+  --led-blocked: #D98A3A;
+  --task-open: #B5A5A0;
+  --task-active: #C85250;
+  --task-closed: #8AA47C;
+  --task-queued: #6A5459;
+  --shadow: rgba(0, 0, 0, 0.55);
+}
+html[data-lens="systems"] {
+  --bg-primary: #FBFBFA;
+  --bg-surface: #F2F2ED;
+  --bg-elevated: #ECECE6;
+  --bg-input: #FFFFFF;
+  --border-subtle: #E5E5DF;
+  --border-active: #D4D4CE;
+  --text-primary: #111110;
+  --text-muted: #555550;
+  --text-soft: #6B6B66;
+  --accent-crimson: #DC2626;
+  --accent-wine: #991B1B;
+  --accent-dim: rgba(220, 38, 38, 0.08);
+  --led-active: #DC2626;
+  --led-idle: #C4C4BE;
+  --led-done: #4F7A46;
+  --led-blocked: #B45309;
+  --task-open: #555550;
+  --task-active: #DC2626;
+  --task-closed: #4F7A46;
+  --task-queued: #A8A8A2;
+  --shadow: rgba(0, 0, 0, 0.12);
+}
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "JetBrains Mono", "Cascadia Mono", Consolas, "Courier New", monospace;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-full: 9999px;
+  --measure: 74ch;
+}
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+img, svg { max-width: 100%; }
+a { color: var(--accent-crimson); }
+.sr-only {
+  position: absolute; margin: -1px; padding: 0; border: 0;
+  clip: rect(0 0 0 0); clip-path: inset(50%); overflow: hidden; white-space: nowrap;
+}
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1.1rem;
+  min-width: 0;
+}
+.skip {
+  position: absolute; left: -9999px; top: 0; background: var(--bg-elevated);
+  color: var(--text-primary); padding: 0.6rem 0.9rem; z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+.site-header {
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  position: sticky; top: 0; z-index: 5;
+}
+.head {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem 1.1rem;
+  padding-top: 0.7rem; padding-bottom: 0.7rem;
+}
+.brand {
+  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700;
+  text-decoration: none; color: var(--text-primary); display: inline-flex; align-items: center; gap: 0.45rem;
+}
+.dot {
+  inline-size: 9px; block-size: 9px; border-radius: var(--radius-full);
+  background: var(--accent-crimson); box-shadow: 0 0 0 3px var(--accent-dim);
+}
+.head-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-inline-start: auto; min-width: 0; }
+.head-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+button {
+  min-height: 44px; min-width: 44px; padding: 0.4rem 0.85rem;
+  font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.04em;
+  color: var(--text-primary); background: var(--bg-elevated);
+  border: 1px solid var(--border-active); border-radius: var(--radius-sm); cursor: pointer;
+}
+button:hover { border-color: var(--accent-crimson); color: var(--accent-crimson); }
+button:focus-visible { outline: 2px solid var(--accent-crimson); outline-offset: 2px; }
+.pill {
+  display: inline-block; padding: 0.15rem 0.55rem; border-radius: var(--radius-full);
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.05em;
+  border: 1px solid var(--border-active); color: var(--text-muted); min-width: 0;
+}
+.pill-quiet { border-color: var(--border-subtle); color: var(--text-soft); }
+.badge { border-color: var(--accent-crimson); color: var(--accent-crimson); }
+.badge[data-live="live"] { background: var(--accent-dim); }
+.badge[data-live="stale"] { color: var(--led-blocked); border-color: var(--led-blocked); }
+h1 {
+  font-size: 1.5rem; line-height: 1.25; margin: 1.4rem 0 0.4rem; letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+h2 {
+  font-size: 1.05rem; margin: 0 0 0.7rem; letter-spacing: 0.02em;
+  text-transform: lowercase; font-family: var(--font-mono); color: var(--accent-crimson);
+}
+.kicker { color: var(--text-muted); margin: 0 0 1.1rem; max-width: var(--measure); font-size: 0.92rem; }
+.meta-row {
+  display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-soft); margin: 0 0 1.2rem;
+}
+section { margin: 0 0 1.8rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; margin: 0 0 0.8rem; }
+.legend span { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); }
+.map { position: relative; }
+.lanes { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.7rem; align-items: start; }
+.lane { min-width: 0; border-left: 1px dashed var(--border-subtle); padding-inline-start: 0.7rem; }
+.lane-label {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-soft); margin: 0 0 0.5rem;
+}
+.bot {
+  background: var(--bg-surface); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); padding: 0.75rem; margin: 0 0 0.7rem;
+  min-width: 0; overflow-wrap: anywhere; box-shadow: 0 4px 18px var(--shadow);
+}
+.bot[data-status="active"] { border-color: var(--accent-crimson); }
+.bot[data-status="blocked"] { border-color: var(--led-blocked); }
+.bot-top { display: flex; align-items: flex-start; gap: 0.55rem; min-width: 0; }
+.avatar { flex: 0 0 auto; color: var(--text-muted); }
+.bot[data-status="active"] .avatar { color: var(--accent-crimson); }
+.bot[data-status="blocked"] .avatar { color: var(--led-blocked); }
+.bot[data-status="done"] .avatar { color: var(--led-done); }
+.avatar-svg { display: block; inline-size: 34px; block-size: 34px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.avatar-dot { fill: currentColor; stroke: none; }
+.avatar-head, .avatar-eye { fill: none; }
+.bot-id { min-width: 0; }
+.bot-name { font-size: 0.9rem; margin: 0; font-family: var(--font-mono); letter-spacing: 0.01em; }
+.bot-mode { font-size: 0.66rem; margin: 0.1rem 0 0; color: var(--text-soft); font-family: var(--font-mono); }
+.led {
+  display: inline-block; margin-inline-start: auto; flex: 0 0 auto;
+  inline-size: 10px; block-size: 10px;
+  border-radius: var(--radius-full); background: var(--led-idle);
+  box-shadow: 0 0 0 3px var(--bg-primary);
+}
+.led[data-status="active"] { background: var(--led-active); animation: pulse 1.8s ease-in-out infinite; }
+.led[data-status="done"] { background: var(--led-done); }
+.led[data-status="blocked"] { background: var(--led-blocked); }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@media (prefers-reduced-motion: reduce) { .led { animation: none; } }
+.bot-persona { font-size: 0.78rem; color: var(--text-muted); margin: 0.5rem 0 0; }
+.bot-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.3rem; margin: 0.6rem 0 0; }
+.stat { min-width: 0; }
+.stat dt { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.08em; }
+.stat dd { margin: 0; font-family: var(--font-mono); font-size: 0.95rem; color: var(--text-primary); }
+.bot-files, .bot-last { font-size: 0.68rem; color: var(--text-soft); margin: 0.45rem 0 0; font-family: var(--font-mono); }
+.k { color: var(--accent-crimson); }
+.tag { font-size: 0.6rem; color: var(--led-blocked); font-family: var(--font-mono); }
+.edges { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
+.edge-path { fill: none; stroke: var(--accent-crimson); stroke-width: 1.4; opacity: 0.75; }
+.edge-path[data-state="bad"] { stroke: var(--led-blocked); stroke-dasharray: 4 3; }
+.edge-label {
+  position: absolute; transform: translate(-50%, -50%);
+  background: var(--bg-elevated); border: 1px solid var(--border-active);
+  border-radius: var(--radius-full); padding: 0.1rem 0.5rem;
+  font-family: var(--font-mono); font-size: 0.64rem; color: var(--text-muted);
+  max-width: 12rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.board { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
+.task {
+  background: var(--bg-surface); border: 1px solid var(--border-subtle);
+  border-inline-start: 4px solid var(--task-open);
+  border-radius: var(--radius-sm); padding: 0.6rem 0.7rem; min-width: 0; overflow-wrap: anywhere;
+}
+.task[data-status="in_progress"] { border-inline-start-color: var(--task-active); }
+.task[data-status="completed"] { border-inline-start-color: var(--task-closed); }
+.task[data-status="pending"] { border-inline-start-color: var(--task-queued); }
+.task-content { margin: 0 0 0.4rem; font-size: 0.85rem; }
+.task-meta { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; margin: 0; }
+.task-owner { font-family: var(--font-mono); font-size: 0.66rem; color: var(--text-soft); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.2rem; }
+.tl {
+  display: grid; grid-template-columns: 5.2rem 8.5rem minmax(0, 1fr); gap: 0.5rem;
+  align-items: baseline; padding: 0.3rem 0.45rem; border-radius: var(--radius-sm);
+  font-family: var(--font-mono); font-size: 0.72rem; border-inline-start: 3px solid var(--border-subtle);
+  min-width: 0;
+}
+.tl time, .tl > span:first-child { color: var(--text-soft); }
+.tl-agent { color: var(--accent-crimson); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tl-label { color: var(--text-muted); overflow-wrap: anywhere; }
+.tl[data-kind="handoff"] { border-inline-start-color: var(--accent-crimson); }
+.tl[data-kind="chat"] { border-inline-start-color: var(--led-done); }
+.tl[data-state="bad"] .tl-label { color: var(--led-blocked); }
+.site-footer { border-top: 1px solid var(--border-subtle); margin: 2rem 0 0; padding: 1.2rem 0 2.4rem; }
+.foot-wordmark { font-size: 2.6rem; font-weight: 700; color: var(--border-active); margin: 0 0 0.5rem; letter-spacing: -0.02em; }
+.checks { display: flex; flex-wrap: wrap; gap: 0.4rem 0.5rem; }
+.check {
+  font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-soft);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-full); padding: 0.1rem 0.55rem;
+}
+.check-pass { color: var(--led-done); border-color: var(--led-done); }
+.check-fail { color: var(--led-blocked); border-color: var(--led-blocked); }
+.note { font-size: 0.78rem; color: var(--text-muted); max-width: var(--measure); }
+@media (max-width: 1080px) { .lanes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .lanes { grid-template-columns: repeat(2, minmax(0, 1fr)); } .head-meta { margin-inline-start: 0; } }
+@media (max-width: 520px) {
+  .lanes { grid-template-columns: minmax(0, 1fr); }
+  .tl { grid-template-columns: minmax(0, 1fr); }
+  h1 { font-size: 1.25rem; }
+}
+</style>
+<meta name="description" content="curated relay recovery record, reconstructed from documented incident lessons. not a captured agent trace."><link rel="canonical" href="https://naquuuu.github.io/performance/recovery/session-map.html"></head>
+<body>
+<a class="skip" href="#map">skip to the map</a>
+<header class="site-header">
+  <div class="wrap head">
+    <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span>naquuuu</a>
+    <div class="head-meta">
+      <span class="pill badge" id="live-badge" data-live="static" aria-live="polite">static</span>
+      <span class="pill">session recovery on 28 september 2026</span>
+      <span class="pill" id="live-stamp">written 21:26:37</span>
+    </div>
+    <div class="head-actions">
+      <button type="button" id="lens-btn">lens: culture</button>
+      <button type="button" id="reload-btn">reload</button>
+    </div>
+  </div>
+</header>
+<main class="wrap" id="top">
+  <h1>session map: recovery on 28 september 2026</h1>
+  <p class="kicker">game bot view of the roster at work. lanes read left to right as the pipeline. a card lights up when that agent was the last one to move. a dashed card means its last tool call failed.</p>
+  <p class="meta-row">
+    <span>active: none</span><span>•</span>
+    <span>blocked: none</span><span>•</span>
+    <span>current task: documented recovery; agent attribution unavailable</span><span>•</span>
+    <span>generated <time datetime="2026-09-28T21:26:37+07:00">21:26:37</time></span>
+  </p>
+
+  <section aria-labelledby="map-title">
+    <h2 id="map-title">the roster</h2>
+    <div class="legend" aria-hidden="true"><span><i class="led" data-status="active"></i>active</span><span><i class="led" data-status="idle"></i>idle</span><span><i class="led" data-status="done"></i>done</span><span><i class="led" data-status="blocked"></i>blocked</span></div>
+    <div class="map" id="map">
+      <svg class="edges" id="edges" aria-hidden="true" focusable="false"><defs id="edge-defs"></defs><g id="edge-layer"></g></svg>
+      <div class="lanes"><div class="lane" data-lane="orchestrator"><p class="lane-label">orchestrator</p><article class="bot" id="agent-naquuuubot" data-agent="naquuuubot" data-lane="orchestrator" data-status="idle"><div class="bot-top"><span class="avatar" aria-hidden="true"><svg class="avatar-svg" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 14 L24 7" /><circle class="avatar-dot" cx="24" cy="4.5" r="2.4" /><rect class="avatar-head" x="7" y="14" width="34" height="25" rx="7" /><path class="avatar-eye" d="M13 24 L35 24 L35 27 L13 27 Z" /><path d="M20 33 L28 33" /></svg></span><div class="bot-id"><h3 class="bot-name">naquuuubot</h3><p class="bot-mode">primary</p></div><span class="led" data-status="idle" title="idle"><span class="sr-only">idle</span></span></div><p class="bot-persona">chief of staff / engineering orchestrator. sole entry point for engineering tasks: screens in...</p><dl class="bot-stats"><div class="stat"><dt>tasks</dt><dd data-value="0">0</dd></div><div class="stat"><dt>tools</dt><dd data-value="0">0</dd></div><div class="stat"><dt>files</dt><dd data-value="0">0</dd></div><div class="stat"><dt>out</dt><dd data-value="0">0</dd></div><div class="stat"><dt>in</dt><dd data-value="0">0</dd></div><div class="stat"><dt>err</dt><dd data-value="0">0</dd></div></dl></article></div><div class="lane" data-lane="creative"><p class="lane-label">creative</p><article class="bot" id="agent-naquuuu-curator" data-agent="naquuuu-curator" data-lane="creative" data-status="idle"><div class="bot-top"><span class="avatar" aria-hidden="true"><svg class="avatar-svg" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 14 L24 7" /><circle class="avatar-dot" cx="24" cy="4.5" r="2.4" /><rect class="avatar-head" x="7" y="14" width="34" height="25" rx="7" /><path class="avatar-eye" d="M13 24 L35 24 L35 27 L13 27 Z" /><path d="M20 33 L28 33" /></svg></span><div class="bot-id"><h3 class="bot-name">naquuuu-curator</h3><p class="bot-mode">all</p></div><span class="led" data-status="idle" title="idle"><span class="sr-only">idle</span></span></div><p class="bot-persona">aesthetic, taste &amp; persona muse and bilingual (id/en) thought partner. creative director for...</p><dl class="bot-stats"><div class="stat"><dt>tasks</dt><dd data-value="0">0</dd></div><div class="stat"><dt>tools</dt><dd data-value="0">0</dd></div><div class="stat"><dt>files</dt><dd data-value="0">0</dd></div><div class="stat"><dt>out</dt><dd data-value="0">0</dd></div><div class="stat"><dt>in</dt><dd data-value="0">0</dd></div><div class="stat"><dt>err</dt><dd data-value="0">0</dd></div></dl></article></div><div class="lane" data-lane="build"><p class="lane-label">build</p><article class="bot" id="agent-naquuuu-builder" data-agent="naquuuu-builder" data-lane="build" data-status="idle"><div class="bot-top"><span class="avatar" aria-hidden="true"><svg class="avatar-svg" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 14 L24 7" /><circle class="avatar-dot" cx="24" cy="4.5" r="2.4" /><rect class="avatar-head" x="7" y="14" width="34" height="25" rx="7" /><circle class="avatar-eye" cx="18" cy="25" r="2.6" /><circle class="avatar-eye" cx="30" cy="25" r="2.6" /><path d="M19 33 L29 33" /></svg></span><div class="bot-id"><h3 class="bot-name">naquuuu-builder</h3><p class="bot-mode">subagent</p></div><span class="led" data-status="idle" title="idle"><span class="sr-only">idle</span></span></div><p class="bot-persona">software &amp; prototype builder. implements code across projects, scripts, and blog features, th...</p><dl class="bot-stats"><div class="stat"><dt>tasks</dt><dd data-value="0">0</dd></div><div class="stat"><dt>tools</dt><dd data-value="0">0</dd></div><div class="stat"><dt>files</dt><dd data-value="0">0</dd></div><div class="stat"><dt>out</dt><dd data-value="0">0</dd></div><div class="stat"><dt>in</dt><dd data-value="0">0</dd></div><div class="stat"><dt>err</dt><dd data-value="0">0</dd></div></dl></article><article class="bot" id="agent-naquuuu-scribe" data-agent="naquuuu-scribe" data-lane="build" data-status="idle"><div class="bot-top"><span class="avatar" aria-hidden="true"><svg class="avatar-svg" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 14 L24 7" /><circle class="avatar-dot" cx="24" cy="4.5" r="2.4" /><rect class="avatar-head" x="7" y="14" width="34" height="25" rx="7" /><path class="avatar-eye" d="M13 24 L35 24 L35 27 L13 27 Z" /><path d="M20 33 L28 33" /></svg></span><div class="bot-id"><h3 class="bot-name">naquuuu-scribe</h3><p class="bot-mode">subagent</p></div><span class="led" data-status="idle" title="idle"><span class="sr-only">idle</span></span></div><p class="bot-persona">content &amp; documentation scribe. drafts blog articles, technical adrs, project documentation,...</p><dl class="bot-stats"><div class="stat"><dt>tasks</dt><dd data-value="0">0</dd></div><div class="stat"><dt>tools</dt><dd data-value="0">0</dd></div><div class="stat"><dt>files</dt><dd data-value="0">0</dd></div><div class="stat"><dt>out</dt><dd data-value="0">0</dd></div><div class="stat"><dt>in</dt><dd data-value="0">0</dd></div><div class="stat"><dt>err</dt><dd data-value="0">0</dd></div></dl></article></div><div class="lane" data-lane="review"><p class="lane-label">review</p><article class="bot" id="agent-naquuuu-librarian" data-agent="naquuuu-librarian" data-lane="review" data-status="idle"><div class="bot-top"><span class="avatar" aria-hidden="true"><svg class="avatar-svg" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 14 L24 7" /><circle class="avatar-dot" cx="24" cy="4.5" r="2.4" /><rect class="avatar-head" x="7" y="14" width="34" height="25" rx="7" /><path class="avatar-eye" d="M14 25 L22 25" /><path class="avatar-eye" d="M26 25 L34 25" /><path d="M19 33 Q24 36 29 33" /></svg></span><div class="bot-id"><h3 class="bot-name">naquuuu-librarian</h3><p class="bot-mode">subagent</p></div><span class="led" data-status="idle" title="idle"><span class="sr-only">idle</span></span></div><p class="bot-persona">personal knowledge librarian. read-only retrieval across workspace docs, adrs, notes, and dec...</p><dl class="bot-stats"><div class="stat"><dt>tasks</dt><dd data-value="0">0</dd></div><div class="stat"><dt>tools</dt><dd data-value="0">0</dd></div><div class="stat"><dt>files</dt><dd data-value="0">0</dd></div><div class="stat"><dt>out</dt><dd data-value="0">0</dd></div><div class="stat"><dt>in</dt><dd data-value="0">0</dd></div><div class="stat"><dt>err</dt><dd data-value="0">0</dd></div></dl></article><article class="bot" id="agent-naquuuu-skeptic" data-agent="naquuuu-skeptic" data-lane="review" data-status="idle"><div class="bot-top"><span class="avatar" aria-hidden="true"><svg class="avatar-svg" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 14 L24 7" /><circle class="avatar-dot" cx="24" cy="4.5" r="2.4" /><rect class="avatar-head" x="7" y="14" width="34" height="25" rx="7" /><circle class="avatar-eye" cx="18" cy="25" r="2.6" /><circle class="avatar-eye" cx="30" cy="25" r="2.6" /><path d="M19 33 L29 33" /></svg></span><div class="bot-id"><h3 class="bot-name">naquuuu-skeptic</h3><p class="bot-mode">subagent</p></div><span class="led" data-status="idle" title="idle"><span class="sr-only">idle</span></span></div><p class="bot-persona">adversarial reviewer. challenges specifications and code for hallucinations, unsupported clai...</p><dl class="bot-stats"><div class="stat"><dt>tasks</dt><dd data-value="0">0</dd></div><div class="stat"><dt>tools</dt><dd data-value="0">0</dd></div><div class="stat"><dt>files</dt><dd data-value="0">0</dd></div><div class="stat"><dt>out</dt><dd data-value="0">0</dd></div><div class="stat"><dt>in</dt><dd data-value="0">0</dd></div><div class="stat"><dt>err</dt><dd data-value="0">0</dd></div></dl></article></div><div class="lane" data-lane="verify"><p class="lane-label">verify</p><article class="bot" id="agent-naquuuu-verifier" data-agent="naquuuu-verifier" data-lane="verify" data-status="idle"><div class="bot-top"><span class="avatar" aria-hidden="true"><svg class="avatar-svg" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 14 L24 7" /><circle class="avatar-dot" cx="24" cy="4.5" r="2.4" /><rect class="avatar-head" x="7" y="14" width="34" height="25" rx="7" /><circle class="avatar-eye" cx="18" cy="25" r="2.6" /><circle class="avatar-eye" cx="30" cy="25" r="2.6" /><path d="M19 33 L29 33" /></svg></span><div class="bot-id"><h3 class="bot-name">naquuuu-verifier</h3><p class="bot-mode">subagent</p></div><span class="led" data-status="idle" title="idle"><span class="sr-only">idle</span></span></div><p class="bot-persona">quality gatekeeper. runs workspace gate scripts and reports pass or fail with raw evidence.</p><dl class="bot-stats"><div class="stat"><dt>tasks</dt><dd data-value="0">0</dd></div><div class="stat"><dt>tools</dt><dd data-value="0">0</dd></div><div class="stat"><dt>files</dt><dd data-value="0">0</dd></div><div class="stat"><dt>out</dt><dd data-value="0">0</dd></div><div class="stat"><dt>in</dt><dd data-value="0">0</dd></div><div class="stat"><dt>err</dt><dd data-value="0">0</dd></div></dl></article></div></div>
+      <p class="note">no handoff edges in this session.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="board-title">
+    <h2 id="board-title">task board</h2>
+    <ul class="board"><li class="task" data-status="pending" data-priority="unknown"><p class="task-content">no todowrite records in this session</p></li></ul>
+  </section>
+
+  <section aria-labelledby="timeline-title">
+    <h2 id="timeline-title">timeline</h2>
+    <ol class="timeline"><li class="tl" data-kind="event" data-state="bad"><span>--:--:--</span><span class="tl-agent">unattributed</span><span class="tl-label">l-17: two hosts and repeated restarts disrupted the relay</span></li><li class="tl" data-kind="event" data-state="bad"><span>--:--:--</span><span class="tl-agent">unattributed</span><span class="tl-label">l-18: interrupted update left the environment incomplete</span></li><li class="tl" data-kind="event" data-state="bad"><span>--:--:--</span><span class="tl-agent">unattributed</span><span class="tl-label">l-20: missing aiohttp explained misleading connection timeouts</span></li><li class="tl" data-kind="event" data-state="ok"><time datetime="2026-09-28T19:32:48+07:00">19:32:48</time><span class="tl-agent">unattributed</span><span class="tl-label">aiohttp installed; gateway connected at 19:32:48 wib</span></li><li class="tl" data-kind="event" data-state="ok"><span>--:--:--</span><span class="tl-agent">unattributed</span><span class="tl-label">l-21: owner message round-trip confirmed recovery</span></li></ol>
+  </section>
+</main>
+<footer class="wrap site-footer">
+  <p class="foot-wordmark" aria-hidden="true">naquuuu</p>
+  <div class="checks"><span class="check check-pass">dashes: 0</span><span class="check check-pass">inline width styles: 0</span><span class="check">credential patterns scrubbed: 0</span><span class="check">records: 5</span><span class="check">agents: 7</span><span class="check">handoff edges: 0</span><span class="check">tasks: 0</span><span class="check">roster: parsed from .opencode/agent/*.md</span></div>
+  <p class="note">telemetry lives in .session-viz and holds paths, commands, and task text only. file contents are never recorded. credential shaped strings are replaced with [redacted] twice, once when the record is written and again when this page is built, so a key in a record cannot reach a file git would accept. this page holds itself to the same dash and inline width rules as the blog.</p>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement;
+  var map = document.getElementById("map");
+  var svg = document.getElementById("edges");
+  var layer = document.getElementById("edge-layer");
+  var badge = document.getElementById("live-badge");
+  var stamp = document.getElementById("live-stamp");
+  var lensBtn = document.getElementById("lens-btn");
+  var reloadBtn = document.getElementById("reload-btn");
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+  var labels = [].slice.call(document.querySelectorAll(".edge-label"));
+
+  function token(name) {
+    return getComputedStyle(root).getPropertyValue(name).trim();
+  }
+
+  function marker(color) {
+    var found = document.getElementById("viz-arrow");
+    if (!found) {
+      found = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+      found.setAttribute("id", "viz-arrow");
+      found.setAttribute("viewBox", "0 0 8 8");
+      found.setAttribute("refX", "7");
+      found.setAttribute("refY", "4");
+      found.setAttribute("markerWidth", "5");
+      found.setAttribute("markerHeight", "5");
+      found.setAttribute("orient", "auto-start-reverse");
+      var head = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      head.setAttribute("d", "M0 0 L8 4 L0 8 Z");
+      found.appendChild(head);
+      document.getElementById("edge-defs").appendChild(found);
+    }
+    found.firstChild.setAttribute("fill", color);
+    return found;
+  }
+
+  function draw() {
+    if (!map || !svg || !layer) return;
+    var box = map.getBoundingClientRect();
+    var accent = token("--accent-crimson") || "currentColor";
+    marker(accent);
+    svg.setAttribute("viewBox", "0 0 " + Math.max(box.width, 1) + " " + Math.max(box.height, 1));
+    while (layer.firstChild) layer.removeChild(layer.firstChild);
+    labels.forEach(function (label) { label.style.visibility = "hidden"; });
+    labels.forEach(function (label) {
+      var from = document.querySelector('.bot[data-agent="' + label.getAttribute("data-from") + '"]');
+      var to = document.querySelector('.bot[data-agent="' + label.getAttribute("data-to") + '"]');
+      if (!from || !to) return;
+      var a = from.getBoundingClientRect();
+      var b = to.getBoundingClientRect();
+      var ax = a.left - box.left + a.width / 2;
+      var ay = a.top - box.top + a.height / 2;
+      var bx = b.left - box.left + b.width / 2;
+      var by = b.top - box.top + b.height / 2;
+      var rightward = bx >= ax;
+      var x1 = rightward ? ax + a.width / 2 : ax - a.width / 2;
+      var x2 = rightward ? bx - b.width / 2 : bx + b.width / 2;
+      var bow = Math.max(Math.abs(x2 - x1) * 0.45, 14) * (rightward ? 1 : -1);
+      var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("class", "edge-path");
+      path.setAttribute("d", "M" + x1 + " " + ay + " C" + (x1 + bow) + " " + ay +
+        ", " + (x2 - bow) + " " + by + ", " + x2 + " " + by);
+      path.setAttribute("marker-end", "url(#viz-arrow)");
+      if (from.getAttribute("data-status") === "blocked") {
+        path.setAttribute("data-state", "bad");
+        path.setAttribute("marker-end", "");
+        marker(token("--led-blocked") || accent);
+      }
+      layer.appendChild(path);
+      label.style.left = (x1 + x2) / 2 + "px";
+      label.style.top = (ay + by) / 2 + "px";
+      label.style.visibility = "visible";
+    });
+  }
+
+  function badgeSet(state, text) {
+    if (!badge) return;
+    badge.setAttribute("data-live", state);
+    badge.textContent = text;
+  }
+
+  function poll() {
+    if (location.protocol !== "http:" && location.protocol !== "https:") {
+      badgeSet("static", "static");
+      return;
+    }
+    fetch("api/session", { cache: "no-store" }).then(function (response) {
+      if (!response.ok) throw new Error("bad status");
+      return response.json();
+    }).then(function (data) {
+      badgeSet("live", "live");
+      if (stamp && data && data.generated) stamp.textContent = "served " + String(data.generated);
+    }).catch(function () {
+      badgeSet("stale", "stale");
+    });
+  }
+
+  if (lensBtn) {
+    lensBtn.addEventListener("click", function () {
+      var next = root.getAttribute("data-lens") === "systems" ? "culture" : "systems";
+      root.setAttribute("data-lens", next);
+      lensBtn.textContent = "lens: " + next;
+      if (themeMeta) themeMeta.setAttribute("content", token("--bg-surface"));
+      draw();
+    });
+  }
+  if (reloadBtn) reloadBtn.addEventListener("click", function () { location.reload(); });
+  window.addEventListener("resize", draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  draw();
+  poll();
+  window.setInterval(poll, 2000);
+})();
+</script>
+</body>
+</html>
