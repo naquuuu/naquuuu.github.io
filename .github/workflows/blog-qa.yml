@@ -1,0 +1,138 @@
+name: Blog Reliability QA & Publishing Guard
+
+# Deterministic gates only. There is no model call in this workflow and there
+# are no secrets in it. Content is drafted locally by the opencode agents and
+# lands here as a pull request, so the only thing CI has to do is prove the
+# site is still sound and nudge the owner when the cadence slips.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.html'
+      - 'assets/**'
+      - 'scripts/**'
+  pull_request:
+    paths:
+      - '**/*.html'
+      - 'assets/**'
+      - 'scripts/**'
+  schedule:
+    # Saturday 04:00 UTC. Gates plus a cadence nudge, nothing else.
+    - cron: '0 4 * * 6'
+  workflow_dispatch:
+
+# Read only. No job in this file writes to the repository.
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    name: Reliability gates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Blog reliability QA gate
+        run: python scripts/verify_blog_qa.py
+
+      - name: Sanitization and leak linter
+        run: python scripts/verify_sanitization.py --dir .
+
+  nudge:
+    name: Nudge when the cadence slips
+    needs: qa
+    if: github.event_name == 'schedule'
+    # A broken nudge must never redden the weekly run. The gates above are the
+    # signal; this job is a reminder.
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    permissions:
+      # Job level permissions replace the top level block, so it is restated
+      # here. Read on contents so the commit query works, write on issues only
+      # because the nudge is an issue comment. Never write on contents.
+      contents: read
+      issues: write
+    steps:
+      - name: Nudge if no essay page landed in the last 8 days
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const TITLE = '[nudge] no essay published in 8 days';
+            const WINDOW_DAYS = 8;
+            const { owner, repo } = context.repo;
+
+            const since = new Date(Date.now() - WINDOW_DAYS * 24 * 60 * 60 * 1000).toISOString();
+            const recent = await github.rest.repos.listCommits({
+              owner,
+              repo,
+              since,
+              path: 'blog/*/index.html',
+              per_page: 100,
+            });
+
+            // Confirm each hit really moved an essay page, so a path filter
+            // that the API quietly widens cannot suppress the nudge. If the
+            // file list cannot be read, treat the commit as a publish and stay
+            // silent rather than cry wolf.
+            const ESSAY_PAGE = /^blog\/[^/]+\/index\.html$/;
+            let published = false;
+            for (const commit of recent.data) {
+              let files;
+              try {
+                const detail = await github.rest.repos.getCommit({
+                  owner,
+                  repo,
+                  ref: commit.sha,
+                });
+                files = (detail.data.files || []).map((f) => f.filename);
+              } catch (error) {
+                published = true;
+                core.info(`could not read files for ${commit.sha}, standing down`);
+                break;
+              }
+              if (files.some((name) => ESSAY_PAGE.test(name))) {
+                published = true;
+                break;
+              }
+            }
+
+            if (published) {
+              core.info('an essay page changed inside the window, no nudge needed');
+              return;
+            }
+
+            const open = await github.rest.issues.listForRepo({
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100,
+            });
+            const existing = open.data.find((issue) => issue.title === TITLE);
+            const body = [
+              `no essay page under blog has changed in the last ${WINDOW_DAYS} days.`,
+              'the rotation pool in the style bible holds twelve topics, one per week.',
+              'scaffold locally with scripts/new_essay.py, replace the markers, then open a pull request.',
+            ].join('\n');
+
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: existing.number,
+                body,
+              });
+              core.info(`nudged existing issue ${existing.number}`);
+            } else {
+              await github.rest.issues.create({ owner, repo, title: TITLE, body });
+              core.info('opened the nudge issue');
+            }
