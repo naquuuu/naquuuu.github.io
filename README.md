@@ -1,53 +1,29 @@
-# naquuuu@pm — Personal Product & AI Systems Blog
+# naquuuu: a personal journal
 
-A public thought-leadership and engineering workstation by **Ramadhana Bhanuharya Krishnamurti (Krishna / naquuuu)**.
-Bridging AI agentic workflows, high-precision technical product management, and systems architecture.
+A static personal journal by Krishna, exploring systems & matter and culture & taste.
 
-- Live URL: [https://naquuuu.github.io/](https://naquuuu.github.io/)
+Live site: [naquuuu.github.io](https://naquuuu.github.io/).
 
----
+## Structure
 
-## 1. Structure
-```
-blog/
-├── index.html                   # Workstation Homepage (Terminal, whoami, focus, latest essays)
-├── about/
-│   └── index.html               # About Me (ITB, BCG, Traveloka, MAPCLUB, Tanoto Scholar, Hobbies)
-├── blog/
-│   ├── index.html               # Essays Archive
-│   └── building-an-autonomous-product-operating-system/
-│       └── index.html           # Foundational Post #1 (8 min read)
-├── assets/
-│   ├── css/style.css            # Dark Crimson Workstation Design System (IDE Theme)
-│   └── js/main.js               # Interactive CLI parser & code copy utilities
-└── drafts/                      # Automated drafts staging area
-```
+- `index.html`: editorial homepage, selected writing, projects, portrait, and listening corner.
+- `blog/`: essay archive and published articles.
+- `portfolio/`, `experience/`, `performance/`: existing case studies and notebooks; their URLs remain stable.
+- `assets/css/style.css`: existing component styles used by published pages.
+- `assets/css/journal.css`: shared paper-and-ink visual system, reading typography, archive and homepage layouts. Loaded after `style.css`.
+- `assets/js/journal.js`: optional homepage navigation enhancement. All homepage content and links work without JavaScript.
+- `assets/js/main.js`: existing article and archive interactions, including theme filtering and code-copy controls.
 
----
+The homepage uses local artwork and photography. Its record illustration is CSS. It does not load social embeds, remote fonts, or background audio. Spotify is an explicit external link.
 
-## 2. Deploying to GitHub Pages (`naquuuu.github.io`)
-To host this directly under your personal GitHub Pages handle:
-1. Create a public repository named `naquuuu.github.io` on GitHub under your account `naquuuu`.
-2. In this `blog` folder, run:
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: initial release of naquuuu@pm blog"
-   git branch -M main
-   git remote add origin https://github.com/naquuuu/naquuuu.github.io.git
-   git push -u origin main
-   ```
-3. Enable GitHub Pages in repository **Settings** $\rightarrow$ **Pages** $\rightarrow$ **Deploy from a branch (`main` / `/root`)**.
+## Local preview
 
----
+From this repository, run `python -m http.server 8000` and open `http://localhost:8000/`. There is no package install or build step.
 
-## 3. Automated Weekly Publishing Engine
-To generate a new draft from workspace changes on demand:
-```bash
-python scripts/generate_blog_post.py --topic "Your Topic Here"
-```
-To publish a reviewed draft:
-```bash
-python scripts/generate_blog_post.py --publish [slug]
-```
-Weekly autonomous synthesis runs automatically every **Saturday morning at 11:00 AM JKT (+7)**, emailing draft notifications to `rbkrishnamurti@gmail.com`.
+## Verification and publishing
+
+Run `python scripts/verify_blog_qa.py` from this repository. Run workspace sanitization and multi-repo gates from the parent hub before committing or pushing. Review desktop and mobile layouts, keyboard navigation, article tables, archive filters, and no-JavaScript behavior in a browser.
+
+Asset version: `20260929a`. Keep HTML references and `CURRENT_ASSET_VERSION` in the QA script aligned when updating shared assets. The visual revamp is pending full QA and deployment; implementation alone does not certify publishing readiness.
+
+The existing GitHub Pages publishing configuration is retained. Do not initialize another repository or replace the remote.
