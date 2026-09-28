@@ -5,13 +5,24 @@
 <meta name="description" content="a relay recovery record: the missing dependency, documented timings, and the checks that separate a working process from a working reply.">
 <link rel="canonical" href="https://naquuuu.github.io/performance/recovery/">
 <link rel="stylesheet" href="../../assets/css/style.css?v=20260928a"><link rel="icon" href="../../assets/favicon.svg">
+<style>
+.essay-article { padding-block: clamp(2rem, 5vw, 4rem); }
+.essay-content > * + * { margin-top: 1.25rem; }
+.essay-content h2 { margin-top: 2.75rem; line-height: 1.3; }
+.essay-content ol, .essay-content ul { padding-left: 1.4rem; }
+.essay-content li + li { margin-top: .5rem; }
+.recovery-table caption { text-align: left; padding-block: .75rem; color: var(--text-secondary); }
+.recovery-table td { white-space: nowrap; }
+.essay-content summary { cursor: pointer; padding-block: .75rem; }
+.essay-content details p { margin-top: .75rem; }
+</style>
 </head><body><a class="skip-link" href="#main-content">skip to content</a>
 <header class="site-header"><nav class="wrap nav-container" aria-label="primary"><a class="nav-brand" href="../../">naquuuu</a><a href="../../blog/">essays &amp; notes</a></nav></header>
 <main id="main-content" class="wrap essay-article"><header class="essay-header"><p class="essay-meta-row"><time datetime="2026-09-28">28 september 2026</time> • systems notebook</p><h1 class="essay-header-title">relay recovery: prove the check can run</h1></header>
 <article class="essay-content"><div class="concept-box"><p>a timeout did not prove the network was broken. the environment was missing aiohttp. installing the dependency let the gateway connect, and an owner message round-trip confirmed the reply path.</p></div>
 <h2 id="record">1. the recovery record</h2><p>the record is a repair receipt. it lists the fault and the evidence left after the fix. the session map below is reconstructed from documented lessons l-17, l-18, l-20 and l-21. it is not a captured agent trace. agent attribution is unavailable.</p>
 <ol><li>two hosts and repeated restarts disrupted the relay.</li><li>an interrupted update left the environment incomplete.</li><li>missing aiohttp produced misleading connection timeouts.</li><li>after installation, the gateway connected at 19:32:48 wib.</li><li>an owner message round-trip confirmed recovery that evening.</li></ol>
-<p><a class="hero-cta-btn" href="session-map.html">open the curated session map ↗</a></p>
+<p><a href="session-map.html">explore the curated recovery map →</a></p>
 <h2 id="measurements">2. measure before claiming speed</h2><p>a stopwatch needs a label. these earlier measurements belong to the laptop on 28 september, not the relay host. a cold process includes startup and provider time.</p>
 <table class="recovery-table"><caption>documented baseline, lesson l-09</caption><thead><tr><th scope="col">check</th><th scope="col">elapsed</th></tr></thead><tbody><tr><th scope="row">cold one-word opencode run</th><td>15,177 ms</td></tr><tr><th scope="row">opencode run --help</th><td>2,097 ms</td></tr></tbody></table>
 <table class="recovery-table"><caption>relay host, 28 september 2026: one matched trial</caption><thead><tr><th scope="col">path</th><th scope="col">elapsed</th></tr></thead><tbody><tr><th scope="row">cold run</th><td>7,177 ms</td></tr><tr><th scope="row">warm authenticated attach</th><td>10,212 ms</td></tr></tbody></table><p id="latency-update">both runs used the same no-tool prompt and returned ok with exit code zero. the warm path was slower in this sample. provider variance was uncontrolled. one trial does not establish a typical latency or a speedup.</p><details><summary>measurement method</summary><p>prompt: <code>Reply with exactly OK. Do not use tools.</code></p><p>cold: <code>opencode run --format json</code>. warm: <code>opencode run --attach http://127.0.0.1:4096 --dir &lt;workspace&gt; --format json</code>. authentication stayed in the host environment. elapsed time covers the complete command.</p></details>
