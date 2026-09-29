@@ -9,7 +9,7 @@
   <title>MAPCLUB: Product Management &amp; Operations Workspace | Krishna (naquuuu)</title>
   <meta name="description" content="Product Management at MAPCLUB: building an AI-assisted Product Operations workspace, owning Ticketing Services requirements, checkout coupon and delivery address improvements, and app revamp coordination.">
   <link rel="canonical" href="https://naquuuu.github.io/experience/mapclub/">
-  <link rel="stylesheet" href="../../assets/css/style.css?v=20260930c">
+  <link rel="stylesheet" href="../../assets/css/style.css?v=20260930d">
   <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg?v=20260917i">
   <link rel="alternate icon" href="../../favicon.ico?v=20260917i">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,7 +69,7 @@
       <div class="flowchart-board-canvas scroll-x">
 <svg class="flowchart-svg" viewBox="0 0 780 396" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mapclub-flow-title mapclub-flow-desc">
 <title id="mapclub-flow-title">mapclub requirement to release flow</title>
-<desc id="mapclub-flow-desc">blueprint flowchart: one prompt starts the ai-assisted workspace, which drafts a brd, diagram and prototype; a human decision checks scope and logic, looping back to clarify if needed; security safeguards apply before engineering handoff; acceptance, edge-case and payment testing lead to the september 2026 app release, with an issue resolution loop.</desc>
+<desc id="mapclub-flow-desc">blueprint flowchart: one prompt starts the ai-assisted workspace, which drafts a brd, diagram and prototype; a human decision checks scope and logic, looping back to clarify if needed; access and data safeguards apply before engineering handoff; acceptance, edge-case and payment testing lead to the september 2026 app release, with an issue resolution loop.</desc>
 <defs>
 <marker id="mapclub-flow-arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#8c897e" /></marker>
 <marker id="mapclub-flow-arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#3b6989" /></marker>
@@ -114,8 +114,8 @@
 <polygon points="270,160 498,160 512,186 498,212 270,212 256,186" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" stroke-linejoin="round" />
 <rect x="272" y="166" width="56" height="12" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
 <text x="300" y="175" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#2d4b63" text-anchor="middle">safeguards</text>
-<text x="384" y="193" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">security safeguards</text>
-<text x="384" y="205" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">passcode cookies, synthetic data, scans</text>
+<text x="384" y="193" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">access &amp; data safeguards</text>
+<text x="384" y="205" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">access &amp; data rules set up front</text>
 <rect x="536" y="160" width="212" height="52" rx="6" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
 <rect x="544" y="166" width="47.2" height="12" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
 <text x="567.6" y="175" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">verified</text>
@@ -166,7 +166,7 @@
     </div>
     <aside class="principle-strip" aria-label="how this flowchart maps to my principles">
   <p class="principle-strip-label">how this maps to my principles</p>
-  <ul class="principle-strip-list"><li><span class="principle-name">reka peluang</span><span class="principle-text">step 2 checks scope, logic and acceptance criteria before anything is handed to engineering.</span></li><li><span class="principle-name">murphy&#x27;s law</span><span class="principle-text">safeguards are built in up front: passcode cookies, synthetic data only, pre-commit scans.</span></li><li><span class="principle-name">recovery</span><span class="principle-text">issue resolution and payment checks stay in the loop through the september 2026 release.</span></li></ul>
+  <ul class="principle-strip-list"><li><span class="principle-name">reka peluang</span><span class="principle-text">step 2 checks scope, logic and acceptance criteria before anything is handed to engineering.</span></li><li><span class="principle-name">murphy&#x27;s law</span><span class="principle-text">access and data safeguards are set up front, before anything reaches engineering.</span></li><li><span class="principle-name">recovery</span><span class="principle-text">issue resolution and payment checks stay in the loop through the september 2026 release.</span></li></ul>
   <p class="principle-strip-note">simplified from the responsibilities described on this page. an editorial reading, not a full process map.</p>
 </aside>
 <!-- /bp:flow -->
@@ -200,9 +200,9 @@
         </div>
       </div>
       <div class="failure-tree-card">
-        <div class="failure-tree-header">concrete security &amp; data safeguards</div>
+        <div class="failure-tree-header">access &amp; data safeguards</div>
         <div class="failure-tree-text">
-          Implemented verifiable security controls: passcode verification with signed cookies, strict synthetic-data rules forbidding real customer or transaction records, and automated pre-commit scanning scripts.
+          Set up access and data safeguards in the workspace from the start, covering both prototypes and documents.
         </div>
       </div>
     </div>
@@ -305,6 +305,6 @@
 
   <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
   <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <script src="../../assets/js/palette.js?v=20260930c" defer></script>
+  <script src="../../assets/js/palette.js?v=20260930d" defer></script>
 </body>
 </html>

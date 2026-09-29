@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap"></noscript>
   
-  <link rel="stylesheet" href="../../assets/css/style.css?v=20260930c">
+  <link rel="stylesheet" href="../../assets/css/style.css?v=20260930d">
 </head>
 <body>
   <a class="skip-link" href="#main-content">skip to content</a>
@@ -99,7 +99,7 @@
         <div class="flowchart-board-canvas scroll-x">
           <svg class="flowchart-svg" viewBox="0 0 780 596" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="flowchart-bin-title flowchart-bin-desc">
 <title id="flowchart-bin-title">binary harvesting and edge prototyping user action diagram</title>
-<desc id="flowchart-bin-desc">blueprint flowchart: an operator supplies a production apk; the harvester and vector parser build a lossless svg library, the token and font extractor produces the design tokens stylesheet after an operator audit, and an edge access control gate protects the verified mobile prototype that stakeholders sign off on their phones.</desc>
+<desc id="flowchart-bin-desc">blueprint flowchart: an operator supplies a production apk; the harvester and vector parser build a lossless svg library, the token and font extractor produces the design tokens stylesheet after an operator audit, and an access gate keeps the verified mobile prototype private until reviewers sign off on their phones.</desc>
 <defs>
 <marker id="flowchart-bin-arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#8c897e" /></marker>
 <marker id="flowchart-bin-arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#3b6989" /></marker>
@@ -149,13 +149,13 @@
 <path d="M 536 266 Q 536 260 542 260 H 742 Q 748 260 748 266 V 308 C 701.36 302 667.44 316 631.4 312 S 567.8 304 536 310 Z" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.5" />
 <rect x="544" y="263" width="69.2" height="12" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
 <text x="578.6" y="272" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#5a5850" text-anchor="middle">design tokens</text>
-<text x="642" y="290" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">mapclub-tokens.css</text>
+<text x="642" y="290" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">design-tokens.css</text>
 <text x="642" y="302" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">mobile shell, nav bar &amp; design tokens</text>
 <polygon points="270,360 498,360 512,386 498,412 270,412 256,386" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" stroke-linejoin="round" />
 <rect x="272" y="366" width="73.6" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
 <text x="308.8" y="375" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">access control</text>
-<text x="384" y="393" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">edge access control gate</text>
-<text x="384" y="405" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">signed cookie auth &amp; passcode wall</text>
+<text x="384" y="393" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">prototype access gate</text>
+<text x="384" y="405" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">private preview for reviewers only</text>
 <rect x="536" y="360" width="212" height="52" rx="6" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
 <rect x="544" y="366" width="95.6" height="12" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
 <text x="591.8" y="375" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">interactive preview</text>
@@ -192,7 +192,7 @@
       <!-- bp:principles -->
       <aside class="principle-strip" aria-label="how this flowchart maps to my principles">
   <p class="principle-strip-label">how this maps to my principles</p>
-  <ul class="principle-strip-list"><li><span class="principle-name">murphy&#x27;s law</span><span class="principle-text">assume the design file drifts, so tokens come from the shipped apk.</span></li><li><span class="principle-name">reka peluang</span><span class="principle-text">the edge access gate assumes unreleased features can leak, and protects the prototype.</span></li></ul>
+  <ul class="principle-strip-list"><li><span class="principle-name">murphy&#x27;s law</span><span class="principle-text">assume the design file drifts, so tokens come from the shipped apk.</span></li><li><span class="principle-name">reka peluang</span><span class="principle-text">the access gate assumes unreleased features can leak, and keeps the prototype private.</span></li></ul>
   <p class="principle-strip-note">an editorial reading of the steps shown above, not additional results.</p>
 </aside>
       <!-- /bp:principles -->
@@ -214,25 +214,17 @@
 
       <h3>C. The Hardware-Accurate Mobile Shell</h3>
       <p>
-        When an executive opens a prototype URL on desktop, standard web layouts feel unnatural because mobile user experience is constrained by physical touch ergonomics. We created <code style="color:var(--term-cyan)">mapclub-mobile-shell.js</code>:
+        When an executive opens a prototype URL on desktop, standard web layouts feel unnatural because mobile user experience is constrained by physical touch ergonomics. We created <code style="color:var(--term-cyan)">mobile-shell.js</code>:
       </p>
       <ul>
         <li>On desktop screens (width &gt; 640px), the prototype automatically mounts inside an authentic iPhone 16 Pro / Pixel 8 hardware frame with dynamic Island/notch rendering and realistic drop shadows.</li>
         <li>On physical mobile devices, the outer shell automatically collapses, allowing the prototype to fill the viewport naturally.</li>
       </ul>
 
-      <h2>4. Practical Access Controls: Protecting Prototypes without Auth Friction</h2>
+      <h2>4. Keeping Unreleased Prototypes Private</h2>
       <p>
-        Enterprise prototypes often contain forward-looking features that are not yet public. How do you protect interactive prototypes from public search crawlers without forcing busy stakeholders to navigate complex VPN setups or enterprise logins?
+        Prototypes often show features that are not public yet, so they sit behind a lightweight access check instead of a full corporate login. Reviewers can still open them directly on their own phones.
       </p>
-      <p>
-        We handle this using lightweight edge routing:
-      </p>
-      <ol>
-        <li><strong>Edge Request Inspection:</strong> Requests to prototype paths are evaluated by edge middleware before static files are served.</li>
-        <li><strong>Passcode Cookie Verification:</strong> The edge function checks for an authenticated session cookie. Unauthenticated visitors see a simple passcode entry screen.</li>
-        <li><strong>Direct Access Links:</strong> For internal stakeholder reviews, an access query parameter sets the session cookie and redirects to the clean prototype URL, enabling instant testing on mobile devices without friction.</li>
-      </ol>
 
       <h2>5. Practical Benefits: Aligning Design with Engineering</h2>
       <p>
@@ -295,6 +287,6 @@
 
   <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
   <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <script src="../../assets/js/palette.js?v=20260930c" defer></script>
+  <script src="../../assets/js/palette.js?v=20260930d" defer></script>
 </body>
 </html>

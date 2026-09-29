@@ -1815,50 +1815,6 @@ body[data-mode="culture"] .note-tag {
   box-sizing: border-box;
 }
 
-.spotify-carousel-controls {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  flex-shrink: 0;
-}
-
-.spotify-carousel-index {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.spotify-nav-arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: var(--radius-xs);
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-surface);
-  color: var(--text-primary);
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  line-height: 1;
-}
-
-.spotify-nav-arrow:hover {
-  background: var(--accent-crimson);
-  color: #FFFFFF;
-  border-color: var(--accent-crimson);
-  transform: translateY(-1px);
-}
-
-.spotify-nav-arrow:active {
-  transform: scale(0.92);
-}
-
 /* Carousel strip fade: applied only when the strip actually overflows (JS-toggled) */
 .spotify-carousel-tabs.is-scrollable {
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
@@ -1931,42 +1887,6 @@ body[data-mode="culture"] .note-tag {
 .spotify-carousel-tab.active .spotify-tab-num {
   opacity: 1;
   color: var(--accent-crimson);
-}
-
-/* Media Indicators (real buttons, >=44px hit area, visual dot via ::before) */
-.spotify-media-indicators {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.2rem;
-  margin-top: 0.35rem;
-}
-
-.spotify-indicator-dot {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-.spotify-indicator-dot::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: var(--radius-full);
-  background: var(--border-active);
-  transition: all 0.25s ease;
-}
-
-.spotify-indicator-dot.active::before {
-  width: 20px;
-  background: var(--accent-crimson);
-  box-shadow: 0 0 8px rgba(200, 82, 80, 0.4);
 }
 
 /* Spotify Direction & Sonic Pillars */
@@ -2144,25 +2064,11 @@ body[data-mode="culture"] .note-tag {
     font-size: 0.7rem;
     box-sizing: border-box;
     min-width: 0;
-  }
-
-  .spotify-carousel-controls {
-    width: 100%;
-    justify-content: flex-end;
+    min-height: 44px;
   }
 
   .spotify-tab-num {
     font-size: 0.64rem;
-  }
-
-  .spotify-carousel-index {
-    font-size: 0.68rem;
-  }
-
-  .spotify-nav-arrow {
-    width: 44px;
-    height: 44px;
-    font-size: 1rem;
   }
 
   .culture-card-tag {
@@ -2288,16 +2194,6 @@ body[data-mode="culture"] .note-tag {
 
   .spotify-tab-num {
     font-size: 0.6rem;
-  }
-
-  .spotify-carousel-index {
-    font-size: 0.64rem;
-  }
-
-  .spotify-nav-arrow {
-    width: 44px;
-    height: 44px;
-    font-size: 1rem;
   }
 
   .spotify-info-col .culture-card-title {
@@ -4528,17 +4424,13 @@ html.cmdk-open { overflow: hidden; }
   .hero-side-block .portrait-img { width: 100%; flex: 1 1 auto; height: 100%; min-height: 360px; aspect-ratio: auto; object-fit: cover; object-position: center 20%; }
 }
 
-/* Spotify card: the playlist dots sit inside the card under the player, not on its edge */
+/* Spotify card: the player fills the media column */
 .spotify-media-col { display: flex; flex-direction: column; gap: 0.35rem; height: auto; align-self: stretch; }
 .spotify-media-col .spotify-player-container { flex: 1 1 auto; height: auto; }
 .spotify-media-col .spotify-player-frame { height: 100%; min-height: inherit; }
-.spotify-media-indicators { flex: none; gap: 0; }
-.spotify-indicator-dot::before { width: 9px; height: 9px; background: var(--text-muted); opacity: 0.45; }
-.spotify-indicator-dot:hover::before { opacity: 0.8; }
-.spotify-indicator-dot.active::before { width: 22px; opacity: 1; background: var(--accent-crimson); box-shadow: none; }
 
-/* Spotify playlist tabs: a 2x2 grid that never scrolls or clips; arrows stay to the right */
-.spotify-carousel-bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 0.5rem 0.75rem; }
+/* Spotify playlist tabs: a 2x2 grid that never scrolls or clips; the tabs are the only playlist control */
+.spotify-carousel-bar { display: block; }
 .spotify-carousel-tabs,
 .spotify-carousel-tabs.is-scrollable {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.35rem;
@@ -4546,31 +4438,31 @@ html.cmdk-open { overflow: hidden; }
 }
 .spotify-carousel-tab { min-width: 0; justify-content: flex-start; flex: none; }
 .spotify-tab-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
-.spotify-carousel-controls { flex-direction: row; gap: 0.35rem; }
-@media (max-width: 768px) {
-  .spotify-carousel-bar { grid-template-columns: minmax(0, 1fr); }
-  .spotify-carousel-controls { flex-direction: row; justify-content: flex-end; }
-}
 
-/* Identity line sits under the naquuuu.build name, in the regular sans */
+/* Identity line sits under the naquuuu.build name: plain secondary text, no pill */
 .hero-headline .hero-sub-identity,
 .hero-editorial-grid .hero-headline .hero-sub-identity {
-  display: flex;
-  width: fit-content;
+  display: block;
+  width: auto;
   max-width: 100%;
-  margin: 0.7rem 0 0;
-  padding: 0.3rem 0.8rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
   font-family: var(--font-sans);
   font-size: 0.9rem;
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.4;
   letter-spacing: 0;
   text-transform: lowercase;
+  color: var(--text-secondary);
+  transition: color 0.45s ease;
 }
-.hero-headline .hero-sub-identity::before { box-shadow: none; flex: none; }
+.hero-headline .hero-sub-identity::before { content: none; }
 @media (max-width: 768px) {
   .hero-headline .hero-sub-identity,
-  .hero-editorial-grid .hero-headline .hero-sub-identity { font-size: 0.8rem; margin-top: 0.55rem; padding: 0.25rem 0.7rem; }
+  .hero-editorial-grid .hero-headline .hero-sub-identity { font-size: 0.82rem; margin-top: 0.45rem; }
 }
 
 /* =============================================================================
