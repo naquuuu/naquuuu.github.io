@@ -106,7 +106,7 @@
               ✓ STRUCTURED PRODUCT WORKSPACE (HOW I SET IT UP)
             </div>
             <div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-              Raw Brief → Scoping &amp; Boundary Check → Data &amp; API Schema Extraction → Clear, Verified Specification → Automated UAT Sign-off → Production Deployment.
+              Raw Brief → Intake Screening &amp; Boundary Audit → API Contract Modeling → BRD Compilation → Multi-Stage Verification Gate → Approved Specification.
             </div>
           </div>
         </div>
@@ -126,144 +126,209 @@
             <span style="font-size: 0.65rem; background: #27272A; color: #D4D4D8; border: 1px solid #3F3F46; padding: 2px 7px; border-radius: 4px;">systems architecture</span>
           </div>
           <div class="flowchart-toolbar-right">
-            <span>100%</span>
-            <span>naquuuu</span>
-            <span style="color: #A1A1AA;">verified logic</span>
+            <span>multi-stage</span>
+            <span>validation</span>
+            <span style="color: #A1A1AA;">&amp; governance pipeline</span>
           </div>
         </div>
 
         <div class="flowchart-board-canvas scroll-x">
-          <svg class="flowchart-svg" viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg">
+          <svg class="flowchart-svg" viewBox="0 0 780 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="flowchart-title flowchart-desc">
+            <title id="flowchart-title">autonomous product operating system user action diagram</title>
+            <desc id="flowchart-desc">systems architecture flowchart showing operator actions, agent operating system processing, and deliverable artifacts with contract dependencies and correction loops.</desc>
             <defs>
               <marker id="arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                 <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#71717A" />
               </marker>
+              <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#D97706" />
+              </marker>
+              <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#38BDF8" />
+              </marker>
+              <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#DC2626" />
+              </marker>
+              <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#10B981" />
+              </marker>
             </defs>
 
             <!-- Column Headers -->
-            <rect x="24" y="16" width="210" height="28" rx="4" fill="#1C1917" stroke="#44403C" stroke-width="1" />
-            <text x="129" y="34" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+            <rect x="32" y="16" width="200" height="28" rx="4" fill="#1C1917" stroke="#44403C" stroke-width="1" />
+            <text x="132" y="34" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">
               operator action
             </text>
 
-            <rect x="260" y="16" width="240" height="28" rx="4" fill="#18181B" stroke="#3F3F46" stroke-width="1" />
-            <text x="380" y="34" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+            <rect x="256" y="16" width="256" height="28" rx="4" fill="#18181B" stroke="#3F3F46" stroke-width="1" />
+            <text x="384" y="34" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">
               agent operating system
             </text>
 
-            <rect x="526" y="16" width="210" height="28" rx="4" fill="#141C1A" stroke="#27443E" stroke-width="1" />
-            <text x="631" y="34" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+            <rect x="536" y="16" width="212" height="28" rx="4" fill="#141C1A" stroke="#27443E" stroke-width="1" />
+            <text x="642" y="34" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">
               deliverable artifacts
             </text>
 
             <!-- Dividing Track Guidelines -->
-            <line x1="247" y1="52" x2="247" y2="450" stroke="#27272A" stroke-width="1" stroke-dasharray="3" />
-            <line x1="513" y1="52" x2="513" y2="450" stroke="#27272A" stroke-width="1" stroke-dasharray="3" />
+            <line x1="244" y1="50" x2="244" y2="480" stroke="#27272A" stroke-width="1" stroke-dasharray="3,3" />
+            <line x1="524" y1="50" x2="524" y2="480" stroke="#27272A" stroke-width="1" stroke-dasharray="3,3" />
 
-            <!-- Row 1: Brief Ingestion & Intake Gatekeeper -->
-            <rect x="24" y="60" width="210" height="50" rx="6" fill="#27272A" stroke="#52525B" stroke-width="1.5" />
-            <text x="129" y="81" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+            <!-- Row 1: Brief Ingestion & Intake Screening Gate -->
+            <rect x="32" y="56" width="200" height="52" rx="6" fill="#27272A" stroke="#52525B" stroke-width="1.5" />
+            <text x="132" y="78" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
               1. submit raw brief
             </text>
-            <text x="129" y="97" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
+            <text x="132" y="94" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">
               paste slack brief or meeting notes
             </text>
 
-            <rect x="260" y="60" width="240" height="50" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
-            <text x="380" y="81" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
-              intake gatekeeper (mapclub-intake)
+            <rect x="256" y="56" width="256" height="52" rx="6" fill="#27272A" stroke="#D97706" stroke-width="1.5" />
+            <rect x="264" y="62" width="104" height="12" rx="2" fill="#78350F" stroke="#D97706" stroke-width="0.8" />
+            <text x="316" y="71" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#FDE68A" text-anchor="middle">INTAKE SCREENING</text>
+            <text x="384" y="86" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              intake gatekeeper &amp; screener
             </text>
-            <text x="380" y="97" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
-              enforce strict moscow boundaries
+            <text x="384" y="100" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#A1A1AA" text-anchor="middle">
+              screen pii/keys &amp; enforce moscow scope
             </text>
 
-            <rect x="526" y="60" width="210" height="50" rx="6" fill="#1C1917" stroke="#3F3F46" stroke-width="1.5" />
-            <text x="631" y="81" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+            <rect x="536" y="56" width="212" height="52" rx="6" fill="#1C1917" stroke="#3F3F46" stroke-width="1.5" />
+            <text x="642" y="78" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
               strict scope manifest
             </text>
-            <text x="631" y="97" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
+            <text x="642" y="94" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">
               p0 must-have vs out-of-scope
             </text>
 
             <!-- Connector: U1 -> P1 -->
-            <path d="M 234 85 L 260 85" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+            <path d="M 232 82 L 256 82" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
 
             <!-- Connector: P1 -> A1 -->
-            <path d="M 500 85 L 526 85" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+            <path d="M 512 82 L 536 82" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
 
-            <!-- Row 2: Boundary Audit Feedback Loop -->
-            <rect x="24" y="144" width="210" height="50" rx="6" fill="#27272A" stroke="#52525B" stroke-width="1.5" />
-            <text x="129" y="165" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
-              2. resolve boundary audit
+            <!-- Row 2: Boundary Audit & Clarification -->
+            <rect x="32" y="144" width="200" height="52" rx="6" fill="#27272A" stroke="#52525B" stroke-width="1.5" />
+            <text x="132" y="166" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              2. clarify &amp; resolve audit
             </text>
-            <text x="129" y="181" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
-              answer missing edge cases &amp; timeouts
+            <text x="132" y="182" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">
+              answer edge cases, timeouts &amp; pii flags
             </text>
 
-            <!-- Connector: P1 down and back to U2 -->
-            <path d="M 380 110 L 380 169 L 234 169" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
-            <text x="307" y="161" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">[boundary audit]</text>
+            <!-- Failure Loop 1: P1 down and left to U2 (Screening & Scope Audit) -->
+            <path d="M 360 108 L 360 156 A 8 8 0 0 1 352 164 L 232 164" stroke="#D97706" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#arrow-amber)" />
+            <rect x="246" y="152" width="102" height="12" rx="2" fill="#111110" />
+            <text x="297" y="161" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#FBBF24" text-anchor="middle">[screening flag / audit]</text>
 
-            <!-- Row 3: Soft API Contract Generator & Spec Output -->
-            <rect x="260" y="230" width="240" height="50" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
-            <text x="380" y="251" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+            <!-- Row 3: Soft API Contract Extraction -->
+            <rect x="256" y="232" width="256" height="52" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
+            <text x="384" y="254" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
               soft api contract generator
             </text>
-            <text x="380" y="267" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
-              json payloads, error codes &amp; db states
+            <text x="384" y="270" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">
+              json schemas, error codes &amp; db states
             </text>
 
-            <rect x="526" y="230" width="210" height="50" rx="6" fill="#1C1917" stroke="#3F3F46" stroke-width="1.5" />
-            <text x="631" y="251" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+            <rect x="536" y="232" width="212" height="52" rx="6" fill="#1C1917" stroke="#38BDF8" stroke-width="1.5" />
+            <rect x="544" y="238" width="88" height="12" rx="2" fill="#0C4A6E" stroke="#38BDF8" stroke-width="0.8" />
+            <text x="588" y="247" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#BAE6FD" text-anchor="middle">TYPED SCHEMAS</text>
+            <text x="642" y="262" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
               api contract schemas
             </text>
-            <text x="631" y="267" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
-              zero-defect payload specifications
+            <text x="642" y="276" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#A1A1AA" text-anchor="middle">
+              structured payload &amp; state specs
             </text>
 
-            <!-- Connector: U2 down to P2 -->
-            <path d="M 129 194 L 129 255 L 260 255" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
-            <text x="194" y="247" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">[trigger extraction]</text>
+            <!-- Connector: U2 attach 1 down to P2 -->
+            <path d="M 116 196 L 116 250 A 8 8 0 0 0 124 258 L 256 258" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+            <rect x="144" y="246" width="88" height="12" rx="2" fill="#111110" />
+            <text x="188" y="255" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#A1A1AA" text-anchor="middle">[trigger extraction]</text>
 
-            <!-- Connector: P2 right to O2 -->
-            <path d="M 500 255 L 526 255" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+            <!-- Connector: P2 right to A2 -->
+            <path d="M 512 258 L 536 258" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
 
-            <!-- Row 4: Automated Word/SharePoint & Verified BRD Spec -->
-            <rect x="260" y="325" width="240" height="50" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
-            <text x="380" y="346" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+            <!-- Row 4: BRD Specification Engine -->
+            <rect x="256" y="320" width="256" height="52" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1.5" />
+            <text x="384" y="342" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
               docx packaging engine
             </text>
-            <text x="380" y="362" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
-              corporate typography, tables &amp; sign-off
+            <text x="384" y="358" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">
+              compiles brd with contract specs &amp; tables
             </text>
 
-            <rect x="526" y="325" width="210" height="50" rx="6" fill="#1C1917" stroke="#3F3F46" stroke-width="1.5" />
-            <text x="631" y="346" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
-              verified brd specification
+            <rect x="536" y="320" width="212" height="52" rx="6" fill="#1C1917" stroke="#3F3F46" stroke-width="1.5" />
+            <rect x="544" y="326" width="96" height="12" rx="2" fill="#27272A" stroke="#71717A" stroke-width="0.8" />
+            <text x="592" y="335" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#D4D4D8" text-anchor="middle">PROVISIONAL SPEC</text>
+            <text x="642" y="350" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#F4F4F5" text-anchor="middle">
+              compiled brd draft
             </text>
-            <text x="631" y="362" font-family="'Open Sans', sans-serif" font-size="9.5" fill="#A1A1AA" text-anchor="middle">
-              ready for gtech engineering &amp; uat
-            </text>
-
-            <!-- Connector: U2 down to P3 -->
-            <path d="M 129 194 L 129 350 L 260 350" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
-            <text x="194" y="342" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">[generate spec]</text>
-
-            <!-- Connector: P3 right to O3 -->
-            <path d="M 500 350 L 526 350" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
-
-            <!-- Row 5: Automated Sanitization Pre-Commit Gate -->
-            <rect x="260" y="405" width="240" height="46" rx="6" fill="#1C1917" stroke="#DC2626" stroke-width="1.5" />
-            <text x="380" y="425" font-family="'Open Sans', sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-              verify_sanitization.py gate
-            </text>
-            <text x="380" y="440" font-family="'Open Sans', sans-serif" font-size="9" fill="#A1A1AA" text-anchor="middle">
-              0 pii • 0 internal keys • git pre-commit
+            <text x="642" y="364" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#A1A1AA" text-anchor="middle">
+              provisional spec awaiting audit
             </text>
 
-            <!-- Connector: O3 down to P4 gate -->
-            <path d="M 631 375 L 631 428 L 500 428" stroke="#DC2626" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
-            <text x="565" y="420" font-family="'Open Sans', sans-serif" font-size="9" fill="#DC2626" text-anchor="middle">[pre-commit]</text>
+            <!-- Connector: U2 attach 2 down to P3 -->
+            <path d="M 148 196 L 148 338 A 8 8 0 0 0 156 346 L 256 346" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+            <rect x="168" y="334" width="76" height="12" rx="2" fill="#111110" />
+            <text x="206" y="343" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#A1A1AA" text-anchor="middle">[generate spec]</text>
+
+            <!-- Connected Dependency: A2 Contract Schemas FEEDS into P3 BRD Packaging Engine -->
+            <path d="M 600 284 L 600 294 A 8 8 0 0 1 592 302 L 488 302 A 8 8 0 0 0 480 310 L 480 320" stroke="#38BDF8" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)" />
+            <rect x="494" y="290" width="96" height="12" rx="2" fill="#111110" />
+            <text x="542" y="299" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#38BDF8" text-anchor="middle">[feed contract to brd]</text>
+
+            <!-- Connector: P3 right to A3 -->
+            <path d="M 512 346 L 536 346" stroke="#71717A" stroke-width="1.5" fill="none" marker-end="url(#arrow-gray)" />
+
+            <!-- Row 5: Multi-Stage Verification Gate & Final Deliverable -->
+            <rect x="256" y="412" width="256" height="56" rx="6" fill="#1C1917" stroke="#DC2626" stroke-width="1.5" />
+            <rect x="264" y="418" width="84" height="12" rx="2" fill="#7F1D1D" stroke="#DC2626" stroke-width="0.8" />
+            <text x="306" y="427" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#FCA5A5" text-anchor="middle">TIER 4 GATE</text>
+            <text x="384" y="442" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+              multi-stage verification gate
+            </text>
+            <text x="384" y="458" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#FCA5A5" text-anchor="middle">
+              schema audit • logic checks • verify_sanitization.py
+            </text>
+
+            <rect x="536" y="412" width="212" height="56" rx="6" fill="#064E3B" stroke="#10B981" stroke-width="1.5" />
+            <rect x="544" y="418" width="108" height="12" rx="2" fill="#065F46" stroke="#10B981" stroke-width="0.8" />
+            <text x="598" y="427" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#A7F3D0" text-anchor="middle">VERIFIED ARTIFACT</text>
+            <text x="642" y="442" font-family="'Open Sans', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+              approved specification
+            </text>
+            <text x="642" y="458" font-family="'Open Sans', sans-serif" font-size="8.5" fill="#D1FAE5" text-anchor="middle">
+              ready for engineering &amp; uat handoff
+            </text>
+
+            <!-- Connector: A3 down to P4 Gate (Submit for Verification) -->
+            <path d="M 600 372 L 600 386 A 8 8 0 0 1 592 394 L 488 394 A 8 8 0 0 0 480 402 L 480 412" stroke="#DC2626" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)" />
+            <rect x="498" y="382" width="88" height="12" rx="2" fill="#111110" />
+            <text x="542" y="391" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#FCA5A5" text-anchor="middle">[submit for audit]</text>
+
+            <!-- Connector: P4 right to A4 (Gate Passed) -->
+            <path d="M 512 440 L 536 440" stroke="#10B981" stroke-width="1.8" fill="none" marker-end="url(#arrow-green)" />
+
+            <!-- Failure Loop 2: Failed validation loops back to U2 for operator resolution -->
+            <path d="M 256 440 L 24 440 A 8 8 0 0 1 16 432 L 16 178 A 8 8 0 0 1 24 170 L 32 170" stroke="#DC2626" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#arrow-red)" />
+            <rect x="52" y="428" width="168" height="12" rx="2" fill="#111110" />
+            <text x="136" y="437" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#EF4444" text-anchor="middle">[failed validation / remediation loop]</text>
+
+            <!-- Bottom Legend Strip -->
+            <line x1="32" y1="492" x2="748" y2="492" stroke="#27272A" stroke-width="1" />
+            <text x="32" y="512" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#71717A" letter-spacing="0.1em">LEGEND</text>
+
+            <line x1="96" y1="509" x2="124" y2="509" stroke="#71717A" stroke-width="1.5" marker-end="url(#arrow-gray)" />
+            <text x="132" y="512" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#A1A1AA">standard flow</text>
+
+            <line x1="228" y1="509" x2="256" y2="509" stroke="#38BDF8" stroke-width="1.5" marker-end="url(#arrow-blue)" />
+            <text x="264" y="512" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#A1A1AA">contract dependency</text>
+
+            <line x1="392" y1="509" x2="420" y2="509" stroke="#10B981" stroke-width="1.8" marker-end="url(#arrow-green)" />
+            <text x="428" y="512" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#A1A1AA">verified &amp; approved</text>
+
+            <line x1="552" y1="509" x2="580" y2="509" stroke="#DC2626" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow-red)" />
+            <text x="588" y="512" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#A1A1AA">failure &amp; remediation loop</text>
           </svg>
         </div>
       </div>
@@ -273,23 +338,24 @@
         Before any specification is drafted, the intake skill aggressively audits the raw context. It acts like a strict border guard:
       </p>
       <ul>
+        <li><strong>Sensitive Input Screening:</strong> Automatically scans briefs at intake to redact Indonesian PII and private credentials before they reach downstream models.</li>
         <li><strong>MoSCoW Enforcement:</strong> Separates fuzzy requirements into rigid boundaries: Must-Have (P0 MVP), Should-Have, and strictly out-of-scope Won't-Have items.</li>
         <li><strong>Proactive Edge Case Auditing:</strong> If a brief mentions <em>"users receive marketing vouchers"</em>, the agent interrupts and demands answers:
           <em>"Can a voucher discount exceed cart value? Are vouchers stackable with member tier points? What exact HTTP error code is returned on concurrency collisions?"</em>
         </li>
       </ul>
 
-      <h3>Tier 2: The Specification Engine (<code style="color:var(--term-cyan)">mapclub-brd</code>)</h3>
+      <h3>Tier 2: The Specification Engine &amp; API Contract Extraction (<code style="color:var(--term-cyan)">mapclub-brd</code>)</h3>
       <p>
-        Once boundaries are locked, the BRD generation skill compiles the specification adhering strictly to our internal engineering standards (<code style="color:var(--term-cyan)">PO_STANDARDS.md</code>):
+        Once boundaries are locked, the workflow extracts interface contracts first, then directly feeds those contracts into specification generation adhering to our internal engineering standards (<code style="color:var(--term-cyan)">PO_STANDARDS.md</code>):
       </p>
       <ul>
         <li><strong>Soft API Contracts:</strong> Every feature includes precise JSON request and response payloads with parameter data types (UUID, ISO-8601 strings, integers) and realistic edge-case responses.</li>
         <li><strong>Database Entity State Machines:</strong> Defines explicit database statuses (e.g., <code>PENDING_RECONCILIATION → INVOICED → DISPUTED</code>) so backend engineers know exactly what state transitions to handle.</li>
-        <li><strong>Clear and Actionable:</strong> All marketing fluff and vague adjectives are removed. Requirements are written directly for engineers with exact state transitions.</li>
+        <li><strong>Contract-Driven Spec Compilation:</strong> Extracted API schemas feed directly into the BRD packaging compiler so business prose never drifts from technical payload definitions.</li>
       </ul>
 
-      <h3>Tier 3: Acceptance Governance &amp; UAT Pipeline (<code style="color:var(--term-cyan)">mapclub-bac</code> &amp; <code style="color:var(--term-cyan)">mapclub-sharepoint</code>)</h3>
+      <h3>Tier 3: Acceptance Governance &amp; UAT Packaging (<code style="color:var(--term-cyan)">mapclub-bac</code> &amp; <code style="color:var(--term-cyan)">mapclub-sharepoint</code>)</h3>
       <p>
         Writing requirements is only half the battle; getting executive and cross-departmental approval is the other:
       </p>
@@ -298,13 +364,14 @@
         <li><strong>Automated Word &amp; SharePoint Sync:</strong> Compiles Markdown specifications into official Microsoft Word deliverables (<code style="color:var(--term-cyan)">.docx</code>) styled with MAPCLUB corporate typography, tables, and executive sign-off signatures, deposited directly into synced SharePoint drives.</li>
       </ul>
 
-      <h3>Tier 4: Automated Verification &amp; Sanitization Gate</h3>
+      <h3>Tier 4: Automated Multi-Stage Verification &amp; Sanitization Gate</h3>
       <p>
-        To prevent accidental data leakage or broken specs, the workspace includes custom Python validation scripts:
+        To prevent accidental data leakage or broken specs, artifacts remain provisional until cleared by a multi-stage validation gate:
       </p>
       <ul>
-        <li><code style="color:var(--term-cyan)">verify_sanitization.py</code>: Scans every markdown file and artifact before git commits, guaranteeing strictly zero Indonesian PII (NIK, phone numbers), production API keys, or confidential financial tokens ever enter version control.</li>
-        <li>Automated validation checks testing formatting and table integrity.</li>
+        <li><strong>Schema &amp; Contract Consistency:</strong> Cross-validates business logic against API models to ensure edge cases and error states are accounted for.</li>
+        <li><strong>Leak Prevention:</strong> <code style="color:var(--term-cyan)">verify_sanitization.py</code> scans every document before git commits, guaranteeing strictly zero Indonesian PII (NIK, phone numbers) or confidential keys enter version control.</li>
+        <li><strong>Automated Correction Loop:</strong> If validation fails (contract mismatch or sanitization flag), artifacts are quarantined and returned to the operator for remediation before being marked approved.</li>
       </ul>
 
       <h2>3. The Underlying Technology Stack</h2>
