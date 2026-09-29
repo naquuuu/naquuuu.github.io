@@ -41,9 +41,10 @@
   --term-red: var(--text-accent);
   --spotify-green: var(--text-accent);
 
-  /* --- Font Stack: Open Sans body + Space Grotesk display + JetBrains Mono labels/code --- */
-  --font-sans: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-display: 'Space Grotesk', var(--font-sans);
+  /* --- Font Stack: Plus Jakarta Sans UI + headings, Open Sans reading text, JetBrains Mono labels/code --- */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-sans);
+  --font-read: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-mono: 'JetBrains Mono', 'Consolas', monospace;
   --font-code: var(--font-mono);
 
@@ -3128,6 +3129,65 @@ body[data-mode="culture"] .concept-box {
   border-radius: var(--radius-xs);
 }
 
+/* Flowchart canvas: readable on phones (scrolls sideways inside the box instead of shrinking text) */
+.flowchart-board-canvas .flowchart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 640px;
+}
+
+/* Principle strip: maps a flowchart to the four working principles (editorial reading) */
+.principle-strip {
+  margin: -1rem 0 2rem;
+  padding: 0.85rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+.principle-strip-label {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  color: var(--text-secondary);
+}
+.principle-strip-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+.principle-strip-list li {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+  font-family: var(--font-read);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+.principle-name {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-crimson);
+  text-transform: lowercase;
+}
+.principle-strip-note {
+  margin: 0.6rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: lowercase;
+}
+@media (max-width: 520px) {
+  .principle-strip-list li { grid-template-columns: 1fr; gap: 0.15rem; }
+}
+
 /* MECE Failure Tree Grid */
 .failure-tree-grid {
   display: grid;
@@ -3232,6 +3292,12 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
   font-size: 0.86rem;
   color: var(--text-secondary);
   line-height: 1.5;
+}
+
+/* Reading text: readable body face inside long-form pages; headings keep Plus Jakarta Sans */
+.essay-content :is(p, li, td, th, blockquote, figcaption, dd),
+.inquiry-prose :is(p, li, td, th, blockquote, figcaption, dd) {
+  font-family: var(--font-read);
 }
 
 /* Article Reading Column (Blog Reliability Standard: 72ch constraint) */

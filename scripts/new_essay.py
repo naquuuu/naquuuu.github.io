@@ -272,6 +272,10 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <title>{title} | naquuuu (krishna)</title>
   <meta name="description" content="{description}">
   <link rel="canonical" href="{canonical}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap"></noscript>
   <link rel="stylesheet" href="../../assets/css/style.css?v={asset_version}">
   <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg?v={favicon_version}">
   <link rel="alternate icon" href="../../favicon.ico?v={favicon_version}">
