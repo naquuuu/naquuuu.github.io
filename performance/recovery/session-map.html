@@ -290,6 +290,7 @@ section { margin: 0 0 1.8rem; }
   <p class="foot-wordmark" aria-hidden="true">naquuuu</p>
   <div class="checks"><span class="check check-pass">dashes: 0</span><span class="check check-pass">inline width styles: 0</span><span class="check">credential patterns scrubbed: 0</span><span class="check">records: 5</span><span class="check">agents: 7</span><span class="check">handoff edges: 0</span><span class="check">tasks: 0</span><span class="check">roster: parsed from .opencode/agent/*.md</span></div>
   <p class="note">telemetry lives in .session-viz and holds paths, commands, and task text only. file contents are never recorded. credential shaped strings are replaced with [redacted] twice, once when the record is written and again when this page is built, so a key in a record cannot reach a file git would accept. this page holds itself to the same dash and inline width rules as the blog.</p>
+  <p class="note footer-privacy">visits are counted with <a href="https://www.goatcounter.com/" target="_blank" rel="noopener noreferrer">goatcounter</a>: no cookies, no personal info tracked.</p>
 </footer>
 <script>
 (function () {
@@ -406,5 +407,8 @@ section { margin: 0 0 1.8rem; }
   window.setInterval(poll, 2000);
 })();
 </script>
+  <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
+  <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script src="../../assets/js/palette.js?v=20260930a" defer></script>
 </body>
 </html>
