@@ -3107,6 +3107,27 @@ body[data-mode="culture"] .concept-box {
   gap: 0.5rem;
 }
 
+/* Architectural Blueprint on Warm Paper Variant */
+.flowchart-whiteboard-box.blueprint-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+}
+
+.flowchart-whiteboard-box.blueprint-box .flowchart-board-toolbar {
+  background: var(--bg-surface-elevated);
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.flowchart-whiteboard-box.blueprint-box .flowchart-toolbar-tag {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.65rem;
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+}
+
 /* MECE Failure Tree Grid */
 .failure-tree-grid {
   display: grid;
