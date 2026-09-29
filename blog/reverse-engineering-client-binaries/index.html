@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap"></noscript>
   
-  <link rel="stylesheet" href="../../assets/css/style.css?v=20260929d">
+  <link rel="stylesheet" href="../../assets/css/style.css?v=20260930a">
 </head>
 <body>
   <a class="skip-link" href="#main-content">skip to content</a>
@@ -97,170 +97,96 @@
         </div>
 
         <div class="flowchart-board-canvas scroll-x">
-          <svg class="flowchart-svg" viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="flowchart-bin-title flowchart-bin-desc">
-            <title id="flowchart-bin-title">binary harvesting and edge prototyping user action diagram</title>
-            <desc id="flowchart-bin-desc">architectural blueprint flowchart on warm paper showing operator actions, extraction pipeline processing, and deliverable artifacts.</desc>
-            <defs>
-              <marker id="arrow-gray-bin" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#8c897e" />
-              </marker>
-              <marker id="arrow-slate-bin" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#3b6989" />
-              </marker>
-              <marker id="arrow-sage-bin" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2e6844" />
-              </marker>
-            </defs>
-
-            <!-- Background Stage -->
-            <rect width="100%" height="100%" fill="var(--bg-surface, #F2F2ED)" />
-
-            <!-- Column Headers -->
-            <rect x="24" y="16" width="210" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-            <text x="129" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              user / operator action
-            </text>
-
-            <rect x="260" y="16" width="240" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-            <text x="380" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              automated pipeline execution
-            </text>
-
-            <rect x="526" y="16" width="210" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-            <text x="631" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              deliverable artifacts
-            </text>
-
-            <!-- Column Dividing Guideline Tracks -->
-            <line x1="247" y1="52" x2="247" y2="450" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
-            <line x1="513" y1="52" x2="513" y2="450" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
-
-            <!-- Row 1: Trigger & Harvester -->
-            <rect x="24" y="60" width="210" height="50" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-            <text x="129" y="81" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              1. trigger apk ingestion
-            </text>
-            <text x="129" y="97" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              supply production client apk
-            </text>
-
-            <rect x="260" y="60" width="240" height="50" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" />
-            <rect x="268" y="66" width="96" height="12" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
-            <text x="316" y="75" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#2d4b63" text-anchor="middle">asset harvester</text>
-            <text x="380" y="90" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              zip stream &amp; asset harvester
-            </text>
-            <text x="380" y="103" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              parse res/drawable, values &amp; assets/
-            </text>
-
-            <!-- Connector: U1 -> P1 -->
-            <path d="M 234 85 L 260 85" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#arrow-gray-bin)" />
-
-            <!-- Connector: P1 down to P2 -->
-            <path d="M 380 110 L 380 144" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#arrow-gray-bin)" />
-
-            <!-- Row 2: Vector Transpile & SVG Library -->
-            <rect x="260" y="144" width="240" height="50" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-            <text x="380" y="165" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              android vector xml parser
-            </text>
-            <text x="380" y="181" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              transpile pathdata &amp; fills to svg
-            </text>
-
-            <rect x="526" y="144" width="210" height="50" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" />
-            <rect x="534" y="150" width="76" height="12" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
-            <text x="572" y="159" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#2d4b63" text-anchor="middle">svg library</text>
-            <text x="631" y="174" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              lossless svg asset library
-            </text>
-            <text x="631" y="187" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              tier badges &amp; clean vectors
-            </text>
-
-            <!-- Connector: P2 -> A1 -->
-            <path d="M 500 169 L 526 169" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#arrow-gray-bin)" />
-
-            <!-- Connector: P2 down to P3 -->
-            <path d="M 380 194 L 380 230" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#arrow-gray-bin)" />
-
-            <!-- Row 3: Audit, Token Extractor & Tokens CSS -->
-            <rect x="24" y="230" width="210" height="50" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-            <text x="129" y="251" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              2. review asset &amp; font audit
-            </text>
-            <text x="129" y="267" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              verify hex codes &amp; variable glyphs
-            </text>
-
-            <rect x="260" y="230" width="240" height="50" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-            <text x="380" y="251" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              token &amp; font extractor
-            </text>
-            <text x="380" y="267" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              harvest colors.xml &amp; ttf webfonts
-            </text>
-
-            <rect x="526" y="230" width="210" height="50" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.5" />
-            <rect x="534" y="236" width="90" height="12" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
-            <text x="579" y="245" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#5a5850" text-anchor="middle">design tokens</text>
-            <text x="631" y="260" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              mapclub-tokens.css
-            </text>
-            <text x="631" y="273" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              mobile shell, nav bar &amp; design tokens
-            </text>
-
-            <!-- Connector: U2 -> P3 (user audits token compiler) -->
-            <path d="M 234 255 L 260 255" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#arrow-gray-bin)" />
-
-            <!-- Connector: P3 -> A2 -->
-            <path d="M 500 255 L 526 255" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#arrow-gray-bin)" />
-
-            <!-- Connector: P3 down to P4 -->
-            <path d="M 380 280 L 380 316" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#arrow-gray-bin)" />
-
-            <!-- Row 4: Edge Security Gate & Native Prototype -->
-            <rect x="260" y="316" width="240" height="50" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" />
-            <rect x="268" y="322" width="88" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
-            <text x="312" y="331" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">access control</text>
-            <text x="380" y="346" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              edge access control gate
-            </text>
-            <text x="380" y="359" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              signed cookie auth &amp; passcode wall
-            </text>
-
-            <rect x="526" y="316" width="210" height="50" rx="6" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
-            <rect x="534" y="322" width="112" height="12" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
-            <text x="590" y="331" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">interactive preview</text>
-            <text x="631" y="346" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="#1b3d2b" text-anchor="middle">
-              verified mobile prototype
-            </text>
-            <text x="631" y="359" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="#345e46" text-anchor="middle">
-              hardware-accurate mobile preview
-            </text>
-
-            <!-- Connector: P4 -> A3 -->
-            <path d="M 500 341 L 526 341" stroke="#2e6844" stroke-width="1.5" fill="none" marker-end="url(#arrow-sage-bin)" />
-
-            <!-- Row 5: Final User Sign-off and Delivery -->
-            <rect x="24" y="396" width="210" height="50" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#5b8a6d" stroke-width="1.5" />
-            <rect x="32" y="402" width="84" height="12" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
-            <text x="74" y="411" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">review step</text>
-            <text x="129" y="426" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              3. stakeholder sign-off
-            </text>
-            <text x="129" y="439" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              direct link on physical mobile
-            </text>
-
-            <!-- Connector: A3 down and across to U3 -->
-            <path d="M 631 366 L 631 421 L 234 421" stroke="#2e6844" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#arrow-sage-bin)" />
-            <rect x="340" y="415" width="180" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-            <text x="430" y="424" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#2e6844" text-anchor="middle">[reduced token drift: rapid sign-off]</text>
-          </svg>
+          <svg class="flowchart-svg" viewBox="0 0 780 590" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="flowchart-bin-title flowchart-bin-desc">
+<title id="flowchart-bin-title">binary harvesting and edge prototyping user action diagram</title>
+<desc id="flowchart-bin-desc">blueprint flowchart: an operator supplies a production apk; the harvester and vector parser build a lossless svg library, the token and font extractor produces the design tokens stylesheet after an operator audit, and an edge access control gate protects the verified mobile prototype that stakeholders sign off on their phones.</desc>
+<defs>
+<marker id="flowchart-bin-arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#8c897e" /></marker>
+<marker id="flowchart-bin-arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#3b6989" /></marker>
+<marker id="flowchart-bin-arrow-sage" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2e6844" /></marker>
+<marker id="flowchart-bin-arrow-crimson" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#a63822" /></marker>
+<marker id="flowchart-bin-arrow-terracotta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#b45309" /></marker>
+</defs>
+<rect width="100%" height="100%" fill="var(--bg-surface, #F2F2ED)" />
+<rect x="32" y="16" width="200" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="132" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">user / operator action</text>
+<rect x="256" y="16" width="256" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="384" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">automated pipeline execution</text>
+<rect x="536" y="16" width="212" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="642" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">deliverable artifacts</text>
+<line x1="244" y1="50" x2="244" y2="520" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
+<line x1="524" y1="50" x2="524" y2="520" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
+<path d="M 226 86 L 256 86" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
+<path d="M 384 112 L 384 160" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
+<path d="M 512 186 L 536 186" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
+<path d="M 384 212 L 384 260" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
+<path d="M 232 286 L 256 286" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
+<path d="M 512 286 L 536 286" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
+<path d="M 384 312 L 384 360" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
+<path d="M 512 386 L 536 386" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#flowchart-bin-arrow-sage)" />
+<path d="M 642 412 L 642 478 Q 642 486 634 486 L 232 486" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#flowchart-bin-arrow-sage)" />
+<polygon points="44,60 232,60 220,112 32,112" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
+<text x="132" y="83" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">1. trigger apk ingestion</text>
+<text x="132" y="98" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">supply production client apk</text>
+<rect x="256" y="60" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" />
+<rect x="264" y="66" width="78" height="12" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
+<text x="303" y="75" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#2d4b63" text-anchor="middle">asset harvester</text>
+<text x="384" y="93" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">zip stream &amp; asset harvester</text>
+<text x="384" y="105" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">parse res/drawable, values &amp; assets/</text>
+<rect x="256" y="160" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="384" y="183" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">android vector xml parser</text>
+<text x="384" y="198" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">transpile pathdata &amp; fills to svg</text>
+<path d="M 536 166 A 106 6 0 0 1 748 166 V 206 A 106 6 0 0 1 536 206 Z" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" /><path d="M 536 166 A 106 6 0 0 0 748 166" fill="none" stroke="#9bb4c7" stroke-width="1.5" />
+<rect x="544" y="168" width="60.4" height="12" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
+<text x="574.2" y="177" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#2d4b63" text-anchor="middle">svg library</text>
+<text x="642" y="195" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">lossless svg asset library</text>
+<text x="642" y="207" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">tier badges &amp; clean vectors</text>
+<rect x="32" y="260" width="200" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="132" y="283" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">2. review asset &amp; font audit</text>
+<text x="132" y="298" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">verify hex codes &amp; variable glyphs</text>
+<rect x="256" y="260" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="384" y="283" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">token &amp; font extractor</text>
+<text x="384" y="298" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">harvest colors.xml &amp; ttf webfonts</text>
+<path d="M 536 266 Q 536 260 542 260 H 742 Q 748 260 748 266 V 308 C 701.36 302 667.44 316 631.4 312 S 567.8 304 536 310 Z" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.5" />
+<rect x="544" y="263" width="69.2" height="12" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
+<text x="578.6" y="272" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#5a5850" text-anchor="middle">design tokens</text>
+<text x="642" y="290" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">mapclub-tokens.css</text>
+<text x="642" y="302" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">mobile shell, nav bar &amp; design tokens</text>
+<polygon points="270,360 498,360 512,386 498,412 270,412 256,386" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" stroke-linejoin="round" />
+<rect x="272" y="366" width="73.6" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
+<text x="308.8" y="375" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">access control</text>
+<text x="384" y="393" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">edge access control gate</text>
+<text x="384" y="405" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">signed cookie auth &amp; passcode wall</text>
+<rect x="536" y="360" width="212" height="52" rx="6" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
+<rect x="544" y="366" width="95.6" height="12" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
+<text x="591.8" y="375" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">interactive preview</text>
+<text x="642" y="393" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">verified mobile prototype</text>
+<text x="642" y="405" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">hardware-accurate mobile preview</text>
+<rect x="32" y="460" width="200" height="52" rx="26" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
+<text x="132" y="483" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">3. stakeholder sign-off</text>
+<text x="132" y="498" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">direct link on physical mobile</text>
+<rect x="345.25" y="470" width="169.5" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
+<text x="430" y="479" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#244b35" text-anchor="middle">[reduced token drift: rapid sign-off]</text>
+<line x1="32" y1="538" x2="748" y2="538" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="32" y="554" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">lines</text>
+<line x1="96" y1="551" x2="124" y2="551" stroke="#8c897e" stroke-width="1.2" marker-end="url(#flowchart-bin-arrow-gray)" />
+<text x="132" y="554" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">flow</text>
+<line x1="174.4" y1="551" x2="202.4" y2="551" stroke="#2e6844" stroke-width="1.6" marker-end="url(#flowchart-bin-arrow-sage)" />
+<text x="210.4" y="554" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">verified outcome</text>
+<text x="32" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">shapes</text>
+<rect x="96" y="566" width="16" height="10" rx="5" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="118" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">start / end</text>
+<polygon points="194.6,566 206.6,566 202.6,576 190.6,576" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="212.6" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">input</text>
+<rect x="257.6" y="566" width="16" height="10" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="279.6" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">action</text>
+<polygon points="333.20000000000005,566 341.20000000000005,566 345.20000000000005,571 341.20000000000005,576 333.20000000000005,576 329.20000000000005,571" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="351.20000000000005" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">control gate</text>
+<path d="M 428.40000000000003 568 A 8 2 0 0 1 444.40000000000003 568 V 574 A 8 2 0 0 1 428.40000000000003 574 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" /><path d="M 428.40000000000003 568 A 8 2 0 0 0 444.40000000000003 568" fill="none" stroke="#8c897e" stroke-width="1" />
+<text x="450.40000000000003" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">data source</text>
+<path d="M 523.0 566 H 539.0 V 574 C 535.0 572 531.0 578 523.0 575 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="545.0" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">document</text>
+</svg>
         </div>
       </div>
 
@@ -363,9 +289,13 @@
       </div>
       <div class="footer-live-stamp">
         <span>naquuuu.github.io • built with matter and code.</span>
+        <span class="footer-privacy">visits are counted with <a href="https://www.goatcounter.com/" target="_blank" rel="noopener noreferrer">goatcounter</a>: no cookies, no personal info tracked.</span>
       </div>
     </div>
   </footer>
 
+  <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
+  <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script src="../../assets/js/palette.js?v=20260930a" defer></script>
 </body>
 </html>

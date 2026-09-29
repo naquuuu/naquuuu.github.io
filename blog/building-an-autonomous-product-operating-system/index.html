@@ -9,7 +9,7 @@
   <title>building a product operations workspace: reliable specifications with ai workflows: naquuuu (krishna)</title>
   <meta name="description" content="Inside my product operations workspace: moving beyond generic prompts to structured workflows, interactive prototypes, and quality checks that reduce BRD preparation time.">
   <link rel="canonical" href="https://naquuuu.github.io/blog/building-an-autonomous-product-operating-system/">
-  <link rel="stylesheet" href="../../assets/css/style.css?v=20260929d">
+  <link rel="stylesheet" href="../../assets/css/style.css?v=20260930a">
   <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg?v=20260917i">
   <link rel="alternate icon" href="../../favicon.ico?v=20260917i">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,206 +140,114 @@
         </div>
 
         <div class="flowchart-board-canvas scroll-x">
-          <svg class="flowchart-svg" viewBox="0 0 780 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="flowchart-title flowchart-desc">
-            <title id="flowchart-title">product operations workspace user action diagram</title>
-            <desc id="flowchart-desc">architectural blueprint flowchart on warm paper showing operator actions, workspace processing, and deliverable artifacts with contract dependencies and correction loops.</desc>
-            <defs>
-              <marker id="arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#8c897e" />
-              </marker>
-              <marker id="arrow-terracotta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#b45309" />
-              </marker>
-              <marker id="arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#3b6989" />
-              </marker>
-              <marker id="arrow-crimson" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#a63822" />
-              </marker>
-              <marker id="arrow-sage" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2e6844" />
-              </marker>
-            </defs>
-
-            <!-- Canvas Background Stage -->
-            <rect width="100%" height="100%" fill="var(--bg-surface, #F2F2ED)" />
-
-            <!-- Column Headers -->
-            <rect x="32" y="16" width="200" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-            <text x="132" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              operator action
-            </text>
-
-            <rect x="256" y="16" width="256" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-            <text x="384" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              agent operating system
-            </text>
-
-            <rect x="536" y="16" width="212" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-            <text x="642" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              deliverable artifacts
-            </text>
-
-            <!-- Dividing Track Guidelines -->
-            <line x1="244" y1="50" x2="244" y2="480" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
-            <line x1="524" y1="50" x2="524" y2="480" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
-
-            <!-- Row 1: Brief Ingestion & Intake Screening Gate -->
-            <rect x="32" y="56" width="200" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-            <text x="132" y="78" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              1. submit raw brief
-            </text>
-            <text x="132" y="94" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              paste slack brief or meeting notes
-            </text>
-
-            <rect x="256" y="56" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" />
-            <rect x="264" y="62" width="104" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
-            <text x="316" y="71" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">intake screening</text>
-            <text x="384" y="86" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              intake gatekeeper &amp; screener
-            </text>
-            <text x="384" y="100" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              screen pii/keys &amp; enforce moscow scope
-            </text>
-
-            <rect x="536" y="56" width="212" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-            <text x="642" y="78" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              strict scope manifest
-            </text>
-            <text x="642" y="94" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              p0 must-have vs out-of-scope
-            </text>
-
-            <!-- Connector: U1 -> P1 -->
-            <path d="M 232 82 L 256 82" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#arrow-gray)" />
-
-            <!-- Connector: P1 -> A1 -->
-            <path d="M 512 82 L 536 82" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#arrow-gray)" />
-
-            <!-- Row 2: Boundary Audit & Clarification -->
-            <rect x="32" y="144" width="200" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-            <text x="132" y="166" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              2. clarify &amp; resolve audit
-            </text>
-            <text x="132" y="182" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              answer edge cases, timeouts &amp; pii flags
-            </text>
-
-            <!-- Failure Loop 1: P1 down and left to U2 (Screening & Scope Audit) -->
-            <path d="M 360 108 L 360 156 A 8 8 0 0 1 352 164 L 232 164" stroke="#b45309" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#arrow-terracotta)" />
-            <rect x="246" y="152" width="102" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-            <text x="297" y="161" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#8a3b1e" text-anchor="middle">[screening flag / audit]</text>
-
-            <!-- Row 3: Soft API Contract Extraction -->
-            <rect x="256" y="232" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-            <text x="384" y="254" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              soft api contract generator
-            </text>
-            <text x="384" y="270" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              json schemas, error codes &amp; db states
-            </text>
-
-            <rect x="536" y="232" width="212" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" />
-            <rect x="544" y="238" width="88" height="12" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
-            <text x="588" y="247" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#2d4b63" text-anchor="middle">typed schemas</text>
-            <text x="642" y="262" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              api contract schemas
-            </text>
-            <text x="642" y="276" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              structured payload &amp; state specs
-            </text>
-
-            <!-- Connector: U2 attach 1 down to P2 -->
-            <path d="M 116 196 L 116 250 A 8 8 0 0 0 124 258 L 256 258" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#arrow-gray)" />
-            <rect x="144" y="246" width="88" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-            <text x="188" y="255" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">[trigger extraction]</text>
-
-            <!-- Connector: P2 right to A2 -->
-            <path d="M 512 258 L 536 258" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#arrow-gray)" />
-
-            <!-- Row 4: BRD Specification Engine -->
-            <rect x="256" y="320" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-            <text x="384" y="342" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              docx packaging engine
-            </text>
-            <text x="384" y="358" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              compiles brd with contract specs &amp; tables
-            </text>
-
-            <rect x="536" y="320" width="212" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.5" />
-            <rect x="544" y="326" width="96" height="12" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
-            <text x="592" y="335" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#5a5850" text-anchor="middle">provisional spec</text>
-            <text x="642" y="350" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">
-              compiled brd draft
-            </text>
-            <text x="642" y="364" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">
-              provisional spec awaiting audit
-            </text>
-
-            <!-- Connector: U2 attach 2 down to P3 -->
-            <path d="M 148 196 L 148 338 A 8 8 0 0 0 156 346 L 256 346" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#arrow-gray)" />
-            <rect x="168" y="334" width="76" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-            <text x="206" y="343" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">[generate spec]</text>
-
-            <!-- Connected Dependency: A2 Contract Schemas FEEDS into P3 BRD Packaging Engine -->
-            <path d="M 600 284 L 600 294 A 8 8 0 0 1 592 302 L 488 302 A 8 8 0 0 0 480 310 L 480 320" stroke="#3b6989" stroke-width="1.3" fill="none" marker-end="url(#arrow-slate)" />
-            <rect x="494" y="290" width="96" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-            <text x="542" y="299" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#2d4b63" text-anchor="middle">[feed contract to brd]</text>
-
-            <!-- Connector: P3 right to A3 -->
-            <path d="M 512 346 L 536 346" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#arrow-gray)" />
-
-            <!-- Row 5: Multi-Stage Verification Gate & Final Deliverable -->
-            <rect x="256" y="412" width="256" height="56" rx="6" fill="#fdf6f5" stroke="#a63822" stroke-width="1.5" />
-            <rect x="264" y="418" width="84" height="12" rx="2" fill="#faeae8" stroke="#d85c46" stroke-width="0.8" />
-            <text x="306" y="427" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#a63822" text-anchor="middle">tier 4 gate</text>
-            <text x="384" y="442" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="#111110" text-anchor="middle">
-              multi-stage verification gate
-            </text>
-            <text x="384" y="458" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="#a63822" text-anchor="middle">
-              schema audit • logic checks • verify_sanitization.py
-            </text>
-
-            <rect x="536" y="412" width="212" height="56" rx="6" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
-            <rect x="544" y="418" width="108" height="12" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
-            <text x="598" y="427" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">verified artifact</text>
-            <text x="642" y="442" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="#1b3d2b" text-anchor="middle">
-              approved specification
-            </text>
-            <text x="642" y="458" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="#345e46" text-anchor="middle">
-              ready for engineering &amp; uat handoff
-            </text>
-
-            <!-- Connector: A3 down to P4 Gate (Submit for Verification) -->
-            <path d="M 600 372 L 600 386 A 8 8 0 0 1 592 394 L 488 394 A 8 8 0 0 0 480 402 L 480 412" stroke="#a63822" stroke-width="1.3" fill="none" marker-end="url(#arrow-crimson)" />
-            <rect x="498" y="382" width="88" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-            <text x="542" y="391" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#a63822" text-anchor="middle">[submit for audit]</text>
-
-            <!-- Connector: P4 right to A4 (Gate Passed) -->
-            <path d="M 512 440 L 536 440" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#arrow-sage)" />
-
-            <!-- Failure Loop 2: Failed validation loops back to U2 for operator resolution -->
-            <path d="M 256 440 L 24 440 A 8 8 0 0 1 16 432 L 16 178 A 8 8 0 0 1 24 170 L 32 170" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#arrow-crimson)" />
-            <rect x="52" y="428" width="168" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-            <text x="136" y="437" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#a63822" text-anchor="middle">[failed validation / remediation loop]</text>
-
-            <!-- Bottom Legend Strip -->
-            <line x1="32" y1="492" x2="748" y2="492" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-            <text x="32" y="512" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">legend</text>
-
-            <line x1="96" y1="509" x2="124" y2="509" stroke="#8c897e" stroke-width="1.2" marker-end="url(#arrow-gray)" />
-            <text x="132" y="512" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">standard flow</text>
-
-            <line x1="228" y1="509" x2="256" y2="509" stroke="#3b6989" stroke-width="1.3" marker-end="url(#arrow-slate)" />
-            <text x="264" y="512" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">contract dependency</text>
-
-            <line x1="392" y1="509" x2="420" y2="509" stroke="#2e6844" stroke-width="1.6" marker-end="url(#arrow-sage)" />
-            <text x="428" y="512" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">verified &amp; approved</text>
-
-            <line x1="552" y1="509" x2="580" y2="509" stroke="#a63822" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#arrow-crimson)" />
-            <text x="588" y="512" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">failure &amp; remediation loop</text>
-          </svg>
+          <svg class="flowchart-svg" viewBox="0 0 780 590" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="flowchart-title flowchart-desc">
+<title id="flowchart-title">product operations workspace user action diagram</title>
+<desc id="flowchart-desc">blueprint flowchart: a raw brief enters an intake gatekeeper that screens pii and keys and enforces moscow scope, flagging audits back to the operator; clarification triggers a soft api contract generator and the docx packaging engine, with contract schemas feeding the brd; the compiled draft goes to a verification decision that either approves the specification or loops back for remediation.</desc>
+<defs>
+<marker id="flowchart-arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#8c897e" /></marker>
+<marker id="flowchart-arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#3b6989" /></marker>
+<marker id="flowchart-arrow-sage" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2e6844" /></marker>
+<marker id="flowchart-arrow-crimson" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#a63822" /></marker>
+<marker id="flowchart-arrow-terracotta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#b45309" /></marker>
+</defs>
+<rect width="100%" height="100%" fill="var(--bg-surface, #F2F2ED)" />
+<rect x="32" y="16" width="200" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="132" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">operator action</text>
+<rect x="256" y="16" width="256" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="384" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">agent operating system</text>
+<rect x="536" y="16" width="212" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="642" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">deliverable artifacts</text>
+<line x1="244" y1="50" x2="244" y2="520" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
+<line x1="524" y1="50" x2="524" y2="520" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
+<path d="M 226 86 L 256 86" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-arrow-gray)" />
+<path d="M 512 86 L 536 86" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-arrow-gray)" />
+<path d="M 360 112 L 360 178 Q 360 186 352 186 L 232 186" stroke="#b45309" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#flowchart-arrow-terracotta)" />
+<path d="M 172 212 L 172 278 Q 172 286 180 286 L 256 286" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-arrow-gray)" />
+<path d="M 92 212 L 92 378 Q 92 386 100 386 L 256 386" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-arrow-gray)" />
+<path d="M 512 286 L 536 286" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-arrow-gray)" />
+<path d="M 600 312 L 600 328 Q 600 336 592 336 L 488 336 Q 480 336 480 344 L 480 360" stroke="#3b6989" stroke-width="1.3" fill="none" marker-end="url(#flowchart-arrow-slate)" />
+<path d="M 512 386 L 536 386" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-arrow-gray)" />
+<path d="M 642 412 L 642 428 Q 642 436 634 436 L 392 436 Q 384 436 384 444 L 384 452" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-arrow-gray)" />
+<path d="M 512 486 L 536 486" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#flowchart-arrow-sage)" />
+<path d="M 256 486 L 26 486 Q 18 486 18 478 L 18 193 Q 18 186 25 186 L 32 186" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#flowchart-arrow-crimson)" />
+<polygon points="44,60 232,60 220,112 32,112" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
+<text x="132" y="83" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">1. submit raw brief</text>
+<text x="132" y="98" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">slack brief or meeting notes</text>
+<polygon points="270,60 498,60 512,86 498,112 270,112 256,86" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" stroke-linejoin="round" />
+<rect x="272" y="66" width="82.4" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
+<text x="313.2" y="75" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">intake screening</text>
+<text x="384" y="93" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">intake gatekeeper &amp; screener</text>
+<text x="384" y="105" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">screen pii/keys &amp; enforce moscow scope</text>
+<path d="M 536 66 Q 536 60 542 60 H 742 Q 748 60 748 66 V 108 C 701.36 102 667.44 116 631.4 112 S 567.8 104 536 110 Z" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="642" y="80" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">strict scope manifest</text>
+<text x="642" y="95" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">p0 must-have vs out-of-scope</text>
+<rect x="32" y="160" width="200" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="132" y="183" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">2. clarify &amp; resolve audit</text>
+<text x="132" y="198" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">edge cases, timeouts &amp; pii flags</text>
+<rect x="256" y="260" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="384" y="283" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">soft api contract generator</text>
+<text x="384" y="298" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">json schemas, error codes &amp; db states</text>
+<path d="M 536 266 A 106 6 0 0 1 748 266 V 306 A 106 6 0 0 1 536 306 Z" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" /><path d="M 536 266 A 106 6 0 0 0 748 266" fill="none" stroke="#9bb4c7" stroke-width="1.5" />
+<rect x="544" y="268" width="69.2" height="12" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
+<text x="578.6" y="277" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#2d4b63" text-anchor="middle">typed schemas</text>
+<text x="642" y="295" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">api contract schemas</text>
+<text x="642" y="307" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">structured payload &amp; state specs</text>
+<rect x="256" y="360" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="384" y="383" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">docx packaging engine</text>
+<text x="384" y="398" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">compiles brd with contract specs &amp; tables</text>
+<path d="M 536 366 Q 536 360 542 360 H 742 Q 748 360 748 366 V 408 C 701.36 402 667.44 416 631.4 412 S 567.8 404 536 410 Z" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.5" />
+<rect x="544" y="363" width="82.4" height="12" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
+<text x="585.2" y="372" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#5a5850" text-anchor="middle">provisional spec</text>
+<text x="642" y="390" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">compiled brd draft</text>
+<text x="642" y="402" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">provisional spec awaiting audit</text>
+<polygon points="256,486 384,452 512,486 384,520" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
+<text x="384" y="484" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">passes verification?</text>
+<text x="384" y="497" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">schema audit · logic · sanitization</text>
+<rect x="536" y="460" width="212" height="52" rx="26" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
+<text x="642" y="483" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">approved specification</text>
+<text x="642" y="498" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">ready for engineering &amp; uat handoff</text>
+<rect x="244.5" y="170" width="111" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
+<text x="300" y="179" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#8a3b1e" text-anchor="middle">[screening flag / audit]</text>
+<rect x="167.5" y="270" width="93" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
+<text x="214" y="279" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">[trigger extraction]</text>
+<rect x="124.75" y="370" width="70.5" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
+<text x="160" y="379" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">[generate spec]</text>
+<rect x="505" y="330" width="102" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
+<text x="556" y="339" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#2d4b63" text-anchor="middle">[feed contract to brd]</text>
+<rect x="518" y="430" width="84" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
+<text x="560" y="439" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">[submit for audit]</text>
+<rect x="509" y="445" width="30" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
+<text x="524" y="454" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#244b35" text-anchor="middle">[pass]</text>
+<rect x="53" y="480" width="174" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
+<text x="140" y="489" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#a63822" text-anchor="middle">[failed validation / remediation loop]</text>
+<line x1="32" y1="538" x2="748" y2="538" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="32" y="554" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">lines</text>
+<line x1="96" y1="551" x2="124" y2="551" stroke="#8c897e" stroke-width="1.2" marker-end="url(#flowchart-arrow-gray)" />
+<text x="132" y="554" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">flow</text>
+<line x1="174.4" y1="551" x2="202.4" y2="551" stroke="#3b6989" stroke-width="1.3" marker-end="url(#flowchart-arrow-slate)" />
+<text x="210.4" y="554" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">dependency</text>
+<line x1="280.4" y1="551" x2="308.4" y2="551" stroke="#2e6844" stroke-width="1.6" marker-end="url(#flowchart-arrow-sage)" />
+<text x="316.4" y="554" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">verified outcome</text>
+<line x1="414.0" y1="551" x2="442.0" y2="551" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#flowchart-arrow-crimson)" />
+<text x="450.0" y="554" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">failure or risk path</text>
+<line x1="566.0" y1="551" x2="594.0" y2="551" stroke="#b45309" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#flowchart-arrow-terracotta)" />
+<text x="602.0" y="554" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">audit flag</text>
+<text x="32" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">shapes</text>
+<rect x="96" y="566" width="16" height="10" rx="5" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="118" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">start / end</text>
+<polygon points="194.6,566 206.6,566 202.6,576 190.6,576" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="212.6" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">input</text>
+<rect x="257.6" y="566" width="16" height="10" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="279.6" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">action</text>
+<polygon points="329.20000000000005,571 337.20000000000005,565 345.20000000000005,571 337.20000000000005,577" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="351.20000000000005" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">decision</text>
+<polygon points="414.00000000000006,566 422.00000000000006,566 426.00000000000006,571 422.00000000000006,576 414.00000000000006,576 410.00000000000006,571" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="432.00000000000006" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">control gate</text>
+<path d="M 509.20000000000005 568 A 8 2 0 0 1 525.2 568 V 574 A 8 2 0 0 1 509.20000000000005 574 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" /><path d="M 509.20000000000005 568 A 8 2 0 0 0 525.2 568" fill="none" stroke="#8c897e" stroke-width="1" />
+<text x="531.2" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">data source</text>
+<path d="M 603.8000000000001 566 H 619.8000000000001 V 574 C 615.8000000000001 572 611.8000000000001 578 603.8000000000001 575 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="625.8000000000001" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">document</text>
+</svg>
         </div>
       </div>
 
@@ -442,9 +350,13 @@
       </div>
       <div class="footer-live-stamp">
         <span>naquuuu.github.io • built with matter and code.</span>
+        <span class="footer-privacy">visits are counted with <a href="https://www.goatcounter.com/" target="_blank" rel="noopener noreferrer">goatcounter</a>: no cookies, no personal info tracked.</span>
       </div>
     </div>
   </footer>
 
+  <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
+  <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script src="../../assets/js/palette.js?v=20260930a" defer></script>
 </body>
 </html>

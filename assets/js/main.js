@@ -309,6 +309,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const MAX_AUDIO_VOLUME = 0.5;
 
   let isUserInitiatedPause = false;
+  // Off by default: audio only ever plays after the visitor clicks the sound pill.
+  let userWantsAudio = false;
   let pausedBySpotify = false;
   let isSpotifyPlaying = false;
 
@@ -333,7 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function resumeMainAudioFromSpotify() {
     isSpotifyPlaying = false;
     // Resume loop only if previously paused by Spotify and user hasn't explicitly clicked [PAUSE]
-    if (audioEl && pausedBySpotify && !isUserInitiatedPause) {
+    if (audioEl && userWantsAudio && pausedBySpotify && !isUserInitiatedPause) {
       pausedBySpotify = false;
       audioEl.volume = MAX_AUDIO_VOLUME;
       audioEl.play().catch(() => {});
@@ -345,6 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function toggleAudio() {
     if (!audioEl) return;
     if (audioEl.paused) {
+      userWantsAudio = true;
       isUserInitiatedPause = false;
       pausedBySpotify = false;
       isSpotifyPlaying = false;
@@ -361,6 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Audio playback request handled:', err);
       });
     } else {
+      userWantsAudio = false;
       isUserInitiatedPause = true;
       pausedBySpotify = false;
       audioEl.pause();
@@ -390,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
         audioEl.volume = MAX_AUDIO_VOLUME;
       }
       // Never allow main audio to play if Spotify is active
-      if (pausedBySpotify || isSpotifyPlaying) {
+      if (!userWantsAudio || pausedBySpotify || isSpotifyPlaying) {
         audioEl.pause();
         updateAudioUI(false);
         return;
@@ -401,9 +405,9 @@ document.addEventListener('DOMContentLoaded', () => {
     audioEl.addEventListener('pause', () => {
       updateAudioUI(false);
       // Auto-resume resilience: recover from OS/browser interruptions only when not Spotify-paused and not user-paused
-      if (!isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying) {
+      if (userWantsAudio && !isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying) {
         setTimeout(() => {
-          if (!isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying && audioEl.paused) {
+          if (userWantsAudio && !isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying && audioEl.paused) {
             audioEl.volume = MAX_AUDIO_VOLUME;
             audioEl.play().catch(() => {});
           }
@@ -413,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Tab visibility resilience
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible' && !isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying && audioEl.paused) {
+      if (document.visibilityState === 'visible' && userWantsAudio && !isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying && audioEl.paused) {
         audioEl.volume = MAX_AUDIO_VOLUME;
         audioEl.play().catch(() => {});
       }
@@ -422,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Single deterministic loop restart
     audioEl.addEventListener('ended', () => {
       audioEl.currentTime = 0;
-      if (!isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying) {
+      if (userWantsAudio && !isUserInitiatedPause && !pausedBySpotify && !isSpotifyPlaying) {
         audioEl.volume = MAX_AUDIO_VOLUME;
         audioEl.play().catch(err => {
           console.warn('Seamless loop restart caught:', err);

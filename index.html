@@ -6,7 +6,7 @@
   <title>krishna (naquuuu) • product manager</title>
   <meta name="description" content="Personal portfolio and notes of Krishna (naquuuu). Product manager based in Jakarta, building software and everyday physical design.">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg?v=20260917i">
-  <link rel="stylesheet" href="./assets/css/style.css?v=20260929d">
+  <link rel="stylesheet" href="./assets/css/style.css?v=20260930a">
   <link rel="canonical" href="https://naquuuu.github.io/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +40,12 @@
           </span>
           <span id="nav-audio-status">[ SOUND ]</span>
         </button>
+
+        <button type="button" class="nav-search-chip" data-cmdk-open aria-label="search this site">
+          <svg class="qi" aria-hidden="true" focusable="false" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg>
+          <span>search</span><kbd data-cmdk-key>ctrl K</kbd>
+        </button>
+        <a href="./assets/Krishna_CV_2026.pdf" target="_blank" rel="noopener" class="nav-cv-chip" aria-label="open cv (pdf)"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-cv"></use></svg><span>cv</span></a>
 
         <nav class="nav-links" aria-label="Primary Navigation">
           <a href="#philosophy" class="nav-link" data-nav="philosophy">philosophy</a>
@@ -84,14 +90,12 @@
               <span class="hero-headline-subthesis">mapping every possibility, from code to culture.</span>
             </h1>
             <nav class="hero-quicklinks" aria-label="cv and contact">
-              <a class="quick-cv" href="./assets/Krishna_CV_2026.pdf" target="_blank" rel="noopener"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-cv"></use></svg><span>cv (pdf)</span></a>
-              <div class="quick-icons">
-                <a class="quick-icon" href="https://wa.me/6282112255009" target="_blank" rel="noopener noreferrer" aria-label="whatsapp" title="whatsapp"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg></a>
-                <a class="quick-icon" href="mailto:rbkrishnamurti@gmail.com" aria-label="email" title="email"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg></a>
-                <a class="quick-icon" href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" aria-label="linkedin" title="linkedin"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-linkedin"></use></svg></a>
-                <a class="quick-icon" href="https://www.instagram.com/naquuuu_/" target="_blank" rel="noopener noreferrer" aria-label="instagram" title="instagram"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-instagram"></use></svg></a>
-                <a class="quick-icon" href="https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf" target="_blank" rel="noopener noreferrer" aria-label="spotify" title="spotify"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-spotify"></use></svg></a>
-              </div>
+              <a class="quick-tile quick-tile--cv" href="./assets/Krishna_CV_2026.pdf" target="_blank" rel="noopener" aria-label="open cv (pdf)" title="cv (pdf)"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-cv"></use></svg><span>cv</span></a>
+              <a class="quick-tile" href="https://wa.me/6282112255009" target="_blank" rel="noopener noreferrer" aria-label="whatsapp" title="whatsapp"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg></a>
+              <a class="quick-tile" href="mailto:rbkrishnamurti@gmail.com" aria-label="email" title="email"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg></a>
+              <a class="quick-tile" href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" aria-label="linkedin" title="linkedin"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-linkedin"></use></svg></a>
+              <a class="quick-tile" href="https://www.instagram.com/naquuuu_/" target="_blank" rel="noopener noreferrer" aria-label="instagram" title="instagram"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-instagram"></use></svg></a>
+              <a class="quick-tile" href="https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf" target="_blank" rel="noopener noreferrer" aria-label="spotify" title="spotify"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-spotify"></use></svg></a>
             </nav>
           </div>
 
@@ -164,6 +168,7 @@
       </div>
     </div>
 
+
     <!-- =======================================================================
          view a: systems & matter (technical proof, white paper theme)
          ================================================================       -->
@@ -172,7 +177,7 @@
       <section class="section-loop-cards" id="operating-philosophy">
         <div class="wrap">
           <div class="loop-cards-header" data-reveal>
-            <span class="loop-cards-title">how i think about systems</span>
+            <span class="loop-cards-title"><span class="section-num"></span>how i think about systems</span>
             <span class="loop-cards-sub">[ 04 principles ]</span>
           </div>
 
@@ -228,220 +233,71 @@
         </div>
       </section>
 
-      <!-- 2. Selected Artifacts (The 3 Shipped Systems) -->
+      <!-- 2. Selected Work: compact index, full detail on case pages (ADR-038) -->
       <section class="section-works" id="artifacts">
         <div class="wrap">
           <div class="section-label-bar" data-reveal>
-            <span class="section-label">shipped systems</span>
-            <span class="section-count">[ 05 built ]</span>
+            <span class="section-label"><span class="section-num"></span>selected work</span>
+            <a href="./experience/" class="section-count">all experience →</a>
           </div>
 
-          <div class="dossier-stack">
-            <!-- Dossier 1: MAPCLUB -->
-            <article class="dossier-card">
-              <div class="dossier-tab">
-                <span>doc 01</span>
-                <span class="dossier-tab-sep">/</span>
-                <span class="dossier-tab-name">mapclub</span><img class="brand-mark brand-mark--tab brand-mapclub" src="./assets/img/brands/mapclub.svg" alt="mapclub logo" width="143" height="25" loading="lazy" decoding="async">
+          <p class="work-group-label">experience</p>
+          <ol class="work-index">
+            <li class="work-row">
+              <span class="work-num">01</span>
+              <div class="work-main">
+                <div class="work-meta"><img class="brand-mark brand-mark--tab brand-mapclub" src="./assets/img/brands/mapclub.svg" alt="mapclub logo" width="143" height="25" loading="lazy" decoding="async"><span>senior product owner · jul 2026 - present</span></div>
+                <h3 class="work-title"><a href="./experience/mapclub/" class="dossier-title-link">product operations workspace &amp; e-commerce journeys</a></h3>
+                <p class="work-desc">own the pre-purchase journey (homepage, campaigns, cart, checkout) and built an ai-assisted workspace for brds, diagrams and prototypes.</p>
               </div>
-              <div class="dossier-header">
-                <div class="dossier-badge">
-                  <span class="dossier-badge-dot" aria-hidden="true"></span>
-                  <span>2026 - present</span>
-                </div>
-                <span class="dossier-category">omnichannel retail loyalty // mapclub</span>
+              <span class="work-result">brd prep 1 week → ≤1 day</span>
+              <span class="work-arrow" aria-hidden="true">↗</span>
+            </li>
+            <li class="work-row">
+              <span class="work-num">02</span>
+              <div class="work-main">
+                <div class="work-meta"><img class="brand-mark brand-mark--tab brand-traveloka" src="./assets/img/brands/traveloka.svg" alt="traveloka logo" width="135" height="43" loading="lazy" decoding="async"><span>product manager · apr 2024 - mar 2026</span></div>
+                <h3 class="work-title"><a href="./experience/traveloka/" class="dossier-title-link">flight refund engine &amp; ticket products</a></h3>
+                <p class="work-desc">led ticket-product development, direct provider api integration and a tax &amp; commission engine for flight refunds.</p>
               </div>
-              <h2 class="dossier-title"><a href="./experience/mapclub/" class="dossier-title-link">enterprise omnichannel loyalty &amp; automation</a></h2>
+              <span class="work-result">~idr 10bn net revenue in 3 months<br>refund accuracy 87.97% → 94.24%</span>
+              <span class="work-arrow" aria-hidden="true">↗</span>
+            </li>
+            <li class="work-row">
+              <span class="work-num">03</span>
+              <div class="work-main">
+                <div class="work-meta"><img class="brand-mark brand-mark--tab brand-bcg" src="./assets/img/brands/bcg.svg" alt="bcg logo" width="72" height="31" loading="lazy" decoding="async"><span>project specialist · feb 2023 - mar 2024</span></div>
+                <h3 class="work-title"><a href="./experience/bcg/" class="dossier-title-link">techno-commercial tenders &amp; o&amp;m roadmap</a></h3>
+                <p class="work-desc">embedded with an epc client: turned technical specs into tender narratives and analysed a $400mn+ project pipeline.</p>
+              </div>
+              <span class="work-result">30% of 10+ tenders to final bid</span>
+              <span class="work-arrow" aria-hidden="true">↗</span>
+            </li>
+          </ol>
 
-              <div class="dossier-body-grid">
-                <div>
-                  <div class="dossier-subheading">the problem</div>
-                  <p class="dossier-prose">
-                    manual requirements drafting, fragmented business briefs, and complex checkout coupon flows slow down retail delivery.
-                  </p>
-                </div>
-                <div>
-                  <div class="dossier-subheading">what i built</div>
-                  <p class="dossier-prose">
-                    built a structured Product Operations workspace reducing BRD time to 1 day or less, owned C-level approved Ticketing Services requirements, and delivered checkout coupon and address improvements.
-                  </p>
-                </div>
+          <p class="work-group-label">competitions</p>
+          <ol class="work-index" start="4">
+            <li class="work-row">
+              <span class="work-num">04</span>
+              <div class="work-main">
+                <div class="work-meta"><img class="brand-mark brand-mark--tab brand-3m" src="./assets/img/brands/3m.svg" alt="3m logo" width="50" height="26" loading="lazy" decoding="async"><span>3m inspire challenge 2021 · team kancil (itb)</span></div>
+                <h3 class="work-title"><a href="./portfolio/3m-bio-mask/" class="dossier-title-link">3m phb bio-mask</a></h3>
+                <p class="work-desc">a biodegradable phb and kenaf surgical mask with 3d facial contours, to cut single-use plastic waste.</p>
               </div>
-
-              <div class="dossier-footer">
-                <div class="dossier-tags">
-                  <span class="dossier-tag">product operations</span>
-                  <span class="dossier-tag">ticketing services</span>
-                  <span class="dossier-tag">checkout coupons</span>
-                </div>
-                <a href="./experience/mapclub/" class="dossier-link">view case study ↗</a>
+              <span class="work-result">national champion · asean 2nd runner-up</span>
+              <span class="work-arrow" aria-hidden="true">↗</span>
+            </li>
+            <li class="work-row">
+              <span class="work-num">05</span>
+              <div class="work-main">
+                <div class="work-meta"><img class="brand-mark brand-mark--tab brand-schneider" src="./assets/img/brands/schneider.svg" alt="schneider electric logo" width="64" height="64" loading="lazy" decoding="async"><span>schneider go green 2022 · team kancil (itb)</span></div>
+                <h3 class="work-title"><a href="./portfolio/schneider-hotsand/" class="dossier-title-link">hotsand clean thermal microgrid</a></h3>
+                <p class="work-desc">thermal energy storage in silica sand with a stirling engine, for off-grid rural microgrids.</p>
               </div>
-            </article>
-
-            <!-- Dossier 2: Traveloka -->
-            <article class="dossier-card">
-              <div class="dossier-tab">
-                <span>doc 02</span>
-                <span class="dossier-tab-sep">/</span>
-                <span class="dossier-tab-name">traveloka</span><img class="brand-mark brand-mark--tab brand-traveloka" src="./assets/img/brands/traveloka.svg" alt="traveloka logo" width="135" height="43" loading="lazy" decoding="async">
-              </div>
-              <div class="dossier-header">
-                <div class="dossier-badge">
-                  <span class="dossier-badge-dot" aria-hidden="true"></span>
-                  <span>shipped production</span>
-                </div>
-                <span class="dossier-category">aviation systems // traveloka</span>
-              </div>
-              <h2 class="dossier-title"><a href="./experience/traveloka/" class="dossier-title-link">flight disruption recovery &amp; refund engine</a></h2>
-
-              <div class="dossier-body-grid">
-                <div>
-                  <div class="dossier-subheading">the problem</div>
-                  <p class="dossier-prose">
-                    manual pricing verification, complex tax calculation rules, and slow refund dispute processing drag down flight operations.
-                  </p>
-                </div>
-                <div>
-                  <div class="dossier-subheading">what i built</div>
-                  <p class="dossier-prose">
-                    pricing logic, tax/commission calculation engine, and refund dispute automation handling ~IDR 10Bn net revenue with 87.97% to 94.24% accuracy and 16.76% to 34.38% RPA closing.
-                  </p>
-                </div>
-              </div>
-
-              <div class="dossier-footer">
-                <div class="dossier-tags">
-                  <span class="dossier-tag">pricing logic</span>
-                  <span class="dossier-tag">tax/commission engine</span>
-                  <span class="dossier-tag">refund automation</span>
-                </div>
-                <a href="./experience/traveloka/" class="dossier-link">view case study ↗</a>
-              </div>
-            </article>
-
-            <!-- Dossier 3: Boston Consulting Group (BCG) -->
-            <article class="dossier-card">
-              <div class="dossier-tab">
-                <span>doc 03</span>
-                <span class="dossier-tab-sep">/</span>
-                <span class="dossier-tab-name">boston consulting group</span><img class="brand-mark brand-mark--tab brand-bcg" src="./assets/img/brands/bcg.svg" alt="bcg logo" width="72" height="31" loading="lazy" decoding="async">
-              </div>
-              <div class="dossier-header">
-                <div class="dossier-badge">
-                  <span class="dossier-badge-dot" aria-hidden="true"></span>
-                  <span>industrial energy</span>
-                </div>
-                <span class="dossier-category">energy &amp; heavy industry // bcg</span>
-              </div>
-              <h2 class="dossier-title"><a href="./experience/bcg/" class="dossier-title-link">heavy industry economics &amp; energy modeling</a></h2>
-
-              <div class="dossier-body-grid">
-                <div>
-                  <div class="dossier-subheading">the problem</div>
-                  <p class="dossier-prose">
-                    industrial energy proposals face tight submission deadlines, complex technical requirements, and intense tender competition.
-                  </p>
-                </div>
-                <div>
-                  <div class="dossier-subheading">what i built</div>
-                  <p class="dossier-prose">
-                    techno-commercial tender proposals across 10+ bids with a 30% shortlist rate, commercial pipeline roadmaps, and client O&amp;M toolkits.
-                  </p>
-                </div>
-              </div>
-
-              <div class="dossier-footer">
-                <div class="dossier-tags">
-                  <span class="dossier-tag">capex/opex models</span>
-                  <span class="dossier-tag">nickel smelters</span>
-                  <span class="dossier-tag">geothermal power</span>
-                </div>
-                <a href="./experience/bcg/" class="dossier-link">view case study ↗</a>
-              </div>
-            </article>
-
-            <!-- Dossier 4: 3M PHB Bio-Mask -->
-            <article class="dossier-card">
-              <div class="dossier-tab">
-                <span>doc 04</span>
-                <span class="dossier-tab-sep">/</span>
-                <span class="dossier-tab-name">3m biodesign</span>
-              </div>
-              <div class="dossier-header">
-                <div class="dossier-badge">
-                  <span class="dossier-badge-dot" aria-hidden="true"></span>
-                  <span>1st place national: 3m asean</span>
-                </div>
-                <span class="dossier-category">biodesign // sustainable materials</span>
-              </div>
-              <h2 class="dossier-title"><a href="./portfolio/3m-bio-mask/" class="dossier-title-link">3m phb bio-mask</a></h2>
-
-              <div class="dossier-body-grid">
-                <div>
-                  <div class="dossier-subheading">the problem</div>
-                  <p class="dossier-prose">
-                    single-use surgical masks pile up polypropylene plastic waste and rely on petroleum supply chains.
-                  </p>
-                </div>
-                <div>
-                  <div class="dossier-subheading">what i built</div>
-                  <p class="dossier-prose">
-                    Team Kancil (ITB) competition concept: biodegradable PHB and kenaf surgical mask with 3D facial contours, winning 1st Place National and 2nd Runner-Up ASEAN.
-                  </p>
-                </div>
-              </div>
-
-              <div class="dossier-footer">
-                <div class="dossier-tags">
-                  <span class="dossier-tag">phb biopolymer</span>
-                  <span class="dossier-tag">kenaf natural fiber</span>
-                  <span class="dossier-tag">biodesign</span>
-                </div>
-                <a href="./portfolio/3m-bio-mask/" class="dossier-link">view case study ↗</a>
-              </div>
-            </article>
-
-            <!-- Dossier 5: HotSand Clean Thermal Microgrid -->
-            <article class="dossier-card">
-              <div class="dossier-tab">
-                <span>doc 05</span>
-                <span class="dossier-tab-sep">/</span>
-                <span class="dossier-tab-name">schneider electric</span>
-              </div>
-              <div class="dossier-header">
-                <div class="dossier-badge">
-                  <span class="dossier-badge-dot" aria-hidden="true"></span>
-                  <span>country favorite: schneider go green</span>
-                </div>
-                <span class="dossier-category">clean energy // thermal storage</span>
-              </div>
-              <h2 class="dossier-title"><a href="./portfolio/schneider-hotsand/" class="dossier-title-link">hotsand clean thermal microgrid</a></h2>
-
-              <div class="dossier-body-grid">
-                <div>
-                  <div class="dossier-subheading">the problem</div>
-                  <p class="dossier-prose">
-                    solar microgrids in remote Indonesian villages suffer rapid battery deterioration within 2 to 3 years.
-                  </p>
-                </div>
-                <div>
-                  <div class="dossier-subheading">what i built</div>
-                  <p class="dossier-prose">
-                    Team Kancil (ITB) competition concept: thermal energy storage using silica sand and a Stirling engine for off-grid rural power, winning Country Favorite.
-                  </p>
-                </div>
-              </div>
-
-              <div class="dossier-footer">
-                <div class="dossier-tags">
-                  <span class="dossier-tag">silica sand storage</span>
-                  <span class="dossier-tag">stirling engine</span>
-                  <span class="dossier-tag">rural microgrid</span>
-                </div>
-                <a href="./portfolio/schneider-hotsand/" class="dossier-link">view case study ↗</a>
-              </div>
-            </article>
-          </div>
+              <span class="work-result">country favorite</span>
+              <span class="work-arrow" aria-hidden="true">↗</span>
+            </li>
+          </ol>
         </div>
       </section>
 
@@ -449,7 +305,7 @@
       <section class="section-notes-comp" id="notes">
         <div class="wrap">
           <div class="section-label-bar" data-reveal>
-            <span class="section-label">notes: software and systems</span>
+            <span class="section-label"><span class="section-num"></span>notes: software and systems</span>
             <a href="./blog/" class="section-count">view all notes →</a>
           </div>
 
@@ -498,64 +354,64 @@
 
           <!-- Competency Drawer / Technical Matrix -->
           <div class="section-label-bar section-label-bar--spaced" data-reveal>
-            <span class="section-label">technical toolkit</span>
-            <span class="section-count">[ 4 domains ]</span>
+            <span class="section-label"><span class="section-num"></span>technical toolkit</span>
+            <span class="section-count">[ hover a skill to see where ]</span>
           </div>
 
           <div class="comp-matrix-grid comp-matrix-grid--4">
             <!-- Column 1: Product & Commerce -->
             <div class="comp-col">
-              <div class="comp-col-header">product &amp; commerce</div>
-              <ul class="comp-list">
-                <li class="comp-item">e-commerce &amp; pre-purchase journeys</li>
-                <li class="comp-item">refund workflows</li>
-                <li class="comp-item">0-to-1 product development</li>
-                <li class="comp-item">brd, prototypes &amp; acceptance sign-off</li>
-                <li class="comp-item">revenue modeling</li>
-                <li class="comp-item">crm &amp; marketing analytics</li>
+              <div class="comp-col-header"><span class="comp-col-num">s/01</span>product &amp; commerce</div>
+              <ul class="comp-list comp-chips">
+                <li class="comp-item"><a class="skill-chip" href="./experience/mapclub/" data-src="mapclub: homepage, campaigns, cart, checkout">e-commerce &amp; pre-purchase journeys<span class="skill-src"> (from mapclub: homepage, campaigns, cart, checkout)</span></a></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/traveloka/" data-src="traveloka: flight refund engine">refund workflows<span class="skill-src"> (from traveloka: flight refund engine)</span></a></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/traveloka/" data-src="traveloka ticket product · mapclub workspace">0-to-1 product development<span class="skill-src"> (from traveloka ticket product · mapclub workspace)</span></a></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/mapclub/" data-src="mapclub: brd and bac sign-offs">brd, prototypes &amp; acceptance sign-off<span class="skill-src"> (from mapclub: brd and bac sign-offs)</span></a></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/traveloka/" data-src="traveloka: refund-fee and discounted pricing">revenue modeling<span class="skill-src"> (from traveloka: refund-fee and discounted pricing)</span></a></li>
+                <li class="comp-item"><span class="skill-chip">crm &amp; marketing analytics</span></li>
               </ul>
             </div>
 
             <!-- Column 2: AI, Data & Technical -->
             <div class="comp-col">
-              <div class="comp-col-header">ai, data &amp; technical</div>
-              <ul class="comp-list">
-                <li class="comp-item">sql &amp; relational schemas</li>
-                <li class="comp-item">python &amp; javascript</li>
-                <li class="comp-item">api integration</li>
-                <li class="comp-item">rpa</li>
-                <li class="comp-item">ai workflow automation</li>
-                <li class="comp-item">multi-agent orchestration</li>
-                <li class="comp-item">dashboards &amp; kpi frameworks</li>
-                <li class="comp-item">fault-tolerant workflows</li>
+              <div class="comp-col-header"><span class="comp-col-num">s/02</span>ai, data &amp; technical</div>
+              <ul class="comp-list comp-chips">
+                <li class="comp-item"><span class="skill-chip">sql &amp; relational schemas</span></li>
+                <li class="comp-item"><a class="skill-chip" href="./blog/reverse-engineering-client-binaries/" data-src="apk extractor script · this site">python &amp; javascript<span class="skill-src"> (from apk extractor script · this site)</span></a></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/traveloka/" data-src="traveloka: direct provider api">api integration<span class="skill-src"> (from traveloka: direct provider api)</span></a></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/traveloka/" data-src="traveloka: refund closing automation">rpa<span class="skill-src"> (from traveloka: refund closing automation)</span></a></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/mapclub/" data-src="mapclub workspace · traveloka cat 16 parsing">ai workflow automation<span class="skill-src"> (from mapclub workspace · traveloka cat 16 parsing)</span></a></li>
+                <li class="comp-item"><a class="skill-chip" href="./blog/building-an-autonomous-product-operating-system/" data-src="product operating system essay">multi-agent orchestration<span class="skill-src"> (from product operating system essay)</span></a></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/traveloka/" data-src="traveloka anomaly dashboard · waresix superset + nps kpi">dashboards &amp; kpi frameworks<span class="skill-src"> (from traveloka anomaly dashboard · waresix superset + nps kpi)</span></a></li>
+                <li class="comp-item"><a class="skill-chip" href="./performance/recovery/" data-src="relay recovery note">fault-tolerant workflows<span class="skill-src"> (from relay recovery note)</span></a></li>
               </ul>
             </div>
 
             <!-- Column 3: Strategy & Delivery -->
             <div class="comp-col">
-              <div class="comp-col-header">strategy &amp; delivery</div>
-              <ul class="comp-list">
-                <li class="comp-item">stakeholder management</li>
-                <li class="comp-item">process improvement</li>
-                <li class="comp-item">agile / scrum</li>
-                <li class="comp-item">techno-commercial tenders</li>
-                <li class="comp-item">energy project cost estimation</li>
-                <li class="comp-item">supply chain</li>
-                <li class="comp-item">solidworks &amp; ergonomic fit</li>
+              <div class="comp-col-header"><span class="comp-col-num">s/03</span>strategy &amp; delivery</div>
+              <ul class="comp-list comp-chips">
+                <li class="comp-item"><a class="skill-chip" href="./experience/mapclub/" data-src="mapclub c-level approval · app revamp · bcg">stakeholder management<span class="skill-src"> (from mapclub c-level approval · app revamp · bcg)</span></a></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/mapclub/" data-src="mapclub brd time · ovo reporting sla">process improvement<span class="skill-src"> (from mapclub brd time · ovo reporting sla)</span></a></li>
+                <li class="comp-item"><span class="skill-chip">agile / scrum</span></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/bcg/" data-src="bcg: 10+ tender proposals">techno-commercial tenders<span class="skill-src"> (from bcg: 10+ tender proposals)</span></a></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/bcg/" data-src="bcg energy tenders · schneider go green">energy project cost estimation<span class="skill-src"> (from bcg energy tenders · schneider go green)</span></a></li>
+                <li class="comp-item"><span class="skill-chip">supply chain</span></li>
+                <li class="comp-item"><a class="skill-chip" href="./portfolio/3m-bio-mask/" data-src="3m bio-mask: 3d facial contours">solidworks &amp; ergonomic fit<span class="skill-src"> (from 3m bio-mask: 3d facial contours)</span></a></li>
               </ul>
             </div>
 
             <!-- Column 4: Industries & Domains -->
             <div class="comp-col">
-              <div class="comp-col-header">industries &amp; domains</div>
-              <ul class="comp-list">
-                <li class="comp-item">retail &amp; e-commerce</li>
-                <li class="comp-item">travel</li>
-                <li class="comp-item">fintech &amp; payments</li>
-                <li class="comp-item">energy &amp; heavy industry</li>
-                <li class="comp-item">logistics</li>
-                <li class="comp-item">consumer apps</li>
-                <li class="comp-item">education</li>
+              <div class="comp-col-header"><span class="comp-col-num">s/04</span>industries &amp; domains</div>
+              <ul class="comp-list comp-chips">
+                <li class="comp-item"><a class="skill-chip" href="./experience/mapclub/" data-src="mapclub">retail &amp; e-commerce<span class="skill-src"> (from mapclub)</span></a></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/traveloka/" data-src="traveloka">travel<span class="skill-src"> (from traveloka)</span></a></li>
+                <li class="comp-item"><span class="skill-chip" tabindex="0" data-src="ovo · bank indonesia (internships)">fintech &amp; payments<span class="skill-src"> (from ovo · bank indonesia (internships))</span></span></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/bcg/" data-src="bcg · schneider go green">energy &amp; heavy industry<span class="skill-src"> (from bcg · schneider go green)</span></a></li>
+                <li class="comp-item"><span class="skill-chip" tabindex="0" data-src="waresix · shipper (internships)">logistics<span class="skill-src"> (from waresix · shipper (internships))</span></span></li>
+                <li class="comp-item"><a class="skill-chip" href="./experience/mapclub/" data-src="mapclub and traveloka apps">consumer apps<span class="skill-src"> (from mapclub and traveloka apps)</span></a></li>
+                <li class="comp-item"><span class="skill-chip">education</span></li>
               </ul>
             </div>
           </div>
@@ -571,7 +427,7 @@
       <section class="section-culture-philosophy" id="culture-philosophy">
         <div class="wrap">
           <div class="loop-cards-header" data-reveal>
-            <span class="section-label">culture as fuel</span>
+            <span class="section-label"><span class="section-num"></span>culture as fuel</span>
             <span class="loop-cards-sub">[ 04 pillars ]</span>
           </div>
 
@@ -632,7 +488,7 @@
       <section class="section-culture-artifacts" id="culture-artifacts">
         <div class="wrap">
           <div class="section-label-bar" data-reveal>
-            <span class="section-label">hands, ears, closet</span>
+            <span class="section-label"><span class="section-num"></span>hands, ears, closet</span>
             <span class="section-count">[ 03 features ]</span>
           </div>
 
@@ -641,8 +497,8 @@
             <article class="culture-card atelier-card">
               <div class="atelier-photo-wrap">
                 <picture>
-                  <source srcset="./assets/img/krishna-artwork-720.webp?v=20260929d" type="image/webp">
-                  <img src="./assets/img/krishna-artwork-720.jpeg?v=20260929d" alt="Painting on canvas by naquuuu, painted at a coffee shop in Tebet" class="atelier-img" width="720" height="544" loading="lazy" decoding="async">
+                  <source srcset="./assets/img/krishna-artwork-720.webp?v=20260930a" type="image/webp">
+                  <img src="./assets/img/krishna-artwork-720.jpeg?v=20260930a" alt="Painting on canvas by naquuuu, painted at a coffee shop in Tebet" class="atelier-img" width="720" height="544" loading="lazy" decoding="async">
                 </picture>
               </div>
               <div class="atelier-info">
@@ -831,7 +687,7 @@
       <section class="section-culture-notes" id="culture-notes">
         <div class="wrap">
           <div class="section-label-bar" data-reveal>
-            <span class="section-label">notes: music, clothes</span>
+            <span class="section-label"><span class="section-num"></span>notes: music, clothes</span>
             <span class="section-count">[ 02 essays ]</span>
           </div>
 
@@ -886,7 +742,7 @@
         <div class="inquiry-card" data-reveal>
           <div class="inquiry-badge">
             <span class="inquiry-badge-dot" aria-hidden="true"></span>
-            <span>open to connect</span>
+            <span><span class="section-num"></span>open to connect</span>
           </div>
           <h2 class="inquiry-headline">let's build something thoughtful together.</h2>
           <p class="inquiry-prose">
@@ -919,6 +775,8 @@
       </div>
       <div class="footer-live-stamp">
         <span>naquuuu.github.io • built with matter and code.</span>
+        <span class="footer-visits" id="footer-visits" hidden></span>
+        <span class="footer-privacy">visits are counted with <a href="https://www.goatcounter.com/" target="_blank" rel="noopener noreferrer">goatcounter</a>: no cookies, no personal info tracked.</span>
       </div>
     </div>
   </footer>
@@ -934,6 +792,25 @@
   </nav>
 
   <script async src="https://www.instagram.com/embed.js"></script>
-  <script src="./assets/js/main.js?v=20260929d"></script>
+  <script src="./assets/js/main.js?v=20260930a"></script>
+  <script>
+    /* Public visit total from GoatCounter. Needs "allow adding visitor counts on your website" enabled in
+       GoatCounter settings; stays hidden if the endpoint is off, blocked or offline. */
+    (function () {
+      var el = document.getElementById('footer-visits');
+      if (!el || !window.fetch || /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return;
+      fetch('https://naquuuu.goatcounter.com/counter/TOTAL.json')
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          if (!d || !d.count || d.count === '0') return;
+          el.textContent = d.count + ' visits so far';
+          el.hidden = false;
+        })
+        .catch(function () {});
+    })();
+  </script>
+  <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
+  <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script src="./assets/js/palette.js?v=20260930a" defer></script>
 </body>
 </html>
