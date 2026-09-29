@@ -1239,6 +1239,32 @@ body[data-mode="culture"] .mode-status-dot {
   transform: translateX(4px);
 }
 
+/* Whole dossier card is clickable: the title link stretches over the card (stretched-link pattern) */
+.dossier-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+.dossier-title-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.dossier-card:hover .dossier-title-link,
+.dossier-title-link:focus-visible {
+  color: var(--accent-crimson);
+}
+.dossier-title-link:focus-visible {
+  outline: none;
+}
+.dossier-card:has(.dossier-title-link:focus-visible) {
+  outline: 2px solid var(--accent-crimson);
+  outline-offset: 4px;
+}
+.dossier-card:has(.dossier-title-link) {
+  cursor: pointer;
+}
+
 .dossier-tab {
   display: inline-flex;
   align-items: baseline;
@@ -4170,6 +4196,114 @@ img { max-width: 100%; height: auto; }
 .essay-meta-row { flex-wrap: wrap; }
 .recovery-table { width: 100%; border-collapse: collapse; }
 .recovery-table th, .recovery-table td { padding: .75rem; border-bottom: 1px solid var(--border-subtle); text-align: left; overflow-wrap: anywhere; }
+/* =============================================================================
+   BRAND MARKS, ICON SPRITE, HERO QUICK LINKS (ADR-037)
+   ============================================================================= */
+.icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.qi { width: 1em; height: 1em; flex: none; fill: currentColor; }
+
+/* Company marks sit on a small white chip so they read in both lenses */
+.brand-mark {
+  display: inline-block;
+  width: auto;
+  height: 22px;
+  padding: 3px 7px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs, 4px);
+  box-sizing: content-box;
+  vertical-align: middle;
+  object-fit: contain;
+}
+.brand-mark.brand-traveloka { height: 26px; padding: 1px 6px; }
+.brand-mark--tab { height: 14px; padding: 2px 5px; margin-left: auto; }
+.brand-mark--tab.brand-traveloka { height: 17px; padding: 0 4px; }
+.dossier-tab:has(.brand-mark--tab) { display: flex; width: 100%; }
+.exp-kicker {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.exp-kicker > span { margin-bottom: 0 !important; }
+
+/* Hero quick links: cv + contact, directly under the thesis */
+.hero-quicklinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 0.75rem;
+  margin-top: 1.1rem;
+}
+.quick-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 0 1rem;
+  border-radius: var(--radius-full);
+  background: var(--accent-crimson);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+.quick-cv:hover, .quick-cv:focus-visible { background: var(--accent-crimson-hover); color: #FFFFFF; }
+.quick-cv .qi { width: 15px; height: 15px; }
+.quick-icons { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.quick-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-active);
+  background: var(--bg-surface-elevated);
+  color: var(--text-secondary);
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+.quick-icon .qi { width: 17px; height: 17px; }
+.quick-icon:hover, .quick-icon:focus-visible {
+  color: var(--accent-crimson);
+  border-color: var(--accent-crimson);
+}
+.inquiry-btn .qi { width: 15px; height: 15px; }
+.inquiry-btn--cv { background: var(--accent-crimson); border-color: var(--accent-crimson); color: #FFFFFF; }
+
+/* Toolkit: four columns on wide screens, two on laptops */
+.comp-matrix-grid--4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1180px) {
+  .comp-matrix-grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .comp-matrix-grid--4 { grid-template-columns: 1fr; }
+}
+
+/* Mobile hero: quick links fill the empty column beside the portrait */
+@media (max-width: 768px) {
+  .hero-quicklinks {
+    grid-column: 1;
+    grid-row: 4;
+    align-self: start;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    margin-top: 0;
+  }
+  .quick-cv { justify-content: center; padding: 0 0.75rem; }
+  .quick-icons { gap: 0.35rem; }
+  .quick-icon { width: 40px; height: 40px; }
+  .hero-editorial-grid .portrait-technical-wrap { grid-row: 4 / span 2; }
+  .hero-editorial-grid .hero-epigraph { grid-row: 5; align-self: end; }
+  .brand-mark--kicker { height: 18px; }
+  .brand-mark--kicker.brand-traveloka { height: 22px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
