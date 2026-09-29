@@ -5,7 +5,7 @@
 <meta name="description" content="a relay recovery record: the missing dependency, documented timings, and the checks that separate a working process from a working reply.">
 <link rel="canonical" href="https://naquuuu.github.io/performance/recovery/">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap"></noscript>
-<link rel="stylesheet" href="../../assets/css/style.css?v=20260930a"><link rel="icon" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="../../assets/css/style.css?v=20260930c"><link rel="icon" href="../../assets/favicon.svg">
 <style>
 .essay-article { padding-block: clamp(2rem, 5vw, 4rem); }
 .essay-content > * + * { margin-top: 1.25rem; }
@@ -32,7 +32,7 @@
     <div class="flowchart-toolbar-right"><span>28 september 2026</span></div>
   </div>
   <div class="flowchart-board-canvas scroll-x">
-<svg class="flowchart-svg" viewBox="0 0 780 590" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="recovery-flow-title recovery-flow-desc">
+<svg class="flowchart-svg" viewBox="0 0 780 596" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="recovery-flow-title recovery-flow-desc">
 <title id="recovery-flow-title">relay recovery flow</title>
 <desc id="recovery-flow-desc">blueprint flowchart: a relay disrupted by two hosts and restarts, an interrupted update, and connection timeouts that looked like a network fault; the decision network fault or environment leads to an environment check that finds aiohttp missing; installing it lets the gateway connect at 19:32:48 wib, and an owner message round-trip confirms recovery that evening.</desc>
 <defs>
@@ -40,7 +40,6 @@
 <marker id="recovery-flow-arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#3b6989" /></marker>
 <marker id="recovery-flow-arrow-sage" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2e6844" /></marker>
 <marker id="recovery-flow-arrow-crimson" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#a63822" /></marker>
-<marker id="recovery-flow-arrow-terracotta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#b45309" /></marker>
 </defs>
 <rect width="100%" height="100%" fill="var(--bg-surface, #F2F2ED)" />
 <rect x="32" y="16" width="200" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
@@ -53,7 +52,7 @@
 <line x1="524" y1="50" x2="524" y2="520" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
 <path d="M 232 86 L 256 86" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
 <path d="M 296 112 L 296 128 Q 296 136 288 136 L 140 136 Q 132 136 132 144 L 132 160" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
-<path d="M 232 186 L 256 186" stroke="#b45309" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#recovery-flow-arrow-terracotta)" />
+<path d="M 232 186 L 256 186" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#recovery-flow-arrow-crimson)" />
 <path d="M 384 220 L 384 260" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
 <path d="M 512 286 L 536 286" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
 <path d="M 384 312 L 384 360" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
@@ -109,26 +108,26 @@
 <rect x="511.25" y="445" width="25.5" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
 <text x="524" y="454" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#244b35" text-anchor="middle">[yes]</text>
 <line x1="32" y1="538" x2="748" y2="538" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="32" y="554" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">lines</text>
-<line x1="96" y1="551" x2="124" y2="551" stroke="#8c897e" stroke-width="1.2" marker-end="url(#recovery-flow-arrow-gray)" />
-<text x="132" y="554" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">flow</text>
-<line x1="174.4" y1="551" x2="202.4" y2="551" stroke="#2e6844" stroke-width="1.6" marker-end="url(#recovery-flow-arrow-sage)" />
-<text x="210.4" y="554" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">verified outcome</text>
-<line x1="308.0" y1="551" x2="336.0" y2="551" stroke="#b45309" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#recovery-flow-arrow-terracotta)" />
-<text x="344.0" y="554" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">audit flag</text>
-<text x="32" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">shapes</text>
-<rect x="96" y="566" width="16" height="10" rx="5" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="118" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">start / end</text>
-<polygon points="194.6,566 206.6,566 202.6,576 190.6,576" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="212.6" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">input</text>
-<rect x="257.6" y="566" width="16" height="10" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="279.6" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">action</text>
-<polygon points="329.20000000000005,571 337.20000000000005,565 345.20000000000005,571 337.20000000000005,577" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="351.20000000000005" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">decision</text>
-<path d="M 410.00000000000006 568 A 8 2 0 0 1 426.00000000000006 568 V 574 A 8 2 0 0 1 410.00000000000006 574 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" /><path d="M 410.00000000000006 568 A 8 2 0 0 0 426.00000000000006 568" fill="none" stroke="#8c897e" stroke-width="1" />
-<text x="432.00000000000006" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">data source</text>
-<path d="M 504.6 566 H 520.6 V 574 C 516.6 572 512.6 578 504.6 575 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="526.6" y="574" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">document</text>
+<text x="32" y="556" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">lines</text>
+<line x1="104" y1="552.5" x2="132" y2="552.5" stroke="#8c897e" stroke-width="1.2" marker-end="url(#recovery-flow-arrow-gray)" />
+<text x="140" y="556" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">flow</text>
+<line x1="186" y1="552.5" x2="214" y2="552.5" stroke="#2e6844" stroke-width="1.6" marker-end="url(#recovery-flow-arrow-sage)" />
+<text x="222" y="556" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">verified outcome</text>
+<line x1="342" y1="552.5" x2="370" y2="552.5" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#recovery-flow-arrow-crimson)" />
+<text x="378" y="556" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">failure or risk path</text>
+<text x="32" y="578" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">shapes</text>
+<rect x="104" y="569" width="16" height="10" rx="5" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="126" y="578" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">start / end</text>
+<polygon points="219,569 231,569 227,579 215,579" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="237" y="578" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">input</text>
+<rect x="290" y="569" width="16" height="10" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="312" y="578" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">action</text>
+<polygon points="371,574 379,568 387,574 379,580" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="393" y="578" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">decision</text>
+<path d="M 464 571 A 8 2 0 0 1 480 571 V 577 A 8 2 0 0 1 464 577 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" /><path d="M 464 571 A 8 2 0 0 0 480 571" fill="none" stroke="#8c897e" stroke-width="1" />
+<text x="486" y="578" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">data source</text>
+<path d="M 575 569 H 591 V 577 C 587 575 583 581 575 578 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="597" y="578" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">document</text>
 </svg>
   </div>
 </div>
@@ -145,5 +144,5 @@
 <p>the recovery map contains curated incident facts only. no raw messages, account identifiers, or credentials are published.</p></article></main>
 <footer class="site-footer"><div class="wrap footer-content"><a href="../../">return to home</a><a href="../../blog/">essays &amp; notes</a><p class="footer-privacy">visits are counted with <a href="https://www.goatcounter.com/" target="_blank" rel="noopener noreferrer">goatcounter</a>: no cookies, no personal info tracked.</p></div></footer>  <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
   <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <script src="../../assets/js/palette.js?v=20260930a" defer></script>
+  <script src="../../assets/js/palette.js?v=20260930c" defer></script>
 </body></html>

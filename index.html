@@ -6,7 +6,7 @@
   <title>krishna (naquuuu) • product manager</title>
   <meta name="description" content="Personal portfolio and notes of Krishna (naquuuu). Product manager based in Jakarta, building software and everyday physical design.">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg?v=20260917i">
-  <link rel="stylesheet" href="./assets/css/style.css?v=20260930a">
+  <link rel="stylesheet" href="./assets/css/style.css?v=20260930c">
   <link rel="canonical" href="https://naquuuu.github.io/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,23 +27,23 @@
         <a href="./" class="nav-brand" aria-label="naquuuu home">
           <span class="nav-telemetry-dot" aria-hidden="true"></span>naquuuu
         </a>
-        <span class="nav-clock" id="live-clock" aria-label="Current Jakarta Time">JAKARTA [WIB / UTC+7] --:--:--</span>
+        <span class="nav-clock" id="live-clock" title="utc+7">jakarta • wib --:--</span>
       </div>
 
       <div class="nav-actions">
         <!-- Audio Telemetry Toggle (Hukum Murphy by Kafin Sulthan) -->
-        <button type="button" class="nav-audio-pill" id="nav-audio-pill" aria-label="Toggle Hukum Murphy Audio Telemetry" title="Hukum Murphy - Kafin Sulthan (Tap to play/pause)">
+        <button type="button" class="nav-audio-pill" id="nav-audio-pill" aria-label="sound: hukum murphy by kafin sulthan" title="hukum murphy by kafin sulthan (tap to play or pause)">
           <span class="nav-audio-wave" aria-hidden="true">
             <span class="nav-wave-bar"></span>
             <span class="nav-wave-bar"></span>
             <span class="nav-wave-bar"></span>
           </span>
-          <span id="nav-audio-status">[ SOUND ]</span>
+          <span id="nav-audio-status">sound</span>
         </button>
 
         <button type="button" class="nav-search-chip" data-cmdk-open aria-label="search this site">
           <svg class="qi" aria-hidden="true" focusable="false" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg>
-          <span>search</span><kbd data-cmdk-key>ctrl K</kbd>
+          <span>search</span><kbd data-cmdk-key>ctrl k</kbd>
         </button>
         <a href="./assets/Krishna_CV_2026.pdf" target="_blank" rel="noopener" class="nav-cv-chip" aria-label="open cv (pdf)"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-cv"></use></svg><span>cv</span></a>
 
@@ -83,12 +83,12 @@
       <div class="wrap">
         <div class="hero-editorial-grid">
           <div class="hero-head-block">
-            <div class="hero-sub-identity" id="hero-sub-identity">krishna, alias naquuuu • product manager • industrial engineering, itb</div>
-            <h1 class="hero-headline">
-              <span class="hero-headline-name">naquuuu.<wbr>build</span>
-              <span class="hero-headline-thesis">systems that anticipate <em>failure</em>. taste that anticipates <em>feeling</em>.</span>
-              <span class="hero-headline-subthesis">mapping every possibility, from code to culture.</span>
-            </h1>
+            <div class="hero-headline">
+              <h1 class="hero-headline-title"><span class="hero-headline-name">naquuuu.<wbr>build</span></h1>
+              <p class="hero-sub-identity" id="hero-sub-identity">krishna, alias naquuuu • product manager • industrial engineering, itb</p>
+              <p class="hero-headline-thesis">systems that anticipate <em>failure</em>. taste that anticipates <em>feeling</em>.</p>
+              <p class="hero-headline-subthesis">mapping every possibility, from code to culture.</p>
+            </div>
             <nav class="hero-quicklinks" aria-label="cv and contact">
               <a class="quick-tile quick-tile--cv" href="./assets/Krishna_CV_2026.pdf" target="_blank" rel="noopener" aria-label="open cv (pdf)" title="cv (pdf)"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-cv"></use></svg><span>cv</span></a>
               <a class="quick-tile" href="https://wa.me/6282112255009" target="_blank" rel="noopener noreferrer" aria-label="whatsapp" title="whatsapp"><svg class="qi" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg></a>
@@ -109,17 +109,11 @@
               <div class="mode-switcher" role="tablist" aria-label="Perspective Switcher">
                 <button type="button" class="mode-tab-btn active" id="tab-mode-systems" data-mode-tab="systems" role="tab" aria-selected="true" aria-controls="view-systems">
                   <span class="mode-tab-text">systems &amp; matter</span>
-                  <span class="mode-cta-badge" id="badge-mode-systems" data-mode-badge="systems"></span>
                 </button>
                 <button type="button" class="mode-tab-btn" id="tab-mode-culture" data-mode-tab="culture" role="tab" aria-selected="false" aria-controls="view-culture">
                   <span class="mode-tab-text">culture &amp; taste</span>
-                  <span class="mode-cta-badge active" id="badge-mode-culture" data-mode-badge="culture">switch →</span>
                 </button>
               </div>
-            </div>
-            <div class="mode-status-meta">
-              <span class="mode-status-dot" aria-hidden="true"></span>
-              <span id="mode-status-label">lens: systems &amp; matter (tap to switch)</span>
             </div>
           </div>
 
@@ -163,8 +157,8 @@
     <!-- Marquee Strip: identity ticker (decorative, reduced-motion safe) -->
     <div class="marquee-strip" aria-hidden="true">
       <div class="marquee-track">
-        <div class="marquee-chunk"><span>systems &amp; matter</span><span class="marquee-sep">✦</span><span>culture &amp; taste</span><span class="marquee-sep">✦</span><span>naquuuu.build</span><span class="marquee-sep">✦</span><span>mapclub</span><span class="marquee-sep">✦</span><span>traveloka</span><span class="marquee-sep">✦</span><span>bcg</span><span class="marquee-sep">✦</span><span>matter + code</span><span class="marquee-sep">✦</span></div>
-        <div class="marquee-chunk"><span>systems &amp; matter</span><span class="marquee-sep">✦</span><span>culture &amp; taste</span><span class="marquee-sep">✦</span><span>naquuuu.build</span><span class="marquee-sep">✦</span><span>mapclub</span><span class="marquee-sep">✦</span><span>traveloka</span><span class="marquee-sep">✦</span><span>bcg</span><span class="marquee-sep">✦</span><span>matter + code</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-chunk"><span>systems &amp; matter</span><span class="marquee-sep">✦</span><span>culture &amp; taste</span><span class="marquee-sep">✦</span><span>naquuuu.build</span><span class="marquee-sep">✦</span><span>matter + code</span><span class="marquee-sep">✦</span><span>systems &amp; matter</span><span class="marquee-sep">✦</span><span>culture &amp; taste</span><span class="marquee-sep">✦</span><span>naquuuu.build</span><span class="marquee-sep">✦</span><span>matter + code</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-chunk"><span>systems &amp; matter</span><span class="marquee-sep">✦</span><span>culture &amp; taste</span><span class="marquee-sep">✦</span><span>naquuuu.build</span><span class="marquee-sep">✦</span><span>matter + code</span><span class="marquee-sep">✦</span><span>systems &amp; matter</span><span class="marquee-sep">✦</span><span>culture &amp; taste</span><span class="marquee-sep">✦</span><span>naquuuu.build</span><span class="marquee-sep">✦</span><span>matter + code</span><span class="marquee-sep">✦</span></div>
       </div>
     </div>
 
@@ -355,7 +349,7 @@
           <!-- Competency Drawer / Technical Matrix -->
           <div class="section-label-bar section-label-bar--spaced" data-reveal>
             <span class="section-label"><span class="section-num"></span>technical toolkit</span>
-            <span class="section-count">[ hover a skill to see where ]</span>
+            <span class="section-count">[ linked skills show where i used them ]</span>
           </div>
 
           <div class="comp-matrix-grid comp-matrix-grid--4">
@@ -428,7 +422,7 @@
         <div class="wrap">
           <div class="loop-cards-header" data-reveal>
             <span class="section-label"><span class="section-num"></span>culture as fuel</span>
-            <span class="loop-cards-sub">[ 04 pillars ]</span>
+            <span class="loop-cards-sub">[ 04 practices ]</span>
           </div>
 
           <!-- 4-Card Cultural Exploration Grid -->
@@ -497,8 +491,8 @@
             <article class="culture-card atelier-card">
               <div class="atelier-photo-wrap">
                 <picture>
-                  <source srcset="./assets/img/krishna-artwork-720.webp?v=20260930a" type="image/webp">
-                  <img src="./assets/img/krishna-artwork-720.jpeg?v=20260930a" alt="Painting on canvas by naquuuu, painted at a coffee shop in Tebet" class="atelier-img" width="720" height="544" loading="lazy" decoding="async">
+                  <source srcset="./assets/img/krishna-artwork-720.webp?v=20260930c" type="image/webp">
+                  <img src="./assets/img/krishna-artwork-720.jpeg?v=20260930c" alt="Painting on canvas by naquuuu, painted at a coffee shop in Tebet" class="atelier-img" width="720" height="544" loading="lazy" decoding="async">
                 </picture>
               </div>
               <div class="atelier-info">
@@ -792,7 +786,7 @@
   </nav>
 
   <script async src="https://www.instagram.com/embed.js"></script>
-  <script src="./assets/js/main.js?v=20260930a"></script>
+  <script src="./assets/js/main.js?v=20260930c"></script>
   <script>
     /* Public visit total from GoatCounter. Needs "allow adding visitor counts on your website" enabled in
        GoatCounter settings; stays hidden if the endpoint is off, blocked or offline. */
@@ -811,6 +805,6 @@
   </script>
   <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
   <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <script src="./assets/js/palette.js?v=20260930a" defer></script>
+  <script src="./assets/js/palette.js?v=20260930c" defer></script>
 </body>
 </html>
