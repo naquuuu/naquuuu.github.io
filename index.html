@@ -34,6 +34,15 @@
           ✳
         </span>
       </a>
+      <div class="journal-lens-pill" role="tablist" aria-label="Perspective lenses">
+        <button type="button" class="journal-lens-btn active" data-lens-tab="systems" role="tab" aria-selected="true" aria-controls="main-content">
+          systems &amp; matter
+        </button>
+        <span class="journal-lens-sep" aria-hidden="true">/</span>
+        <button type="button" class="journal-lens-btn" data-lens-tab="culture" role="tab" aria-selected="false" aria-controls="main-content">
+          culture &amp; taste
+        </button>
+      </div>
       <nav class="journal-nav" aria-label="Primary navigation">
         <a href="#notes">
           the journal
@@ -45,13 +54,26 @@
           about
         </a>
       </nav>
-      <a class="journal-contact" href="mailto:rbkrishnamurti@gmail.com">
-        say hello
-        <span aria-hidden="true">
-          ↗
-        </span>
-      </a>
+      <div class="journal-header-actions">
+        <button type="button" class="journal-audio-pill" id="nav-audio-pill" aria-label="Toggle Hukum Murphy Audio" title="Hukum Murphy - Kafin Sulthan (Tap to play/pause)">
+          <span class="journal-audio-wave" aria-hidden="true">
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+          </span>
+          <span id="nav-audio-status">[ sound ]</span>
+        </button>
+        <a class="journal-contact" href="mailto:rbkrishnamurti@gmail.com">
+          say hello
+          <span aria-hidden="true">
+            ↗
+          </span>
+        </a>
+      </div>
     </header>
+    <audio id="hukum-murphy-audio" preload="metadata" playsinline>
+      <source src="./assets/audio/hukum-murphy-full.mp3" type="audio/mpeg">
+    </audio>
     <main id="main-content">
       <section class="journal-hero journal-wrap" aria-labelledby="home-title">
         <div class="journal-kicker">
@@ -67,7 +89,7 @@
         </div>
         <div class="journal-hero-grid">
           <div class="journal-hero-copy">
-            <h1 id="home-title">
+            <h1 id="home-title" class="lens-content-systems">
               systems, matter
               <br>
               &amp;
@@ -76,12 +98,28 @@
                 feeling.
               </em>
             </h1>
-            <p>
+            <h1 id="home-title-culture" class="lens-content-culture" hidden>
+              analog warmth,
+              <br>
+              &amp;
+              a little
+              <em>
+                rhythm.
+              </em>
+            </h1>
+            <p class="lens-content-systems">
               i build things and pay attention.
               <br>
               to how systems fail. how music feels.
               <br>
               and everything interesting in between.
+            </p>
+            <p class="lens-content-culture" hidden>
+              i collect sounds and pay attention.
+              <br>
+              to vinyl dust. the cut of a jacket.
+              <br>
+              and the quiet beauty of everyday craft.
             </p>
             <a class="journal-text-link" href="#notes">
               explore the journal
@@ -93,13 +131,22 @@
           <figure class="journal-hero-art">
             <div class="journal-art-mat">
               <img src="./assets/img/krishna-artwork-720.webp" alt="An abstract painting by Krishna: vivid orange, blue, green and yellow shapes on textured canvas" width="720" height="544" fetchpriority="high" decoding="async">
-              <span class="journal-art-mark" aria-hidden="true">
+              <span class="journal-art-mark lens-content-systems" aria-hidden="true">
                 a study
                 <br>
                 in paying
                 <br>
                 <em>
                   attention.
+                </em>
+              </span>
+              <span class="journal-art-mark lens-content-culture" aria-hidden="true" hidden>
+                no ctrl+z
+                <br>
+                on wet
+                <br>
+                <em>
+                  canvas.
                 </em>
               </span>
             </div>
@@ -117,17 +164,19 @@
           <span>
             product thinking meets everyday curiosity
           </span>
-          <span>
-            systems
-            &amp;
-            matter
-            <b aria-hidden="true">
-              ✳
-            </b>
-            culture
-            &amp;
-            taste
-          </span>
+          <div class="journal-colophon-switch" role="tablist" aria-label="Secondary Perspective Switcher">
+            <button type="button" class="journal-colophon-btn active" data-lens-tab="systems" role="tab" aria-selected="true">
+              systems &amp; matter
+            </button>
+            <span aria-hidden="true">
+              <b>
+                ✳
+              </b>
+            </span>
+            <button type="button" class="journal-colophon-btn" data-lens-tab="culture" role="tab" aria-selected="false">
+              culture &amp; taste
+            </button>
+          </div>
         </div>
       </section>
       <section class="journal-notes journal-wrap" id="notes" aria-labelledby="notes-title">
@@ -297,11 +346,11 @@
                 a different afterlife for a mask.
               </h3>
               <p>
-                3m phb bio-mask · circular biomaterials
+                3m bio-mask · circular biomaterials
               </p>
             </div>
             <span class="journal-project-type">
-              product concept
+              competition concept
             </span>
             <span class="journal-project-arrow" aria-hidden="true">
               ↗
@@ -316,11 +365,11 @@
                 storing the sun in sand.
               </h3>
               <p>
-                hotsand · clean thermal microgrid
+                schneider hotsand · clean thermal microgrid
               </p>
             </div>
             <span class="journal-project-type">
-              energy systems
+              competition concept
             </span>
             <span class="journal-project-arrow" aria-hidden="true">
               ↗
@@ -332,14 +381,14 @@
             </span>
             <div>
               <h3>
-                give the agents a system.
+                give the workflow a system.
               </h3>
               <p>
-                building an autonomous product operating system
+                product operations workspace · ai workflows
               </p>
             </div>
             <span class="journal-project-type">
-              workspace design
+              systems workspace
             </span>
             <span class="journal-project-arrow" aria-hidden="true">
               ↗
