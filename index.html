@@ -1,437 +1,916 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f5f2e9">
-    <meta name="color-scheme" content="light">
-    <title>
-      naquuuu • systems, matter
-      &amp;
-      a little feeling
-    </title>
-    <meta name="description" content="The personal journal of Krishna (naquuuu), a product manager in Jakarta. Notes on building thoughtful systems, music, painting, and everyday design.">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="naquuuu • systems, matter &amp; a little feeling">
-    <meta property="og:description" content="A personal journal at the intersection of code and culture. By Krishna, from Jakarta.">
-    <meta property="og:url" content="https://naquuuu.github.io/">
-    <meta property="og:image" content="https://naquuuu.github.io/assets/img/krishna-artwork-720.jpeg">
-    <link rel="canonical" href="https://naquuuu.github.io/">
-    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg?v=20260917i">
-    <link rel="stylesheet" href="./assets/css/style.css?v=20260929a">
-    <link rel="stylesheet" href="./assets/css/journal.css?v=20260929a">
-    <script src="./assets/js/journal.js?v=20260929a" defer>
-    </script>
-  </head>
-  <body class="journal-home">
-    <a class="skip-link" href="#main-content">
-      skip to content
-    </a>
-    <header class="journal-header">
-      <a class="journal-brand" href="./" aria-label="naquuuu home">
-        naquuuu
-        <span aria-hidden="true">
-          ✳
-        </span>
-      </a>
-      <nav class="journal-nav" aria-label="Primary navigation">
-        <a href="#notes">
-          the journal
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>krishna (naquuuu) • product manager</title>
+  <meta name="description" content="Personal portfolio and notes of Krishna (naquuuu). Product manager based in Jakarta, building software and everyday physical design.">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg?v=20260917i">
+  <link rel="stylesheet" href="./assets/css/style.css?v=20260928a">
+  <link rel="canonical" href="https://naquuuu.github.io/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap"></noscript>
+</head>
+<body data-mode="systems">
+  <a class="skip-link" href="#main-content">skip to content</a>
+
+  <!-- =========================================================================
+       Navigation Header: Strict Single-Row, Live Jakarta Clock & Controls
+       ========================================================================= -->
+  <header class="site-header">
+    <div class="wrap nav-container">
+      <div class="nav-brand-group">
+        <a href="./" class="nav-brand" aria-label="naquuuu home">
+          <span class="nav-telemetry-dot" aria-hidden="true"></span>naquuuu
         </a>
-        <a href="#work">
-          selected work
-        </a>
-        <a href="#about">
-          about
-        </a>
-      </nav>
-      <a class="journal-contact" href="mailto:rbkrishnamurti@gmail.com">
-        say hello
-        <span aria-hidden="true">
-          ↗
-        </span>
-      </a>
-    </header>
-    <main id="main-content">
-      <section class="journal-hero journal-wrap" aria-labelledby="home-title">
-        <div class="journal-kicker">
-          <span>
-            a personal journal by krishna
+        <span class="nav-clock" id="live-clock" aria-label="Current Jakarta Time">JAKARTA [WIB / UTC+7] --:--:--</span>
+      </div>
+
+      <div class="nav-actions">
+        <!-- Audio Telemetry Toggle (Hukum Murphy by Kafin Sulthan) -->
+        <button type="button" class="nav-audio-pill" id="nav-audio-pill" aria-label="Toggle Hukum Murphy Audio Telemetry" title="Hukum Murphy - Kafin Sulthan (Tap to play/pause)">
+          <span class="nav-audio-wave" aria-hidden="true">
+            <span class="nav-wave-bar"></span>
+            <span class="nav-wave-bar"></span>
+            <span class="nav-wave-bar"></span>
           </span>
-          <span>
-            jakarta, indonesia
-            <span aria-hidden="true">
-              ↗
-            </span>
-          </span>
-        </div>
-        <div class="journal-hero-grid">
-          <div class="journal-hero-copy">
-            <h1 id="home-title">
-              systems, matter
-              <br>
-              &amp;
-              a little
-              <em>
-                feeling.
-              </em>
+          <span id="nav-audio-status">[ SOUND ]</span>
+        </button>
+
+        <nav class="nav-links" aria-label="Primary Navigation">
+          <a href="#philosophy" class="nav-link" data-nav="philosophy">philosophy</a>
+          <a href="#artifacts" class="nav-link" data-nav="artifacts">builts</a>
+          <a href="#notes" class="nav-link" data-nav="notes">notes</a>
+          <a href="#inquiries" class="nav-link" data-nav="inquiries">inquiries</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Floating Lens Switcher (mobile-only, appears on scroll past the hero name) -->
+  <div class="sticky-perspective-wrap" id="sticky-perspective-bar" aria-hidden="true">
+    <div class="sticky-perspective-inner mode-switcher" role="tablist" aria-label="Quick Perspective Switcher">
+      <button type="button" class="mode-tab-btn" id="mobile-tab-mode-systems" data-mode-tab="systems" role="tab" aria-selected="true" aria-controls="view-systems">
+        <span class="mode-tab-text">systems &amp; matter</span>
+      </button>
+      <button type="button" class="mode-tab-btn" id="mobile-tab-mode-culture" data-mode-tab="culture" role="tab" aria-selected="false" aria-controls="view-culture">
+        <span class="mode-tab-text">culture &amp; taste</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Audio Element: Streamlined Single Source (Blog Reliability Standard) -->
+  <audio id="hukum-murphy-audio" preload="metadata" playsinline>
+    <source src="./assets/audio/hukum-murphy-full.mp3" type="audio/mpeg">
+    <source src="./assets/audio/hukum-murphy-preview.m4a" type="audio/mp4">
+  </audio>
+
+  <main id="main-content">
+    <!-- =======================================================================
+         SECTION 1: HERO & CONSOLIDATED PHILOSOPHY
+         ======================================================================= -->
+    <section class="section-hero" id="philosophy">
+      <div class="wrap">
+        <div class="hero-editorial-grid">
+          <div class="hero-head-block">
+            <div class="hero-sub-identity" id="hero-sub-identity">krishna, alias naquuuu • product manager • industrial engineering, itb</div>
+            <h1 class="hero-headline">
+              <span class="hero-headline-name">naquuuu.<wbr>build</span>
+              <span class="hero-headline-thesis">systems that anticipate <em>failure</em>. taste that anticipates <em>feeling</em>.</span>
+              <span class="hero-headline-subthesis">mapping every possibility, from code to culture.</span>
             </h1>
-            <p>
-              i build things and pay attention.
-              <br>
-              to how systems fail. how music feels.
-              <br>
-              and everything interesting in between.
-            </p>
-            <a class="journal-text-link" href="#notes">
-              explore the journal
-              <span aria-hidden="true">
-                ↓
-              </span>
-            </a>
           </div>
-          <figure class="journal-hero-art">
-            <div class="journal-art-mat">
-              <img src="./assets/img/krishna-artwork-720.webp" alt="An abstract painting by Krishna: vivid orange, blue, green and yellow shapes on textured canvas" width="720" height="544" fetchpriority="high" decoding="async">
-              <span class="journal-art-mark" aria-hidden="true">
-                a study
-                <br>
-                in paying
-                <br>
-                <em>
-                  attention.
-                </em>
-              </span>
+
+          <!-- Dual-Mode Perspective Switcher (Direct Theme & Visuals Controller) -->
+          <div class="mode-switch-wrap">
+            <div class="mode-switcher-container">
+              <div class="mode-switcher-label">
+                <span class="mode-switcher-spark" aria-hidden="true">✦</span>
+                <span>switch theme &amp; perspective:</span>
+              </div>
+              <div class="mode-switcher" role="tablist" aria-label="Perspective Switcher">
+                <button type="button" class="mode-tab-btn active" id="tab-mode-systems" data-mode-tab="systems" role="tab" aria-selected="true" aria-controls="view-systems">
+                  <span class="mode-tab-text">systems &amp; matter</span>
+                  <span class="mode-cta-badge" id="badge-mode-systems" data-mode-badge="systems"></span>
+                </button>
+                <button type="button" class="mode-tab-btn" id="tab-mode-culture" data-mode-tab="culture" role="tab" aria-selected="false" aria-controls="view-culture">
+                  <span class="mode-tab-text">culture &amp; taste</span>
+                  <span class="mode-cta-badge active" id="badge-mode-culture" data-mode-badge="culture">switch →</span>
+                </button>
+              </div>
             </div>
-            <figcaption>
-              <span>
-                01 / from the personal canvas
-              </span>
-              <span>
-                paint, pause, repeat.
-              </span>
-            </figcaption>
-          </figure>
+            <div class="mode-status-meta">
+              <span class="mode-status-dot" aria-hidden="true"></span>
+              <span id="mode-status-label">lens: systems &amp; matter (tap to switch)</span>
+            </div>
+          </div>
+
+          <div class="hero-body-block">
+            <div class="hero-prose">
+              <p>
+                murphy's law is my working philosophy: whatever can fail, will fail. so i sweat the details and map every scenario before it maps me. but scenarios don't only live in systems. art, culture, and politics each hold possibilities that engineering alone can't see.
+              </p>
+              <p>
+                that's why this portfolio runs two lenses. systems &amp; matter holds the professional work: loyalty, refunds, energy models. culture &amp; taste holds the rest: painting, playlists, tailoring. flip the switch and you get the other side of the same person.
+              </p>
+              <p>
+                partly inspired by my twin brother <a href="https://bhanuharya.github.io/" target="_blank" rel="noopener noreferrer">harya</a>, i put this website together to share what i build and what i learn along the way. feel free to explore or reach out.
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-side-block">
+            <!-- Single Dynamic Portrait Frame (Swaps on Mode Switch) -->
+            <div class="portrait-technical-wrap" id="hero-portrait-card">
+              <div class="portrait-corner-tl" aria-hidden="true"></div>
+              <div class="portrait-corner-br" aria-hidden="true"></div>
+              <img id="hero-portrait-img" src="./assets/img/naquuuu-studio-bw.jpeg?v=20260911" alt="Studio portrait of naquuuu" class="portrait-img" width="1066" height="1120" decoding="async" fetchpriority="high">
+              <div class="portrait-meta-strip" id="hero-portrait-meta">
+                <span>jakarta, indonesia</span>
+                <span>matter + code</span>
+              </div>
+            </div>
+
+            <blockquote class="hero-epigraph">
+              "yang bisa gagal 'kan gagal juga pada akhirnya"
+              <cite>
+                by kafin sulthan, <a href="https://genius.com/Kafin-sulthan-hukum-murphy-lyrics" target="_blank" rel="noopener noreferrer">"hukum murphy" ↗</a>
+              </cite>
+            </blockquote>
+          </div>
         </div>
-        <div class="journal-colophon">
-          <span>
-            product thinking meets everyday curiosity
-          </span>
-          <span>
-            systems
-            &amp;
-            matter
-            <b aria-hidden="true">
-              ✳
-            </b>
-            culture
-            &amp;
-            taste
-          </span>
+      </div>
+    </section>
+
+    <!-- Marquee Strip: identity ticker (decorative, reduced-motion safe) -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-chunk"><span>systems &amp; matter</span><span class="marquee-sep">✦</span><span>culture &amp; taste</span><span class="marquee-sep">✦</span><span>naquuuu.build</span><span class="marquee-sep">✦</span><span>mapclub</span><span class="marquee-sep">✦</span><span>traveloka</span><span class="marquee-sep">✦</span><span>bcg</span><span class="marquee-sep">✦</span><span>matter + code</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-chunk"><span>systems &amp; matter</span><span class="marquee-sep">✦</span><span>culture &amp; taste</span><span class="marquee-sep">✦</span><span>naquuuu.build</span><span class="marquee-sep">✦</span><span>mapclub</span><span class="marquee-sep">✦</span><span>traveloka</span><span class="marquee-sep">✦</span><span>bcg</span><span class="marquee-sep">✦</span><span>matter + code</span><span class="marquee-sep">✦</span></div>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         view a: systems & matter (technical proof, white paper theme)
+         ================================================================       -->
+    <div id="view-systems" class="view-panel active" role="tabpanel" aria-labelledby="tab-mode-systems">
+      <!-- 1. Operating Philosophy: The Resilient Loop (4 Persistent Phases) -->
+      <section class="section-loop-cards" id="operating-philosophy">
+        <div class="wrap">
+          <div class="loop-cards-header" data-reveal>
+            <span class="loop-cards-title">how i think about systems</span>
+            <span class="loop-cards-sub">[ 04 principles ]</span>
+          </div>
+
+          <div class="loop-cards-grid">
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <div class="loop-card-step-group">
+                  <span class="loop-step-node">01</span>
+                  <span class="loop-card-step">murphy's law</span>
+                </div>
+                <span class="loop-card-tag">expect failure</span>
+              </div>
+              <h3 class="loop-card-title">plan for bad days</h3>
+              <p class="loop-card-desc">buses stall, signals drop, forms get messy. i assume that chaos in my designs, so people still get through calmly.</p>
+            </div>
+
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <div class="loop-card-step-group">
+                  <span class="loop-step-node">02</span>
+                  <span class="loop-card-step">reka peluang</span>
+                </div>
+                <span class="loop-card-tag">edge cases</span>
+              </div>
+              <h3 class="loop-card-title">map the edge cases early</h3>
+              <p class="loop-card-desc">"reka semua peluang yang ada." i list timeouts, race conditions, and wrong taps before i build, then test the ugly paths first.</p>
+            </div>
+
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <div class="loop-card-step-group">
+                  <span class="loop-step-node">03</span>
+                  <span class="loop-card-step">buffers</span>
+                </div>
+                <span class="loop-card-tag">margin</span>
+              </div>
+              <h3 class="loop-card-title">keep a little slack</h3>
+              <p class="loop-card-desc">i add retries, pauses, and extra space. that slack keeps systems steady when traffic jumps.</p>
+            </div>
+
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <div class="loop-card-step-group">
+                  <span class="loop-step-node">04</span>
+                  <span class="loop-card-step">recovery</span>
+                </div>
+                <span class="loop-card-tag">resilience</span>
+              </div>
+              <h3 class="loop-card-title">help people recover fast</h3>
+              <p class="loop-card-desc">when things fail, show clear status, save progress, and offer a next step. never leave a user with a blank screen or an unconfirmed transaction.</p>
+            </div>
+          </div>
         </div>
       </section>
-      <section class="journal-notes journal-wrap" id="notes" aria-labelledby="notes-title">
-        <div class="journal-section-heading">
-          <div>
-            <span class="journal-eyebrow">
-              01 / the journal
-            </span>
-            <h2 id="notes-title">
-              notes from both sides.
-            </h2>
+
+      <!-- 2. Selected Artifacts (The 3 Shipped Systems) -->
+      <section class="section-works" id="artifacts">
+        <div class="wrap">
+          <div class="section-label-bar" data-reveal>
+            <span class="section-label">shipped systems</span>
+            <span class="section-count">[ 05 built ]</span>
           </div>
-          <a class="journal-text-link" href="./blog/">
-            all essays
-            <span aria-hidden="true">
-              ↗
-            </span>
-          </a>
-        </div>
-        <div class="journal-stories">
-          <article class="journal-feature">
-            <a class="journal-feature-art" href="./blog/the-geometry-of-shibuya-kei/" aria-label="Read the geometry of shibuya-kei">
-              <div class="journal-record" aria-hidden="true">
-                <div class="journal-record-label">
-                  naquuuu
-                  <br>
-                  <strong>
-                    side b
-                  </strong>
-                  <span>
-                    culture
-                    &amp;
-                    taste
-                  </span>
+
+          <div class="dossier-stack">
+            <!-- Dossier 1: MAPCLUB -->
+            <article class="dossier-card">
+              <div class="dossier-tab">
+                <span>doc 01</span>
+                <span class="dossier-tab-sep">/</span>
+                <span class="dossier-tab-name">mapclub</span>
+              </div>
+              <div class="dossier-header">
+                <div class="dossier-badge">
+                  <span class="dossier-badge-dot" aria-hidden="true"></span>
+                  <span>2026 - present</span>
+                </div>
+                <span class="dossier-category">omnichannel retail loyalty // mapclub</span>
+              </div>
+              <h2 class="dossier-title">enterprise omnichannel loyalty &amp; automation</h2>
+
+              <div class="dossier-body-grid">
+                <div>
+                  <div class="dossier-subheading">the problem</div>
+                  <p class="dossier-prose">
+                    stores juggle paper invoices, leaky coupons, and tricky bank checkouts that slow the line.
+                  </p>
+                </div>
+                <div>
+                  <div class="dossier-subheading">what i built</div>
+                  <p class="dossier-prose">
+                    marketing service invoicing automation, Employee Discount Scheme (EDS) key validation, Mandiri Livin' Sukha webview (RaaS) checkout routing, plus telemetry.
+                  </p>
                 </div>
               </div>
-              <span class="journal-sleeve-note" aria-hidden="true">
-                tokyo, on repeat.
-                <br>
-                an appreciation of shibuya-kei
-              </span>
-              <span class="journal-art-arrow" aria-hidden="true">
-                ↗
-              </span>
-            </a>
-            <div class="journal-story-meta">
-              <span>
-                culture
-                &amp;
-                taste
-              </span>
-              <span>
-                11 sep 2026 · 5 min read
-              </span>
-            </div>
-            <h3>
-              <a href="./blog/the-geometry-of-shibuya-kei/">
-                the geometry of shibuya-kei
-              </a>
-            </h3>
-            <p>
-              analog warmth in digital workspaces. on cornelius, pizzicato five, and the pleasure of finding a rhythm to think in.
-            </p>
-          </article>
-          <div class="journal-story-list">
-            <article class="journal-story">
-              <div class="journal-story-meta">
-                <span>
-                  systems
-                  &amp;
-                  matter
-                </span>
-                <time datetime="2026-09-28">
-                  28 sep 2026
-                </time>
+
+              <div class="dossier-footer">
+                <div class="dossier-tags">
+                  <span class="dossier-tag">invoicing automation</span>
+                  <span class="dossier-tag">eds validation</span>
+                  <span class="dossier-tag">raas webview</span>
+                </div>
+                <a href="./experience/mapclub/" class="dossier-link">view case study ↗</a>
               </div>
-              <h3>
-                <a href="./performance/recovery/">
-                  a timeout isn't always
-                  <br>
-                  a network problem.
-                  <span aria-hidden="true">
-                    ↗
-                  </span>
-                </a>
-              </h3>
-              <p>
-                relay recovery: prove the check can run. a repair receipt, with evidence and its limits.
-              </p>
             </article>
-            <article class="journal-story">
-              <div class="journal-story-meta">
-                <span>
-                  culture
-                  &amp;
-                  taste
-                </span>
-                <time datetime="2026-09-11">
-                  11 sep 2026
-                </time>
+
+            <!-- Dossier 2: Traveloka -->
+            <article class="dossier-card">
+              <div class="dossier-tab">
+                <span>doc 02</span>
+                <span class="dossier-tab-sep">/</span>
+                <span class="dossier-tab-name">traveloka</span>
               </div>
-              <h3>
-                <a href="./blog/smart-tailoring-as-kinetic-infrastructure/">
-                  soft clothes.
-                  <br>
-                  hot cities.
-                  <span aria-hidden="true">
-                    ↗
-                  </span>
-                </a>
-              </h3>
-              <p>
-                relaxed tailoring, natural fabrics, and getting dressed for a life spent moving.
-              </p>
+              <div class="dossier-header">
+                <div class="dossier-badge">
+                  <span class="dossier-badge-dot" aria-hidden="true"></span>
+                  <span>shipped production</span>
+                </div>
+                <span class="dossier-category">aviation systems // traveloka</span>
+              </div>
+              <h2 class="dossier-title">flight disruption recovery &amp; refund engine</h2>
+
+              <div class="dossier-body-grid">
+                <div>
+                  <div class="dossier-subheading">the problem</div>
+                  <p class="dossier-prose">
+                    when flights cancel, lines spike, fare maps clash, seat locks stick, and bank gateways time out.
+                  </p>
+                </div>
+                <div>
+                  <div class="dossier-subheading">what i built</div>
+                  <p class="dossier-prose">
+                    state machine policy decision engine (PM 185/2015), self-service Easy Reschedule, Split Refund engine (cash to card + loyalty points re-credit), and idempotent locks.
+                  </p>
+                </div>
+              </div>
+
+              <div class="dossier-footer">
+                <div class="dossier-tags">
+                  <span class="dossier-tag">state machines</span>
+                  <span class="dossier-tag">easy reschedule</span>
+                  <span class="dossier-tag">split refunds</span>
+                </div>
+                <a href="./experience/traveloka/" class="dossier-link">view case study ↗</a>
+              </div>
             </article>
-            <article class="journal-story journal-story-compact">
-              <div class="journal-story-meta">
-                <span>
-                  systems
-                  &amp;
-                  matter
-                </span>
-                <time datetime="2026-09-10">
-                  10 sep 2026
-                </time>
+
+            <!-- Dossier 3: Boston Consulting Group (BCG) -->
+            <article class="dossier-card">
+              <div class="dossier-tab">
+                <span>doc 03</span>
+                <span class="dossier-tab-sep">/</span>
+                <span class="dossier-tab-name">boston consulting group</span>
               </div>
-              <h3>
-                <a href="./blog/reverse-engineering-client-binaries/">
-                  design tokens, straight from the source.
-                  <span aria-hidden="true">
-                    ↗
-                  </span>
-                </a>
-              </h3>
-              <p>
-                finding the ground truth inside mobile apks.
-              </p>
+              <div class="dossier-header">
+                <div class="dossier-badge">
+                  <span class="dossier-badge-dot" aria-hidden="true"></span>
+                  <span>industrial energy</span>
+                </div>
+                <span class="dossier-category">energy &amp; heavy industry // bcg</span>
+              </div>
+              <h2 class="dossier-title">heavy industry economics &amp; energy modeling</h2>
+
+              <div class="dossier-body-grid">
+                <div>
+                  <div class="dossier-subheading">the problem</div>
+                  <p class="dossier-prose">
+                    teams weigh $400m proposals while models drift from turnaround downtime, machine wear, and long equipment lead times.
+                  </p>
+                </div>
+                <div>
+                  <div class="dossier-subheading">what i built</div>
+                  <p class="dossier-prose">
+                    capex/opex models linking furnace upkeep at nickel smelters and geothermal heat rates to yield curves.
+                  </p>
+                </div>
+              </div>
+
+              <div class="dossier-footer">
+                <div class="dossier-tags">
+                  <span class="dossier-tag">capex/opex models</span>
+                  <span class="dossier-tag">nickel smelters</span>
+                  <span class="dossier-tag">geothermal power</span>
+                </div>
+                <a href="./experience/bcg/" class="dossier-link">view case study ↗</a>
+              </div>
+            </article>
+
+            <!-- Dossier 4: 3M PHB Bio-Mask -->
+            <article class="dossier-card">
+              <div class="dossier-tab">
+                <span>doc 04</span>
+                <span class="dossier-tab-sep">/</span>
+                <span class="dossier-tab-name">3m biodesign</span>
+              </div>
+              <div class="dossier-header">
+                <div class="dossier-badge">
+                  <span class="dossier-badge-dot" aria-hidden="true"></span>
+                  <span>1st place national: 3m asean</span>
+                </div>
+                <span class="dossier-category">biodesign // sustainable materials</span>
+              </div>
+              <h2 class="dossier-title">3m phb bio-mask</h2>
+
+              <div class="dossier-body-grid">
+                <div>
+                  <div class="dossier-subheading">the problem</div>
+                  <p class="dossier-prose">
+                    single-use surgical masks pile up polypropylene plastic waste and lean on fragile petroleum supply chains.
+                  </p>
+                </div>
+                <div>
+                  <div class="dossier-subheading">what i built</div>
+                  <p class="dossier-prose">
+                    grew phb biopolymer on sugarcane waste into a mask with 3d facial contours that degrades in 6 to 12 months.
+                  </p>
+                </div>
+              </div>
+
+              <div class="dossier-footer">
+                <div class="dossier-tags">
+                  <span class="dossier-tag">phb biopolymer</span>
+                  <span class="dossier-tag">3d ergonomic seal</span>
+                  <span class="dossier-tag">biodesign</span>
+                </div>
+                <a href="./portfolio/3m-bio-mask/" class="dossier-link">view case study ↗</a>
+              </div>
+            </article>
+
+            <!-- Dossier 5: HotSand Clean Thermal Microgrid -->
+            <article class="dossier-card">
+              <div class="dossier-tab">
+                <span>doc 05</span>
+                <span class="dossier-tab-sep">/</span>
+                <span class="dossier-tab-name">schneider electric</span>
+              </div>
+              <div class="dossier-header">
+                <div class="dossier-badge">
+                  <span class="dossier-badge-dot" aria-hidden="true"></span>
+                  <span>country favorite: schneider go green</span>
+                </div>
+                <span class="dossier-category">clean energy // thermal storage</span>
+              </div>
+              <h2 class="dossier-title">hotsand clean thermal microgrid</h2>
+
+              <div class="dossier-body-grid">
+                <div>
+                  <div class="dossier-subheading">the problem</div>
+                  <p class="dossier-prose">
+                    island villages need power without costly lithium packs that hate heat and risk fire.
+                  </p>
+                </div>
+                <div>
+                  <div class="dossier-subheading">what i built</div>
+                  <p class="dossier-prose">
+                    a storage system from silica sand at 500°c+ with vacuum insulation and a stirling generator for clean power and heat.
+                  </p>
+                </div>
+              </div>
+
+              <div class="dossier-footer">
+                <div class="dossier-tags">
+                  <span class="dossier-tag">silica sand storage</span>
+                  <span class="dossier-tag">stirling generator</span>
+                  <span class="dossier-tag">island microgrid</span>
+                </div>
+                <a href="./portfolio/schneider-hotsand/" class="dossier-link">view case study ↗</a>
+              </div>
             </article>
           </div>
         </div>
       </section>
-      <section class="journal-work" id="work" aria-labelledby="work-title">
-        <div class="journal-wrap">
-          <div class="journal-section-heading">
-            <div>
-              <span class="journal-eyebrow">
-                02 / systems
-                &amp;
-                matter
-              </span>
-              <h2 id="work-title">
-                ideas, made tangible.
-              </h2>
-            </div>
-            <p>
-              from software workflows
-              <br>
-              to the materials around us.
-            </p>
+
+      <!-- 3. Writing / Notes & Technical Competencies -->
+      <section class="section-notes-comp" id="notes">
+        <div class="wrap">
+          <div class="section-label-bar" data-reveal>
+            <span class="section-label">notes: software and systems</span>
+            <a href="./blog/" class="section-count">view all notes →</a>
           </div>
-          <a class="journal-project" href="./portfolio/3m-bio-mask/">
-            <span class="journal-project-number">
-              01
-            </span>
-            <div>
-              <h3>
-                a different afterlife for a mask.
-              </h3>
-              <p>
-                3m phb bio-mask · circular biomaterials
-              </p>
-            </div>
-            <span class="journal-project-type">
-              product concept
-            </span>
-            <span class="journal-project-arrow" aria-hidden="true">
-              ↗
-            </span>
-          </a>
-          <a class="journal-project" href="./portfolio/schneider-hotsand/">
-            <span class="journal-project-number">
-              02
-            </span>
-            <div>
-              <h3>
-                storing the sun in sand.
-              </h3>
-              <p>
-                hotsand · clean thermal microgrid
-              </p>
-            </div>
-            <span class="journal-project-type">
-              energy systems
-            </span>
-            <span class="journal-project-arrow" aria-hidden="true">
-              ↗
-            </span>
-          </a>
-          <a class="journal-project" href="./blog/building-an-autonomous-product-operating-system/">
-            <span class="journal-project-number">
-              03
-            </span>
-            <div>
-              <h3>
-                give the agents a system.
-              </h3>
-              <p>
-                building an autonomous product operating system
-              </p>
-            </div>
-            <span class="journal-project-type">
-              workspace design
-            </span>
-            <span class="journal-project-arrow" aria-hidden="true">
-              ↗
-            </span>
-          </a>
-        </div>
-      </section>
-      <section class="journal-about journal-wrap" id="about" aria-labelledby="about-title">
-        <figure class="journal-portrait">
-          <img src="./assets/img/naquuuu-studio-bw.jpeg" alt="Black and white studio portrait of Krishna" width="1066" height="1120" loading="lazy" decoding="async">
-          <figcaption>
-            krishna / naquuuu / jakarta
-          </figcaption>
-        </figure>
-        <div class="journal-about-copy">
-          <span class="journal-eyebrow">
-            03 / the person behind the tabs
-          </span>
-          <h2 id="about-title">
-            an engineer's mind.
-            <br>
-            an unfinished canvas.
-          </h2>
-          <p>
-            i'm krishna, a product manager based in jakarta, with a background in industrial engineering at itb.
-          </p>
-          <p>
-            murphy's law is my working philosophy: think through what can go wrong, leave a little slack, and help people recover. outside the systems, you'll find me painting, collecting songs, or thinking about the way a jacket falls.
-          </p>
-          <p>
-            two lenses. the same curiosity.
-          </p>
-          <div class="journal-about-links">
-            <a class="journal-text-link" href="https://github.com/naquuuu">
-              things i build ↗
+
+          <div class="notes-stack">
+            <a href="./performance/recovery/" class="note-item">
+              <div class="note-main">
+                <div class="note-tag-row">
+                  <span class="note-tag">systems notebook</span>
+                  <span class="note-date">2026</span>
+                </div>
+                <div class="note-title">relay recovery: prove the check can run</div>
+                <p class="note-summary">a missing dependency, misleading timeouts, and the evidence that confirmed recovery.</p>
+              </div>
+              <span class="note-meta">[ reliability ]</span>
             </a>
-            <a class="journal-text-link" href="https://www.instagram.com/bhanuharya/">
-              things i notice ↗
+            <!-- Note 1 -->
+            <a href="./blog/reverse-engineering-client-binaries/" class="note-item">
+              <div class="note-main">
+                <div class="note-tag-row">
+                  <span class="note-tag">architecture</span>
+                  <span class="note-date">2026</span>
+                </div>
+                <div class="note-title">reverse-engineering client binaries: extracting ground-truth design systems</div>
+                <p class="note-summary">
+                  figma drifts from the live app. i inspect compiled production apks to lock a true base for rapid prototyping.
+                </p>
+              </div>
+              <span class="note-meta">[ architecture ]</span>
             </a>
+
+            <!-- Note 2 -->
+            <a href="./blog/building-an-autonomous-product-operating-system/" class="note-item">
+              <div class="note-main">
+                <div class="note-tag-row">
+                  <span class="note-tag">systems</span>
+                  <span class="note-date">2026</span>
+                </div>
+                <div class="note-title">building a product operating system: beyond generic prompts</div>
+                <p class="note-summary">
+                  plain chatbot prompts flop on enterprise product needs. i use structured product operations workspaces to write verified specs.
+                </p>
+              </div>
+              <span class="note-meta">[ systems ]</span>
+            </a>
+          </div>
+
+          <!-- Competency Drawer / Technical Matrix -->
+          <div class="section-label-bar section-label-bar--spaced" data-reveal>
+            <span class="section-label">technical toolkit</span>
+            <span class="section-count">[ 3 domains ]</span>
+          </div>
+
+          <div class="comp-matrix-grid">
+            <!-- Column 1: Physical & CAD -->
+            <div class="comp-col">
+              <div class="comp-col-header">physical &amp; cad</div>
+              <ul class="comp-list">
+                <li class="comp-item">solidworks</li>
+                <li class="comp-item">energy project cost estimations</li>
+                <li class="comp-item">supply chain</li>
+                <li class="comp-item">design for manufacturing (dfm)</li>
+                <li class="comp-item">rapid prototyping (fdm / resin)</li>
+                <li class="comp-item">ergonomics &amp; fit</li>
+              </ul>
+            </div>
+
+            <!-- Column 2: Software & Data -->
+            <div class="comp-col">
+              <div class="comp-col-header">software &amp; data</div>
+              <ul class="comp-list">
+                <li class="comp-item">product management</li>
+                <li class="comp-item">crm</li>
+                <li class="comp-item">marketing analytics</li>
+                <li class="comp-item">data analytics</li>
+                <li class="comp-item">ai / llm</li>
+                <li class="comp-item">state machine architecture</li>
+                <li class="comp-item">fault-tolerant workflows</li>
+                <li class="comp-item">sql &amp; relational schemas</li>
+                <li class="comp-item">python, js &amp; api integration</li>
+              </ul>
+            </div>
+
+            <!-- Column 3: Industry Experience -->
+            <div class="comp-col">
+              <div class="comp-col-header">industries &amp; domains</div>
+              <ul class="comp-list">
+                <li class="comp-item">education</li>
+                <li class="comp-item">fintech</li>
+                <li class="comp-item">energy</li>
+                <li class="comp-item">retail</li>
+                <li class="comp-item">consumer apps</li>
+                <li class="comp-item">logistics</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
-      <aside class="journal-listening journal-wrap" aria-label="Listening corner">
-        <div class="journal-listening-icon" aria-hidden="true">
-          ♫
+    </div> <!-- /#view-systems -->
+
+    <!-- =======================================================================
+         view b: culture & taste (creative sandbox, dark velvet crimson theme)
+         ======================================================================= -->
+    <div id="view-culture" class="view-panel" role="tabpanel" aria-labelledby="tab-mode-culture">
+      <!-- 1. Aesthetic Philosophy (Themes & Inspiration) -->
+      <section class="section-culture-philosophy" id="culture-philosophy">
+        <div class="wrap">
+          <div class="loop-cards-header" data-reveal>
+            <span class="section-label">culture as fuel</span>
+            <span class="loop-cards-sub">[ 04 pillars ]</span>
+          </div>
+
+          <!-- 4-Card Cultural Exploration Grid -->
+          <div class="loop-cards-grid">
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <div class="loop-card-step-group">
+                  <span class="loop-step-node">01</span>
+                  <span class="loop-card-step">visual art</span>
+                </div>
+                <span class="loop-card-tag">exploration</span>
+              </div>
+              <h3 class="loop-card-title">paint without undo</h3>
+              <p class="loop-card-desc">i paint without ctrl+z, working wet layers and fixed marks. hands learn composition through mess, not perfect strokes.</p>
+            </div>
+
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <div class="loop-card-step-group">
+                  <span class="loop-step-node">02</span>
+                  <span class="loop-card-step">fashion &amp; fit</span>
+                </div>
+                <span class="loop-card-tag">structure</span>
+              </div>
+              <h3 class="loop-card-title">cut cloth like a plan</h3>
+              <p class="loop-card-desc">i study proportion, silhouette, and movement in everyday cuts. cloth teaches fit the way specs teach flow.</p>
+            </div>
+
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <div class="loop-card-step-group">
+                  <span class="loop-step-node">03</span>
+                  <span class="loop-card-step">sound &amp; groove</span>
+                </div>
+                <span class="loop-card-tag">atmosphere</span>
+              </div>
+              <h3 class="loop-card-title">music that steadies me</h3>
+              <p class="loop-card-desc">from retro indonesian pop to 80s city pop and space ambient, tunes shape my pace for focused making.</p>
+            </div>
+
+            <div class="loop-card">
+              <div class="loop-card-header">
+                <div class="loop-card-step-group">
+                  <span class="loop-step-node">04</span>
+                  <span class="loop-card-step">synthesis</span>
+                </div>
+                <span class="loop-card-tag">cross-medium</span>
+              </div>
+              <h3 class="loop-card-title">taste keeps work fresh</h3>
+              <p class="loop-card-desc">art, sound, and clothes free my thinking. hands on craft returns me to screens with sharper eyes.</p>
+            </div>
+          </div>
         </div>
-        <div>
-          <span class="journal-eyebrow">
-            a soundtrack for the in-between
-          </span>
-          <h2>
-            pop mega raya
-          </h2>
-          <p>
-            retro grooves, indonesian pop, and a little room to wander.
-          </p>
-        </div>
-        <a class="journal-text-link" href="https://open.spotify.com/playlist/4wKJqsG3yNAEl47lWPc3Et">
-          listen on spotify ↗
-        </a>
-      </aside>
-      <section class="journal-goodbye journal-wrap" aria-labelledby="hello-title">
-        <span class="journal-eyebrow">
-          good things start with a conversation.
-        </span>
-        <h2 id="hello-title">
-          have a thought?
-          <br>
-          <a href="mailto:rbkrishnamurti@gmail.com">
-            let's compare notes.
-            <span aria-hidden="true">
-              ↗
-            </span>
-          </a>
-        </h2>
       </section>
-    </main>
-    <footer class="journal-footer journal-wrap">
-      <a class="journal-brand" href="./">
-        naquuuu
-        <span aria-hidden="true">
-          ✳
-        </span>
-      </a>
-      <p>
-        made with matter, code
-        &amp;
-        curiosity.
-      </p>
-      <a class="journal-text-link" href="#main-content">
-        back to top ↑
-      </a>
-    </footer>
-  </body>
+
+      <!-- 2. Selected Artifacts (Music, Fashion & Algorithmic Taste) -->
+      <section class="section-culture-artifacts" id="culture-artifacts">
+        <div class="wrap">
+          <div class="section-label-bar" data-reveal>
+            <span class="section-label">hands, ears, closet</span>
+            <span class="section-count">[ 03 features ]</span>
+          </div>
+
+          <div class="culture-dossier-stack">
+            <!-- 1. Physical Canvas (Painting in Tebet) -->
+            <article class="culture-card atelier-card">
+              <div class="atelier-photo-wrap">
+                <picture>
+                  <source srcset="./assets/img/krishna-artwork-720.webp?v=20260928a" type="image/webp">
+                  <img src="./assets/img/krishna-artwork-720.jpeg?v=20260928a" alt="Painting on canvas by naquuuu, painted at a coffee shop in Tebet" class="atelier-img" width="720" height="544" loading="lazy" decoding="async">
+                </picture>
+              </div>
+              <div class="atelier-info">
+                <div class="culture-card-header">
+                  <span class="culture-card-tag">01 // physical canvas</span>
+                  <span class="culture-card-domain">[ coffee shop in tebet ]</span>
+                </div>
+                <h3 class="culture-card-title">painting at a coffee shop: no ctrl+z on canvas</h3>
+                <p class="atelier-prose">
+                  i painted this with some paint on generic canvas at a coffee shop in tebet. no belgian linen, no studio, just an afternoon of layering color to see what sticks.
+                </p>
+                <p class="atelier-prose">
+                  code lets you roll back fast with ctrl+z. wet paint does not. you work with the mark you made and stay patient.
+                </p>
+              </div>
+            </article>
+
+            <!-- 2. Acoustic Archives (Music Curation) -->
+            <article class="culture-card spotify-dossier-card">
+              <div class="spotify-dossier-grid">
+                <div class="spotify-info-col">
+                  <!-- Spotify Curator Profile Header -->
+                  <div class="spotify-profile-header">
+                    <a href="https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf" target="_blank" rel="noopener noreferrer" class="spotify-profile-avatar-link" aria-label="View naquuuu on Spotify">
+                      <img src="./assets/img/spotify-profile.jpeg" alt="Spotify profile photo of naquuuu" class="spotify-profile-img" width="44" height="44" loading="lazy" decoding="async">
+                    </a>
+                    <div class="spotify-profile-meta">
+                      <div class="spotify-profile-name-row">
+                        <a href="https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf" target="_blank" rel="noopener noreferrer" class="spotify-profile-name">naquuuu</a>
+                        <span class="spotify-profile-badge">[ spotify curator ]</span>
+                      </div>
+                      <span class="spotify-profile-subtitle">curated listening archives</span>
+                    </div>
+                  </div>
+
+                  <!-- Spotify Carousel Navigation Bar (Single-Row) -->
+                  <div class="spotify-carousel-bar">
+                    <div class="spotify-carousel-tabs" role="tablist" aria-label="Curated Playlists">
+                      <button type="button" class="spotify-carousel-tab active" data-playlist-idx="0" role="tab" aria-selected="true">
+                        <span class="spotify-tab-num">01</span>
+                        <span class="spotify-tab-name">pop mega raya</span>
+                      </button>
+                      <button type="button" class="spotify-carousel-tab" data-playlist-idx="1" role="tab" aria-selected="false">
+                        <span class="spotify-tab-num">02</span>
+                        <span class="spotify-tab-name">honda city '05</span>
+                      </button>
+                      <button type="button" class="spotify-carousel-tab" data-playlist-idx="2" role="tab" aria-selected="false">
+                        <span class="spotify-tab-num">03</span>
+                        <span class="spotify-tab-name">trop chic</span>
+                      </button>
+                      <button type="button" class="spotify-carousel-tab" data-playlist-idx="3" role="tab" aria-selected="false">
+                        <span class="spotify-tab-num">04</span>
+                        <span class="spotify-tab-name">zetaa</span>
+                      </button>
+                    </div>
+                    <div class="spotify-carousel-controls">
+                      <span class="spotify-carousel-index" id="spotify-carousel-index">01 / 04</span>
+                      <button type="button" class="spotify-nav-arrow" id="spotify-prev-btn" aria-label="Previous playlist">‹</button>
+                      <button type="button" class="spotify-nav-arrow" id="spotify-next-btn" aria-label="Next playlist">›</button>
+                    </div>
+                  </div>
+
+                  <div class="culture-card-header">
+                    <span class="culture-card-tag">02 // music playlist</span>
+                    <span class="culture-card-domain">[ @naquuuu ]</span>
+                  </div>
+                  <h3 class="culture-card-title" id="spotify-playlist-title">pop mega raya</h3>
+                  <p class="culture-card-prose" id="spotify-playlist-prose">
+                    nostalgic indonesian pop with retro disco lift, brass warmth, and high spirits for making.
+                  </p>
+
+                  <!-- Musical Direction & Sonic Pillars -->
+                  <div class="spotify-direction-grid">
+                    <div class="spotify-direction-item">
+                      <span class="spotify-direction-label">direction:</span>
+                      <span class="spotify-direction-val" id="spotify-direction-val">classic indonesian pop, retro disco groove, lively brass &amp; celebratory melodies</span>
+                    </div>
+                    <div class="spotify-direction-item">
+                      <span class="spotify-direction-label">tempo:</span>
+                      <span class="spotify-direction-val" id="spotify-tempo-val">upbeat push for creative sprints and joyful listening</span>
+                    </div>
+                    <div class="spotify-direction-item">
+                      <span class="spotify-direction-label">artists:</span>
+                      <span class="spotify-direction-val" id="spotify-artists-val">chrisye, guruh gipsy, vira talisa, fariz rm &amp; evergreen indonesian groove</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Spotify Player Media Column (Half Embed) -->
+                <div class="spotify-media-col">
+                  <div class="spotify-player-container" id="spotify-player-container">
+                    <iframe id="spotify-embed-iframe" src="https://open.spotify.com/embed/playlist/4wKJqsG3yNAEl47lWPc3Et?utm_source=generator&amp;theme=0&amp;si=039d4b675b194de9" class="spotify-player-frame" width="100%" height="450" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Curated playlist by Krishna (naquuuu)"></iframe>
+                  </div>
+                  <div class="spotify-media-indicators">
+                    <button type="button" class="spotify-indicator-dot active" data-dot-idx="0" aria-label="Show playlist 01"></button>
+                    <button type="button" class="spotify-indicator-dot" data-dot-idx="1" aria-label="Show playlist 02"></button>
+                    <button type="button" class="spotify-indicator-dot" data-dot-idx="2" aria-label="Show playlist 03"></button>
+                    <button type="button" class="spotify-indicator-dot" data-dot-idx="3" aria-label="Show playlist 04"></button>
+                  </div>
+                </div>
+
+                <!-- Direction Links & Curated Tags -->
+                <div class="spotify-footer-col">
+                  <div class="spotify-card-pills" id="spotify-card-pills">
+                    <span class="spotify-pill">pop mega raya</span>
+                    <span class="spotify-pill">indonesian pop</span>
+                    <span class="spotify-pill">retro groove</span>
+                    <span class="spotify-pill">festive brass</span>
+                    <span class="spotify-pill">high energy</span>
+                  </div>
+                  <div class="spotify-card-links" id="spotify-card-links">
+                    <a href="./blog/the-geometry-of-shibuya-kei/" class="dossier-link">
+                      read music essay ↗
+                    </a>
+                    <a href="https://open.spotify.com/playlist/4wKJqsG3yNAEl47lWPc3Et?si=039d4b675b194de9" target="_blank" rel="noopener noreferrer" class="dossier-link">
+                      open playlist on spotify ↗
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- 3. Form & Silhouette: Tailoring, Fit & Footwear Archive -->
+            <article class="culture-card instagram-dossier-card">
+              <div class="instagram-dossier-grid">
+                <div class="instagram-info-col">
+                  <div class="culture-card-header">
+                    <span class="culture-card-tag">03 // personal style</span>
+                    <span class="culture-card-domain">[ @bhanuharya ]</span>
+                  </div>
+                  <h3 class="culture-card-title">soft clothes for hot cities</h3>
+                  <p class="culture-card-prose">
+                    relaxed pleated trousers, soft unlined jackets, and comfortable shoes built for city walking. i archive daily fits, textures, and tailoring on instagram.
+                  </p>
+                  <div class="instagram-desktop-notes">
+                    <div class="instagram-spec-item">
+                      <span class="instagram-spec-label">focus:</span>
+                      <span class="instagram-spec-val">relaxed drape, single &amp; double pleats</span>
+                    </div>
+                    <div class="instagram-spec-item">
+                      <span class="instagram-spec-label">fabrics:</span>
+                      <span class="instagram-spec-val">unlined linen, tropical wool, cotton twill</span>
+                    </div>
+                    <div class="instagram-spec-item">
+                      <span class="instagram-spec-label">footwear:</span>
+                      <span class="instagram-spec-val">lugged soles, blundstones, walking loafers</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="instagram-media-col">
+                  <!-- Real Instagram Profile Live Embed -->
+                  <div class="instagram-player-container" id="instagram-player-container">
+                    <iframe id="instagram-embed-iframe"
+                            src="https://www.instagram.com/bhanuharya/embed/?cr=1"
+                            class="instagram-embed-frame"
+                            width="100%"
+                            height="480"
+                            frameborder="0"
+                            scrolling="no"
+                            allowtransparency="true"
+                            referrerpolicy="no-referrer"
+                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                            title="Instagram profile of @bhanuharya"></iframe>
+                  </div>
+                </div>
+
+                <div class="instagram-footer-col">
+                  <div class="instagram-embed-pills">
+                    <span class="instagram-pill">relaxed pleats</span>
+                    <span class="instagram-pill">unstructured tailoring</span>
+                    <span class="instagram-pill">leather footwear</span>
+                    <span class="instagram-pill">natural textiles</span>
+                  </div>
+                  <a href="https://www.instagram.com/bhanuharya?stkn=d2JtbWNndW1nZnZs&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" class="dossier-link">
+                    open @bhanuharya on instagram ↗
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Cultural Notes (Aesthetic Field Records & Channels) -->
+      <section class="section-culture-notes" id="culture-notes">
+        <div class="wrap">
+          <div class="section-label-bar" data-reveal>
+            <span class="section-label">notes: music, clothes</span>
+            <span class="section-count">[ 02 essays ]</span>
+          </div>
+
+          <div class="notes-grid">
+            <!-- Culture Essay 1: Shibuya-kei -->
+            <a href="./blog/the-geometry-of-shibuya-kei/" class="note-item">
+              <div class="note-main">
+                <div class="note-tag-row">
+                  <span class="note-tag">music essay</span>
+                  <span class="note-date">2026</span>
+                </div>
+                <h3 class="note-title">the geometry of shibuya-kei: analog warmth in digital workspaces</h3>
+                <p class="note-summary">
+                  i lean on cornelius, pizzicato five, and 90s tokyo sampling for steady focus and gentle lift.
+                </p>
+              </div>
+              <span class="note-meta">[ music &amp; focus ]</span>
+            </a>
+
+            <!-- Culture Essay 2: Smart Tailoring -->
+            <a href="./blog/smart-tailoring-as-kinetic-infrastructure/" class="note-item">
+              <div class="note-main">
+                <div class="note-tag-row">
+                  <span class="note-tag">style essay</span>
+                  <span class="note-date">2026</span>
+                </div>
+                <h3 class="note-title">smart tailoring for everyday life: clothes for city walking</h3>
+                <p class="note-summary">
+                  relaxed pleats, breathable textiles, and good shoes make humid cities feel easy.
+                </p>
+              </div>
+              <span class="note-meta">[ everyday design ]</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div> <!-- /#view-culture -->
+
+    <!-- Marquee Strip: closing ticker above inquiries (decorative) -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-chunk"><span>open to connect</span><span class="marquee-sep">✦</span><span>gmail</span><span class="marquee-sep">✦</span><span>whatsapp</span><span class="marquee-sep">✦</span><span>linkedin</span><span class="marquee-sep">✦</span><span>say hi anytime</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-chunk"><span>open to connect</span><span class="marquee-sep">✦</span><span>gmail</span><span class="marquee-sep">✦</span><span>whatsapp</span><span class="marquee-sep">✦</span><span>linkedin</span><span class="marquee-sep">✦</span><span>say hi anytime</span><span class="marquee-sep">✦</span></div>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         SECTION 3: AVAILABILITY // INQUIRIES (SHARED CLOSING CARD)
+         ======================================================================= -->
+    <section class="section-inquiries" id="inquiries">
+      <div class="wrap">
+        <div class="inquiry-card" data-reveal>
+          <div class="inquiry-badge">
+            <span class="inquiry-badge-dot" aria-hidden="true"></span>
+            <span>open to connect</span>
+          </div>
+          <h2 class="inquiry-headline">let's build something thoughtful together.</h2>
+          <p class="inquiry-prose">
+            i'm open to product roles, playful experiments, and shared work. if systems, music, or clothes interest you, my inbox is open.
+          </p>
+
+          <div class="inquiry-actions">
+            <a href="mailto:rbkrishnamurti@gmail.com" class="inquiry-btn">
+              <span>gmail ↗</span>
+            </a>
+            <a href="https://wa.me/6282112255009" target="_blank" rel="noopener noreferrer" class="inquiry-btn">
+              <span>whatsapp ↗</span>
+            </a>
+            <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" class="inquiry-btn">
+              <span>linkedin ↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       Footer: Direct Channels & Industrial Monospace Live Stamp
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="footer-wordmark" aria-hidden="true">naquuuu</div>
+    <div class="wrap footer-content">
+      <div class="footer-channels">
+        <a href="https://github.com/naquuuu" target="_blank" rel="noopener noreferrer">github</a>
+        <a href="mailto:rbkrishnamurti@gmail.com">email</a>
+        <a href="./blog/">notes</a>
+      </div>
+      <div class="footer-live-stamp">
+        <span>naquuuu.github.io • built with matter and code.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Ergonomic Bottom Navigation Dock (<= 768px viewports) -->
+  <nav class="mobile-bottom-dock" id="mobile-bottom-dock" aria-label="Mobile Bottom Navigation">
+    <div class="mobile-dock-inner">
+      <a href="#philosophy" class="mobile-dock-link active" data-nav="philosophy">philosophy</a>
+      <a href="#artifacts" class="mobile-dock-link" data-nav="artifacts">builts</a>
+      <a href="#notes" class="mobile-dock-link" data-nav="notes">notes</a>
+      <a href="#inquiries" class="mobile-dock-link" data-nav="inquiries">inquiries</a>
+    </div>
+  </nav>
+
+  <script async src="https://www.instagram.com/embed.js"></script>
+  <script src="./assets/js/main.js?v=20260928a"></script>
+</body>
 </html>
