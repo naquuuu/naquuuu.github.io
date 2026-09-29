@@ -194,7 +194,7 @@ a:hover {
 .spotify-dossier-card, .spotify-dossier-grid, .spotify-info-col, .spotify-media-col, .spotify-footer-col,
 .spotify-profile-header, .spotify-profile-meta,
 .spotify-direction-grid, .spotify-direction-item, .spotify-card-footer,
-.mode-switcher-container, .mode-switcher-label, .mode-cta-badge,
+.mode-switcher-container, .mode-switcher-label,
 .dossier-tab, .loop-card-step-group, .loop-step-node,
 .essay-filter-bar, .essay-filter-btn, .essay-grid, .essay-card, .essay-card-link,
 .hero-headline, .hero-headline-name, .hero-headline-sub,
@@ -910,11 +910,6 @@ body[data-mode="culture"] .hero-epigraph {
   100% { transform: scale(1); }
 }
 
-@keyframes badgePopIn {
-  0% { opacity: 0; transform: scale(0.85) translateX(-3px); }
-  100% { opacity: 1; transform: scale(1) translateX(0); }
-}
-
 .mode-tab-btn.active {
   background: var(--bg-card);
   color: var(--text-primary);
@@ -929,65 +924,10 @@ body[data-mode="culture"] .mode-tab-btn.active {
   box-shadow: var(--shadow-glow);
 }
 
-.mode-cta-badge {
-  display: none;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: var(--accent-crimson);
-  background: var(--accent-crimson-dim);
-  border: 1px solid var(--border-active);
-  padding: 1px 6px;
-  border-radius: var(--radius-xs);
-  letter-spacing: 0.03em;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-}
-
-.mode-cta-badge.active {
-  display: inline-flex;
-  align-items: center;
-  animation: badgePopIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Strict guarantee: Active mode buttons never display a switch badge */
-.mode-tab-btn.active .mode-cta-badge {
-  display: none !important;
-}
-
-.mode-tab-btn:hover .mode-cta-badge {
-  background: var(--accent-crimson);
-  color: #FFFFFF;
-  border-color: var(--accent-crimson);
-  transform: translateY(-1px);
-}
-
 .mode-tab-icon {
   font-size: 0.85rem;
   color: var(--accent-crimson);
   transition: color 0.45s ease;
-}
-
-.mode-status-meta {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.mode-status-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: var(--radius-full);
-  background: var(--accent-crimson);
-  box-shadow: 0 0 8px var(--border-glow);
-}
-
-body[data-mode="culture"] .mode-status-dot {
-  background: var(--accent-crimson);
-  box-shadow: 0 0 8px var(--border-glow);
 }
 
 /* Tactile "Already at this section" feedback animation */
@@ -4052,10 +3992,6 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
     font-size: 0.66rem;
   }
 
-  .mode-status-meta {
-    font-size: 0.64rem;
-  }
-
   .section-loop-cards,
   .section-culture-philosophy {
     padding: 1.25rem 0 2rem 0;
@@ -4494,7 +4430,8 @@ body[data-mode="culture"] .mode-tab-btn.active { background: #F3E6E1; color: #2A
 a.skill-chip::after { content: "↗"; font-size: 0.7em; color: var(--text-muted); }
 a.skill-chip:hover, a.skill-chip:focus-visible { border-color: var(--accent-crimson); color: var(--accent-crimson); }
 .skill-src { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.skill-chip[data-src]:hover::before, .skill-chip[data-src]:focus-visible::before {
+/* :focus too, so a tap on a tooltip-only chip (no link) reveals its source on touch */
+.skill-chip[data-src]:hover::before, .skill-chip[data-src]:focus::before, .skill-chip[data-src]:focus-visible::before {
   content: attr(data-src);
   position: absolute;
   left: 50%;
@@ -4589,6 +4526,113 @@ html.cmdk-open { overflow: hidden; }
   .hero-side-block { align-self: stretch; }
   .hero-side-block .portrait-technical-wrap { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0; }
   .hero-side-block .portrait-img { width: 100%; flex: 1 1 auto; height: 100%; min-height: 360px; aspect-ratio: auto; object-fit: cover; object-position: center 20%; }
+}
+
+/* Spotify card: the playlist dots sit inside the card under the player, not on its edge */
+.spotify-media-col { display: flex; flex-direction: column; gap: 0.35rem; height: auto; align-self: stretch; }
+.spotify-media-col .spotify-player-container { flex: 1 1 auto; height: auto; }
+.spotify-media-col .spotify-player-frame { height: 100%; min-height: inherit; }
+.spotify-media-indicators { flex: none; gap: 0; }
+.spotify-indicator-dot::before { width: 9px; height: 9px; background: var(--text-muted); opacity: 0.45; }
+.spotify-indicator-dot:hover::before { opacity: 0.8; }
+.spotify-indicator-dot.active::before { width: 22px; opacity: 1; background: var(--accent-crimson); box-shadow: none; }
+
+/* Spotify playlist tabs: a 2x2 grid that never scrolls or clips; arrows stay to the right */
+.spotify-carousel-bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 0.5rem 0.75rem; }
+.spotify-carousel-tabs,
+.spotify-carousel-tabs.is-scrollable {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.35rem;
+  overflow: visible; -webkit-mask-image: none; mask-image: none;
+}
+.spotify-carousel-tab { min-width: 0; justify-content: flex-start; flex: none; }
+.spotify-tab-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.spotify-carousel-controls { flex-direction: row; gap: 0.35rem; }
+@media (max-width: 768px) {
+  .spotify-carousel-bar { grid-template-columns: minmax(0, 1fr); }
+  .spotify-carousel-controls { flex-direction: row; justify-content: flex-end; }
+}
+
+/* Identity line sits under the naquuuu.build name, in the regular sans */
+.hero-headline .hero-sub-identity,
+.hero-editorial-grid .hero-headline .hero-sub-identity {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0.7rem 0 0;
+  padding: 0.3rem 0.8rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-transform: lowercase;
+}
+.hero-headline .hero-sub-identity::before { box-shadow: none; flex: none; }
+@media (max-width: 768px) {
+  .hero-headline .hero-sub-identity,
+  .hero-editorial-grid .hero-headline .hero-sub-identity { font-size: 0.8rem; margin-top: 0.55rem; padding: 0.25rem 0.7rem; }
+}
+
+/* =============================================================================
+   ROUND 4: principle card rhythm, quieter lens switchers, header on phones
+   ============================================================================= */
+/* Principle cards (both lenses): row 1 = number + label on one line, row 2 = tag chip.
+   Every card gets the same two header rows, so titles start on one baseline across the row. */
+.loop-card-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: start;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.95rem;
+}
+.loop-card-step-group { display: flex; align-items: baseline; gap: 0.55rem; min-width: 0; max-width: 100%; }
+.loop-card-step { white-space: nowrap; }
+.loop-card-tag { justify-self: start; line-height: 1.4; }
+@media (max-width: 768px) {
+  .loop-card-header { gap: 0.35rem; margin-bottom: 0.1rem; }
+}
+@media (max-width: 400px) {
+  /* narrow phones: number sits above the label so "sound & groove" never clips */
+  .loop-card-step-group { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+}
+
+/* Floating lens switcher: same flat box as the hero switcher, no glass, shadow or dots.
+   Surface fill + a firmer hairline so it separates from the content scrolling underneath. */
+.sticky-perspective-inner,
+body[data-mode="culture"] .sticky-perspective-inner {
+  border-radius: var(--radius-sm);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: var(--bg-surface);
+  border: 1px solid #BDBDB5;
+}
+body[data-mode="culture"] .sticky-perspective-inner { border-color: #6A4850; }
+.sticky-perspective-inner .mode-tab-btn { border-radius: var(--radius-xs, 4px); }
+.sticky-perspective-inner .mode-tab-btn::before { content: none; }
+
+/* Hero heading: the h1 holds only the name; identity pill and thesis sit beside it, same look */
+.hero-headline { font-family: var(--font-display); }
+.hero-headline-title { margin: 0; font-size: inherit; line-height: inherit; letter-spacing: inherit; }
+.hero-headline > p { margin-bottom: 0; }
+@media (max-width: 768px) {
+  /* the heading block takes rows 1-2 (the identity pill used to own row 1), so the prose never lands above the name */
+  .hero-editorial-grid .hero-headline { grid-row: 1 / span 2; }
+}
+
+/* Palette jump targets take focus without a ring */
+section[tabindex="-1"]:focus { outline: none; }
+
+/* Spotify tabs on narrow phones: drop the index number so every playlist name fits */
+@media (max-width: 360px) {
+  .spotify-tab-num { display: none; }
+  .spotify-carousel-tab { padding-left: 0.4rem; padding-right: 0.4rem; }
+}
+
+/* Header on phones: the cv chip steps aside (cv stays in the hero tiles) */
+@media (max-width: 768px) {
+  .nav-cv-chip { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

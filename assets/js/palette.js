@@ -8,6 +8,9 @@
     { group: 'sections', label: 'how i think about systems', hint: 'home', href: '/#operating-philosophy' },
     { group: 'sections', label: 'selected work', hint: 'home', href: '/#artifacts' },
     { group: 'sections', label: 'notes & technical toolkit', hint: 'home', href: '/#notes' },
+    { group: 'sections', label: 'culture as fuel', hint: 'culture lens', href: '/#culture-philosophy' },
+    { group: 'sections', label: 'hands, ears, closet', hint: 'culture lens', href: '/#culture-artifacts' },
+    { group: 'sections', label: 'notes: music, clothes', hint: 'culture lens', href: '/#culture-notes' },
     { group: 'sections', label: 'contact', hint: 'home', href: '/#inquiries' },
     { group: 'work', label: 'mapclub: product operations workspace', hint: 'senior product owner', href: '/experience/mapclub/' },
     { group: 'work', label: 'traveloka: flight refund engine', hint: 'product manager', href: '/experience/traveloka/' },
@@ -54,7 +57,7 @@
       if (e.target.hasAttribute('data-cmdk-close')) close();
     });
     input.addEventListener('input', render);
-    input.addEventListener('keydown', onKey);
+    root.addEventListener('keydown', onKey);
     list.addEventListener('mousemove', function (e) {
       var li = e.target.closest('[data-i]');
       if (li) setActive(+li.getAttribute('data-i'));
@@ -101,12 +104,36 @@
   function go(i) {
     var it = results[i];
     if (!it) return;
-    close();
     if (it.external && it.href.indexOf('mailto:') !== 0) {
+      close();
       window.open(it.href, '_blank', 'noopener');
-    } else {
+    } else if (!jumpInPage(it.href)) {
+      close();
       window.location.href = it.href;
     }
+  }
+
+  // Homepage sections live in two lens panels; open the target's lens before scrolling to it.
+  function jumpInPage(href) {
+    var hashAt = href.indexOf('#');
+    if (hashAt === -1 || (href.slice(0, hashAt) || '/') !== '/') return false;
+    var here = window.location.pathname;
+    if (here !== '/' && here !== '/index.html') return false;
+    var id = href.slice(hashAt + 1);
+    var el = document.getElementById(id);
+    if (!el) return false;
+    close(false);
+    var panel = el.closest('.view-panel');
+    if (panel && !panel.classList.contains('active')) {
+      var tab = document.getElementById(panel.id === 'view-culture' ? 'tab-mode-culture' : 'tab-mode-systems');
+      if (tab) tab.click();
+    }
+    if (history.pushState) history.pushState(null, '', '#' + id);
+    el.scrollIntoView({ block: 'start' });
+    // move focus to the section instead of back to the trigger
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+    return true;
   }
 
   function onKey(e) {
@@ -127,11 +154,11 @@
     input.focus();
   }
 
-  function close() {
+  function close(restoreFocus) {
     if (!root || root.hidden) return;
     root.hidden = true;
     document.documentElement.classList.remove('cmdk-open');
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
+    if (restoreFocus !== false && lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
   document.addEventListener('keydown', function (e) {
@@ -149,6 +176,6 @@
   // Show the platform's shortcut on trigger buttons.
   var mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
   document.querySelectorAll('[data-cmdk-key]').forEach(function (el) {
-    el.textContent = mac ? '⌘ K' : 'ctrl K';
+    el.textContent = mac ? '⌘ k' : 'ctrl k';
   });
 })();

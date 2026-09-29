@@ -26,9 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const hours = String(wibDate.getHours()).padStart(2, '0');
     const minutes = String(wibDate.getMinutes()).padStart(2, '0');
-    const seconds = String(wibDate.getSeconds()).padStart(2, '0');
 
-    clockEl.textContent = `JAKARTA [WIB / UTC+7] ${hours}:${minutes}:${seconds}`;
+    clockEl.textContent = `jakarta • wib ${hours}:${minutes}`;
   }
 
   updateJakartaClock();
@@ -39,13 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===========================================================================
   const btnModeSystems = document.getElementById('tab-mode-systems');
   const btnModeCulture = document.getElementById('tab-mode-culture');
-  const badgeModeSystems = document.getElementById('badge-mode-systems');
-  const badgeModeCulture = document.getElementById('badge-mode-culture');
   const stickyPerspectiveBar = document.getElementById('sticky-perspective-bar');
 
   const viewSystems = document.getElementById('view-systems');
   const viewCulture = document.getElementById('view-culture');
-  const modeStatusLabel = document.getElementById('mode-status-label');
   const heroSubIdentity = document.getElementById('hero-sub-identity');
   const heroPortraitImg = document.getElementById('hero-portrait-img');
   const heroPortraitMeta = document.getElementById('hero-portrait-meta');
@@ -79,40 +75,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function syncPerspectiveSwitchers(activeMode) {
     const isCulture = activeMode === 'culture';
 
-    // Query all systems and culture buttons and badges across all switchers (hero + floating)
+    // Query all systems and culture buttons across all switchers (hero + floating)
     const systemsButtons = document.querySelectorAll('#tab-mode-systems, [data-mode-tab="systems"]');
     const cultureButtons = document.querySelectorAll('#tab-mode-culture, [data-mode-tab="culture"]');
-    const systemsBadges = document.querySelectorAll('#badge-mode-systems, [data-mode-badge="systems"]');
-    const cultureBadges = document.querySelectorAll('#badge-mode-culture, [data-mode-badge="culture"]');
 
-    // Systems buttons & badges
     systemsButtons.forEach(btn => {
       btn.classList.toggle('active', !isCulture);
       btn.setAttribute('aria-selected', !isCulture ? 'true' : 'false');
     });
-    systemsBadges.forEach(badge => {
-      if (isCulture) {
-        badge.textContent = '← switch';
-        badge.classList.add('active');
-      } else {
-        badge.textContent = '';
-        badge.classList.remove('active');
-      }
-    });
-
-    // Culture buttons & badges
     cultureButtons.forEach(btn => {
       btn.classList.toggle('active', isCulture);
       btn.setAttribute('aria-selected', isCulture ? 'true' : 'false');
-    });
-    cultureBadges.forEach(badge => {
-      if (!isCulture) {
-        badge.textContent = 'switch →';
-        badge.classList.add('active');
-      } else {
-        badge.textContent = '';
-        badge.classList.remove('active');
-      }
     });
   }
 
@@ -125,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (targetMode === 'culture') {
       if (viewSystems) viewSystems.classList.remove('active');
       if (viewCulture) viewCulture.classList.add('active');
-      if (modeStatusLabel) modeStatusLabel.textContent = 'lens: culture & taste (tap to switch)';
       if (heroSubIdentity) heroSubIdentity.textContent = 'krishna, alias naquuuu • visual art, sound & tailoring';
 
       // Animate single hero portrait change
@@ -140,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       if (viewCulture) viewCulture.classList.remove('active');
       if (viewSystems) viewSystems.classList.add('active');
-      if (modeStatusLabel) modeStatusLabel.textContent = 'lens: systems & matter (tap to switch)';
       if (heroSubIdentity) heroSubIdentity.textContent = 'krishna, alias naquuuu • product manager • industrial engineering, itb';
 
       // Animate single hero portrait change
@@ -158,9 +129,33 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('naquuuu_mode', targetMode);
   }
 
+  // A deep link (e.g. /#culture-notes) wins over the saved lens: open the panel that holds the target.
+  let hashTarget = null;
+  try {
+    hashTarget = window.location.hash ? document.getElementById(decodeURIComponent(window.location.hash.slice(1))) : null;
+  } catch (err) {
+    hashTarget = null;
+  }
+  const hashPanel = hashTarget ? hashTarget.closest('.view-panel') : null;
+  const hashMode = hashPanel ? (hashPanel.id === 'view-culture' ? 'culture' : 'systems') : null;
+
   // Restore saved perspective mode if previously selected (always run on load!)
-  const savedMode = localStorage.getItem('naquuuu_mode') || 'systems';
+  const savedMode = hashMode || localStorage.getItem('naquuuu_mode') || 'systems';
   switchMode(savedMode);
+  if (hashPanel) {
+    // the target was hidden when the browser tried to jump: scroll now, and again once images settle
+    // instant, like the browser's own fragment jump (html has scroll-behavior: smooth)
+    const jumpToHash = () => {
+      const rootEl = document.documentElement;
+      rootEl.style.scrollBehavior = 'auto';
+      hashTarget.scrollIntoView({ block: 'start' });
+      rootEl.style.scrollBehavior = '';
+    };
+    requestAnimationFrame(jumpToHash);
+    window.addEventListener('load', () => {
+      if (window.scrollY < 10 || Math.abs(hashTarget.getBoundingClientRect().top) > 120) jumpToHash();
+    }, { once: true });
+  }
 
   // Bind click listeners for all perspective switch buttons (hero + header)
   document.querySelectorAll('.mode-tab-btn').forEach(btn => {
@@ -320,7 +315,10 @@ document.addEventListener('DOMContentLoaded', () => {
       navAudioBtn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
     }
     if (navAudioStatus) {
-      navAudioStatus.textContent = isPlaying ? '[ PAUSE ]' : '[ PLAY ]';
+      navAudioStatus.textContent = isPlaying ? 'pause' : 'play';
+    }
+    if (navAudioBtn) {
+      navAudioBtn.setAttribute('aria-label', (isPlaying ? 'pause' : 'play') + ' hukum murphy by kafin sulthan');
     }
   }
 
