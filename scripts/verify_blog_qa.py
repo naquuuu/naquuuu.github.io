@@ -19,7 +19,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CSS_PATH = ROOT / "assets" / "css" / "style.css"
 JS_PATH = ROOT / "assets" / "js" / "main.js"
-CURRENT_ASSET_VERSION = "20260928a"
+CURRENT_ASSET_VERSION = "20260929c"
+# non-creative pages must carry a blueprint flowchart (STYLE_BIBLE 2.8); the two creative essays are exempt
+FLOWCHART_REQUIRED = {
+    "blog/building-an-autonomous-product-operating-system/index.html",
+    "blog/reverse-engineering-client-binaries/index.html",
+    "performance/recovery/index.html",
+    "experience/mapclub/index.html",
+    "experience/traveloka/index.html",
+    "experience/bcg/index.html",
+}
 EXCLUDE_PARTS = {"_revamp", "drafts", ".git", ".github", ".vscode", "node_modules"}
 
 failures: list[str] = []
@@ -152,6 +161,14 @@ def main() -> int:
         for m in re.finditer(r"<img\b(?![^>]*\balt=)[^>]*>", text):
             line = text.count("\n", 0, m.start()) + 1
             d5.append(f"img missing alt: {p.relative_to(ROOT)}:{line}")
+        rel = p.relative_to(ROOT).as_posix()
+        if rel in FLOWCHART_REQUIRED:
+            if "flowchart-whiteboard-box" not in text:
+                d5.append(f"missing blueprint flowchart: {rel}")
+            elif "principle-strip" not in text:
+                d5.append(f"flowchart missing principle strip: {rel}")
+        if not p.name.startswith("_") and re.search(r"Space[+ ]Grotesk|Syne", text):
+            d5.append(f"retired font referenced (ADR-035): {p.relative_to(ROOT)}")
     gate_result("5. typography & a11y baseline", not d5, d5 or ["72ch column, 44px targets, 16px inputs, charset + alt everywhere"])
 
     # ---- summary ----

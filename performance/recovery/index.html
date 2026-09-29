@@ -4,7 +4,8 @@
 <title>relay recovery: measurements and evidence | naquuuu</title>
 <meta name="description" content="a relay recovery record: the missing dependency, documented timings, and the checks that separate a working process from a working reply.">
 <link rel="canonical" href="https://naquuuu.github.io/performance/recovery/">
-<link rel="stylesheet" href="../../assets/css/style.css?v=20260928a"><link rel="icon" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/css/style.css?v=20260929c"><link rel="icon" href="../../assets/favicon.svg">
 <style>
 .essay-article { padding-block: clamp(2rem, 5vw, 4rem); }
 .essay-content > * + * { margin-top: 1.25rem; }
@@ -23,6 +24,103 @@
 <h2 id="record">1. the recovery record</h2><p>the record is a repair receipt. it lists the fault and the evidence left after the fix. the session map below is reconstructed from documented lessons l-17, l-18, l-20 and l-21. it is not a captured agent trace. agent attribution is unavailable.</p>
 <ol><li>two hosts and repeated restarts disrupted the relay.</li><li>an interrupted update left the environment incomplete.</li><li>missing aiohttp produced misleading connection timeouts.</li><li>after installation, the gateway connected at 19:32:48 wib.</li><li>an owner message round-trip confirmed recovery that evening.</li></ol>
 <p><a href="session-map.html">explore the curated recovery map →</a></p>
+
+<!-- bp:flow -->
+<div class="flowchart-whiteboard-box blueprint-box" style="margin: 2rem 0;">
+  <div class="flowchart-board-toolbar">
+    <div class="flowchart-toolbar-left"><span>relay recovery // from timeout to proof</span><span class="flowchart-toolbar-tag">systems notebook</span></div>
+    <div class="flowchart-toolbar-right"><span>28 september 2026</span></div>
+  </div>
+  <div class="flowchart-board-canvas scroll-x">
+<svg class="flowchart-svg" viewBox="0 0 780 446" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="recovery-flow-title recovery-flow-desc">
+<title id="recovery-flow-title">relay recovery flow</title>
+<desc id="recovery-flow-desc">blueprint flowchart on warm paper: a relay disrupted by two hosts and restarts, an interrupted update, misleading timeouts traced to a missing aiohttp dependency, installation, gateway connection at 19:32:48 wib, and an owner message round-trip confirming recovery.</desc>
+<defs>
+<marker id="recovery-flow-arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#8c897e" /></marker>
+<marker id="recovery-flow-arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#3b6989" /></marker>
+<marker id="recovery-flow-arrow-sage" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2e6844" /></marker>
+<marker id="recovery-flow-arrow-crimson" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#a63822" /></marker>
+<marker id="recovery-flow-arrow-terracotta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#b45309" /></marker>
+</defs>
+<rect width="100%" height="100%" fill="var(--bg-surface, #F2F2ED)" />
+<rect x="32" y="16" width="200" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="132" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">what was observed</text>
+<rect x="256" y="16" width="256" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="384" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">what was checked</text>
+<rect x="536" y="16" width="212" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="642" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">evidence left</text>
+<line x1="244" y1="50" x2="244" y2="378" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
+<line x1="524" y1="50" x2="524" y2="378" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
+<rect x="32" y="56" width="200" height="52" rx="6" fill="#fdf6f5" stroke="#d85c46" stroke-width="1.5" />
+<rect x="40" y="62" width="42.8" height="12" rx="2" fill="#faeae8" stroke="#d85c46" stroke-width="0.8" />
+<text x="61.4" y="71" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#a63822" text-anchor="middle">symptom</text>
+<text x="132" y="89" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">1. relay disrupted</text>
+<text x="132" y="101" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">two hosts, repeated restarts</text>
+<rect x="256" y="56" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.5" />
+<rect x="264" y="62" width="42.8" height="12" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
+<text x="285.4" y="71" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#5a5850" text-anchor="middle">finding</text>
+<text x="384" y="89" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">2. update interrupted</text>
+<text x="384" y="101" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">environment left incomplete</text>
+<rect x="32" y="144" width="200" height="52" rx="6" fill="#fdf6f5" stroke="#d85c46" stroke-width="1.5" />
+<rect x="40" y="150" width="56" height="12" rx="2" fill="#faeae8" stroke="#d85c46" stroke-width="0.8" />
+<text x="68" y="159" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#a63822" text-anchor="middle">misleading</text>
+<text x="132" y="177" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">3. connection timeouts</text>
+<text x="132" y="189" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">looked like a network fault</text>
+<rect x="256" y="144" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" />
+<rect x="264" y="150" width="56" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
+<text x="292" y="159" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">root cause</text>
+<text x="384" y="177" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">dependency check</text>
+<text x="384" y="189" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">aiohttp missing from the environment</text>
+<rect x="536" y="144" width="212" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.5" />
+<rect x="544" y="150" width="47.2" height="12" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
+<text x="567.6" y="159" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#5a5850" text-anchor="middle">evidence</text>
+<text x="642" y="177" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">timeouts explained</text>
+<text x="642" y="189" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">the fault was the environment</text>
+<rect x="256" y="232" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="384" y="254" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">4. install aiohttp</text>
+<text x="384" y="270" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">lets the gateway connect</text>
+<rect x="536" y="232" width="212" height="52" rx="6" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
+<rect x="544" y="238" width="47.2" height="12" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
+<text x="567.6" y="247" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">evidence</text>
+<text x="642" y="265" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">gateway connected</text>
+<text x="642" y="277" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">19:32:48 wib</text>
+<rect x="32" y="320" width="200" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="132" y="342" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">5. owner sends a message</text>
+<text x="132" y="358" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">tests the reply path</text>
+<rect x="256" y="320" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="384" y="342" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">round-trip check</text>
+<text x="384" y="358" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">reply path exercised end to end</text>
+<rect x="536" y="320" width="212" height="52" rx="6" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
+<rect x="544" y="326" width="47.2" height="12" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
+<text x="567.6" y="335" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">evidence</text>
+<text x="642" y="353" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">recovery confirmed</text>
+<text x="642" y="365" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">that evening, not perpetual uptime</text>
+<path d="M 232 82 L 256 82" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
+<path d="M 296 108 L 296 118 Q 296 126 288 126 L 140 126 Q 132 126 132 134 L 132 144" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
+<path d="M 232 170 L 256 170" stroke="#b45309" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#recovery-flow-arrow-terracotta)" />
+<path d="M 512 170 L 536 170" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
+<path d="M 384 196 L 384 232" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
+<path d="M 512 258 L 536 258" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#recovery-flow-arrow-sage)" />
+<path d="M 296 284 L 296 294 Q 296 302 288 302 L 140 302 Q 132 302 132 310 L 132 320" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
+<path d="M 232 346 L 256 346" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
+<path d="M 512 346 L 536 346" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#recovery-flow-arrow-sage)" />
+<line x1="32" y1="403" x2="748" y2="403" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="32" y="420" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">legend</text>
+<line x1="96" y1="417" x2="124" y2="417" stroke="#8c897e" stroke-width="1.2" marker-end="url(#recovery-flow-arrow-gray)" />
+<text x="132" y="420" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">standard flow</text>
+<line x1="217.8" y1="417" x2="245.8" y2="417" stroke="#2e6844" stroke-width="1.6" marker-end="url(#recovery-flow-arrow-sage)" />
+<text x="253.8" y="420" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">verified outcome</text>
+<line x1="353.4" y1="417" x2="381.4" y2="417" stroke="#b45309" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#recovery-flow-arrow-terracotta)" />
+<text x="389.4" y="420" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)">audit flag</text>
+</svg>
+  </div>
+</div>
+<aside class="principle-strip" aria-label="how this flowchart maps to my principles">
+  <p class="principle-strip-label">how this maps to my principles</p>
+  <ul class="principle-strip-list"><li><span class="principle-name">murphy&#x27;s law</span><span class="principle-text">the timeouts pointed at the network, and a missing dependency was the fault.</span></li><li><span class="principle-name">reka peluang</span><span class="principle-text">prove the check can run before trusting what it reports.</span></li><li><span class="principle-name">recovery</span><span class="principle-text">an owner message round-trip confirmed the reply path, not only a running process.</span></li></ul>
+  <p class="principle-strip-note">reconstructed from documented lessons l-17, l-18, l-20 and l-21. it is not a captured agent trace.</p>
+</aside>
+<!-- /bp:flow -->
 <h2 id="measurements">2. measure before claiming speed</h2><p>a stopwatch needs a label. these earlier measurements belong to the laptop on 28 september, not the relay host. a cold process includes startup and provider time.</p>
 <table class="recovery-table"><caption>documented baseline, lesson l-09</caption><thead><tr><th scope="col">check</th><th scope="col">elapsed</th></tr></thead><tbody><tr><th scope="row">cold one-word opencode run</th><td>15,177 ms</td></tr><tr><th scope="row">opencode run --help</th><td>2,097 ms</td></tr></tbody></table>
 <table class="recovery-table"><caption>relay host, 28 september 2026: one matched trial</caption><thead><tr><th scope="col">path</th><th scope="col">elapsed</th></tr></thead><tbody><tr><th scope="row">cold run</th><td>7,177 ms</td></tr><tr><th scope="row">warm authenticated attach</th><td>10,212 ms</td></tr></tbody></table><p id="latency-update">both runs used the same no-tool prompt and returned ok with exit code zero. the warm path was slower in this sample. provider variance was uncontrolled. one trial does not establish a typical latency or a speedup.</p><details><summary>measurement method</summary><p>prompt: <code>Reply with exactly OK. Do not use tools.</code></p><p>cold: <code>opencode run --format json</code>. warm: <code>opencode run --attach http://127.0.0.1:4096 --dir &lt;workspace&gt; --format json</code>. authentication stayed in the host environment. elapsed time covers the complete command.</p></details>
