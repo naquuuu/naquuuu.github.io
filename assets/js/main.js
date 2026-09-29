@@ -518,11 +518,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 150);
     }
 
-    const indexEl = document.getElementById('spotify-carousel-index');
-    if (indexEl) {
-      indexEl.textContent = `0${index + 1} / 0${SPOTIFY_PLAYLISTS.length}`;
-    }
-
     document.querySelectorAll('.spotify-carousel-tab').forEach((tab, i) => {
       const isActive = i === index;
       tab.classList.toggle('active', isActive);
@@ -530,10 +525,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isActive && typeof tab.scrollIntoView === 'function') {
         tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
       }
-    });
-
-    document.querySelectorAll('.spotify-indicator-dot').forEach((dot, i) => {
-      dot.classList.toggle('active', i === index);
     });
 
     const titleEl = document.getElementById('spotify-playlist-title');
@@ -593,29 +584,10 @@ document.addEventListener('DOMContentLoaded', () => {
   syncSpotifyTabsScrollable();
   window.addEventListener('resize', syncSpotifyTabsScrollable, { passive: true });
 
-  // Carousel Prev / Next Button Listeners
-  const spotifyPrevBtn = document.getElementById('spotify-prev-btn');
-  const spotifyNextBtn = document.getElementById('spotify-next-btn');
-
-  if (spotifyPrevBtn) {
-    spotifyPrevBtn.addEventListener('click', () => setSpotifyPlaylist(currentSpotifyIdx - 1));
-  }
-  if (spotifyNextBtn) {
-    spotifyNextBtn.addEventListener('click', () => setSpotifyPlaylist(currentSpotifyIdx + 1));
-  }
-
   // Carousel Tab Listeners
   document.querySelectorAll('.spotify-carousel-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       const idx = parseInt(tab.getAttribute('data-playlist-idx'), 10);
-      if (!isNaN(idx)) setSpotifyPlaylist(idx);
-    });
-  });
-
-  // Carousel Indicator Dot Listeners
-  document.querySelectorAll('.spotify-indicator-dot').forEach(dot => {
-    dot.addEventListener('click', () => {
-      const idx = parseInt(dot.getAttribute('data-dot-idx'), 10);
       if (!isNaN(idx)) setSpotifyPlaylist(idx);
     });
   });

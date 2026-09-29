@@ -9,7 +9,7 @@
   <title>building a product operations workspace: reliable specifications with ai workflows: naquuuu (krishna)</title>
   <meta name="description" content="Inside my product operations workspace: moving beyond generic prompts to structured workflows, interactive prototypes, and quality checks that reduce BRD preparation time.">
   <link rel="canonical" href="https://naquuuu.github.io/blog/building-an-autonomous-product-operating-system/">
-  <link rel="stylesheet" href="../../assets/css/style.css?v=20260930c">
+  <link rel="stylesheet" href="../../assets/css/style.css?v=20260930d">
   <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg?v=20260917i">
   <link rel="alternate icon" href="../../favicon.ico?v=20260917i">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -256,7 +256,7 @@
 </aside>
       <!-- /bp:principles -->
 
-      <h3>Tier 1: Boundary Audit &amp; Intake Gatekeeper (<code style="color:var(--term-cyan)">mapclub-intake</code>)</h3>
+      <h3>Tier 1: Boundary Audit &amp; Intake Gatekeeper</h3>
       <p>
         Before any specification is drafted, the intake skill aggressively audits the raw context. It acts like a strict border guard:
       </p>
@@ -268,9 +268,9 @@
         </li>
       </ul>
 
-      <h3>Tier 2: Specification, Flowcharts &amp; Interactive Prototypes (<code style="color:var(--term-cyan)">mapclub-brd</code>)</h3>
+      <h3>Tier 2: Specification, Flowcharts &amp; Interactive Prototypes</h3>
       <p>
-        Once boundaries are locked, a single prompt run scaffolds three synchronized artifacts adhering to internal engineering standards (<code style="color:var(--term-cyan)">PO_STANDARDS.md</code>):
+        Once boundaries are locked, a single prompt run scaffolds three synchronized artifacts adhering to internal engineering standards:
       </p>
       <ul>
         <li><strong>Business Requirements Document (BRD):</strong> Outlines end-to-end user journeys, edge cases, soft API contracts (JSON payloads, data types, error schemas), and explicit database state machines (e.g., <code>PENDING_RECONCILIATION → INVOICED → DISPUTED</code>).</li>
@@ -278,7 +278,7 @@
         <li><strong>Interactive Mobile Prototypes:</strong> Scaffolds lightweight, responsive HTML/CSS prototypes simulating actual device viewports and interaction states, allowing design, product, and C-level stakeholders to test flows before engineering commits sprints.</li>
       </ul>
 
-      <h3>Tier 3: Acceptance Governance &amp; UAT Packaging (<code style="color:var(--term-cyan)">mapclub-bac</code> &amp; <code style="color:var(--term-cyan)">mapclub-sharepoint</code>)</h3>
+      <h3>Tier 3: Acceptance Governance &amp; UAT Packaging</h3>
       <p>
         Writing requirements is only half the battle; getting executive and cross-departmental approval is the other:
       </p>
@@ -293,7 +293,7 @@
       </p>
       <ul>
         <li><strong>Schema &amp; Contract Consistency:</strong> Cross-validates business logic against API models to ensure edge cases and error states are accounted for.</li>
-        <li><strong>Leak Prevention:</strong> <code style="color:var(--term-cyan)">verify_sanitization.py</code> scans every document before git commits, validating against Indonesian PII patterns (NIK, phone numbers), internal corporate emails, and API keys.</li>
+        <li><strong>Leak Prevention:</strong> Every document is checked for personal data and credentials before it is approved.</li>
         <li><strong>Automated Correction Loop:</strong> If validation fails (contract mismatch or sanitization flag), artifacts are quarantined and returned to the operator for remediation before being marked approved.</li>
       </ul>
 
@@ -354,6 +354,6 @@
 
   <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
   <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <script src="../../assets/js/palette.js?v=20260930c" defer></script>
+  <script src="../../assets/js/palette.js?v=20260930d" defer></script>
 </body>
 </html>
