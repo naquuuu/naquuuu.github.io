@@ -312,6 +312,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-top: 0.5rem; font-family: var(--font-sans);">
         {byline} {bullet} {descriptor}
       </p>
+      <aside class="ai-note" role="note"><span class="ai-note-label">ai note</span>this post was written by ai and might be wrong. check anything important before you rely on it.</aside>
     </header>
 
     <article class="essay-content">
