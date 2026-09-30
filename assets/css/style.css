@@ -4553,6 +4553,15 @@ section[tabindex="-1"]:focus { outline: none; }
   margin-right: 0.55rem;
 }
 
+/* ai note in the dark (culture) theme: inverted, a white box with red and black text so it still shouts (L-28) */
+body[data-mode="culture"] .ai-note {
+  background: #FFFFFF;
+  border-color: #DC2626;
+  border-left-color: #DC2626;
+  color: #111110;
+}
+body[data-mode="culture"] .ai-note-label { color: #DC2626; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
