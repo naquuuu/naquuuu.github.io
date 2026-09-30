@@ -5,7 +5,7 @@
 <meta name="description" content="a relay recovery record: the missing dependency, documented timings, and the checks that separate a working process from a working reply.">
 <link rel="canonical" href="https://naquuuu.github.io/performance/recovery/">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap"></noscript>
-<link rel="stylesheet" href="../../assets/css/style.css?v=20260930f"><link rel="icon" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="../../assets/css/style.css?v=20260930g"><link rel="icon" href="../../assets/favicon.svg">
 <style>
 .essay-article { padding-block: clamp(2rem, 5vw, 4rem); }
 .essay-content > * + * { margin-top: 1.25rem; }
@@ -19,7 +19,9 @@
 </style>
 </head><body><a class="skip-link" href="#main-content">skip to content</a>
 <header class="site-header"><nav class="wrap nav-container" aria-label="primary"><a class="nav-brand" href="../../">naquuuu</a><a href="../../blog/">essays &amp; notes</a></nav></header>
-<main id="main-content" class="wrap essay-article"><header class="essay-header"><p class="essay-meta-row"><time datetime="2026-09-28">28 september 2026</time> • systems notebook</p><h1 class="essay-header-title">relay recovery: prove the check can run</h1></header>
+<main id="main-content" class="wrap essay-article"><header class="essay-header"><p class="essay-meta-row"><time datetime="2026-09-28">28 september 2026</time> • systems notebook</p><h1 class="essay-header-title">relay recovery: prove the check can run</h1>
+      <aside class="ai-note" role="note"><span class="ai-note-label">ai note</span>this post was written by ai and might be wrong. check anything important before you rely on it.</aside>
+    </header>
 <article class="essay-content"><div class="concept-box"><p>a timeout did not prove the network was broken. the environment was missing aiohttp. installing the dependency let the gateway connect, and an owner message round-trip confirmed the reply path.</p></div>
 <h2 id="record">1. the recovery record</h2><p>the record is a repair receipt. it lists the fault and the evidence left after the fix. the session map below is reconstructed from documented lessons l-17, l-18, l-20 and l-21. it is not a captured agent trace. agent attribution is unavailable.</p>
 <ol><li>two hosts and repeated restarts disrupted the relay.</li><li>an interrupted update left the environment incomplete.</li><li>missing aiohttp produced misleading connection timeouts.</li><li>after installation, the gateway connected at 19:32:48 wib.</li><li>an owner message round-trip confirmed recovery that evening.</li></ol>
@@ -144,5 +146,5 @@
 <p>the recovery map contains curated incident facts only. no raw messages, account identifiers, or credentials are published.</p></article></main>
 <footer class="site-footer"><div class="wrap footer-content"><a href="../../">return to home</a><a href="../../blog/">essays &amp; notes</a><p class="footer-privacy">visits are counted with <a href="https://www.goatcounter.com/" target="_blank" rel="noopener noreferrer">goatcounter</a>: no cookies, no personal info tracked.</p></div></footer>  <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
   <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <script src="../../assets/js/palette.js?v=20260930f" defer></script>
+  <script src="../../assets/js/palette.js?v=20260930g" defer></script>
 </body></html>
