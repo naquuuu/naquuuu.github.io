@@ -4527,28 +4527,30 @@ section[tabindex="-1"]:focus { outline: none; }
   .nav-cv-chip { display: none; }
 }
 
-/* ai disclosure, last child of .essay-header */
+/* ai disclosure, last child of .essay-header. Red on purpose: owner rule, visitors must notice it (L-28) */
 .ai-note {
   margin: 1rem 0 0;
-  padding: 0.6rem 0.9rem;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-left: 3px solid var(--border-active);
+  padding: 0.7rem 0.95rem;
+  background: var(--accent-crimson-dim);
+  border: 1px solid var(--border-crimson);
+  border-left: 4px solid var(--accent-crimson);
   border-radius: var(--radius-md);
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
+  font-weight: 500;
   line-height: 1.55;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   min-width: 0;
   overflow-wrap: anywhere;
 }
 .ai-note-label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--text-primary);
-  margin-right: 0.5rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--accent-crimson);
+  margin-right: 0.55rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
