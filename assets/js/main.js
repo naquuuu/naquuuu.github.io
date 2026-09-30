@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         heroPortraitImg.style.opacity = '0';
         setTimeout(() => {
           heroPortraitImg.src = './assets/img/naquuuu-studio-bw.jpeg?v=20260911';
-          heroPortraitMeta.innerHTML = '<span>jakarta, indonesia</span><span>matter + code</span>';
+          heroPortraitMeta.innerHTML = '<span>jakarta, indonesia</span>';
           heroPortraitImg.style.opacity = '1';
         }, 180);
       }
