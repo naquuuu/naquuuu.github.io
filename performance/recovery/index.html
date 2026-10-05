@@ -34,102 +34,88 @@
     <div class="flowchart-toolbar-right"><span>28 september 2026</span></div>
   </div>
   <div class="flowchart-board-canvas scroll-x">
-<svg class="flowchart-svg" viewBox="0 0 780 596" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="recovery-flow-title recovery-flow-desc">
-<title id="recovery-flow-title">relay recovery flow</title>
-<desc id="recovery-flow-desc">blueprint flowchart: a relay disrupted by two hosts and restarts, an interrupted update, and connection timeouts that looked like a network fault; the decision network fault or environment leads to an environment check that finds aiohttp missing; installing it lets the gateway connect at 19:32:48 wib, and an owner message round-trip confirms recovery that evening.</desc>
+<svg class="flowchart-svg" viewBox="0 0 780 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="recovery-flow-title recovery-flow-desc">
+<title id="recovery-flow-title">relay recovery timeline and fault tree</title>
+<desc id="recovery-flow-desc">blueprint chronological timeline and fault tree: along the horizontal spine, a disrupted relay and interrupted update produce misleading connection timeouts; branching above, the network fault hypothesis is ruled out; branching below, an environment check finds aiohttp missing; returning to the spine, installing aiohttp lets the gateway connect at 19:32:48 wib, and an owner message round-trip confirms recovery that evening.</desc>
 <defs>
 <marker id="recovery-flow-arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#8c897e" /></marker>
-<marker id="recovery-flow-arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#3b6989" /></marker>
 <marker id="recovery-flow-arrow-sage" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2e6844" /></marker>
 <marker id="recovery-flow-arrow-crimson" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#a63822" /></marker>
 </defs>
 <rect width="100%" height="100%" fill="var(--bg-surface, #F2F2ED)" />
-<rect x="32" y="16" width="200" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="132" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">what was observed</text>
-<rect x="256" y="16" width="256" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="384" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">what was checked</text>
-<rect x="536" y="16" width="212" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="642" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">evidence left</text>
-<line x1="244" y1="50" x2="244" y2="520" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
-<line x1="524" y1="50" x2="524" y2="520" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
-<path d="M 232 86 L 256 86" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
-<path d="M 296 112 L 296 128 Q 296 136 288 136 L 140 136 Q 132 136 132 144 L 132 160" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
-<path d="M 232 186 L 256 186" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#recovery-flow-arrow-crimson)" />
-<path d="M 384 220 L 384 260" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
-<path d="M 512 286 L 536 286" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
-<path d="M 384 312 L 384 360" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
-<path d="M 512 386 L 536 386" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#recovery-flow-arrow-sage)" />
-<path d="M 296 412 L 296 428 Q 296 436 288 436 L 140 436 Q 132 436 132 444 L 132 460" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
-<path d="M 226 486 L 256 486" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
-<path d="M 512 486 L 536 486" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#recovery-flow-arrow-sage)" />
-<rect x="32" y="60" width="200" height="52" rx="26" fill="#fdf6f5" stroke="#d85c46" stroke-width="1.5" />
-<text x="132" y="83" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">1. relay disrupted</text>
-<text x="132" y="98" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">two hosts, repeated restarts</text>
-<rect x="256" y="60" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.5" />
-<rect x="264" y="66" width="42.8" height="12" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
-<text x="285.4" y="75" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#5a5850" text-anchor="middle">finding</text>
-<text x="384" y="93" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">2. update interrupted</text>
-<text x="384" y="105" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">environment left incomplete</text>
-<rect x="32" y="160" width="200" height="52" rx="6" fill="#fdf6f5" stroke="#d85c46" stroke-width="1.5" />
-<rect x="40" y="166" width="56" height="12" rx="2" fill="#faeae8" stroke="#d85c46" stroke-width="0.8" />
-<text x="68" y="175" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#a63822" text-anchor="middle">misleading</text>
-<text x="132" y="193" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">3. connection timeouts</text>
-<text x="132" y="205" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">looked like a network fault</text>
-<polygon points="256,186 384,152 512,186 384,220" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
-<text x="384" y="184" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">network fault?</text>
-<text x="384" y="197" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">or the environment?</text>
-<path d="M 256 266 A 128 6 0 0 1 512 266 V 306 A 128 6 0 0 1 256 306 Z" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" /><path d="M 256 266 A 128 6 0 0 0 512 266" fill="none" stroke="#d99b82" stroke-width="1.5" />
-<rect x="264" y="268" width="56" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
-<text x="292" y="277" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">root cause</text>
-<text x="384" y="295" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">environment check</text>
-<text x="384" y="307" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">aiohttp missing</text>
-<path d="M 536 266 Q 536 260 542 260 H 742 Q 748 260 748 266 V 308 C 701.36 302 667.44 316 631.4 312 S 567.8 304 536 310 Z" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.5" />
-<rect x="544" y="263" width="47.2" height="12" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
-<text x="567.6" y="272" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#5a5850" text-anchor="middle">evidence</text>
-<text x="642" y="290" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">timeouts explained</text>
-<text x="642" y="302" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">the fault was the environment</text>
-<rect x="256" y="360" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-<text x="384" y="383" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">4. install aiohttp</text>
-<text x="384" y="398" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">lets the gateway connect</text>
-<path d="M 536 366 Q 536 360 542 360 H 742 Q 748 360 748 366 V 408 C 701.36 402 667.44 416 631.4 412 S 567.8 404 536 410 Z" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
-<rect x="544" y="363" width="47.2" height="12" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
-<text x="567.6" y="372" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">evidence</text>
-<text x="642" y="390" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">gateway connected</text>
-<text x="642" y="402" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">19:32:48 wib</text>
-<polygon points="44,460 232,460 220,512 32,512" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
-<text x="132" y="483" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">5. owner sends a message</text>
-<text x="132" y="498" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">tests the reply path</text>
-<polygon points="256,486 384,452 512,486 384,520" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
-<text x="384" y="484" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">reply comes back?</text>
-<text x="384" y="497" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">round-trip check</text>
-<rect x="536" y="460" width="212" height="52" rx="26" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
-<text x="642" y="483" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">recovery confirmed</text>
-<text x="642" y="498" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">that evening, not perpetual uptime</text>
-<rect x="396.5" y="234" width="111" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-<text x="452" y="243" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">[no: check dependencies]</text>
-<rect x="511.25" y="445" width="25.5" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-<text x="524" y="454" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#244b35" text-anchor="middle">[yes]</text>
-<line x1="32" y1="538" x2="748" y2="538" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="32" y="556" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">lines</text>
-<line x1="104" y1="552.5" x2="132" y2="552.5" stroke="#8c897e" stroke-width="1.2" marker-end="url(#recovery-flow-arrow-gray)" />
-<text x="140" y="556" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">flow</text>
-<line x1="186" y1="552.5" x2="214" y2="552.5" stroke="#2e6844" stroke-width="1.6" marker-end="url(#recovery-flow-arrow-sage)" />
-<text x="222" y="556" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">verified outcome</text>
-<line x1="342" y1="552.5" x2="370" y2="552.5" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#recovery-flow-arrow-crimson)" />
-<text x="378" y="556" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">failure or risk path</text>
-<text x="32" y="578" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">shapes</text>
-<rect x="104" y="569" width="16" height="10" rx="5" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="126" y="578" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">start / end</text>
-<polygon points="219,569 231,569 227,579 215,579" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="237" y="578" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">input</text>
-<rect x="290" y="569" width="16" height="10" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="312" y="578" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">action</text>
-<polygon points="371,574 379,568 387,574 379,580" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="393" y="578" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">decision</text>
-<path d="M 464 571 A 8 2 0 0 1 480 571 V 577 A 8 2 0 0 1 464 577 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" /><path d="M 464 571 A 8 2 0 0 0 480 571" fill="none" stroke="#8c897e" stroke-width="1" />
-<text x="486" y="578" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">data source</text>
-<path d="M 575 569 H 591 V 577 C 587 575 583 581 575 578 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="597" y="578" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">document</text>
+<!-- Horizontal Timeline Spine Connectors -->
+<path d="M 150 152 L 172 152" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
+<!-- Diagnostic Branch Above Spine: Timeouts -> Network Fault? [ruled out] -->
+<path d="M 244 126 L 244 88" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#recovery-flow-arrow-crimson)" />
+<!-- Root Cause Branch Below Spine: Timeouts -> Env Check (aiohttp missing) -> Install aiohttp -->
+<path d="M 244 178 L 244 214" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
+<path d="M 326 240 L 408 240 Q 416 240 416 232 L 416 178" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#recovery-flow-arrow-gray)" />
+<!-- Spine Continuation: Install aiohttp -> Gateway Connected (19:32:48 WIB) -> Owner Message Round-Trip -->
+<path d="M 484 152 L 508 152" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#recovery-flow-arrow-sage)" />
+<path d="M 624 152 L 646 152" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#recovery-flow-arrow-sage)" />
+
+<!-- SPINE NODE 1: Relay Disrupted & Interrupted Update -->
+<rect x="24" y="126" width="126" height="52" rx="26" fill="#fdf6f5" stroke="#d85c46" stroke-width="1.5" />
+<text x="87" y="149" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.8" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">1. relay disrupted</text>
+<text x="87" y="162" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.8" fill="var(--text-secondary, #555550)" text-anchor="middle">2 hosts &amp; partial update</text>
+
+<!-- SPINE NODE 2: Misleading Connection Timeouts -->
+<rect x="172" y="126" width="144" height="52" rx="6" fill="#fdf6f5" stroke="#d85c46" stroke-width="1.5" />
+<rect x="180" y="132" width="54" height="11" rx="2" fill="#faeae8" stroke="#d85c46" stroke-width="0.8" />
+<text x="207" y="140" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#a63822" text-anchor="middle">symptom</text>
+<text x="244" y="157" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.8" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">2. connection timeouts</text>
+<text x="244" y="169" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.8" fill="var(--text-secondary, #555550)" text-anchor="middle">mimicked network fault</text>
+
+<!-- ABOVE SPINE: Ruled-Out Hypothesis (Decision Diamond) -->
+<polygon points="172,56 244,24 316,56 244,88" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
+<text x="244" y="54" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.2" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">network fault?</text>
+<text x="244" y="66" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" fill="#a63822" text-anchor="middle">[no: false lead]</text>
+
+<!-- BELOW SPINE: Root Cause Data Store (Environment Check) -->
+<path d="M 162 220 A 82 6 0 0 1 326 220 V 260 A 82 6 0 0 1 162 260 Z" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" />
+<path d="M 162 220 A 82 6 0 0 0 326 220" fill="none" stroke="#d99b82" stroke-width="1.5" />
+<rect x="170" y="222" width="54" height="11" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
+<text x="197" y="230" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#8a3b1e" text-anchor="middle">root cause</text>
+<text x="244" y="246" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">3. env check: aiohttp</text>
+<text x="244" y="258" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.8" fill="var(--text-secondary, #555550)" text-anchor="middle">dependency missing</text>
+
+<!-- SPINE NODE 3: Install aiohttp (Action) -->
+<rect x="348" y="126" width="136" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="416" y="149" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">4. install aiohttp</text>
+<text x="416" y="163" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">repair python env</text>
+
+<!-- SPINE NODE 4: Gateway Connected Receipt (Document Wave) -->
+<path d="M 508 132 Q 508 126 514 126 H 618 Q 624 126 624 132 V 172 C 596 166 574 178 552 174 S 522 168 508 173 Z" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.4" />
+<rect x="516" y="130" width="46" height="11" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
+<text x="539" y="138" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#244b35" text-anchor="middle">evidence</text>
+<text x="566" y="154" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.8" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">gateway connected</text>
+<text x="566" y="166" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.8" fill="#244b35" text-anchor="middle">19:32:48 wib</text>
+
+<!-- SPINE NODE 5: Owner Round-Trip Confirmed (Terminal Pill) -->
+<rect x="646" y="126" width="114" height="52" rx="26" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
+<text x="703" y="149" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">5. reply verified</text>
+<text x="703" y="162" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" fill="#244b35" text-anchor="middle">owner round-trip</text>
+
+<!-- Legend -->
+<line x1="24" y1="296" x2="756" y2="296" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="24" y="316" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">lines</text>
+<line x1="96" y1="312.5" x2="124" y2="312.5" stroke="#8c897e" stroke-width="1.2" marker-end="url(#recovery-flow-arrow-gray)" />
+<text x="132" y="316" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">flow</text>
+<line x1="178" y1="312.5" x2="206" y2="312.5" stroke="#2e6844" stroke-width="1.6" marker-end="url(#recovery-flow-arrow-sage)" />
+<text x="214" y="316" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">verified outcome</text>
+<line x1="334" y1="312.5" x2="362" y2="312.5" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#recovery-flow-arrow-crimson)" />
+<text x="370" y="316" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">failure or risk path</text>
+<text x="24" y="338" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">shapes</text>
+<rect x="96" y="329" width="16" height="10" rx="5" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="118" y="338" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">start / end</text>
+<rect x="207" y="329" width="16" height="10" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="229" y="338" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">action</text>
+<polygon points="288,334 296,328 304,334 296,340" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="310" y="338" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">decision</text>
+<path d="M 381 331 A 8 2 0 0 1 397 331 V 337 A 8 2 0 0 1 381 337 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" /><path d="M 381 331 A 8 2 0 0 0 397 331" fill="none" stroke="#8c897e" stroke-width="1" />
+<text x="403" y="338" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">data source</text>
+<path d="M 492 329 H 508 V 337 C 504 335 500 341 492 338 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="514" y="338" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">document</text>
 </svg>
   </div>
 </div>
