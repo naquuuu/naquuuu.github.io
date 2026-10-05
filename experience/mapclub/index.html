@@ -60,115 +60,105 @@
     <!-- bp:flow -->
     <div class="section-label-bar" style="margin-top: 2.5rem;">
       <span class="section-label">system flow</span>
-      <span class="section-count">[ where human judgment sits ]</span>
+      <span class="section-count">[ 1-to-3 artifact fan-out &amp; human review loop ]</span>
     </div>
     <div class="flowchart-whiteboard-box blueprint-box" style="margin: 2rem 0;">
       <div class="flowchart-board-toolbar">
-        <div class="flowchart-toolbar-left"><span>mapclub requirement to release flow</span><span class="flowchart-toolbar-tag">simplified</span></div>
-        <div class="flowchart-toolbar-right"><span>from prompt to september 2026 release</span></div>
+        <div class="flowchart-toolbar-left"><span>ai-assisted brd workspace // fan-out &amp; review loop</span><span class="flowchart-toolbar-tag">simplified</span></div>
+        <div class="flowchart-toolbar-right"><span>~1 week reduced to 1 day or less</span></div>
       </div>
       <div class="flowchart-board-canvas scroll-x">
-<svg class="flowchart-svg" viewBox="0 0 780 396" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mapclub-flow-title mapclub-flow-desc">
-<title id="mapclub-flow-title">mapclub requirement to release flow</title>
-<desc id="mapclub-flow-desc">blueprint flowchart: one prompt starts the ai-assisted workspace, which drafts a brd, diagram and prototype; a human decision checks scope and logic, looping back to clarify if needed; access and data safeguards apply before engineering handoff; acceptance, edge-case and payment testing lead to the september 2026 app release, with an issue resolution loop.</desc>
+<svg class="flowchart-svg" viewBox="0 0 780 370" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mapclub-flow-title mapclub-flow-desc">
+<title id="mapclub-flow-title">mapclub ai-assisted brd workspace fan-out and review loop</title>
+<desc id="mapclub-flow-desc">blueprint fan-out flowchart: an initiative needing a brd enters the ai-assisted workspace, which fans out in parallel into three draft artifacts (requirements doc, process diagram, and testable prototype); all three converge into a pm review decision diamond that either loops back to the workspace for revision or approves the brd in one day or less instead of about one week.</desc>
 <defs>
 <marker id="mapclub-flow-arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#8c897e" /></marker>
-<marker id="mapclub-flow-arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#3b6989" /></marker>
 <marker id="mapclub-flow-arrow-sage" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2e6844" /></marker>
 <marker id="mapclub-flow-arrow-crimson" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#a63822" /></marker>
 </defs>
 <rect width="100%" height="100%" fill="var(--bg-surface, #F2F2ED)" />
-<rect x="32" y="16" width="200" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="132" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">product judgment</text>
-<rect x="256" y="16" width="256" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="384" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">workspace &amp; controls</text>
-<rect x="536" y="16" width="212" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="642" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">artifacts</text>
-<line x1="244" y1="50" x2="244" y2="320" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
-<line x1="524" y1="50" x2="524" y2="320" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
-<path d="M 232 86 L 256 86" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#mapclub-flow-arrow-gray)" />
-<path d="M 512 86 L 536 86" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#mapclub-flow-arrow-gray)" />
-<path d="M 642 112 L 642 134 Q 642 142 634 142 L 137 142 Q 132 142 132 147 L 132 152" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#mapclub-flow-arrow-gray)" />
-<path d="M 32 186 L 25 186 Q 18 186 18 179 L 18 138 Q 18 130 26 130 L 352 130 Q 360 130 360 122 L 360 112" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#mapclub-flow-arrow-crimson)" />
-<path d="M 232 186 L 256 186" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#mapclub-flow-arrow-gray)" />
-<path d="M 512 186 L 536 186" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#mapclub-flow-arrow-sage)" />
-<path d="M 642 212 L 642 228 Q 642 236 634 236 L 140 236 Q 132 236 132 244 L 132 260" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#mapclub-flow-arrow-gray)" />
-<path d="M 232 286 L 256 286" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#mapclub-flow-arrow-gray)" />
-<path d="M 512 286 L 536 286" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#mapclub-flow-arrow-sage)" />
-<path d="M 316 312 L 316 320 Q 316 328 308 328 L 140 328 Q 132 328 132 320 L 132 312" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#mapclub-flow-arrow-crimson)" />
-<rect x="32" y="60" width="200" height="52" rx="26" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-<text x="132" y="83" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">1. one prompt</text>
-<text x="132" y="98" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">an initiative starts here</text>
-<rect x="256" y="60" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" />
-<rect x="264" y="66" width="47.2" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
-<text x="287.6" y="75" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">drafting</text>
-<text x="384" y="93" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">ai-assisted workspace</text>
-<text x="384" y="105" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">clarification steps &amp; edge-case review</text>
-<path d="M 536 66 Q 536 60 542 60 H 742 Q 748 60 748 66 V 108 C 701.36 102 667.44 116 631.4 112 S 567.8 104 536 110 Z" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.5" />
-<rect x="544" y="63" width="34" height="12" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
-<text x="561" y="72" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#5a5850" text-anchor="middle">draft</text>
-<text x="642" y="90" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">brd, diagram &amp; prototype</text>
-<text x="642" y="102" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">was ~1 week, now 1 day or less</text>
-<polygon points="32,186 132,152 232,186 132,220" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
-<text x="132" y="184" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">2. scope &amp; logic ok?</text>
-<text x="132" y="197" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">acceptance criteria</text>
-<polygon points="270,160 498,160 512,186 498,212 270,212 256,186" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" stroke-linejoin="round" />
-<rect x="272" y="166" width="56" height="12" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
-<text x="300" y="175" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#2d4b63" text-anchor="middle">safeguards</text>
-<text x="384" y="193" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">access &amp; data safeguards</text>
-<text x="384" y="205" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">access &amp; data rules set up front</text>
-<rect x="536" y="160" width="212" height="52" rx="6" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
-<rect x="544" y="166" width="47.2" height="12" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
-<text x="567.6" y="175" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">verified</text>
-<text x="642" y="193" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">engineering handoff</text>
-<text x="642" y="205" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">after human verification</text>
-<rect x="32" y="260" width="200" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-<text x="132" y="283" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">3. coordinate acceptance</text>
-<text x="132" y="298" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">bac sign-off, testing, payment checks</text>
-<rect x="256" y="260" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" />
-<rect x="264" y="266" width="38.4" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
-<text x="283.2" y="275" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">review</text>
-<text x="384" y="293" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">edge-case &amp; payment testing</text>
-<text x="384" y="305" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">coordinated across engineering teams</text>
-<rect x="536" y="260" width="212" height="52" rx="26" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
-<text x="642" y="283" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">app revamp release</text>
-<text x="642" y="298" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">september 2026</text>
-<rect x="487" y="136" width="66" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-<text x="520" y="145" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">[human review]</text>
-<rect x="219.25" y="124" width="61.5" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-<text x="250" y="133" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#a63822" text-anchor="middle">[no: clarify]</text>
-<rect x="231.25" y="145" width="25.5" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-<text x="244" y="154" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">[yes]</text>
-<rect x="364.75" y="230" width="70.5" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-<text x="400" y="239" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">[after handoff]</text>
-<rect x="182" y="322" width="84" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-<text x="224" y="331" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#a63822" text-anchor="middle">[issue resolution]</text>
-<line x1="32" y1="338" x2="748" y2="338" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="32" y="356" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">lines</text>
-<line x1="104" y1="352.5" x2="132" y2="352.5" stroke="#8c897e" stroke-width="1.2" marker-end="url(#mapclub-flow-arrow-gray)" />
-<text x="140" y="356" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">flow</text>
-<line x1="186" y1="352.5" x2="214" y2="352.5" stroke="#2e6844" stroke-width="1.6" marker-end="url(#mapclub-flow-arrow-sage)" />
-<text x="222" y="356" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">verified outcome</text>
-<line x1="342" y1="352.5" x2="370" y2="352.5" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#mapclub-flow-arrow-crimson)" />
-<text x="378" y="356" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">failure or risk path</text>
-<text x="32" y="378" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">shapes</text>
-<rect x="104" y="369" width="16" height="10" rx="5" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="126" y="378" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">start / end</text>
-<rect x="215" y="369" width="16" height="10" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="237" y="378" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">action</text>
-<polygon points="296,374 304,368 312,374 304,380" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="318" y="378" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">decision</text>
-<polygon points="393,369 401,369 405,374 401,379 393,379 389,374" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="411" y="378" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">control gate</text>
-<path d="M 506 369 H 522 V 377 C 518 375 514 381 506 378 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="528" y="378" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">document</text>
+<!-- Connectors: Input -> Workspace -->
+<path d="M 152 152 L 178 152" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#mapclub-flow-arrow-gray)" />
+<!-- Fan-out: Workspace -> 3 parallel documents -->
+<path d="M 332 140 L 344 140 Q 350 140 350 132 L 350 82 Q 350 74 358 74 L 368 74" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#mapclub-flow-arrow-gray)" />
+<path d="M 332 152 L 368 152" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#mapclub-flow-arrow-gray)" />
+<path d="M 332 164 L 344 164 Q 350 164 350 172 L 350 222 Q 350 230 358 230 L 368 230" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#mapclub-flow-arrow-gray)" />
+<!-- Fan-in: 3 parallel documents -> PM Review Diamond -->
+<path d="M 508 74 L 570 74 Q 578 74 578 82 L 578 118" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#mapclub-flow-arrow-gray)" />
+<path d="M 508 152 L 526 152" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#mapclub-flow-arrow-gray)" />
+<path d="M 508 230 L 570 230 Q 578 230 578 222 L 578 186" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#mapclub-flow-arrow-gray)" />
+<!-- Revise loop: PM Review bottom -> Workspace bottom -->
+<path d="M 556 174 L 556 266 Q 556 274 548 274 L 263 274 Q 255 274 255 266 L 255 180" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#mapclub-flow-arrow-crimson)" />
+<!-- Verified exit: PM Review right -> Terminal outcome -->
+<path d="M 630 152 L 650 152" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#mapclub-flow-arrow-sage)" />
+<!-- Node 1: Input parallelogram -->
+<polygon points="34,126 158,126 146,178 22,178" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
+<text x="90" y="149" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">initiative brief</text>
+<text x="90" y="164" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">needs a structured brd</text>
+<!-- Node 2: AI-Assisted Workspace (Action) -->
+<rect x="178" y="124" width="154" height="56" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" />
+<rect x="186" y="130" width="52" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
+<text x="212" y="139" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">workspace</text>
+<text x="255" y="157" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">ai-assisted workspace</text>
+<text x="255" y="170" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">parallel artifact drafting</text>
+<!-- Fan-out Document 1: Requirements Doc -->
+<path d="M 368 54 Q 368 48 374 48 H 502 Q 508 48 508 54 V 94 C 478 88 456 100 432 96 S 390 90 368 95 Z" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.4" />
+<rect x="376" y="52" width="34" height="11" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
+<text x="393" y="60" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#5a5850" text-anchor="middle">doc 01</text>
+<text x="438" y="75" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">requirements doc</text>
+<text x="438" y="87" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">structured brd draft</text>
+<!-- Fan-out Document 2: Process Diagram -->
+<path d="M 368 132 Q 368 126 374 126 H 502 Q 508 126 508 132 V 172 C 478 166 456 178 432 174 S 390 168 368 173 Z" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.4" />
+<rect x="376" y="130" width="34" height="11" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
+<text x="393" y="138" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#5a5850" text-anchor="middle">doc 02</text>
+<text x="438" y="153" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">process diagram</text>
+<text x="438" y="165" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">states &amp; transitions</text>
+<!-- Fan-out Document 3: Testable Prototype -->
+<path d="M 368 210 Q 368 204 374 204 H 502 Q 508 204 508 210 V 250 C 478 244 456 256 432 252 S 390 246 368 251 Z" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.4" />
+<rect x="376" y="208" width="34" height="11" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
+<text x="393" y="216" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#5a5850" text-anchor="middle">doc 03</text>
+<text x="438" y="231" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">testable prototype</text>
+<text x="438" y="243" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">interactive flow check</text>
+<!-- Convergence Decision Diamond: PM Review -->
+<polygon points="526,152 578,118 630,152 578,186" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
+<text x="578" y="150" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">pm review</text>
+<text x="578" y="162" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">scope &amp; logic ok?</text>
+<!-- Terminal Outcome Pill -->
+<rect x="650" y="124" width="112" height="56" rx="28" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
+<text x="706" y="148" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">brd ready</text>
+<text x="706" y="162" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="#244b35" text-anchor="middle">~1 wk to &lt;=1 day</text>
+<!-- Branch Badges -->
+<rect x="627" y="132" width="25" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
+<text x="639.5" y="141" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#244b35" text-anchor="middle">[yes]</text>
+<rect x="352" y="268" width="96" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
+<text x="400" y="277" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#a63822" text-anchor="middle">[no: clarify &amp; revise]</text>
+<!-- Legend -->
+<line x1="32" y1="306" x2="748" y2="306" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="32" y="326" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">lines</text>
+<line x1="104" y1="322.5" x2="132" y2="322.5" stroke="#8c897e" stroke-width="1.2" marker-end="url(#mapclub-flow-arrow-gray)" />
+<text x="140" y="326" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">flow</text>
+<line x1="186" y1="322.5" x2="214" y2="322.5" stroke="#2e6844" stroke-width="1.6" marker-end="url(#mapclub-flow-arrow-sage)" />
+<text x="222" y="326" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">verified outcome</text>
+<line x1="342" y1="322.5" x2="370" y2="322.5" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#mapclub-flow-arrow-crimson)" />
+<text x="378" y="326" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">failure or risk path</text>
+<text x="32" y="348" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">shapes</text>
+<polygon points="106,339 118,339 114,349 102,349" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="126" y="348" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">input</text>
+<rect x="179" y="339" width="16" height="10" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="201" y="348" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">action</text>
+<path d="M 260 339 H 276 V 347 C 272 345 268 351 260 348 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="282" y="348" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">document</text>
+<polygon points="356,344 364,338 372,344 364,350" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="378" y="348" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">decision</text>
+<rect x="448" y="339" width="16" height="10" rx="5" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="470" y="348" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">start / end</text>
 </svg>
       </div>
     </div>
     <aside class="principle-strip" aria-label="how this flowchart maps to my principles">
   <p class="principle-strip-label">how this maps to my principles</p>
-  <ul class="principle-strip-list"><li><span class="principle-name">reka peluang</span><span class="principle-text">step 2 checks scope, logic and acceptance criteria before anything is handed to engineering.</span></li><li><span class="principle-name">murphy&#x27;s law</span><span class="principle-text">access and data safeguards are set up front, before anything reaches engineering.</span></li><li><span class="principle-name">recovery</span><span class="principle-text">issue resolution and payment checks stay in the loop through the september 2026 release.</span></li></ul>
-  <p class="principle-strip-note">simplified from the responsibilities described on this page. an editorial reading, not a full process map.</p>
+  <ul class="principle-strip-list"><li><span class="principle-name">buffers</span><span class="principle-text">parallel drafting of the requirements doc, process diagram, and testable prototype cuts preparation from about one week to one day or less.</span></li><li><span class="principle-name">reka peluang</span><span class="principle-text">the pm review gate checks scope and logic across all three artifacts before anything is marked ready.</span></li><li><span class="principle-name">recovery</span><span class="principle-text">when scope or edge cases need work, the loop returns to the workspace to clarify and revise.</span></li></ul>
+  <p class="principle-strip-note">focused on the ai-assisted workspace responsibility described on this page. an editorial reading, not additional results.</p>
 </aside>
 <!-- /bp:flow -->
 

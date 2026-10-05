@@ -58,15 +58,19 @@
     </div>
 
     <!-- bp:flow -->
+    <div class="section-label-bar" style="margin-top: 2.5rem;">
+      <span class="section-label">system flow</span>
+      <span class="section-count">[ dual-source convergence &amp; anomaly feedback loop ]</span>
+    </div>
     <div class="flowchart-whiteboard-box blueprint-box" style="margin: 2rem 0;">
       <div class="flowchart-board-toolbar">
-        <div class="flowchart-toolbar-left"><span>refund engine flow // deterministic policy routing</span><span class="flowchart-toolbar-tag">systems architecture</span></div>
-        <div class="flowchart-toolbar-right"><span>pm 185/2015 &amp; provider api integration</span></div>
+        <div class="flowchart-toolbar-left"><span>refund policy completeness // dual-source convergence</span><span class="flowchart-toolbar-tag">simplified</span></div>
+        <div class="flowchart-toolbar-right"><span>provider apis, cat 16 fare rules &amp; anomaly loop</span></div>
       </div>
       <div class="flowchart-board-canvas scroll-x">
-<svg class="flowchart-svg" viewBox="0 0 780 696" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="traveloka-flow-title traveloka-flow-desc">
-<title id="traveloka-flow-title">traveloka refund engine flow</title>
-<desc id="traveloka-flow-desc">blueprint flowchart: a refund request is routed by a decision on voluntary or disruption, a policy decision tree applies pm 185/2015 and llm-parsed cat 16 fare rules, direct provider api data feeds the tax and commission engine and rpa closing, and an anomaly dashboard flags illogical policy data for provider fixes; measured outcomes sit on the right.</desc>
+<svg class="flowchart-svg" viewBox="0 0 780 370" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="traveloka-flow-title traveloka-flow-desc">
+<title id="traveloka-flow-title">traveloka refund policy completeness flow</title>
+<desc id="traveloka-flow-desc">blueprint convergence flowchart: two upstream sources (direct provider apis and airline cat 16 fare rules processed by an improved llm-assisted parsing and translation workflow) converge into refund policy coverage, guarded by an anomaly dashboard that flags policy errors and loops back to coordinate provider fixes, resulting in a single measured output of 95.76% refund policy completeness.</desc>
 <defs>
 <marker id="traveloka-flow-arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#8c897e" /></marker>
 <marker id="traveloka-flow-arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#3b6989" /></marker>
@@ -74,111 +78,87 @@
 <marker id="traveloka-flow-arrow-crimson" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#a63822" /></marker>
 </defs>
 <rect width="100%" height="100%" fill="var(--bg-surface, #F2F2ED)" />
-<rect x="32" y="16" width="200" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="132" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">operations &amp; inputs</text>
-<rect x="256" y="16" width="256" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="384" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">refund engine</text>
-<rect x="536" y="16" width="212" height="28" rx="4" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="642" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">measured outcome</text>
-<line x1="244" y1="50" x2="244" y2="620" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
-<line x1="524" y1="50" x2="524" y2="620" stroke="var(--border-active, #D4D4CE)" stroke-width="1" stroke-dasharray="3,3" />
-<path d="M 226 86 L 256 86" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#traveloka-flow-arrow-gray)" />
-<path d="M 384 120 L 384 160" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#traveloka-flow-arrow-gray)" />
-<path d="M 232 186 L 256 186" stroke="#3b6989" stroke-width="1.3" fill="none" marker-end="url(#traveloka-flow-arrow-slate)" />
-<path d="M 384 212 L 384 260" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#traveloka-flow-arrow-gray)" />
-<path d="M 512 286 L 536 286" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#traveloka-flow-arrow-sage)" />
-<path d="M 256 286 L 232 286" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#traveloka-flow-arrow-crimson)" />
-<path d="M 132 312 L 132 320 Q 132 328 140 328 L 308 328 Q 316 328 316 320 L 316 312" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#traveloka-flow-arrow-crimson)" />
-<path d="M 384 312 L 384 360" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#traveloka-flow-arrow-gray)" />
-<path d="M 512 386 L 536 386" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#traveloka-flow-arrow-sage)" />
-<path d="M 384 412 L 384 460" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#traveloka-flow-arrow-gray)" />
-<path d="M 512 486 L 536 486" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#traveloka-flow-arrow-sage)" />
-<path d="M 384 512 L 384 560" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#traveloka-flow-arrow-gray)" />
-<polygon points="44,60 232,60 220,112 32,112" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
-<text x="132" y="83" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">1. refund request</text>
-<text x="132" y="98" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">voluntary or disruption</text>
-<polygon points="256,86 384,52 512,86 384,120" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
-<text x="384" y="84" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">which refund path?</text>
-<text x="384" y="97" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">voluntary vs disruption</text>
-<rect x="32" y="160" width="200" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-<rect x="40" y="166" width="64.8" height="12" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
-<text x="72.4" y="175" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#5a5850" text-anchor="middle">llm-assisted</text>
-<text x="132" y="193" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">llm fare-rule parsing</text>
-<text x="132" y="205" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">translates airline cat 16 rules</text>
-<rect x="256" y="160" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" />
-<rect x="264" y="166" width="42.8" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
-<text x="285.4" y="175" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">routing</text>
-<text x="384" y="193" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">policy decision tree</text>
-<text x="384" y="205" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">pm 185/2015 &amp; cat 16 fare rules</text>
-<rect x="32" y="260" width="200" height="52" rx="6" fill="#fdf6f5" stroke="#d85c46" stroke-width="1.5" />
-<rect x="40" y="266" width="29.6" height="12" rx="2" fill="#faeae8" stroke="#d85c46" stroke-width="0.8" />
-<text x="54.8" y="275" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#a63822" text-anchor="middle">risk</text>
-<text x="132" y="293" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">anomaly dashboard</text>
-<text x="132" y="305" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">flags illogical policy data</text>
-<path d="M 256 266 A 128 6 0 0 1 512 266 V 306 A 128 6 0 0 1 256 306 Z" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" /><path d="M 256 266 A 128 6 0 0 0 512 266" fill="none" stroke="#9bb4c7" stroke-width="1.5" />
-<rect x="264" y="268" width="60.4" height="12" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
-<text x="294.2" y="277" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#2d4b63" text-anchor="middle">integration</text>
-<text x="384" y="295" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">direct provider api</text>
-<text x="384" y="307" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">carrier policy &amp; fare data</text>
-<rect x="536" y="260" width="212" height="52" rx="6" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
-<rect x="544" y="266" width="42.8" height="12" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
-<text x="565.4" y="275" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">outcome</text>
-<text x="642" y="293" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">95.76% policy completeness</text>
-<text x="642" y="305" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">via direct provider api</text>
-<rect x="256" y="360" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-<text x="384" y="383" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">tax &amp; commission engine</text>
-<text x="384" y="398" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">vat, service charges &amp; commissions</text>
-<rect x="536" y="360" width="212" height="52" rx="6" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
-<rect x="544" y="366" width="42.8" height="12" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
-<text x="565.4" y="375" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">outcome</text>
-<text x="642" y="393" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">87.97% → 94.24% accuracy</text>
-<text x="642" y="405" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">flight refund calculation</text>
-<rect x="256" y="460" width="256" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-<text x="384" y="483" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">rpa refund closing</text>
-<text x="384" y="498" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">reduces manual handling</text>
-<rect x="536" y="460" width="212" height="52" rx="6" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
-<rect x="544" y="466" width="42.8" height="12" rx="2" fill="#eaf2ec" stroke="#88af95" stroke-width="0.8" />
-<text x="565.4" y="475" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">outcome</text>
-<text x="642" y="493" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">16.76% → 34.38% closing</text>
-<text x="642" y="505" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">automated refund closure</text>
-<rect x="256" y="560" width="256" height="52" rx="26" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-<text x="384" y="583" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">refund closed</text>
-<rect x="402.5" y="134" width="75" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-<text x="440" y="143" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">[rules per path]</text>
-<rect x="211" y="145" width="66" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-<text x="244" y="154" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#2d4b63" text-anchor="middle">[parsed rules]</text>
-<rect x="206.5" y="245" width="75" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-<text x="244" y="254" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#a63822" text-anchor="middle">[illogical data]</text>
-<rect x="191" y="322" width="66" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
-<text x="224" y="331" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#a63822" text-anchor="middle">[provider fix]</text>
-<line x1="32" y1="638" x2="748" y2="638" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="32" y="656" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">lines</text>
-<line x1="104" y1="652.5" x2="132" y2="652.5" stroke="#8c897e" stroke-width="1.2" marker-end="url(#traveloka-flow-arrow-gray)" />
-<text x="140" y="656" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">flow</text>
-<line x1="186" y1="652.5" x2="214" y2="652.5" stroke="#3b6989" stroke-width="1.3" marker-end="url(#traveloka-flow-arrow-slate)" />
-<text x="222" y="656" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">dependency</text>
-<line x1="305" y1="652.5" x2="333" y2="652.5" stroke="#2e6844" stroke-width="1.6" marker-end="url(#traveloka-flow-arrow-sage)" />
-<text x="341" y="656" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">verified outcome</text>
-<line x1="461" y1="652.5" x2="489" y2="652.5" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#traveloka-flow-arrow-crimson)" />
-<text x="497" y="656" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">failure or risk path</text>
-<text x="32" y="678" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">shapes</text>
-<rect x="104" y="669" width="16" height="10" rx="5" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="126" y="678" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">start / end</text>
-<polygon points="219,669 231,669 227,679 215,679" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="237" y="678" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">input</text>
-<rect x="290" y="669" width="16" height="10" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="312" y="678" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">action</text>
-<polygon points="371,674 379,668 387,674 379,680" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="393" y="678" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">decision</text>
-<path d="M 464 671 A 8 2 0 0 1 480 671 V 677 A 8 2 0 0 1 464 677 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" /><path d="M 464 671 A 8 2 0 0 0 480 671" fill="none" stroke="#8c897e" stroke-width="1" />
-<text x="486" y="678" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">data source</text>
+<!-- Top upstream path: Provider APIs -> Direct API Ingestion -->
+<path d="M 176 74 L 204 74" stroke="#3b6989" stroke-width="1.3" fill="none" marker-end="url(#traveloka-flow-arrow-slate)" />
+<!-- Bottom upstream path: CAT 16 Fare Rules -> Improved LLM Parsing -->
+<path d="M 176 230 L 204 230" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#traveloka-flow-arrow-gray)" />
+<!-- Convergence into Refund Policy Coverage -->
+<path d="M 380 74 L 400 74 Q 408 74 408 82 L 408 130 Q 408 138 416 138 L 424 138" stroke="#3b6989" stroke-width="1.3" fill="none" marker-end="url(#traveloka-flow-arrow-slate)" />
+<path d="M 380 230 L 400 230 Q 408 230 408 222 L 408 166 Q 408 158 416 158 L 424 158" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#traveloka-flow-arrow-gray)" />
+<!-- Anomaly loop: Direct API Ingestion -> Anomaly Dashboard -> Provider APIs -->
+<path d="M 292 102 L 292 126" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#traveloka-flow-arrow-crimson)" />
+<path d="M 204 152 L 112 152 Q 104 152 104 144 L 104 102" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#traveloka-flow-arrow-crimson)" />
+<!-- Single Output: Policy Coverage -> 95.76% Completeness -->
+<path d="M 564 148 L 592 148" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#traveloka-flow-arrow-sage)" />
+<!-- Source 1: Provider APIs (Data Cylinder) -->
+<path d="M 32 54 A 72 6 0 0 1 176 54 V 94 A 72 6 0 0 1 32 94 Z" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" />
+<path d="M 32 54 A 72 6 0 0 0 176 54" fill="none" stroke="#9bb4c7" stroke-width="1.5" />
+<rect x="40" y="56" width="52" height="11" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
+<text x="66" y="64" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#2d4b63" text-anchor="middle">upstream</text>
+<text x="104" y="80" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">provider apis</text>
+<text x="104" y="92" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">carrier policy &amp; fare data</text>
+<!-- Action 1: Direct Provider API Integration -->
+<rect x="204" y="48" width="176" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" />
+<rect x="212" y="54" width="58" height="11" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
+<text x="241" y="62" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#2d4b63" text-anchor="middle">integration</text>
+<text x="292" y="79" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">provider api integration</text>
+<text x="292" y="91" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">structured policy ingestion</text>
+<!-- Risk / Feedback Node: Anomaly Dashboard -->
+<rect x="204" y="126" width="176" height="52" rx="6" fill="#fdf6f5" stroke="#d85c46" stroke-width="1.5" />
+<rect x="212" y="132" width="32" height="11" rx="2" fill="#faeae8" stroke="#d85c46" stroke-width="0.8" />
+<text x="228" y="140" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#a63822" text-anchor="middle">audit</text>
+<text x="292" y="157" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">anomaly dashboard</text>
+<text x="292" y="169" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">flags policy errors</text>
+<!-- Source 2: Airline CAT 16 Fare Rules (Document) -->
+<path d="M 32 210 Q 32 204 38 204 H 170 Q 176 204 176 210 V 250 C 144 244 120 256 96 252 S 54 246 32 251 Z" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.4" />
+<rect x="40" y="208" width="44" height="11" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
+<text x="62" y="216" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#5a5850" text-anchor="middle">cat 16</text>
+<text x="104" y="232" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">airline fare rules</text>
+<text x="104" y="244" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">unstructured tariff text</text>
+<!-- Action 2: Improved LLM-Assisted Workflow -->
+<rect x="204" y="204" width="176" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" />
+<rect x="212" y="210" width="64" height="11" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
+<text x="244" y="218" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#8a3b1e" text-anchor="middle">llm-assisted</text>
+<text x="292" y="235" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">improved rule parsing</text>
+<text x="292" y="247" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">translates cat 16 for policy</text>
+<!-- Convergence Hub: Refund Policy Interpretation -->
+<rect x="424" y="122" width="140" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="494" y="145" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">policy interpretation</text>
+<text x="494" y="159" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">merged api &amp; cat 16 rules</text>
+<!-- Single Terminal Output: 95.76% Policy Completeness -->
+<rect x="592" y="122" width="160" height="52" rx="26" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
+<text x="672" y="145" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">95.76% completeness</text>
+<text x="672" y="159" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="#244b35" text-anchor="middle">refund policy coverage</text>
+<!-- Loop Badge -->
+<rect x="54" y="122" width="104" height="12" rx="2" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-subtle, #E5E5DF)" stroke-width="0.8" />
+<text x="106" y="131" font-family="'JetBrains Mono', monospace" font-size="7.2" fill="#a63822" text-anchor="middle">[coordinate provider fix]</text>
+<!-- Legend -->
+<line x1="32" y1="306" x2="748" y2="306" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="32" y="326" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">lines</text>
+<line x1="104" y1="322.5" x2="132" y2="322.5" stroke="#8c897e" stroke-width="1.2" marker-end="url(#traveloka-flow-arrow-gray)" />
+<text x="140" y="326" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">flow</text>
+<line x1="186" y1="322.5" x2="214" y2="322.5" stroke="#3b6989" stroke-width="1.3" marker-end="url(#traveloka-flow-arrow-slate)" />
+<text x="222" y="326" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">dependency</text>
+<line x1="305" y1="322.5" x2="333" y2="322.5" stroke="#2e6844" stroke-width="1.6" marker-end="url(#traveloka-flow-arrow-sage)" />
+<text x="341" y="326" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">verified outcome</text>
+<line x1="461" y1="322.5" x2="489" y2="322.5" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#traveloka-flow-arrow-crimson)" />
+<text x="497" y="326" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">failure or risk path</text>
+<text x="32" y="348" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">shapes</text>
+<path d="M 104 341 A 8 2 0 0 1 120 341 V 347 A 8 2 0 0 1 104 347 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" /><path d="M 104 341 A 8 2 0 0 0 120 341" fill="none" stroke="#8c897e" stroke-width="1" />
+<text x="126" y="348" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">data source</text>
+<path d="M 215 339 H 231 V 347 C 227 345 223 351 215 348 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="237" y="348" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">document</text>
+<rect x="311" y="339" width="16" height="10" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="333" y="348" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">action</text>
+<rect x="392" y="339" width="16" height="10" rx="5" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="414" y="348" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">start / end</text>
 </svg>
       </div>
     </div>
     <aside class="principle-strip" aria-label="how this flowchart maps to my principles">
   <p class="principle-strip-label">how this maps to my principles</p>
-  <ul class="principle-strip-list"><li><span class="principle-name">murphy&#x27;s law</span><span class="principle-text">the anomaly dashboard flags illogical policy data instead of trusting it.</span></li><li><span class="principle-name">reka peluang</span><span class="principle-text">policy routing decides the refund path first: voluntary and disruption refunds follow different rules.</span></li><li><span class="principle-name">buffers</span><span class="principle-text">rpa closing lifts the closing rate from 16.76% to 34.38% and frees operations capacity.</span></li></ul>
-  <p class="principle-strip-note">an editorial reading of the steps shown above, not additional results.</p>
+  <ul class="principle-strip-list"><li><span class="principle-name">murphy&#x27;s law</span><span class="principle-text">the anomaly dashboard flags policy errors from provider apis and coordinates fixes instead of trusting raw feeds.</span></li><li><span class="principle-name">reka peluang</span><span class="principle-text">combining direct provider apis with improved llm-assisted cat 16 rule parsing raised refund policy completeness to 95.76%.</span></li></ul>
+  <p class="principle-strip-note">focused on the refund policy completeness and cat 16 workflow described on this page. an editorial reading, not additional results.</p>
 </aside>
 <!-- /bp:flow -->
 
