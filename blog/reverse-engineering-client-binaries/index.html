@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap"></noscript>
   
-  <link rel="stylesheet" href="../../assets/css/style.css?v=20260930k">
+  <link rel="stylesheet" href="../../assets/css/style.css?v=20261005a">
 </head>
 <body>
   <a class="skip-link" href="#main-content">skip to content</a>
@@ -98,95 +98,98 @@
         </div>
 
         <div class="flowchart-board-canvas scroll-x">
-          <svg class="flowchart-svg" viewBox="0 0 780 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="flowchart-bin-title flowchart-bin-desc">
+          <svg class="flowchart-svg" viewBox="0 0 780 370" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="flowchart-bin-title flowchart-bin-desc">
 <title id="flowchart-bin-title">binary harvesting and parallel extraction lanes diagram</title>
-<desc id="flowchart-bin-desc">blueprint parallel-lane diagram: a production client apk source hub on the left feeds a zip stream and asset harvester that splits into two parallel horizontal extraction lanes (the top vector lane parses android vector xml into a lossless svg asset library; the bottom token lane runs an asset and font audit into the token and font extractor to generate design-tokens.css); both lanes merge on the right into the prototype access gate to deliver a verified mobile prototype for stakeholder sign-off.</desc>
+<desc id="flowchart-bin-desc">blueprint parallel-lane diagram: a production client apk source hub on the left feeds a zip stream and asset harvester that splits into two parallel horizontal extraction lanes (the top vector lane parses android vector xml into a lossless svg asset library; the bottom token lane runs an asset and font audit to generate design-tokens.css); both lanes merge cleanly on the right into the prototype access gate and deliver a verified mobile prototype for stakeholder sign-off.</desc>
 <defs>
 <marker id="flowchart-bin-arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#8c897e" /></marker>
 <marker id="flowchart-bin-arrow-sage" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2e6844" /></marker>
 </defs>
 <rect width="100%" height="100%" fill="var(--bg-surface, #F2F2ED)" />
-<!-- Hub -> Harvester -->
-<path d="M 142 152 L 166 152" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
-<!-- Harvester Split -> Top Vector Lane & Bottom Token Lane -->
-<path d="M 296 136 L 308 136 Q 314 136 314 128 L 314 82 Q 314 74 322 74 L 332 74" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
-<path d="M 296 168 L 308 168 Q 314 168 314 176 L 314 222 Q 314 230 322 230 L 332 230" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
-<!-- Top Lane: Vector Parser -> Lossless SVG Library -->
-<path d="M 468 74 L 492 74" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
-<!-- Bottom Lane: Token & Font Extractor -> design-tokens.css -->
-<path d="M 468 230 L 492 230" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
-<!-- Merge -> Prototype Access Gate -> Verified Mobile Prototype -->
-<path d="M 628 74 L 640 74 Q 648 74 648 82 L 648 118" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
-<path d="M 628 230 L 640 230 Q 648 230 648 222 L 648 176" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
-<path d="M 692 176 L 692 216" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#flowchart-bin-arrow-sage)" />
+<!-- Col 1 -> Col 2 -->
+<path d="M 116 152 L 138 152" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
+<!-- Col 2 Split -> Top Vector Lane (y=76) & Bottom Token Lane (y=228) -->
+<path d="M 252 138 L 260 138 Q 266 138 266 130 L 266 84 Q 266 76 274 76 L 280 76" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
+<path d="M 252 166 L 260 166 Q 266 166 266 174 L 266 220 Q 266 228 274 228 L 280 228" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
+<!-- Top Lane: Vector Parser -> Lossless SVG Assets -->
+<path d="M 400 76 L 418 76" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
+<!-- Bottom Lane: Token & Font Audit -> design-tokens.css -->
+<path d="M 400 228 L 418 228" stroke="#8c897e" fill="none" stroke-width="1.2" marker-end="url(#flowchart-bin-arrow-gray)" />
+<!-- Parallel Lanes Merge -> Access Gate (Col 5) -->
+<path d="M 540 76 L 546 76 Q 552 76 552 84 L 552 132 Q 552 140 558 140 L 564 140" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
+<path d="M 540 228 L 546 228 Q 552 228 552 220 L 552 172 Q 552 164 558 164 L 564 164" stroke="#8c897e" stroke-width="1.2" fill="none" marker-end="url(#flowchart-bin-arrow-gray)" />
+<!-- Access Gate (Col 5) -> Mobile Sign-Off (Col 6) -->
+<path d="M 656 152 L 672 152" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#flowchart-bin-arrow-sage)" />
 
-<!-- Left Hub: Production APK Input -->
-<polygon points="34,124 148,124 136,180 22,180" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
-<text x="85" y="148" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">1. client apk</text>
-<text x="85" y="162" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">production build</text>
+<!-- Col 1: Production APK Input -->
+<polygon points="28,124 122,124 112,180 18,180" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" stroke-linejoin="round" />
+<text x="70" y="148" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">1. client apk</text>
+<text x="70" y="162" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.8" fill="var(--text-secondary, #555550)" text-anchor="middle">production build</text>
 
-<!-- Splitter Hub: ZIP Stream & Asset Harvester -->
-<rect x="166" y="124" width="130" height="56" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" />
-<rect x="174" y="130" width="54" height="11" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
-<text x="201" y="138" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#2d4b63" text-anchor="middle">harvester</text>
-<text x="231" y="156" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">zip &amp; asset stream</text>
-<text x="231" y="169" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.8" fill="var(--text-secondary, #555550)" text-anchor="middle">res/drawable &amp; values</text>
+<!-- Col 2: ZIP Stream & Asset Harvester -->
+<rect x="138" y="124" width="114" height="56" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" />
+<rect x="146" y="130" width="52" height="11" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
+<text x="172" y="138" font-family="'JetBrains Mono', monospace" font-size="6.6" font-weight="700" fill="#2d4b63" text-anchor="middle">harvester</text>
+<text x="195" y="156" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">zip &amp; asset stream</text>
+<text x="195" y="169" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">res/drawable &amp; values</text>
 
-<!-- TOP LANE (Vector Graphics) -->
-<rect x="332" y="48" width="136" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-<text x="400" y="71" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">vector xml parser</text>
-<text x="400" y="85" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">pathdata &amp; fills to svg</text>
-<!-- Lossless SVG Library (Data Cylinder) -->
-<path d="M 492 54 A 68 6 0 0 1 628 54 V 94 A 68 6 0 0 1 492 94 Z" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" />
-<path d="M 492 54 A 68 6 0 0 0 628 54" fill="none" stroke="#9bb4c7" stroke-width="1.5" />
-<rect x="500" y="56" width="56" height="11" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
-<text x="528" y="64" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#2d4b63" text-anchor="middle">svg library</text>
-<text x="560" y="80" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">lossless svg assets</text>
-<text x="560" y="92" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.8" fill="var(--text-secondary, #555550)" text-anchor="middle">tier badges &amp; icons</text>
+<!-- Col 3 Top: Vector XML Parser -->
+<rect x="280" y="50" width="120" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="340" y="73" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">vector xml parser</text>
+<text x="340" y="87" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.8" fill="var(--text-secondary, #555550)" text-anchor="middle">pathdata &amp; fills to svg</text>
 
-<!-- BOTTOM LANE (Tokens & Fonts) -->
-<rect x="332" y="204" width="136" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
-<text x="400" y="227" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">2. token &amp; font audit</text>
-<text x="400" y="241" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">verify hex &amp; ttf glyphs</text>
-<!-- design-tokens.css (Document Wave) -->
-<path d="M 492 210 Q 492 204 498 204 H 622 Q 628 204 628 210 V 250 C 596 244 572 256 548 252 S 510 246 492 251 Z" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.4" />
-<rect x="500" y="208" width="64" height="11" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
-<text x="532" y="216" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#5a5850" text-anchor="middle">design tokens</text>
-<text x="560" y="232" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">design-tokens.css</text>
-<text x="560" y="244" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.8" fill="var(--text-secondary, #555550)" text-anchor="middle">shell &amp; nav variables</text>
+<!-- Col 4 Top: Lossless SVG Library (Data Cylinder) -->
+<path d="M 418 56 A 61 6 0 0 1 540 56 V 96 A 61 6 0 0 1 418 96 Z" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5" />
+<path d="M 418 56 A 61 6 0 0 0 540 56" fill="none" stroke="#9bb4c7" stroke-width="1.5" />
+<rect x="426" y="58" width="54" height="11" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8" />
+<text x="453" y="66" font-family="'JetBrains Mono', monospace" font-size="6.6" font-weight="700" fill="#2d4b63" text-anchor="middle">svg library</text>
+<text x="479" y="82" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">lossless svg assets</text>
+<text x="479" y="94" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">tier badges &amp; icons</text>
 
-<!-- RIGHT MERGE: Prototype Access Gate (Hexagon) -->
-<polygon points="642,120 742,120 754,148 742,176 642,176 630,148" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" stroke-linejoin="round" />
-<rect x="646" y="125" width="68" height="11" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
-<text x="680" y="133" font-family="'JetBrains Mono', monospace" font-size="6.8" font-weight="700" fill="#8a3b1e" text-anchor="middle">access control</text>
-<text x="692" y="152" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">access gate</text>
-<text x="692" y="165" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.8" fill="var(--text-secondary, #555550)" text-anchor="middle">private preview</text>
+<!-- Col 3 Bottom: Token & Font Audit -->
+<rect x="280" y="202" width="120" height="52" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.2" />
+<text x="340" y="225" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">2. token &amp; font audit</text>
+<text x="340" y="239" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.8" fill="var(--text-secondary, #555550)" text-anchor="middle">verify hex &amp; ttf glyphs</text>
 
-<!-- Terminal Outcome: Stakeholder Sign-Off on Verified Mobile Prototype -->
-<rect x="630" y="216" width="124" height="52" rx="26" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
-<text x="692" y="239" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.8" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">3. mobile sign-off</text>
-<text x="692" y="252" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.8" fill="#244b35" text-anchor="middle">verified on device</text>
+<!-- Col 4 Bottom: design-tokens.css (Document Wave) -->
+<path d="M 418 208 Q 418 202 424 202 H 534 Q 540 202 540 208 V 248 C 512 242 490 254 468 250 S 434 244 418 249 Z" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.4" />
+<rect x="426" y="206" width="62" height="11" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8" />
+<text x="457" y="214" font-family="'JetBrains Mono', monospace" font-size="6.6" font-weight="700" fill="#5a5850" text-anchor="middle">design tokens</text>
+<text x="479" y="230" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">design-tokens.css</text>
+<text x="479" y="242" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">shell &amp; nav variables</text>
+
+<!-- Col 5: Prototype Access Gate (Hexagon) -->
+<polygon points="572,124 648,124 656,152 648,180 572,180 564,152" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" stroke-linejoin="round" />
+<rect x="576" y="129" width="64" height="11" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8" />
+<text x="608" y="137" font-family="'JetBrains Mono', monospace" font-size="6.5" font-weight="700" fill="#8a3b1e" text-anchor="middle">access control</text>
+<text x="610" y="155" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">access gate</text>
+<text x="610" y="168" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">private preview</text>
+
+<!-- Col 6: Stakeholder Sign-Off on Verified Mobile Prototype -->
+<rect x="672" y="126" width="96" height="52" rx="26" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1.5" />
+<text x="720" y="149" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.2" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">3. mobile sign-off</text>
+<text x="720" y="162" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.4" fill="#244b35" text-anchor="middle">verified on device</text>
 
 <!-- Legend -->
-<line x1="28" y1="296" x2="752" y2="296" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
-<text x="28" y="316" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">lines</text>
-<line x1="100" y1="312.5" x2="128" y2="312.5" stroke="#8c897e" stroke-width="1.2" marker-end="url(#flowchart-bin-arrow-gray)" />
-<text x="136" y="316" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">flow</text>
-<line x1="182" y1="312.5" x2="210" y2="312.5" stroke="#2e6844" stroke-width="1.6" marker-end="url(#flowchart-bin-arrow-sage)" />
-<text x="218" y="316" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">verified outcome</text>
-<text x="28" y="338" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">shapes</text>
-<polygon points="102,329 114,329 110,339 98,339" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="122" y="338" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">input</text>
-<rect x="175" y="329" width="16" height="10" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="197" y="338" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">action</text>
-<path d="M 256 331 A 8 2 0 0 1 272 331 V 337 A 8 2 0 0 1 256 337 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" /><path d="M 256 331 A 8 2 0 0 0 272 331" fill="none" stroke="#8c897e" stroke-width="1" />
-<text x="278" y="338" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">data source</text>
-<path d="M 369 329 H 385 V 337 C 381 335 377 341 369 338 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="391" y="338" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">document</text>
-<polygon points="467,329 475,329 479,334 475,339 467,339 463,334" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="485" y="338" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">control gate</text>
-<rect x="578" y="329" width="16" height="10" rx="5" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
-<text x="600" y="338" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">start / end</text>
+<line x1="28" y1="284" x2="752" y2="284" stroke="var(--border-active, #D4D4CE)" stroke-width="1" />
+<text x="28" y="304" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">lines</text>
+<line x1="100" y1="300.5" x2="128" y2="300.5" stroke="#8c897e" stroke-width="1.2" marker-end="url(#flowchart-bin-arrow-gray)" />
+<text x="136" y="304" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">flow</text>
+<line x1="182" y1="300.5" x2="210" y2="300.5" stroke="#2e6844" stroke-width="1.6" marker-end="url(#flowchart-bin-arrow-sage)" />
+<text x="218" y="304" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">verified outcome</text>
+<text x="28" y="326" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)" letter-spacing="0.1em">shapes</text>
+<polygon points="102,317 114,317 110,327 98,327" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="122" y="326" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">input</text>
+<rect x="175" y="317" width="16" height="10" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="197" y="326" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">action</text>
+<path d="M 256 319 A 8 2 0 0 1 272 319 V 325 A 8 2 0 0 1 256 325 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" /><path d="M 256 319 A 8 2 0 0 0 272 319" fill="none" stroke="#8c897e" stroke-width="1" />
+<text x="278" y="326" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">data source</text>
+<path d="M 369 317 H 385 V 325 C 381 323 377 329 369 326 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="391" y="326" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">document</text>
+<polygon points="467,317 475,317 479,322 475,327 467,327 463,322" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="485" y="326" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">control gate</text>
+<rect x="578" y="317" width="16" height="10" rx="5" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
+<text x="600" y="326" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">start / end</text>
 </svg>
         </div>
       </div>
@@ -289,6 +292,6 @@
 
   <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
   <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <script src="../../assets/js/palette.js?v=20260930k" defer></script>
+  <script src="../../assets/js/palette.js?v=20261005a" defer></script>
 </body>
 </html>

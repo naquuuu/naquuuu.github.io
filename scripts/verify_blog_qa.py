@@ -19,7 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CSS_PATH = ROOT / "assets" / "css" / "style.css"
 JS_PATH = ROOT / "assets" / "js" / "main.js"
-CURRENT_ASSET_VERSION = "20260930k"
+CURRENT_ASSET_VERSION = "20261005a"
 # non-creative pages must carry a blueprint flowchart (STYLE_BIBLE 2.8); the two creative essays are exempt
 FLOWCHART_REQUIRED = {
     "blog/building-an-autonomous-product-operating-system/index.html",

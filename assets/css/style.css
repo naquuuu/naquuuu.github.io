@@ -4504,6 +4504,43 @@ body[data-mode="culture"] .sticky-perspective-inner { border-color: #6A4850; }
 .sticky-perspective-inner .mode-tab-btn { border-radius: var(--radius-xs, 4px); }
 .sticky-perspective-inner .mode-tab-btn::before { content: none; }
 
+/* Mobile hero lens switcher: full-width centered button from initial load (matches sticky button) */
+@media (max-width: 768px) {
+  .mode-switch-wrap {
+    justify-content: center;
+  }
+  .mode-switcher-container {
+    width: 100%;
+    align-items: center;
+  }
+  .mode-switch-wrap .mode-switcher {
+    display: flex;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    padding: 3px;
+    gap: 2px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-surface);
+    border: 1px solid #BDBDB5;
+  }
+  body[data-mode="culture"] .mode-switch-wrap .mode-switcher {
+    border-color: #6A4850;
+  }
+  .mode-switch-wrap .mode-switcher .mode-tab-btn {
+    flex: 1 1 0%;
+    justify-content: center;
+    min-height: 34px;
+    padding: 0.3rem 0.5rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.74rem;
+    letter-spacing: 0;
+    border: 0;
+    border-radius: var(--radius-xs, 4px);
+  }
+}
+
 /* Hero heading: the h1 holds only the name; identity pill and thesis sit beside it, same look */
 .hero-headline { font-family: var(--font-display); }
 .hero-headline-title { margin: 0; font-size: inherit; line-height: inherit; letter-spacing: inherit; }
@@ -4565,5 +4602,5 @@ body[data-mode="culture"] .ai-note-label { color: #DC2626; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
-@media (max-width: 380px) { .mode-switcher { display: flex; flex-wrap: wrap; max-width: 100%; } .mode-tab-btn { flex: 1 1 100%; } }
+@media (max-width: 380px) { .mode-switcher { display: flex; max-width: 100%; } .mode-tab-btn { flex: 1 1 0%; } }
 .essay-content code { overflow-wrap: anywhere; white-space: normal; } .essay-content pre code { white-space: pre; }
