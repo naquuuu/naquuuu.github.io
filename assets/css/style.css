@@ -2634,7 +2634,7 @@ body[data-mode="culture"] .inquiry-card {
 
 .site-footer {
   border-top: 1px solid var(--border-subtle);
-  padding: 2rem 0;
+  padding: 2rem 0 2.25rem;
   background: var(--bg-primary);
   font-family: var(--font-mono);
   font-size: 0.76rem;
@@ -2644,18 +2644,14 @@ body[data-mode="culture"] .inquiry-card {
 
 .footer-content {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 0.75rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .footer-channels, .footer-links {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
   gap: 1.25rem;
 }
 
@@ -2672,8 +2668,6 @@ body[data-mode="culture"] .inquiry-card {
   color: var(--text-muted);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
   gap: 0.25rem;
 }
 .footer-privacy { font-size: 0.7rem; color: var(--text-muted); }
@@ -2766,19 +2760,21 @@ body[data-mode="culture"] .inquiry-card {
    ============================================================================= */
 
 .footer-wordmark {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   margin: 0 auto;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(3.5rem, 15vw, 11rem);
-  line-height: 0.95;
+  line-height: 1.15;
   letter-spacing: -0.04em;
   text-align: center;
   color: var(--text-muted);
   opacity: 0.18;
   user-select: none;
-  padding: 0.75rem 0 0.75rem;
+  padding: clamp(1rem, 2.5vw, 2rem) 0 clamp(1.5rem, 3.5vw, 2.75rem);
   transition: color 0.45s ease;
 }
 

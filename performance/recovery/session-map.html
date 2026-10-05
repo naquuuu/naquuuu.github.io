@@ -221,9 +221,9 @@ section { margin: 0 0 1.8rem; }
 .tl[data-kind="handoff"] { border-inline-start-color: var(--accent-crimson); }
 .tl[data-kind="chat"] { border-inline-start-color: var(--led-done); }
 .tl[data-state="bad"] .tl-label { color: var(--led-blocked); }
-.site-footer { border-top: 1px solid var(--border-subtle); margin: 2rem auto 0; padding: 1.2rem 1.1rem 2.4rem; text-align: center; }
-.foot-wordmark { font-size: 2.6rem; font-weight: 700; color: var(--border-active); margin: 0 auto 0.5rem; letter-spacing: -0.02em; text-align: center; }
-.checks { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 0.5rem; }
+.site-footer { border-top: 1px solid var(--border-subtle); margin: 2rem auto 0; padding: 1.2rem 1.1rem 2.4rem; }
+.foot-wordmark { font-size: 2.6rem; font-weight: 700; color: var(--border-active); margin: 0 auto; padding: 0.75rem 0 1.25rem; line-height: 1.15; letter-spacing: -0.02em; text-align: center; }
+.checks { display: flex; flex-wrap: wrap; gap: 0.4rem 0.5rem; }
 .check {
   font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-soft);
   border: 1px solid var(--border-subtle); border-radius: var(--radius-full); padding: 0.1rem 0.55rem;
@@ -231,7 +231,6 @@ section { margin: 0 0 1.8rem; }
 .check-pass { color: var(--led-done); border-color: var(--led-done); }
 .check-fail { color: var(--led-blocked); border-color: var(--led-blocked); }
 .note { font-size: 0.78rem; color: var(--text-muted); max-width: var(--measure); }
-.site-footer .note { margin-inline: auto; text-align: center; }
 @media (max-width: 1080px) { .lanes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 760px) { .lanes { grid-template-columns: repeat(2, minmax(0, 1fr)); } .head-meta { margin-inline-start: 0; } }
 @media (max-width: 520px) {
@@ -410,6 +409,6 @@ section { margin: 0 0 1.8rem; }
 </script>
   <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
   <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <script src="../../assets/js/palette.js?v=20261005b" defer></script>
+  <script src="../../assets/js/palette.js?v=20261005c" defer></script>
 </body>
 </html>
