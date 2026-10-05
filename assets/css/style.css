@@ -2634,7 +2634,7 @@ body[data-mode="culture"] .inquiry-card {
 
 .site-footer {
   border-top: 1px solid var(--border-subtle);
-  padding: 2rem 0 2.25rem;
+  padding: 1.1rem 0 2.25rem;
   background: var(--bg-primary);
   font-family: var(--font-mono);
   font-size: 0.76rem;
@@ -2764,17 +2764,17 @@ body[data-mode="culture"] .inquiry-card {
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 0 auto;
+  margin: -0.15em auto 0;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(3.5rem, 15vw, 11rem);
-  line-height: 1.15;
+  line-height: 1;
   letter-spacing: -0.04em;
   text-align: center;
   color: var(--text-muted);
   opacity: 0.18;
   user-select: none;
-  padding: clamp(1rem, 2.5vw, 2rem) 0 clamp(1.5rem, 3.5vw, 2.75rem);
+  padding: 0 0 clamp(1.75rem, 4vw, 3rem);
   transition: color 0.45s ease;
 }
 
