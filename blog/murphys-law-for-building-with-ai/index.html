@@ -513,7 +513,7 @@ svg .s12-pulse{fill:none;stroke:var(--accent-crimson);stroke-width:2;opacity:0;t
 
 
 /* final editorial integration */
-#s9 .s9-editorial{flex:1;align-items:center;gap:26px;grid-template-columns:315px 1fr}
+#s9 .s9-editorial{flex:1;align-items:center;gap:14px;grid-template-columns:315px 36px 1fr}
 #s9 .s9-fig svg{width:315px;height:300px}
 #s9 .s9-flow-svg{height:360px}
 #s9 .s9-flow-svg text{font-size:24px;font-family:var(--f-mono)}
@@ -522,6 +522,14 @@ svg .s12-pulse{fill:none;stroke:var(--accent-crimson);stroke-width:2;opacity:0;t
 #s9 .s9-caption{font-size:18px;padding:12px 16px}
 #s9 .s9-caption b{font-size:16px;line-height:1.4}
 #s9 .s9-different{font-size:18px;margin-top:12px}
+#s9 .s9-circuit{opacity:1}
+#s9 .s9-past-label,#s9 .s9-building-label{font:700 14px var(--f-mono);letter-spacing:.06em;color:var(--accent-crimson);margin:0 0 5px}
+#s9 .s9-building-label{font-size:16px}
+#s9 .s9-bridge{display:block;width:36px;height:32px;align-self:center;overflow:visible}
+#s9 .s9-bridge path{fill:none;stroke:var(--accent-crimson);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0}
+@keyframes k-s9-focus{0%,80%{opacity:.35}100%{opacity:1}}
+#s9.play .s9-circuit{animation:k-s9-focus 4s ease both}
+#s9.play .s9-bridge path{stroke-dasharray:1;stroke-dashoffset:1;animation:k-draw .7s ease 3.1s both}
 #s9 .circuit-packet{offset-path:none;animation:none;fill:var(--accent-crimson)}
 #s9 .circuit-packet path{stroke:var(--paper);stroke-width:1.5;fill:none}
 #s9 .circuit-main,#s9 .circuit-rollback{animation:none;stroke-dasharray:none;stroke-dashoffset:0}
@@ -538,6 +546,7 @@ svg .s12-pulse{fill:none;stroke:var(--accent-crimson);stroke-width:2;opacity:0;t
 .disclosure-foot{font-size:14px}.s11-callback{font-size:18px;margin:3px 0}
 html.mobile #s9-svg{min-width:0}
 html.mobile #s9 .s9-editorial{display:flex;flex-direction:column;align-items:stretch}
+html.mobile #s9 .s9-bridge{transform:rotate(90deg);margin:3px auto}
 html.mobile #s9 .s9-fig svg{width:100%;height:auto}
 html.mobile #s9 .s9-flow-svg{width:740px;height:390px}
 html.mobile .s9-circuit{overflow-x:auto}
@@ -1118,6 +1127,8 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
   <div class="body">
     <h2 class="t rise">design the <em>fall</em>, not just the climb.</h2>
     <div class="s9-editorial">
+      <div class="s9-past">
+      <p class="s9-past-label">01 / past case</p>
       <figure class="fig crop s9-fig">
         <div class="scroller"><svg id="s9-svg" viewBox="0 0 420 300" role="img" aria-label="an elevator safety catch stops a platform after its rope breaks">
           <g id="s9-scene" transform="translate(8 12)">
@@ -1131,7 +1142,10 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
           </g></svg></div>
         <figcaption class="s9-caption"><b>1854 / the rope breaks. the catch holds.</b><span>otis made the failure survivable.</span></figcaption>
       </figure>
+      </div>
+      <svg class="s9-bridge" viewBox="0 0 36 32" aria-hidden="true"><path pathLength="1" d="M2 16 H27 M21 9 L29 16 L21 23"/></svg>
       <div class="s9-circuit">
+        <p class="s9-building-label">02 / building with ai</p>
         <p class="s9-circuit-label">independent review · model b</p>
         <svg class="s9-flow-svg" viewBox="0 0 740 390" role="img" aria-label="a draft visits skeptic, returns for revision, passes verifier and reaches a human release decision. a checkpoint provides a rollback route.">
           <path class="circuit-main" d="M100 190 C180 190 180 75 270 75 M270 90 C190 90 190 230 100 230 M100 230 H270 M410 230 C500 230 520 190 620 190"/>
@@ -1537,7 +1551,8 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
 
 
   /* Native SVG paths keep handoffs attached to their real diagram geometry. */
-  function pathStory(slideId, pathId, packetId, duration){
+  function pathStory(slideId, pathId, packetId, duration, delayMs){
+    delayMs=typeof delayMs==='number'?delayMs:400;
     var path=document.getElementById(pathId), packet=document.getElementById(packetId), raf=0;
     var total=path.getTotalLength();
     function place(progress){
@@ -1559,14 +1574,14 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
     hooks[slideId]={stop:stop,still:function(){stop();place(1)},play:function(s,red){
       stop();place(red?1:0);if(red)return;
       var preview=/[?&]t=(\d+)/.exec(location.search);
-      if(preview){place(Math.min(1,Math.max(0,(+preview[1]-400)/duration)));return}
-      var started=performance.now()+400;
+      if(preview){place(Math.min(1,Math.max(0,(+preview[1]-delayMs)/duration)));return}
+      var started=performance.now()+delayMs;
       function step(now){var progress=Math.min(1,Math.max(0,(now-started)/duration));place(progress);if(progress<1)raf=requestAnimationFrame(step)}
       raf=requestAnimationFrame(step);
     }};
     place(1);
   }
-  pathStory('s9','review-motion-path','review-packet',6000);
+  pathStory('s9','review-motion-path','review-packet',6000,4200);
   pathStory('s11','crew-motion-path','crew-packet',8000);
 
   /* ---------- design review aid: deck.html?t=1800#9 freezes the slide's css motion at 1.8s ---------- */
