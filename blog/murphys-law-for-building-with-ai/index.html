@@ -1,0 +1,1333 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>murphy's law for people who build with ai | naquuuu</title>
+<meta name="description" content="a 12-slide presentation on murphy's law, ai-assisted prototyping, reliability, and the human checks that keep cheap drafts from becoming confident mistakes.">
+<link rel="canonical" href="https://naquuuu.github.io/blog/murphys-law-for-building-with-ai/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="naquuuu">
+<meta property="og:title" content="murphy's law for people who build with ai">
+<meta property="og:description" content="a 12-slide presentation on murphy's law, ai-assisted prototyping, reliability, and the human checks that keep cheap drafts from becoming confident mistakes.">
+<meta property="og:url" content="https://naquuuu.github.io/blog/murphys-law-for-building-with-ai/">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg?v=20260917i">
+<link rel="alternate icon" href="../../favicon.ico?v=20260917i">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+/* ==================================================================
+   naquuuu sharing session v3: murphy's law for people who build with ai
+   order: 0 tokens, 1 shell, 2 chrome, 3 type + shared parts, 4 motion,
+   5 per-slide blocks (s1 to s12), 6 mobile, 7 print + reduced motion
+   ================================================================== */
+
+/* ---------- 0. tokens (light is the default; dark via data-theme) ---------- */
+:root{
+  --bg-primary:#fbfbfa; --bg-surface:#f2f2ed; --bg-surface-elevated:#ecece6; --bg-card:#ffffff;
+  --border-subtle:#e5e5df; --border-active:#d4d4ce;
+  --text-primary:#111110; --text-secondary:#555550;
+  --accent-crimson:#dc2626; --accent-crimson-dim:rgba(220,38,38,.08);
+  --wash-a:rgba(220,38,38,.10); --wash-b:rgba(220,38,38,.05); --wash-c:rgba(220,38,38,.16);
+  --glow:rgba(220,38,38,.34);
+  /* blueprint on warm paper */
+  --paper:#fffdf6; --node:#fbf8ee; --line:#bdb7a5; --arrow:#6b675c; --ink:#111110;
+  --n-weak:#bdb7a5; --n-strong:#6b675c;
+  --shadow-card:0 2px 12px rgba(0,0,0,.04); --shadow-lift:0 8px 24px rgba(0,0,0,.08);
+  --r-sm:6px; --r-md:12px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --f-head:'Segoe UI',system-ui,sans-serif; --f-body:'Open Sans',system-ui,sans-serif; --f-mono:Consolas,ui-monospace,monospace;
+}
+html[data-theme="dark"]{
+  --bg-primary:#160e10; --bg-surface:#22171a; --bg-surface-elevated:#2b1d20; --bg-card:#26191c;
+  --border-subtle:#362529; --border-active:#4f353b;
+  --text-primary:#f5ece8; --text-secondary:#b5a5a0;
+  --accent-crimson:#c85250; --accent-crimson-dim:rgba(200,82,80,.14);
+  --wash-a:rgba(200,82,80,.12); --wash-b:rgba(200,82,80,.06); --wash-c:rgba(200,82,80,.22);
+  --glow:rgba(200,82,80,.42);
+  --paper:#2a1d1f; --node:#33242a; --line:#5a4247; --arrow:#b5a5a0; --ink:#f5ece8;
+  --n-weak:#85736f; --n-strong:#cdbeb8;
+  --shadow-card:0 4px 24px rgba(0,0,0,.5); --shadow-lift:0 8px 32px rgba(0,0,0,.65);
+}
+
+/* ---------- 1. shell: viewport, scaling stage, slides ---------- */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg-surface);color:var(--text-primary);font-family:var(--f-body);-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit}
+.viewport{position:fixed;left:0;top:0;right:0;bottom:0;overflow:hidden;background:var(--bg-surface)}
+.stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center;background:var(--bg-primary);border:1px solid var(--border-subtle);overflow:hidden}
+.slide{position:absolute;left:0;top:0;width:1280px;height:720px;padding:80px 88px 68px;display:none;flex-direction:column;background:var(--bg-primary);overflow:hidden}
+.slide.active{display:flex}
+.body{flex:1;display:flex;flex-direction:column;gap:24px;min-height:0}
+.body.mid{justify-content:center}
+.notes{display:none}
+
+/* ---------- 2. chrome: top bar, footer, hud, notes panel ---------- */
+.top{position:absolute;top:30px;left:88px;right:88px;z-index:3;display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--border-subtle);font:700 14px/20px var(--f-mono);letter-spacing:.04em;color:var(--text-primary);white-space:nowrap}
+.top .num{color:var(--accent-crimson);margin-right:8px}
+.top .tr{font-weight:400;font-size:13px;letter-spacing:.02em;color:var(--text-secondary)}
+.foot{position:absolute;left:0;right:0;bottom:0;height:44px;border-top:1px solid var(--border-subtle);display:flex;align-items:center;gap:24px;padding:0 88px;font:400 13px var(--f-mono);color:var(--text-secondary);background:var(--bg-primary);z-index:3}
+.wm{font:700 17px var(--f-head);letter-spacing:-.015em;color:var(--text-primary);flex:none}
+.wm i{font-style:normal;color:var(--accent-crimson)}
+.marq{flex:1;overflow:hidden;white-space:nowrap;min-width:0}
+.marq-in{display:inline-block;animation:mq 40s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ctr{flex:none;font-weight:600;color:var(--text-primary)}
+
+.hud{position:fixed;top:3px;right:6px;display:flex;gap:4px;z-index:20;opacity:.38;transition:opacity .2s}
+.hud:hover,.hud:focus-within{opacity:1}
+.hud button{font:600 11px/1 var(--f-mono);background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:3px;padding:3px 8px;cursor:pointer;color:var(--text-secondary)}
+.hud button:hover{border-color:var(--accent-crimson);color:var(--accent-crimson)}
+.hud{flex-wrap:wrap;max-width:calc(100vw - 12px);justify-content:flex-end}
+.deck-back-link{display:inline-flex;min-width:44px;min-height:44px;align-items:center;justify-content:center;padding:3px 10px;border:1px solid var(--border-subtle);border-radius:3px;background:var(--bg-card);color:var(--text-secondary);font:600 11px/1 var(--f-mono);text-decoration:none}
+.deck-back-link:hover,.deck-back-link:focus-visible{border-color:var(--accent-crimson);color:var(--accent-crimson)}
+.notespanel{position:fixed;left:0;right:0;bottom:0;height:30vh;background:var(--bg-card);border-top:2px solid var(--accent-crimson);z-index:30;display:none;flex-direction:column;overflow:hidden}
+.notespanel.open{display:flex}
+.notespanel header{font:700 12px var(--f-mono);letter-spacing:.06em;color:var(--accent-crimson);padding:10px 24px 4px}
+.notespanel .nb{overflow-y:auto;padding:4px 24px 16px;font-size:18px;line-height:1.55;color:var(--text-primary)}
+.notespanel .nb p{margin:0 0 8px;max-width:1100px}
+
+/* ---------- 3. type + shared parts ---------- */
+h1,h2,h3,p{margin:0}
+.t{font:700 50px/1.1 var(--f-head);letter-spacing:-.02em;color:var(--text-primary);max-width:1104px}
+.t em{font-style:normal;color:var(--accent-crimson)}
+.sub{font:400 24px/1.5 var(--f-body);color:var(--text-secondary);max-width:900px}
+.txt{font:400 22px/1.5 var(--f-body);color:var(--text-secondary)}
+.foot-note{font:400 13px/1.5 var(--f-mono);color:var(--text-secondary);letter-spacing:.02em}
+.tag{display:inline-block;font:600 12px var(--f-mono);letter-spacing:.04em;border:1px solid var(--border-subtle);border-radius:999px;padding:3px 11px;color:var(--text-secondary);background:var(--bg-surface);white-space:nowrap}
+
+/* paper card (hero visuals). .crop adds the blog photo-frame corner marks */
+.fig{position:relative;margin:0;background:var(--paper);border:1px solid var(--border-subtle);border-radius:var(--r-sm);box-shadow:var(--shadow-card);min-width:0}
+.fig svg{display:block;width:100%;height:auto}
+.crop{position:relative}
+.crop::before,.crop::after{content:"";position:absolute;width:14px;height:14px;pointer-events:none;z-index:2}
+.crop::before{top:-1px;left:-1px;border-top:2px solid var(--accent-crimson);border-left:2px solid var(--accent-crimson)}
+.crop::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--accent-crimson);border-right:2px solid var(--accent-crimson)}
+.scroller{min-width:0}
+
+/* svg text and strokes shared by every diagram */
+svg text{font-family:var(--f-mono);font-size:14px;letter-spacing:.02em;fill:var(--text-secondary)}
+svg text.ink{fill:var(--ink)}
+svg text.red{fill:var(--accent-crimson)}
+svg text.b{font-weight:700}
+svg text.body{font-family:var(--f-body);font-size:16px;letter-spacing:0;fill:var(--ink)}
+svg text.body.b{font-size:17px}
+svg text.mk{font-family:var(--f-mono);font-size:16px}
+svg .ax{fill:none;stroke:var(--line);stroke-width:1.2}
+svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
+svg .lnk{fill:none;stroke:var(--arrow);stroke-width:1.5}
+svg .nd{fill:var(--bg-card);stroke:var(--border-active);stroke-width:1}
+svg .s-weak,svg .s-strong,svg .s-red{fill:none;stroke-linecap:butt;stroke-linejoin:round}
+svg .s-weak{stroke:var(--n-weak);stroke-width:3}
+svg .s-strong{stroke:var(--n-strong);stroke-width:3}
+svg .s-red{stroke:var(--accent-crimson);stroke-width:4.5}
+
+/* "in ai work" strip (blog principle strip) */
+.strip{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:12px 22px 14px}
+.strip-h{font:400 14px var(--f-mono);letter-spacing:.05em;color:var(--text-secondary);margin:0 0 6px}
+.strip ol{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+.strip li{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:baseline;font:400 22px/1.45 var(--f-body);color:var(--text-secondary)}
+.strip li b{font:700 14px var(--f-mono);letter-spacing:.04em;color:var(--accent-crimson)}
+
+/* blueprint box (blog diagram): toolbar, canvas, legend */
+.bp{margin:0;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--r-md);overflow:hidden;min-width:0}
+.bp-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 16px;background:var(--bg-surface-elevated);border-bottom:1px solid var(--border-subtle);font:400 14px/1.4 var(--f-mono);color:var(--text-secondary)}
+.bp-ttl{display:inline-flex;align-items:center;gap:10px}
+.bp-ico{width:16px;height:12px;fill:none;stroke:var(--text-secondary);stroke-width:1.5;stroke-linecap:round;flex:none}
+.bp-tag{background:var(--bg-card);border:1px solid var(--border-subtle);color:var(--text-secondary);font-size:13px;padding:2px 9px;border-radius:var(--r-sm);white-space:nowrap}
+.bp-body{padding:14px 16px}
+.bp-body svg{display:block;width:100%;height:auto}
+.bp-leg{display:flex;gap:18px;align-items:center;padding:7px 16px 9px;border-top:1px solid var(--border-subtle);font:400 14px var(--f-mono);color:var(--text-secondary)}
+.bp-leg span{display:inline-flex;align-items:center;gap:8px}
+.lg{display:inline-block;width:28px;height:0}
+.lg-flow{border-top:1.5px solid var(--arrow)}
+.lg-fail{border-top:1.5px dashed var(--accent-crimson)}
+
+/* ---------- 4. motion (calm editorial) ----------
+   the base style of every element IS its final state. animation only runs
+   while the slide has .play, so reduced motion, print and no-js show the end. */
+@keyframes k-rise{from{opacity:0;transform:translateY(14px)}}
+@keyframes k-fade{from{opacity:0}}
+@keyframes k-draw{from{stroke-dasharray:1;stroke-dashoffset:1}to{stroke-dasharray:1;stroke-dashoffset:0}}
+@keyframes k-pop{from{opacity:0;transform:scale(.4)}}
+@keyframes k-wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.pop{transform-box:fill-box;transform-origin:center}
+.slide.play .rise{animation:k-rise calc(var(--t,.8)*1s) var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .fade{animation:k-fade calc(var(--t,.7)*1s) var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .draw{animation:k-draw calc(var(--t,.9)*1s) var(--ez,var(--ease)) calc(var(--d,0)*1s) both}
+.slide.play .pop{animation:k-pop calc(var(--t,.5)*1s) var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .wipe{animation:k-wipe calc(var(--t,.5)*1s) var(--ease) calc(var(--d,0)*1s) both}
+
+/* ---------- 5. per-slide blocks ---------- */
+
+/* ===== s1 title ===== */
+.s1{background:radial-gradient(900px 560px at 88% 8%,var(--wash-a),transparent 70%),radial-gradient(700px 520px at 6% 98%,var(--wash-b),transparent 70%),var(--bg-primary)}
+.s1-curve{position:absolute;left:0;top:0;width:1280px;height:720px;z-index:0;pointer-events:none}
+.s1-curve path{fill:none;stroke:var(--accent-crimson);stroke-width:7;opacity:.08}
+.s1 .body{position:relative;z-index:1;gap:0}
+.s1-h{font:700 42px/1.1 var(--f-head);letter-spacing:-.02em}
+.s1-h span{display:block}
+.s1-l2{color:var(--accent-crimson)}
+.s1-sub{margin-top:28px;max-width:860px}
+.s1-by{margin-top:30px;font:600 17px var(--f-mono);letter-spacing:.02em;color:var(--text-primary)}
+.s1-disc{margin-top:22px;padding-top:16px;border-top:1px solid var(--border-subtle);max-width:780px;font:400 15px/1.7 var(--f-mono);color:var(--text-secondary)}
+.s1-disc-k{font-weight:700}
+
+/* ===== s2 the moment ===== */
+.s2-row{display:grid;grid-template-columns:722px 1fr;gap:42px;align-items:start}
+.s2-chart{display:flex;flex-direction:column;gap:12px;min-width:0}
+.s2-lines{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:20px}
+.s2-lines li{font:400 24px/1.5 var(--f-body);color:var(--text-secondary);padding-top:18px;border-top:1px solid var(--border-subtle)}
+.s2-lines li:first-child{border-top:0;padding-top:2px}
+.s2-lines li.s2-last{color:var(--text-primary);font-weight:600}
+svg .s2-dim{fill:none;stroke:var(--accent-crimson);stroke-width:1.2}
+
+/* ===== s3 the symptom: document with red-pen notes ===== */
+.doc{position:relative;background:var(--paper);border:1px solid var(--border-subtle);border-radius:var(--r-sm);box-shadow:0 6px 22px rgba(0,0,0,.07),0 1px 3px rgba(0,0,0,.05);padding:0 32px 4px}
+.doc-h{display:flex;justify-content:space-between;align-items:center;padding:15px 0 13px;border-bottom:1px solid var(--line)}
+.doc-ttl{font:700 16px var(--f-mono);letter-spacing:.03em;color:var(--text-primary)}
+.doc-rows{list-style:none;margin:0;padding:0}
+.doc-r{display:grid;grid-template-columns:572px 1fr;column-gap:26px;align-items:center;min-height:60px;padding:6px 0;border-bottom:1px solid var(--border-subtle)}
+.doc-r:last-child{border-bottom:0}
+#s3 .foot-note{max-width:640px}
+.doc-l{font:400 21px/1.35 var(--f-body);color:var(--ink)}
+.doc-l b{font:700 14px var(--f-mono);letter-spacing:.04em;color:var(--text-secondary);margin-right:3px}
+.doc-n{align-self:stretch;display:flex;align-items:center;padding-left:18px;border-left:1px solid var(--border-subtle);font:500 15px/1.4 var(--f-mono);color:var(--accent-crimson)}
+.doc-n-none{border-left-color:var(--border-subtle)}
+.pen{position:relative;display:inline-block;padding-bottom:1px}
+.pen::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:6px;background:var(--accent-crimson);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='6' viewBox='0 0 12 6'%3E%3Cpath d='M0 3 Q3 0.4 6 3 T12 3' fill='none' stroke='black' stroke-width='1.7'/%3E%3C/svg%3E") repeat-x left bottom/12px 6px;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='6' viewBox='0 0 12 6'%3E%3Cpath d='M0 3 Q3 0.4 6 3 T12 3' fill='none' stroke='black' stroke-width='1.7'/%3E%3C/svg%3E") repeat-x left bottom/12px 6px}
+.slide.play .pen::after{animation:k-wipe .55s var(--ease) calc(var(--d,0)*1s) both}
+
+/* ===== s4 the law: chart + live sliders ===== */
+#s4 .body{gap:14px}
+.s4-row{display:grid;grid-template-columns:702px 1fr;gap:42px;align-items:start}
+.s4-left{display:flex;flex-direction:column;gap:14px;min-width:0}
+.s4-key{display:flex;flex-wrap:wrap;gap:6px 24px;list-style:none;margin:0;padding:11px 18px 6px;font:400 14px var(--f-mono);color:var(--text-secondary)}
+.s4-key li{display:inline-flex;align-items:center;gap:8px}
+.s4-key .hot{color:var(--accent-crimson);font-weight:700}
+.sw{display:inline-block;width:24px;height:0;border-top:3px solid var(--n-weak)}
+.sw-red{border-top-width:4.5px;border-top-color:var(--accent-crimson)}
+.sw-strong{border-top-color:var(--n-strong)}
+svg .s4-ghost{fill:none;stroke:var(--accent-crimson);stroke-width:1.6;stroke-dasharray:2 5;stroke-linecap:round;opacity:.7}
+svg .s4-lead{fill:none;stroke:var(--accent-crimson);stroke-width:1;stroke-dasharray:2 3}.s4-value{font:700 27px var(--f-head);letter-spacing:-.02em}.s4-call-label{font:400 12px var(--f-mono);fill:var(--text-secondary)}
+svg .s4-dot,svg .s4-mkdot{fill:var(--accent-crimson)}
+svg .s4-guide{fill:none;stroke:var(--accent-crimson);stroke-width:1;stroke-dasharray:3 4;opacity:.65}
+svg .s4-ring{fill:var(--paper);stroke:var(--accent-crimson);stroke-width:2.2}
+#s4-call{transition:opacity .35s var(--ease)}
+.ctl{display:grid;grid-template-columns:1fr 1fr;gap:34px;padding:12px 22px 14px;background:var(--paper);border:1px solid var(--border-subtle);border-radius:var(--r-sm)}
+.rng{display:flex;flex-direction:column;gap:4px;min-width:0}
+.rng label{display:flex;justify-content:space-between;align-items:baseline;font:600 14px var(--f-mono);letter-spacing:.02em;color:var(--text-secondary)}
+.rng output{font:700 15px var(--f-mono);color:var(--text-primary)}
+.rng input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;margin:0;background:transparent;cursor:pointer;--v:50%}
+.rng input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:linear-gradient(to right,var(--accent-crimson) var(--v),var(--line) var(--v))}
+.rng input[type=range]::-moz-range-track{height:3px;border-radius:2px;background:linear-gradient(to right,var(--accent-crimson) var(--v),var(--line) var(--v))}
+.rng input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;margin-top:-8.5px;border-radius:50%;background:var(--paper);border:2px solid var(--accent-crimson);box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.rng input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--paper);border:2px solid var(--accent-crimson);box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.rng input[type=range]:focus{outline:none}
+.rng input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 5px var(--accent-crimson-dim),0 1px 4px rgba(0,0,0,.18)}
+.rng input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 5px var(--accent-crimson-dim),0 1px 4px rgba(0,0,0,.18)}
+.s4-side{display:flex;flex-direction:column;gap:18px;min-width:0}
+.ro{display:flex;flex-direction:column;gap:4px;color:var(--accent-crimson)}
+.ro b{font:700 76px/1 var(--f-head);letter-spacing:-.03em}
+.ro span{font:600 21px/1.3 var(--f-body)}
+.s4-formula{font:600 15px/1.5 var(--f-mono);color:var(--text-primary);padding:11px 14px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--r-sm)}
+.s4-formula sup{font-size:.75em;line-height:0}
+
+/* ===== s5 the origin ===== */
+.s5-row{display:grid;grid-template-columns:1fr 540px;gap:44px;align-items:start}
+.s5-story{display:flex;flex-direction:column;gap:16px;padding-top:4px}
+.s5-cards{display:flex;flex-direction:column;gap:10px}
+.s5-card{display:grid;grid-template-columns:132px 1fr;gap:14px;align-items:center;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:6px 18px 6px 12px;min-height:100px}
+.s5-icon-wrap{position:relative;width:132px;display:flex;flex-direction:column;align-items:center;padding-bottom:14px}.s5-ico{width:132px;height:auto;display:block;overflow:visible}.s5-micro{position:absolute;left:0;right:0;bottom:0;font:400 10.5px/1.2 var(--f-mono);color:var(--text-secondary);text-align:center;white-space:nowrap}.s5-wrong-label{opacity:0}.s5-right-label{opacity:1}
+.s5-ico .ico-slot,.s5-ico .ico-card,.s5-ico .ico-line,.s5-ico .ico-pad{fill:none;stroke:var(--arrow);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.s5-ico .ico-card{fill:var(--node)}
+.s5-ico .ico-axis{fill:none;stroke:var(--line);stroke-width:1.2;stroke-dasharray:3 4}.s5-ico .ico-hole{fill:none;stroke:var(--arrow);stroke-width:1.5;stroke-dasharray:3 3;stroke-linejoin:round}
+.s5-ico text{font:700 24px var(--f-mono);text-anchor:middle;letter-spacing:0}
+.s5-ico .sim-x{fill:var(--accent-crimson);opacity:0}
+.s5-ico .sim-ok{fill:var(--ink)}
+.s5-ico .sim-card,.s5-ico .sim-ok{transform-box:fill-box;transform-origin:center}
+.s5-card-t{font:400 20px/1.4 var(--f-body);color:var(--text-secondary)}
+.s5-card-t b{display:block;font:700 15px var(--f-mono);letter-spacing:.02em;color:var(--text-primary);margin-bottom:2px}
+@keyframes k-sim{
+  0%{transform:translateX(-72px) rotate(180deg);opacity:0}
+  6%{transform:translateX(-72px) rotate(180deg);opacity:1}
+  22%{transform:translateX(-7px) rotate(180deg)}
+  25%{transform:translateX(-13px) rotate(180deg)}
+  28%{transform:translateX(-5px) rotate(180deg)}
+  31%{transform:translateX(-11px) rotate(180deg)}
+  34%{transform:translateX(-7px) rotate(180deg)}
+  44%{transform:translateX(-44px) rotate(180deg)}
+  64%{transform:translateX(-44px) rotate(360deg)}
+  86%,100%{transform:translateX(0) rotate(360deg)}
+}
+@keyframes k-sim-stroke{0%,20%{stroke:var(--arrow)}24%,40%{stroke:var(--accent-crimson)}48%,100%{stroke:var(--arrow)}}
+@keyframes k-sim-x{0%,20%{opacity:0}23%,40%{opacity:1}47%,100%{opacity:0}}
+@keyframes k-sim-ok{0%,88%{opacity:0;transform:scale(.5)}95%,100%{opacity:1;transform:scale(1)}}
+@keyframes k-sim-wrong-label{0%,20%{opacity:0}23%,40%{opacity:1}48%,100%{opacity:0}}
+.slide.play .s5-ico .sim-card{animation:k-sim 3.4s var(--ease) .6s both}
+.slide.play .s5-ico .sim-card .ico-card{animation:k-sim-stroke 3.4s linear .6s both}
+.slide.play .s5-ico .sim-x{animation:k-sim-x 3.4s linear .6s both}
+.slide.play .s5-ico .sim-ok{animation:k-sim-ok 3.4s var(--ease) .6s both}
+.slide.play .s5-wrong-label{animation:k-sim-wrong-label 3.4s linear .6s both}
+.slide.play .s5-right-label{opacity:0;animation:k-sim-ok 3.4s var(--ease) .6s both}
+@media print{.s5-wrong-label{opacity:0!important}.s5-right-label{opacity:1!important}}
+
+/* ===== s6 the framework: blog principle grid ===== */
+.s6-head{display:flex;flex-direction:column;gap:10px}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border-subtle);margin-top:18px}
+.pcol{position:relative;padding:32px 26px 28px;display:flex;flex-direction:column;min-width:0}
+.pcol+.pcol{border-left:1px solid var(--border-subtle)}
+.pcol-ico{position:absolute;right:20px;top:30px;width:38px;height:38px;fill:none;stroke:var(--arrow);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.pcol-ico .ico-hot{stroke:var(--accent-crimson)}
+.pcol-ico .ico-band{fill:var(--accent-crimson-dim)}
+.pcol-h{display:flex;align-items:baseline;gap:10px;margin-bottom:16px;padding-right:44px}
+.pcol-n{font:700 44px/1 var(--f-head);letter-spacing:-.02em;color:var(--text-secondary)}
+.pcol-name{font:700 15px var(--f-mono);letter-spacing:.02em;color:var(--text-primary);white-space:nowrap}
+.ptag{align-self:flex-start;font:400 12px/1.4 var(--f-mono);letter-spacing:.03em;color:var(--accent-crimson);background:var(--accent-crimson-dim);padding:3px 10px;border-radius:999px;border:1px solid var(--border-subtle)}
+.pcol-t{margin:24px 0 0;min-height:calc(1.28em*3);font:700 24px/1.28 var(--f-head);letter-spacing:-.01em;color:var(--text-primary)}
+.pcol-hr{border:0;border-top:1px solid var(--border-subtle);margin:26px 0 16px}
+.pcol-k{font:400 13px var(--f-mono);letter-spacing:.05em;color:var(--text-secondary);margin:0 0 6px}
+.pcol-a{font:400 20px/1.5 var(--f-body);color:var(--text-secondary)}
+
+/* ===== s7 reka peluang ===== */
+.s7-row{display:grid;grid-template-columns:410px 1fr;gap:36px;align-items:start}
+.s7-case{display:flex;flex-direction:column;gap:14px}
+.s7-cite{font:600 14px var(--f-mono);letter-spacing:.03em;color:var(--text-secondary)}
+
+/* ===== s8 buffers ===== */
+.s8-row{display:grid;grid-template-columns:722px 1fr;gap:42px;align-items:start}
+svg .s8-band{fill:var(--wash-c);stroke:none}
+svg .s8-band-edge{fill:none;stroke:var(--accent-crimson);stroke-width:1;opacity:.55}
+svg .s8-reorder{fill:none;stroke:var(--arrow);stroke-width:1.3;stroke-dasharray:6 5}
+svg .s8-saw{stroke-width:2.6}
+@keyframes k-saw{0%{stroke-dasharray:1;stroke-dashoffset:1}17.63%{stroke-dasharray:1;stroke-dashoffset:.8237}35.26%{stroke-dasharray:1;stroke-dashoffset:.6474}52.9%{stroke-dasharray:1;stroke-dashoffset:.471}74.74%{stroke-dasharray:1;stroke-dashoffset:.2526}92.37%{stroke-dasharray:1;stroke-dashoffset:.0763}100%{stroke-dasharray:1;stroke-dashoffset:0}}
+.slide.play .s8-saw{animation:k-saw 3.42s var(--ease) .9s both}
+svg .s8-dip{fill:none;stroke:var(--accent-crimson);stroke-width:2.2}
+svg .s8-lead{fill:none;stroke:var(--accent-crimson);stroke-width:1.2}
+
+/* ===== s9 recovery: elevator safety catch ===== */
+.s9-row{display:grid;grid-template-columns:472px 1fr;gap:42px;align-items:start}
+.s9-case{display:flex;flex-direction:column;gap:12px}.s9-how{margin-top:2px}.s9-how-h{font:700 12px var(--f-mono);letter-spacing:.03em;color:var(--text-secondary);margin-bottom:5px}.s9-how ol{list-style:none;margin:0;padding:0;display:grid;gap:4px}.s9-how li{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:start;font:400 15px/1.3 var(--f-body);color:var(--text-secondary)}.s9-how b{font:700 12px var(--f-mono);color:var(--accent-crimson)}
+.s9-lead-p{color:var(--text-primary);font-weight:600}
+svg .el-beam,svg .el-rail{fill:var(--node);stroke:var(--arrow);stroke-width:1.2;stroke-linejoin:round}
+svg .el-hook{fill:var(--paper);stroke:var(--arrow);stroke-width:1.5}
+svg .el-floor{fill:none;stroke:var(--arrow);stroke-width:2}
+svg .el-hatch{fill:none;stroke:var(--line);stroke-width:1.2}
+svg .el-rope{fill:none;stroke:var(--arrow);stroke-width:2}
+svg .el-carbody{fill:var(--bg-card);stroke:var(--arrow);stroke-width:1.8}
+svg .el-cardet{fill:none;stroke:var(--line);stroke-width:1.2}
+svg .s9-pawl{fill:var(--accent-crimson-dim);stroke:var(--accent-crimson);stroke-width:1.6;stroke-linejoin:round}
+svg .s9-lead{fill:none;stroke:var(--accent-crimson);stroke-width:1.2}
+svg .s9-lead-dot{fill:var(--accent-crimson)}
+.s9-car{transform:translateY(40px)}
+.s9-pawl-l{transform-origin:61px 123.5px}
+.s9-pawl-r{transform-origin:179px 123.5px}
+.s9-rope-top{stroke-dasharray:1;stroke-dashoffset:.9}
+@keyframes k-drop{from{transform:translateY(0)}to{transform:translateY(40px)}}
+@keyframes k-snap{from{stroke-dasharray:1;stroke-dashoffset:0}to{stroke-dasharray:1;stroke-dashoffset:.9}}
+@keyframes k-pawl-l{from{transform:rotate(70deg)}to{transform:rotate(0)}}
+@keyframes k-pawl-r{from{transform:rotate(-70deg)}to{transform:rotate(0)}}
+.slide.play .s9-car{animation:k-drop .3s cubic-bezier(.55,0,.9,.5) 1.42s both}
+.slide.play .s9-rope-top{animation:k-snap .28s cubic-bezier(.5,0,1,.6) 1.4s both}
+.slide.play .s9-pawl-l{animation:k-pawl-l .16s cubic-bezier(.2,.8,.3,1) 1.54s both}
+.slide.play .s9-pawl-r{animation:k-pawl-r .16s cubic-bezier(.2,.8,.3,1) 1.54s both}
+
+/* ===== s10 the mindset ===== */
+.ck-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:18px 30px 6px;box-shadow:var(--shadow-card)}
+.ck-h{font:600 15px var(--f-mono);letter-spacing:.03em;color:var(--text-secondary);padding-bottom:12px;border-bottom:1px solid var(--border-subtle)}
+.ck-list{list-style:none;margin:0;padding:0}
+.ck-list li{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:13px 0;border-bottom:1px solid var(--border-subtle)}
+.ck-list li:last-child{border-bottom:0}
+.ck{display:inline-block;font:700 30px/1 var(--f-body);color:var(--text-primary)}
+.ck-t{font:500 24px/1.35 var(--f-body);color:var(--text-primary)}
+.ck-tag{font:400 13px var(--f-mono);letter-spacing:.02em;color:var(--text-secondary);border:1px solid var(--border-subtle);background:var(--bg-surface);padding:3px 12px;border-radius:999px;white-space:nowrap}
+.thesis{background:var(--bg-card);border:1px solid var(--border-subtle);border-left:4px solid var(--accent-crimson);border-radius:var(--r-md);padding:22px 32px;box-shadow:var(--shadow-lift)}
+.thesis p{font:700 40px/1.15 var(--f-head);letter-spacing:-.02em;color:var(--text-primary)}
+
+/* ===== s11 disclosure ===== */
+#s11 .body{gap:12px}
+.s11-head{display:flex;flex-direction:column;gap:6px}
+.s11-head .sub{max-width:760px}
+.s11-bp .bp-body{padding:14px 18px}
+.flow{display:flex;align-items:stretch}
+.fn{background:var(--bg-card);border:1px solid var(--border-active);border-radius:6px;padding:12px 18px;display:flex;flex-direction:column;justify-content:center;gap:8px;min-width:0}
+.fn-k{font:700 14px var(--f-mono);letter-spacing:.03em;color:var(--text-primary)}
+.fn-t{font:400 17px/1.4 var(--f-body);color:var(--text-secondary);text-wrap:balance}
+.fn-t .ph{white-space:nowrap}
+.fn-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.fn-list li{font:400 17px/1.35 var(--f-body);color:var(--text-secondary)}
+.fn-in{position:relative;z-index:0;flex:0 0 300px;background:none;border:0;padding:14px 36px}
+.fn-in::before{content:"";position:absolute;left:0;right:0;top:0;bottom:0;z-index:-1;background:var(--bg-card);border:1px solid var(--border-active);border-radius:4px;transform:skewX(-8deg)}
+.fn-ai{flex:1 1 0}
+.fn-gate{flex:1 1 0;border-radius:0;border:1px solid var(--arrow);outline:1px solid var(--border-active);outline-offset:3px;margin:0 4px}
+.fn-human{flex:0 0 206px;border-radius:0;border:2px dashed var(--accent-crimson);background:var(--accent-crimson-dim)}
+.fn-human .fn-k{color:var(--accent-crimson)}
+.farr{flex:0 0 40px;width:40px;height:16px;align-self:center;fill:none;stroke:var(--arrow);stroke-width:1.5}
+.farr-h{fill:var(--arrow);stroke:none}
+@keyframes k-pulse{0%{box-shadow:0 0 0 0 transparent}42%{box-shadow:0 0 30px 6px var(--glow)}100%{box-shadow:0 0 0 0 transparent}}
+.slide.play .fn-human{animation:k-rise calc(var(--t,.8)*1s) var(--ease) calc(var(--d,0)*1s) both,k-pulse 2.2s ease-in-out 4s 1 both}
+.vs{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font:400 14px var(--f-mono);color:var(--text-secondary)}
+.vs-i{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--bg-surface);white-space:nowrap}
+.vs-i b{font-weight:700;color:var(--text-primary)}
+.vs-i .x{font-style:normal;font-weight:700;color:var(--accent-crimson)}
+.vs-now{border-color:var(--text-primary);color:var(--text-primary)}
+.vs-end{margin-left:auto}
+.s11-callback{font:700 20px/1.35 var(--f-mono);letter-spacing:.02em;color:var(--accent-crimson);margin:8px 0 10px}
+.ainote{padding:12px 20px;background:var(--accent-crimson-dim);border:1px solid var(--accent-crimson);border-radius:8px;font:500 15px/1.5 var(--f-body);color:var(--text-primary)}
+.ainote b{font:700 14px var(--f-mono);letter-spacing:.04em;color:var(--accent-crimson);margin-right:14px}
+
+/* ===== s12 your turn ===== */
+.s12-row{display:grid;grid-template-columns:520px 1fr;gap:44px;align-items:center;margin-top:10px}
+.s12-loop{margin:0;min-width:0}
+.s12-loop svg{display:block;width:100%;height:auto}
+svg .s12-ring{fill:none;stroke:var(--line);stroke-width:1.5}
+svg .s12-arr{fill:none;stroke:var(--arrow);stroke-width:1.5}
+#s12-svg marker path{fill:var(--arrow)}
+svg .s12-node{fill:var(--bg-card);stroke:var(--arrow);stroke-width:1.6}
+svg .s12-you{fill:var(--accent-crimson-dim);stroke:var(--accent-crimson);stroke-width:1.8}
+svg .s12-lab{font:700 18px var(--f-mono);letter-spacing:.02em;fill:var(--text-primary)}
+svg .s12-lab-you{fill:var(--accent-crimson)}
+svg .s12-dot{fill:var(--accent-crimson)}
+svg .s12-pulse{fill:none;stroke:var(--accent-crimson);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center}
+@keyframes k-ripple{from{opacity:.6;transform:scale(1)}to{opacity:0;transform:scale(2.4)}}
+.slide.play .s12-pulse{animation:k-ripple .9s var(--ease) 3.85s 1 both}
+.s12-q{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.s12-q li{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:baseline;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:20px 26px;box-shadow:var(--shadow-card)}
+.s12-q b{font:700 15px var(--f-mono);letter-spacing:.04em;color:var(--accent-crimson)}
+.s12-q span{font:700 26px/1.3 var(--f-head);letter-spacing:-.01em;color:var(--text-primary)}
+.s12-close{display:flex;align-items:baseline;gap:24px;margin-top:22px}
+.qa{font:700 50px/1 var(--f-mono);letter-spacing:-.01em;color:var(--accent-crimson)}
+.qt{font:600 34px/1.2 var(--f-head);letter-spacing:-.015em;color:var(--text-primary)}
+
+/* ---------- 6. mobile reflow (<= 760px): one slide at a time, stacked ---------- */
+html.mobile .viewport{overflow-y:auto;overflow-x:hidden}
+html.mobile .stage{position:relative;left:auto;top:auto;width:100%;max-width:100%;height:auto;transform:none!important;border:0}
+html.mobile .slide{position:relative;width:100%;max-width:100%;height:auto;min-height:calc(100vh - 2px);padding:60px 18px 24px;overflow-x:hidden}
+html.mobile .top{left:18px;right:18px;top:16px;font-size:12px}
+html.mobile .top .tr{display:none}
+html.mobile .foot{position:relative;bottom:auto;margin-top:24px;padding:0 4px;gap:12px;font-size:11px;width:100%}
+html.mobile .body{justify-content:flex-start;gap:18px;width:100%}
+html.mobile .t{font-size:30px;max-width:100%}
+html.mobile .t br{display:none}
+html.mobile .s1-h{font-size:34px}
+html.mobile .sub,html.mobile .txt,html.mobile .s2-lines li{font-size:18px}
+html.mobile .strip li{font-size:17px;grid-template-columns:34px 1fr}
+html.mobile .s2-row,html.mobile .s4-row,html.mobile .s5-row,html.mobile .s7-row,html.mobile .s8-row,html.mobile .s9-row,html.mobile .s12-row{grid-template-columns:1fr;gap:18px}
+html.mobile .s1-curve{width:100%;height:100%}
+html.mobile .scroller{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+html.mobile .scroller svg{min-width:640px}
+html.mobile #s2-svg,html.mobile #s8-svg{min-width:720px}
+html.mobile #s4-svg{min-width:700px}
+html.mobile #s9-svg{min-width:470px}
+html.mobile .s12-loop svg{min-width:0}
+html.mobile .doc{padding:0 16px 4px}
+html.mobile .doc-r{grid-template-columns:1fr;row-gap:4px;padding:10px 0}
+html.mobile .doc-l{font-size:18px}
+html.mobile .doc-n{border-left:0;padding-left:0;font-size:14px}
+html.mobile .doc-n-none{display:none}
+html.mobile .ctl{grid-template-columns:1fr;gap:12px}
+html.mobile .ro b{font-size:56px}
+html.mobile .s5-card{grid-template-columns:112px 1fr;gap:10px}
+html.mobile .s5-icon-wrap{width:112px}html.mobile .s5-ico{width:112px}html.mobile .s5-micro{font-size:9px}
+html.mobile .s5-card-t{font-size:17px}
+html.mobile .pgrid{grid-template-columns:1fr}
+html.mobile .pcol+.pcol{border-left:0;border-top:1px solid var(--border-subtle)}
+html.mobile .pcol-t{font-size:20px}
+html.mobile .flow{flex-direction:column;align-items:stretch}
+html.mobile .fn-in,html.mobile .fn-human{flex:0 0 auto}
+html.mobile .farr{transform:rotate(90deg);margin:6px 0;align-self:center}
+html.mobile .vs-end{margin-left:0}
+html.mobile .vs-i{white-space:normal}
+html.mobile .ck-list li{grid-template-columns:34px 1fr}
+html.mobile .ck-tag{grid-column:2;justify-self:start}
+html.mobile .ck-t{font-size:19px}
+html.mobile .thesis p{font-size:26px}
+html.mobile .ainote{font-size:17px}
+html.mobile .qa{font-size:34px}
+html.mobile .qt{font-size:22px}
+html.mobile .s12-close{flex-wrap:wrap;gap:8px 16px}
+html.mobile .s12-q span{font-size:20px}
+html.mobile .tag,html.mobile .ptag{white-space:normal}
+html.mobile .notespanel{height:45vh}
+html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
+
+/* ---------- 7. print (final state) + reduced motion ---------- */
+@page{size:1280px 720px;margin:0}
+@media print{
+  html,body{overflow:visible;height:auto;background:#ffffff}
+  .viewport{position:static;overflow:visible}
+  .stage{position:static;transform:none!important;width:1280px;height:auto;border:0;overflow:visible}
+  .slide{display:flex!important;position:relative;width:1280px;height:720px;break-after:page;page-break-after:always;overflow:hidden}
+  .hud,.notespanel{display:none!important}
+  .slide *,.slide *::before,.slide *::after{animation:none!important;transition:none!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (prefers-reduced-motion:reduce){
+  .slide *,.slide *::before,.slide *::after{animation:none!important;transition:none!important}
+  .marq-in{animation:none!important}
+}
+</style>
+</head>
+<body>
+<div class="viewport" id="vp">
+<div class="stage" id="stage">
+
+<!-- ================================================================
+     01 title
+     ================================================================ -->
+<section class="slide s1" id="s1" data-title="anything that can go wrong will go wrong">
+  <svg class="s1-curve" viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path id="s1-curve-path" class="draw" pathLength="1" d="M704.0 720.0 L741.8 719.7 L777.7 718.7 L811.9 717.1 L844.4 714.8 L875.3 711.9 L904.5 708.3 L932.1 704.1 L958.2 699.2 L982.8 693.6 L1006.1 687.3 L1027.9 680.3 L1048.4 672.7 L1067.6 664.3 L1085.6 655.3 L1102.5 645.5 L1118.1 635.1 L1132.7 623.9 L1146.3 612.0 L1158.9 599.4 L1170.5 586.0 L1181.2 571.9 L1191.1 557.1 L1200.2 541.5 L1208.6 525.2 L1216.2 508.1 L1223.2 490.2 L1229.6 471.6 L1235.5 452.3 L1240.8 432.1 L1245.7 411.2 L1250.2 389.5 L1254.3 367.0 L1258.1 343.7 L1261.6 319.6 L1264.9 294.7 L1268.1 269.0 L1271.1 242.5 L1274.1 215.1 L1277.0 187.0 L1280.0 158.0" style="--d:.2;--t:1.6"/>
+  </svg>
+  <div class="top"><span class="lbl">sharing session</span><span class="tr">[ murphy's law for ai ]</span></div>
+  <div class="body mid">
+    <h1 class="s1-h"><span class="s1-l1 rise" style="--d:.1">anything that can go wrong will go wrong.</span><span class="s1-l2 rise" style="--d:.4">ai just gets there faster.</span></h1>
+    <p class="sub s1-sub rise" style="--d:.75">murphy's law as a mindset for discovery, mvps and prototyping, now that making is cheap.</p>
+    <p class="s1-by rise" style="--d:1">krishna</p>
+    <p class="s1-disc rise" style="--d:1.25"><b class="s1-disc-k">[ disclaimer ]</b> i practice this. i have not mastered it. this is me sharing the parts i want to be more consistent at.</p>
+  </div>
+  <aside class="notes">
+    <p>hi semua. disclaimer dulu: i practice what's in this deck, but i'm not an expert at it. this is me sharing the parts i want to be more consistent at. and a quick warning: today i'm the pessimist in the room. not about ai. about us using ai. fifteen minutes on murphy's law, why i think it's the right mindset right now, and four habits that come from things that break.</p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     02 the moment
+     ================================================================ -->
+<section class="slide" id="s2" data-title="making got cheap. being right did not.">
+  <div class="top"><span class="lbl"><span class="num">(00)</span>the moment</span><span class="tr">[ murphy's law for ai ]</span></div>
+  <div class="body">
+    <h2 class="t rise">making got cheap. being right did <em>not</em>.</h2>
+    <div class="s2-row">
+      <div class="s2-chart">
+        <figure class="fig s2-fig">
+          <div class="scroller">
+            <svg id="s2-svg" viewBox="0 0 720 420" role="img" aria-label="illustrative chart with no numbers. the effort to make a draft, a mock or a prototype falls steeply from before ai to now. the cost when a wrong thing reaches customers stays flat and high. the widening space between the two lines is the optimism gap.">
+              <defs>
+                <linearGradient id="s2-gap-grad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" style="stop-color:var(--accent-crimson);stop-opacity:0"/>
+                  <stop offset=".42" style="stop-color:var(--accent-crimson);stop-opacity:.06"/>
+                  <stop offset="1" style="stop-color:var(--accent-crimson);stop-opacity:.26"/>
+                </linearGradient>
+              </defs>
+              <path id="s2-axes" class="ax draw" pathLength="1" d="M48 28 V360 H696" style="--d:.1;--t:.7"/>
+              <path id="s2-gap-wash" class="fade" fill="url(#s2-gap-grad)" stroke="none" style="--d:2.5;--t:.9" d="M48 106.4 L75 106.1 L102 105.6 L129 105 L156 104.3 L183 103.5 L210 102.7 L237 101.9 L264 100.9 L291 100 L318 98.9 L345 97.9 L372 96.8 L399 95.7 L426 94.5 L453 93.3 L480 92 L507 90.8 L534 89.5 L561 88.2 L588 86.8 L615 85.4 L642 84 L669 82.6 L696 81.1 L696 336.9 L687 336.9 L678 336.9 L669 336.9 L660 336.9 L651 336.9 L642 336.9 L633 336.8 L624 336.8 L615 336.8 L606 336.7 L597 336.7 L588 336.6 L579 336.5 L570 336.4 L561 336.2 L552 336 L543 335.8 L534 335.5 L525 335.1 L516 334.6 L507 334 L498 333.3 L489 332.3 L480 331.1 L471 329.7 L462 327.8 L453 325.6 L444 322.9 L435 319.5 L426 315.5 L417 310.7 L408 305.1 L399 298.7 L390 291.3 L381 283.1 L372 274.2 L363 264.8 L354 255 L345 245.2 L336 235.5 L327 226.4 L318 217.8 L309 210.1 L300 203.2 L291 197.2 L282 192.1 L273 187.8 L264 184.1 L255 181.1 L246 178.7 L237 176.7 L228 175.1 L219 173.8 L210 172.7 L201 171.9 L192 171.2 L183 170.7 L174 170.3 L165 169.9 L156 169.7 L147 169.4 L138 169.3 L129 169.1 L120 169 L111 169 L102 168.9 L93 168.8 L84 168.8 L75 168.8 L66 168.7 L57 168.7 L48 168.7 Z"/>
+              <path id="s2-line-effort" class="s-strong draw" pathLength="1" style="--d:.5;--t:.9" d="M48 168.7 L57 168.7 L66 168.7 L75 168.8 L84 168.8 L93 168.8 L102 168.9 L111 169 L120 169 L129 169.1 L138 169.3 L147 169.4 L156 169.7 L165 169.9 L174 170.3 L183 170.7 L192 171.2 L201 171.9 L210 172.7 L219 173.8 L228 175.1 L237 176.7 L246 178.7 L255 181.1 L264 184.1 L273 187.8 L282 192.1 L291 197.2 L300 203.2 L309 210.1 L318 217.8 L327 226.4 L336 235.5 L345 245.2 L354 255 L363 264.8 L372 274.2 L381 283.1 L390 291.3 L399 298.7 L408 305.1 L417 310.7 L426 315.5 L435 319.5 L444 322.9 L453 325.6 L462 327.8 L471 329.7 L480 331.1 L489 332.3 L498 333.3 L507 334 L516 334.6 L525 335.1 L534 335.5 L543 335.8 L552 336 L561 336.2 L570 336.4 L579 336.5 L588 336.6 L597 336.7 L606 336.7 L615 336.8 L624 336.8 L633 336.8 L642 336.9 L651 336.9 L660 336.9 L669 336.9 L678 336.9 L687 336.9 L696 336.9"/>
+              <path id="s2-line-cost" class="s-red draw" pathLength="1" style="--d:1.5;--t:.9" d="M48 106.4 L75 106.1 L102 105.6 L129 105 L156 104.3 L183 103.5 L210 102.7 L237 101.9 L264 100.9 L291 100 L318 98.9 L345 97.9 L372 96.8 L399 95.7 L426 94.5 L453 93.3 L480 92 L507 90.8 L534 89.5 L561 88.2 L588 86.8 L615 85.4 L642 84 L669 82.6 L696 81.1"/>
+              <g id="s2-label-effort" class="fade" style="--d:1.1">
+                <path class="s-strong" d="M56 207 H80"/>
+                <text x="90" y="212" class="ink">effort to make a draft,<tspan x="90" dy="21">a mock, a prototype</tspan></text>
+              </g>
+              <g id="s2-label-cost" class="fade" style="--d:1.9">
+                <path class="s-red" d="M56 68 H80"/>
+                <text x="90" y="73" class="red">cost when a wrong thing reaches customers</text>
+              </g>
+              <g id="s2-gap-label" class="fade" style="--d:3;--t:.8">
+                <path class="s2-dim" d="M652 93.5 V326.9 M646 93.5 H658 M646 326.9 H658"/>
+                <text x="638" y="214" text-anchor="end" class="red b">the optimism gap</text>
+              </g>
+              <text x="48" y="392">before ai</text>
+              <text x="696" y="392" text-anchor="end">now</text>
+            </svg>
+          </div>
+        </figure>
+        <p class="foot-note rise" style="--d:.6">illustrative shape, not measured data.</p>
+      </div>
+      <ul class="s2-lines">
+        <li class="rise" style="--d:.9">a PRD, a mock, a working prototype: each one a prompt away.</li>
+        <li class="rise" style="--d:2.2">so everyone feels fast, and everyone feels right.</li>
+        <li class="rise s2-last" style="--d:3.1">that is exactly when murphy shows up.</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>this is the moment we're in. making got cheap. a PRD, a mock, a working prototype, each one a prompt away. the dark line is the effort to make something, and it fell off a cliff. the red line is the cost when a wrong thing reaches customers. that line didn't move. a wrong price or a broken voucher costs the same as it always did. the space in between is what i call the optimism gap. everyone feels fast, everyone feels right, and that's exactly when murphy shows up. the chart is a shape, not data, ya.</p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     03 the symptom
+     ================================================================ -->
+<section class="slide" id="s3" data-title="ai sounds just as sure when it is wrong">
+  <div class="top"><span class="lbl"><span class="num">(01)</span>the symptom</span><span class="tr">[ murphy's law for ai ]</span></div>
+  <div class="body">
+    <h2 class="t rise">ai sounds just as sure when it is <em>wrong</em>.</h2>
+    <div class="doc crop rise" style="--d:.15;--t:.7" id="s3-doc">
+      <div class="doc-h"><span class="doc-ttl">prd: one-tap reorder</span><span class="tag">ai draft</span></div>
+      <ol class="doc-rows">
+        <li class="doc-r">
+          <p class="doc-l"><b>goal:</b> members reorder a past purchase in one tap.</p>
+          <p class="doc-n doc-n-none" aria-hidden="true"></p>
+        </li>
+        <li class="doc-r">
+          <p class="doc-l"><b>impact:</b> <span class="pen" style="--d:1.65">lifts repeat purchase by 23%</span>.</p>
+          <p class="doc-n rise" style="--d:1.65;--t:.5">✕ invented number. no source, no baseline.</p>
+        </li>
+        <li class="doc-r">
+          <p class="doc-l"><b>flow:</b> <span class="pen" style="--d:2.25">member taps reorder, the order is placed</span>.</p>
+          <p class="doc-n rise" style="--d:2.25;--t:.5">✕ happy path only. out of stock? price changed? address deleted?</p>
+        </li>
+        <li class="doc-r">
+          <p class="doc-l"><b>integration:</b> <span class="pen" style="--d:2.85">real-time sync with the loyalty engine</span>.</p>
+          <p class="doc-n rise" style="--d:2.85;--t:.5">✕ which engine? nobody checked it exists.</p>
+        </li>
+        <li class="doc-r">
+          <p class="doc-l"><b>edge cases:</b> <span class="pen" style="--d:3.45">all handled</span>.</p>
+          <p class="doc-n rise" style="--d:3.45;--t:.5">✕ none are listed.</p>
+        </li>
+        <li class="doc-r">
+          <p class="doc-l"><b>status:</b> <span class="pen" style="--d:4.05">ready for development</span>.</p>
+          <p class="doc-n rise" style="--d:4.05;--t:.5">✕ no non-goals. no owner. no undo.</p>
+        </li>
+      </ol>
+    </div>
+    <p class="foot-note rise" style="--d:.5">sample draft written for this slide. every line reads fine. five of six would cost us later.</p>
+  </div>
+  <aside class="notes">
+    <p>this is a sample draft i had ai write for this slide. read it fast and it sounds fine: confident, tidy, ready for development. now read it like a pessimist. twenty-three percent, from where? "taps reorder and the order is placed": what if it's out of stock, the price changed, the address is gone? "real-time sync with the loyalty engine": which engine, and does it exist? "all edge cases handled": none are listed. "ready for development": no non-goals, no owner. the problem isn't that ai is sometimes wrong. it's that it sounds exactly the same when it's wrong.</p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     06 the framework (blog principle grid)
+     ================================================================ -->
+<section class="slide" id="s6" data-title="four habits, borrowed from things that break">
+  <div class="top"><span class="lbl">the framework</span><span class="tr">[ murphy's law for ai ]</span></div>
+  <div class="body">
+    <div class="s6-head">
+      <h2 class="t rise">four habits, borrowed from things that <em>break</em>.</h2>
+      <p class="sub rise" style="--d:.2">a pessimist's toolkit for an optimistic moment.</p>
+    </div>
+    <div class="pgrid">
+      <article class="pcol rise" style="--d:.5" id="s6-murphy">
+        <svg class="pcol-ico" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M14 4V14M26 4V14"/><rect x="9" y="14" width="22" height="13" rx="4"/><path d="M20 27V31C20 34 22 35 25 35H33"/></svg>
+        <div class="pcol-h"><span class="pcol-n">01</span><span class="pcol-name">murphy's law</span></div>
+        <span class="ptag">expect failure</span>
+        <h3 class="pcol-t">expect the wrong way.</h3>
+        <hr class="pcol-hr">
+        <p class="pcol-k">in ai work</p>
+        <p class="pcol-a">count the steps. each one can fail.</p>
+      </article>
+      <article class="pcol rise" style="--d:.75" id="s6-reka">
+        <svg class="pcol-ico" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="7" r="3"/><path d="M20 10V17M8 17H32M8 17V27M20 17V27M32 17V27"/><rect x="5" y="27" width="6" height="7" rx="1"/><rect x="17" y="27" width="6" height="7" rx="1"/><rect class="ico-hot" x="29" y="27" width="6" height="7" rx="1"/></svg>
+        <div class="pcol-h"><span class="pcol-n">02</span><span class="pcol-name">reka peluang</span></div>
+        <span class="ptag">edge cases</span>
+        <h3 class="pcol-t">map the ugly paths first.</h3>
+        <hr class="pcol-hr">
+        <p class="pcol-k">in ai work</p>
+        <p class="pcol-a">ask for the failure list before the feature list.</p>
+      </article>
+      <article class="pcol rise" style="--d:1" id="s6-buffers">
+        <svg class="pcol-ico" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect x="8" y="5" width="24" height="30" rx="2"/><rect class="ico-hot ico-band" x="8" y="25" width="24" height="10"/><path d="M8 17H32" stroke-dasharray="3 3"/></svg>
+        <div class="pcol-h"><span class="pcol-n">03</span><span class="pcol-name">buffers</span></div>
+        <span class="ptag">margin</span>
+        <h3 class="pcol-t">leave slack where the bad week lands.</h3>
+        <hr class="pcol-hr">
+        <p class="pcol-k">in ai work</p>
+        <p class="pcol-a">a second reader, capped review, time to check.</p>
+      </article>
+      <article class="pcol rise" style="--d:1.25" id="s6-recovery">
+        <svg class="pcol-ico" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M7 4V36M33 4V36M7 10H11M7 16H11M7 22H11M7 28H11M33 10H29M33 16H29M33 22H29M33 28H29"/><rect x="14" y="17" width="12" height="14" rx="2"/><path class="ico-hot" d="M14 19L10 17M26 19L30 17"/></svg>
+        <div class="pcol-h"><span class="pcol-n">04</span><span class="pcol-name">recovery</span></div>
+        <span class="ptag">resilience</span>
+        <h3 class="pcol-t">make the failure survivable.</h3>
+        <hr class="pcol-hr">
+        <p class="pcol-k">in ai work</p>
+        <p class="pcol-a">know your undo before you ship.</p>
+      </article>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>so this is my framework: four habits, all borrowed from things that break. murphy's law, expect the wrong way. reka peluang, map the ugly paths first. buffers, leave slack where the bad week lands. recovery, make the failure survivable. kalau kalian tahu lagunya kafin sulthan, "hukum murphy", that title is the whole talk. next three slides, one habit each, each with a real thing that works this way.</p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     04 the law (interactive chart, svg is filled in by js)
+     ================================================================ -->
+<section class="slide s4" id="s4" data-title="ai adds steps for free. murphy charges for every one.">
+  <div class="top"><span class="lbl"><span class="num">(02)</span>the law</span><span class="tr">[ murphy's law for ai ]</span></div>
+  <div class="body">
+    <h2 class="t rise">ai adds steps for free.<br> murphy charges for <em>every one</em>.</h2>
+    <div class="s4-row">
+      <div class="s4-left">
+        <figure class="fig crop s4-fig">
+          <ul class="s4-key" aria-label="legend">
+            <li><i class="sw sw-weak"></i>each step 99% right</li>
+            <li class="hot"><i class="sw sw-red"></i>each step 95% right</li>
+            <li><i class="sw sw-strong"></i>each step 90% right</li>
+          </ul>
+          <div class="scroller">
+            <svg id="s4-svg" viewBox="0 0 700 288" role="img" aria-label="line chart of the chance that at least one step is wrong, from 0 to 100 percent, against the number of steps or claims, from 1 to 30. three lines show per-step accuracy of 99, 95 and 90 percent. at 95 percent, 10 steps gives about 40 percent and 20 steps about 64 percent. a crimson marker follows the sliders.">
+              <g id="s4-grid" class="gl fade" style="--d:.1;--t:.6"></g>
+              <path id="s4-axes" class="ax draw" pathLength="1" style="--d:.1;--t:.6"/>
+              <g id="s4-yt" class="fade" style="--d:.2;--t:.6"></g>
+              <g id="s4-xt" class="fade" style="--d:.2;--t:.6"></g>
+              <text class="s4-ttl fade" style="--d:.2;--t:.6" x="4" y="14">chance at least one is wrong</text>
+              <text class="s4-ttl fade" style="--d:.2;--t:.6" x="684" y="282" text-anchor="end">steps or claims in the work</text>
+              <path id="s4-ghost" class="s4-ghost fade" style="--d:3.2;--t:.6"/>
+              <path id="s4-c99" class="s-weak draw" pathLength="1" style="--d:.7;--t:.9"/>
+              <path id="s4-c90" class="s-strong draw" pathLength="1" style="--d:1.3;--t:.9"/>
+              <path id="s4-c95" class="s-red draw" pathLength="1" style="--d:1;--t:.9"/>
+              <g id="s4-call">
+                <g id="s4-call10">
+                  <path class="s4-lead fade" style="--d:2.4"/>
+                  <circle class="s4-dot pop" r="5.5" style="--d:2.3;--t:.5"/>
+                  <text class="red s4-value fade" style="--d:2.45;--t:.6">40%</text>
+                  <text class="s4-call-label fade" style="--d:2.5;--t:.6">a 10-step agent chain</text>
+                </g>
+                <g id="s4-call20">
+                  <path class="s4-lead fade" style="--d:2.8"/>
+                  <circle class="s4-dot pop" r="5.5" style="--d:2.7;--t:.5"/>
+                  <text class="red s4-value fade" style="--d:2.85;--t:.6">64%</text>
+                  <text class="s4-call-label fade" style="--d:2.9;--t:.6">a 20-claim spec</text>
+                </g>
+              </g>
+              <g id="s4-mk" class="fade" style="--d:3.2;--t:.6">
+                <path id="s4-mk-v" class="s4-guide"/>
+                <path id="s4-mk-h" class="s4-guide"/>
+                <circle id="s4-mk-ring" class="s4-ring" r="10"/>
+                <circle id="s4-mk-dot" class="s4-mkdot" r="3.5"/>
+              </g>
+            </svg>
+          </div>
+        </figure>
+        <div class="ctl fade" style="--d:.9" role="group" aria-label="try the arithmetic">
+          <div class="rng">
+            <label for="s4-p"><span>each step is right</span><output id="s4-pv" for="s4-p">95.0%</output></label>
+            <input id="s4-p" type="range" min="80" max="99.9" step="0.1" value="95">
+          </div>
+          <div class="rng">
+            <label for="s4-n"><span>steps</span><output id="s4-nv" for="s4-n">20</output></label>
+            <input id="s4-n" type="range" min="1" max="50" step="1" value="20">
+          </div>
+        </div>
+      </div>
+      <aside class="s4-side">
+        <p class="ro rise" style="--d:.6" aria-live="polite"><b id="s4-ro">64%</b><span>chance something is wrong</span></p>
+        <p class="txt s4-note rise" style="--d:.9">more screens, more claims, more agents in a chain. each one is cheap to add. none of them is exempt from murphy.</p>
+        <p class="s4-formula rise" style="--d:1.1">chance something is wrong = 1 - p<sup>n</sup></p>
+        <p class="foot-note rise" style="--d:1.3">illustrative arithmetic. assumes steps fail independently. real work is messier.</p>
+      </aside>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>so how often is it wrong? simple arithmetic. if each step is 95% right and you chain ten of them, like an agent pipeline, there's about a 40% chance something in the chain is wrong. a spec with twenty claims at 95% each: about 64%. the formula is one minus p to the n. ai makes it free to add steps: more screens, more claims, more agents. it doesn't make any step exempt from murphy. this is illustrative math. it assumes the steps are independent, and real work is messier. but the shape holds: more steps, more chances.</p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     05 the origin
+     ================================================================ -->
+<section class="slide" id="s5" data-title="murphy's law was a design brief, not a mood">
+  <div class="top"><span class="lbl"><span class="num">(03)</span>the origin</span><span class="tr">[ murphy's law for ai ]</span></div>
+  <div class="body">
+    <h2 class="t rise">murphy's law was a <em>design brief</em>, not a mood.</h2>
+    <div class="s5-row">
+      <div class="s5-story">
+        <p class="txt rise" style="--d:.2">1949, a rocket-sled test for the us air force. a set of sensors turned out to be installed the wrong way round. the takeaway, as the story is usually told: if it can be done wrong, someone will do it wrong.</p>
+        <p class="txt rise" style="--d:.5">the engineering answer was not 'be more careful'. it was: make the wrong way impossible.</p>
+      </div>
+      <div class="s5-cards">
+        <article class="s5-card" id="s5-sim">
+          <div class="s5-icon-wrap"><svg class="s5-ico" viewBox="0 0 150 84" role="img" aria-label="a sim card slides toward a slot turned the wrong way round, stops at the cut corner and backs off. it turns the right way round, slides in and fits.">
+            <path class="ico-slot" d="M44 15 H106.1 L123 31.9 V65 H44"/>
+            <g class="sim-card">
+              <path class="ico-card" d="M56 20 H104 L118 34 V60 H56 Z"/>
+              <rect class="ico-pad" x="72" y="30" width="22" height="20" rx="3"/>
+              <path class="ico-pad" d="M72 40 H94 M83 30 V50"/>
+            </g>
+            <text class="sim-x" x="138" y="50" text-anchor="middle">✕</text>
+            <text class="sim-ok" x="138" y="50" text-anchor="middle">✓</text>
+          </svg><p class="s5-micro s5-wrong-label">wrong way: blocked</p><p class="s5-micro s5-right-label">right way: fits</p></div>
+          <p class="s5-card-t"><b>sim card:</b> the cut corner fits one way only.</p>
+        </article>
+        <article class="s5-card rise" style="--d:4.3">
+          <div class="s5-icon-wrap"><svg class="s5-ico" viewBox="0 0 150 84" role="img" aria-label="a symmetric usb-c plug shell with an inner tongue.">
+            <path class="ico-axis" d="M20 42 H104"/>
+            <rect class="ico-line" x="30" y="28" width="64" height="28" rx="14"/>
+            <rect class="ico-line" x="42" y="38" width="40" height="8" rx="4"/>
+            <path class="ico-line" d="M94 42 H140"/>
+          </svg><p class="s5-micro">no wrong side</p></div>
+          <p class="s5-card-t"><b>usb-c:</b> designed so there is no wrong way in.</p>
+        </article>
+        <article class="s5-card rise" style="--d:4.8">
+          <div class="s5-icon-wrap"><svg class="s5-ico" viewBox="0 0 150 84" role="img" aria-label="a shaped peg with a flat side, and a block with its matching dashed hole.">
+            <path class="ico-axis" d="M40 28 H96 M40 60 H96"/>
+            <path class="ico-line" d="M14 48 L42 20 L70 48 V74 H14 Z"/>
+            <path class="ico-hole" d="M82 48 L110 20 L138 48 V74 H82 Z"/>
+          </svg><p class="s5-micro">only fits its hole</p></div>
+          <p class="s5-card-t"><b>poka-yoke:</b> toyota's word for mistake-proofing.</p>
+        </article>
+      </div>
+    </div>
+    <div class="strip rise" style="--d:5.3">
+      <p class="strip-h">in ai work</p>
+      <ol>
+        <li><b>01</b><span>constrain before you generate.</span></li>
+        <li><b>02</b><span>give it a template, a schema, the real system names and the non-goals.</span></li>
+        <li><b>03</b><span>a form, not a blank page.</span></li>
+      </ol>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>and murphy's law was never meant as a mood. the story as it's usually told: 1949, a rocket-sled test for the us air force, and a set of sensors installed the wrong way round. the takeaway: if it can be done wrong, someone will do it wrong. the engineering answer wasn't "be more careful". it was to make the wrong way impossible. a sim card has a cut corner so it only fits one way. usb-c removed the wrong way entirely. toyota has a word for it, poka-yoke. for us with ai, that means constrain before you generate: a template, a schema, the real system names, the non-goals. a form, not a blank page.</p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     07 reka peluang
+     ================================================================ -->
+<section class="slide" id="s7" data-title="imagine it already failed. then list why.">
+  <div class="top"><span class="lbl"><span class="num">(04)</span>reka peluang</span><span class="tr">[ murphy's law for ai ]</span></div>
+  <div class="body">
+    <h2 class="t rise">imagine it already <em>failed</em>. then list why.</h2>
+    <div class="s7-row">
+      <div class="s7-case">
+        <p class="txt rise" style="--d:.2">1935: a new bomber prototype crashed on its evaluation flight. a control lock had been left on. the fix was not a better pilot. it was a checklist.</p>
+        <p class="txt rise" style="--d:.45">today's version is the pre-mortem: before launch, the team assumes it already failed and writes down why.</p>
+        <p class="s7-cite rise" style="--d:.7">pre-mortem: gary klein</p>
+      </div>
+      <figure class="bp s7-bp">
+        <div class="bp-bar"><span class="bp-ttl"><svg class="bp-ico" viewBox="0 0 16 12" aria-hidden="true" focusable="false"><path d="M1 1.5H15M1 6H15M1 10.5H15"/></svg>pre-mortem</span><span class="bp-tag">reka peluang</span></div>
+        <div class="bp-body scroller">
+          <svg id="s7-svg" viewBox="0 0 664 242" role="img" aria-label="failure map. the centre node reads: one-tap reorder shipped. it failed. why? six branches lead to six failure nodes: item out of stock, price changed since last order, saved address deleted, voucher already used, double tap with two orders, payment method expired.">
+            <g id="s7-root" class="fade" style="--d:.3;--t:.6">
+              <rect class="nd" x="2" y="84" width="262" height="72" rx="36"/>
+              <text class="body b" x="133" y="115" text-anchor="middle">one-tap reorder shipped.</text>
+              <text class="body b" x="133" y="139" text-anchor="middle">it failed. why?</text>
+            </g>
+            <path class="lnk draw" pathLength="1" style="--d:.9;--t:.5" d="M264 120 C297 120 297 20 330 20"/>
+            <path class="lnk draw" pathLength="1" style="--d:1.25;--t:.5" d="M264 120 C297 120 297 60 330 60"/>
+            <path class="lnk draw" pathLength="1" style="--d:1.6;--t:.5" d="M264 120 C297 120 297 100 330 100"/>
+            <path class="lnk draw" pathLength="1" style="--d:1.95;--t:.5" d="M264 120 C297 120 297 140 330 140"/>
+            <path class="lnk draw" pathLength="1" style="--d:2.3;--t:.5" d="M264 120 C297 120 297 180 330 180"/>
+            <path class="lnk draw" pathLength="1" style="--d:2.65;--t:.5" d="M264 120 C297 120 297 220 330 220"/>
+            <g id="s7-f1" class="fade" style="--d:1.2;--t:.5"><rect class="nd" x="330" y="4" width="332" height="32" rx="6"/><text class="red b mk" x="347" y="26" text-anchor="middle">✕</text><text class="body" x="366" y="26">item out of stock</text></g>
+            <g id="s7-f2" class="fade" style="--d:1.55;--t:.5"><rect class="nd" x="330" y="44" width="332" height="32" rx="6"/><text class="red b mk" x="347" y="66" text-anchor="middle">✕</text><text class="body" x="366" y="66">price changed since last order</text></g>
+            <g id="s7-f3" class="fade" style="--d:1.9;--t:.5"><rect class="nd" x="330" y="84" width="332" height="32" rx="6"/><text class="red b mk" x="347" y="106" text-anchor="middle">✕</text><text class="body" x="366" y="106">saved address deleted</text></g>
+            <g id="s7-f4" class="fade" style="--d:2.25;--t:.5"><rect class="nd" x="330" y="124" width="332" height="32" rx="6"/><text class="red b mk" x="347" y="146" text-anchor="middle">✕</text><text class="body" x="366" y="146">voucher already used</text></g>
+            <g id="s7-f5" class="fade" style="--d:2.6;--t:.5"><rect class="nd" x="330" y="164" width="332" height="32" rx="6"/><text class="red b mk" x="347" y="186" text-anchor="middle">✕</text><text class="body" x="366" y="186">double tap, two orders</text></g>
+            <g id="s7-f6" class="fade" style="--d:2.95;--t:.5"><rect class="nd" x="330" y="204" width="332" height="32" rx="6"/><text class="red b mk" x="347" y="226" text-anchor="middle">✕</text><text class="body" x="366" y="226">payment method expired</text></g>
+          </svg>
+        </div>
+        <div class="bp-leg" aria-hidden="true"><span class="bp-leg-k">lines:</span><span><i class="lg lg-flow"></i>flow</span><span><i class="lg lg-fail"></i>failure</span></div>
+      </figure>
+    </div>
+    <div class="strip rise" style="--d:3.5">
+      <p class="strip-h">in ai work</p>
+      <ol>
+        <li><b>01</b><span>ask the ai for the failure list before the feature list.</span></li>
+        <li><b>02</b><span>then turn every branch into a test case or a non-goal.</span></li>
+      </ol>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>1935: a new bomber prototype crashed on its evaluation flight. a control lock had been left on. the fix wasn't a better pilot. it was a checklist. that's reka peluang: map the possibilities before they map you. today's version is the pre-mortem. before launch, assume it already failed and write down why. here's one for the reorder feature from slide three: out of stock, price changed, address deleted, voucher already used, double tap and two orders, payment expired. with ai i flip the usual order: i ask for the failure list before the feature list. then every branch becomes a test case or a non-goal.</p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     08 buffers
+     ================================================================ -->
+<section class="slide" id="s8" data-title="slack looks like waste until the bad week">
+  <div class="top"><span class="lbl"><span class="num">(05)</span>buffers</span><span class="tr">[ murphy's law for ai ]</span></div>
+  <div class="body">
+    <h2 class="t rise">slack looks like waste until the <em>bad week</em>.</h2>
+    <div class="s8-row">
+      <figure class="fig crop s8-fig">
+        <div class="scroller">
+          <svg id="s8-svg" viewBox="0 0 720 300" role="img" aria-label="inventory chart with no numbers. stock on hand falls and a delivery lifts it back up, about five times. a dashed line marks the reorder point and a crimson band at the bottom marks safety stock. in the fourth cycle demand spikes and the truck is late, so the line dips into the band and turns before it reaches zero.">
+            <rect id="s8-band" class="s8-band fade" x="52" y="164.7" width="538" height="41.3" style="--d:.2;--t:.7"/>
+            <path id="s8-band-edge" class="s8-band-edge fade" d="M52 164.7 H590" style="--d:.2;--t:.7"/>
+            <path id="s8-axes" class="ax draw" pathLength="1" d="M52 30 V206 H590" style="--d:.1;--t:.7"/>
+            <path id="s8-reorder" class="s8-reorder fade" d="M52 133.8 H596" style="--d:.5;--t:.7"/>
+            <path id="s8-saw" class="s-strong s8-saw" pathLength="1" d="M52 34 L148 152.7 L148 34 L244 152.7 L244 34 L340 152.7 L340 34 L420.1 192.5 L420.1 34 L516.1 152.7 L516.1 34 L590 125.3"/>
+            <circle id="s8-dip" class="s8-dip pop" cx="420.1" cy="192.5" r="9" style="--d:2.85;--t:.5"/>
+            <path id="s8-lead" class="s8-lead fade" d="M420.1 202 V250" style="--d:2.95;--t:.5"/>
+            <text id="s8-note" class="red fade" x="420.1" y="270" text-anchor="middle" style="--d:3.1;--t:.7">demand spike + late truck.<tspan x="420.1" dy="21">the buffer takes the hit, not the customer.</tspan></text>
+            <text x="52" y="18">stock on hand</text>
+            <text x="52" y="228">weeks</text>
+            <text x="602" y="139">reorder point</text>
+            <text class="red" x="602" y="190">safety stock</text>
+          </svg>
+        </div>
+      </figure>
+      <p class="txt s8-txt rise" style="--d:.5">retail keeps safety stock because demand and delivery both wobble. on a good week it just sits there. on a bad week it is the business.</p>
+    </div>
+    <div class="strip rise" style="--d:4.2">
+      <p class="strip-h">in ai work</p>
+      <ol>
+        <li><b>01</b><span>a second model attacks the draft cold.</span></li>
+        <li><b>02</b><span>review capped at two rounds, then a human decides.</span></li>
+        <li><b>03</b><span>time booked for checking, not only for making.</span></li>
+      </ol>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>this one should feel familiar, because we're retail. safety stock exists because demand wobbles and deliveries wobble. on a good week the buffer looks like waste, money sitting on a shelf. then you get a week like this one: a demand spike plus a late truck. stock dips into the buffer and not to zero, and the customer never notices. ai work needs the same slack. a second model that attacks the draft cold, not the one that wrote it. review capped at two rounds and then a human decides, so we don't loop forever. and real time booked for checking. ai saved us the making time, so spend some of it here.</p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     09 recovery
+     ================================================================ -->
+<section class="slide" id="s9" data-title="design the fall, not just the climb">
+  <div class="top"><span class="lbl"><span class="num">(06)</span>recovery</span><span class="tr">[ murphy's law for ai ]</span></div>
+  <div class="body">
+    <h2 class="t rise">design the <em>fall</em>, not just the climb.</h2>
+    <div class="s9-row">
+      <figure class="fig crop s9-fig">
+        <div class="scroller">
+          <svg id="s9-svg" viewBox="0 0 470 300" role="img" aria-label="line drawing of an elevator safety catch. two guide rails with saw teeth on their inner edges, a car hanging from a rope between them, and two small pawls on the car's top corners. the rope snaps, the car drops a short way, the pawls flick out into the teeth and the car stops. a label reads: safety catch engages.">
+            <g id="s9-scene" transform="translate(22 0)">
+            <rect class="el-beam" x="10" y="6" width="220" height="8"/>
+            <circle class="el-hook" cx="120" cy="22" r="4"/>
+            <path id="s9-rail-l" class="el-rail" d="M10 14 H34 V28 H45 L34 39 V48 H45 L34 59 V68 H45 L34 79 V88 H45 L34 99 V108 H45 L34 119 V128 H45 L34 139 V148 H45 L34 159 V168 H45 L34 179 V188 H45 L34 199 V208 H45 L34 219 V228 H45 L34 239 V248 H45 L34 259 V268 H10 Z"/>
+            <path id="s9-rail-r" class="el-rail" d="M230 14 H206 V28 H195 L206 39 V48 H195 L206 59 V68 H195 L206 79 V88 H195 L206 99 V108 H195 L206 119 V128 H195 L206 139 V148 H195 L206 159 V168 H195 L206 179 V188 H195 L206 199 V208 H195 L206 219 V228 H195 L206 239 V248 H195 L206 259 V268 H230 Z"/>
+            <path class="el-floor" d="M10 268 H230"/>
+            <path class="el-hatch" d="M22 268 L14 280 M38 268 L30 280 M54 268 L46 280 M70 268 L62 280 M86 268 L78 280 M102 268 L94 280 M118 268 L110 280 M134 268 L126 280 M150 268 L142 280 M166 268 L158 280 M182 268 L174 280 M198 268 L190 280 M214 268 L206 280 M230 268 L222 280"/>
+            <path id="s9-rope-top" class="el-rope s9-rope-top" pathLength="1" d="M120 26 V80"/>
+            <g id="s9-cut" class="fade" style="--d:1.4;--t:.25"><text class="red b" x="128" y="79">✕</text><text class="red" x="145" y="79" style="font-size:10px">rope cut</text></g>
+            <g id="s9-car" class="s9-car">
+              <path class="el-rope" d="M120 80 V100 M120 100 L66 120 M120 100 L174 120"/>
+              <rect class="el-carbody" x="61" y="120" width="118" height="80" rx="6"/>
+              <path class="el-cardet" d="M61 136 H179 M120 136 V200"/>
+              <path id="s9-pawl-l" class="s9-pawl s9-pawl-l" d="M61 119 L40 121 L40 128 L61 128 Z"/>
+              <path id="s9-pawl-r" class="s9-pawl s9-pawl-r" d="M179 119 L200 121 L200 128 L179 128 Z"/>
+            </g>
+            <g id="s9-label" class="s9-label fade" style="--d:2;--t:.7">
+              <path class="s9-lead" d="M238 164 H203"/>
+              <circle class="s9-lead-dot" cx="201" cy="164" r="3"/>
+              <text x="246" y="169" class="red b">safety catch engages ✓</text>
+            </g>
+            </g>
+          </svg>
+        </div>
+      </figure>
+      <div class="s9-case">
+        <p class="txt rise" style="--d:.3">1854, new york. elisha otis rode a lifting platform up in front of a crowd, then had the rope cut. the platform held.</p>
+        <p class="txt s9-lead-p rise" style="--d:.6">otis did not invent the elevator. he made its failure survivable.</p>
+        <div class="s9-how fade" style="--d:2.7">
+          <p class="s9-how-h">[ how it works ]</p>
+          <ol>
+            <li><b>01</b><span>the rope's pull keeps a spring flexed and the catches tucked in.</span></li>
+            <li><b>02</b><span>the rope snaps. the spring snaps back.</span></li>
+            <li><b>03</b><span>its ends push two catches into the teeth on the rails.</span></li>
+            <li><b>04</b><span>the car stops after a short drop.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="strip rise" style="--d:2.4">
+      <p class="strip-h">in ai work</p>
+      <ol>
+        <li><b>01</b><span>everything ai touches lives in version control. undo is one step.</span></li>
+        <li><b>02</b><span>prototypes stay behind a gate until a human checks them.</span></li>
+        <li><b>03</b><span>when it breaks: a clear status and a next step, never a blank screen.</span></li>
+      </ol>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>1854, new york. elisha otis rode a lifting platform up in front of a crowd, then had the rope cut. the platform held. elevators already existed. what otis added was a survivable failure: when the rope goes slack, a spring throws catches into teeth on the rails. people started trusting elevators because the fall was designed. for ai work, that means everything it touches lives in version control, so undo is one step. prototypes stay behind a gate until someone checks them. and when something breaks, the user gets a status and a next step, not a blank screen.</p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     10 the mindset
+     ================================================================ -->
+<section class="slide" id="s10" data-title="optimistic about the goal. pessimistic about every step.">
+  <div class="top"><span class="lbl">the mindset</span><span class="tr">[ murphy's law for ai ]</span></div>
+  <div class="body">
+    <h2 class="t rise">optimistic about the goal.<br> <em>pessimistic</em> about every step.</h2>
+    <div class="ck-card rise" style="--d:.2">
+      <p class="ck-h">before anything ai made reaches a customer:</p>
+      <ul class="ck-list">
+        <li><span class="ck wipe" style="--d:.9">✓</span><span class="ck-t">count the steps. each one is a chance to be wrong.</span><span class="ck-tag">murphy's law</span></li>
+        <li><span class="ck wipe" style="--d:1.5">✓</span><span class="ck-t">write the non-goals and ugly paths before the prompt.</span><span class="ck-tag">reka peluang</span></li>
+        <li><span class="ck wipe" style="--d:2.1">✓</span><span class="ck-t">never let the author grade its own work.</span><span class="ck-tag">buffers</span></li>
+        <li><span class="ck wipe" style="--d:2.7">✓</span><span class="ck-t">know your undo before you ship.</span><span class="ck-tag">recovery</span></li>
+      </ul>
+    </div>
+    <div class="thesis fade" style="--d:3.5;--t:.9" id="s10-thesis">
+      <p>making is cheap now. checking is the job.</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>so back to the question we started with. everything is easy now, so what's the right mindset? mine is optimistic about the goal and pessimistic about every step. four checks before anything ai-made reaches a customer. count the steps. write the non-goals and the ugly paths before the prompt. never let the author grade its own work. know your undo. honestly, these are also the four i still skip sometimes. that's why they're on a slide. making is cheap now. checking is the job.</p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     11 disclosure
+     ================================================================ -->
+<section class="slide" id="s11" data-title="this deck was made 100% by ai">
+  <div class="top"><span class="lbl">disclosure</span><span class="tr">[ murphy's law for ai ]</span></div>
+  <div class="body">
+    <div class="s11-head">
+      <h2 class="t rise">this deck was made <em>100% by ai</em>.</h2>
+      <p class="sub rise" style="--d:.2">krishna gave the input. ai did the rest.<br> by its own rules, it is still a draft.</p>
+    </div>
+    <figure class="bp s11-bp">
+      <div class="bp-bar"><span class="bp-ttl"><svg class="bp-ico" viewBox="0 0 16 12" aria-hidden="true" focusable="false"><path d="M1 1.5H15M1 6H15M1 10.5H15"/></svg>how this deck was made</span><span class="bp-tag">disclosure</span></div>
+      <div class="bp-body scroller">
+        <div class="flow" role="group" aria-label="how this deck was made. krishna's input goes to the ai agents, then to automatic checks, then to a human review that is still open.">
+          <div class="fn fn-in rise" style="--d:.4">
+            <p class="fn-k">krishna's input</p>
+            <ul class="fn-list">
+              <li>the angle: murphy's law for the ai era</li>
+              <li>four habits from the blog</li>
+              <li>taste and style rules</li>
+              <li>feedback between drafts</li>
+            </ul>
+          </div>
+          <svg class="farr" viewBox="0 0 44 16" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:1;--t:.4" d="M2 8 H34"/><path class="farr-h fade" style="--d:1.25;--t:.2" d="M32 3 L41 8 L32 13 Z"/></svg>
+          <div class="fn fn-ai rise" style="--d:1.3">
+            <p class="fn-k">ai agents</p>
+            <p class="fn-t"><span class="ph">research •</span> <span class="ph">writing •</span> <span class="ph">visuals •</span> <span class="ph">html and pptx build</span></p>
+          </div>
+          <svg class="farr" viewBox="0 0 44 16" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:1.9;--t:.4" d="M2 8 H34"/><path class="farr-h fade" style="--d:2.15;--t:.2" d="M32 3 L41 8 L32 13 Z"/></svg>
+          <div class="fn fn-gate rise" style="--d:2.2">
+            <p class="fn-k">automatic checks ✓</p>
+            <p class="fn-t"><span class="ph">style lint •</span> <span class="ph">dash scan •</span> <span class="ph">render check</span></p>
+          </div>
+          <svg class="farr" viewBox="0 0 44 16" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:2.8;--t:.4" d="M2 8 H34"/><path class="farr-h fade" style="--d:3.05;--t:.2" d="M32 3 L41 8 L32 13 Z"/></svg>
+          <div class="fn fn-human rise" style="--d:3.1" id="s11-human">
+            <p class="fn-k">human review ✕</p>
+            <p class="fn-t">open. that is you.</p>
+          </div>
+        </div>
+      </div>
+      <div class="bp-leg" aria-hidden="true"><span class="bp-leg-k">lines:</span><span><i class="lg lg-flow"></i>flow</span><span><i class="lg lg-fail"></i>failure</span></div>
+    </figure>
+    <div class="vs rise" style="--d:3.9">
+      <span class="vs-i"><b>v1</b><i class="x">✕</i>too many work cases</span>
+      <span class="vs-i"><b>v2</b><i class="x">✕</i>read like showing off</span>
+      <span class="vs-i vs-now"><b>v3</b>this one</span>
+      <span class="vs-end">both fixes came from a human.</span>
+    </div>
+    <p class="s11-callback rise" style="--d:4.3">by slide 5's math, something in here is probably wrong.</p>
+    <p class="ainote rise" style="--d:4.6"><b>ai note</b><span>drafted with ai. might be wrong, check anything important.</span></p>
+  </div>
+  <aside class="notes">
+    <p>one confession. this deck was made 100% by ai. i gave the input: the angle, the four habits from my blog, my style rules, and feedback between drafts. the first version had too many work cases. the second read like showing off. both fixes came from a human. ai did the research, the writing, the visuals and the build, and it ran its own checks. but by its own rules it's still a draft, because the human review gate is still open. and by slide five's math, something in here is probably wrong.</p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     12 your turn
+     ================================================================ -->
+<section class="slide" id="s12" data-title="now the human loop. your turn.">
+  <div class="top"><span class="lbl">human loop</span><span class="tr">[ murphy's law for ai ]</span></div>
+  <div class="body">
+    <h2 class="t rise">now the human loop. <em>your turn</em>.</h2>
+    <div class="s12-row">
+      <figure class="s12-loop">
+        <div class="scroller">
+          <svg id="s12-svg" viewBox="0 0 480 280" role="img" aria-label="a closed loop of four nodes with arrows going round: krishna, ai, you and v4. a small crimson dot travels the loop once and stops at you.">
+            <defs>
+              <marker id="s12-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z"/></marker>
+            </defs>
+            <path id="s12-ring" class="s12-ring" d="M240 44 H382 A28 28 0 0 1 410 72 V208 A28 28 0 0 1 382 236 H98 A28 28 0 0 1 70 208 V72 A28 28 0 0 1 98 44 H240"/>
+            <path id="s12-dotpath" d="M240 236 H98 A28 28 0 0 1 70 208 V72 A28 28 0 0 1 98 44 H382 A28 28 0 0 1 410 72 V208 A28 28 0 0 1 382 236 H240" fill="none" stroke="none"/>
+            <path class="s12-arr fade" style="--d:.4;--t:.5" d="M258 44 H382 A28 28 0 0 1 410 72 V120" marker-end="url(#s12-ah)"/>
+            <path class="s12-arr fade" style="--d:.6;--t:.5" d="M410 160 V208 A28 28 0 0 1 382 236 H264" marker-end="url(#s12-ah)"/>
+            <path class="s12-arr fade" style="--d:.8;--t:.5" d="M218 236 H98 A28 28 0 0 1 70 208 V160" marker-end="url(#s12-ah)"/>
+            <path class="s12-arr fade" style="--d:1;--t:.5" d="M70 120 V72 A28 28 0 0 1 98 44 H222" marker-end="url(#s12-ah)"/>
+            <g class="s12-st fade" style="--d:.2;--t:.5"><circle class="s12-node" cx="240" cy="44" r="12"/><text class="s12-lab" x="240" y="26" text-anchor="middle">krishna</text></g>
+            <g class="s12-st fade" style="--d:.3;--t:.5"><circle class="s12-node" cx="410" cy="140" r="12"/><text class="s12-lab" x="432" y="147">ai</text></g>
+            <g class="s12-st fade" style="--d:.4;--t:.5"><circle class="s12-node s12-you" cx="240" cy="236" r="15"/><text class="s12-lab s12-lab-you" x="240" y="272" text-anchor="middle">you</text></g>
+            <g class="s12-st fade" style="--d:.5;--t:.5"><circle class="s12-node" cx="70" cy="140" r="12"/><text class="s12-lab" x="48" y="147" text-anchor="end">v4</text></g>
+            <circle id="s12-pulse" class="s12-pulse" cx="240" cy="236" r="15"/>
+            <circle id="s12-dot" class="s12-dot fade" style="--d:.5;--t:.4" cx="240" cy="236" r="5.5"/>
+          </svg>
+        </div>
+      </figure>
+      <ol class="s12-q">
+        <li class="rise" style="--d:1.4"><b>01</b><span>what is wrong in this deck?</span></li>
+        <li class="rise" style="--d:1.9"><b>02</b><span>which failure have we not mapped in our own work?</span></li>
+        <li class="rise" style="--d:2.4"><b>03</b><span>where would a buffer have saved us?</span></li>
+      </ol>
+    </div>
+    <p class="s12-close rise" style="--d:3.4"><span class="qa">[ q&amp;a ]</span><span class="qt">what you find goes into v4.</span></p>
+  </div>
+  <aside class="notes">
+    <p>so that gate is you. three questions. what's wrong in this deck? which failure have we not mapped in our own work? where would a buffer have saved us? whatever you find goes into version four. ayo, q&amp;a.</p>
+  </aside>
+</section>
+
+</div>
+</div>
+
+<div class="hud" id="hud">
+  <button type="button" id="b-prev" aria-label="previous slide">prev</button>
+  <button type="button" id="b-next" aria-label="next slide">next</button>
+  <button type="button" id="b-replay" aria-label="replay this slide">r replay</button>
+  <button type="button" id="b-notes" aria-label="toggle notes">n notes</button>
+  <button type="button" id="b-theme" aria-label="toggle theme">t theme</button>
+  <button type="button" id="b-full" aria-label="toggle fullscreen">f full</button>
+  <a class="deck-back-link" href="../" aria-label="back to notes archive">← notes</a>
+</div>
+<div class="notespanel" id="np"><header>[ speaker notes ]</header><div class="nb" id="nb"></div></div>
+
+<script>
+(function(){
+  'use strict';
+  var vp=document.getElementById('vp'), stage=document.getElementById('stage'), np=document.getElementById('np'), nb=document.getElementById('nb');
+  var slides=[].slice.call(document.querySelectorAll('.slide')), n=slides.length, cur=0, notesOpen=false;
+  var root=document.documentElement;
+  var mqReduce=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var hooks={};                 /* per slide id: {play(slide,reduced), stop(slide), still(slide)} */
+  var ctlDown=false;            /* a pointer is down inside a slider panel: swallow the click */
+  function pad(x){return (x<10?'0':'')+x}
+  function isReduced(){return !!mqReduce.matches}
+
+  /* ---------- footer, per slide ---------- */
+  var mq='systems & matter ✦ culture & taste ✦ ', half='';
+  for(var k=0;k<6;k++){half+=mq}
+  slides.forEach(function(s,i){
+    var f=document.createElement('footer'); f.className='foot';
+    var w=document.createElement('span'); w.className='wm'; w.innerHTML='naquuuu<i>.</i>';
+    var m=document.createElement('div'); m.className='marq';
+    var mi=document.createElement('span'); mi.className='marq-in'; mi.textContent=half+half; m.appendChild(mi);
+    var c=document.createElement('span'); c.className='ctr'; c.textContent=pad(i+1)+' / '+pad(n);
+    f.appendChild(w); f.appendChild(m); f.appendChild(c); s.appendChild(f);
+    s.setAttribute('aria-label','slide '+(i+1)+' of '+n);
+  });
+
+  /* ---------- scale the 1280x720 stage into the window ---------- */
+  function fit(){
+    if(!window.innerWidth||!window.innerHeight)return;   /* hidden pane: wait for a real size */
+    var mobile=window.innerWidth<=760;
+    root.classList.toggle('mobile',mobile);
+    var panelH=(notesOpen&&np.offsetHeight)?np.offsetHeight:0;
+    vp.style.bottom=panelH+'px';
+    if(mobile){stage.style.transform='none';return}
+    var s=Math.min(vp.clientWidth/1280, vp.clientHeight/720);
+    stage.style.transform='translate(-50%,-50%) scale('+s+')';
+  }
+
+  /* ---------- motion: a slide plays when it becomes active, r replays ---------- */
+  function play(i){
+    var s=slides[i]; if(!s)return;
+    var h=hooks[s.id];
+    if(h&&h.stop)h.stop(s);
+    s.classList.remove('play');
+    void s.offsetWidth;                         /* restart css animations */
+    var red=isReduced();
+    if(!red)s.classList.add('play');            /* reduced motion: never add .play, so the end state shows */
+    if(h&&h.play)h.play(s,red);
+  }
+
+  function show(i,write){
+    i=Math.max(0,Math.min(n-1,i)); cur=i;
+    slides.forEach(function(s,k){var on=(k===i); s.classList.toggle('active',on); if(!on)s.classList.remove('play')});
+    nb.innerHTML=''; var a=slides[i].querySelector('.notes');
+    if(a){[].slice.call(a.children).forEach(function(c){nb.appendChild(c.cloneNode(true))})}
+    if(write!==false){try{history.replaceState(null,'',location.pathname+location.search+'#'+(i+1))}catch(e){location.hash='#'+(i+1)}}
+    document.title=pad(i+1)+' / '+pad(n)+' '+(slides[i].getAttribute('data-title')||'naquuuu');
+    vp.scrollTop=0;
+    var ae=document.activeElement;
+    if(ae&&ae!==document.body&&!slides[i].contains(ae)&&ae.blur&&!/^(b-)/.test(ae.id||''))ae.blur();
+    play(i);
+  }
+  function fromHash(){var v=parseInt((location.hash||'').replace('#',''),10); return (v>=1&&v<=n)?v-1:0}
+  function next(){show(cur+1)} function prev(){show(cur-1)}
+  function replay(){play(cur)}
+  function toggleNotes(){notesOpen=!notesOpen; np.classList.toggle('open',notesOpen); fit()}
+  function setTheme(d){root.setAttribute('data-theme',d)}
+  function toggleTheme(){
+    var d=root.getAttribute('data-theme')==='dark'?'light':'dark'; setTheme(d);
+    try{localStorage.setItem('naq-deck-theme',d)}catch(e){}
+  }
+  function toggleFull(){
+    try{ if(document.fullscreenElement){document.exitFullscreen()} else if(root.requestFullscreen){root.requestFullscreen()} }catch(e){}
+  }
+
+  try{var t=localStorage.getItem('naq-deck-theme'); if(t==='dark'||t==='light'){setTheme(t)}}catch(e){}
+  var qm=/[?&]theme=(dark|light)/.exec(location.search); if(qm){setTheme(qm[1])}   /* ?theme=dark for previews */
+
+  /* ---------- keys: arrows, space, enter, page keys, home, end; t n f r ---------- */
+  function isField(el){return !!(el&&el.closest&&el.closest('input,select,textarea,[contenteditable="true"]'))}
+  document.addEventListener('keydown',function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    var k=e.key, lk=(k&&k.length===1)?k.toLowerCase():k;
+    if(isField(e.target)){
+      /* a focused slider keeps its arrows, space, page and home/end keys; only the letter hotkeys pass through */
+      if(k==='Escape'){e.target.blur();e.preventDefault();return}
+      if(lk!=='t'&&lk!=='n'&&lk!=='f'&&lk!=='r')return;
+    }
+    if(k==='ArrowRight'||k==='ArrowDown'||k===' '||k==='PageDown'||k==='Enter'){e.preventDefault();next()}
+    else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'||k==='Backspace'){e.preventDefault();prev()}
+    else if(k==='Home'){show(0)} else if(k==='End'){show(n-1)}
+    else if(lk==='n'){toggleNotes()}
+    else if(lk==='t'){toggleTheme()}
+    else if(lk==='f'){toggleFull()}
+    else if(lk==='r'){replay()}
+  });
+  /* belt and braces: inputs never let navigation keys bubble out of them */
+  [].slice.call(document.querySelectorAll('input[type=range]')).forEach(function(inp){
+    inp.addEventListener('keydown',function(e){
+      if(/^[tnfrTNFR]$/.test(e.key)||e.key==='Escape')return;
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener('pointerdown',function(e){ctlDown=!!(e.target.closest&&e.target.closest('.ctl'))});
+  window.addEventListener('pointerup',function(){setTimeout(function(){ctlDown=false},0)});
+  window.addEventListener('pointercancel',function(){setTimeout(function(){ctlDown=false},0)});
+
+  vp.addEventListener('click',function(e){
+    if(ctlDown||e.target.closest('a,button,input,.ctl,.scroller,.notespanel'))return;
+    if(root.classList.contains('mobile'))return;
+    var x=e.clientX/window.innerWidth; if(x<0.25)prev(); else next();
+  });
+  var sx=0,sy=0,swipeOk=true;
+  vp.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;swipeOk=!(e.target.closest&&e.target.closest('.ctl,.scroller'))},{passive:true});
+  vp.addEventListener('touchend',function(e){
+    if(!swipeOk)return;
+    var dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){ if(dx<0)next(); else prev(); }
+  },{passive:true});
+  document.getElementById('b-prev').onclick=prev;
+  document.getElementById('b-next').onclick=next;
+  document.getElementById('b-replay').onclick=replay;
+  document.getElementById('b-notes').onclick=toggleNotes;
+  document.getElementById('b-theme').onclick=toggleTheme;
+  document.getElementById('b-full').onclick=toggleFull;
+  window.addEventListener('resize',fit);
+  window.addEventListener('hashchange',function(){show(fromHash(),false)});
+  window.addEventListener('beforeprint',function(){Object.keys(hooks).forEach(function(id){var h=hooks[id]; if(h.still)h.still(document.getElementById(id))})});
+
+  /* ================================================================
+     s4: the law. y = 1 - p^n, live. one source of truth: state.p, state.n
+     ================================================================ */
+  (function(){
+    var svg=document.getElementById('s4-svg'); if(!svg)return;
+    var NS='http://www.w3.org/2000/svg';
+    var L=52, R=684, T=30, B=236, W=R-L, H=B-T;          /* plot box inside the 700x288 viewBox */
+    var DOM_DEFAULT=30, DOM_WIDE=50;                      /* x axis shows 1 to 30, widens to 50 when steps > 30 */
+    var P0=95, N0=20;
+    var q=function(id){return document.getElementById(id)};
+    var gGrid=q('s4-grid'), gYt=q('s4-yt'), gXt=q('s4-xt'), axes=q('s4-axes'), ghost=q('s4-ghost');
+    var c99=q('s4-c99'), c95=q('s4-c95'), c90=q('s4-c90'), call=q('s4-call');
+    var call10=q('s4-call10'), call20=q('s4-call20');
+    var mkV=q('s4-mk-v'), mkH=q('s4-mk-h'), mkRing=q('s4-mk-ring'), mkDot=q('s4-mk-dot');
+    var pIn=q('s4-p'), nIn=q('s4-n'), pOut=q('s4-pv'), nOut=q('s4-nv'), ro=q('s4-ro');
+    var state={p:P0/100, n:N0, xmax:DOM_DEFAULT}, raf=0;
+    function X(v,xm){return L+(v-1)/(xm-1)*W}
+    function Y(v){return B-v*H}
+    function r1(v){return Math.round(v*10)/10}
+    function el(tag,attrs){var e=document.createElementNS(NS,tag); for(var k in attrs){e.setAttribute(k,attrs[k])} return e}
+    function curve(p,xm){var d='',steps=96; for(var i=0;i<=steps;i++){var v=1+(xm-1)*i/steps; d+=(i?'L':'M')+r1(X(v,xm))+' '+r1(Y(1-Math.pow(p,v)))} return d}
+
+    /* static parts: gridlines, y labels, x tick labels (positions update while the axis widens) */
+    var yTicks=[0,25,50,75,100];
+    yTicks.forEach(function(v){
+      var y=r1(Y(v/100));
+      gGrid.appendChild(el('path',{d:'M'+L+' '+y+'H'+R}));
+      var t=el('text',{x:L-8,y:y+5,'text-anchor':'end'}); t.textContent=v+'%'; gYt.appendChild(t);
+    });
+    var xTicks=[1,10,20,30,40,50], xEls=xTicks.map(function(v){
+      var t=el('text',{x:0,y:B+22,'text-anchor':'middle'}); t.textContent=String(v); gXt.appendChild(t); return t;
+    });
+
+    function render(){
+      var xm=state.xmax;
+      axes.setAttribute('d','M'+L+' '+T+'V'+B+'H'+R);
+      xEls.forEach(function(t,i){
+        var v=xTicks[i], x=X(v,xm), op=Math.max(0,Math.min(1,(R+6-x)/6));
+        t.setAttribute('x',r1(x)); t.style.opacity=op;
+      });
+      c99.setAttribute('d',curve(.99,xm)); c95.setAttribute('d',curve(.95,xm)); c90.setAttribute('d',curve(.90,xm));
+      ghost.setAttribute('d',curve(state.p,xm));
+      /* highlight points on the 95% line: n=10 and n=20 */
+      place(call10,10,xm,[16,-5]); place(call20,20,xm,[16,-5]);
+      /* marker follows the sliders */
+      var mx=r1(X(state.n,xm)), my=r1(Y(1-Math.pow(state.p,state.n)));
+      mkV.setAttribute('d','M'+mx+' '+my+'V'+B); mkH.setAttribute('d','M'+mx+' '+my+'H'+L);
+      mkRing.setAttribute('cx',mx); mkRing.setAttribute('cy',my); mkDot.setAttribute('cx',mx); mkDot.setAttribute('cy',my);
+    }
+    function place(g,v,xm,off){
+      var x=r1(X(v,xm)), y=r1(Y(1-Math.pow(.95,v)));
+      var dot=g.querySelector('circle'), lead=g.querySelector('path'), tx=g.querySelector('.s4-value'), lab=g.querySelector('.s4-call-label');
+      dot.setAttribute('cx',x); dot.setAttribute('cy',y);
+      lead.setAttribute('d','M'+(x+4)+' '+(y+4)+'L'+(x+off[0]-5)+' '+(y+off[1]-8));
+      tx.setAttribute('x',x+off[0]); tx.setAttribute('y',y+off[1]);
+      lab.setAttribute('x',x+off[0]); lab.setAttribute('y',y+off[1]+17);
+    }
+    function readout(){
+      pOut.textContent=(state.p*100).toFixed(1)+'%'; nOut.textContent=String(state.n);
+      ro.textContent=Math.round((1-Math.pow(state.p,state.n))*100)+'%';
+      [pIn,nIn].forEach(function(inp){var mn=+inp.min, mx=+inp.max; inp.style.setProperty('--v',((+inp.value-mn)/(mx-mn)*100)+'%')});
+    }
+    function widen(){
+      var target=state.n>DOM_DEFAULT?DOM_WIDE:DOM_DEFAULT;
+      call.style.opacity=target>DOM_DEFAULT?'0':'1';
+      if(raf){cancelAnimationFrame(raf);raf=0}
+      if(isReduced()||Math.abs(state.xmax-target)<.01){state.xmax=target;render();return}
+      var from=state.xmax, t0=performance.now(), dur=420;
+      (function step(t){
+        var k=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-k,3);
+        state.xmax=from+(target-from)*e; render();
+        raf=k<1?requestAnimationFrame(step):0;
+      })(t0);
+    }
+    function onInput(){
+      state.p=(+pIn.value)/100; state.n=+nIn.value;
+      readout(); widen(); render();
+    }
+    function reset(){
+      if(raf){cancelAnimationFrame(raf);raf=0}
+      pIn.value=P0; nIn.value=N0; state.p=P0/100; state.n=N0; state.xmax=DOM_DEFAULT;
+      call.style.opacity='1'; readout(); render();
+    }
+    pIn.addEventListener('input',onInput); nIn.addEventListener('input',onInput);
+    hooks.s4={play:reset, still:reset, stop:function(){}};
+    reset();
+  })();
+
+  /* ================================================================
+     s12: a crimson dot travels the loop once, then rests at "you"
+     ================================================================ */
+  (function(){
+    var dot=document.getElementById('s12-dot'), path=document.getElementById('s12-dotpath');
+    if(!dot||!path)return;
+    var timer=0, raf=0, total=0;
+    function put(len){var p=path.getPointAtLength(len); dot.setAttribute('cx',p.x.toFixed(1)); dot.setAttribute('cy',p.y.toFixed(1))}
+    function stop(){clearTimeout(timer); if(raf)cancelAnimationFrame(raf); timer=0; raf=0}
+    function end(){try{total=path.getTotalLength(); put(total)}catch(e){}}
+    function ease(k){return k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2}
+    hooks.s12={
+      stop:stop,
+      still:function(){stop(); end()},
+      play:function(s,red){
+        stop(); end();
+        if(red)return;
+        put(0);
+        var delay=1100, dur=2700;
+        timer=setTimeout(function(){
+          var t0=performance.now();
+          (function step(t){
+            var k=Math.min(1,(t-t0)/dur); put(total*ease(k));
+            raf=k<1?requestAnimationFrame(step):0;
+          })(t0);
+        },delay);
+      }
+    };
+  })();
+
+  /* ---------- design review aid: deck.html?t=1800#9 freezes the slide's css motion at 1.8s ---------- */
+  var qt=/[?&]t=(\d+)/.exec(location.search);
+  if(qt){requestAnimationFrame(function(){requestAnimationFrame(function(){
+    document.getAnimations().forEach(function(a){try{a.pause();a.currentTime=+qt[1]}catch(e){}});
+  })})}
+
+  /* ---------- go ---------- */
+  fit(); show(fromHash(),false);
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fit)}
+})();
+</script>
+</body>
+</html>
+
