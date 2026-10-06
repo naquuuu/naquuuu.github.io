@@ -20,7 +20,7 @@
 /* ==================================================================
    naquuuu sharing session v3: murphy's law for people who build with ai
    order: 0 tokens, 1 shell, 2 chrome, 3 type + shared parts, 4 motion,
-   5 per-slide blocks (s1 to s12 plus s-origin plus s-origin plus s-origin), 6 mobile, 7 print + reduced motion
+   5 per-slide blocks (s1 to s12 plus s-origin), 6 mobile, 7 print + reduced motion
    ================================================================== */
 
 /* ---------- 0. tokens (light is the default; dark via data-theme) ---------- */
@@ -346,20 +346,37 @@ svg .s9-lead-dot{fill:var(--accent-crimson)}
 .thesis p{font:700 40px/1.15 var(--f-head);letter-spacing:-.02em;color:var(--text-primary)}
 
 /* ===== origin: music to work ===== */
-.origin .body{gap:15px}.origin-title{font:700 42px/1.08 var(--f-head);letter-spacing:-.02em}
-.origin-route-grid{display:grid;grid-template-columns:1fr 42px 1fr 42px 1fr;align-items:stretch;gap:8px;min-width:0}
-.origin-node{min-width:0;min-height:235px;padding:16px 18px;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);display:flex;flex-direction:column;justify-content:center}
-.origin-k{font:700 13px var(--f-mono);letter-spacing:.08em;color:var(--accent-crimson);margin-bottom:11px}.origin-h{font:700 24px/1.12 var(--f-head);letter-spacing:-.02em;color:var(--text-primary)}.origin-copy{font:400 15px/1.4 var(--f-body);color:var(--text-secondary);margin-top:8px}
-.origin-record{display:block;width:88px;height:88px;margin:0 auto 10px;overflow:visible}.origin-disc{transform-box:fill-box;transform-origin:center}.origin-label{fill:var(--paper);stroke:var(--line);stroke-width:1}.origin-groove{fill:none;stroke:var(--paper);stroke-opacity:.3;stroke-width:1}.origin-hole{fill:var(--accent-crimson)}.origin-record-title{font:600 8px var(--f-mono);fill:var(--paper);letter-spacing:.04em}
-.origin-arrow{width:42px;height:20px;align-self:center;fill:none;stroke:var(--arrow);stroke-width:1.6}.origin-arrow path{stroke-dasharray:none;stroke-dashoffset:0}
-.origin-extras{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;min-height:32px}.origin-chip{font:400 13px var(--f-mono);color:var(--text-secondary);border:1px solid var(--border-subtle);background:var(--bg-surface);border-radius:999px;padding:5px 11px}.origin-stamp{font:700 12px var(--f-mono);letter-spacing:.08em;color:var(--accent-crimson);border:1px solid var(--accent-crimson);padding:4px 9px;transform:rotate(-3deg)}
-.origin-bridge{display:grid;grid-template-columns:310px 1fr;align-items:center;gap:20px;border-top:1px solid var(--border-subtle);padding-top:11px}.origin-bridge-k{font:700 12px var(--f-mono);letter-spacing:.06em;color:var(--accent-crimson)}.origin-bridge p{font:500 16px/1.35 var(--f-body);color:var(--text-primary)}
+.origin .body{display:grid;grid-template-columns:390px 1fr;grid-template-rows:1fr auto;column-gap:50px;align-items:center}
+.origin-left{position:relative;align-self:center}.origin-title{font:700 42px/1.08 var(--f-head);letter-spacing:-.02em}
+.origin-record{display:block;width:330px;height:330px;margin:0 auto 8px;overflow:visible}
+.origin-disc{transform-box:fill-box;transform-origin:center}.origin-label{fill:var(--paper);stroke:var(--line);stroke-width:1}.origin-groove{fill:none;stroke:var(--paper);stroke-opacity:.3;stroke-width:1}.origin-hole{fill:var(--accent-crimson)}
+.origin-record-title{font:600 9px var(--f-mono);fill:var(--text-primary);letter-spacing:.04em}.origin-tonearm{fill:none;stroke:var(--arrow);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.origin-arm-pivot{fill:var(--bg-card);stroke:var(--accent-crimson);stroke-width:3}
+.origin-groove-mark{fill:none;stroke:var(--accent-crimson);stroke-width:2.5;stroke-linecap:round}.origin-track-dot{fill:var(--accent-crimson)}
+.origin-artist{font:600 13px var(--f-mono);letter-spacing:.06em;color:var(--text-secondary);text-align:center}.origin-tagline{font:500 17px/1.3 var(--f-mono);color:var(--text-secondary);margin-top:11px;text-align:center}
+.origin-story{align-self:center;position:relative;padding:4px 0 8px}.origin-headline{font:700 48px/1.04 var(--f-head);letter-spacing:-.035em;color:var(--text-primary);max-width:690px}.origin-headline em{font-style:normal;color:var(--accent-crimson)}
+.origin-beats{margin-top:18px}.origin-beat{position:relative;display:grid;grid-template-columns:1fr;gap:5px;align-items:start;padding:11px 0 11px 14px;border-top:1px solid var(--border-subtle);font:500 18px/1.25 var(--f-body);color:var(--text-primary)}
+.origin-beat b{font:700 16px/1.25 var(--f-mono);letter-spacing:.02em;color:var(--accent-crimson)}.origin-beat small{font:400 19px/1.3 var(--f-body);color:var(--text-secondary)}
+.origin-question small{font-weight:700;font-size:22px;color:var(--text-primary)}.origin-rule{position:absolute;left:0;top:0;width:2px;height:100%;background:var(--accent-crimson);transform:scaleY(0);transform-origin:top}
+.origin-route{position:absolute;left:300px;top:112px;width:150px;height:360px;overflow:visible;pointer-events:none}.origin-route path{fill:none;stroke:var(--accent-crimson);stroke-width:1.5;stroke-dasharray:none;stroke-dashoffset:0}.origin-route circle{fill:var(--accent-crimson)}
+.origin-ipc{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid var(--border-subtle);padding-top:11px;font:400 13px var(--f-mono);color:var(--text-secondary)}
+.origin-ipc strong{font-weight:700;color:var(--text-primary)}
+.origin-headline em{background-image:linear-gradient(var(--accent-crimson),var(--accent-crimson));background-repeat:no-repeat;background-position:0 96%;background-size:0 3px}
+.origin-beat{transition:color .2s}
+@keyframes k-beat-accent{0%,100%{background:transparent}35%,70%{background:var(--wash-b)}}
+@keyframes k-origin-trace{to{stroke-dashoffset:0}}
+@keyframes k-origin-tonearm{from{transform:rotate(-14deg)}to{transform:rotate(0)}}
+@keyframes k-origin-underline{to{background-size:100% 3px}}
 @keyframes k-origin-spin{from{transform:rotate(-20deg)}to{transform:rotate(340deg)}}
-@keyframes k-origin-glow{0%,100%{box-shadow:0 0 0 0 transparent}45%{box-shadow:0 0 22px 2px var(--glow)}}
-.slide.play .origin-disc{animation:k-origin-spin 8s var(--ease) .2s both}.slide.play .origin-node{animation:k-rise .65s var(--ease) var(--d,0s) both}.slide.play .origin-arrow path{stroke-dasharray:1;stroke-dashoffset:1;animation:k-draw .8s var(--ease) var(--d,0s) both}.slide.play .origin-stamp{animation:k-pop .55s var(--ease) 5.8s both,k-origin-glow 1s ease 6.4s 1 both}
-.slide.play .origin-extras .origin-chip{animation:k-rise .6s var(--ease) 5.3s both}
-.origin-tagline{font:500 19px/1.3 var(--f-mono);color:var(--text-secondary);margin-top:-8px}
-.origin-groove-mark{fill:none;stroke:var(--accent-crimson);stroke-width:2;stroke-linecap:round}.origin-track-dot{fill:var(--accent-crimson)}
+.slide.play .origin-disc{animation:k-origin-spin 6s var(--ease) .1s both}
+.slide.play .origin-tonearm{transform-origin:248px 18px;animation:k-origin-tonearm .8s var(--ease) .7s both}
+.slide.play .origin-groove-mark{stroke-dasharray:160;stroke-dashoffset:160;animation:k-origin-trace 1.25s var(--ease) 1.2s both}
+.slide.play .origin-headline em{animation:k-origin-underline .65s ease 5.1s both}
+.slide.play .origin-beat:nth-child(1){animation:k-beat-accent .9s ease 2s both}
+.slide.play .origin-beat:nth-child(2){animation:k-beat-accent .9s ease 3.25s both}
+.slide.play .origin-beat:nth-child(3){animation:k-beat-accent .9s ease 4.5s both}
+.slide.play .origin-route path{stroke-dasharray:1;stroke-dashoffset:1;animation:k-draw 3.4s var(--ease) 1.5s both}
+.slide.play .origin-route circle{offset-path:path("M4 0 C70 0 140 10 140 70 V290 C140 340 80 350 4 360");animation:k-origin-trace-dot 3.4s linear 1.5s both}
+@keyframes k-origin-trace-dot{from{offset-distance:0%}to{offset-distance:100%}}
 
 /* recovery review loop */
 .s9-review{padding:10px 16px 11px;position:relative}
@@ -375,8 +392,8 @@ svg .s9-lead-dot{fill:var(--accent-crimson)}
 .slide.play .review-return-path{stroke-dasharray:1;stroke-dashoffset:1;animation:k-draw .7s var(--ease) 7.2s both}
 .review-node{min-height:82px;padding:9px 12px}.review-node b{font-size:16px}.review-node small{font-size:15px}
 .review-role strong{font-size:15px}.review-role span{font-size:14px}
-#s9 .body{gap:16px}.s9-row{grid-template-columns:420px 1fr;gap:30px}.s9-fig svg{width:420px}
-.s9-review{min-height:188px;padding:9px 15px}
+#s9 .body{gap:12px}.s9-row{grid-template-columns:330px 1fr;gap:28px}.s9-fig svg{width:330px;height:211px;object-fit:contain}.s9-case{gap:6px}.s9-case .txt{font-size:16px;line-height:1.3}.s9-how{display:none}
+.s9-review{min-height:196px;padding:8px 14px}
 .fn-ai{padding-left:8px;padding-right:8px}
 .fn-agents{gap:4px}.fn-agents li{grid-template-columns:max-content 1fr;column-gap:12px;padding:2px 3px}
 .fn-agents .agent-name{font-size:14px}.fn-agents .agent-role{font-size:14px}
@@ -396,6 +413,41 @@ svg .s9-lead-dot{fill:var(--accent-crimson)}
 @keyframes k-agent-pass{0%,100%{background:transparent;border-left-color:transparent}40%{background:var(--wash-a);border-left-color:var(--accent-crimson)}}
 .slide.play .fn-agents li{animation:k-agent-pass .8s ease calc(var(--d,3.8)*1s) both}
 .fn-agents li:nth-child(1){--d:3.7}.fn-agents li:nth-child(2){--d:4.05}.fn-agents li:nth-child(3){--d:4.4}.fn-agents li:nth-child(4){--d:4.75}.fn-agents li:nth-child(5){--d:5.1}.fn-agents li:nth-child(6){--d:5.45}.fn-agents li:nth-child(7){--d:5.8}
+
+/* editorial recovery circuit */
+.s9-editorial{display:grid;grid-template-columns:330px 1fr;gap:34px;align-items:center}
+.s9-fig svg{width:330px;height:210px}.s9-caption{display:grid;gap:4px;padding:8px 12px 10px;font:400 15px/1.3 var(--f-body);color:var(--text-secondary)}
+.s9-caption b{font:700 15px var(--f-mono);color:var(--text-primary)}.s9-circuit{min-width:0}.s9-circuit-label{font:700 14px var(--f-mono);letter-spacing:.04em;color:var(--accent-crimson);margin-bottom:4px}
+.s9-flow-svg{display:block;width:100%;height:218px;overflow:visible}.s9-flow-svg text{font-size:16px;fill:var(--text-primary)}
+.s9-flow-svg .circuit-sub{font-size:14px;fill:var(--text-secondary)}.s9-flow-svg .circuit-return-label{font-size:14px;fill:var(--accent-crimson)}
+.s9-flow-svg .circuit-builder path,.s9-flow-svg .circuit-skeptic path,.s9-flow-svg .circuit-verifier path,.s9-flow-svg .circuit-human path{fill:none;stroke:var(--arrow);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.s9-flow-svg .circuit-skeptic path{stroke:var(--accent-crimson)}.s9-flow-svg .circuit-main,.s9-flow-svg .circuit-loop,.s9-flow-svg .circuit-rollback{fill:none;stroke:var(--line);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.s9-flow-svg .circuit-loop,.s9-flow-svg .circuit-rollback{stroke:var(--accent-crimson);stroke-dasharray:5 4}
+.s9-flow-svg .circuit-arrow{fill:none;stroke:var(--arrow);stroke-width:1.5}.s9-flow-svg .circuit-mark{font:700 24px var(--f-mono);fill:var(--accent-crimson)}
+.s9-flow-svg .circuit-safe{fill:var(--bg-surface);stroke:var(--border-active);stroke-width:1.2}.s9-flow-svg .circuit-safe text{font-size:14px}
+.s9-flow-svg .circuit-packet{fill:var(--accent-crimson);offset-path:path("M115 98 C190 98 220 61 291 61 L300 82 C260 115 190 133 115 130 C190 130 220 162 291 162 L428 162 C520 162 580 98 676 98");offset-distance:0}
+@keyframes k-circuit-run{to{offset-distance:100%}}
+.slide.play .circuit-main{stroke-dasharray:1;stroke-dashoffset:1;animation:k-draw .7s var(--ease) 1.2s both}
+.slide.play .circuit-packet{animation:k-circuit-run 5.2s linear 1.1s both}
+.slide.play .circuit-loop,.slide.play .circuit-rollback{stroke-dasharray:1;stroke-dashoffset:1;animation:k-draw .7s var(--ease) 3.3s both}
+.s9-different{font:400 15px/1.3 var(--f-body);color:var(--text-secondary);margin-top:0}
+.s9-model-examples{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--border-subtle);padding-top:6px;margin-top:5px;font:400 13px/1.3 var(--f-mono);color:var(--text-secondary)}
+
+/* orchestration handoffs */
+.disclosure-map{border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);padding:4px 0}
+.disclosure-svg{display:block;width:100%;height:310px;overflow:visible}.disclosure-svg text{font-size:17px;fill:var(--text-primary)}
+.disclosure-svg .disclosure-small{font-size:14px;fill:var(--text-secondary)}.disclosure-lane{font-size:14px!important;fill:var(--accent-crimson)!important;letter-spacing:.07em}
+.disclosure-input path,.disclosure-human path{fill:none;stroke:var(--arrow);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.disclosure-hub circle{fill:var(--accent-crimson-dim);stroke:var(--accent-crimson);stroke-width:1.7}.disclosure-hub .hub-inner{fill:none;stroke:var(--accent-crimson);stroke-dasharray:3 4}
+.disclosure-role circle{fill:var(--bg-surface);stroke:var(--arrow);stroke-width:1.5}.disclosure-reviewer circle{stroke:var(--accent-crimson)}
+.disclosure-path,.disclosure-return{fill:none;stroke:var(--arrow);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.disclosure-return{stroke:var(--accent-crimson);stroke-dasharray:4 4}
+.disclosure-arrow{fill:none;stroke:var(--arrow);stroke-width:1.5}.disclosure-packet{fill:var(--accent-crimson);offset-path:path("M174 156 H322 C460 156 520 54 620 54 H850 C900 54 880 250 860 250 H620 C520 250 460 156 322 156 H174");offset-distance:0}
+.disclosure-foot{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--border-subtle);padding:5px 0;font:400 13px var(--f-mono);color:var(--text-secondary)}
+.disclosure-foot span:nth-child(3){color:var(--accent-crimson);font-weight:700}
+@keyframes k-disclosure-packet{to{offset-distance:100%}}@keyframes k-role-accent{0%,100%{fill:var(--bg-surface)}40%,70%{fill:var(--accent-crimson-dim)}}
+.slide.play .disclosure-packet{animation:k-disclosure-packet 6s linear .4s both}
+.slide.play .disclosure-role-1{animation:k-role-accent .55s ease 1.4s both}.slide.play .disclosure-role-2{animation:k-role-accent .55s ease 1.9s both}.slide.play .disclosure-role-3{animation:k-role-accent .55s ease 2.4s both}.slide.play .disclosure-role-4{animation:k-role-accent .55s ease 2.9s both}.slide.play .disclosure-role-5{animation:k-role-accent .55s ease 3.7s both}.slide.play .disclosure-role-6{animation:k-role-accent .55s ease 4.4s both}
+.slide.play .disclosure-return{stroke-dasharray:1;stroke-dashoffset:1;animation:k-draw .7s var(--ease) 3.5s both}
 
 /* ===== s11 disclosure ===== */
 #s11 .body{gap:12px}
@@ -452,6 +504,39 @@ svg .s12-pulse{fill:none;stroke:var(--accent-crimson);stroke-width:2;opacity:0;t
 .qa{font:700 50px/1 var(--f-mono);letter-spacing:-.01em;color:var(--accent-crimson)}
 .qt{font:600 34px/1.2 var(--f-head);letter-spacing:-.015em;color:var(--text-primary)}
 
+
+/* final editorial integration */
+#s9 .s9-editorial{flex:1;align-items:center;gap:26px;grid-template-columns:315px 1fr}
+#s9 .s9-fig svg{width:315px;height:300px}
+#s9 .s9-flow-svg{height:360px}
+#s9 .s9-flow-svg text{font-size:24px;font-family:var(--f-mono)}
+#s9 .s9-flow-svg .circuit-sub,#s9 .s9-flow-svg .circuit-return-label{font-size:20px}
+#s9 .s9-flow-svg .circuit-safe text{font-size:16px;fill:var(--text-primary);stroke:none}
+#s9 .s9-caption{font-size:18px;padding:12px 16px}
+#s9 .s9-caption b{font-size:16px;line-height:1.4}
+#s9 .s9-different{font-size:18px;margin-top:12px}
+#s9 .circuit-packet{offset-path:none;animation:none;fill:var(--accent-crimson)}
+#s9 .circuit-packet path{stroke:var(--paper);stroke-width:1.5;fill:none}
+#s9 .circuit-main,#s9 .circuit-rollback{animation:none;stroke-dasharray:none;stroke-dashoffset:0}
+.disclosure-svg{height:350px}
+.disclosure-svg text{font-size:21px}
+.disclosure-svg .disclosure-small{font-size:18px}
+.disclosure-svg .disclosure-packet{offset-path:none;animation:none}
+.disclosure-role circle{transition:fill .2s}
+.disclosure-role.is-current circle{fill:var(--accent-crimson);stroke:var(--accent-crimson)}
+.disclosure-note{font:400 14px var(--f-mono);color:var(--text-secondary)}
+.origin-route{left:440px;top:310px;width:110px;height:200px}
+.slide.play .origin-route circle{offset-path:path("M0 0 H88 V178 H103")}
+.circuit-packet.is-verified{fill:var(--text-primary)!important}
+.disclosure-foot{font-size:14px}.s11-callback{font-size:18px;margin:3px 0}
+html.mobile #s9-svg{min-width:0}
+html.mobile #s9 .s9-editorial{display:flex;flex-direction:column;align-items:stretch}
+html.mobile #s9 .s9-fig svg{width:100%;height:auto}
+html.mobile #s9 .s9-flow-svg{width:740px;height:390px}
+html.mobile .s9-circuit{overflow-x:auto}
+html.mobile .disclosure-map{overflow-x:auto}
+html.mobile .disclosure-svg{width:1080px;height:380px}
+
 /* ---------- 6. mobile reflow (<= 760px): one slide at a time, stacked ---------- */
 html.mobile .viewport{overflow-y:auto;overflow-x:hidden}
 html.mobile .stage{position:relative;left:auto;top:auto;width:100%;max-width:100%;height:auto;transform:none!important;border:0}
@@ -502,10 +587,18 @@ html.mobile .s12-close{flex-wrap:wrap;gap:8px 16px}
 html.mobile .s12-q span{font-size:20px}
 html.mobile .tag,html.mobile .ptag{white-space:normal}
 html.mobile .origin-title{font-size:34px}
-html.mobile .origin-route-grid{grid-template-columns:1fr;gap:10px}
-html.mobile .origin-node{min-height:180px}
-html.mobile .origin-arrow{transform:rotate(90deg);margin:4px auto}
-html.mobile .origin-bridge{grid-template-columns:1fr;gap:6px}
+html.mobile .origin .body{display:flex;gap:14px;align-items:stretch}
+html.mobile .origin-record{width:180px;height:180px}
+html.mobile .origin-route{display:none}
+html.mobile .origin-headline{font-size:34px}
+html.mobile .origin-beat small{font-size:17px}
+html.mobile .origin-ipc{align-items:flex-start;flex-direction:column;gap:5px}
+html.mobile .s9-editorial{grid-template-columns:1fr;gap:12px}
+html.mobile .s9-fig svg{width:100%;height:auto}
+html.mobile .s9-flow-svg{height:auto;min-height:190px}
+html.mobile .s9-model-examples{flex-direction:column;gap:4px}
+html.mobile .disclosure-svg{height:auto;min-height:230px}
+html.mobile .disclosure-foot{flex-wrap:wrap}
 html.mobile .s9-row{grid-template-columns:1fr;gap:12px}
 html.mobile .s9-fig svg{width:100%}
 html.mobile #s9 .body{gap:16px}
@@ -514,7 +607,10 @@ html.mobile .review-flow{grid-template-columns:1fr;gap:5px}
 html.mobile .review-arrow{transform:rotate(90deg);margin:3px auto}
 html.mobile .review-models{flex-wrap:wrap;justify-content:flex-start}
 html.mobile .notespanel{height:45vh}
-html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
+html.mobile .viewport{bottom:106px}
+html.mobile .hud{top:auto;bottom:0;left:0;right:0;opacity:1;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px;background:var(--bg-primary);border-top:1px solid var(--border-subtle);max-width:none}
+html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-items:center;justify-content:center}
+.disclosure-hub text{font-size:18px}
 
 /* ---------- 7. print (final state) + reduced motion ---------- */
 @page{size:1280px 720px;margin:0}
@@ -568,20 +664,30 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
 <section class="slide origin" id="s-origin" data-title="from a song to a way of working">
   <div class="top"><span class="lbl">origin</span><span class="tr">[ music · meaning · work ]</span></div>
   <div class="body">
-    <h2 class="origin-title rise" style="--d:.1">from a song to a way of working.</h2>
-    <p class="origin-tagline rise" style="--d:.25">krishna · product, systems &amp; music</p>
-    <div class="origin-route-grid">
-      <article class="origin-node" style="--d:.35s"><p class="origin-k">01 / music</p>
-        <svg class="origin-record" viewBox="0 0 120 120" role="img" aria-label="a vinyl record labeled hukum murphy by kafin sulthan"><g class="origin-disc"><circle cx="60" cy="60" r="54" fill="var(--text-primary)"/><circle class="origin-groove" cx="60" cy="60" r="44"/><circle class="origin-groove" cx="60" cy="60" r="36"/><circle class="origin-groove" cx="60" cy="60" r="28"/><path class="origin-groove-mark" d="M60 6 A54 54 0 0 1 113 47"/><circle class="origin-track-dot" cx="113" cy="47" r="2.5"/></g><circle class="origin-label" cx="60" cy="60" r="20"/><circle class="origin-hole" cx="60" cy="60" r="3"/><text class="origin-record-title" x="60" y="57" text-anchor="middle">hukum</text><text class="origin-record-title" x="60" y="67" text-anchor="middle">murphy</text></svg>
-        <p class="origin-h">“hukum murphy”</p><p class="origin-copy">kafin sulthan · music to quiet the mind</p>
-      </article>
-      <svg class="origin-arrow" viewBox="0 0 48 20" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:1.6;--t:.8" d="M2 10 H38 M32 4 L40 10 L32 16"/></svg>
-      <article class="origin-node" style="--d:2.3s"><p class="origin-k">02 / meaning</p><p class="origin-h">prepare for what can go wrong.</p><p class="origin-copy">a way to meet uncertainty with more care.</p></article>
-      <svg class="origin-arrow" viewBox="0 0 48 20" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:3.5;--t:.8" d="M2 10 H38 M32 4 L40 10 L32 16"/></svg>
-      <article class="origin-node" style="--d:4.1s"><p class="origin-k">03 / work</p><p class="origin-h">an engineering mindset for product discovery.</p><p class="origin-copy">one view i am still testing.</p></article>
+    <div class="origin-left">
+      <svg class="origin-record" viewBox="0 0 280 280" role="img" aria-label="vinyl record and tonearm for hukum murphy by kafin sulthan">
+        <g class="origin-disc">
+          <circle cx="140" cy="140" r="132" fill="var(--text-primary)"/>
+          <circle class="origin-groove" cx="140" cy="140" r="116"/><circle class="origin-groove" cx="140" cy="140" r="102"/><circle class="origin-groove" cx="140" cy="140" r="88"/><circle class="origin-groove" cx="140" cy="140" r="74"/>
+          <path class="origin-groove-mark" d="M140 8 A132 132 0 0 1 267 104"/><circle class="origin-track-dot" cx="267" cy="104" r="4"/>
+        </g>
+        <circle class="origin-label" cx="140" cy="140" r="47"/><circle class="origin-hole" cx="140" cy="140" r="5"/>
+        <text class="origin-record-title" x="140" y="135" text-anchor="middle">hukum</text><text class="origin-record-title" x="140" y="149" text-anchor="middle">murphy</text>
+        <path class="origin-tonearm" d="M248 18 L214 18 L190 42 L174 85"/><circle class="origin-arm-pivot" cx="248" cy="18" r="8"/><circle class="origin-arm-pivot" cx="174" cy="85" r="4"/>
+      </svg>
+      <p class="origin-artist">kafin sulthan / hukum murphy</p>
+      <p class="origin-tagline">krishna · product, systems &amp; music</p>
     </div>
-    <div class="origin-extras"><span class="origin-chip">june · after an 8-year relationship</span><span class="origin-chip">to my ears: 70s/80s french pop + 90s shibuya-kei</span><span class="origin-stamp">anak negeri!</span></div>
-    <div class="origin-bridge rise" style="--d:6.2"><p class="origin-bridge-k">at ipc · designer · pm · data · writer</p><p>many perspectives. one question still open: how should we discover with ai? here is my view.</p></div>
+    <svg class="origin-route" viewBox="0 0 110 200" aria-hidden="true"><path pathLength="1" d="M0 0 H88 V178 H103"/><circle cx="0" cy="0" r="5"/></svg>
+    <div class="origin-story">
+      <h2 class="origin-headline">i came for the music.<br><em>i stayed for the mindset.</em></h2>
+      <div class="origin-beats">
+        <div class="origin-beat"><i class="origin-rule"></i><b>01 / a quieter mind</b><small>music, when i needed it.</small></div>
+        <div class="origin-beat"><i class="origin-rule"></i><b>02 / a familiar sound, made here</b><small>to my ears: french pop meets shibuya-kei. <strong>anak negeri.</strong></small></div>
+        <div class="origin-beat origin-question"><i class="origin-rule"></i><b>03 / a question i could bring to work</b><small>what could go wrong, and how do we prepare?</small></div>
+      </div>
+    </div>
+    <div class="origin-ipc"><span>from listening to product discovery</span><strong>at ipc · many perspectives. one question still open.</strong></div>
   </div>
   <aside class="notes" lang="id">
     <p>Sebelum masuk ke idenya, sedikit cerita kenapa saya memilih topik ini. Saya Krishna. Saya suka produk, sistem, dan musik, dan kali ini ketiganya ketemu.</p>
@@ -591,7 +697,7 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
     <p>Lalu saya mulai memperhatikan lirik dan gagasannya. Murphy yang sebelumnya saya kenal dari konteks engineering ternyata nyambung ke cara kita bekerja di produk: memikirkan apa yang bisa salah, supaya kita lebih siap menghadapi ketidakpastian.</p>
     <p>Kemarin di IPC, teman-teman designer, PM, data, dan writer punya pandangan berbeda tentang discovery dan AI. Waktunya habis, sementara pertanyaan dasarnya masih terbuka. Jadi, hari ini saya ingin membagikan cara saya melihatnya. Ini pandangan yang juga masih saya uji.</p>
     <p>Dari lagu itu, saya membawa satu pertanyaan ke pekerjaan: ketika AI membuat banyak hal jadi lebih mudah, bagian mana yang tetap perlu kita periksa? Kita mulai dari perubahan yang paling terasa: sekarang, membuat sesuatu jadi jauh lebih murah.</p>
-    <p><em>Setelah cerita Juni, jeda singkat. Music, meaning, work muncul mengikuti cerita. Ucapkan ‘C’mon, anak negeri!’ dengan senyum ringan. Footer IPC muncul menjelang bagian terakhir.</em></p>
+    <p><em>Setelah cerita Juni, jeda singkat. Ikuti gerak record dan jalur merah menuju pertanyaan kerja. Tiga bagian cerita mendapat penekanan bergantian. Ucapkan ‘C’mon, anak negeri!’ dengan senyum ringan, lalu hubungkan ke diskusi IPC.</em></p>
     <p>Referensi (tidak dibacakan): https://p-vine.jp/news/20260713-120035 ; https://www.medcom.id/hiburan/musik/JKRAvZQk-kafin-sulthan-ingin-berkolaborasi-dengan-candra-darusman</p>
   </aside>
 </section>
@@ -1001,85 +1107,45 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
   <div class="top"><span class="lbl"><span class="num">(06)</span>recovery</span><span class="tr">[ murphy's law for ai ]</span></div>
   <div class="body">
     <h2 class="t rise">design the <em>fall</em>, not just the climb.</h2>
-    <div class="s9-row">
+    <div class="s9-editorial">
       <figure class="fig crop s9-fig">
-        <div class="scroller">
-          <svg id="s9-svg" viewBox="0 0 470 300" role="img" aria-label="line drawing of an elevator safety catch. two guide rails with saw teeth on their inner edges, a car hanging from a rope between them, and two small pawls on the car's top corners. the rope snaps, the car drops a short way, the pawls flick out into the teeth and the car stops. a label reads: safety catch engages.">
-            <g id="s9-scene" transform="translate(22 0)">
-            <rect class="el-beam" x="10" y="6" width="220" height="8"/>
-            <circle class="el-hook" cx="120" cy="22" r="4"/>
+        <div class="scroller"><svg id="s9-svg" viewBox="0 0 420 300" role="img" aria-label="an elevator safety catch stops a platform after its rope breaks">
+          <g id="s9-scene" transform="translate(8 12)">
+            <rect class="el-beam" x="10" y="6" width="220" height="8"/><circle class="el-hook" cx="120" cy="22" r="4"/>
             <path id="s9-rail-l" class="el-rail" d="M10 14 H34 V28 H45 L34 39 V48 H45 L34 59 V68 H45 L34 79 V88 H45 L34 99 V108 H45 L34 119 V128 H45 L34 139 V148 H45 L34 159 V168 H45 L34 179 V188 H45 L34 199 V208 H45 L34 219 V228 H45 L34 239 V248 H45 L34 259 V268 H10 Z"/>
             <path id="s9-rail-r" class="el-rail" d="M230 14 H206 V28 H195 L206 39 V48 H195 L206 59 V68 H195 L206 79 V88 H195 L206 99 V108 H195 L206 119 V128 H195 L206 139 V148 H195 L206 159 V168 H195 L206 179 V188 H195 L206 199 V208 H195 L206 219 V228 H195 L206 239 V248 H195 L206 259 V268 H230 Z"/>
-            <path class="el-floor" d="M10 268 H230"/>
-            <path class="el-hatch" d="M22 268 L14 280 M38 268 L30 280 M54 268 L46 280 M70 268 L62 280 M86 268 L78 280 M102 268 L94 280 M118 268 L110 280 M134 268 L126 280 M150 268 L142 280 M166 268 L158 280 M182 268 L174 280 M198 268 L190 280 M214 268 L206 280 M230 268 L222 280"/>
-            <path id="s9-rope-top" class="el-rope s9-rope-top" pathLength="1" d="M120 26 V80"/>
+            <path class="el-floor" d="M10 268 H230"/><path id="s9-rope-top" class="el-rope s9-rope-top" pathLength="1" d="M120 26 V80"/>
             <g id="s9-cut" class="fade" style="--d:1.4;--t:.25"><text class="red b" x="128" y="79">✕</text><text class="red" x="145" y="79" style="font-size:10px">rope cut</text></g>
-            <g id="s9-car" class="s9-car">
-              <path class="el-rope" d="M120 80 V100 M120 100 L66 120 M120 100 L174 120"/>
-              <rect class="el-carbody" x="61" y="120" width="118" height="80" rx="6"/>
-              <path class="el-cardet" d="M61 136 H179 M120 136 V200"/>
-              <path id="s9-pawl-l" class="s9-pawl s9-pawl-l" d="M61 119 L40 121 L40 128 L61 128 Z"/>
-              <path id="s9-pawl-r" class="s9-pawl s9-pawl-r" d="M179 119 L200 121 L200 128 L179 128 Z"/>
-            </g>
-            <g id="s9-label" class="s9-label fade" style="--d:2;--t:.7">
-              <path class="s9-lead" d="M238 164 H203"/>
-              <circle class="s9-lead-dot" cx="201" cy="164" r="3"/>
-              <text x="246" y="169" class="red b">safety catch engages ✓</text>
-            </g>
-            </g>
-          </svg>
-        </div>
+            <g id="s9-car" class="s9-car"><path class="el-rope" d="M120 80 V100 M120 100 L66 120 M120 100 L174 120"/><rect class="el-carbody" x="61" y="120" width="118" height="80" rx="6"/><path class="el-cardet" d="M61 136 H179 M120 136 V200"/><path id="s9-pawl-l" class="s9-pawl s9-pawl-l" d="M61 119 L40 121 L40 128 L61 128 Z"/><path id="s9-pawl-r" class="s9-pawl s9-pawl-r" d="M179 119 L200 121 L200 128 L179 128 Z"/></g>
+            <g id="s9-label" class="s9-label fade" style="--d:2;--t:.7"><path class="s9-lead" d="M238 164 H203"/><circle class="s9-lead-dot" cx="201" cy="164" r="3"/><text x="246" y="169" class="red b">safety catch holds ✓</text></g>
+          </g></svg></div>
+        <figcaption class="s9-caption"><b>1854 / the rope breaks. the catch holds.</b><span>otis made the failure survivable.</span></figcaption>
       </figure>
-      <div class="s9-case">
-        <p class="txt rise" style="--d:.3">1854, new york. elisha otis rode a lifting platform up in front of a crowd, then had the rope cut. the platform held.</p>
-        <p class="txt s9-lead-p rise" style="--d:.6">otis did not invent the elevator. he made its failure survivable.</p>
-        <div class="s9-how fade" style="--d:2.7">
-          <p class="s9-how-h">[ how it works ]</p>
-          <ol>
-            <li><b>01</b><span>the rope's pull keeps a spring flexed and the catches tucked in.</span></li>
-            <li><b>02</b><span>the rope snaps. the spring snaps back.</span></li>
-            <li><b>03</b><span>its ends push two catches into the teeth on the rails.</span></li>
-            <li><b>04</b><span>the car stops after a short drop.</span></li>
-          </ol>
-        </div>
-      </div>
-    </div>
-    <div class="strip s9-review rise" style="--d:2.4">
-      <p class="strip-h">choose models by task, then check the result</p>
-      <div class="review-flow" role="group" aria-label="a builder model sends a draft to a different reviewer model for assumption review and repeatable checks, then a human decides whether to release">
-        <div class="review-node"><b>builder · model a</b><small>draft and revise</small></div>
-        <svg class="review-arrow" viewBox="0 0 34 18" aria-hidden="true"><path class="draw" pathLength="1" d="M1 9 H27 M23 4 L31 9 L23 14"/><circle class="packet" cx="2" cy="9" r="2.5"/></svg>
-        <div class="review-node">
-          <div class="review-roles">
-            <div class="review-role review-role-skeptic"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h14v9H9l-4 3v-3H3z"/><path d="M10 7v3m0 2v.2"/></svg><span><strong>skeptic</strong> · challenge assumptions<br><small>claims · scope · blind spots</small></span></div>
-            <div class="review-role review-role-verifier"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 2.5h14v15H3z"/><path d="m6 7 1.5 1.5L10 6m1 1h3m-8 6 1.5 1.5L10 12m1 1h3"/></svg><span><strong>verifier</strong> · run repeatable checks<br><small>lint · render · integrity</small></span></div>
-          </div>
-          <small style="margin-top:5px">independent reviewer · model b</small>
-        </div>
-        <svg class="review-arrow" viewBox="0 0 34 18" aria-hidden="true"><path class="draw" pathLength="1" d="M1 9 H27 M23 4 L31 9 L23 14"/><circle class="packet" cx="2" cy="9" r="2.5"/></svg>
-        <div class="review-node"><b>human gate</b><small>decide what ships</small></div>
-      </div>
-      <div class="review-returns">
-        <svg class="review-return-map" viewBox="0 0 900 42" preserveAspectRatio="none" role="img" aria-label="review issues return to the builder for revision; release issues roll back to the last safe checkpoint">
-          <path class="review-return-path" pathLength="1" d="M480 0 V9 H122 V29 M114 22 L122 30 L130 22"/>
-          <text class="review-return-text" x="155" y="24">revise · return to builder</text>
-          <path class="review-return-path" pathLength="1" d="M786 0 V18"/>
-          <path class="review-return-path" pathLength="1" d="M778 11 L786 19 L794 11"/>
-          <rect class="review-checkpoint" x="670" y="22" width="232" height="18" rx="3"/>
-          <text class="review-return-title" x="786" y="35" text-anchor="middle">rollback · last safe checkpoint</text>
+      <div class="s9-circuit">
+        <p class="s9-circuit-label">independent review · model b</p>
+        <svg class="s9-flow-svg" viewBox="0 0 740 390" role="img" aria-label="a draft visits skeptic, returns for revision, passes verifier and reaches a human release decision. a checkpoint provides a rollback route.">
+          <path class="circuit-main" d="M100 190 C180 190 180 75 270 75 M270 90 C190 90 190 230 100 230 M100 230 H270 M410 230 C500 230 520 190 620 190"/>
+          <path class="circuit-rollback" d="M670 250 V340 H590"/>
+          <g class="circuit-builder"><path d="M20 155h80v95H20z M35 178h50 M35 194h50 M35 210h32"/><text x="60" y="285" text-anchor="middle">builder</text><text class="circuit-sub" x="60" y="312" text-anchor="middle">model a</text></g>
+          <g class="circuit-skeptic"><path d="M270 52h140v44H270z M285 66h95 M285 80h65"/><text x="340" y="125" text-anchor="middle">skeptic</text><text class="circuit-sub" x="340" y="152" text-anchor="middle">challenge assumptions</text><text class="circuit-mark" x="425" y="82">?</text></g>
+          <g class="circuit-verifier"><path d="M270 210h140v40H270z M285 226l7 7 12-16 M318 230h76"/><text x="340" y="280" text-anchor="middle">verifier</text><text class="circuit-sub" x="340" y="307" text-anchor="middle">test the result</text></g>
+          <g class="circuit-human"><path d="M620 140h110v110H620z M646 170l12 12 24-30"/><text x="675" y="211" text-anchor="middle">human</text><text class="circuit-sub" x="675" y="234" text-anchor="middle">release</text></g>
+          <g class="circuit-safe"><path d="M490 321h100v40H490z"/><text x="540" y="346" text-anchor="middle">checkpoint</text></g>
+          <text class="circuit-return-label" x="160" y="120" text-anchor="middle">revise</text><text class="circuit-return-label" x="640" y="369" text-anchor="middle">rollback</text>
+          <path id="review-motion-path" d="M100 190 C180 190 180 75 270 75 H340 V90 C190 90 190 230 100 230 H340 H410 C500 230 520 190 620 190 H675" fill="none" stroke="none"/>
+          <g id="review-packet" class="circuit-packet"><rect x="-13" y="-9" width="26" height="18" rx="1"/><path d="M-8-3H8M-8 3H3"/></g>
         </svg>
+        <p class="s9-different">a different reviewer brings another perspective. it still needs checks.</p>
+        <p class="s9-model-examples"><span>multimodal: images · audio · video</span><span>coding: implement · test</span></p>
       </div>
-      <div class="review-models"><strong>model examples by task:</strong><span>gemini · images · audio · video</span><span>coding-focused model · implement · test</span></div>
-    </div>
-  </div>
-  <aside class="notes" lang="id">
+    </div>  <aside class="notes" lang="id">
     <p>Kisah demonstrasi Otis pada tahun 1854 sering dipakai untuk menjelaskan pendekatan ini. Dalam demonstrasi tersebut, tali dipotong dan mekanisme pengaman menahan platform. Perhatiannya juga diberikan pada apa yang terjadi ketika penopangnya gagal.</p>
     <p>Di workflow saya, model yang membangun dan model yang mereview saya pisahkan. Builder membuat draft. Skeptic mencari asumsi yang lemah, klaim tanpa bukti, dan kemungkinan gagal yang belum dibahas. Verifier menjalankan cek yang bisa diulang, misalnya lint, test, dan hasil render. Jadi satu mengecek cara berpikirnya, satu mengecek hal yang bisa diuji.</p>
     <p>Model juga punya kemampuan dan batas yang berbeda. Contohnya, Gemini bisa membantu memahami gambar, audio, atau video; untuk implementasi, kita bisa memilih model yang cocok dengan tugas coding. Pilih berdasarkan tugas dan hasil cek kita, bukan sekadar nama model. Reviewer yang berbeda memberi sudut pandang lain, tapi tetap bisa salah atau punya blind spot yang sama.</p>
     <p>Kalau review menemukan masalah, hasilnya kembali ke builder. Kalau sudah dirilis dan bermasalah, kita perlu checkpoint atau rollback yang jelas. Lolos review AI belum menjadi keputusan rilis: gate akhirnya tetap manusia.</p>
     <p>Saat membangun dengan AI, kita perlu bertanya hal serupa: kalau hasilnya bermasalah, bagaimana kita berhenti atau pulih?</p>
     <p>Version control membantu mengembalikan perubahan kode. Prototype bisa ditahan sampai selesai direview. Ketika proses gagal, pengguna perlu tahu statusnya dan langkah berikutnya.</p>
-    <p>Tapi undo tidak selalu tersedia. Perubahan di sistem luar, misalnya, mungkin membutuhkan penanganan berbeda. Jadi cek mekanisme pemulihannya sejak awal, termasuk batasnya. Jangan baru mencari jalan kembali setelah sesuatu terlanjur terjadi.</p>
+    <p>Review membantu menemukan kesalahan, tapi tidak menjamin semuanya tertangkap. Mekanisme Otis memberi gambaran tentang failure yang masih bisa ditahan; analoginya terbatas, karena perubahan perangkat lunak punya penyebab dan dampak yang berbeda. Rollback juga perlu checkpoint yang memang tersedia. Perubahan di sistem luar mungkin membutuhkan penanganan berbeda. Cek jalur pulih dan batasnya sejak awal, jangan menunggu sampai masalah terjadi.</p>
     <p><em>Ikuti alur builder, dua jenis review, lalu gate manusia. Tunjukkan jalur kembali saat revisi dan rollback.</em></p>
     <p>Referensi (tidak dibacakan): https://ai.google.dev/gemini-api/docs/video-understanding</p>
   </aside>
@@ -1121,63 +1187,35 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
   <div class="body">
     <div class="s11-head">
       <h2 class="t rise">this deck was made <em>100% by ai</em>.</h2>
-      <p class="sub rise" style="--d:.2">krishna gave the input. ai did the rest.<br> by its own rules, it is still a draft.</p>
+      <p class="sub rise" style="--d:.2">human direction. ai production. human judgment.</p>
     </div>
-    <figure class="bp s11-bp">
-      <div class="bp-bar"><span class="bp-ttl"><svg class="bp-ico" viewBox="0 0 16 12" aria-hidden="true" focusable="false"><path d="M1 1.5H15M1 6H15M1 10.5H15"/></svg>how this deck was made</span><span class="bp-tag">disclosure</span></div>
-      <div class="bp-body scroller">
-        <div class="flow" role="group" aria-label="how this deck was made. krishna's input goes to the ai agents, then to automatic checks, then to a human review that is still open.">
-          <div class="fn fn-in rise" style="--d:.4">
-            <p class="fn-k">krishna's input</p>
-            <ul class="fn-list">
-              <li>the angle: murphy's law for the ai era</li>
-              <li>four habits from the blog</li>
-              <li>taste and style rules</li>
-              <li>feedback between drafts</li>
-            </ul>
-          </div>
-          <svg class="farr" viewBox="0 0 44 16" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:1;--t:.4" d="M2 8 H34"/><path class="farr-h fade" style="--d:1.25;--t:.2" d="M32 3 L41 8 L32 13 Z"/></svg>
-          <div class="fn fn-ai rise" style="--d:1.3">
-            <p class="fn-k">naquuuu crew</p>
-            <ul class="fn-agents" aria-label="workspace agent roles">
-              <li aria-label="naquuuubot: coordinate"><span class="agent-name">naquuuubot</span><span class="agent-role">coordinate</span></li>
-              <li aria-label="naquuuu-curator: taste"><span class="agent-name">naquuuu-curator</span><span class="agent-role">taste</span></li>
-              <li aria-label="naquuuu-builder: build"><span class="agent-name">builder</span><span class="agent-role">build</span></li>
-              <li aria-label="naquuuu-scribe: write"><span class="agent-name">scribe</span><span class="agent-role">write</span></li>
-              <li aria-label="naquuuu-librarian: research"><span class="agent-name">librarian</span><span class="agent-role">research</span></li>
-              <li aria-label="naquuuu-skeptic: challenge"><span class="agent-name">skeptic</span><span class="agent-role">challenge</span></li>
-              <li aria-label="naquuuu-verifier: check"><span class="agent-name">verifier</span><span class="agent-role">check</span></li>
-            </ul>
-          </div>
-          <svg class="farr" viewBox="0 0 44 16" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:1.9;--t:.4" d="M2 8 H34"/><path class="farr-h fade" style="--d:2.15;--t:.2" d="M32 3 L41 8 L32 13 Z"/></svg>
-          <div class="fn fn-gate rise" style="--d:2.2">
-            <p class="fn-k">automatic checks ✓</p>
-            <p class="fn-t"><span class="ph">style lint •</span> <span class="ph">dash scan •</span> <span class="ph">render check</span></p>
-          </div>
-          <svg class="farr" viewBox="0 0 44 16" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:2.8;--t:.4" d="M2 8 H34"/><path class="farr-h fade" style="--d:3.05;--t:.2" d="M32 3 L41 8 L32 13 Z"/></svg>
-          <div class="fn fn-human rise" style="--d:3.1" id="s11-human">
-            <p class="fn-k">human review ✕</p>
-            <p class="fn-t">open. that is you.</p>
-          </div>
-        </div>
-      </div>
-      <div class="bp-leg" aria-hidden="true"><span class="bp-leg-k">lines:</span><span><i class="lg lg-flow"></i>flow</span><span><i class="lg lg-fail"></i>failure</span></div>
-    </figure>
-    <div class="vs rise" style="--d:3.9">
-      <span class="vs-i"><b>v1</b><i class="x">✕</i>too many work cases</span>
-      <span class="vs-i"><b>v2</b><i class="x">✕</i>read like showing off</span>
-      <span class="vs-i vs-now"><b>v3</b>this one</span>
-      <span class="vs-end">both fixes came from a human.</span>
+    <div class="disclosure-map">
+      <svg class="disclosure-svg" viewBox="0 0 1080 380" role="img" aria-label="my workflow roles: human direction enters naquuuubot; curator, librarian, scribe and builder shape a draft; skeptic and verifier review it, and a human decides.">
+        <text class="disclosure-lane" x="0" y="22">my workflow roles</text>
+        <path class="disclosure-path" d="M130 210 H230 M330 190 C380 190 380 90 480 90 H750 M750 90 C750 140 480 140 480 190 H750 M750 190 C750 250 480 250 480 315 H750 C875 315 880 280 965 280"/>
+        <path class="disclosure-return" d="M480 315 C570 355 750 310 750 190"/>
+        <g class="disclosure-input"><path d="M30 165h100v90H30z M48 185h63 M48 204h63 M48 223h40"/><text x="80" y="285" text-anchor="middle">krishna</text><text class="disclosure-small" x="80" y="313" text-anchor="middle">direction</text></g>
+        <g class="disclosure-hub"><circle cx="280" cy="210" r="53"/><circle cx="280" cy="210" r="44" class="hub-inner"/><text x="280" y="208" text-anchor="middle">naquuuubot</text><text class="disclosure-small" x="280" y="232" text-anchor="middle">coordinate</text></g>
+        <g class="disclosure-role disclosure-role-1"><circle cx="480" cy="90" r="9"/><text x="480" y="62" text-anchor="middle">naquuuu-curator</text><text class="disclosure-small" x="480" y="118" text-anchor="middle">taste</text></g>
+        <g class="disclosure-role disclosure-role-2"><circle cx="750" cy="90" r="9"/><text x="750" y="62" text-anchor="middle">librarian</text><text class="disclosure-small" x="750" y="118" text-anchor="middle">research</text></g>
+        <g class="disclosure-role disclosure-role-3"><circle cx="480" cy="190" r="9"/><text x="480" y="166" text-anchor="middle">scribe</text><text class="disclosure-small" x="480" y="218" text-anchor="middle">story</text></g>
+        <g class="disclosure-role disclosure-role-4"><circle cx="750" cy="190" r="9"/><text x="750" y="166" text-anchor="middle">builder</text><text class="disclosure-small" x="750" y="218" text-anchor="middle">build</text></g>
+        <g class="disclosure-role disclosure-reviewer disclosure-role-5"><circle cx="480" cy="315" r="10"/><text x="480" y="285" text-anchor="middle">skeptic</text><text class="disclosure-small" x="480" y="345" text-anchor="middle">challenge</text></g>
+        <g class="disclosure-role disclosure-reviewer disclosure-role-6"><circle cx="750" cy="315" r="10"/><text x="750" y="285" text-anchor="middle">verifier</text><text class="disclosure-small" x="750" y="345" text-anchor="middle">check</text></g>
+        <g class="disclosure-human"><path d="M965 230h90v100H965z M982 254l12 12 22-28"/><text x="1010" y="302" text-anchor="middle">human</text><text class="disclosure-small" x="1010" y="363" text-anchor="middle">decision</text></g>
+        <path id="crew-motion-path" d="M130 210 H280 L330 190 C380 190 380 90 480 90 H750 C750 140 480 140 480 190 H750 C750 250 480 250 480 315 C570 355 750 310 750 190 C780 255 710 265 750 315 C875 315 880 280 1010 280" fill="none" stroke="none"/>
+        <circle id="crew-packet" class="disclosure-packet" r="6" cx="0" cy="0"/>
+      </svg>
     </div>
-    <p class="s11-callback rise" style="--d:4.3">by slide 6's math, something in here is probably wrong.</p>
-    <p class="ainote rise" style="--d:4.6"><b>ai note</b><span>drafted with ai. might be wrong, check anything important.</span></p>
+    <div class="disclosure-foot"><span>v1 · too many examples</span><span>v2 · too much showing off</span><span>v3 · shaped by feedback</span></div>    <p class="s11-callback">by slide 6's math, something in here is probably wrong.</p>
+    <p class="disclosure-note">ai draft · check anything important before using it.</p>
   </div>
   <aside class="notes" lang="id">
     <p>Dan ada sedikit pengakuan: deck yang kalian lihat ini juga dibuat dengan AI. Maksud tulisan ‘seratus persen’ di sini, AI mengerjakan riset, penulisan, visual, dan pembangunan deck, dengan input dan review manusia.</p>
     <p>Saya memberi arah: sudut pembahasan, empat kebiasaan, gaya, dan feedback. Draft pertama terlalu banyak contoh pekerjaan. Draft berikutnya terlalu ingin menunjukkan kemampuan. Arah itu kemudian dikoreksi, dan hasilnya tetap perlu diperiksa manusia.</p>
-    <p>Di kotak kedua, saya tunjukkan pembagian peran agent di workspace saya. Naquuuubot mengatur alurnya. Curator membantu arah dan tone, builder mengerjakan hasilnya, dan scribe membantu penulisan. Librarian mencari bahan; skeptic menantang asumsi; verifier menjalankan pengecekan. Ini peta peran, bukan berarti semua agent harus dipanggil setiap kali. Yang penting, membuat dan mengecek punya tugas yang jelas, dan keputusan akhirnya tetap ada di kita.</p>
+    <p>Diagram ini menunjukkan workflow role di workspace saya, bukan catatan bahwa semua peran selalu dipanggil untuk setiap deck. Naquuuubot mengoordinasikan alur. Curator membantu taste, librarian riset, scribe menyusun cerita, dan builder mengerjakan hasil. Skeptic menantang asumsi; verifier mengecek hal yang bisa diuji. Packet bergerak melewati tiap handoff. Keputusan akhir tetap ada di manusia.</p>
     <p>Kalau memakai logika slide matematika tadi, tentu ada banyak bagian yang mungkin salah. Tapi kita tidak punya angka peluang kesalahan untuk deck ini. Anggap itu pengingat kecil: AI bisa membangun bahan presentasinya, sementara kita tetap bertanggung jawab atas yang kita sampaikan.</p>
-    <p><em>Biarkan nama dan peran agent muncul satu per satu sebelum lanjut ke kotak automatic checks.</em></p>
+    <p><em>Ikuti packet dari input manusia ke naquuuubot, lalu ke authoring dan review roles. Tunjukkan jalur balik dari skeptic sebelum menutup dengan keputusan manusia.</em></p>
   </aside>
 </section>
 
@@ -1486,6 +1524,40 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
       }
     };
   })();
+
+
+  /* Native SVG paths keep handoffs attached to their real diagram geometry. */
+  function pathStory(slideId, pathId, packetId, duration){
+    var path=document.getElementById(pathId), packet=document.getElementById(packetId), raf=0;
+    var total=path.getTotalLength();
+    function place(progress){
+      if(slideId==='s9'){
+        var times=[0,.24,.33,.55,.62,.78,.85,1], distances=[0,.27,.27,.52,.52,.72,.72,1];
+        for(var j=1;j<times.length;j++){if(progress<=times[j]){progress=distances[j-1]+(distances[j]-distances[j-1])*(progress-times[j-1])/(times[j]-times[j-1]);break}}
+        packet.classList.toggle('is-verified',progress>.72);
+      }
+      var point=path.getPointAtLength(total*progress);
+      packet.setAttribute('transform','translate('+point.x+' '+point.y+')');
+      var roles=document.querySelectorAll('#'+slideId+' .disclosure-role');
+      roles.forEach(function(role){
+        var circle=role.querySelector('circle');
+        var dx=point.x-(+circle.getAttribute('cx')), dy=point.y-(+circle.getAttribute('cy'));
+        role.classList.toggle('is-current',Math.hypot(dx,dy)<45);
+      });
+    }
+    function stop(){if(raf)cancelAnimationFrame(raf);raf=0}
+    hooks[slideId]={stop:stop,still:function(){stop();place(1)},play:function(s,red){
+      stop();place(red?1:0);if(red)return;
+      var preview=/[?&]t=(\d+)/.exec(location.search);
+      if(preview){place(Math.min(1,Math.max(0,(+preview[1]-400)/duration)));return}
+      var started=performance.now()+400;
+      function step(now){var progress=Math.min(1,Math.max(0,(now-started)/duration));place(progress);if(progress<1)raf=requestAnimationFrame(step)}
+      raf=requestAnimationFrame(step);
+    }};
+    place(1);
+  }
+  pathStory('s9','review-motion-path','review-packet',6000);
+  pathStory('s11','crew-motion-path','crew-packet',8000);
 
   /* ---------- design review aid: deck.html?t=1800#9 freezes the slide's css motion at 1.8s ---------- */
   var qt=/[?&]t=(\d+)/.exec(location.search);

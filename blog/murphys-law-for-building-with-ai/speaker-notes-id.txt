@@ -29,7 +29,7 @@ Dari lagu itu, saya membawa satu pertanyaan ke pekerjaan: ketika AI membuat bany
 
 Referensi (tidak dibacakan): https://p-vine.jp/news/20260713-120035 ; https://www.medcom.id/hiburan/musik/JKRAvZQk-kafin-sulthan-ingin-berkolaborasi-dengan-candra-darusman
 
-Cue: Setelah cerita Juni, jeda singkat. Music, meaning, work muncul mengikuti cerita. Ucapkan ‘C’mon, anak negeri!’ dengan senyum ringan. Footer IPC muncul menjelang bagian terakhir.
+Cue: Setelah cerita Juni, jeda singkat. Ikuti gerak record dan jalur merah menuju pertanyaan kerja. Tiga bagian cerita mendapat penekanan bergantian. Ucapkan ‘C’mon, anak negeri!’ dengan senyum ringan, lalu hubungkan ke diskusi IPC.
 
 ## 3. making got cheap. being right did not.
 
@@ -119,7 +119,7 @@ Saat membangun dengan AI, kita perlu bertanya hal serupa: kalau hasilnya bermasa
 
 Version control membantu mengembalikan perubahan kode. Prototype bisa ditahan sampai selesai direview. Ketika proses gagal, pengguna perlu tahu statusnya dan langkah berikutnya.
 
-Tapi undo tidak selalu tersedia. Perubahan di sistem luar, misalnya, mungkin membutuhkan penanganan berbeda. Jadi cek mekanisme pemulihannya sejak awal, termasuk batasnya. Jangan baru mencari jalan kembali setelah sesuatu terlanjur terjadi.
+Review membantu menemukan kesalahan, tapi tidak menjamin semuanya tertangkap. Mekanisme Otis memberi gambaran tentang failure yang masih bisa ditahan; analoginya terbatas, karena perubahan perangkat lunak punya penyebab dan dampak yang berbeda. Rollback juga perlu checkpoint yang memang tersedia. Perubahan di sistem luar mungkin membutuhkan penanganan berbeda. Cek jalur pulih dan batasnya sejak awal, jangan menunggu sampai masalah terjadi.
 
 Referensi (tidak dibacakan): https://ai.google.dev/gemini-api/docs/video-understanding
 
@@ -141,11 +141,11 @@ Dan ada sedikit pengakuan: deck yang kalian lihat ini juga dibuat dengan AI. Mak
 
 Saya memberi arah: sudut pembahasan, empat kebiasaan, gaya, dan feedback. Draft pertama terlalu banyak contoh pekerjaan. Draft berikutnya terlalu ingin menunjukkan kemampuan. Arah itu kemudian dikoreksi, dan hasilnya tetap perlu diperiksa manusia.
 
-Di kotak kedua, saya tunjukkan pembagian peran agent di workspace saya. Naquuuubot mengatur alurnya. Curator membantu arah dan tone, builder mengerjakan hasilnya, dan scribe membantu penulisan. Librarian mencari bahan; skeptic menantang asumsi; verifier menjalankan pengecekan. Ini peta peran, bukan berarti semua agent harus dipanggil setiap kali. Yang penting, membuat dan mengecek punya tugas yang jelas, dan keputusan akhirnya tetap ada di kita.
+Diagram ini menunjukkan workflow role di workspace saya, bukan catatan bahwa semua peran selalu dipanggil untuk setiap deck. Naquuuubot mengoordinasikan alur. Curator membantu taste, librarian riset, scribe menyusun cerita, dan builder mengerjakan hasil. Skeptic menantang asumsi; verifier mengecek hal yang bisa diuji. Packet bergerak melewati tiap handoff. Keputusan akhir tetap ada di manusia.
 
 Kalau memakai logika slide matematika tadi, tentu ada banyak bagian yang mungkin salah. Tapi kita tidak punya angka peluang kesalahan untuk deck ini. Anggap itu pengingat kecil: AI bisa membangun bahan presentasinya, sementara kita tetap bertanggung jawab atas yang kita sampaikan.
 
-Cue: Biarkan nama dan peran agent muncul satu per satu sebelum lanjut ke kotak automatic checks.
+Cue: Ikuti packet dari input manusia ke naquuuubot, lalu ke authoring dan review roles. Tunjukkan jalur balik dari skeptic sebelum menutup dengan keputusan manusia.
 
 ## 13. now the human loop. your turn.
 
