@@ -347,12 +347,17 @@ svg .s9-lead-dot{fill:var(--accent-crimson)}
 
 /* ===== origin: music to work ===== */
 .origin .body{display:grid;grid-template-columns:390px 1fr;grid-template-rows:1fr auto;column-gap:50px;align-items:center}
-.origin-left{position:relative;align-self:center}.origin-title{font:700 42px/1.08 var(--f-head);letter-spacing:-.02em}
-.origin-record{display:block;width:330px;height:330px;margin:0 auto 8px;overflow:visible}
+.origin-left{position:relative;align-self:center;width:390px}.origin-title{font:700 42px/1.08 var(--f-head);letter-spacing:-.02em}
+.origin-art{position:relative;width:390px;height:410px;margin:0 auto}
+.origin-sleeve{position:absolute;z-index:1;left:0;top:0;width:235px;height:235px;overflow:visible;filter:drop-shadow(0 5px 8px rgba(0,0,0,.2));transform:rotate(-5deg)}
+.origin-sleeve svg{display:block;width:100%;height:100%;border-radius:8px;overflow:hidden}
+.origin-cover-image{width:522px;height:545px}
+.origin-record{position:absolute;z-index:2;left:70px;top:65px;display:block;width:300px;height:300px;margin:0;overflow:visible;filter:drop-shadow(0 4px 9px rgba(0,0,0,.16))}
 .origin-disc{transform-box:fill-box;transform-origin:center}.origin-label{fill:var(--paper);stroke:var(--line);stroke-width:1}.origin-groove{fill:none;stroke:var(--paper);stroke-opacity:.3;stroke-width:1}.origin-hole{fill:var(--accent-crimson)}
+.origin-label{fill:#fffdf6}.origin-groove{stroke:#fffdf6}.origin-record .origin-record-title{fill:#111110}
 .origin-record-title{font:600 9px var(--f-mono);fill:var(--text-primary);letter-spacing:.04em}.origin-tonearm{fill:none;stroke:var(--arrow);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.origin-arm-pivot{fill:var(--bg-card);stroke:var(--accent-crimson);stroke-width:3}
 .origin-groove-mark{fill:none;stroke:var(--accent-crimson);stroke-width:2.5;stroke-linecap:round}.origin-track-dot{fill:var(--accent-crimson)}
-.origin-artist{font:600 13px var(--f-mono);letter-spacing:.06em;color:var(--text-secondary);text-align:center}.origin-tagline{font:500 17px/1.3 var(--f-mono);color:var(--text-secondary);margin-top:11px;text-align:center}
+.origin-credit{text-align:center;display:grid;gap:3px}.origin-credit strong{font:700 16px var(--f-mono);color:var(--text-primary);letter-spacing:.03em}.origin-credit span{font:400 14px var(--f-mono);color:var(--text-secondary)}
 .origin-story{align-self:center;position:relative;padding:4px 0 8px}.origin-headline{font:700 48px/1.04 var(--f-head);letter-spacing:-.035em;color:var(--text-primary);max-width:690px}.origin-headline em{font-style:normal;color:var(--accent-crimson)}
 .origin-beats{margin-top:18px}.origin-beat{position:relative;display:grid;grid-template-columns:1fr;gap:5px;align-items:start;padding:11px 0 11px 14px;border-top:1px solid var(--border-subtle);font:500 18px/1.25 var(--f-body);color:var(--text-primary)}
 .origin-beat b{font:700 16px/1.25 var(--f-mono);letter-spacing:.02em;color:var(--accent-crimson)}.origin-beat small{font:400 19px/1.3 var(--f-body);color:var(--text-secondary)}
@@ -368,6 +373,8 @@ svg .s9-lead-dot{fill:var(--accent-crimson)}
 @keyframes k-origin-underline{to{background-size:100% 3px}}
 @keyframes k-origin-spin{from{transform:rotate(-20deg)}to{transform:rotate(340deg)}}
 .slide.play .origin-disc{animation:k-origin-spin 6s var(--ease) .1s both}
+.slide.play .origin-sleeve{animation:k-cover-reveal 1.2s var(--ease) .2s both}
+@keyframes k-cover-reveal{from{transform:translateX(105px) rotate(0deg) scale(.92)}to{transform:translateX(0) rotate(-5deg) scale(1)}}
 .slide.play .origin-tonearm{transform-origin:248px 18px;animation:k-origin-tonearm .8s var(--ease) .7s both}
 .slide.play .origin-groove-mark{stroke-dasharray:160;stroke-dashoffset:160;animation:k-origin-trace 1.25s var(--ease) 1.2s both}
 .slide.play .origin-headline em{animation:k-origin-underline .65s ease 5.1s both}
@@ -588,7 +595,8 @@ html.mobile .s12-q span{font-size:20px}
 html.mobile .tag,html.mobile .ptag{white-space:normal}
 html.mobile .origin-title{font-size:34px}
 html.mobile .origin .body{display:flex;gap:14px;align-items:stretch}
-html.mobile .origin-record{width:180px;height:180px}
+html.mobile .origin-left{width:min(390px,100%);min-height:325px;margin:0 auto}
+html.mobile .origin-art{transform:scale(.78);transform-origin:top left;margin-bottom:-86px}
 html.mobile .origin-route{display:none}
 html.mobile .origin-headline{font-size:34px}
 html.mobile .origin-beat small{font-size:17px}
@@ -665,9 +673,11 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
   <div class="top"><span class="lbl">origin</span><span class="tr">[ music · meaning · work ]</span></div>
   <div class="body">
     <div class="origin-left">
+      <div class="origin-art">
+      <div class="origin-sleeve" role="img" aria-label="a midsummer night's dream cover artwork, featuring hukum murphy by kafin sulthan"><svg viewBox="67 43 389 389" preserveAspectRatio="none"><image class="origin-cover-image" href="cover-art-reference.png" x="0" y="0"/></svg></div>
       <svg class="origin-record" viewBox="0 0 280 280" role="img" aria-label="vinyl record and tonearm for hukum murphy by kafin sulthan">
         <g class="origin-disc">
-          <circle cx="140" cy="140" r="132" fill="var(--text-primary)"/>
+          <circle cx="140" cy="140" r="132" fill="#111110"/>
           <circle class="origin-groove" cx="140" cy="140" r="116"/><circle class="origin-groove" cx="140" cy="140" r="102"/><circle class="origin-groove" cx="140" cy="140" r="88"/><circle class="origin-groove" cx="140" cy="140" r="74"/>
           <path class="origin-groove-mark" d="M140 8 A132 132 0 0 1 267 104"/><circle class="origin-track-dot" cx="267" cy="104" r="4"/>
         </g>
@@ -675,8 +685,8 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
         <text class="origin-record-title" x="140" y="135" text-anchor="middle">hukum</text><text class="origin-record-title" x="140" y="149" text-anchor="middle">murphy</text>
         <path class="origin-tonearm" d="M248 18 L214 18 L190 42 L174 85"/><circle class="origin-arm-pivot" cx="248" cy="18" r="8"/><circle class="origin-arm-pivot" cx="174" cy="85" r="4"/>
       </svg>
-      <p class="origin-artist">kafin sulthan / hukum murphy</p>
-      <p class="origin-tagline">krishna · product, systems &amp; music</p>
+      </div>
+      <div class="origin-credit"><strong>hukum murphy</strong><span>kafin sulthan · songwriter &amp; performer</span></div>
     </div>
     <svg class="origin-route" viewBox="0 0 110 200" aria-hidden="true"><path pathLength="1" d="M0 0 H88 V178 H103"/><circle cx="0" cy="0" r="5"/></svg>
     <div class="origin-story">
@@ -912,11 +922,11 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
         </figure>
         <div class="ctl fade" style="--d:.9" role="group" aria-label="try the arithmetic">
           <div class="rng">
-            <label for="s4-p"><span>each step is right</span><output id="s4-pv" for="s4-p">95.0%</output></label>
+            <label for="s4-p"><span>each step is right (p)</span><output id="s4-pv" for="s4-p">95.0%</output></label>
             <input id="s4-p" type="range" min="80" max="99.9" step="0.1" value="95">
           </div>
           <div class="rng">
-            <label for="s4-n"><span>steps</span><output id="s4-nv" for="s4-n">20</output></label>
+            <label for="s4-n"><span>steps (n)</span><output id="s4-nv" for="s4-n">20</output></label>
             <input id="s4-n" type="range" min="1" max="50" step="1" value="20">
           </div>
         </div>
