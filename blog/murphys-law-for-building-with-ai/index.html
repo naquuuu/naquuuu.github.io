@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>murphy's law for people who build with ai | naquuuu</title>
-<meta name="description" content="a 12-slide presentation on murphy's law, ai-assisted prototyping, reliability, and the human checks that keep cheap drafts from becoming confident mistakes.">
+<meta name="description" content="a 13-slide presentation on murphy's law, ai-assisted prototyping, reliability, and the human checks that keep cheap drafts from becoming confident mistakes.">
 <link rel="canonical" href="https://naquuuu.github.io/blog/murphys-law-for-building-with-ai/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="naquuuu">
 <meta property="og:title" content="murphy's law for people who build with ai">
-<meta property="og:description" content="a 12-slide presentation on murphy's law, ai-assisted prototyping, reliability, and the human checks that keep cheap drafts from becoming confident mistakes.">
+<meta property="og:description" content="a 13-slide presentation on murphy's law, ai-assisted prototyping, reliability, and the human checks that keep cheap drafts from becoming confident mistakes.">
 <meta property="og:url" content="https://naquuuu.github.io/blog/murphys-law-for-building-with-ai/">
 <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg?v=20260917i">
 <link rel="alternate icon" href="../../favicon.ico?v=20260917i">
@@ -20,7 +20,7 @@
 /* ==================================================================
    naquuuu sharing session v3: murphy's law for people who build with ai
    order: 0 tokens, 1 shell, 2 chrome, 3 type + shared parts, 4 motion,
-   5 per-slide blocks (s1 to s12), 6 mobile, 7 print + reduced motion
+   5 per-slide blocks (s1 to s12 plus s-origin plus s-origin plus s-origin), 6 mobile, 7 print + reduced motion
    ================================================================== */
 
 /* ---------- 0. tokens (light is the default; dark via data-theme) ---------- */
@@ -345,6 +345,58 @@ svg .s9-lead-dot{fill:var(--accent-crimson)}
 .thesis{background:var(--bg-card);border:1px solid var(--border-subtle);border-left:4px solid var(--accent-crimson);border-radius:var(--r-md);padding:22px 32px;box-shadow:var(--shadow-lift)}
 .thesis p{font:700 40px/1.15 var(--f-head);letter-spacing:-.02em;color:var(--text-primary)}
 
+/* ===== origin: music to work ===== */
+.origin .body{gap:15px}.origin-title{font:700 42px/1.08 var(--f-head);letter-spacing:-.02em}
+.origin-route-grid{display:grid;grid-template-columns:1fr 42px 1fr 42px 1fr;align-items:stretch;gap:8px;min-width:0}
+.origin-node{min-width:0;min-height:235px;padding:16px 18px;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);display:flex;flex-direction:column;justify-content:center}
+.origin-k{font:700 13px var(--f-mono);letter-spacing:.08em;color:var(--accent-crimson);margin-bottom:11px}.origin-h{font:700 24px/1.12 var(--f-head);letter-spacing:-.02em;color:var(--text-primary)}.origin-copy{font:400 15px/1.4 var(--f-body);color:var(--text-secondary);margin-top:8px}
+.origin-record{display:block;width:88px;height:88px;margin:0 auto 10px;overflow:visible}.origin-disc{transform-box:fill-box;transform-origin:center}.origin-label{fill:var(--paper);stroke:var(--line);stroke-width:1}.origin-groove{fill:none;stroke:var(--paper);stroke-opacity:.3;stroke-width:1}.origin-hole{fill:var(--accent-crimson)}.origin-record-title{font:600 8px var(--f-mono);fill:var(--paper);letter-spacing:.04em}
+.origin-arrow{width:42px;height:20px;align-self:center;fill:none;stroke:var(--arrow);stroke-width:1.6}.origin-arrow path{stroke-dasharray:none;stroke-dashoffset:0}
+.origin-extras{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;min-height:32px}.origin-chip{font:400 13px var(--f-mono);color:var(--text-secondary);border:1px solid var(--border-subtle);background:var(--bg-surface);border-radius:999px;padding:5px 11px}.origin-stamp{font:700 12px var(--f-mono);letter-spacing:.08em;color:var(--accent-crimson);border:1px solid var(--accent-crimson);padding:4px 9px;transform:rotate(-3deg)}
+.origin-bridge{display:grid;grid-template-columns:310px 1fr;align-items:center;gap:20px;border-top:1px solid var(--border-subtle);padding-top:11px}.origin-bridge-k{font:700 12px var(--f-mono);letter-spacing:.06em;color:var(--accent-crimson)}.origin-bridge p{font:500 16px/1.35 var(--f-body);color:var(--text-primary)}
+@keyframes k-origin-spin{from{transform:rotate(-20deg)}to{transform:rotate(340deg)}}
+@keyframes k-origin-glow{0%,100%{box-shadow:0 0 0 0 transparent}45%{box-shadow:0 0 22px 2px var(--glow)}}
+.slide.play .origin-disc{animation:k-origin-spin 8s var(--ease) .2s both}.slide.play .origin-node{animation:k-rise .65s var(--ease) var(--d,0s) both}.slide.play .origin-arrow path{stroke-dasharray:1;stroke-dashoffset:1;animation:k-draw .8s var(--ease) var(--d,0s) both}.slide.play .origin-stamp{animation:k-pop .55s var(--ease) 5.8s both,k-origin-glow 1s ease 6.4s 1 both}
+.slide.play .origin-extras .origin-chip{animation:k-rise .6s var(--ease) 5.3s both}
+.origin-tagline{font:500 19px/1.3 var(--f-mono);color:var(--text-secondary);margin-top:-8px}
+.origin-groove-mark{fill:none;stroke:var(--accent-crimson);stroke-width:2;stroke-linecap:round}.origin-track-dot{fill:var(--accent-crimson)}
+
+/* recovery review loop */
+.s9-review{padding:10px 16px 11px;position:relative}
+.s9-review .strip-h{font-weight:700;color:var(--text-primary);margin-bottom:8px}
+.review-flow{display:grid;grid-template-columns:1fr 34px 1.35fr 34px 1fr;align-items:stretch;gap:7px}
+.review-node{min-width:0;border:1px solid var(--border-subtle);background:var(--bg-surface);border-radius:6px;padding:8px 11px;display:flex;flex-direction:column;justify-content:center}
+.review-node b{font:700 13px var(--f-mono);color:var(--text-primary)}.review-node small{font:400 12px/1.25 var(--f-body);color:var(--text-secondary);margin-top:3px}
+.review-arrow{width:34px;height:18px;align-self:center;fill:none;stroke:var(--arrow);stroke-width:1.5}.review-arrow path{stroke-dasharray:none;stroke-dashoffset:0}
+.review-roles{display:grid;gap:5px}.review-role{display:grid;grid-template-columns:20px 1fr;gap:7px;align-items:center;min-width:0}
+.review-role svg{width:18px;height:18px;fill:none;stroke:var(--accent-crimson);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.review-role strong{font:700 12px var(--f-mono);color:var(--accent-crimson)}.review-role span{font:400 12px/1.2 var(--f-body);color:var(--text-secondary)}
+.review-returns{display:block;margin:4px 0 2px}.review-return-map{display:block;width:100%;height:42px;overflow:visible}.review-return-path{fill:none;stroke:var(--accent-crimson);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0}.review-checkpoint{fill:var(--bg-surface);stroke:var(--border-active);stroke-width:1}.review-return-text{font:400 12px var(--f-mono);fill:var(--text-secondary)}.review-return-title{font:700 12px var(--f-mono);fill:var(--accent-crimson)}
+.slide.play .review-return-path{stroke-dasharray:1;stroke-dashoffset:1;animation:k-draw .7s var(--ease) 7.2s both}
+.review-node{min-height:82px;padding:9px 12px}.review-node b{font-size:16px}.review-node small{font-size:15px}
+.review-role strong{font-size:15px}.review-role span{font-size:14px}
+#s9 .body{gap:16px}.s9-row{grid-template-columns:420px 1fr;gap:30px}.s9-fig svg{width:420px}
+.s9-review{min-height:188px;padding:9px 15px}
+.fn-ai{padding-left:8px;padding-right:8px}
+.fn-agents{gap:4px}.fn-agents li{grid-template-columns:max-content 1fr;column-gap:12px;padding:2px 3px}
+.fn-agents .agent-name{font-size:14px}.fn-agents .agent-role{font-size:14px}
+.review-models{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--border-subtle);padding-top:6px;font:400 12px/1.2 var(--f-mono);color:var(--text-secondary)}.review-models strong{color:var(--text-primary);font-weight:700}.review-models span{white-space:nowrap}
+@keyframes k-review-pulse{0%,100%{opacity:1}45%{opacity:.48;filter:drop-shadow(0 0 4px var(--accent-crimson))}}
+@keyframes k-review-check{0%{stroke-dashoffset:12}100%{stroke-dashoffset:0}}
+.slide.play .review-role-skeptic svg{animation:k-review-pulse .8s ease 5.1s 2 both}.slide.play .review-role-verifier svg path{stroke-dasharray:12;stroke-dashoffset:12;animation:k-review-check .5s ease 6s both}
+.slide.play .review-arrow path{stroke-dasharray:1;stroke-dashoffset:1;animation:k-draw .6s var(--ease) var(--d,0s) both}.review-arrow:nth-of-type(1) path{--d:3.5s}.review-arrow:nth-of-type(2) path{--d:6.7s}
+.review-arrow .packet{fill:var(--accent-crimson);opacity:0}
+@keyframes k-review-packet{0%{opacity:0;transform:translateX(0)}15%,75%{opacity:1}100%{opacity:0;transform:translateX(24px)}}
+.slide.play .review-arrow:first-of-type .packet{animation:k-review-packet .9s ease 3.8s both}
+.slide.play .review-arrow:last-of-type .packet{animation:k-review-packet .9s ease 6.9s both}
+.slide.play .review-flow .review-node:last-child{animation:k-rise .55s var(--ease) 7.4s both}
+.fn-agents{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+.fn-agents li{display:grid;grid-template-columns:minmax(0,1fr) max-content;gap:12px;align-items:center;padding:2px 3px;border-left:2px solid transparent;font:400 14px/1.15 var(--f-mono);color:var(--text-secondary)}
+.fn-agents .agent-name{font-size:14px;color:var(--text-primary);white-space:nowrap}.fn-agents .agent-role{font:500 14px/1.15 var(--f-body);white-space:nowrap}
+@keyframes k-agent-pass{0%,100%{background:transparent;border-left-color:transparent}40%{background:var(--wash-a);border-left-color:var(--accent-crimson)}}
+.slide.play .fn-agents li{animation:k-agent-pass .8s ease calc(var(--d,3.8)*1s) both}
+.fn-agents li:nth-child(1){--d:3.7}.fn-agents li:nth-child(2){--d:4.05}.fn-agents li:nth-child(3){--d:4.4}.fn-agents li:nth-child(4){--d:4.75}.fn-agents li:nth-child(5){--d:5.1}.fn-agents li:nth-child(6){--d:5.45}.fn-agents li:nth-child(7){--d:5.8}
+
 /* ===== s11 disclosure ===== */
 #s11 .body{gap:12px}
 .s11-head{display:flex;flex-direction:column;gap:6px}
@@ -449,6 +501,18 @@ html.mobile .qt{font-size:22px}
 html.mobile .s12-close{flex-wrap:wrap;gap:8px 16px}
 html.mobile .s12-q span{font-size:20px}
 html.mobile .tag,html.mobile .ptag{white-space:normal}
+html.mobile .origin-title{font-size:34px}
+html.mobile .origin-route-grid{grid-template-columns:1fr;gap:10px}
+html.mobile .origin-node{min-height:180px}
+html.mobile .origin-arrow{transform:rotate(90deg);margin:4px auto}
+html.mobile .origin-bridge{grid-template-columns:1fr;gap:6px}
+html.mobile .s9-row{grid-template-columns:1fr;gap:12px}
+html.mobile .s9-fig svg{width:100%}
+html.mobile #s9 .body{gap:16px}
+html.mobile .s9-review{min-height:0}
+html.mobile .review-flow{grid-template-columns:1fr;gap:5px}
+html.mobile .review-arrow{transform:rotate(90deg);margin:3px auto}
+html.mobile .review-models{flex-wrap:wrap;justify-content:flex-start}
 html.mobile .notespanel{height:45vh}
 html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
 
@@ -466,6 +530,9 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
 @media (prefers-reduced-motion:reduce){
   .slide *,.slide *::before,.slide *::after{animation:none!important;transition:none!important}
   .marq-in{animation:none!important}
+}
+@media print, (prefers-reduced-motion:reduce){
+  .origin-arrow path,.review-arrow path,.review-return-path,.review-role-verifier svg path{stroke-dasharray:none!important;stroke-dashoffset:0!important}
 }
 </style>
 </head>
@@ -487,14 +554,48 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
     <p class="s1-by rise" style="--d:1">krishna</p>
     <p class="s1-disc rise" style="--d:1.25"><b class="s1-disc-k">[ disclaimer ]</b> i practice this. i have not mastered it. this is me sharing the parts i want to be more consistent at.</p>
   </div>
-  <aside class="notes">
-    <p>hi semua. disclaimer dulu: i practice what's in this deck, but i'm not an expert at it. this is me sharing the parts i want to be more consistent at. and a quick warning: today i'm the pessimist in the room. not about ai. about us using ai. fifteen minutes on murphy's law, why i think it's the right mindset right now, and four habits that come from things that break.</p>
+  <aside class="notes" lang="id">
+    <p>Hai semua. Hari ini saya mau sharing sesuatu yang saya sendiri masih belajar buat lebih konsisten menjalankannya. Jadi, saya datang bukan sebagai expert, tapi sebagai sesama orang yang kadang terlalu senang waktu AI bikin pekerjaan terasa cepat.</p>
+    <p>Judulnya memang agak pesimis: apa pun yang bisa salah, bisa saja akhirnya salah. Tapi saya tetap optimis dengan manfaat AI. Yang mau saya ajak lebih pesimis justru cara kita merencanakan penggunaannya.</p>
+    <p>Dalam sekitar lima belas menit, kita akan lihat kenapa hasil yang cepat dan meyakinkan masih perlu diperiksa, lalu empat kebiasaan sederhana yang bisa membantu. Harapannya, kita pulang dengan satu kebiasaan yang bisa dicoba di pekerjaan berikutnya.</p>
+    <p><em>Jeda setelah “terlalu senang”. Pembukaan tenang, seperti mulai ngobrol dengan rekan kerja.</em></p>
   </aside>
 </section>
 
 <!-- ================================================================
      02 the moment
      ================================================================ -->
+<section class="slide origin" id="s-origin" data-title="from a song to a way of working">
+  <div class="top"><span class="lbl">origin</span><span class="tr">[ music · meaning · work ]</span></div>
+  <div class="body">
+    <h2 class="origin-title rise" style="--d:.1">from a song to a way of working.</h2>
+    <p class="origin-tagline rise" style="--d:.25">krishna · product, systems &amp; music</p>
+    <div class="origin-route-grid">
+      <article class="origin-node" style="--d:.35s"><p class="origin-k">01 / music</p>
+        <svg class="origin-record" viewBox="0 0 120 120" role="img" aria-label="a vinyl record labeled hukum murphy by kafin sulthan"><g class="origin-disc"><circle cx="60" cy="60" r="54" fill="var(--text-primary)"/><circle class="origin-groove" cx="60" cy="60" r="44"/><circle class="origin-groove" cx="60" cy="60" r="36"/><circle class="origin-groove" cx="60" cy="60" r="28"/><path class="origin-groove-mark" d="M60 6 A54 54 0 0 1 113 47"/><circle class="origin-track-dot" cx="113" cy="47" r="2.5"/></g><circle class="origin-label" cx="60" cy="60" r="20"/><circle class="origin-hole" cx="60" cy="60" r="3"/><text class="origin-record-title" x="60" y="57" text-anchor="middle">hukum</text><text class="origin-record-title" x="60" y="67" text-anchor="middle">murphy</text></svg>
+        <p class="origin-h">“hukum murphy”</p><p class="origin-copy">kafin sulthan · music to quiet the mind</p>
+      </article>
+      <svg class="origin-arrow" viewBox="0 0 48 20" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:1.6;--t:.8" d="M2 10 H38 M32 4 L40 10 L32 16"/></svg>
+      <article class="origin-node" style="--d:2.3s"><p class="origin-k">02 / meaning</p><p class="origin-h">prepare for what can go wrong.</p><p class="origin-copy">a way to meet uncertainty with more care.</p></article>
+      <svg class="origin-arrow" viewBox="0 0 48 20" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:3.5;--t:.8" d="M2 10 H38 M32 4 L40 10 L32 16"/></svg>
+      <article class="origin-node" style="--d:4.1s"><p class="origin-k">03 / work</p><p class="origin-h">an engineering mindset for product discovery.</p><p class="origin-copy">one view i am still testing.</p></article>
+    </div>
+    <div class="origin-extras"><span class="origin-chip">june · after an 8-year relationship</span><span class="origin-chip">to my ears: 70s/80s french pop + 90s shibuya-kei</span><span class="origin-stamp">anak negeri!</span></div>
+    <div class="origin-bridge rise" style="--d:6.2"><p class="origin-bridge-k">at ipc · designer · pm · data · writer</p><p>many perspectives. one question still open: how should we discover with ai? here is my view.</p></div>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Sebelum masuk ke idenya, sedikit cerita kenapa saya memilih topik ini. Saya Krishna. Saya suka produk, sistem, dan musik, dan kali ini ketiganya ketemu.</p>
+    <p>Juni lalu, setelah hubungan yang berlangsung delapan tahun berakhir, musik membantu menenangkan pikiran saya. Belakangan saya menemukan ‘Hukum Murphy’ dari Kafin Sulthan.</p>
+    <p>Di telinga saya, sound-nya mengingatkan pada French pop tahun tujuh puluhan dan delapan puluhan, lalu Shibuya-kei tahun sembilan puluhan. Itu kesan saya sebagai pendengar. Waktu tahu ini karya musisi Indonesia, reaksinya langsung: ‘C’mon, anak negeri!’ Ada rasa senang menemukan musik yang terasa dekat dengan selera saya.</p>
+    <p>Buat saya, bakat Kafin luar biasa. Dia juga lulusan Arsitektur Interior UI dan pernah bekerja bersama Candra Darusman lewat Chaseiro. Menarik lihat cara musik dan desain ketemu di satu orang.</p>
+    <p>Lalu saya mulai memperhatikan lirik dan gagasannya. Murphy yang sebelumnya saya kenal dari konteks engineering ternyata nyambung ke cara kita bekerja di produk: memikirkan apa yang bisa salah, supaya kita lebih siap menghadapi ketidakpastian.</p>
+    <p>Kemarin di IPC, teman-teman designer, PM, data, dan writer punya pandangan berbeda tentang discovery dan AI. Waktunya habis, sementara pertanyaan dasarnya masih terbuka. Jadi, hari ini saya ingin membagikan cara saya melihatnya. Ini pandangan yang juga masih saya uji.</p>
+    <p>Dari lagu itu, saya membawa satu pertanyaan ke pekerjaan: ketika AI membuat banyak hal jadi lebih mudah, bagian mana yang tetap perlu kita periksa? Kita mulai dari perubahan yang paling terasa: sekarang, membuat sesuatu jadi jauh lebih murah.</p>
+    <p><em>Setelah cerita Juni, jeda singkat. Music, meaning, work muncul mengikuti cerita. Ucapkan ‘C’mon, anak negeri!’ dengan senyum ringan. Footer IPC muncul menjelang bagian terakhir.</em></p>
+    <p>Referensi (tidak dibacakan): https://p-vine.jp/news/20260713-120035 ; https://www.medcom.id/hiburan/musik/JKRAvZQk-kafin-sulthan-ingin-berkolaborasi-dengan-candra-darusman</p>
+  </aside>
+</section>
+
 <section class="slide" id="s2" data-title="making got cheap. being right did not.">
   <div class="top"><span class="lbl"><span class="num">(00)</span>the moment</span><span class="tr">[ murphy's law for ai ]</span></div>
   <div class="body">
@@ -541,8 +642,11 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
       </ul>
     </div>
   </div>
-  <aside class="notes">
-    <p>this is the moment we're in. making got cheap. a PRD, a mock, a working prototype, each one a prompt away. the dark line is the effort to make something, and it fell off a cliff. the red line is the cost when a wrong thing reaches customers. that line didn't move. a wrong price or a broken voucher costs the same as it always did. the space in between is what i call the optimism gap. everyone feels fast, everyone feels right, and that's exactly when murphy shows up. the chart is a shape, not data, ya.</p>
+  <aside class="notes" lang="id">
+    <p>Sekarang, bikin sesuatu terasa jauh lebih murah. Draft PRD, mockup, atau prototype yang dulu butuh beberapa tahap, sekarang bisa mulai dari satu prompt. Itu membantu sekali.</p>
+    <p>Di grafik ini, garis gelap menggambarkan usaha untuk membuat sesuatu yang makin turun. Tapi garis merah mengingatkan bahwa akibat dari membuat hal yang salah tetap ada. Kalau harga salah tampil atau voucher gagal dipakai pelanggan, kita tetap harus menangani dampaknya.</p>
+    <p>Grafik ini ilustrasi, bukan hasil pengukuran. Yang ingin ditunjukkan adalah jaraknya: kita merasa makin cepat, lalu tanpa sadar ikut merasa makin benar. Padahal, kecepatan membuat dan ketepatan hasil itu perlu kita cek secara terpisah.</p>
+    <p><em>Tunjuk kedua garis, lalu beri jeda singkat pada jarak di antara keduanya.</em></p>
   </aside>
 </section>
 
@@ -584,8 +688,12 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
     </div>
     <p class="foot-note rise" style="--d:.5">sample draft written for this slide. every line reads fine. five of six would cost us later.</p>
   </div>
-  <aside class="notes">
-    <p>this is a sample draft i had ai write for this slide. read it fast and it sounds fine: confident, tidy, ready for development. now read it like a pessimist. twenty-three percent, from where? "taps reorder and the order is placed": what if it's out of stock, the price changed, the address is gone? "real-time sync with the loyalty engine": which engine, and does it exist? "all edge cases handled": none are listed. "ready for development": no non-goals, no owner. the problem isn't that ai is sometimes wrong. it's that it sounds exactly the same when it's wrong.</p>
+  <aside class="notes" lang="id">
+    <p>Coba kita lihat contoh draft fitur reorder ini. Sekilas, tulisannya rapi dan terdengar siap dibawa ke development. Tapi kalau dibaca pelan, ada beberapa pertanyaan.</p>
+    <p>Angka dua puluh tiga persen ini asalnya dari mana? Saat pengguna tap reorder, apakah pesanan langsung dibuat? Bagaimana kalau stok habis, harga berubah, atau alamatnya sudah dihapus? Lalu ‘real-time loyalty engine’ ini sistem yang mana?</p>
+    <p>Ada juga kalimat semua edge case sudah ditangani, tapi kasusnya belum disebutkan. Statusnya ‘ready’, sementara batas scope dan pemilik keputusan belum jelas.</p>
+    <p>Ini contoh buatan untuk diskusi. Intinya, nada yang yakin belum menjawab pertanyaan tadi. Kita tetap perlu mencari bukti, asumsi, dan keputusan yang sebenarnya masih terbuka.</p>
+    <p><em>Pilih dua atau tiga sorotan di layar. Jangan membacakan seluruh draft.</em></p>
   </aside>
 </section>
 
@@ -638,8 +746,11 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
       </article>
     </div>
   </div>
-  <aside class="notes">
-    <p>so this is my framework: four habits, all borrowed from things that break. murphy's law, expect the wrong way. reka peluang, map the ugly paths first. buffers, leave slack where the bad week lands. recovery, make the failure survivable. kalau kalian tahu lagunya kafin sulthan, "hukum murphy", that title is the whole talk. next three slides, one habit each, each with a real thing that works this way.</p>
+  <aside class="notes" lang="id">
+    <p>Dari situ, saya mencoba merangkumnya jadi empat kebiasaan. Kita pinjam dari cara orang menghadapi hal-hal yang bisa rusak atau gagal.</p>
+    <p>Pertama, Murphy: anggap cara yang salah akan dicoba, lalu buat cara itu lebih sulit dilakukan. Kedua, reka peluang: bayangkan kemungkinan gagalnya lebih dulu, termasuk jalan yang kurang enak dibicarakan. Ketiga, sisakan buffer: waktu atau ruang untuk mengecek ketika kenyataan tidak sesuai rencana. Keempat, siapkan recovery supaya kegagalan masih bisa ditangani.</p>
+    <p>Di beberapa slide berikutnya, kita mulai dari Murphy dan contoh desainnya, lalu masuk ke tiga kebiasaan lain. Kalian nggak perlu mengingat semua istilahnya. Cukup perhatikan mana yang paling sering terlewat dalam cara kita bekerja.</p>
+    <p><em>Gunakan slide ini sebagai peta. Jangan mulai menjelaskan semua contoh secara detail.</em></p>
   </aside>
 </section>
 
@@ -712,8 +823,11 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
       </aside>
     </div>
   </div>
-  <aside class="notes">
-    <p>so how often is it wrong? simple arithmetic. if each step is 95% right and you chain ten of them, like an agent pipeline, there's about a 40% chance something in the chain is wrong. a spec with twenty claims at 95% each: about 64%. the formula is one minus p to the n. ai makes it free to add steps: more screens, more claims, more agents. it doesn't make any step exempt from murphy. this is illustrative math. it assumes the steps are independent, and real work is messier. but the shape holds: more steps, more chances.</p>
+  <aside class="notes" lang="id">
+    <p>Bagian ini sedikit hitung-hitungan, tapi idenya sederhana. Bayangkan setiap langkah punya peluang benar sembilan puluh lima persen. Kalau ada sepuluh langkah, peluang setidaknya satu langkah salah menjadi sekitar empat puluh persen. Kalau dua puluh langkah, sekitar enam puluh empat persen.</p>
+    <p>Angka ini ilustrasi matematika, bukan ukuran akurasi AI. Rumusnya juga mengasumsikan setiap langkah independen, sementara dalam pekerjaan nyata kesalahan bisa saling terkait.</p>
+    <p>Yang bisa kita ambil: semakin banyak klaim, layar, atau agent yang ditambahkan, semakin banyak bagian yang perlu diperiksa. AI memudahkan kita menambah semuanya. Jadi sebelum menambah langkah lagi, mungkin kita perlu bertanya: ini benar-benar membantu, atau hanya menambah pekerjaan pengecekan?</p>
+    <p><em>Gerakkan slider satu kali. Ulangi singkat bahwa ini ilustrasi dengan asumsi independen.</em></p>
   </aside>
 </section>
 
@@ -771,8 +885,11 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
       </ol>
     </div>
   </div>
-  <aside class="notes">
-    <p>and murphy's law was never meant as a mood. the story as it's usually told: 1949, a rocket-sled test for the us air force, and a set of sensors installed the wrong way round. the takeaway: if it can be done wrong, someone will do it wrong. the engineering answer wasn't "be more careful". it was to make the wrong way impossible. a sim card has a cut corner so it only fits one way. usb-c removed the wrong way entirely. toyota has a word for it, poka-yoke. for us with ai, that means constrain before you generate: a template, a schema, the real system names, the non-goals. a form, not a blank page.</p>
+  <aside class="notes" lang="id">
+    <p>Kisah Murphy yang sering diceritakan berhubungan dengan pengujian rocket sled pada tahun 1949, ketika sensor dipasang dengan cara yang keliru. Saya mengambil pelajaran desainnya: kalau ada cara memasang yang salah, jangan hanya berharap semua orang selalu ingat.</p>
+    <p>Kita sudah mengenal pendekatan ini. Sudut SIM card membantu menunjukkan orientasinya. USB-C bisa dipasang dari dua arah. Bentuk benda ikut membantu kita melakukan hal yang benar.</p>
+    <p>Saat bekerja dengan AI, pendekatannya bisa berupa template, schema, nama sistem yang jelas, dan non-goals yang ditulis sejak awal. Jadi sebelum meminta hasil, kita memberi batas yang bisa diperiksa. Halaman kosong terasa bebas, tapi juga memberi banyak ruang untuk asumsi yang tidak kita maksud.</p>
+    <p><em>Tunjuk contoh fisik dulu, baru hubungkan ke template dan batas prompt.</em></p>
   </aside>
 </section>
 
@@ -823,8 +940,12 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
       </ol>
     </div>
   </div>
-  <aside class="notes">
-    <p>1935: a new bomber prototype crashed on its evaluation flight. a control lock had been left on. the fix wasn't a better pilot. it was a checklist. that's reka peluang: map the possibilities before they map you. today's version is the pre-mortem. before launch, assume it already failed and write down why. here's one for the reorder feature from slide three: out of stock, price changed, address deleted, voucher already used, double tap and two orders, payment expired. with ai i flip the usual order: i ask for the failure list before the feature list. then every branch becomes a test case or a non-goal.</p>
+  <aside class="notes" lang="id">
+    <p>Contoh berikutnya memakai kisah kecelakaan bomber tahun 1935 yang sering diceritakan dalam pembahasan checklist: control lock tertinggal, lalu menjadi bagian penting dari kegagalannya. Pelajarannya dekat dengan pekerjaan kita. Orang yang mampu pun bisa melewatkan satu langkah.</p>
+    <p>Sebelum meminta AI membuat solusi, kita bisa melakukan premortem sederhana. Bayangkan fitur sudah dirilis dan ternyata gagal. Kira-kira kenapa?</p>
+    <p>Untuk reorder: stok habis, harga berubah, alamat terhapus, voucher sudah dipakai, pengguna double tap, atau pembayaran kedaluwarsa.</p>
+    <p>Daftar ini bisa menjadi test case, keputusan produk, atau non-goal yang dinyatakan jelas. Jadi sesekali, mulai dari failure list sebelum feature list. Kita memberi kesempatan untuk melihat masalah selagi biaya memperbaikinya masih lebih kecil.</p>
+    <p><em>Berhenti sebentar setelah “kira-kira kenapa”, agar audiens sempat ikut membayangkan.</em></p>
   </aside>
 </section>
 
@@ -865,8 +986,11 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
       </ol>
     </div>
   </div>
-  <aside class="notes">
-    <p>this one should feel familiar, because we're retail. safety stock exists because demand wobbles and deliveries wobble. on a good week the buffer looks like waste, money sitting on a shelf. then you get a week like this one: a demand spike plus a late truck. stock dips into the buffer and not to zero, and the customer never notices. ai work needs the same slack. a second model that attacks the draft cold, not the one that wrote it. review capped at two rounds and then a human decides, so we don't loop forever. and real time booked for checking. ai saved us the making time, so spend some of it here.</p>
+  <aside class="notes" lang="id">
+    <p>Buffer sering terlihat seperti sesuatu yang bisa dipangkas. Di contoh retail, safety stock terasa berlebihan sampai permintaan naik dan pengiriman terlambat pada saat yang sama. Saat itulah ruang cadangan membantu.</p>
+    <p>Dalam pekerjaan dengan AI, buffer bisa berupa waktu khusus untuk membaca ulang atau meminta pembaca kedua menantang draft. Kalau memakai model lain, berikan tugas yang spesifik: cari asumsi, klaim tanpa bukti, dan bagian yang belum bisa diuji.</p>
+    <p>Tentu pembaca atau model kedua juga bisa salah. Karena itu, review tetap butuh keputusan manusia. Kita bisa membatasi dua putaran, lalu memutuskan apa yang diperbaiki atau masih terbuka. Sebagian waktu yang dihemat AI bisa kita pakai untuk pengecekan ini.</p>
+    <p><em>Tekankan “sebagian waktu”. Hindari kesan bahwa semua pekerjaan membutuhkan proses review panjang.</em></p>
   </aside>
 </section>
 
@@ -920,17 +1044,44 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
         </div>
       </div>
     </div>
-    <div class="strip rise" style="--d:2.4">
-      <p class="strip-h">in ai work</p>
-      <ol>
-        <li><b>01</b><span>everything ai touches lives in version control. undo is one step.</span></li>
-        <li><b>02</b><span>prototypes stay behind a gate until a human checks them.</span></li>
-        <li><b>03</b><span>when it breaks: a clear status and a next step, never a blank screen.</span></li>
-      </ol>
+    <div class="strip s9-review rise" style="--d:2.4">
+      <p class="strip-h">choose models by task, then check the result</p>
+      <div class="review-flow" role="group" aria-label="a builder model sends a draft to a different reviewer model for assumption review and repeatable checks, then a human decides whether to release">
+        <div class="review-node"><b>builder · model a</b><small>draft and revise</small></div>
+        <svg class="review-arrow" viewBox="0 0 34 18" aria-hidden="true"><path class="draw" pathLength="1" d="M1 9 H27 M23 4 L31 9 L23 14"/><circle class="packet" cx="2" cy="9" r="2.5"/></svg>
+        <div class="review-node">
+          <div class="review-roles">
+            <div class="review-role review-role-skeptic"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5h14v9H9l-4 3v-3H3z"/><path d="M10 7v3m0 2v.2"/></svg><span><strong>skeptic</strong> · challenge assumptions<br><small>claims · scope · blind spots</small></span></div>
+            <div class="review-role review-role-verifier"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 2.5h14v15H3z"/><path d="m6 7 1.5 1.5L10 6m1 1h3m-8 6 1.5 1.5L10 12m1 1h3"/></svg><span><strong>verifier</strong> · run repeatable checks<br><small>lint · render · integrity</small></span></div>
+          </div>
+          <small style="margin-top:5px">independent reviewer · model b</small>
+        </div>
+        <svg class="review-arrow" viewBox="0 0 34 18" aria-hidden="true"><path class="draw" pathLength="1" d="M1 9 H27 M23 4 L31 9 L23 14"/><circle class="packet" cx="2" cy="9" r="2.5"/></svg>
+        <div class="review-node"><b>human gate</b><small>decide what ships</small></div>
+      </div>
+      <div class="review-returns">
+        <svg class="review-return-map" viewBox="0 0 900 42" preserveAspectRatio="none" role="img" aria-label="review issues return to the builder for revision; release issues roll back to the last safe checkpoint">
+          <path class="review-return-path" pathLength="1" d="M480 0 V9 H122 V29 M114 22 L122 30 L130 22"/>
+          <text class="review-return-text" x="155" y="24">revise · return to builder</text>
+          <path class="review-return-path" pathLength="1" d="M786 0 V18"/>
+          <path class="review-return-path" pathLength="1" d="M778 11 L786 19 L794 11"/>
+          <rect class="review-checkpoint" x="670" y="22" width="232" height="18" rx="3"/>
+          <text class="review-return-title" x="786" y="35" text-anchor="middle">rollback · last safe checkpoint</text>
+        </svg>
+      </div>
+      <div class="review-models"><strong>model examples by task:</strong><span>gemini · images · audio · video</span><span>coding-focused model · implement · test</span></div>
     </div>
   </div>
-  <aside class="notes">
-    <p>1854, new york. elisha otis rode a lifting platform up in front of a crowd, then had the rope cut. the platform held. elevators already existed. what otis added was a survivable failure: when the rope goes slack, a spring throws catches into teeth on the rails. people started trusting elevators because the fall was designed. for ai work, that means everything it touches lives in version control, so undo is one step. prototypes stay behind a gate until someone checks them. and when something breaks, the user gets a status and a next step, not a blank screen.</p>
+  <aside class="notes" lang="id">
+    <p>Kisah demonstrasi Otis pada tahun 1854 sering dipakai untuk menjelaskan pendekatan ini. Dalam demonstrasi tersebut, tali dipotong dan mekanisme pengaman menahan platform. Perhatiannya juga diberikan pada apa yang terjadi ketika penopangnya gagal.</p>
+    <p>Di workflow saya, model yang membangun dan model yang mereview saya pisahkan. Builder membuat draft. Skeptic mencari asumsi yang lemah, klaim tanpa bukti, dan kemungkinan gagal yang belum dibahas. Verifier menjalankan cek yang bisa diulang, misalnya lint, test, dan hasil render. Jadi satu mengecek cara berpikirnya, satu mengecek hal yang bisa diuji.</p>
+    <p>Model juga punya kemampuan dan batas yang berbeda. Contohnya, Gemini bisa membantu memahami gambar, audio, atau video; untuk implementasi, kita bisa memilih model yang cocok dengan tugas coding. Pilih berdasarkan tugas dan hasil cek kita, bukan sekadar nama model. Reviewer yang berbeda memberi sudut pandang lain, tapi tetap bisa salah atau punya blind spot yang sama.</p>
+    <p>Kalau review menemukan masalah, hasilnya kembali ke builder. Kalau sudah dirilis dan bermasalah, kita perlu checkpoint atau rollback yang jelas. Lolos review AI belum menjadi keputusan rilis: gate akhirnya tetap manusia.</p>
+    <p>Saat membangun dengan AI, kita perlu bertanya hal serupa: kalau hasilnya bermasalah, bagaimana kita berhenti atau pulih?</p>
+    <p>Version control membantu mengembalikan perubahan kode. Prototype bisa ditahan sampai selesai direview. Ketika proses gagal, pengguna perlu tahu statusnya dan langkah berikutnya.</p>
+    <p>Tapi undo tidak selalu tersedia. Perubahan di sistem luar, misalnya, mungkin membutuhkan penanganan berbeda. Jadi cek mekanisme pemulihannya sejak awal, termasuk batasnya. Jangan baru mencari jalan kembali setelah sesuatu terlanjur terjadi.</p>
+    <p><em>Ikuti alur builder, dua jenis review, lalu gate manusia. Tunjukkan jalur kembali saat revisi dan rollback.</em></p>
+    <p>Referensi (tidak dibacakan): https://ai.google.dev/gemini-api/docs/video-understanding</p>
   </aside>
 </section>
 
@@ -954,8 +1105,11 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
       <p>making is cheap now. checking is the job.</p>
     </div>
   </div>
-  <aside class="notes">
-    <p>so back to the question we started with. everything is easy now, so what's the right mindset? mine is optimistic about the goal and pessimistic about every step. four checks before anything ai-made reaches a customer. count the steps. write the non-goals and the ugly paths before the prompt. never let the author grade its own work. know your undo. honestly, these are also the four i still skip sometimes. that's why they're on a slide. making is cheap now. checking is the job.</p>
+  <aside class="notes" lang="id">
+    <p>Kalau empat kebiasaan tadi dibawa ke pekerjaan besok, bentuknya cukup sederhana. Sebelum mulai, lihat berapa banyak langkah atau klaim yang kita minta. Tulis non-goals dan beberapa kemungkinan gagal. Sisakan waktu untuk review. Lalu cari tahu bagaimana memperbaiki atau mengembalikan perubahan kalau perlu.</p>
+    <p>Saya sendiri masih kadang melewatkan ini, terutama ketika hasil pertama sudah kelihatan bagus dan deadline terasa dekat. Jadi ini juga pengingat buat saya.</p>
+    <p>Kita boleh optimis dengan tujuan dan manfaat AI. Untuk langkah-langkahnya, kita bisa lebih teliti. Membuat sesuatu sekarang lebih mudah; memastikan hasilnya layak dipakai masih menjadi pekerjaan kita. Tidak harus sempurna, tapi jelas apa yang sudah dicek dan apa yang belum.</p>
+    <p><em>Perlambat bagian akhir. Ini tempat merangkum sebelum membuka proses pembuatan deck.</em></p>
   </aside>
 </section>
 
@@ -984,8 +1138,16 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
           </div>
           <svg class="farr" viewBox="0 0 44 16" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:1;--t:.4" d="M2 8 H34"/><path class="farr-h fade" style="--d:1.25;--t:.2" d="M32 3 L41 8 L32 13 Z"/></svg>
           <div class="fn fn-ai rise" style="--d:1.3">
-            <p class="fn-k">ai agents</p>
-            <p class="fn-t"><span class="ph">research •</span> <span class="ph">writing •</span> <span class="ph">visuals •</span> <span class="ph">html and pptx build</span></p>
+            <p class="fn-k">naquuuu crew</p>
+            <ul class="fn-agents" aria-label="workspace agent roles">
+              <li aria-label="naquuuubot: coordinate"><span class="agent-name">naquuuubot</span><span class="agent-role">coordinate</span></li>
+              <li aria-label="naquuuu-curator: taste"><span class="agent-name">naquuuu-curator</span><span class="agent-role">taste</span></li>
+              <li aria-label="naquuuu-builder: build"><span class="agent-name">builder</span><span class="agent-role">build</span></li>
+              <li aria-label="naquuuu-scribe: write"><span class="agent-name">scribe</span><span class="agent-role">write</span></li>
+              <li aria-label="naquuuu-librarian: research"><span class="agent-name">librarian</span><span class="agent-role">research</span></li>
+              <li aria-label="naquuuu-skeptic: challenge"><span class="agent-name">skeptic</span><span class="agent-role">challenge</span></li>
+              <li aria-label="naquuuu-verifier: check"><span class="agent-name">verifier</span><span class="agent-role">check</span></li>
+            </ul>
           </div>
           <svg class="farr" viewBox="0 0 44 16" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:1.9;--t:.4" d="M2 8 H34"/><path class="farr-h fade" style="--d:2.15;--t:.2" d="M32 3 L41 8 L32 13 Z"/></svg>
           <div class="fn fn-gate rise" style="--d:2.2">
@@ -1007,11 +1169,15 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
       <span class="vs-i vs-now"><b>v3</b>this one</span>
       <span class="vs-end">both fixes came from a human.</span>
     </div>
-    <p class="s11-callback rise" style="--d:4.3">by slide 5's math, something in here is probably wrong.</p>
+    <p class="s11-callback rise" style="--d:4.3">by slide 6's math, something in here is probably wrong.</p>
     <p class="ainote rise" style="--d:4.6"><b>ai note</b><span>drafted with ai. might be wrong, check anything important.</span></p>
   </div>
-  <aside class="notes">
-    <p>one confession. this deck was made 100% by ai. i gave the input: the angle, the four habits from my blog, my style rules, and feedback between drafts. the first version had too many work cases. the second read like showing off. both fixes came from a human. ai did the research, the writing, the visuals and the build, and it ran its own checks. but by its own rules it's still a draft, because the human review gate is still open. and by slide five's math, something in here is probably wrong.</p>
+  <aside class="notes" lang="id">
+    <p>Dan ada sedikit pengakuan: deck yang kalian lihat ini juga dibuat dengan AI. Maksud tulisan ‘seratus persen’ di sini, AI mengerjakan riset, penulisan, visual, dan pembangunan deck, dengan input dan review manusia.</p>
+    <p>Saya memberi arah: sudut pembahasan, empat kebiasaan, gaya, dan feedback. Draft pertama terlalu banyak contoh pekerjaan. Draft berikutnya terlalu ingin menunjukkan kemampuan. Arah itu kemudian dikoreksi, dan hasilnya tetap perlu diperiksa manusia.</p>
+    <p>Di kotak kedua, saya tunjukkan pembagian peran agent di workspace saya. Naquuuubot mengatur alurnya. Curator membantu arah dan tone, builder mengerjakan hasilnya, dan scribe membantu penulisan. Librarian mencari bahan; skeptic menantang asumsi; verifier menjalankan pengecekan. Ini peta peran, bukan berarti semua agent harus dipanggil setiap kali. Yang penting, membuat dan mengecek punya tugas yang jelas, dan keputusan akhirnya tetap ada di kita.</p>
+    <p>Kalau memakai logika slide matematika tadi, tentu ada banyak bagian yang mungkin salah. Tapi kita tidak punya angka peluang kesalahan untuk deck ini. Anggap itu pengingat kecil: AI bisa membangun bahan presentasinya, sementara kita tetap bertanggung jawab atas yang kita sampaikan.</p>
+    <p><em>Biarkan nama dan peran agent muncul satu per satu sebelum lanjut ke kotak automatic checks.</em></p>
   </aside>
 </section>
 
@@ -1052,8 +1218,12 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
     </div>
     <p class="s12-close rise" style="--d:3.4"><span class="qa">[ q&amp;a ]</span><span class="qt">what you find goes into v4.</span></p>
   </div>
-  <aside class="notes">
-    <p>so that gate is you. three questions. what's wrong in this deck? which failure have we not mapped in our own work? where would a buffer have saved us? whatever you find goes into version four. ayo, q&amp;a.</p>
+  <aside class="notes" lang="id">
+    <p>Sekarang saya ingin meminjam mata kalian sebagai pembaca berikutnya. Kalau ada bagian deck ini yang terasa kurang tepat, terlalu menyederhanakan, atau belum menjawab pertanyaan penting, boleh kita bahas.</p>
+    <p>Mungkin mulai dari satu contoh: pernah ada kemungkinan gagal yang baru terlihat setelah pekerjaan selesai? Atau ada bagian proses yang akan lebih aman kalau diberi sedikit buffer?</p>
+    <p>Saya ingin dengar bagaimana empat kebiasaan tadi terasa dalam cara kalian bekerja, termasuk kalau ada yang kurang cocok.</p>
+    <p>Feedback dari percakapan ini bisa menjadi bahan revisi berikutnya. Kita sudah melihat apa yang AI bantu buat; sekarang kita cek bersama bagian yang masih bisa diperbaiki.</p>
+    <p><em>Sisakan 2 sampai 3 menit. Pilih satu pertanyaan pembuka, lalu beri ruang audiens menjawab.</em></p>
   </aside>
 </section>
 
@@ -1069,7 +1239,7 @@ html.mobile .hud{top:auto;bottom:50px;right:8px;opacity:.9}
   <button type="button" id="b-full" aria-label="toggle fullscreen">f full</button>
   <a class="deck-back-link" href="../" aria-label="back to notes archive">← notes</a>
 </div>
-<div class="notespanel" id="np"><header>[ speaker notes ]</header><div class="nb" id="nb"></div></div>
+<div class="notespanel" id="np"><header>[ catatan pembicara ]</header><div class="nb" id="nb"></div></div>
 
 <script>
 (function(){
