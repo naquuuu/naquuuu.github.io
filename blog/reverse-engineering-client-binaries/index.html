@@ -1,90 +1,268 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#120305">
-  
-  <title>reverse-engineering client binaries: extracting ground-truth design systems for high-velocity prototyping: naquuuu</title>
-  <meta name="description" content="How to eliminate Figma specification drift by decompiling production Android APKs into hardware-accurate tokens, component schemas, and zero-friction edge prototypes.">
-  <link rel="canonical" href="https://naquuuu.github.io/blog/reverse-engineering-client-binaries/">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap"></noscript>
-  
-  <link rel="stylesheet" href="../../assets/css/style.css?v=20261005d">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>reverse-engineering client binaries | naquuuu</title>
+<meta name="description" content="How to eliminate Figma specification drift by decompiling production Android APKs into hardware-accurate tokens, component schemas, and zero-friction edge prototypes.">
+<link rel="canonical" href="https://naquuuu.github.io/blog/reverse-engineering-client-binaries/">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg?v=20260917i">
+<link rel="alternate icon" href="../../favicon.ico?v=20260917i">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mobile.css?v=20261006mobile1" media="screen and (max-width:760px)">
+<script src="mobile.js?v=20261006mobile1"></script>
+<style>
+/* ==================================================================
+   naquuuu sharing session v3: murphy's law for people who build with ai
+   order: 0 tokens, 1 shell, 2 chrome, 3 type + shared parts, 4 motion,
+   5 per-slide blocks (s1 to s12 plus s-origin), 6 mobile, 7 print + reduced motion
+   ================================================================== */
+
+/* ---------- 0. tokens (light is the default; dark via data-theme) ---------- */
+:root{
+  --bg-primary:#fbfbfa; --bg-surface:#f2f2ed; --bg-surface-elevated:#ecece6; --bg-card:#ffffff;
+  --border-subtle:#e5e5df; --border-active:#d4d4ce;
+  --text-primary:#111110; --text-secondary:#555550;
+  --accent-crimson:#dc2626; --accent-crimson-dim:rgba(220,38,38,.08);
+  --wash-a:rgba(220,38,38,.10); --wash-b:rgba(220,38,38,.05); --wash-c:rgba(220,38,38,.16);
+  --glow:rgba(220,38,38,.34);
+  /* blueprint on warm paper */
+  --paper:#fffdf6; --node:#fbf8ee; --line:#bdb7a5; --arrow:#6b675c; --ink:#111110;
+  --n-weak:#bdb7a5; --n-strong:#6b675c;
+  --shadow-card:0 2px 12px rgba(0,0,0,.04); --shadow-lift:0 8px 24px rgba(0,0,0,.08);
+  --r-sm:6px; --r-md:12px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --f-head:'Segoe UI',system-ui,sans-serif; --f-body:'Open Sans',system-ui,sans-serif; --f-mono:Consolas,ui-monospace,monospace;
+}
+html[data-theme="dark"]{
+  --bg-primary:#160e10; --bg-surface:#22171a; --bg-surface-elevated:#2b1d20; --bg-card:#26191c;
+  --border-subtle:#362529; --border-active:#4f353b;
+  --text-primary:#f5ece8; --text-secondary:#b5a5a0;
+  --accent-crimson:#c85250; --accent-crimson-dim:rgba(200,82,80,.14);
+  --wash-a:rgba(200,82,80,.12); --wash-b:rgba(200,82,80,.06); --wash-c:rgba(200,82,80,.22);
+  --glow:rgba(200,82,80,.42);
+  --paper:#2a1d1f; --node:#33242a; --line:#5a4247; --arrow:#b5a5a0; --ink:#f5ece8;
+  --n-weak:#85736f; --n-strong:#cdbeb8;
+  --shadow-card:0 4px 24px rgba(0,0,0,.5); --shadow-lift:0 8px 32px rgba(0,0,0,.65);
+}
+
+/* ---------- 1. shell: viewport, scaling stage, slides ---------- */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg-surface);color:var(--text-primary);font-family:var(--f-body);-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit}
+.viewport{position:fixed;left:0;top:0;right:0;bottom:0;overflow:hidden;background:var(--bg-surface)}
+.stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center;background:var(--bg-primary);border:1px solid var(--border-subtle);overflow:hidden}
+.slide{position:absolute;left:0;top:0;width:1280px;height:720px;padding:80px 88px 68px;display:none;flex-direction:column;background:var(--bg-primary);overflow:hidden}
+.slide.active{display:flex}
+.body{flex:1;display:flex;flex-direction:column;gap:24px;min-height:0}
+.body.mid{justify-content:center}
+.notes{display:none}
+
+/* ---------- 2. chrome: top bar, footer, hud, notes panel ---------- */
+.top{position:absolute;top:30px;left:88px;right:88px;z-index:3;display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--border-subtle);font:700 14px/20px var(--f-mono);letter-spacing:.04em;color:var(--text-primary);white-space:nowrap}
+.top .num{color:var(--accent-crimson);margin-right:8px}
+.top .tr{font-weight:400;font-size:13px;letter-spacing:.02em;color:var(--text-secondary)}
+.foot{position:absolute;left:0;right:0;bottom:0;height:44px;border-top:1px solid var(--border-subtle);display:flex;align-items:center;gap:24px;padding:0 88px;font:400 13px var(--f-mono);color:var(--text-secondary);background:var(--bg-primary);z-index:3}
+.wm{font:700 17px var(--f-head);letter-spacing:-.015em;color:var(--text-primary);flex:none}
+.wm i{font-style:normal;color:var(--accent-crimson)}
+.marq{flex:1;overflow:hidden;white-space:nowrap;min-width:0}
+.marq-in{display:inline-block;animation:mq 40s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ctr{flex:none;font-weight:600;color:var(--text-primary)}
+
+.hud{position:fixed;top:3px;right:6px;display:flex;gap:4px;z-index:20;opacity:.38;transition:opacity .2s}
+.hud:hover,.hud:focus-within{opacity:1}
+.hud button{font:600 11px/1 var(--f-mono);background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:3px;padding:3px 8px;cursor:pointer;color:var(--text-secondary)}
+.hud button:hover{border-color:var(--accent-crimson);color:var(--accent-crimson)}
+.hud{flex-wrap:wrap;max-width:calc(100vw - 12px);justify-content:flex-end}
+.deck-back-link{display:inline-flex;min-width:44px;min-height:44px;align-items:center;justify-content:center;padding:3px 10px;border:1px solid var(--border-subtle);border-radius:3px;background:var(--bg-card);color:var(--text-secondary);font:600 11px/1 var(--f-mono);text-decoration:none}
+.deck-back-link:hover,.deck-back-link:focus-visible{border-color:var(--accent-crimson);color:var(--accent-crimson)}
+.notespanel{position:fixed;left:0;right:0;bottom:0;height:30vh;background:var(--bg-card);border-top:2px solid var(--accent-crimson);z-index:30;display:none;flex-direction:column;overflow:hidden}
+.notespanel.open{display:flex}
+.notespanel header{font:700 12px var(--f-mono);letter-spacing:.06em;color:var(--accent-crimson);padding:10px 24px 4px}
+.notespanel .nb{overflow-y:auto;padding:4px 24px 16px;font-size:18px;line-height:1.55;color:var(--text-primary)}
+.notespanel .nb p{margin:0 0 8px;max-width:1100px}
+
+/* ---------- 3. type + shared parts ---------- */
+h1,h2,h3,p{margin:0}
+.t{font:700 50px/1.1 var(--f-head);letter-spacing:-.02em;color:var(--text-primary);max-width:1104px}
+.t em{font-style:normal;color:var(--accent-crimson)}
+.sub{font:400 24px/1.5 var(--f-body);color:var(--text-secondary);max-width:900px}
+.txt{font:400 22px/1.5 var(--f-body);color:var(--text-secondary)}
+.foot-note{font:400 13px/1.5 var(--f-mono);color:var(--text-secondary);letter-spacing:.02em}
+.tag{display:inline-block;font:600 12px var(--f-mono);letter-spacing:.04em;border:1px solid var(--border-subtle);border-radius:999px;padding:3px 11px;color:var(--text-secondary);background:var(--bg-surface);white-space:nowrap}
+
+/* paper card (hero visuals). .crop adds the blog photo-frame corner marks */
+.fig{position:relative;margin:0;background:var(--paper);border:1px solid var(--border-subtle);border-radius:var(--r-sm);box-shadow:var(--shadow-card);min-width:0}
+.fig svg{display:block;width:100%;height:auto}
+.crop{position:relative}
+.crop::before,.crop::after{content:"";position:absolute;width:14px;height:14px;pointer-events:none;z-index:2}
+.crop::before{top:-1px;left:-1px;border-top:2px solid var(--accent-crimson);border-left:2px solid var(--accent-crimson)}
+.crop::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--accent-crimson);border-right:2px solid var(--accent-crimson)}
+.scroller{min-width:0}
+
+/* svg text and strokes shared by every diagram */
+svg text{font-family:var(--f-mono);font-size:14px;letter-spacing:.02em;fill:var(--text-secondary)}
+svg text.ink{fill:var(--ink)}
+svg text.red{fill:var(--accent-crimson)}
+svg text.b{font-weight:700}
+svg text.body{font-family:var(--f-body);font-size:16px;letter-spacing:0;fill:var(--ink)}
+svg text.body.b{font-size:17px}
+svg text.mk{font-family:var(--f-mono);font-size:16px}
+svg .ax{fill:none;stroke:var(--line);stroke-width:1.2}
+svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
+svg .lnk{fill:none;stroke:var(--arrow);stroke-width:1.5}
+svg .nd{fill:var(--bg-card);stroke:var(--border-active);stroke-width:1}
+svg .s-weak,svg .s-strong,svg .s-red{fill:none;stroke-linecap:butt;stroke-linejoin:round}
+svg .s-weak{stroke:var(--n-weak);stroke-width:3}
+svg .s-strong{stroke:var(--n-strong);stroke-width:3}
+svg .s-red{stroke:var(--accent-crimson);stroke-width:4.5}
+
+/* "in ai work" strip (blog principle strip) */
+.strip{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:12px 22px 14px}
+.strip-h{font:400 14px var(--f-mono);letter-spacing:.05em;color:var(--text-secondary);margin:0 0 6px}
+.strip ol{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+.strip li{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:baseline;font:400 22px/1.45 var(--f-body);color:var(--text-secondary)}
+.strip li b{font:700 14px var(--f-mono);letter-spacing:.04em;color:var(--accent-crimson)}
+
+/* blueprint box (blog diagram): toolbar, canvas, legend */
+.bp{margin:0;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--r-md);overflow:hidden;min-width:0}
+.bp-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 16px;background:var(--bg-surface-elevated);border-bottom:1px solid var(--border-subtle);font:400 14px/1.4 var(--f-mono);color:var(--text-secondary)}
+.bp-ttl{display:inline-flex;align-items:center;gap:10px}
+.bp-ico{width:16px;height:12px;fill:none;stroke:var(--text-secondary);stroke-width:1.5;stroke-linecap:round;flex:none}
+.bp-tag{background:var(--bg-card);border:1px solid var(--border-subtle);color:var(--text-secondary);font-size:13px;padding:2px 9px;border-radius:var(--r-sm);white-space:nowrap}
+.bp-body{padding:14px 16px}
+.bp-body svg{display:block;width:100%;height:auto}
+.bp-leg{display:flex;gap:18px;align-items:center;padding:7px 16px 9px;border-top:1px solid var(--border-subtle);font:400 14px var(--f-mono);color:var(--text-secondary)}
+.bp-leg span{display:inline-flex;align-items:center;gap:8px}
+.lg{display:inline-block;width:28px;height:0}
+.lg-flow{border-top:1.5px solid var(--arrow)}
+.lg-fail{border-top:1.5px dashed var(--accent-crimson)}
+
+/* ---------- 4. motion (calm editorial) ----------
+   the base style of every element IS its final state. animation only runs
+   while the slide has .play, so reduced motion, print and no-js show the end. */
+@keyframes k-rise{from{opacity:0;transform:translateY(14px)}}
+@keyframes k-fade{from{opacity:0}}
+@keyframes k-draw{from{stroke-dasharray:1;stroke-dashoffset:1}to{stroke-dasharray:1;stroke-dashoffset:0}}
+@keyframes k-pop{from{opacity:0;transform:scale(.4)}}
+@keyframes k-wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.pop{transform-box:fill-box;transform-origin:center}
+.slide.play .rise{animation:k-rise calc(var(--t,.8)*1s) var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .fade{animation:k-fade calc(var(--t,.7)*1s) var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .draw{animation:k-draw calc(var(--t,.9)*1s) var(--ez,var(--ease)) calc(var(--d,0)*1s) both}
+.slide.play .pop{animation:k-pop calc(var(--t,.5)*1s) var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .wipe{animation:k-wipe calc(var(--t,.5)*1s) var(--ease) calc(var(--d,0)*1s) both}
+
+/* ---------- 5. per-slide blocks ---------- */
+/* ===== reverse engineering specifics ===== */
+.s-head { font: 700 42px/1.1 var(--f-head); letter-spacing:-.02em; color: var(--text-primary); }
+.s-sub { margin-top: 24px; font: 400 24px/1.5 var(--f-body); color: var(--text-secondary); max-width: 900px; }
+.list-style { margin: 20px 0 0; padding-left: 1em; display: flex; flex-direction: column; gap: 12px; font-size: 20px; }
+.s-content { margin-top: 20px; font-size: 20px; line-height: 1.6; color: var(--text-secondary); max-width: 900px; }
+</style>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">skip to content</a>
+<div class="viewport">
+  <div class="stage" id="stage">
 
-  <!-- Top Navigation Header -->
-  <header class="site-header">
-    <div class="wrap nav">
-      <a class="site-title" href="../../">
-        <span class="prompt-user">naquuuu</span><span class="prompt-at">@</span><span class="prompt-host">builder</span>
-        <span class="prompt-badge">bits &amp; atoms</span>
-      </a>
-      <nav class="nav-links">
-        <a href="https://naquuuu.github.io/" class="nav-back-link">[ ← naquuuu.github.io ]</a>
-      </nav>
+    <div class="top">
+      <div class="tl"><span class="num">(01)</span>design systems</div>
+      <div class="tr">[ binary harvesting ]</div>
     </div>
-  </header>
+    
+    <div class="foot">
+      <div class="wm">naquuuu<i>.</i></div>
+      <div class="marq"><div class="marq-in">reverse-engineering client binaries: extracting ground-truth design tokens from mobile apks.</div></div>
+      <div class="ctr"><span id="cnum">1</span> / 6</div>
+    </div>
+    
+    <nav class="hud" aria-label="slide controls">
+      <button id="btn-prev" aria-label="previous slide">prev</button>
+      <button id="btn-next" aria-label="next slide">next</button>
+    </nav>
 
-  <!-- Article Container -->
-  <main id="main-content" class="wrap essay-article">
+    <div id="slides">
+      
+      <!-- S1: Title -->
+      <section class="slide s1 active" id="s1" data-title="reverse-engineering client binaries">
+        <div class="body mid">
+          <h1 class="s-head rise" style="--d:0.1">reverse-engineering client binaries</h1>
+          <p class="s-sub fade" style="--d:0.3">extracting ground-truth design tokens from mobile apks to eliminate Figma specification drift and build hardware-accurate prototypes.</p>
+        </div>
+      </section>
 
-    <header class="essay-header">
-      <div class="essay-meta">
-        <time datetime="2026-09-09">september 2026</time>
-        <span>•</span>
-        <span>9 min read</span>
-        <span>•</span>
-        <span class="hero-badge">design systems</span>
-        <span class="hero-badge hero-badge-art">reverse engineering</span>
-        <span class="hero-badge">edge architecture</span>
-      </div>
-      <h1 class="essay-header-title">
-        reverse-engineering client binaries: extracting ground-truth design tokens from mobile apks
-      </h1>
-      <p style="color: var(--text-muted); font-size: 1.02rem; font-style: italic; margin-top: 0.5rem;">
-        by ramadhana bhanuharya krishnamurti (krishna / naquuuu) • product manager
-      </p>
-      <aside class="ai-note" role="note"><span class="ai-note-label">ai note</span>this post was written by ai and might be wrong. check anything important and double check it with the blog owner before you rely on it.</aside>
-    </header>
+      <!-- S2: The Crisis -->
+      <section class="slide s2" id="s2" data-title="the multi-surface drift crisis">
+        <div class="body">
+          <h2 class="s-head rise" style="--d:0.1">1. the multi-surface drift crisis</h2>
+          <p class="s-sub fade" style="--d:0.3">The Figma canvas is an illusion. As features ship week after week, the production app diverges. New gradient stops are hardcoded, custom Android drawables are patched into native builds, and the design file becomes an out-of-date artifact.</p>
+          <ul class="list-style fade" style="--d:0.5">
+            <li><strong>Sprint Alignment Friction:</strong> Resolving inconsistent paddings and mismatched hex tokens takes valuable sprint time.</li>
+            <li><strong>Stakeholder Review Latency:</strong> Executives cannot evaluate static screenshots; they demand real interactive prototypes on physical hardware.</li>
+          </ul>
+        </div>
+      </section>
 
-    <article class="essay-content">
+      <!-- S3: Extraction Workflow -->
+      <section class="slide s3" id="s3" data-title="the extraction workflow">
+        <div class="body">
+          <h2 class="s-head rise" style="--d:0.1">2. the extraction workflow</h2>
+          <p class="s-sub fade" style="--d:0.3">Instead of guessing styles by eye, we built a script to extract design tokens directly from the Android APK, pulling vector graphics, fonts, and hex colors straight from the production build.</p>
+          <div class="s-content fade" style="--d:0.5">
+            The fastest, most accurate source of truth is not the design tool: it is the compiled binary currently running in production.
+          </div>
+        </div>
+      </section>
 
-      <!-- Executive Summary Callout -->
-      <div class="concept-box" style="border-left: 4px solid var(--accent-crimson);">
-        <h3 style="font-size: 1.15rem; color: var(--text-primary); margin-bottom: 0.5rem;">the core thesis in 30 seconds</h3>
-        <p style="margin: 0; font-size: 0.94rem; color: var(--text-secondary); line-height: 1.7;">
-          In large mobile apps, design files in Figma often drift from what actually runs in production. Outdated color variables, missing edge cases, and hardcoded native elements slow teams down during development. In this post, I share how we solved this problem: inspecting production Android APKs to extract the actual vector icons, colors, and typography used in the live app. This gives us an accurate design foundation to build and share interactive mobile prototypes that stakeholders can test directly on their phones.
-        </p>
-      </div>
+      <!-- S4: Technical Execution -->
+      <section class="slide s4" id="s4" data-title="decompiling apks into web components">
+        <div class="body">
+          <h2 class="s-head rise" style="--d:0.1">3. technical execution</h2>
+          <div class="s-content fade" style="--d:0.3">
+            <p><strong>A. Converting VectorDrawables into Standard SVG:</strong> Our python extractor parses the XML tree, maps viewportWidth to viewBox, and translates color resource references into inline SVG paths.</p>
+            <p><strong>B. Typography & Tier Badges:</strong> We pull the exact font files shipped in the APK's assets/fonts/ directory. Brand-critical assets are extracted as clean, lossless vectors.</p>
+            <p><strong>C. Hardware-Accurate Mobile Shell:</strong> On desktop screens, the prototype automatically mounts inside an authentic iPhone/Pixel hardware frame. On physical mobile devices, the shell collapses.</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- S5: Benefits -->
+      <section class="slide s5" id="s5" data-title="practical benefits">
+        <div class="body">
+          <h2 class="s-head rise" style="--d:0.1">4. practical benefits</h2>
+          <p class="s-sub fade" style="--d:0.3">Moving from static mockups to interactive prototypes grounded in extracted production tokens provided two clear operational benefits.</p>
+          <div style="display:flex; gap: 40px; margin-top: 20px;" class="fade" style="--d:0.5">
+            <div style="background: var(--bg-card); padding: 20px; border: 1px solid var(--border-subtle); border-radius: var(--r-sm);">
+                <h3>Hardware-Accurate Mobile Previews</h3>
+                <p class="s-content">Stakeholders test features directly on physical smartphones with realistic touch targets, navigation bars, and modal sheets.</p>
+            </div>
+            <div style="background: var(--bg-card); padding: 20px; border: 1px solid var(--border-subtle); border-radius: var(--r-sm);">
+                <h3>Reduced Design Token Drift</h3>
+                <p class="s-content">Prototypes share the exact color variables, font families, and vector drawables already shipped in the Android APK.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <h2>1. The Multi-Surface Drift Crisis in Enterprise Mobile Apps</h2>
-      <p>
-        Every product manager in a large-scale consumer mobile app encounters the same challenge:
-      </p>
-      <ul>
-        <li><strong>The Figma Canvas is an Illusion:</strong> Product designers create idealized, happy-path wireframes in Figma. But as features ship week after week, the production app diverges. New gradient stops are hardcoded, custom Android drawables are patched into native builds, and the design file becomes an out-of-date artifact.</li>
-        <li><strong>Sprint Alignment Friction:</strong> When engineering teams build a new feature, frontend developers often spend valuable sprint time resolving inconsistent paddings, mismatched hex tokens, and missing typography definitions between design files and the codebase.</li>
-        <li><strong>Stakeholder Review Latency:</strong> Executive leadership and brand directors cannot evaluate static screenshots. They demand to touch and tap real interactive prototypes on physical mobile hardware before signing off on business requirements.</li>
-      </ul>
-      <p>
-        If your prototyping workflow relies on waiting for designers to tidy up a 200-page Figma file, you have already lost the velocity war. The fastest, most accurate source of truth is not the design tool: it is the <strong>compiled binary currently running in production</strong>.
-      </p>
+      <!-- S6: Summary -->
+      <section class="slide s6" id="s6" data-title="bridging design and production code">
+        <div class="body mid">
+          <h2 class="s-head rise" style="--d:0.1">5. bridging design and production code</h2>
+          <p class="s-sub fade" style="--d:0.3">Effective product work isn't about writing vague documents and tossing tickets over a wall. It's about bridging the gap between design and engineering with real code, clear requirements, and working prototypes that stakeholders can actually try.</p>
+          <p class="s-content fade" style="--d:0.5" style="color:var(--accent-crimson); font-weight: bold; margin-top: 20px;">
+            Keep unreleased prototypes private.
+          </p>
+        </div>
+      </section>
 
-      <h2>2. The Extraction Workflow: Getting Styles from the Live App</h2>
-      <p>
-        Instead of guessing styles by eye, we built a small script to extract design tokens directly from the Android APK: pulling vector graphics, fonts, and hex colors straight from the production build:
-      </p>
 
-      <!-- Systems Architecture Blueprint: The Binary Extraction & Edge Prototyping Pipeline -->
-      <div class="flowchart-whiteboard-box blueprint-box" style="margin: 2rem 0;">
+      <section class="slide" id="s-bp" data-title="blueprint flowchart">
+        <div class="body mid">
+          <!-- bp:flow -->
+<div class="flowchart-whiteboard-box blueprint-box" style="margin: 2rem 0;">
         <div class="flowchart-board-toolbar">
           <div class="flowchart-toolbar-left">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -200,98 +378,13 @@
   <ul class="principle-strip-list"><li><span class="principle-name">murphy&#x27;s law</span><span class="principle-text">assume the design file drifts, so tokens come from the shipped apk.</span></li><li><span class="principle-name">reka peluang</span><span class="principle-text">the access gate assumes unreleased features can leak, and keeps the prototype private.</span></li></ul>
   <p class="principle-strip-note">an editorial reading of the steps shown above, not additional results.</p>
 </aside>
-      <!-- /bp:principles -->
-
-      <h2>3. Technical Execution: Decompiling APKs into Clean Web Components</h2>
-      <p>
-        Building the extractor script (<code style="color:var(--term-cyan)">scripts/extract_apk_design_system.py</code>) required solving three concrete engineering hurdles:
-      </p>
-
-      <h3>A. Converting Android VectorDrawables into Standard SVG</h3>
-      <p>
-        Android native binaries encode vectors using an XML format with attributes like <code>android:pathData</code> and <code>android:fillColor</code>. Standard web browsers cannot render VectorDrawables natively. Our python extractor parses the XML tree, maps <code>android:viewportWidth</code> to standard SVG <code>viewBox</code>, and translates color resource references into inline SVG paths.
-      </p>
-
-      <h3>B. Variable Typography and Tier Badge Assets</h3>
-      <p>
-        Rather than guessing web font fallbacks, we pull the exact font files shipped in the APK's <code>assets/fonts/</code> directory. Brand-critical assets (such as the MAPCLUB Gold/Platinum loyalty tier badges, partner logos, and barcode glyphs) are extracted as clean, lossless vectors and placed directly into our workspace design library.
-      </p>
-
-      <h3>C. The Hardware-Accurate Mobile Shell</h3>
-      <p>
-        When an executive opens a prototype URL on desktop, standard web layouts feel unnatural because mobile user experience is constrained by physical touch ergonomics. We created <code style="color:var(--term-cyan)">mobile-shell.js</code>:
-      </p>
-      <ul>
-        <li>On desktop screens (width &gt; 640px), the prototype automatically mounts inside an authentic iPhone 16 Pro / Pixel 8 hardware frame with dynamic Island/notch rendering and realistic drop shadows.</li>
-        <li>On physical mobile devices, the outer shell automatically collapses, allowing the prototype to fill the viewport naturally.</li>
-      </ul>
-
-      <h2>4. Keeping Unreleased Prototypes Private</h2>
-      <p>
-        Prototypes often show features that are not public yet, so they sit behind a lightweight access check instead of a full corporate login. Reviewers can still open them directly on their own phones.
-      </p>
-
-      <h2>5. Practical Benefits: Aligning Design with Engineering</h2>
-      <p>
-        Moving from static mockups to interactive prototypes grounded in extracted production tokens provided two clear operational benefits:
-      </p>
-      <div class="concept-box" style="margin: 1.5rem 0;">
-        <div style="display: grid; grid-template-columns: 1fr; gap: 1rem;">
-          <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem;">
-            <div style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--accent-crimson); font-weight: 700; margin-bottom: 0.3rem;">
-              Hardware-Accurate Mobile Previews
-            </div>
-            <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
-              Stakeholders test features directly on physical smartphones with realistic touch targets, navigation bars, and modal sheets, resolving layout and interaction questions before engineering sprints begin.
-            </div>
-          </div>
-          <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem;">
-            <div style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-primary); font-weight: 700; margin-bottom: 0.3rem;">
-              Reduced Design Token Drift
-            </div>
-            <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
-              Prototypes share the exact color variables, font families, and vector drawables already shipped in the Android APK, giving engineering direct CSS token parity rather than visual approximations.
-            </div>
-          </div>
+<!-- /bp:flow -->
         </div>
-      </div>
-
-      <h2>6. Summary: Bridging Design and Production Code</h2>
-      <p>
-        Effective product work isn't about writing vague documents and tossing tickets over a wall. It's about bridging the gap between design and engineering with real code, clear requirements, and working prototypes that stakeholders can actually try.
-      </p>
-
-    </article>
-
-    <!-- Post Footer Navigation -->
-    <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-      <a href="https://naquuuu.github.io/" style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--accent-crimson-hover);">← return to home</a>
-      <div style="display: flex; gap: 1rem; font-family: var(--font-sans); font-size: 0.8rem;">
-        <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary);">linkedin ↗</a>
-        <a href="mailto:rbkrishnamurti@gmail.com" style="color: var(--text-secondary);">email ↗</a>
-      </div>
+      </section>
     </div>
-
-  </main>
-
-  <!-- Site Footer -->
-  <footer class="site-footer">
-    <div class="footer-wordmark" aria-hidden="true">naquuuu</div>
-    <div class="wrap footer-content">
-      <div class="footer-channels">
-        <a href="https://github.com/naquuuu" target="_blank" rel="noopener noreferrer">github</a>
-        <a href="mailto:rbkrishnamurti@gmail.com">email</a>
-        <a href="https://naquuuu.github.io/">home</a>
-      </div>
-      <div class="footer-live-stamp">
-        <span>naquuuu.github.io • built with matter and code.</span>
-        <span class="footer-privacy">visits are counted with <a href="https://www.goatcounter.com/" target="_blank" rel="noopener noreferrer">goatcounter</a>: no cookies, no personal info tracked.</span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
-  <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <script src="../../assets/js/palette.js?v=20261005d" defer></script>
+  </div>
+</div>
+<!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
+<script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
