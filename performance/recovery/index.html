@@ -1,33 +1,260 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>relay recovery: measurements and evidence | naquuuu</title>
 <meta name="description" content="a relay recovery record: the missing dependency, documented timings, and the checks that separate a working process from a working reply.">
 <link rel="canonical" href="https://naquuuu.github.io/performance/recovery/">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap"></noscript>
-<link rel="stylesheet" href="../../assets/css/style.css?v=20261005d"><link rel="icon" href="../../assets/favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="naquuuu">
+<meta property="og:title" content="relay recovery: measurements and evidence">
+<meta property="og:description" content="a relay recovery record: the missing dependency, documented timings, and the checks that separate a working process from a working reply.">
+<meta property="og:url" content="https://naquuuu.github.io/performance/recovery/">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg?v=20260917i">
+<link rel="alternate icon" href="../../favicon.ico?v=20260917i">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mobile.css?v=20261006mobile1" media="screen and (max-width:760px)">
+<script src="mobile.js?v=20261006mobile1"></script>
 <style>
-.essay-article { padding-block: clamp(2rem, 5vw, 4rem); }
-.essay-content > * + * { margin-top: 1.25rem; }
-.essay-content h2 { margin-top: 2.75rem; line-height: 1.3; }
-.essay-content ol, .essay-content ul { padding-left: 1.4rem; }
-.essay-content li + li { margin-top: .5rem; }
-.recovery-table caption { text-align: left; padding-block: .75rem; color: var(--text-secondary); }
-.recovery-table td { white-space: nowrap; }
-.essay-content summary { cursor: pointer; padding-block: .75rem; }
-.essay-content details p { margin-top: .75rem; }
-</style>
-</head><body><a class="skip-link" href="#main-content">skip to content</a>
-<header class="site-header"><nav class="wrap nav-container" aria-label="primary"><a class="nav-brand" href="../../">naquuuu</a><a href="../../blog/">essays &amp; notes</a></nav></header>
-<main id="main-content" class="wrap essay-article"><header class="essay-header"><p class="essay-meta-row"><time datetime="2026-09-28">28 september 2026</time> • systems notebook</p><h1 class="essay-header-title">relay recovery: prove the check can run</h1>
-      <aside class="ai-note" role="note"><span class="ai-note-label">ai note</span>this post was written by ai and might be wrong. check anything important and double check it with the blog owner before you rely on it.</aside>
-    </header>
-<article class="essay-content"><div class="concept-box"><p>a timeout did not prove the network was broken. the environment was missing aiohttp. installing the dependency let the gateway connect, and an owner message round-trip confirmed the reply path.</p></div>
-<h2 id="record">1. the recovery record</h2><p>the record is a repair receipt. it lists the fault and the evidence left after the fix. the session map below is reconstructed from documented lessons l-17, l-18, l-20 and l-21. it is not a captured agent trace. agent attribution is unavailable.</p>
-<ol><li>two hosts and repeated restarts disrupted the relay.</li><li>an interrupted update left the environment incomplete.</li><li>missing aiohttp produced misleading connection timeouts.</li><li>after installation, the gateway connected at 19:32:48 wib.</li><li>an owner message round-trip confirmed recovery that evening.</li></ol>
-<p><a href="session-map.html">explore the curated recovery map →</a></p>
+/* ==================================================================
+   naquuuu sharing session v3: murphy's law for people who build with ai
+   order: 0 tokens, 1 shell, 2 chrome, 3 type + shared parts, 4 motion,
+   5 per-slide blocks (s1 to s12 plus s-origin), 6 mobile, 7 print + reduced motion
+   ================================================================== */
 
-<!-- bp:flow -->
+/* ---------- 0. tokens (light is the default; dark via data-theme) ---------- */
+:root{
+  --bg-primary:#fbfbfa; --bg-surface:#f2f2ed; --bg-surface-elevated:#ecece6; --bg-card:#ffffff;
+  --border-subtle:#e5e5df; --border-active:#d4d4ce;
+  --text-primary:#111110; --text-secondary:#555550;
+  --accent-crimson:#dc2626; --accent-crimson-dim:rgba(220,38,38,.08);
+  --wash-a:rgba(220,38,38,.10); --wash-b:rgba(220,38,38,.05); --wash-c:rgba(220,38,38,.16);
+  --glow:rgba(220,38,38,.34);
+  /* blueprint on warm paper */
+  --paper:#fffdf6; --node:#fbf8ee; --line:#bdb7a5; --arrow:#6b675c; --ink:#111110;
+  --n-weak:#bdb7a5; --n-strong:#6b675c;
+  --shadow-card:0 2px 12px rgba(0,0,0,.04); --shadow-lift:0 8px 24px rgba(0,0,0,.08);
+  --r-sm:6px; --r-md:12px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --f-head:'Segoe UI',system-ui,sans-serif; --f-body:'Open Sans',system-ui,sans-serif; --f-mono:Consolas,ui-monospace,monospace;
+}
+html[data-theme="dark"]{
+  --bg-primary:#160e10; --bg-surface:#22171a; --bg-surface-elevated:#2b1d20; --bg-card:#26191c;
+  --border-subtle:#362529; --border-active:#4f353b;
+  --text-primary:#f5ece8; --text-secondary:#b5a5a0;
+  --accent-crimson:#c85250; --accent-crimson-dim:rgba(200,82,80,.14);
+  --wash-a:rgba(200,82,80,.12); --wash-b:rgba(200,82,80,.06); --wash-c:rgba(200,82,80,.22);
+  --glow:rgba(200,82,80,.42);
+  --paper:#2a1d1f; --node:#33242a; --line:#5a4247; --arrow:#b5a5a0; --ink:#f5ece8;
+  --n-weak:#85736f; --n-strong:#cdbeb8;
+  --shadow-card:0 4px 24px rgba(0,0,0,.5); --shadow-lift:0 8px 32px rgba(0,0,0,.65);
+}
+
+/* ---------- 1. shell: viewport, scaling stage, slides ---------- */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg-surface);color:var(--text-primary);font-family:var(--f-body);-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit}
+.viewport{position:fixed;left:0;top:0;right:0;bottom:0;overflow:hidden;background:var(--bg-surface)}
+.stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center;background:var(--bg-primary);border:1px solid var(--border-subtle);overflow:hidden}
+.slide{position:absolute;left:0;top:0;width:1280px;height:720px;padding:80px 88px 68px;display:none;flex-direction:column;background:var(--bg-primary);overflow:hidden}
+.slide.active{display:flex}
+.body{flex:1;display:flex;flex-direction:column;gap:24px;min-height:0}
+.body.mid{justify-content:center}
+.notes{display:none}
+
+/* ---------- 2. chrome: top bar, footer, hud, notes panel ---------- */
+.top{position:absolute;top:30px;left:88px;right:88px;z-index:3;display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--border-subtle);font:700 14px/20px var(--f-mono);letter-spacing:.04em;color:var(--text-primary);white-space:nowrap}
+.top .num{color:var(--accent-crimson);margin-right:8px}
+.top .tr{font-weight:400;font-size:13px;letter-spacing:.02em;color:var(--text-secondary)}
+.foot{position:absolute;left:0;right:0;bottom:0;height:44px;border-top:1px solid var(--border-subtle);display:flex;align-items:center;gap:24px;padding:0 88px;font:400 13px var(--f-mono);color:var(--text-secondary);background:var(--bg-primary);z-index:3}
+.wm{font:700 17px var(--f-head);letter-spacing:-.015em;color:var(--text-primary);flex:none}
+.wm i{font-style:normal;color:var(--accent-crimson)}
+.marq{flex:1;overflow:hidden;white-space:nowrap;min-width:0}
+.marq-in{display:inline-block;animation:mq 40s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ctr{flex:none;font-weight:600;color:var(--text-primary)}
+
+.hud{position:fixed;top:3px;right:6px;display:flex;gap:4px;z-index:20;opacity:.38;transition:opacity .2s}
+.hud:hover,.hud:focus-within{opacity:1}
+.hud button{font:600 11px/1 var(--f-mono);background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:3px;padding:3px 8px;cursor:pointer;color:var(--text-secondary)}
+.hud button:hover{border-color:var(--accent-crimson);color:var(--accent-crimson)}
+.hud{flex-wrap:wrap;max-width:calc(100vw - 12px);justify-content:flex-end}
+.deck-back-link{display:inline-flex;min-width:44px;min-height:44px;align-items:center;justify-content:center;padding:3px 10px;border:1px solid var(--border-subtle);border-radius:3px;background:var(--bg-card);color:var(--text-secondary);font:600 11px/1 var(--f-mono);text-decoration:none}
+.deck-back-link:hover,.deck-back-link:focus-visible{border-color:var(--accent-crimson);color:var(--accent-crimson)}
+.notespanel{position:fixed;left:0;right:0;bottom:0;height:30vh;background:var(--bg-card);border-top:2px solid var(--accent-crimson);z-index:30;display:none;flex-direction:column;overflow:hidden}
+.notespanel.open{display:flex}
+.notespanel header{font:700 12px var(--f-mono);letter-spacing:.06em;color:var(--accent-crimson);padding:10px 24px 4px}
+.notespanel .nb{overflow-y:auto;padding:4px 24px 16px;font-size:18px;line-height:1.55;color:var(--text-primary)}
+.notespanel .nb p{margin:0 0 8px;max-width:1100px}
+
+/* ---------- 3. type + shared parts ---------- */
+h1,h2,h3,p{margin:0}
+.t{font:700 50px/1.1 var(--f-head);letter-spacing:-.02em;color:var(--text-primary);max-width:1104px}
+.t em{font-style:normal;color:var(--accent-crimson)}
+.sub{font:400 24px/1.5 var(--f-body);color:var(--text-secondary);max-width:900px}
+.txt{font:400 22px/1.5 var(--f-body);color:var(--text-secondary)}
+.foot-note{font:400 13px/1.5 var(--f-mono);color:var(--text-secondary);letter-spacing:.02em}
+.tag{display:inline-block;font:600 12px var(--f-mono);letter-spacing:.04em;border:1px solid var(--border-subtle);border-radius:999px;padding:3px 11px;color:var(--text-secondary);background:var(--bg-surface);white-space:nowrap}
+
+/* paper card (hero visuals). .crop adds the blog photo-frame corner marks */
+.fig{position:relative;margin:0;background:var(--paper);border:1px solid var(--border-subtle);border-radius:var(--r-sm);box-shadow:var(--shadow-card);min-width:0}
+.fig svg{display:block;width:100%;height:auto}
+.crop{position:relative}
+.crop::before,.crop::after{content:"";position:absolute;width:14px;height:14px;pointer-events:none;z-index:2}
+.crop::before{top:-1px;left:-1px;border-top:2px solid var(--accent-crimson);border-left:2px solid var(--accent-crimson)}
+.crop::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--accent-crimson);border-right:2px solid var(--accent-crimson)}
+.scroller{min-width:0}
+
+/* svg text and strokes shared by every diagram */
+svg text{font-family:var(--f-mono);font-size:14px;letter-spacing:.02em;fill:var(--text-secondary)}
+svg text.ink{fill:var(--ink)}
+svg text.red{fill:var(--accent-crimson)}
+svg text.b{font-weight:700}
+svg text.body{font-family:var(--f-body);font-size:16px;letter-spacing:0;fill:var(--ink)}
+svg text.body.b{font-size:17px}
+svg text.mk{font-family:var(--f-mono);font-size:16px}
+svg .ax{fill:none;stroke:var(--line);stroke-width:1.2}
+svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
+svg .lnk{fill:none;stroke:var(--arrow);stroke-width:1.5}
+svg .nd{fill:var(--bg-card);stroke:var(--border-active);stroke-width:1}
+svg .s-weak,svg .s-strong,svg .s-red{fill:none;stroke-linecap:butt;stroke-linejoin:round}
+svg .s-weak{stroke:var(--n-weak);stroke-width:3}
+svg .s-strong{stroke:var(--n-strong);stroke-width:3}
+svg .s-red{stroke:var(--accent-crimson);stroke-width:4.5}
+
+/* "in ai work" strip (blog principle strip) */
+.strip{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:12px 22px 14px}
+.strip-h{font:400 14px var(--f-mono);letter-spacing:.05em;color:var(--text-secondary);margin:0 0 6px}
+.strip ol{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+.strip li{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:baseline;font:400 22px/1.45 var(--f-body);color:var(--text-secondary)}
+.strip li b{font:700 14px var(--f-mono);letter-spacing:.04em;color:var(--accent-crimson)}
+
+/* blueprint box (blog diagram): toolbar, canvas, legend */
+.bp{margin:0;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--r-md);overflow:hidden;min-width:0}
+.bp-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 16px;background:var(--bg-surface-elevated);border-bottom:1px solid var(--border-subtle);font:400 14px/1.4 var(--f-mono);color:var(--text-secondary)}
+.bp-ttl{display:inline-flex;align-items:center;gap:10px}
+.bp-ico{width:16px;height:12px;fill:none;stroke:var(--text-secondary);stroke-width:1.5;stroke-linecap:round;flex:none}
+.bp-tag{background:var(--bg-card);border:1px solid var(--border-subtle);color:var(--text-secondary);font-size:13px;padding:2px 9px;border-radius:var(--r-sm);white-space:nowrap}
+.bp-body{padding:14px 16px}
+.bp-body svg{display:block;width:100%;height:auto}
+.bp-leg{display:flex;gap:18px;align-items:center;padding:7px 16px 9px;border-top:1px solid var(--border-subtle);font:400 14px var(--f-mono);color:var(--text-secondary)}
+.bp-leg span{display:inline-flex;align-items:center;gap:8px}
+.lg{display:inline-block;width:28px;height:0}
+.lg-flow{border-top:1.5px solid var(--arrow)}
+.lg-fail{border-top:1.5px dashed var(--accent-crimson)}
+
+/* ---------- 4. motion (calm editorial) ----------
+   the base style of every element IS its final state. animation only runs
+   while the slide has .play, so reduced motion, print and no-js show the end. */
+@keyframes k-rise{from{opacity:0;transform:translateY(14px)}}
+@keyframes k-fade{from{opacity:0}}
+@keyframes k-draw{from{stroke-dasharray:1;stroke-dashoffset:1}to{stroke-dasharray:1;stroke-dashoffset:0}}
+@keyframes k-pop{from{opacity:0;transform:scale(.4)}}
+@keyframes k-wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.pop{transform-box:fill-box;transform-origin:center}
+.slide.play .rise{animation:k-rise calc(var(--t,.8)*1s) var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .fade{animation:k-fade calc(var(--t,.7)*1s) var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .draw{animation:k-draw calc(var(--t,.9)*1s) var(--ez,var(--ease)) calc(var(--d,0)*1s) both}
+.slide.play .pop{animation:k-pop calc(var(--t,.5)*1s) var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .wipe{animation:k-wipe calc(var(--t,.5)*1s) var(--ease) calc(var(--d,0)*1s) both}
+
+/* ---------- 5. per-slide blocks ---------- */
+/* ===== recovery slide specifics ===== */
+.s1 { background: var(--bg-surface); }
+.s-head { font: 700 42px/1.1 var(--f-head); letter-spacing:-.02em; color: var(--text-primary); }
+.s-sub { margin-top: 24px; font: 400 24px/1.5 var(--f-body); color: var(--text-secondary); max-width: 900px; }
+.list-style { margin: 20px 0 0; padding-left: 1em; display: flex; flex-direction: column; gap: 12px; font-size: 20px; }
+</style>
+</head>
+<body>
+<div class="viewport">
+  <div class="stage" id="stage">
+
+    <div class="top">
+      <div class="tl"><span class="num">(01)</span>the record</div>
+      <div class="tr">[ relay recovery ]</div>
+    </div>
+    
+    <div class="foot">
+      <div class="wm">naquuuu<i>.</i></div>
+      <div class="marq"><div class="marq-in">a relay recovery record: the missing dependency, documented timings, and the checks that separate a working process from a working reply.</div></div>
+      <div class="ctr"><span id="cnum">1</span> / 4</div>
+    </div>
+    
+    <nav class="hud" aria-label="slide controls">
+      <button id="btn-prev" aria-label="previous slide">prev</button>
+      <button id="btn-next" aria-label="next slide">next</button>
+    </nav>
+
+    <div id="slides">
+      
+      <!-- S1: Title -->
+      <section class="slide s1 active" id="s1" data-title="relay recovery: prove the check can run">
+        <div class="body mid">
+          <h1 class="s-head rise" style="--d:0.1">relay recovery:<br>prove the check can run</h1>
+          <p class="s-sub fade" style="--d:0.3">a timeout did not prove the network was broken. the environment was missing aiohttp. installing the dependency let the gateway connect, and an owner message round-trip confirmed the reply path.</p>
+        </div>
+      </section>
+
+      <!-- S2: The recovery record -->
+      <section class="slide s2" id="s2" data-title="the recovery record">
+        <div class="body">
+          <h2 class="s-head rise" style="--d:0.1">1. the recovery record</h2>
+          <p class="s-sub fade" style="--d:0.3">the record is a repair receipt. it lists the fault and the evidence left after the fix. reconstructed from documented lessons l-17, l-18, l-20 and l-21.</p>
+          <ol class="list-style fade" style="--d:0.5">
+            <li>two hosts and repeated restarts disrupted the relay.</li>
+            <li>an interrupted update left the environment incomplete.</li>
+            <li>missing aiohttp produced misleading connection timeouts.</li>
+            <li>after installation, the gateway connected at 19:32:48 wib.</li>
+            <li>an owner message round-trip confirmed recovery that evening.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- S3: Measurements -->
+      <section class="slide s3" id="s3" data-title="measure before claiming speed">
+        <div class="body">
+          <h2 class="s-head rise" style="--d:0.1">2. measure before claiming speed</h2>
+          <p class="s-sub fade" style="--d:0.3">a stopwatch needs a label. these earlier measurements belong to the laptop on 28 september, not the relay host. a cold process includes startup and provider time.</p>
+          <div style="display:flex; gap: 40px; margin-top: 20px;" class="fade" style="--d:0.5">
+            <div style="background: var(--bg-card); padding: 20px; border: 1px solid var(--border-subtle); border-radius: var(--r-sm);">
+                <h3>documented baseline, lesson l-09</h3>
+                <ul class="list-style">
+                    <li>cold one-word opencode run: 15,177 ms</li>
+                    <li>opencode run --help: 2,097 ms</li>
+                </ul>
+            </div>
+            <div style="background: var(--bg-card); padding: 20px; border: 1px solid var(--border-subtle); border-radius: var(--r-sm);">
+                <h3>relay host, 28 september 2026: one matched trial</h3>
+                <ul class="list-style">
+                    <li>cold run: 7,177 ms</li>
+                    <li>warm authenticated attach: 10,212 ms</li>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- S4: Checks before publication -->
+      <section class="slide s4" id="s4" data-title="checks before publication">
+        <div class="body">
+          <h2 class="s-head rise" style="--d:0.1">3. checks before publication</h2>
+          <p class="s-sub fade" style="--d:0.3">a green light only covers the wire connected to it. the page checks cover layout and publishing hygiene. the historical round-trip proves recovery at that time, not perpetual availability.</p>
+          <ul class="list-style fade" style="--d:0.5">
+            <li>session renderer: zero dash violations and zero inline width styles.</li>
+            <li>blog reliability gate: verified before publication.</li>
+            <li>credential sanitization: verified before publication.</li>
+          </ul>
+        </div>
+      </section>
+      
+
+      <section class="slide" id="s-bp" data-title="blueprint flowchart">
+        <div class="body mid">
+          <!-- bp:flow -->
 <div class="flowchart-whiteboard-box blueprint-box" style="margin: 2rem 0;">
   <div class="flowchart-board-toolbar">
     <div class="flowchart-toolbar-left"><span>relay recovery // from timeout to proof</span><span class="flowchart-toolbar-tag">systems notebook</span></div>
@@ -125,12 +352,12 @@
   <p class="principle-strip-note">reconstructed from documented lessons l-17, l-18, l-20 and l-21. it is not a captured agent trace.</p>
 </aside>
 <!-- /bp:flow -->
-<h2 id="measurements">2. measure before claiming speed</h2><p>a stopwatch needs a label. these earlier measurements belong to the laptop on 28 september, not the relay host. a cold process includes startup and provider time.</p>
-<table class="recovery-table"><caption>documented baseline, lesson l-09</caption><thead><tr><th scope="col">check</th><th scope="col">elapsed</th></tr></thead><tbody><tr><th scope="row">cold one-word opencode run</th><td>15,177 ms</td></tr><tr><th scope="row">opencode run --help</th><td>2,097 ms</td></tr></tbody></table>
-<table class="recovery-table"><caption>relay host, 28 september 2026: one matched trial</caption><thead><tr><th scope="col">path</th><th scope="col">elapsed</th></tr></thead><tbody><tr><th scope="row">cold run</th><td>7,177 ms</td></tr><tr><th scope="row">warm authenticated attach</th><td>10,212 ms</td></tr></tbody></table><p id="latency-update">both runs used the same no-tool prompt and returned ok with exit code zero. the warm path was slower in this sample. provider variance was uncontrolled. one trial does not establish a typical latency or a speedup.</p><details><summary>measurement method</summary><p>prompt: <code>Reply with exactly OK. Do not use tools.</code></p><p>cold: <code>opencode run --format json</code>. warm: <code>opencode run --attach http://127.0.0.1:4096 --dir &lt;workspace&gt; --format json</code>. authentication stayed in the host environment. elapsed time covers the complete command.</p></details>
-<h2 id="checks">3. checks before publication</h2><p>a green light only covers the wire connected to it. the page checks cover layout and publishing hygiene. the historical round-trip proves recovery at that time, not perpetual availability.</p><ul><li>session renderer: zero dash violations and zero inline width styles.</li><li>blog reliability gate: verified before publication.</li><li>credential sanitization: verified before publication.</li></ul>
-<p>the recovery map contains curated incident facts only. no raw messages, account identifiers, or credentials are published.</p></article></main>
-<footer class="site-footer"><div class="wrap footer-content"><a href="../../">return to home</a><a href="../../blog/">essays &amp; notes</a><p class="footer-privacy">visits are counted with <a href="https://www.goatcounter.com/" target="_blank" rel="noopener noreferrer">goatcounter</a>: no cookies, no personal info tracked.</p></div></footer>  <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
-  <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <script src="../../assets/js/palette.js?v=20261005d" defer></script>
-</body></html>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
+<script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
