@@ -17,6 +17,139 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="mobile.css?v=20261006mobile1" media="screen and (max-width:760px)">
+<script>
+(function(){
+  'use strict';
+  var vp=document.getElementById('vp'), stage=document.getElementById('stage'), np=document.getElementById('np'), nb=document.getElementById('nb');
+  var slides=[].slice.call(document.querySelectorAll('.slide')), n=slides.length, cur=0, notesOpen=false;
+  var root=document.documentElement;
+  var mqReduce=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var hooks={};                 /* per slide id: {play(slide,reduced), stop(slide), still(slide)} */
+  var ctlDown=false;            /* a pointer is down inside a slider panel: swallow the click */
+  function pad(x){return (x<10?'0':'')+x}
+  function isReduced(){return !!mqReduce.matches}
+
+  /* ---------- footer, per slide ---------- */
+  var mq='systems & matter ✦ culture & taste ✦ ', half='';
+  for(var k=0;k<6;k++){half+=mq}
+  slides.forEach(function(s,i){
+    var f=document.createElement('footer'); f.className='foot';
+    var w=document.createElement('span'); w.className='wm'; w.innerHTML='naquuuu<i>.</i>';
+    var m=document.createElement('div'); m.className='marq';
+    var mi=document.createElement('span'); mi.className='marq-in'; mi.textContent=half+half; m.appendChild(mi);
+    var c=document.createElement('span'); c.className='ctr'; c.textContent=pad(i+1)+' / '+pad(n);
+    f.appendChild(w); f.appendChild(m); f.appendChild(c); s.appendChild(f);
+    s.setAttribute('aria-label','slide '+(i+1)+' of '+n);
+  });
+
+  /* ---------- scale the 1280x720 stage into the window ---------- */
+  function fit(){
+    if(!window.innerWidth||!window.innerHeight)return;   /* hidden pane: wait for a real size */
+    var mobile=window.innerWidth<=760;
+    root.classList.toggle('mobile',mobile);
+    var panelH=(notesOpen&&np.offsetHeight)?np.offsetHeight:0;
+    vp.style.bottom=panelH+'px';
+    if(mobile){stage.style.transform='none';return}
+    var s=Math.min(vp.clientWidth/1280, vp.clientHeight/720);
+    stage.style.transform='translate(-50%,-50%) scale('+s+')';
+  }
+
+  /* ---------- motion: a slide plays when it becomes active, r replays ---------- */
+  function play(i){
+    var s=slides[i]; if(!s)return;
+    var h=hooks[s.id];
+    if(h&&h.stop)h.stop(s);
+    s.classList.remove('play');
+    void s.offsetWidth;                         /* restart css animations */
+    var red=isReduced();
+    if(!red)s.classList.add('play');            /* reduced motion: never add .play, so the end state shows */
+    if(h&&h.play)h.play(s,red);
+  }
+
+  function show(i,write){
+    i=Math.max(0,Math.min(n-1,i)); cur=i;
+    slides.forEach(function(s,k){var on=(k===i); s.classList.toggle('active',on); if(!on)s.classList.remove('play')});
+    nb.innerHTML=''; var a=slides[i].querySelector('.notes');
+    if(a){[].slice.call(a.children).forEach(function(c){nb.appendChild(c.cloneNode(true))})}
+    if(write!==false){try{history.replaceState(null,'',location.pathname+location.search+'#'+(i+1))}catch(e){location.hash='#'+(i+1)}}
+    document.title=pad(i+1)+' / '+pad(n)+' '+(slides[i].getAttribute('data-title')||'naquuuu');
+    vp.scrollTop=0;
+    var ae=document.activeElement;
+    if(ae&&ae!==document.body&&!slides[i].contains(ae)&&ae.blur&&!/^(b-)/.test(ae.id||''))ae.blur();
+    play(i);
+  }
+  function fromHash(){var v=parseInt((location.hash||'').replace('#',''),10); return (v>=1&&v<=n)?v-1:0}
+  function next(){show(cur+1)} function prev(){show(cur-1)}
+  function replay(){play(cur)}
+  function toggleNotes(){notesOpen=!notesOpen; np.classList.toggle('open',notesOpen); fit()}
+  function setTheme(d){root.setAttribute('data-theme',d)}
+  function toggleTheme(){
+    var d=root.getAttribute('data-theme')==='dark'?'light':'dark'; setTheme(d);
+    try{localStorage.setItem('naq-deck-theme',d)}catch(e){}
+  }
+  function toggleFull(){
+    try{ if(document.fullscreenElement){document.exitFullscreen()} else if(root.requestFullscreen){root.requestFullscreen()} }catch(e){}
+  }
+
+  try{var t=localStorage.getItem('naq-deck-theme'); if(t==='dark'||t==='light'){setTheme(t)}}catch(e){}
+  var qm=/[?&]theme=(dark|light)/.exec(location.search); if(qm){setTheme(qm[1])}   /* ?theme=dark for previews */
+
+  /* ---------- keys: arrows, space, enter, page keys, home, end; t n f r ---------- */
+  function isField(el){return !!(el&&el.closest&&el.closest('input,select,textarea,[contenteditable="true"]'))}
+  document.addEventListener('keydown',function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    var k=e.key, lk=(k&&k.length===1)?k.toLowerCase():k;
+    if(isField(e.target)){
+      /* a focused slider keeps its arrows, space, page and home/end keys; only the letter hotkeys pass through */
+      if(k==='Escape'){e.target.blur();e.preventDefault();return}
+      if(lk!=='t'&&lk!=='n'&&lk!=='f'&&lk!=='r')return;
+    }
+    if(k==='ArrowRight'||k==='ArrowDown'||k===' '||k==='PageDown'||k==='Enter'){e.preventDefault();next()}
+    else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'||k==='Backspace'){e.preventDefault();prev()}
+    else if(k==='Home'){show(0)} else if(k==='End'){show(n-1)}
+    else if(lk==='n'){toggleNotes()}
+    else if(lk==='t'){toggleTheme()}
+    else if(lk==='f'){toggleFull()}
+    else if(lk==='r'){replay()}
+  });
+  /* belt and braces: inputs never let navigation keys bubble out of them */
+  [].slice.call(document.querySelectorAll('input[type=range]')).forEach(function(inp){
+    inp.addEventListener('keydown',function(e){
+      if(/^[tnfrTNFR]$/.test(e.key)||e.key==='Escape')return;
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener('pointerdown',function(e){ctlDown=!!(e.target.closest&&e.target.closest('.ctl'))});
+  window.addEventListener('pointerup',function(){setTimeout(function(){ctlDown=false},0)});
+  window.addEventListener('pointercancel',function(){setTimeout(function(){ctlDown=false},0)});
+
+  vp.addEventListener('click',function(e){
+    if(ctlDown||e.target.closest('a,button,input,.ctl,.scroller,.notespanel'))return;
+    if(root.classList.contains('mobile'))return;
+    var x=e.clientX/window.innerWidth; if(x<0.25)prev(); else next();
+  });
+  var sx=0,sy=0,swipeOk=true;
+  vp.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;swipeOk=!(e.target.closest&&e.target.closest('.ctl,.scroller'))},{passive:true});
+  vp.addEventListener('touchend',function(e){
+    if(!swipeOk)return;
+    var dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){ if(dx<0)next(); else prev(); }
+  },{passive:true});
+  document.getElementById('b-prev').onclick=prev;
+  document.getElementById('b-next').onclick=next;
+  document.getElementById('b-replay').onclick=replay;
+  document.getElementById('b-notes').onclick=toggleNotes;
+  document.getElementById('b-theme').onclick=toggleTheme;
+  document.getElementById('b-full').onclick=toggleFull;
+  window.addEventListener('resize',fit);
+  window.addEventListener('hashchange',function(){show(fromHash(),false)});
+  window.addEventListener('beforeprint',function(){Object.keys(hooks).forEach(function(id){var h=hooks[id]; if(h.still)h.still(document.getElementById(id))})});
+
+  
+  fit(); show(fromHash(),false);
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fit)}
+})();
+</script>
 <script src="mobile.js?v=20261006mobile1"></script>
 <style>
 /* ==================================================================
@@ -170,7 +303,7 @@ svg .s-red{stroke:var(--accent-crimson);stroke-width:4.5}
 </style>
 </head>
 <body>
-<div class="viewport">
+<div class="viewport" id="vp">
   <div class="stage" id="stage">
 
     <div class="top">
@@ -188,6 +321,7 @@ svg .s-red{stroke:var(--accent-crimson);stroke-width:4.5}
       <button id="btn-prev" aria-label="previous slide">prev</button>
       <button id="btn-next" aria-label="next slide">next</button>
     </nav>
+    <div class="notespanel" id="np"><header>Speaker Notes</header><div class="nb" id="nb"></div></div>
 
     <div id="slides">
       
