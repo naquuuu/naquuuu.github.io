@@ -1,147 +1,386 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#120305">
-  
-  <title>building a product operations workspace: reliable specifications with ai workflows: naquuuu (krishna)</title>
-  <meta name="description" content="Inside my product operations workspace: moving beyond generic prompts to structured workflows, interactive prototypes, and quality checks that reduce BRD preparation time.">
-  <link rel="canonical" href="https://naquuuu.github.io/blog/building-an-autonomous-product-operating-system/">
-  <link rel="stylesheet" href="../../assets/css/style.css?v=20261005d">
-  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg?v=20260917i">
-  <link rel="alternate icon" href="../../favicon.ico?v=20260917i">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap"></noscript>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>building a product operations workspace | naquuuu</title>
+<meta name="description" content="a 9-slide deck showing how a product operations workspace turns a prompt into a reviewed BRD, flowchart and prototype through human checks.">
+<link rel="canonical" href="https://naquuuu.github.io/blog/building-an-autonomous-product-operating-system/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="naquuuu">
+<meta property="og:title" content="building a product operations workspace: reliable specs and prototypes with ai workflows">
+<meta property="og:description" content="a 9-slide deck showing how a product operations workspace turns a prompt into a reviewed BRD, flowchart and prototype through human checks.">
+<meta property="og:url" content="https://naquuuu.github.io/blog/building-an-autonomous-product-operating-system/">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg?v=20260917i">
+<link rel="alternate icon" href="../../favicon.ico?v=20260917i">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400..800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==================================================================
+   naquuuu systems notebook: building a product operations workspace
+   shell lifted from the murphy's law deck: 0 tokens, 1 shell, 2 chrome,
+   3 type + shared parts, 4 motion, 5 per-slide blocks, 6 mobile, 7 print
+   ================================================================== */
+/* ---------- 0. tokens (light is the default; dark via data-theme) ---------- */
+:root{
+  --bg-primary:#fbfbfa; --bg-surface:#f2f2ed; --bg-surface-elevated:#ecece6; --bg-card:#ffffff;
+  --border-subtle:#e5e5df; --border-active:#d4d4ce;
+  --text-primary:#111110; --text-secondary:#555550;
+  --accent-crimson:#dc2626; --accent-crimson-dim:rgba(220,38,38,.08);
+  --wash-a:rgba(220,38,38,.10); --wash-b:rgba(220,38,38,.05); --wash-c:rgba(220,38,38,.16);
+  --paper:#fffdf6; --node:#fbf8ee; --line:#bdb7a5; --arrow:#6b675c; --ink:#111110;
+  --shadow-card:0 2px 12px rgba(0,0,0,.04); --shadow-lift:0 8px 24px rgba(0,0,0,.08);
+  --r-sm:6px; --r-md:12px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --f-head:'Segoe UI',system-ui,sans-serif; --f-body:'Open Sans',system-ui,sans-serif; --f-mono:Consolas,ui-monospace,monospace;
+}
+html[data-theme="dark"]{
+  --bg-primary:#160e10; --bg-surface:#22171a; --bg-surface-elevated:#2b1d20; --bg-card:#26191c;
+  --border-subtle:#362529; --border-active:#4f353b;
+  --text-primary:#f5ece8; --text-secondary:#b5a5a0;
+  --accent-crimson:#c85250; --accent-crimson-dim:rgba(200,82,80,.14);
+  --wash-a:rgba(200,82,80,.12); --wash-b:rgba(200,82,80,.06); --wash-c:rgba(200,82,80,.22);
+  --paper:#2a1d1f; --node:#33242a; --line:#5a4247; --arrow:#b5a5a0; --ink:#f5ece8;
+  --shadow-card:0 4px 24px rgba(0,0,0,.5); --shadow-lift:0 8px 32px rgba(0,0,0,.65);
+}
+
+/* ---------- 1. shell: viewport, scaling stage, slides ---------- */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg-surface);color:var(--text-primary);font-family:var(--f-body);-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit}
+a{color:var(--accent-crimson)}
+.viewport{position:fixed;left:0;top:0;right:0;bottom:0;overflow:hidden;background:var(--bg-surface)}
+.stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center;background:var(--bg-primary);border:1px solid var(--border-subtle);overflow:hidden}
+.slide{position:absolute;left:0;top:0;width:1280px;height:720px;padding:80px 88px 68px;display:none;flex-direction:column;background:var(--bg-primary);overflow:hidden}
+.slide.active{display:flex}
+.body{flex:1;display:flex;flex-direction:column;gap:24px;min-height:0}
+.body.mid{justify-content:center}
+.notes{display:none}
+
+/* ---------- 2. chrome: top bar, footer, hud, notes panel ---------- */
+.top{position:absolute;top:30px;left:88px;right:88px;z-index:3;display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--border-subtle);font:700 14px/20px var(--f-mono);letter-spacing:.04em;color:var(--text-primary);white-space:nowrap}
+.top .num{color:var(--accent-crimson);margin-right:8px}
+.top .tr{font-weight:400;font-size:13px;letter-spacing:.02em;color:var(--text-secondary)}
+.foot{position:absolute;left:0;right:0;bottom:0;height:44px;border-top:1px solid var(--border-subtle);display:flex;align-items:center;gap:24px;padding:0 88px;font:400 13px var(--f-mono);color:var(--text-secondary);background:var(--bg-primary);z-index:3}
+.wm{font:700 17px var(--f-head);letter-spacing:-.015em;color:var(--text-primary);flex:none}
+.wm i{font-style:normal;color:var(--accent-crimson)}
+.marq{flex:1;overflow:hidden;white-space:nowrap;min-width:0}
+.marq-in{display:inline-block;animation:mq 40s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ctr{flex:none;font-weight:600;color:var(--text-primary)}
+
+.hud{position:fixed;top:3px;right:6px;display:flex;flex-wrap:wrap;justify-content:flex-end;max-width:calc(100vw - 12px);gap:4px;z-index:20;opacity:.38;transition:opacity .2s}
+.hud:hover,.hud:focus-within{opacity:1}
+.hud button{font:600 11px/1 var(--f-mono);background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:3px;padding:3px 8px;cursor:pointer;color:var(--text-secondary)}
+.hud button:hover{border-color:var(--accent-crimson);color:var(--accent-crimson)}
+.deck-back-link{display:inline-flex;min-width:44px;min-height:44px;align-items:center;justify-content:center;padding:3px 10px;border:1px solid var(--border-subtle);border-radius:3px;background:var(--bg-card);color:var(--text-secondary);font:600 11px/1 var(--f-mono);text-decoration:none}
+.deck-back-link:hover,.deck-back-link:focus-visible{border-color:var(--accent-crimson);color:var(--accent-crimson)}
+.notespanel{position:fixed;left:0;right:0;bottom:0;height:30vh;background:var(--bg-card);border-top:2px solid var(--accent-crimson);z-index:30;display:none;flex-direction:column;overflow:hidden}
+.notespanel.open{display:flex}
+.notespanel header{font:700 12px var(--f-mono);letter-spacing:.06em;color:var(--accent-crimson);padding:10px 24px 4px}
+.notespanel .nb{overflow-y:auto;padding:4px 24px 16px;font-size:18px;line-height:1.55;color:var(--text-primary)}
+.notespanel .nb p{margin:0 0 8px;max-width:1100px}
+
+/* ---------- 3. type + shared parts ---------- */
+h1,h2,h3,p{margin:0}
+.t{font:700 50px/1.1 var(--f-head);letter-spacing:-.02em;color:var(--text-primary);max-width:1104px}
+.t em{font-style:normal;color:var(--accent-crimson)}
+.sub{font:400 24px/1.5 var(--f-body);color:var(--text-secondary);max-width:900px}
+.txt{font:400 22px/1.5 var(--f-body);color:var(--text-secondary)}
+.txt strong,.sub strong{color:var(--text-primary);font-weight:600}
+.foot-note{font:400 13px/1.5 var(--f-mono);color:var(--text-secondary);letter-spacing:.02em}
+.tag{display:inline-block;font:600 12px var(--f-mono);letter-spacing:.04em;border:1px solid var(--border-subtle);border-radius:999px;padding:3px 11px;color:var(--text-secondary);background:var(--bg-surface);white-space:nowrap}
+code{font-family:var(--f-mono);font-size:.86em;color:var(--text-primary);background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:4px;padding:1px 6px;overflow-wrap:anywhere}
+.head{display:flex;flex-direction:column;gap:10px}
+.row{display:grid;grid-template-columns:var(--cols,1fr 1fr);gap:44px;align-items:start}
+.row.mid{align-items:center}
+.go{font:700 15px var(--f-mono);letter-spacing:.03em;color:var(--accent-crimson);text-decoration:none;border-bottom:1px solid currentColor;align-self:flex-start}
+.go:hover{opacity:.8}
+
+/* title slide */
+.s1{background:radial-gradient(900px 560px at 88% 8%,var(--wash-a),transparent 70%),radial-gradient(700px 520px at 6% 98%,var(--wash-b),transparent 70%),var(--bg-primary)}
+.s1 .body{position:relative;z-index:1;gap:0}
+.s1-kick{font:700 15px var(--f-mono);letter-spacing:.06em;color:var(--accent-crimson);margin-bottom:22px}
+.s1-h{font:700 54px/1.06 var(--f-head);letter-spacing:-.025em;max-width:1040px}
+.s1-h em{font-style:normal;color:var(--accent-crimson)}
+.s1-sub{margin-top:26px;max-width:880px}
+.s1-by{margin-top:30px;font:600 17px var(--f-mono);letter-spacing:.02em;color:var(--text-primary)}
+.s1-disc{margin-top:22px;padding-top:16px;border-top:1px solid var(--border-subtle);max-width:820px;font:400 15px/1.7 var(--f-mono);color:var(--text-secondary)}
+.s1-disc b{color:var(--accent-crimson)}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(var(--n,3),1fr);gap:20px}
+.card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:22px 24px 24px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;gap:10px;min-width:0}
+.card-k{font:700 14px var(--f-mono);letter-spacing:.04em;color:var(--accent-crimson)}
+.card-h{font:700 24px/1.25 var(--f-head);letter-spacing:-.01em;color:var(--text-primary)}
+.card-t{font:400 19px/1.5 var(--f-body);color:var(--text-secondary)}
+.card ul{margin:0;padding:0 0 0 20px;display:grid;gap:6px}
+.card li{font:400 18px/1.42 var(--f-body);color:var(--text-secondary)}
+.card.hot{border-left:4px solid var(--accent-crimson)}
+
+/* numbered steps on a rail */
+.steps{list-style:none;margin:0;padding:0;border-left:2px solid var(--border-subtle)}
+.steps li{position:relative;display:grid;grid-template-columns:48px 1fr;gap:8px;align-items:baseline;padding:10px 0 10px 24px;font:400 22px/1.4 var(--f-body);color:var(--text-secondary)}
+.steps li b{font:700 14px var(--f-mono);color:var(--accent-crimson)}
+.steps li::before{content:"";position:absolute;left:-8px;top:19px;width:14px;height:14px;border-radius:50%;background:var(--bg-primary);border:2px solid var(--arrow)}
+.steps li.hot{color:var(--text-primary);font-weight:600}
+.steps li.hot::before{background:var(--accent-crimson);border-color:var(--accent-crimson)}
+
+/* data table */
+.tbl{width:100%;border-collapse:collapse;font:400 20px/1.4 var(--f-body)}
+.tbl caption{text-align:left;font:700 14px/1.4 var(--f-mono);letter-spacing:.03em;color:var(--text-secondary);padding:0 0 12px}
+.tbl th,.tbl td{padding:13px 0;border-bottom:1px solid var(--border-subtle);text-align:left;vertical-align:baseline}
+.tbl thead th{font:600 13px var(--f-mono);color:var(--text-secondary);letter-spacing:.04em;padding-top:0}
+.tbl tbody th{font-weight:400;color:var(--text-primary)}
+.tbl td,.tbl thead th:last-child{text-align:right}
+.tbl td{font:700 24px var(--f-mono);color:var(--text-primary);white-space:nowrap;padding-left:20px}
+.tbl tr:last-child>*{border-bottom:0}
+
+/* code block */
+.code{margin:0;font:500 17px/1.55 var(--f-mono);background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--r-sm);padding:14px 18px;color:var(--text-primary);white-space:pre-wrap;overflow-wrap:anywhere}
+.code-k{font:700 13px var(--f-mono);letter-spacing:.05em;color:var(--text-secondary);margin-bottom:6px}
+
+/* "how this maps to my principles" strip */
+.strip{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:16px 22px 18px;display:flex;flex-direction:column;gap:10px}
+.strip-h{font:400 14px var(--f-mono);letter-spacing:.05em;color:var(--text-secondary)}
+.strip ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.strip li{display:flex;flex-direction:column;gap:3px;font:400 18px/1.42 var(--f-body);color:var(--text-secondary)}
+.strip li b{font:700 14px var(--f-mono);letter-spacing:.04em;color:var(--accent-crimson)}
+.strip-note{font:400 13px/1.5 var(--f-mono);color:var(--text-secondary);border-top:1px solid var(--border-subtle);padding-top:10px}
+
+/* blueprint box (blog diagram): toolbar, canvas */
+.bp{margin:0;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--r-md);overflow:hidden;min-width:0}
+.bp-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 16px;background:var(--bg-surface-elevated);border-bottom:1px solid var(--border-subtle);font:400 14px/1.4 var(--f-mono);color:var(--text-secondary)}
+.bp-tag{background:var(--bg-card);border:1px solid var(--border-subtle);color:var(--text-secondary);font-size:13px;padding:2px 9px;border-radius:var(--r-sm);white-space:nowrap}
+.bp-body{padding:8px 10px}
+.bp-body svg{display:block;width:100%;height:auto}
+html[data-theme="dark"] .bp-body svg [fill="#fdf6f5"],
+html[data-theme="dark"] .bp-body svg [fill="#faeae8"],
+html[data-theme="dark"] .bp-body svg [fill="#f7ede6"]{fill:#33242a!important}
+html[data-theme="dark"] .bp-body svg [fill="#f4f8f5"],
+html[data-theme="dark"] .bp-body svg [fill="#eaf2ec"]{fill:#223129!important}
+html[data-theme="dark"] .bp-body svg [fill="#e8eef3"]{fill:#222b32!important}
+html[data-theme="dark"] .bp-body svg [fill="#f0ede6"]{fill:#302b25!important}
+html[data-theme="dark"] .bp-body svg text[fill="#a63822"],
+html[data-theme="dark"] .bp-body svg text[fill="#8a3b1e"]{fill:#efaa91!important}
+html[data-theme="dark"] .bp-body svg text[fill="#244b35"]{fill:#b8d9c0!important}
+html[data-theme="dark"] .bp-body svg text[fill="#2d4b63"]{fill:#b8d1e5!important}
+html[data-theme="dark"] .bp-body svg text[fill="#5a5850"]{fill:#d2cabe!important}
+html[data-theme="dark"] .bp-body svg [stroke="#2e6844"]{stroke:#88af95!important}
+html[data-theme="dark"] .bp-body svg [stroke="#3b6989"]{stroke:#9bb4c7!important}
+html[data-theme="dark"] .bp-body svg [stroke="#a63822"]{stroke:#d99b82!important}
+html[data-theme="dark"] .bp-body svg [fill="#2e6844"]{fill:#88af95!important}
+html[data-theme="dark"] .bp-body svg [fill="#3b6989"]{fill:#9bb4c7!important}
+html[data-theme="dark"] .bp-body svg [fill="#a63822"]{fill:#d99b82!important}
+.bp-row{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start}
+
+/* checklist + thesis */
+.ck-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:18px 30px 6px;box-shadow:var(--shadow-card)}
+.ck-h{font:600 15px var(--f-mono);letter-spacing:.03em;color:var(--text-secondary);padding-bottom:12px;border-bottom:1px solid var(--border-subtle)}
+.ck-list{list-style:none;margin:0;padding:0}
+.ck-list li{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--border-subtle)}
+.ck-list li:last-child{border-bottom:0}
+.ck{display:inline-block;font:700 30px/1 var(--f-body);color:var(--text-primary)}
+.ck-t{font:500 23px/1.35 var(--f-body);color:var(--text-primary)}
+.ck-tag{font:400 13px var(--f-mono);letter-spacing:.02em;color:var(--text-secondary);border:1px solid var(--border-subtle);background:var(--bg-surface);padding:3px 12px;border-radius:999px;white-space:nowrap}
+.thesis{background:var(--bg-card);border:1px solid var(--border-subtle);border-left:4px solid var(--accent-crimson);border-radius:var(--r-md);padding:24px 32px;box-shadow:var(--shadow-lift);display:flex;flex-direction:column;gap:12px}
+.thesis p{font:700 40px/1.15 var(--f-head);letter-spacing:-.02em;color:var(--text-primary)}
+.thesis p.sub{font:400 22px/1.5 var(--f-body);color:var(--text-secondary);letter-spacing:0}
+
+/* document with red-pen notes */
+.doc{position:relative;background:var(--paper);border:1px solid var(--border-subtle);border-radius:var(--r-sm);box-shadow:0 6px 22px rgba(0,0,0,.07),0 1px 3px rgba(0,0,0,.05);padding:0 32px 4px}
+.crop::before,.crop::after{content:"";position:absolute;width:14px;height:14px;pointer-events:none;z-index:2}
+.crop::before{top:-1px;left:-1px;border-top:2px solid var(--accent-crimson);border-left:2px solid var(--accent-crimson)}
+.crop::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--accent-crimson);border-right:2px solid var(--accent-crimson)}
+.doc-h{display:flex;justify-content:space-between;align-items:center;padding:15px 0 13px;border-bottom:1px solid var(--line)}
+.doc-ttl{font:700 16px var(--f-mono);letter-spacing:.03em;color:var(--text-primary)}
+.doc-rows{list-style:none;margin:0;padding:0}
+.doc-r{display:grid;grid-template-columns:520px 1fr;column-gap:26px;align-items:center;min-height:64px;padding:8px 0;border-bottom:1px solid var(--border-subtle)}
+.doc-r:last-child{border-bottom:0}
+.doc-l{font:400 21px/1.35 var(--f-body);color:var(--ink)}
+.doc-l b{font:700 14px var(--f-mono);letter-spacing:.04em;color:var(--text-secondary);margin-right:3px}
+.doc-n{align-self:stretch;display:flex;align-items:center;padding-left:18px;border-left:1px solid var(--border-subtle);font:500 16px/1.4 var(--f-mono);color:var(--accent-crimson)}
+.pen{position:relative;display:inline-block;padding-bottom:1px}
+.pen::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:6px;background:var(--accent-crimson);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='6' viewBox='0 0 12 6'%3E%3Cpath d='M0 3 Q3 0.4 6 3 T12 3' fill='none' stroke='black' stroke-width='1.7'/%3E%3C/svg%3E") repeat-x left bottom/12px 6px;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='6' viewBox='0 0 12 6'%3E%3Cpath d='M0 3 Q3 0.4 6 3 T12 3' fill='none' stroke='black' stroke-width='1.7'/%3E%3C/svg%3E") repeat-x left bottom/12px 6px}
+
+/* two lanes compared: chips joined by arrows */
+.lanes{display:grid;gap:18px}
+.lane{display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:center;padding:20px 24px;border:1px solid var(--border-subtle);border-radius:var(--r-md);background:var(--bg-card);box-shadow:var(--shadow-card)}
+.lane-k{font:700 14px/1.45 var(--f-mono);letter-spacing:.03em;color:var(--text-primary)}
+.lane-k span{display:block;font-weight:400;color:var(--text-secondary)}
+.chain{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 6px}
+.chain li{display:inline-flex;align-items:center;gap:6px;font:500 17px/1.3 var(--f-body);color:var(--text-primary)}
+.chain li+li::before{content:"\2192";font:400 16px var(--f-mono);color:var(--arrow);margin-right:2px}
+.chain span{padding:7px 14px;border:1px solid var(--border-active);border-radius:999px;background:var(--bg-surface)}
+.lane-bad .lane-k{color:var(--accent-crimson)}
+.lane-bad .chain span{border-style:dashed;color:var(--text-secondary);background:transparent}
+.lane-bad .chain li:last-child span{border-color:var(--accent-crimson);color:var(--accent-crimson)}
+.lane-good .chain li:last-child span{background:var(--accent-crimson-dim);border-color:var(--accent-crimson);color:var(--accent-crimson);font-weight:700}
+
+/* principle grid (four tiers) */
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border-subtle);background:var(--bg-card)}
+.pcol{padding:24px 22px 24px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.pcol+.pcol{border-left:1px solid var(--border-subtle)}
+.pcol-n{font:700 40px/1 var(--f-head);letter-spacing:-.02em;color:var(--text-secondary)}
+.pcol-name{font:700 21px/1.25 var(--f-head);color:var(--text-primary);min-height:calc(1.25em*2)}
+.pcol ul{margin:0;padding:12px 0 0;list-style:none;border-top:1px solid var(--border-subtle);display:grid;gap:10px}
+.pcol li{font:400 17px/1.4 var(--f-body);color:var(--text-secondary)}
+.pcol li b{display:block;font:700 13px var(--f-mono);letter-spacing:.03em;color:var(--accent-crimson);margin-bottom:2px}
+
+/* readout + definition rows */
+.ro{display:flex;flex-direction:column;gap:6px}
+.ro b{font:700 76px/1 var(--f-head);letter-spacing:-.03em;color:var(--accent-crimson)}
+.ro span{font:600 20px/1.35 var(--f-body);color:var(--text-primary)}
+.ro small{font:400 14px/1.5 var(--f-mono);color:var(--text-secondary)}
+.defs{list-style:none;margin:0;padding:0;border-top:1px solid var(--border-subtle)}
+.defs li{display:grid;grid-template-columns:var(--k,300px) 1fr;gap:28px;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--border-subtle)}
+.defs li>b{font:700 15px/1.4 var(--f-mono);letter-spacing:.03em;color:var(--text-primary)}
+.defs li>span{font:400 20px/1.45 var(--f-body);color:var(--text-secondary)}
+.map{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.map li{display:grid;grid-template-columns:1fr 44px 1fr;align-items:center;gap:10px}
+.map code{display:block;font-size:17px;padding:10px 14px;border-radius:var(--r-sm)}
+.map li>i{font-style:normal;text-align:center;font:400 20px var(--f-mono);color:var(--accent-crimson)}
+.map-h{display:grid;grid-template-columns:1fr 44px 1fr;gap:10px;font:700 13px var(--f-mono);letter-spacing:.05em;color:var(--text-secondary)}
+
+/* ---------- 4. motion (calm editorial) ----------
+   the base style of every element IS its final state. animation only runs
+   while the slide has .play, so reduced motion, print and no-js show the end. */
+@keyframes k-rise{from{opacity:0;transform:translateY(14px)}}
+@keyframes k-fade{from{opacity:0}}
+@keyframes k-wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.slide.play .rise{animation:k-rise calc(var(--t,.8)*1s) var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .fade{animation:k-fade calc(var(--t,.7)*1s) var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .wipe{animation:k-wipe calc(var(--t,.5)*1s) var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .pen::after{animation:k-wipe .55s var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .chain li{animation:k-rise .6s var(--ease) calc(var(--d,0)*1s + var(--i,0)*.12s) both}
+.chain li:nth-child(2){--i:1}.chain li:nth-child(3){--i:2}.chain li:nth-child(4){--i:3}.chain li:nth-child(5){--i:4}.chain li:nth-child(6){--i:5}
+.story-beat{opacity:1}
+.slide.play .story-beat{animation:k-rise .6s var(--ease) calc(.2s + var(--beat-delay,0s)) both}
+.story-trace{fill:none;stroke:var(--accent-crimson);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:.72;stroke-dasharray:1;stroke-dashoffset:0;pointer-events:none}
+.story-trace.story-trace-risk{stroke:var(--accent-crimson);stroke-width:2.4;stroke-dasharray:.012 .01;opacity:.66}
+.slide.play .story-trace{stroke-dashoffset:1;animation:k-story-draw 5.8s var(--ease) var(--trace-delay,0s) both}
+.slide.play .story-trace.story-trace-risk{animation-duration:3.8s;animation-delay:1.1s}
+.story-packet{fill:var(--accent-crimson);stroke:var(--bg-primary);stroke-width:2;pointer-events:none}
+@keyframes k-story-draw{to{stroke-dashoffset:0}}
+
+/* ---------- 7. print (final state) + reduced motion ---------- */
+@page{size:1280px 720px;margin:0}
+@media print{
+  html,body{overflow:visible;height:auto;background:#ffffff}
+  .viewport{position:static;overflow:visible}
+  .stage{position:static;transform:none!important;width:1280px;height:auto;border:0;overflow:visible}
+  .slide{display:flex!important;position:relative;width:1280px;height:720px;break-after:page;page-break-after:always;overflow:hidden}
+  .hud,.notespanel{display:none!important}
+  .slide *,.slide *::before,.slide *::after{animation:none!important;transition:none!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (prefers-reduced-motion:reduce){
+  .slide *,.slide *::before,.slide *::after{animation:none!important;transition:none!important}
+  .marq-in{animation:none!important}
+}
+
+/* ---------- 5. per-slide blocks ---------- */
+#s6 .bp-body svg{max-height:400px}
+#s7 .pgrid{flex:1;max-height:470px}
+#s8 .defs li>span{font-size:21px}
+</style>
+<link rel="stylesheet" href="mobile.css?v=20261014scaledmotion" media="screen and (max-width:760px)">
 </head>
 <body>
-  <a class="skip-link" href="#main-content">skip to content</a>
+<div class="viewport" id="vp">
+<div class="stage" id="stage">
+<section class="slide s1" id="s1" data-title="building a product operations workspace">
+  <div class="top"><span class="lbl">systems notebook</span><span class="tr">[ product operations ]</span></div>
+  <div class="body mid">
+    <p class="s1-kick rise">september 2026 · workspace design</p>
+    <h1 class="s1-h rise" style="--d:.15">building a product operations workspace:<br><em>reliable specs &amp; prototypes with ai workflows.</em></h1>
+    <p class="sub s1-sub rise" style="--d:.45">one prompt in. a reviewed brd, flowchart and prototype out, with human review and quality checks at every step.</p>
+    <p class="s1-by rise" style="--d:.7">krishna · product manager</p>
+    <p class="s1-disc rise" style="--d:.9"><b>[ ai note ]</b> this deck was written by ai and might be wrong. check anything important and double check it with the blog owner before you rely on it.</p>
+  </div>
+  <aside class="notes"><p>this deck walks through the product operations workspace i built: how a single prompt turns into a business requirements document, a system flowchart and an interactive prototype, and why the human review and quality checks matter more than the generation.</p></aside>
+</section>
 
-  <!-- Site Header -->
-  <header class="site-header">
-    <div class="wrap nav">
-      <a class="site-title" href="../../">
-        <span class="prompt-user">naquuuu</span><span class="prompt-at">@</span><span class="prompt-host">builder</span>
-        <span class="prompt-badge">bits &amp; atoms</span>
-      </a>
-      <nav class="nav-links">
-        <a href="https://naquuuu.github.io/" class="nav-back-link">[ ← naquuuu.github.io ]</a>
-      </nav>
+<section class="slide" id="s2" data-title="the core thesis">
+  <div class="top"><span class="lbl"><span class="num">(01)</span>the thesis</span><span class="tr">[ product operations ]</span></div>
+  <div class="body">
+    <h2 class="t rise">generic prompts write <em>buzzwords</em>. structure writes specs.</h2>
+    <div class="row mid" style="--cols:1fr 360px">
+      <p class="txt rise" style="--d:.2">asking a generic ai chatbot to write product requirements usually produces vague summaries full of buzzwords, missing api details and unclear scope. the workspace turns one prompt into a <strong>brd, system flowchart and interactive prototype</strong> through structured clarification, human review and automated quality checks.</p>
+      <div class="ro rise" style="--d:.5">
+        <small>brd preparation per initiative</small>
+        <b>≈ 1 week → ≤ 1 day</b>
+        <span>with clarification, review and checks kept in the loop.</span>
+      </div>
     </div>
-  </header>
+  </div>
+  <aside class="notes"><p>the thesis in thirty seconds. a generic chatbot gives you a vague summary with buzzwords, missing api details and unclear scope.</p><p>the workspace i built takes a single prompt and produces a brd, a system flowchart and an interactive prototype. brd preparation went from approximately one week to one day or less, because the clarification, the human review and the automated checks are built into the flow.</p></aside>
+</section>
 
-  <!-- Article Body -->
-  <main id="main-content" class="wrap essay-article">
+<section class="slide" id="s3" data-title="why simple prompts fail">
+  <div class="top"><span class="lbl"><span class="num">(02)</span>the problem</span><span class="tr">[ product operations ]</span></div>
+  <div class="body">
+    <div class="head">
+      <h2 class="t rise">why simple prompts fail in <em>real</em> product work.</h2>
+      <p class="sub rise" style="--d:.15">at a large retail e-commerce platform, a complete brd, flowchart and testable prototype took about a week per initiative by hand.</p>
+    </div>
+    <div class="cards">
+      <div class="card rise" style="--d:.35"><p class="card-k">01 / the input</p><p class="card-h">raw stakeholder input is fragmented.</p><p class="card-t">a quick chat message, rough meeting notes, or an unprioritized wishlist with contradictory goals.</p></div>
+      <div class="card rise" style="--d:.55"><p class="card-k">02 / the draft</p><p class="card-h">chatbots produce superficial summaries.</p><p class="card-t">feed that brief to a chatbot and you get a generic document full of consultant filler.</p></div>
+      <div class="card rise" style="--d:.75"><p class="card-k">03 / the handoff</p><p class="card-h">engineers still lack actionable details.</p><p class="card-t">the schema, the timeout behavior and the billing edge cases are still unanswered.</p></div>
+    </div>
+  </div>
+  <aside class="notes"><p>preparing a complete brd, system flowchart and testable prototype manually used to take approximately one week per initiative.</p><p>when teams try to speed that up with generic prompts, they hit predictable failures. the input is fragmented: a chat message, rough notes, a wishlist with contradictory goals. the chatbot then turns it into a generic document full of consultant filler. and engineers still lack the details they need to build.</p></aside>
+</section>
 
-    <header class="essay-header">
-      <div class="essay-meta">
-        <time datetime="2026-09-09">september 2026</time>
-        <span>•</span>
-        <span>7 min read</span>
-        <span>•</span>
-        <span class="hero-badge">product operations</span>
-        <span class="hero-badge hero-badge-art">workspace design</span>
-      </div>
-      <h1 class="essay-header-title">
-        building a product operations workspace: reliable specifications &amp; prototypes with ai workflows
-      </h1>
-      <p style="color: var(--text-muted); font-size: 1.02rem; font-style: italic; margin-top: 0.5rem;">
-        by ramadhana bhanuharya krishnamurti (krishna / naquuuu) • product manager
-      </p>
-      <aside class="ai-note" role="note"><span class="ai-note-label">ai note</span>this post was written by ai and might be wrong. check anything important and double check it with the blog owner before you rely on it.</aside>
-    </header>
-
-    <article class="essay-content">
-
-      <!-- Executive Summary -->
-      <div class="concept-box" style="border-left: 4px solid var(--accent-crimson);">
-        <h3 style="font-size: 1.15rem; color: var(--text-primary); margin-bottom: 0.5rem;">the core thesis in 30 seconds</h3>
-        <p style="margin: 0; font-size: 0.94rem; color: var(--text-secondary); line-height: 1.7;">
-          Asking generic AI chatbots to write product requirements usually produces vague summaries filled with buzzwords, missing API details, and unclear scopes. In this essay, I share how I built a structured Product Operations workspace myself. The workflow turns a single prompt into a business requirements document (BRD), system flowchart, and interactive prototype, reducing BRD preparation from approximately one week to one day or less through structured clarification, human review, and automated quality checks.
-        </p>
-      </div>
-
-      <h2>1. The Problem: Why Simple Prompts Fail in Enterprise Product Management</h2>
-      <p>
-        In a large retail e-commerce platform like <strong>MAPCLUB</strong>, preparing a complete business requirements document (BRD), system flowchart, and testable prototype manually used to take approximately one week per initiative.
-      </p>
-      <p>
-        When teams attempt to speed this up using generic AI prompts, they usually run into predictable failures:
-      </p>
-      <ol>
-        <li><strong>Raw Stakeholder Input is Fragmented:</strong> A business brief often arrives as a quick chat message, rough meeting notes, or an unprioritized wishlist with contradictory goals.</li>
-        <li><strong>Chatbots Produce Superficial Summaries:</strong> Feeding that brief into ChatGPT or Claude produces a generic document filled with consultant filler: <em>"The system will provide an intuitive, scalable, AI-driven experience."</em></li>
-        <li><strong>Engineers Still Lack Actionable Details:</strong> When software developers receive this, key technical questions remain unanswered:
-          <ul>
-            <li>What is the exact JSON request/response schema?</li>
-            <li>What happens when a database transaction times out after 3,000ms?</li>
-            <li>How does the billing service reconcile discount vouchers stacked with loyalty points?</li>
-          </ul>
-        </li>
+<section class="slide" id="s4" data-title="what the engineer still asks">
+  <div class="top"><span class="lbl"><span class="num">(03)</span>the symptom</span><span class="tr">[ product operations ]</span></div>
+  <div class="body">
+    <h2 class="t rise">it reads fine. it <em>answers nothing</em>.</h2>
+    <div class="doc crop rise" style="--d:.15;--t:.7">
+      <div class="doc-h"><span class="doc-ttl">brd: generic chatbot draft</span><span class="tag">illustrative</span></div>
+      <ol class="doc-rows">
+        <li class="doc-r"><p class="doc-l"><b>vision:</b> <span class="pen" style="--d:1.2">an intuitive, scalable, ai-driven experience</span>.</p><p class="doc-n rise" style="--d:1.2;--t:.5">✕ consultant filler. nothing to build.</p></li>
+        <li class="doc-r"><p class="doc-l"><b>api:</b> <span class="pen" style="--d:1.8">integrates seamlessly with services</span>.</p><p class="doc-n rise" style="--d:1.8;--t:.5">✕ what is the exact json request and response schema?</p></li>
+        <li class="doc-r"><p class="doc-l"><b>reliability:</b> <span class="pen" style="--d:2.4">robust error handling</span>.</p><p class="doc-n rise" style="--d:2.4;--t:.5">✕ what happens when a transaction times out after 3,000 ms?</p></li>
+        <li class="doc-r"><p class="doc-l"><b>billing:</b> <span class="pen" style="--d:3">supports vouchers and points</span>.</p><p class="doc-n rise" style="--d:3;--t:.5">✕ how are discount vouchers stacked with loyalty points reconciled?</p></li>
       </ol>
+    </div>
+    <p class="foot-note rise" style="--d:.5">sample lines written for this slide. the red notes are the questions engineers asked.</p>
+  </div>
+  <aside class="notes"><p>this is what the generic output looks like, written as a sample for the slide. the system will provide an intuitive, scalable, ai-driven experience. every line sounds fine.</p><p>and every line leaves the real questions open: what is the exact json schema, what happens when a database transaction times out after 3,000 milliseconds, and how does billing reconcile discount vouchers stacked with loyalty points.</p></aside>
+</section>
 
-      <!-- Flowchart Comparison -->
-      <div class="concept-box" style="margin: 2rem 0;">
-        <h3 style="color: var(--text-primary); margin-bottom: 0.5rem;">comparing two approaches: generic prompts vs. structured workspace</h3>
-        
-        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
-          The difference between asking a chatbot for quick ideas vs. using structured workflows with clear rules.
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr; gap: 1rem;">
-          <div style="background: rgba(248, 113, 113, 0.08); border: 1px solid rgba(248, 113, 113, 0.3); border-radius: var(--radius-md); padding: 1.15rem;">
-            <div style="font-family: var(--font-sans); font-size: 0.78rem; color: var(--term-red); font-weight: 700; margin-bottom: 0.4rem;">
-              ✕ GENERIC CHATBOT PROMPTS (UNSTRUCTURED DRAFTING)
-            </div>
-            <div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-              Unclear Request → Generic AI Prompt → Vague 10-page Buzzword Document → Engineering Rejection → Weeks of Clarification Meetings.
-            </div>
-          </div>
-
-          <div style="background: var(--bg-surface); border: 1px solid var(--border-active); border-radius: var(--radius-md); padding: 1.15rem;">
-            <div style="font-family: var(--font-sans); font-size: 0.78rem; color: var(--text-primary); font-weight: 700; margin-bottom: 0.4rem;">
-              ✓ STRUCTURED PRODUCT WORKSPACE (SINGLE PROMPT WITH HUMAN REVIEW)
-            </div>
-            <div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-              Raw Brief → Intake Screening &amp; Scope Audit → API Contract Modeling → BRD, Flowchart &amp; Prototype Scaffold → Human Review &amp; Quality Checks → Approved Deliverable (≤1 day).
-            </div>
-          </div>
-        </div>
+<section class="slide" id="s5" data-title="two approaches compared">
+  <div class="top"><span class="lbl"><span class="num">(04)</span>two approaches</span><span class="tr">[ product operations ]</span></div>
+  <div class="body">
+    <div class="head">
+      <h2 class="t rise">quick ideas vs. <em>structured workflows</em> with clear rules.</h2>
+    </div>
+    <div class="lanes">
+      <div class="lane lane-bad rise" style="--d:.2">
+        <p class="lane-k">✕ generic chatbot prompts<span>unstructured drafting</span></p>
+        <ol class="chain" style="--d:.4"><li><span>unclear request</span></li><li><span>generic ai prompt</span></li><li><span>vague 10-page document</span></li><li><span>engineering rejection</span></li><li><span>weeks of clarification</span></li></ol>
       </div>
+      <div class="lane lane-good rise" style="--d:1.1">
+        <p class="lane-k">✓ structured workspace<span>single prompt, human review</span></p>
+        <ol class="chain" style="--d:1.3"><li><span>raw brief</span></li><li><span>intake screening &amp; scope audit</span></li><li><span>api contract modeling</span></li><li><span>brd, flowchart &amp; prototype</span></li><li><span>human review &amp; checks</span></li><li><span>approved in ≤ 1 day</span></li></ol>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>two ways to get from a brief to a deliverable.</p><p>the generic path: an unclear request goes into a generic prompt, a vague ten-page buzzword document comes out, engineering rejects it, and you spend weeks in clarification meetings.</p><p>the structured path: the raw brief goes through intake screening and a scope audit, then api contract modeling, then the brd, flowchart and prototype scaffold, then human review and quality checks, and an approved deliverable comes out in a day or less.</p></aside>
+</section>
 
-      <h2>2. Inside the Architecture: How the Product Operations Workspace Works</h2>
-      <p>
-        I built this Product Operations workspace myself to transform messy briefs into structured, verified deliverables. Starting from a single prompt, the workflow supports generating three linked outputs:
-      </p>
-      <ul>
-        <li><strong>A Business Requirements Document (BRD):</strong> Formatted to corporate standards with Given-When-Then acceptance criteria and explicit scope boundaries.</li>
-        <li><strong>A System Flowchart:</strong> Visualizing system transitions, integration touchpoints, and failure modes.</li>
-        <li><strong>An Interactive Prototype:</strong> Scaffolding realistic HTML/CSS mobile experiences that stakeholders can touch and test on physical devices before committing engineering sprints.</li>
-      </ul>
-      <p>
-        Crucially, the system does not produce approved, production-ready deliverables autonomously. It relies on structured clarification steps, human judgment, and quality checks at every transition:
-      </p>
-
-      <!-- Systems Architecture User Action Diagram: Deterministic Workspace Engine -->
-      <div class="flowchart-whiteboard-box blueprint-box" style="margin: 2rem 0;">
-        <div class="flowchart-board-toolbar">
-          <div class="flowchart-toolbar-left">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            <span>mapclub product operating system user action diagram</span>
-            <span class="flowchart-toolbar-tag">systems architecture</span>
-          </div>
-          <div class="flowchart-toolbar-right">
-            <span>multi-stage</span>
-            <span>validation</span>
-            <span style="opacity: 0.75;">&amp; governance pipeline</span>
-          </div>
-        </div>
-
-        <div class="flowchart-board-canvas scroll-x">
-          <svg class="flowchart-svg" viewBox="0 0 780 410" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="flowchart-title flowchart-desc">
+<section class="slide" id="s6" data-title="inside the architecture">
+  <div class="top"><span class="lbl"><span class="num">(05)</span>the architecture</span><span class="tr">[ product operations ]</span></div>
+  <div class="body">
+    <h2 class="t rise">clarify, generate, <em>verify</em>, then hand to a human.</h2>
+    <div class="bp-row">
+      <div class="fade" style="--d:.2"><figure class="bp flowchart-whiteboard-box">
+  <div class="bp-bar"><span>product operating system user action diagram</span><span class="bp-tag">systems architecture</span></div>
+  <div class="bp-body scroller">
+<svg class="flowchart-svg" viewBox="0 0 780 410" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="flowchart-title flowchart-desc">
 <title id="flowchart-title">product operations workspace serpentine state machine diagram</title>
 <desc id="flowchart-desc">blueprint two-row serpentine state machine: row one moves left-to-right from raw brief submission through the intake gatekeeper and screener (with a screening flag loop back to clarify and resolve audit) to the strict scope manifest; the flow drops down on the right into row two and moves right-to-left through the soft api contract generator and typed contract schemas into the docx packaging engine, compiled brd draft, and verification decision diamond before exiting to the approved specification.</desc>
 <defs>
@@ -244,115 +483,346 @@
 <path d="M 100 377 H 116 V 385 C 112 383 108 389 100 386 Z" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1" />
 <text x="122" y="386" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-secondary, #555550)">document</text>
 </svg>
-        </div>
-      </div>
-
-      <!-- bp:principles -->
-      <aside class="principle-strip" aria-label="how this flowchart maps to my principles">
-  <p class="principle-strip-label">how this maps to my principles</p>
-  <ul class="principle-strip-list"><li><span class="principle-name">murphy&#x27;s law</span><span class="principle-text">the intake gatekeeper screens pii and keys before any drafting starts.</span></li><li><span class="principle-name">reka peluang</span><span class="principle-text">step 2 answers edge cases, timeouts and pii flags before contracts are generated.</span></li><li><span class="principle-name">recovery</span><span class="principle-text">failed validation loops back to the operator for remediation instead of shipping.</span></li></ul>
-  <p class="principle-strip-note">an editorial reading of the steps shown above, not additional results.</p>
-</aside>
-      <!-- /bp:principles -->
-
-      <h3>Tier 1: Boundary Audit &amp; Intake Gatekeeper</h3>
-      <p>
-        Before any specification is drafted, the intake skill aggressively audits the raw context. It acts like a strict border guard:
-      </p>
-      <ul>
-        <li><strong>Sensitive Input Screening:</strong> Automatically scans briefs at intake to redact Indonesian PII and private credentials before they reach downstream models.</li>
-        <li><strong>MoSCoW Enforcement:</strong> Separates fuzzy requirements into rigid boundaries: Must-Have (P0 MVP), Should-Have, and strictly out-of-scope Won't-Have items.</li>
-        <li><strong>Proactive Edge Case Auditing:</strong> If a brief mentions <em>"users receive marketing vouchers"</em>, the agent interrupts and demands answers:
-          <em>"Can a voucher discount exceed cart value? Are vouchers stackable with member tier points? What exact HTTP error code is returned on concurrency collisions?"</em>
-        </li>
-      </ul>
-
-      <h3>Tier 2: Specification, Flowcharts &amp; Interactive Prototypes</h3>
-      <p>
-        Once boundaries are locked, a single prompt run scaffolds three synchronized artifacts adhering to internal engineering standards:
-      </p>
-      <ul>
-        <li><strong>Business Requirements Document (BRD):</strong> Outlines end-to-end user journeys, edge cases, soft API contracts (JSON payloads, data types, error schemas), and explicit database state machines (e.g., <code>PENDING_RECONCILIATION → INVOICED → DISPUTED</code>).</li>
-        <li><strong>System Flowcharts:</strong> Visualizes state transitions, retry loops, and service-to-service integration touchpoints using architectural diagrams with strict accessibility standards.</li>
-        <li><strong>Interactive Mobile Prototypes:</strong> Scaffolds lightweight, responsive HTML/CSS prototypes simulating actual device viewports and interaction states, allowing design, product, and C-level stakeholders to test flows before engineering commits sprints.</li>
-      </ul>
-
-      <h3>Tier 3: Acceptance Governance &amp; UAT Packaging</h3>
-      <p>
-        Writing requirements is only half the battle; getting executive and cross-departmental approval is the other:
-      </p>
-      <ul>
-        <li><strong>Berita Acara Acceptance (BAC):</strong> Automatically synthesizes test matrices and staging UAT sign-off documentation formatted for corporate governance.</li>
-        <li><strong>Automated Word &amp; SharePoint Sync:</strong> Compiles Markdown specifications into official Microsoft Word deliverables (<code style="color:var(--term-cyan)">.docx</code>) styled with MAPCLUB corporate typography, tables, and executive sign-off signatures, deposited directly into synced SharePoint drives.</li>
-      </ul>
-
-      <h3>Tier 4: Automated Multi-Stage Verification &amp; Sanitization Gate</h3>
-      <p>
-        To prevent accidental data leakage or broken specs, artifacts remain provisional until cleared by a multi-stage validation gate:
-      </p>
-      <ul>
-        <li><strong>Schema &amp; Contract Consistency:</strong> Cross-validates business logic against API models to ensure edge cases and error states are accounted for.</li>
-        <li><strong>Leak Prevention:</strong> Every document is checked for personal data and credentials before it is approved.</li>
-        <li><strong>Automated Correction Loop:</strong> If validation fails (contract mismatch or sanitization flag), artifacts are quarantined and returned to the operator for remediation before being marked approved.</li>
-      </ul>
-
-      <h2>3. The Underlying Technology Stack</h2>
-      <p>
-        The workspace was constructed utilizing modern systems tools:
-      </p>
-      <div style="background: var(--bg-surface); border: 1.5px solid var(--border-active); border-radius: var(--radius-md); padding: 1.25rem; margin: 1.5rem 0;">
-        <ul style="margin: 0 0 0 1.25rem; font-size: 0.92rem; line-height: 1.8;">
-          <li><strong>Agentic Orchestration:</strong> Google Antigravity (AGY) SDK &amp; custom multi-agent skill system (<code style="color:var(--term-cyan)">.agents/skills/</code>).</li>
-          <li><strong>Specification Layer:</strong> Markdown-as-Code versioned directly in Git, enabling pull request reviews, diff tracking, and audit trails for product specs.</li>
-          <li><strong>Document Generation:</strong> Python <code style="color:var(--term-cyan)">python-docx</code> engine with corporate XML style injection.</li>
-          <li><strong>Sanitization &amp; Linting:</strong> Custom Python regex analyzers verifying privacy compliance.</li>
-          <li><strong>Interactive Prototyping:</strong> Responsive HTML/CSS/SVG mobile prototypes for pre-sprint stakeholder alignment.</li>
-        </ul>
-      </div>
-
-      <h2>4. the core takeaway: constrain before you generate</h2>
-      <p>
-        if you take one lesson away from this system, let it be this:
-      </p>
-      <div class="concept-box" style="margin: 1.5rem 0; border-color: var(--accent-crimson);">
-        <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); line-height: 1.6; margin-bottom: 0.5rem;">
-          don't use ai as a conversational chatbot to write generic prose.
-        </p>
-        <p style="color: var(--text-secondary); font-size: 0.94rem; line-height: 1.65; margin: 0;">
-          give ai strict scope boundaries, enforce edge-case audits, embed domain standards directly into tools, and verify every output against engineering constraints. that is how you build software that doesn't break in production.
-        </p>
-      </div>
-
-    </article>
-
-    <!-- Post Footer -->
-    <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-      <a href="https://naquuuu.github.io/" style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--accent-crimson-hover);">← return to home</a>
-      <div style="display: flex; gap: 1rem; font-family: var(--font-sans); font-size: 0.8rem;">
-        <a href="https://www.linkedin.com/in/rbkrishnamurti/" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary);">linkedin ↗</a>
-        <a href="mailto:rbkrishnamurti@gmail.com" style="color: var(--text-secondary);">email ↗</a>
-      </div>
+  </div>
+</figure></div>
+      <div class="rise" style="--d:.6"><aside class="strip principle-strip" aria-label="how this flowchart maps to my principles"><p class="strip-h">how this maps to my principles</p><ol><li><b>murphy's law</b>the intake gatekeeper screens pii and keys before any drafting starts.</li><li><b>reka peluang</b>step 2 answers edge cases, timeouts and pii flags before contracts are generated.</li><li><b>recovery</b>failed validation loops back to the operator for remediation instead of shipping.</li></ol><p class="strip-note">an editorial reading of the steps shown, not additional results.</p></aside></div>
     </div>
+  </div>
+  <aside class="notes"><p>starting from a single prompt, the workflow supports three linked outputs: a brd with given-when-then acceptance criteria and explicit scope boundaries, a system flowchart showing transitions, integrations and failure modes, and an interactive prototype that stakeholders can test on real devices.</p><p>crucially, the system does not produce approved, production-ready deliverables on its own. it relies on clarification steps, human judgment and quality checks at every transition, and failed validation loops back to the operator.</p></aside>
+</section>
 
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-wordmark" aria-hidden="true">naquuuu</div>
-    <div class="wrap footer-content">
-      <div class="footer-channels">
-        <a href="https://github.com/naquuuu" target="_blank" rel="noopener noreferrer">github</a>
-        <a href="mailto:rbkrishnamurti@gmail.com">email</a>
-        <a href="https://naquuuu.github.io/">home</a>
-      </div>
-      <div class="footer-live-stamp">
-        <span>naquuuu.github.io • built with matter and code.</span>
-        <span class="footer-privacy">visits are counted with <a href="https://www.goatcounter.com/" target="_blank" rel="noopener noreferrer">goatcounter</a>: no cookies, no personal info tracked.</span>
-      </div>
+<section class="slide" id="s7" data-title="four tiers">
+  <div class="top"><span class="lbl"><span class="num">(06)</span>four tiers</span><span class="tr">[ product operations ]</span></div>
+  <div class="body">
+    <h2 class="t rise">four tiers between a brief and an <em>approved</em> spec.</h2>
+    <div class="pgrid rise" style="--d:.2">
+      <div class="pcol"><span class="pcol-n">01</span><p class="pcol-name">boundary audit &amp; intake gatekeeper</p><ul><li><b>screen</b>pii and private credentials redacted at intake.</li><li><b>scope</b>moscow: must, should, and won't-have.</li><li><b>probe</b>can a voucher exceed cart value? stack with tier points?</li></ul></div>
+      <div class="pcol"><span class="pcol-n">02</span><p class="pcol-name">specs, flowcharts &amp; prototypes</p><ul><li><b>brd</b>journeys, edge cases, soft api contracts, state machines.</li><li><b>flowchart</b>transitions, retry loops, integration points.</li><li><b>prototype</b>responsive html/css on real viewports.</li></ul></div>
+      <div class="pcol"><span class="pcol-n">03</span><p class="pcol-name">acceptance governance &amp; uat packaging</p><ul><li><b>bac</b>test matrices and staging uat sign-off documents.</li><li><b>docs</b>markdown compiled to styled word files, synced to shared drives.</li></ul></div>
+      <div class="pcol"><span class="pcol-n">04</span><p class="pcol-name">multi-stage verification &amp; sanitization</p><ul><li><b>contracts</b>business logic cross-checked against api models.</li><li><b>leaks</b>every document checked for personal data and credentials.</li><li><b>loop</b>failures quarantined and returned to the operator.</li></ul></div>
     </div>
-  </footer>
+  </div>
+  <aside class="notes"><p>tier one, the intake gatekeeper, audits raw context before anything is drafted. it scans briefs for indonesian pii and private credentials, splits fuzzy requirements into must-have, should-have and strictly out-of-scope won't-have items, and interrupts with edge-case questions. if a brief says users receive marketing vouchers, it asks: can a voucher discount exceed cart value, are vouchers stackable with member tier points, and what http error code is returned on concurrency collisions.</p><p>tier two scaffolds three synchronized artifacts: a brd with journeys, edge cases, soft api contracts and explicit state machines, for example pending reconciliation to invoiced to disputed; system flowcharts; and lightweight mobile prototypes.</p><p>tier three handles acceptance: berita acara acceptance documents with test matrices and uat sign-off, and markdown specs compiled into styled word documents placed in synced shared drives.</p><p>tier four keeps every artifact provisional until it clears validation: contract consistency, leak prevention, and an automated correction loop that quarantines failures and returns them to the operator.</p></aside>
+</section>
 
-  <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
-  <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <script src="../../assets/js/palette.js?v=20261005d" defer></script>
+<section class="slide" id="s8" data-title="the technology stack">
+  <div class="top"><span class="lbl"><span class="num">(07)</span>the stack</span><span class="tr">[ product operations ]</span></div>
+  <div class="body">
+    <h2 class="t rise">ordinary tools, <em>strict</em> wiring.</h2>
+    <ul class="defs rise" style="--d:.2;--k:320px">
+      <li><b>agentic orchestration</b><span>google antigravity (agy) sdk and a custom multi-agent skill system in <code>.agents/skills/</code>.</span></li>
+      <li><b>specification layer</b><span>markdown-as-code versioned in git: pull request reviews, diffs and audit trails for product specs.</span></li>
+      <li><b>document generation</b><span>python <code>python-docx</code> engine with xml style injection.</span></li>
+      <li><b>sanitization &amp; linting</b><span>custom python regex analyzers that verify privacy compliance.</span></li>
+      <li><b>interactive prototyping</b><span>responsive html, css and svg mobile prototypes for pre-sprint alignment.</span></li>
+    </ul>
+  </div>
+  <aside class="notes"><p>the stack is deliberately ordinary. orchestration runs on the google antigravity sdk with a custom multi-agent skill system. specs are markdown versioned in git, so they get pull request reviews, diffs and audit trails like code.</p><p>documents are generated with python-docx, sanitization runs through custom python analyzers, and prototypes are plain html, css and svg.</p></aside>
+</section>
+
+<section class="slide" id="s9" data-title="constrain before you generate">
+  <div class="top"><span class="lbl">the takeaway</span><span class="tr">[ product operations ]</span></div>
+  <div class="body mid">
+    <div class="thesis rise">
+      <p>constrain before you generate.</p>
+      <p class="sub">don't use ai as a chatbot for generic prose. give it strict scope, enforce edge-case audits, embed domain standards in the tools, and verify every output against engineering constraints.</p>
+    </div>
+  </div>
+  <aside class="notes"><p>if you take one lesson from this system: do not use ai as a conversational chatbot to write generic prose.</p><p>give it strict scope boundaries, enforce edge-case audits, embed domain standards directly into the tools, and verify every output against engineering constraints. that is how you build specs that do not break in production.</p></aside>
+</section>
+</div>
+</div>
+
+<div class="hud" id="hud">
+  <button type="button" id="b-prev" aria-label="previous slide">prev</button>
+  <button type="button" id="b-next" aria-label="next slide">next</button>
+  <button type="button" id="b-replay" aria-label="replay this slide">r replay</button>
+  <button type="button" id="b-notes" aria-label="toggle notes">n notes</button>
+  <button type="button" id="b-theme" aria-label="toggle theme">t theme</button>
+  <button type="button" id="b-full" aria-label="toggle fullscreen">f full</button>
+  <a class="deck-back-link" href="../" aria-label="back to notes archive">← notes</a>
+</div>
+<div class="notespanel" id="np"><header>[ speaker notes ]</header><div class="nb" id="nb"></div></div>
+
+<!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
+<script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>/* One-shot editorial motion for rebuilt SVG decks. Original diagram paths stay intact. */
+(function (global) {
+  'use strict';
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var states = new WeakMap();
+  var beatSelector = '.cards > .card,.pgrid > .pcol,.defs > li,.tbl tbody > tr,.steps > li,.ck-list > li';
+  var routeDuration = 5600;
+
+  function markBeats(slide) {
+    Array.prototype.forEach.call(slide.querySelectorAll(beatSelector), function (item, index) {
+      item.classList.add('story-beat');
+      item.style.setProperty('--beat-delay', Math.min(index * 0.11, 1.1) + 's');
+    });
+  }
+
+  function makeOverlay(svg, source) {
+    var path = document.createElementNS(NS, 'path');
+    if (source.tagName.toLowerCase() === 'line') {
+      path.setAttribute('d', 'M' + source.getAttribute('x1') + ' ' + source.getAttribute('y1') +
+        ' L' + source.getAttribute('x2') + ' ' + source.getAttribute('y2'));
+    } else {
+      path.setAttribute('d', source.getAttribute('d'));
+    }
+    path.setAttribute('class', 'story-trace');
+    path.setAttribute('pathLength', '1');
+    path.setAttribute('aria-hidden', 'true');
+    var color = getComputedStyle(source).stroke;
+    path.style.setProperty('fill', 'none', 'important');
+    path.style.setProperty('stroke', color, 'important');
+    path.style.setProperty('stroke-width', '2.8', 'important');
+    path.style.setProperty('stroke-linecap', 'round', 'important');
+    path.style.setProperty('stroke-linejoin', 'round', 'important');
+    path.style.setProperty('stroke-dasharray', '1', 'important');
+    path.style.setProperty('stroke-dashoffset', '1', 'important');
+    path.style.setProperty('opacity', '0', 'important');
+    path.style.setProperty('animation', 'none', 'important');
+    path.style.setProperty('pointer-events', 'none', 'important');
+    svg.appendChild(path);
+    var length = path.getTotalLength();
+    if (!length) {
+      path.remove();
+      return null;
+    }
+    return { path: path, source: source, length: length };
+  }
+
+  function prepare(slide) {
+    var existing = states.get(slide);
+    if (existing) return existing;
+    markBeats(slide);
+    var svg = slide.querySelector('.bp-body svg');
+    if (!svg) return null;
+    var sources = Array.prototype.filter.call(
+      svg.querySelectorAll('path[marker-end],line[marker-end]'),
+      function (el) {
+        if (el.closest('defs,marker')) return false;
+        try { return el.getBBox().y < 300 && (el.getTotalLength ? el.getTotalLength() : 0) > 0; }
+        catch (_) { return false; }
+      }
+    );
+    var segments = sources.map(function (source) { return makeOverlay(svg, source); }).filter(Boolean);
+    if (!segments.length) return null;
+    var packet = document.createElementNS(NS, 'circle');
+    packet.setAttribute('class', 'story-packet');
+    packet.setAttribute('r', '5.5');
+    packet.setAttribute('aria-hidden', 'true');
+    packet.style.setProperty('fill', 'var(--accent-crimson)', 'important');
+    packet.style.setProperty('stroke', 'var(--bg-primary)', 'important');
+    packet.style.setProperty('stroke-width', '2', 'important');
+    packet.style.setProperty('opacity', '0', 'important');
+    packet.style.setProperty('pointer-events', 'none', 'important');
+    svg.appendChild(packet);
+    var total = segments.reduce(function (sum, segment) { return sum + segment.length; }, 0);
+    var state = { segments: segments, packet: packet, total: total, raf: 0 };
+    states.set(slide, state);
+    return state;
+  }
+
+  function hide(state) {
+    state.segments.forEach(function (segment) {
+      segment.path.style.setProperty('opacity', '0', 'important');
+      segment.path.style.setProperty('stroke-dashoffset', '1', 'important');
+    });
+    state.packet.style.setProperty('opacity', '0', 'important');
+  }
+
+  function place(state, distance) {
+    distance = Math.max(0, Math.min(state.total, distance));
+    var traversed = 0, current = state.segments[state.segments.length - 1], local = current.length, found = false;
+    state.segments.forEach(function (segment) {
+      var drawn = Math.max(0, Math.min(segment.length, distance - traversed));
+      segment.path.style.setProperty('opacity', drawn > 0 ? '0.84' : '0', 'important');
+      segment.path.style.setProperty('stroke-dashoffset', String(1 - drawn / segment.length), 'important');
+      if (!found && distance <= traversed + segment.length) {
+        current = segment;
+        local = distance - traversed;
+        found = true;
+      }
+      traversed += segment.length;
+    });
+    var point = current.path.getPointAtLength(Math.max(0, Math.min(current.length, local)));
+    state.packet.setAttribute('cx', point.x);
+    state.packet.setAttribute('cy', point.y);
+    state.packet.style.setProperty('opacity', '1', 'important');
+  }
+
+  function stop(slide) {
+    var state = slide && states.get(slide);
+    if (!state) return;
+    if (state.raf) cancelAnimationFrame(state.raf);
+    state.raf = 0;
+    hide(state);
+  }
+
+  function still(slide) {
+    stop(slide);
+  }
+
+  function refresh(slide) {
+    var state = states.get(slide);
+    if (!state) return;
+    state.segments.forEach(function (segment) {
+      segment.path.style.setProperty('stroke', getComputedStyle(segment.source).stroke, 'important');
+    });
+  }
+
+  function play(slide, reduced) {
+    stop(slide);
+    var state = prepare(slide);
+    if (!state) return;
+    refresh(slide);
+    if (reduced) {
+      still(slide);
+      return;
+    }
+    var started = 0;
+    function frame(now) {
+      if (!started) started = now;
+      var progress = Math.min(1, (now - started) / routeDuration);
+      place(state, state.total * progress);
+      if (progress < 1) state.raf = requestAnimationFrame(frame);
+      else {
+        state.raf = 0;
+        hide(state);
+      }
+    }
+    place(state, 0);
+    state.raf = requestAnimationFrame(frame);
+  }
+
+  global.DeckMotion = { play: play, stop: stop, still: still, refresh: refresh };
+})(window);
+</script>
+<script>
+(function(){
+  'use strict';
+  var vp=document.getElementById('vp'), stage=document.getElementById('stage'), np=document.getElementById('np'), nb=document.getElementById('nb');
+  var slides=[].slice.call(document.querySelectorAll('.slide')), n=slides.length, cur=0, notesOpen=false;
+  var root=document.documentElement;
+  var mqReduce=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  function pad(x){return (x<10?'0':'')+x}
+  function isReduced(){return !!mqReduce.matches}
+
+  /* ---------- footer, per slide ---------- */
+  var mq='systems & matter ✦ culture & taste ✦ ', half='';
+  for(var k=0;k<6;k++){half+=mq}
+  slides.forEach(function(s,i){
+    var f=document.createElement('footer'); f.className='foot';
+    var w=document.createElement('span'); w.className='wm'; w.innerHTML='naquuuu<i>.</i>';
+    var m=document.createElement('div'); m.className='marq';
+    var mi=document.createElement('span'); mi.className='marq-in'; mi.textContent=half+half; m.appendChild(mi);
+    var c=document.createElement('span'); c.className='ctr'; c.textContent=pad(i+1)+' / '+pad(n);
+    f.appendChild(w); f.appendChild(m); f.appendChild(c); s.appendChild(f);
+    s.setAttribute('aria-label','slide '+(i+1)+' of '+n);
+  });
+
+  /* ---------- scale the 1280x720 stage into the window ---------- */
+  function fit(){
+    if(!window.innerWidth||!window.innerHeight)return;   /* hidden pane: wait for a real size */
+    var mobile=window.innerWidth<=760;
+    root.classList.toggle('mobile',mobile);
+    var panelH=(notesOpen&&np.offsetHeight)?np.offsetHeight:0;
+    var nav=document.querySelector('.m-nav'), navH=mobile?(nav?nav.offsetHeight:64):0;
+    vp.style.bottom=(panelH+navH)+'px';
+    var s=Math.min(vp.clientWidth/1280, vp.clientHeight/720);
+    stage.style.transform='translate(-50%,-50%) scale('+s+')';
+  }
+
+  /* ---------- motion: a slide plays when it becomes active, r replays ---------- */
+  function play(i){
+    var s=slides[i]; if(!s)return;
+    s.classList.remove('play');
+    void s.offsetWidth;                         /* restart css animations */
+    if(!isReduced())s.classList.add('play');    /* reduced motion: never add .play, so the end state shows */
+    if(window.DeckMotion)window.DeckMotion.play(s,isReduced());
+  }
+
+  function show(i,write){
+    i=Math.max(0,Math.min(n-1,i)); cur=i;
+    slides.forEach(function(s,k){var on=(k===i); s.classList.toggle('active',on); if(!on){s.classList.remove('play');if(window.DeckMotion)window.DeckMotion.stop(s)}});
+    nb.innerHTML=''; var a=slides[i].querySelector('.notes');
+    if(a){[].slice.call(a.children).forEach(function(c){nb.appendChild(c.cloneNode(true))})}
+    if(write!==false){try{history.replaceState(null,'',location.pathname+location.search+'#'+(i+1))}catch(e){location.hash='#'+(i+1)}}
+    document.title=pad(i+1)+' / '+pad(n)+' '+(slides[i].getAttribute('data-title')||'naquuuu');
+    vp.scrollTop=0;
+    var ae=document.activeElement;
+    if(ae&&ae!==document.body&&!slides[i].contains(ae)&&ae.blur&&!/^(b-)/.test(ae.id||''))ae.blur();
+    play(i);
+  }
+  function fromHash(){var v=parseInt((location.hash||'').replace('#',''),10); return (v>=1&&v<=n)?v-1:0}
+  function next(){show(cur+1)} function prev(){show(cur-1)}
+  function replay(){play(cur)}
+  function toggleNotes(){notesOpen=!notesOpen; np.classList.toggle('open',notesOpen); fit()}
+  function setTheme(d){root.setAttribute('data-theme',d);if(window.DeckMotion)window.DeckMotion.refresh(slides[cur])}
+  function toggleTheme(){
+    var d=root.getAttribute('data-theme')==='dark'?'light':'dark'; setTheme(d);
+    try{localStorage.setItem('naq-deck-theme',d)}catch(e){}
+  }
+  function toggleFull(){
+    try{ if(document.fullscreenElement){document.exitFullscreen()} else if(root.requestFullscreen){root.requestFullscreen()} }catch(e){}
+  }
+
+  try{var t=localStorage.getItem('naq-deck-theme'); if(t==='dark'||t==='light'){setTheme(t)}}catch(e){}
+  var qm=/[?&]theme=(dark|light)/.exec(location.search); if(qm){setTheme(qm[1])}   /* ?theme=dark for previews */
+
+  /* ---------- keys: arrows, space, enter, page keys, home, end; t n f r ---------- */
+  document.addEventListener('keydown',function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    var k=e.key, lk=(k&&k.length===1)?k.toLowerCase():k;
+    if(k==='ArrowRight'||k==='ArrowDown'||k===' '||k==='PageDown'||k==='Enter'){
+      if(k==='Enter'&&e.target.closest&&e.target.closest('a,button'))return;   /* enter activates focused links and buttons */
+      e.preventDefault();next()
+    }
+    else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'||k==='Backspace'){e.preventDefault();prev()}
+    else if(k==='Home'){show(0)} else if(k==='End'){show(n-1)}
+    else if(lk==='n'){toggleNotes()}
+    else if(lk==='t'){toggleTheme()}
+    else if(lk==='f'){toggleFull()}
+    else if(lk==='r'){replay()}
+  });
+
+  vp.addEventListener('click',function(e){
+    if(e.target.closest('a,button,input,.scroller,.notespanel'))return;
+    if(root.classList.contains('mobile'))return;
+    var x=e.clientX/window.innerWidth; if(x<0.25)prev(); else next();
+  });
+  var sx=0,sy=0,swipeOk=true;
+  vp.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;swipeOk=!(e.target.closest&&e.target.closest('.scroller'))},{passive:true});
+  vp.addEventListener('touchend',function(e){
+    if(!swipeOk)return;
+    var dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){ if(dx<0)next(); else prev(); }
+  },{passive:true});
+  document.getElementById('b-prev').onclick=prev;
+  document.getElementById('b-next').onclick=next;
+  document.getElementById('b-replay').onclick=replay;
+  document.getElementById('b-notes').onclick=toggleNotes;
+  document.getElementById('b-theme').onclick=toggleTheme;
+  document.getElementById('b-full').onclick=toggleFull;
+  window.addEventListener('resize',fit);
+  window.addEventListener('deck:controlschange',fit);
+  window.addEventListener('hashchange',function(){show(fromHash(),false)});
+  function motionPreference(){
+    if(isReduced()){slides[cur].classList.remove('play');if(window.DeckMotion)window.DeckMotion.still(slides[cur])}
+    else play(cur);
+  }
+  if(mqReduce.addEventListener)mqReduce.addEventListener('change',motionPreference);
+  else if(mqReduce.addListener)mqReduce.addListener(motionPreference);
+  window.addEventListener('beforeprint',function(){slides.forEach(function(s){s.classList.remove('play');if(window.DeckMotion)window.DeckMotion.still(s)})});
+  window.addEventListener('afterprint',function(){fit();play(cur)});
+
+  /* ---------- go ---------- */
+  fit(); show(fromHash(),false);
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fit)}
+})();
+</script>
+<script src="mobile.js?v=20261014scaledmotion"></script>
 </body>
 </html>
