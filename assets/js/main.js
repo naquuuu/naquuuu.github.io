@@ -30,8 +30,28 @@ document.addEventListener('DOMContentLoaded', () => {
     clockEl.textContent = `jakarta • wib ${hours}:${minutes}`;
   }
 
-  updateJakartaClock();
-  setInterval(updateJakartaClock, 1000);
+  let clockTimeout = null;
+  function scheduleJakartaClock() {
+    clearTimeout(clockTimeout);
+    clockTimeout = null;
+    if (document.visibilityState !== 'visible' || !clockEl) return;
+    clockTimeout = setTimeout(() => {
+      updateJakartaClock();
+      scheduleJakartaClock();
+    }, 60000 - (Date.now() % 60000));
+  }
+
+  if (document.visibilityState === 'visible') updateJakartaClock();
+  scheduleJakartaClock();
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      updateJakartaClock();
+      scheduleJakartaClock();
+    } else {
+      clearTimeout(clockTimeout);
+      clockTimeout = null;
+    }
+  });
 
   // ===========================================================================
   // 2. Dual-Mode Perspective & Dynamic Theme Switcher: Systems vs. Culture
@@ -205,6 +225,10 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(navScrollTimeout);
         navScrollTimeout = setTimeout(() => {
           isNavClickScrolling = false;
+          if (scrollSpyFrame !== null) {
+            cancelAnimationFrame(scrollSpyFrame);
+            scrollSpyFrame = null;
+          }
           updateActiveNavOnScroll();
         }, 750);
       }
@@ -290,7 +314,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  window.addEventListener('scroll', updateActiveNavOnScroll, { passive: true });
+  let scrollSpyFrame = null;
+  window.addEventListener('scroll', () => {
+    if (scrollSpyFrame !== null) return;
+    scrollSpyFrame = requestAnimationFrame(() => {
+      scrollSpyFrame = null;
+      updateActiveNavOnScroll();
+    });
+  }, { passive: true });
 
   // ===========================================================================
   // 3. Audio Telemetry Engine: Hukum Murphy by Kafin Sulthan (Gate 4 Standard)
@@ -749,12 +780,20 @@ document.addEventListener('DOMContentLoaded', () => {
   //     scroll-in after a lens switch. No-JS users see everything (no .js class).
   // ===========================================================================
   const revealTargets = document.querySelectorAll('[data-reveal]');
-  if (revealTargets.length && 'IntersectionObserver' in window) {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion) {
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let revealIO = null;
+  function reconcileMotionPreference() {
+    if (reducedMotionQuery.matches) {
+      if (revealIO) {
+        revealIO.disconnect();
+        revealIO = null;
+      }
       revealTargets.forEach(el => el.classList.add('revealed'));
-    } else {
-      const revealIO = new IntersectionObserver((entries) => {
+      return;
+    }
+    if (!('IntersectionObserver' in window) || !revealTargets.length) return;
+    if (!revealIO) {
+      revealIO = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('revealed');
@@ -762,9 +801,13 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       }, { threshold: 0.12 });
-      revealTargets.forEach(el => revealIO.observe(el));
     }
+    revealTargets.forEach(el => {
+      if (!el.classList.contains('revealed')) revealIO.observe(el);
+    });
   }
+  reconcileMotionPreference();
+  reducedMotionQuery.addEventListener('change', reconcileMotionPreference);
 
   // Instagram Live Embed Handshake
   if (window.instgrm && window.instgrm.Embeds) {

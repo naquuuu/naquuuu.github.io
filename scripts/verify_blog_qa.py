@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Blog Reliability QA Gate - 5 gates per AGENTS.md / CI workflow.
+"""Blog Reliability QA Gate - 6 gates per AGENTS.md / CI workflow.
 
 Gates:
   1. Zero inline width (style="...width") + copy hygiene (no em-dashes in body copy)
@@ -7,19 +7,25 @@ Gates:
   3. Responsive baseline (viewport meta everywhere; overflow-x clip; mobile media query)
   4. Valid audio/media (metadata preload, button-driven, ended-loop, no autoplay/loop/mousemove)
   5. Typography & a11y baseline (72ch essay column, 44px touch targets, 16px inputs, charset)
+  6. Sitemap freshness (absolute urls, lastmod == committed date, no shells or utility pages)
 
 Stdlib only. Cross-platform. Exit 1 on any failure.
 """
 from __future__ import annotations
 
 import re
+import subprocess
 import sys
 from pathlib import Path
+from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parent.parent
 CSS_PATH = ROOT / "assets" / "css" / "style.css"
 JS_PATH = ROOT / "assets" / "js" / "main.js"
-CURRENT_ASSET_VERSION = "20261005d"
+SITEMAP_PATH = ROOT / "sitemap.xml"
+ROBOTS_PATH = ROOT / "robots.txt"
+SITE_URL = "https://naquuuu.github.io/"
+CURRENT_ASSET_VERSION = "20261014a2z"
 # non-creative pages must carry a blueprint flowchart (STYLE_BIBLE 2.8); the two creative essays are exempt
 FLOWCHART_REQUIRED = {
     "blog/building-an-autonomous-product-operating-system/index.html",
@@ -30,6 +36,13 @@ FLOWCHART_REQUIRED = {
     "experience/bcg/index.html",
 }
 EXCLUDE_PARTS = {"_revamp", "drafts", ".git", ".github", ".vscode", "node_modules"}
+# pages that must never appear in sitemap.xml: noindex redirect shells and utility pages
+NOT_IN_SITEMAP = {
+    "about/index.html": "noindex redirect shell",
+    "portfolio/index.html": "noindex redirect shell",
+    "404.html": "utility page",
+    "performance/recovery/session-map.html": "utility page",
+}
 
 failures: list[str] = []
 passes: list[str] = []
@@ -55,6 +68,36 @@ def strip_noncopy(html: str) -> str:
     html = re.sub(r"<script\b.*?</script>", " ", html, flags=re.DOTALL | re.IGNORECASE)
     html = re.sub(r"<style\b.*?</style>", " ", html, flags=re.DOTALL | re.IGNORECASE)
     return html
+
+
+def page_url(rel: str) -> str:
+    """Publish url of a page path relative to the blog root (directory urls)."""
+    if rel == "index.html":
+        return SITE_URL
+    return SITE_URL + rel[: -len("index.html")] if rel.endswith("index.html") else SITE_URL + rel
+
+
+def git_last_commit_date(rel: str) -> str:
+    """Committed (HEAD) date of a repo path as YYYY-MM-DD, or "" when unknown."""
+    try:
+        out = subprocess.run(
+            ["git", "-C", str(ROOT), "log", "-1", "--format=%cs", "--", rel],
+            capture_output=True, text=True,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return ""
+    return out.stdout.strip() if out.returncode == 0 else ""
+
+
+def lastmod_mismatch(url: str, found: str | None, expected: str) -> str | None:
+    """None when the sitemap lastmod matches the committed date, else a specific message."""
+    if found is None:
+        return f"sitemap missing <lastmod> for {url} (git date {expected or 'unknown'})"
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", found):
+        return f"sitemap lastmod not YYYY-MM-DD for {url}: found '{found}', git date '{expected}'"
+    if found != expected:
+        return f"sitemap lastmod stale for {url}: found '{found}', git date '{expected}'"
+    return None
 
 
 def main() -> int:
@@ -170,6 +213,69 @@ def main() -> int:
         if not p.name.startswith("_") and re.search(r"Space[+ ]Grotesk|Syne", text):
             d5.append(f"retired font referenced (ADR-035): {p.relative_to(ROOT)}")
     gate_result("5. typography & a11y baseline", not d5, d5 or ["72ch column, 44px targets, 16px inputs, charset + alt everywhere"])
+
+    # ---- Gate 6: sitemap freshness ----
+    d6: list[str] = []
+    sitemap_locs: dict[str, str | None] = {}
+    if not SITEMAP_PATH.exists():
+        d6.append("sitemap.xml not found")
+    else:
+        try:
+            sitemap_root = ElementTree.fromstring(SITEMAP_PATH.read_text(encoding="utf-8", errors="replace"))
+        except ElementTree.ParseError as exc:
+            sitemap_root = None
+            d6.append(f"sitemap.xml does not parse as XML: {exc}")
+        if sitemap_root is not None:
+            if not sitemap_root.tag.endswith("urlset"):
+                d6.append(f"sitemap.xml root element is '{sitemap_root.tag}', expected 'urlset'")
+            for url_el in sitemap_root:
+                loc_el = url_el.find("{http://www.sitemaps.org/schemas/sitemap/0.9}loc")
+                if loc_el is None or not (loc_el.text or "").strip():
+                    d6.append("sitemap.xml <url> entry without <loc>")
+                    continue
+                loc = loc_el.text.strip()
+                lastmod_el = url_el.find("{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod")
+                sitemap_locs[loc] = lastmod_el.text.strip() if lastmod_el is not None and lastmod_el.text else None
+                if not loc.startswith(SITE_URL):
+                    d6.append(f"sitemap url is not absolute under {SITE_URL}: {loc}")
+
+    listed = set(sitemap_locs)
+    content_pages = [
+        p for p in htmls
+        if not p.name.startswith("_")
+        and p.relative_to(ROOT).as_posix() not in NOT_IN_SITEMAP
+    ]
+    for p in content_pages:
+        rel = p.relative_to(ROOT).as_posix()
+        url = page_url(rel)
+        if url not in sitemap_locs:
+            d6.append(f"sitemap missing content page {url} ({rel})")
+            continue
+        expected = git_last_commit_date(rel)
+        if not expected:
+            d6.append(f"sitemap lastmod not verifiable for {url}: no committed git date for {rel}")
+            continue
+        issue = lastmod_mismatch(url, sitemap_locs[url], expected)
+        if issue:
+            d6.append(issue)
+
+    for rel, kind in NOT_IN_SITEMAP.items():
+        url = page_url(rel)
+        if url in listed:
+            d6.append(f"sitemap must not list {url} ({rel} is a {kind})")
+    for p in htmls:
+        if p.name.startswith("_"):
+            url = page_url(p.relative_to(ROOT).as_posix())
+            if url in listed:
+                d6.append(f"sitemap must not list {url} (draft page)")
+
+    robots = ROBOTS_PATH.read_text(encoding="utf-8", errors="replace") if ROBOTS_PATH.exists() else ""
+    if not re.search(rf"(?im)^\s*sitemap:\s*{re.escape(SITE_URL)}sitemap\.xml\s*$", robots):
+        d6.append(f"robots.txt does not point at {SITE_URL}sitemap.xml")
+
+    gate_result("6. sitemap freshness", not d6,
+                d6 or [f"{len(content_pages)} content pages listed with lastmod == git date; "
+                       f"no shells or utility pages; robots.txt points at the sitemap; all urls absolute"])
 
     # ---- summary ----
     print("\n=== SUMMARY ===")
