@@ -2,62 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://naquuuu.github.io/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-10-14</lastmod>
   </url>
   <url>
     <loc>https://naquuuu.github.io/blog/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-14</lastmod>
   </url>
   <url>
     <loc>https://naquuuu.github.io/blog/building-an-autonomous-product-operating-system/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-14</lastmod>
   </url>
   <url>
-    <loc>https://naquuuu.github.io/portfolio/3m-bio-mask/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://naquuuu.github.io/blog/murphys-law-for-building-with-ai/</loc>
+    <lastmod>2026-10-14</lastmod>
   </url>
   <url>
-    <loc>https://naquuuu.github.io/portfolio/schneider-hotsand/</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://naquuuu.github.io/blog/reverse-engineering-client-binaries/</loc>
+    <lastmod>2026-10-14</lastmod>
+  </url>
+  <url>
+    <loc>https://naquuuu.github.io/blog/smart-tailoring-as-kinetic-infrastructure/</loc>
+    <lastmod>2026-10-05</lastmod>
+  </url>
+  <url>
+    <loc>https://naquuuu.github.io/blog/the-geometry-of-shibuya-kei/</loc>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://naquuuu.github.io/experience/</loc>
-    <lastmod>2026-09-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://naquuuu.github.io/experience/mapclub/</loc>
-    <lastmod>2026-09-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://naquuuu.github.io/experience/traveloka/</loc>
-    <lastmod>2026-09-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://naquuuu.github.io/experience/bcg/</loc>
-    <lastmod>2026-09-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <lastmod>2026-10-05</lastmod>
   </url>
-  <url><loc>https://naquuuu.github.io/blog/murphys-law-for-building-with-ai/</loc><lastmod>2026-10-06</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://naquuuu.github.io/portfolio/</loc><lastmod>2026-09-28</lastmod></url>
-  <url><loc>https://naquuuu.github.io/blog/reverse-engineering-client-binaries/</loc><lastmod>2026-09-28</lastmod></url>
-  <url><loc>https://naquuuu.github.io/blog/smart-tailoring-as-kinetic-infrastructure/</loc><lastmod>2026-09-28</lastmod></url>
-  <url><loc>https://naquuuu.github.io/blog/the-geometry-of-shibuya-kei/</loc><lastmod>2026-09-28</lastmod></url>
-  <url><loc>https://naquuuu.github.io/performance/recovery/</loc><lastmod>2026-09-28</lastmod></url>
+  <url>
+    <loc>https://naquuuu.github.io/experience/mapclub/</loc>
+    <lastmod>2026-10-05</lastmod>
+  </url>
+  <url>
+    <loc>https://naquuuu.github.io/experience/traveloka/</loc>
+    <lastmod>2026-10-05</lastmod>
+  </url>
+  <url>
+    <loc>https://naquuuu.github.io/performance/recovery/</loc>
+    <lastmod>2026-10-14</lastmod>
+  </url>
+  <url>
+    <loc>https://naquuuu.github.io/portfolio/3m-bio-mask/</loc>
+    <lastmod>2026-10-05</lastmod>
+  </url>
+  <url>
+    <loc>https://naquuuu.github.io/portfolio/schneider-hotsand/</loc>
+    <lastmod>2026-10-05</lastmod>
+  </url>
 </urlset>
