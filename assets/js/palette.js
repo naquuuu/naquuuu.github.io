@@ -30,10 +30,12 @@
     { group: 'contact', label: 'linkedin', hint: 'profile', href: 'https://www.linkedin.com/in/rbkrishnamurti/', external: true },
     { group: 'contact', label: 'instagram', hint: '@naquuuu_', href: 'https://www.instagram.com/naquuuu_/', external: true },
     { group: 'contact', label: 'spotify', hint: 'listening', href: 'https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf', external: true },
-    { group: 'contact', label: 'github', hint: 'naquuuu', href: 'https://github.com/naquuuu', external: true }
+    { group: 'contact', label: 'github', hint: 'naquuuu', href: 'https://github.com/naquuuu', external: true },
+  { label: "murphy's law for people who build with ai", hint: "13-slide presentation · reliability and human checks", group: "notes", href: "/blog/murphys-law-for-building-with-ai/" },
+
   ];
 
-  var root, input, list, results = [], active = 0, lastFocus = null;
+  var root, input, list, closeButton, results = [], active = 0, lastFocus = null;
 
   function build() {
     root = document.createElement('div');
@@ -44,20 +46,20 @@
       '<div class="cmdk-panel" role="dialog" aria-modal="true" aria-label="search this site">' +
       '  <div class="cmdk-search">' +
       '    <span class="cmdk-prompt" aria-hidden="true">&gt;</span>' +
-      '    <input class="cmdk-input" type="text" placeholder="search pages, work, notes, contact" aria-label="search this site" aria-controls="cmdk-list" autocomplete="off" spellcheck="false">' +
-      '    <kbd class="cmdk-kbd">esc</kbd>' +
+      '    <input class="cmdk-input" type="text" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-haspopup="listbox" placeholder="search pages, work, notes, contact" aria-label="search this site" aria-controls="cmdk-list" autocomplete="off" spellcheck="false">' +
+      '    <button class="cmdk-close" type="button" aria-label="close search"><span aria-hidden="true">×</span></button>' +
       '  </div>' +
-      '  <ul class="cmdk-list" id="cmdk-list" role="listbox"></ul>' +
+      '  <ul class="cmdk-list" id="cmdk-list" role="listbox" aria-label="search results" aria-live="polite"></ul>' +
       '  <div class="cmdk-foot"><span><kbd>↑</kbd><kbd>↓</kbd> move</span><span><kbd>enter</kbd> open</span></div>' +
       '</div>';
     document.body.appendChild(root);
     input = root.querySelector('.cmdk-input');
     list = root.querySelector('.cmdk-list');
+    closeButton = root.querySelector('.cmdk-close');
     root.addEventListener('click', function (e) {
-      if (e.target.hasAttribute('data-cmdk-close')) close();
+      if (e.target.closest('.cmdk-close') || e.target.hasAttribute('data-cmdk-close')) close();
     });
     input.addEventListener('input', render);
-    root.addEventListener('keydown', onKey);
     list.addEventListener('mousemove', function (e) {
       var li = e.target.closest('[data-i]');
       if (li) setActive(+li.getAttribute('data-i'));
@@ -84,13 +86,13 @@
       html += '<li class="cmdk-item" role="option" id="cmdk-opt-' + i + '" data-i="' + i + '">' +
         '<span class="cmdk-label">' + it.label + '</span><span class="cmdk-hint">' + it.hint + (it.external ? ' ↗' : '') + '</span></li>';
     });
-    if (!results.length) html = '<li class="cmdk-empty" role="presentation">nothing matches. try "cv", "refund" or "shibuya".</li>';
+    if (!results.length) html = '<li class="cmdk-empty" role="status">nothing matches. try "cv", "refund" or "shibuya".</li>';
     list.innerHTML = html;
     setActive(0);
   }
 
   function setActive(i) {
-    if (!results.length) return;
+    if (!results.length) { input.removeAttribute('aria-activedescendant'); return; }
     active = Math.max(0, Math.min(results.length - 1, i));
     list.querySelectorAll('.cmdk-item').forEach(function (el) {
       var on = +el.getAttribute('data-i') === active;
@@ -136,19 +138,13 @@
     return true;
   }
 
-  function onKey(e) {
-    if (e.key === 'ArrowDown') { e.preventDefault(); setActive(active + 1); }
-    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(active - 1); }
-    else if (e.key === 'Enter') { e.preventDefault(); go(active); }
-    else if (e.key === 'Escape') { e.preventDefault(); close(); }
-    else if (e.key === 'Tab') { e.preventDefault(); }
-  }
-
   function open() {
     if (!root) build();
     lastFocus = document.activeElement;
+    syncViewport();
     root.hidden = false;
     document.documentElement.classList.add('cmdk-open');
+    input.setAttribute('aria-expanded', 'true');
     input.value = '';
     render();
     input.focus();
@@ -158,20 +154,65 @@
     if (!root || root.hidden) return;
     root.hidden = true;
     document.documentElement.classList.remove('cmdk-open');
-    if (restoreFocus !== false && lastFocus && lastFocus.focus) lastFocus.focus();
+    input.setAttribute('aria-expanded', 'false');
+    if (restoreFocus !== false && lastFocus && lastFocus.focus && lastFocus.isConnected && !lastFocus.closest('[hidden],[aria-hidden="true"]')) lastFocus.focus();
   }
 
   document.addEventListener('keydown', function (e) {
-    if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
-      e.preventDefault();
+    var shortcut = (e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K');
+    if (shortcut) {
+      e.preventDefault(); e.stopPropagation();
       if (root && !root.hidden) close(); else open();
+      return;
     }
-  });
+    if (!root || root.hidden) return;
+    e.stopPropagation();
+    if (e.key === 'Escape') { e.preventDefault(); close(); }
+    else if (e.key === 'Tab') {
+      e.preventDefault();
+      if (e.shiftKey) { if (document.activeElement === input) closeButton.focus(); else input.focus(); }
+      else { if (document.activeElement === closeButton) input.focus(); else closeButton.focus(); }
+    } else if (e.key === 'ArrowDown') { e.preventDefault(); setActive(active + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(active - 1); }
+    else if (e.key === 'Enter') { e.preventDefault(); if (document.activeElement === closeButton) close(); else go(active); }
+  }, true);
+
+
+  function injectArchiveTrigger() {
+    var nav = document.querySelector('.site-header .nav[data-cmdk-mobile-search]');
+    if (!nav || nav.querySelector('[data-cmdk-open]')) return;
+    var button = document.createElement('button');
+    button.type = 'button'; button.className = 'cmdk-mobile-trigger'; button.setAttribute('data-cmdk-open', '');
+    button.setAttribute('aria-label', 'search this site'); button.title = 'search this site';
+    button.innerHTML = '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg>';
+    var links = nav.querySelector('.nav-links');
+    if (links) links.insertAdjacentElement('afterend', button); else nav.appendChild(button);
+  }
+  injectArchiveTrigger();
+
+  function syncViewport() {
+    var vv = window.visualViewport, html = document.documentElement;
+    html.style.setProperty('--cmdk-viewport-height', Math.max(0, vv ? vv.height : window.innerHeight) + 'px');
+    html.style.setProperty('--cmdk-viewport-top', Math.max(0, vv ? vv.offsetTop : 0) + 'px');
+  }
+  syncViewport();
+  window.addEventListener('resize', syncViewport);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', syncViewport);
+    window.visualViewport.addEventListener('scroll', syncViewport);
+  }
 
   document.addEventListener('click', function (e) {
     var t = e.target.closest('[data-cmdk-open]');
     if (t) { e.preventDefault(); open(); }
   });
+
+  var currentScript = document.currentScript;
+  if (currentScript && !document.querySelector('link[href*="/assets/css/palette.css"]')) {
+    var cssHref = currentScript.src.replace(/\/assets\/js\/palette\.js(?:\?.*)?$/, '/assets/css/palette.css?v=20261014search');
+    var styleLink = document.createElement('link'); styleLink.rel = 'stylesheet'; styleLink.href = cssHref;
+    document.head.appendChild(styleLink);
+  }
 
   // Show the platform's shortcut on trigger buttons.
   var mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
