@@ -13,7 +13,7 @@
     nav=document.createElement('nav'); nav.className='m-nav'; nav.setAttribute('aria-label','slide navigation');
     nav.innerHTML='<button type="button" data-action="prev" aria-label="previous slide">‹</button><button type="button" data-action="replay" aria-label="replay animations">↻</button><span class="m-count" aria-live="polite"></span><button type="button" data-action="next" aria-label="next slide">›</button><button type="button" data-action="more" aria-label="more controls" aria-expanded="false">•••</button>';
     menu=document.createElement('div'); menu.className='m-menu'; menu.hidden=true; menu.setAttribute('role','group'); menu.setAttribute('aria-label','more presentation controls');
-    menu.innerHTML='<button type="button" data-action="notes">speaker notes</button><button type="button" data-action="theme">switch theme</button><button type="button" data-action="full">fullscreen</button><a data-action="archive">back to archive</a>';
+    menu.innerHTML='<button type="button" data-action="search" data-cmdk-open aria-label="search this site">search</button><button type="button" data-action="notes">speaker notes</button><button type="button" data-action="theme">switch theme</button><button type="button" data-action="full">fullscreen</button><a data-action="archive">back to archive</a>';
     menu.querySelector('a').setAttribute('href',backHref);
     document.body.appendChild(nav); document.body.appendChild(menu); nodes.push(nav,menu); count=nav.querySelector('.m-count');
     var more=nav.querySelector('[data-action="more"]');
@@ -22,6 +22,7 @@
       var b=e.target.closest('[data-action]'); if(!b)return; var action=b.dataset.action;
       if(action==='more'){menu.hidden=!menu.hidden;more.setAttribute('aria-expanded',String(!menu.hidden));return}
       if(action==='archive'){close();return}
+      if(action==='search'){close();more.focus();return}
       delegate(action); close();
       if(action==='notes')setTimeout(refreshNotesSpace,80);
     }
