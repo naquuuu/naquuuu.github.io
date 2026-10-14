@@ -544,89 +544,6 @@ svg .s12-pulse{fill:none;stroke:var(--accent-crimson);stroke-width:2;opacity:0;t
 .slide.play .origin-route circle{offset-path:path("M0 0 H88 V178 H103")}
 .circuit-packet.is-verified{fill:var(--text-primary)!important}
 .disclosure-foot{font-size:14px}.s11-callback{font-size:18px;margin:3px 0}
-html.mobile #s9-svg{min-width:0}
-html.mobile #s9 .s9-editorial{display:flex;flex-direction:column;align-items:stretch}
-html.mobile #s9 .s9-bridge{transform:rotate(90deg);margin:3px auto}
-html.mobile #s9 .s9-fig svg{width:100%;height:auto}
-html.mobile #s9 .s9-flow-svg{width:740px;height:390px}
-html.mobile .s9-circuit{overflow-x:auto}
-html.mobile .disclosure-map{overflow-x:auto}
-html.mobile .disclosure-svg{width:1080px;height:380px}
-
-/* ---------- 6. mobile reflow (<= 760px): one slide at a time, stacked ---------- */
-html.mobile .viewport{overflow-y:auto;overflow-x:hidden}
-html.mobile .stage{position:relative;left:auto;top:auto;width:100%;max-width:100%;height:auto;transform:none!important;border:0}
-html.mobile .slide{position:relative;width:100%;max-width:100%;height:auto;min-height:calc(100vh - 2px);padding:60px 18px 24px;overflow-x:hidden}
-html.mobile .top{left:18px;right:18px;top:16px;font-size:12px}
-html.mobile .top .tr{display:none}
-html.mobile .foot{position:relative;bottom:auto;margin-top:24px;padding:0 4px;gap:12px;font-size:11px;width:100%}
-html.mobile .body{justify-content:flex-start;gap:18px;width:100%}
-html.mobile .t{font-size:30px;max-width:100%}
-html.mobile .t br{display:none}
-html.mobile .s1-h{font-size:34px}
-html.mobile .sub,html.mobile .txt,html.mobile .s2-lines li{font-size:18px}
-html.mobile .strip li{font-size:17px;grid-template-columns:34px 1fr}
-html.mobile .s2-row,html.mobile .s4-row,html.mobile .s5-row,html.mobile .s7-row,html.mobile .s8-row,html.mobile .s9-row,html.mobile .s12-row{grid-template-columns:1fr;gap:18px}
-html.mobile .s1-curve{width:100%;height:100%}
-html.mobile .scroller{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
-html.mobile .scroller svg{min-width:640px}
-html.mobile #s2-svg,html.mobile #s8-svg{min-width:720px}
-html.mobile #s4-svg{min-width:700px}
-html.mobile #s9-svg{min-width:470px}
-html.mobile .s12-loop svg{min-width:0}
-html.mobile .doc{padding:0 16px 4px}
-html.mobile .doc-r{grid-template-columns:1fr;row-gap:4px;padding:10px 0}
-html.mobile .doc-l{font-size:18px}
-html.mobile .doc-n{border-left:0;padding-left:0;font-size:14px}
-html.mobile .doc-n-none{display:none}
-html.mobile .ctl{grid-template-columns:1fr;gap:12px}
-html.mobile .ro b{font-size:56px}
-html.mobile .s5-card{grid-template-columns:112px 1fr;gap:10px}
-html.mobile .s5-icon-wrap{width:112px}html.mobile .s5-ico{width:112px}html.mobile .s5-micro{font-size:9px}
-html.mobile .s5-card-t{font-size:17px}
-html.mobile .pgrid{grid-template-columns:1fr}
-html.mobile .pcol+.pcol{border-left:0;border-top:1px solid var(--border-subtle)}
-html.mobile .pcol-t{font-size:20px}
-html.mobile .flow{flex-direction:column;align-items:stretch}
-html.mobile .fn-in,html.mobile .fn-human{flex:0 0 auto}
-html.mobile .farr{transform:rotate(90deg);margin:6px 0;align-self:center}
-html.mobile .vs-end{margin-left:0}
-html.mobile .vs-i{white-space:normal}
-html.mobile .ck-list li{grid-template-columns:34px 1fr}
-html.mobile .ck-tag{grid-column:2;justify-self:start}
-html.mobile .ck-t{font-size:19px}
-html.mobile .thesis p{font-size:26px}
-html.mobile .ainote{font-size:17px}
-html.mobile .qa{font-size:34px}
-html.mobile .qt{font-size:22px}
-html.mobile .s12-close{flex-wrap:wrap;gap:8px 16px}
-html.mobile .s12-q span{font-size:20px}
-html.mobile .tag,html.mobile .ptag{white-space:normal}
-html.mobile .origin-title{font-size:34px}
-html.mobile .origin .body{display:flex;gap:14px;align-items:stretch}
-html.mobile .origin-left{width:min(390px,100%);min-height:325px;margin:0 auto}
-html.mobile .origin-art{transform:scale(.78);transform-origin:top left;margin-bottom:-86px}
-html.mobile .origin-route{display:none}
-html.mobile .origin-headline{font-size:34px}
-html.mobile .origin-beat small{font-size:17px}
-html.mobile .origin-ipc{align-items:flex-start;flex-direction:column;gap:5px}
-html.mobile .s9-editorial{grid-template-columns:1fr;gap:12px}
-html.mobile .s9-fig svg{width:100%;height:auto}
-html.mobile .s9-flow-svg{height:auto;min-height:190px}
-html.mobile .s9-model-examples{flex-direction:column;gap:4px}
-html.mobile .disclosure-svg{height:auto;min-height:230px}
-html.mobile .disclosure-foot{flex-wrap:wrap}
-html.mobile .s9-row{grid-template-columns:1fr;gap:12px}
-html.mobile .s9-fig svg{width:100%}
-html.mobile #s9 .body{gap:16px}
-html.mobile .s9-review{min-height:0}
-html.mobile .review-flow{grid-template-columns:1fr;gap:5px}
-html.mobile .review-arrow{transform:rotate(90deg);margin:3px auto}
-html.mobile .review-models{flex-wrap:wrap;justify-content:flex-start}
-html.mobile .notespanel{height:45vh}
-html.mobile .viewport{bottom:106px}
-html.mobile .hud{top:auto;bottom:0;left:0;right:0;opacity:1;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px;background:var(--bg-primary);border-top:1px solid var(--border-subtle);max-width:none}
-html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-items:center;justify-content:center}
 .disclosure-hub text{font-size:18px}
 
 /* ---------- 7. print (final state) + reduced motion ---------- */
@@ -648,7 +565,7 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
   .origin-arrow path,.review-arrow path,.review-return-path,.review-role-verifier svg path{stroke-dasharray:none!important;stroke-dashoffset:0!important}
 }
 </style>
-<link rel="stylesheet" href="mobile.css?v=20261006mobile1" media="screen and (max-width:760px)">
+<link rel="stylesheet" href="mobile.css?v=20261014scaledmurphy" media="screen and (max-width:760px)">
 </head>
 <body>
 <div class="viewport" id="vp">
@@ -1334,9 +1251,9 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
     if(!window.innerWidth||!window.innerHeight)return;   /* hidden pane: wait for a real size */
     var mobile=window.innerWidth<=760;
     root.classList.toggle('mobile',mobile);
+    var nav=document.querySelector('.m-nav'), navH=mobile?(nav?nav.offsetHeight:64):0;
     var panelH=(notesOpen&&np.offsetHeight)?np.offsetHeight:0;
-    vp.style.bottom=panelH+'px';
-    if(mobile){stage.style.transform='none';return}
+    vp.style.bottom=(panelH+navH)+'px';
     var s=Math.min(vp.clientWidth/1280, vp.clientHeight/720);
     stage.style.transform='translate(-50%,-50%) scale('+s+')';
   }
@@ -1355,10 +1272,11 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
 
   function show(i,write){
     i=Math.max(0,Math.min(n-1,i)); cur=i;
-    slides.forEach(function(s,k){var on=(k===i); s.classList.toggle('active',on); if(!on)s.classList.remove('play')});
+    slides.forEach(function(s,k){var on=(k===i); s.classList.toggle('active',on); if(!on){s.classList.remove('play');var h=hooks[s.id];if(h&&h.stop)h.stop(s)}});
     nb.innerHTML=''; var a=slides[i].querySelector('.notes');
     if(a){[].slice.call(a.children).forEach(function(c){nb.appendChild(c.cloneNode(true))})}
     if(write!==false){try{history.replaceState(null,'',location.pathname+location.search+'#'+(i+1))}catch(e){location.hash='#'+(i+1)}}
+    window.dispatchEvent(new Event('deck:slidechange'));
     document.title=pad(i+1)+' / '+pad(n)+' '+(slides[i].getAttribute('data-title')||'naquuuu');
     vp.scrollTop=0;
     var ae=document.activeElement;
@@ -1368,11 +1286,12 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
   function fromHash(){var v=parseInt((location.hash||'').replace('#',''),10); return (v>=1&&v<=n)?v-1:0}
   function next(){show(cur+1)} function prev(){show(cur-1)}
   function replay(){play(cur)}
-  function toggleNotes(){notesOpen=!notesOpen; np.classList.toggle('open',notesOpen); fit()}
+  function toggleNotes(){notesOpen=!notesOpen; np.classList.toggle('open',notesOpen); fit(); window.dispatchEvent(new Event('deck:controlschange'))}
   function setTheme(d){root.setAttribute('data-theme',d)}
   function toggleTheme(){
     var d=root.getAttribute('data-theme')==='dark'?'light':'dark'; setTheme(d);
     try{localStorage.setItem('naq-deck-theme',d)}catch(e){}
+    window.dispatchEvent(new Event('deck:controlschange'))
   }
   function toggleFull(){
     try{ if(document.fullscreenElement){document.exitFullscreen()} else if(root.requestFullscreen){root.requestFullscreen()} }catch(e){}
@@ -1429,6 +1348,10 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
   document.getElementById('b-theme').onclick=toggleTheme;
   document.getElementById('b-full').onclick=toggleFull;
   window.addEventListener('resize',fit);
+  window.addEventListener('deck:controlschange',fit);
+  function motionPreference(){if(isReduced()){slides[cur].classList.remove('play');var h=hooks[slides[cur].id];if(h&&h.stop)h.stop(slides[cur]);if(h&&h.still)h.still(slides[cur])}else play(cur)}
+  if(mqReduce.addEventListener)mqReduce.addEventListener('change',motionPreference);
+  else if(mqReduce.addListener)mqReduce.addListener(motionPreference);
   window.addEventListener('hashchange',function(){show(fromHash(),false)});
   window.addEventListener('beforeprint',function(){Object.keys(hooks).forEach(function(id){var h=hooks[id]; if(h.still)h.still(document.getElementById(id))})});
 
@@ -1516,7 +1439,7 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
       call.style.opacity='1'; readout(); render();
     }
     pIn.addEventListener('input',onInput); nIn.addEventListener('input',onInput);
-    hooks.s4={play:reset, still:reset, stop:function(){}};
+    hooks.s4={play:reset, still:reset, stop:function(){if(raf)cancelAnimationFrame(raf);raf=0}};
     reset();
   })();
 
@@ -1596,7 +1519,7 @@ html.mobile .hud button,html.mobile .hud a{min-height:40px;display:flex;align-it
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fit)}
 })();
 </script>
-<script src="mobile.js?v=20261006mobile1"></script>
+<script src="mobile.js?v=20261014scaledmurphy"></script>
 </body>
 </html>
 
