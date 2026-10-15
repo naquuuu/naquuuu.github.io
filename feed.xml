@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>naquuuu</title>
+  <subtitle>Building systems that don't break when real life gets messy.</subtitle>
+  <id>https://naquuuu.github.io/feed.xml</id>
+  <link rel="alternate" type="text/html" href="https://naquuuu.github.io/"/>
+  <link rel="self" type="application/atom+xml" href="https://naquuuu.github.io/feed.xml"/>
+  <updated>2026-10-14T00:00:00Z</updated>
+  <author>
+    <name>Ramadhana Bhanuharya Krishnamurti (naquuuu)</name>
+    <uri>https://naquuuu.github.io/</uri>
+  </author>
+  <rights>all rights reserved, krishna (naquuuu)</rights>
+  <entry>
+    <title>the geometry of shibuya-kei</title>
+    <link rel="alternate" type="text/html" href="https://naquuuu.github.io/blog/the-geometry-of-shibuya-kei/"/>
+    <id>https://naquuuu.github.io/blog/the-geometry-of-shibuya-kei/</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <summary type="text">a shelf of neighbours for long sessions: city pop, sophisti-pop and sleepy japanese jazz, plus the indonesian wing.</summary>
+  </entry>
+  <entry>
+    <title>soft clothes for hot cities</title>
+    <link rel="alternate" type="text/html" href="https://naquuuu.github.io/blog/smart-tailoring-as-kinetic-infrastructure/"/>
+    <id>https://naquuuu.github.io/blog/smart-tailoring-as-kinetic-infrastructure/</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <summary type="text">a short-sleeve shirt, a quarter-zip knit and shoes with grip: how i dress for a hot city, one soft colour on a dark ground.</summary>
+  </entry>
+  <entry>
+    <title>murphy's law for people who build with ai</title>
+    <link rel="alternate" type="text/html" href="https://naquuuu.github.io/blog/murphys-law-for-building-with-ai/"/>
+    <id>https://naquuuu.github.io/blog/murphys-law-for-building-with-ai/</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <summary type="text">a 13-slide presentation on murphy's law, ai-assisted prototyping, reliability, and the human checks that keep cheap drafts from becoming confident mistakes.</summary>
+  </entry>
+  <entry>
+    <title>building a product operations workspace</title>
+    <link rel="alternate" type="text/html" href="https://naquuuu.github.io/blog/building-an-autonomous-product-operating-system/"/>
+    <id>https://naquuuu.github.io/blog/building-an-autonomous-product-operating-system/</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <summary type="text">a 9-slide deck showing how a product operations workspace turns a prompt into a reviewed BRD, flowchart and prototype through human checks.</summary>
+  </entry>
+  <entry>
+    <title>reverse-engineering client binaries</title>
+    <link rel="alternate" type="text/html" href="https://naquuuu.github.io/blog/reverse-engineering-client-binaries/"/>
+    <id>https://naquuuu.github.io/blog/reverse-engineering-client-binaries/</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <summary type="text">a 9-slide deck on extracting icons, colors and type from production Android APKs to reduce design drift and prototype on real phones.</summary>
+  </entry>
+  <entry>
+    <title>relay recovery: prove the check can run</title>
+    <link rel="alternate" type="text/html" href="https://naquuuu.github.io/performance/recovery/"/>
+    <id>https://naquuuu.github.io/performance/recovery/</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <summary type="text">a 7-slide repair receipt: timings and limits trace a missing dependency behind misleading timeouts, with checks for process health and verified replies.</summary>
+  </entry>
+  <entry>
+    <title>Work Experience &amp; Shipped Systems</title>
+    <link rel="alternate" type="text/html" href="https://naquuuu.github.io/experience/"/>
+    <id>https://naquuuu.github.io/experience/</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <summary type="text">Detailed engineering and product management track record across MAPCLUB, Traveloka, and Boston Consulting Group (BCG) by Krishna (naquuuu).</summary>
+  </entry>
+  <entry>
+    <title>MAPCLUB: Product Management &amp; Ops</title>
+    <link rel="alternate" type="text/html" href="https://naquuuu.github.io/experience/mapclub/"/>
+    <id>https://naquuuu.github.io/experience/mapclub/</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <summary type="text">Product Management at MAPCLUB: building an AI-assisted Product Operations workspace, owning Ticketing Services requirements, checkout coupon and delivery address improvements, and app revamp coordination.</summary>
+  </entry>
+  <entry>
+    <title>Traveloka: Flight Products &amp; Refunds</title>
+    <link rel="alternate" type="text/html" href="https://naquuuu.github.io/experience/traveloka/"/>
+    <id>https://naquuuu.github.io/experience/traveloka/</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <summary type="text">Product Management at Traveloka: modified inventory tickets, refund accuracy, RPA closing automation, and airline fare rule interpretation by Krishna (naquuuu).</summary>
+  </entry>
+  <entry>
+    <title>BCG: Tender Proposals &amp; Roadmaps</title>
+    <link rel="alternate" type="text/html" href="https://naquuuu.github.io/experience/bcg/"/>
+    <id>https://naquuuu.github.io/experience/bcg/</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <summary type="text">Project Specialist at Boston Consulting Group (BCG): structuring techno-commercial tender proposals, analyzing $400M+ project pipelines, and building O&amp;M capability by Krishna (naquuuu).</summary>
+  </entry>
+  <entry>
+    <title>3M NEXCARE Bio Daily Mask</title>
+    <link rel="alternate" type="text/html" href="https://naquuuu.github.io/portfolio/3m-bio-mask/"/>
+    <id>https://naquuuu.github.io/portfolio/3m-bio-mask/</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <summary type="text">PHB-based surgical mask competition concept developed for the 3M Inspire Challenge 2021 by Team Kancil (ITB). 1st Place National Champion and 2nd Runner-Up ASEAN Regional.</summary>
+  </entry>
+  <entry>
+    <title>HotSand: Thermal Energy Storage Concept</title>
+    <link rel="alternate" type="text/html" href="https://naquuuu.github.io/portfolio/schneider-hotsand/"/>
+    <id>https://naquuuu.github.io/portfolio/schneider-hotsand/</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <summary type="text">Sustainable thermal energy storage concept for rural microgrids developed for Schneider Go Green 2022 by Team Kancil (ITB). Country Favorite Winner.</summary>
+  </entry>
+</feed>

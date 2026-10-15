@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroSubIdentity = document.getElementById('hero-sub-identity');
   const heroPortraitImg = document.getElementById('hero-portrait-img');
   const heroPortraitMeta = document.getElementById('hero-portrait-meta');
+  const heroPortraitAlt = document.getElementById('hero-portrait-img-alt');
 
   // Dynamic navbar link mapping per active perspective
   const navSectionMap = {
@@ -109,6 +110,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Lens dissolve (2026-10-15): crossfade the two portrait layers in place.
+  // Opacity only, 180ms, no geometry change. Pages without the second layer keep
+  // the older single-image swap path, and reduced motion makes the swap instant.
+  function dissolvePortrait(targetMode) {
+    const toCulture = targetMode === 'culture';
+    const metaCulture = '<span>jakarta, indonesia</span><span>culture &amp; taste</span>';
+    const metaSystems = '<span>jakarta, indonesia</span>';
+    const srcCulture = './assets/img/krishna-culture-portrait.jpeg?v=20260911';
+    const srcSystems = './assets/img/naquuuu-studio-bw.jpeg?v=20260911';
+
+    if (heroPortraitAlt) {
+      heroPortraitAlt.style.opacity = toCulture ? '1' : '0';
+      heroPortraitImg.style.opacity = toCulture ? '0' : '1';
+      heroPortraitMeta.innerHTML = toCulture ? metaCulture : metaSystems;
+      return;
+    }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      heroPortraitImg.src = toCulture ? srcCulture : srcSystems;
+      heroPortraitMeta.innerHTML = toCulture ? metaCulture : metaSystems;
+      return;
+    }
+
+    heroPortraitImg.style.opacity = '0';
+    setTimeout(() => {
+      heroPortraitImg.src = toCulture ? srcCulture : srcSystems;
+      heroPortraitMeta.innerHTML = toCulture ? metaCulture : metaSystems;
+      heroPortraitImg.style.opacity = '1';
+    }, 180);
+  }
+
   function switchMode(mode) {
     const targetMode = mode === 'culture' ? 'culture' : 'systems';
     document.body.setAttribute('data-mode', targetMode);
@@ -120,29 +152,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (viewCulture) viewCulture.classList.add('active');
       if (heroSubIdentity) heroSubIdentity.textContent = 'krishna, alias naquuuu • visual art, sound & tailoring';
 
-      // Animate single hero portrait change
-      if (heroPortraitImg && heroPortraitMeta) {
-        heroPortraitImg.style.opacity = '0';
-        setTimeout(() => {
-          heroPortraitImg.src = './assets/img/krishna-culture-portrait.jpeg?v=20260911';
-          heroPortraitMeta.innerHTML = '<span>jakarta, indonesia</span><span>culture &amp; taste</span>';
-          heroPortraitImg.style.opacity = '1';
-        }, 180);
-      }
+      if (heroPortraitImg && heroPortraitMeta) dissolvePortrait(targetMode);
     } else {
       if (viewCulture) viewCulture.classList.remove('active');
       if (viewSystems) viewSystems.classList.add('active');
       if (heroSubIdentity) heroSubIdentity.textContent = 'krishna, alias naquuuu • product manager • industrial engineering, itb';
 
-      // Animate single hero portrait change
-      if (heroPortraitImg && heroPortraitMeta) {
-        heroPortraitImg.style.opacity = '0';
-        setTimeout(() => {
-          heroPortraitImg.src = './assets/img/naquuuu-studio-bw.jpeg?v=20260911';
-          heroPortraitMeta.innerHTML = '<span>jakarta, indonesia</span>';
-          heroPortraitImg.style.opacity = '1';
-        }, 180);
-      }
+      if (heroPortraitImg && heroPortraitMeta) dissolvePortrait(targetMode);
     }
 
     updateNavHrefs(targetMode);
@@ -800,7 +816,7 @@ document.addEventListener('DOMContentLoaded', () => {
             revealIO.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.12 });
+      }, { threshold: 0.1 });
     }
     revealTargets.forEach(el => {
       if (!el.classList.contains('revealed')) revealIO.observe(el);
@@ -808,6 +824,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   reconcileMotionPreference();
   reducedMotionQuery.addEventListener('change', reconcileMotionPreference);
+
+  // ===========================================================================
+  // 8. Ticker pause (2026-10-15 motion kit): two identical chunks scroll 0 to
+  //    -50% over 40s. The strip pauses on hover or focus in css; this block
+  //    pauses it as well while the tab is hidden or the strip is offscreen.
+  // ===========================================================================
+  const marqueeStrips = Array.from(document.querySelectorAll('.marquee-strip'));
+  const marqueeOnScreen = new WeakMap();
+
+  function syncMarqueePause(strip) {
+    const offscreen = marqueeOnScreen.get(strip) === false;
+    strip.dataset.paused = (document.hidden || offscreen) ? 'true' : 'false';
+  }
+
+  if (marqueeStrips.length) {
+    if ('IntersectionObserver' in window) {
+      const marqueeIO = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          marqueeOnScreen.set(entry.target, entry.isIntersecting);
+          syncMarqueePause(entry.target);
+        });
+      }, { threshold: 0 });
+      marqueeStrips.forEach(strip => marqueeIO.observe(strip));
+    }
+    document.addEventListener('visibilitychange', () => {
+      marqueeStrips.forEach(syncMarqueePause);
+    });
+  }
 
   // Instagram Live Embed Handshake
   if (window.instgrm && window.instgrm.Embeds) {

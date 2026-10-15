@@ -28,8 +28,9 @@ kramdown:
 permalink: /blog/:title/
 
 # GitHub Pages Native Plugins (Whitelisted by GitHub Pages)
+# jekyll-feed is disabled: it cannot see hand-authored pages, so feed.xml is
+# maintained by hand (2026-10-15, blog IDE round, task B5). jekyll-sitemap stays.
 plugins:
-  - jekyll-feed
   - jekyll-sitemap
 
 # Exclude local scratch files and discontinued revamp context

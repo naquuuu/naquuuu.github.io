@@ -38,3 +38,13 @@ html.cmdk-open{overflow:hidden}
   .cmdk-item{min-height:44px;flex-wrap:wrap;gap:.25rem .75rem}
   .cmdk-hint{white-space:normal;overflow-wrap:anywhere}
 }
+
+/* Open/close motion (2026-10-15 motion kit, task B3): backdrop fades and the panel
+   settles 4px on open (120ms) and fades out on close (80ms). Focus still moves to
+   the input immediately and Escape still interrupts. Opacity and transform only. */
+.cmdk-backdrop{opacity:0;transition:opacity 80ms linear}
+.cmdk-panel{opacity:0;transform:translateY(4px);transition:opacity 80ms linear,transform 80ms linear}
+.cmdk.cmdk-open .cmdk-backdrop{opacity:1;transition-duration:120ms}
+.cmdk.cmdk-open .cmdk-panel{opacity:1;transform:translateY(0);transition-duration:120ms}
+.cmdk:not(.cmdk-open) .cmdk-backdrop,.cmdk:not(.cmdk-open) .cmdk-panel{pointer-events:none}
+@media (prefers-reduced-motion: reduce){.cmdk-backdrop,.cmdk-panel{transition:none}}

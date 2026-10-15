@@ -35,7 +35,7 @@
 
   ];
 
-  var root, input, list, closeButton, results = [], active = 0, lastFocus = null;
+  var root, input, list, closeButton, results = [], active = 0, lastFocus = null, closeTimer = null;
 
   function build() {
     root = document.createElement('div');
@@ -140,22 +140,31 @@
 
   function open() {
     if (!root) build();
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
     lastFocus = document.activeElement;
     syncViewport();
     root.hidden = false;
+    root.classList.remove('cmdk-open');
     document.documentElement.classList.add('cmdk-open');
     input.setAttribute('aria-expanded', 'true');
     input.value = '';
     render();
     input.focus();
+    // one frame at the start state, then animate in (2026-10-15 motion kit)
+    requestAnimationFrame(function () { root.classList.add('cmdk-open'); });
   }
 
   function close(restoreFocus) {
     if (!root || root.hidden) return;
-    root.hidden = true;
-    document.documentElement.classList.remove('cmdk-open');
+    root.classList.remove('cmdk-open');
     input.setAttribute('aria-expanded', 'false');
+    document.documentElement.classList.remove('cmdk-open');
     if (restoreFocus !== false && lastFocus && lastFocus.focus && lastFocus.isConnected && !lastFocus.closest('[hidden],[aria-hidden="true"]')) lastFocus.focus();
+    if (closeTimer) clearTimeout(closeTimer);
+    closeTimer = setTimeout(function () {
+      closeTimer = null;
+      root.hidden = true;
+    }, 80);
   }
 
   document.addEventListener('keydown', function (e) {
@@ -209,7 +218,7 @@
 
   var currentScript = document.currentScript;
   if (currentScript && !document.querySelector('link[href*="/assets/css/palette.css"]')) {
-    var cssHref = currentScript.src.replace(/\/assets\/js\/palette\.js(?:\?.*)?$/, '/assets/css/palette.css?v=20261014search');
+    var cssHref = currentScript.src.replace(/\/assets\/js\/palette\.js(?:\?.*)?$/, '/assets/css/palette.css?v=20261015palette');
     var styleLink = document.createElement('link'); styleLink.rel = 'stylesheet'; styleLink.href = cssHref;
     document.head.appendChild(styleLink);
   }
