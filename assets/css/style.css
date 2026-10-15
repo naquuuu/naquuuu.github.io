@@ -68,9 +68,11 @@
 
   /* --- WP2 Motion & Editorial Tokens (Obys-style design language) --- */
   --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
-  --motion-reveal-duration: 0.7s;
-  --motion-reveal-distance: 18px;
-  --marquee-speed: 28s;
+  --ease-dissolve: cubic-bezier(0.2, 0, 0, 1);   /* lens dissolve (2026-10-15 motion kit) */
+  --motion-reveal-duration: 0.18s;
+  --motion-reveal-distance: 8px;
+  --motion-dissolve-duration: 0.18s;
+  --marquee-speed: 40s;
   --media-hover-scale: 1.015;
 }
 
@@ -315,8 +317,10 @@ body[data-mode="culture"] .site-header {
 }
 
 .nav-clock {
-  font-family: var(--font-sans);
-  font-size: 0.74rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
   color: var(--text-muted);
   letter-spacing: 0.02em;
   padding: 3px 8px;
@@ -387,25 +391,28 @@ body[data-mode="culture"] .nav-audio-pill.playing {
 
 .nav-wave-bar {
   width: 2px;
-  height: 4px;
+  height: 12px;
   background: currentColor;
   border-radius: 1px;
-  transition: height 0.15s ease;
+  transform: scaleY(0.34);
+  transform-origin: bottom;
+  opacity: 0.5;
+  transition: transform 120ms linear, opacity 120ms linear;
 }
 
+/* Static per-state icon, no pulsing: the pill signals playback with an opacity
+   crossfade only (2026-10-15 motion kit, L-24 unchanged). */
+.nav-audio-pill.playing .nav-wave-bar {
+  opacity: 1;
+}
 .nav-audio-pill.playing .nav-wave-bar:nth-child(1) {
-  animation: wave-anim 0.8s infinite ease-in-out;
+  transform: scaleY(0.42);
 }
 .nav-audio-pill.playing .nav-wave-bar:nth-child(2) {
-  animation: wave-anim 1.1s infinite ease-in-out 0.2s;
+  transform: scaleY(1);
 }
 .nav-audio-pill.playing .nav-wave-bar:nth-child(3) {
-  animation: wave-anim 0.9s infinite ease-in-out 0.4s;
-}
-
-@keyframes wave-anim {
-  0%, 100% { height: 4px; }
-  50% { height: 12px; }
+  transform: scaleY(0.62);
 }
 
 /* Floating Lens Switcher: the single post-load lens control on every viewport.
@@ -418,12 +425,13 @@ body[data-mode="culture"] .nav-audio-pill.playing {
   z-index: 995;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.28s var(--ease-editorial);
+  transition: opacity 120ms linear; /* out 120ms; in 180ms via .visible (2026-10-15 motion kit) */
 }
 
 .sticky-perspective-wrap.visible {
   opacity: 1;
   pointer-events: auto;
+  transition-duration: 180ms;
 }
 
 .sticky-perspective-inner {
@@ -801,7 +809,19 @@ body[data-mode="culture"] .hero-epigraph {
   display: block;
   object-fit: cover;
   object-position: top center;
-  transition: opacity 0.25s ease, filter 0.45s ease;
+  transition: opacity var(--motion-dissolve-duration) var(--ease-dissolve), filter 0.45s ease;
+}
+
+/* Second portrait layer: the lens dissolve crossfades the two portraits in place,
+   same box and same source aspect, so the swap never moves geometry (2026-10-15). */
+.portrait-img--layer {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  width: calc(100% - 1rem);
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .portrait-meta-strip {
@@ -984,17 +1004,16 @@ body[data-mode="culture"] .mode-tab-btn.active {
 
 .view-panel.active {
   display: block;
-  animation: modeShift 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: modeShift var(--motion-dissolve-duration) var(--ease-dissolve) forwards;
 }
 
+/* opacity only: the lens dissolve never animates geometry (2026-10-15 motion kit) */
 @keyframes modeShift {
   from {
     opacity: 0;
-    transform: translateY(12px) scale(0.99);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
   }
 }
 
@@ -1520,7 +1539,8 @@ body[data-mode="culture"] .note-tag {
 
 .note-date {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
+  font-variant-numeric: lining-nums tabular-nums;
   color: var(--text-muted);
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-subtle);
@@ -1645,11 +1665,13 @@ body[data-mode="culture"] .note-tag {
 }
 
 .culture-statement {
-  font-size: 1.35rem;
-  font-weight: 600;
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
   line-height: 1.5;
+  letter-spacing: -0.01em;
+  font-weight: 600;
   color: var(--text-primary);
   font-style: italic;
+  text-wrap: pretty;
 }
 
 .culture-dossier-stack {
@@ -3193,7 +3215,9 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
 .essay-content :is(p, li, td, th, blockquote, figcaption, dd),
 .inquiry-prose :is(p, li, td, th, blockquote, figcaption, dd) {
   font-family: var(--font-read);
-  font-size: 1rem;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  hanging-punctuation: first; /* progressive nicety: safari only, harmless elsewhere */
 }
 
 /* Article Reading Column (Blog Reliability Standard: 72ch constraint) */
@@ -3203,6 +3227,13 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
   min-width: 0;
 }
 
+/* Reading measure inside the 72ch column: about 68ch (2026-10-15 design spec).
+   The container keeps its 72ch constraint, only the running text narrows. */
+.essay-content > p,
+.essay-content > blockquote {
+  max-width: 68ch;
+}
+
 .essay-header {
   margin-bottom: 2rem;
   padding-bottom: 1rem;
@@ -3210,16 +3241,19 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
 }
 
 .essay-header-title {
-  font-size: 2rem;
-  line-height: 1.2;
+  font-size: clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
   margin-bottom: 0.75rem;
+  text-wrap: balance;
 }
 
 .essay-meta-row {
   display: flex;
   gap: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.8125rem;
+  font-variant-numeric: lining-nums tabular-nums;
   color: var(--text-muted);
   flex-wrap: wrap;
 }
@@ -3369,7 +3403,8 @@ body[data-mode="culture"] .degrade-card-phb .degrade-metric {
   align-items: center;
   gap: 0.65rem;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
+  font-variant-numeric: lining-nums tabular-nums;
   color: var(--text-muted);
   flex-wrap: wrap;
   margin-bottom: 0.75rem;
@@ -4650,3 +4685,55 @@ body[data-mode="culture"] .ai-note-label { color: #DC2626; }
 }
 @media (max-width: 380px) { .mode-switcher { display: flex; max-width: 100%; } .mode-tab-btn { flex: 1 1 0%; } }
 .essay-content code { overflow-wrap: anywhere; white-space: normal; } .essay-content pre code { white-space: pre; }
+
+/* =============================================================================
+   MOTION KIT (2026-10-15, track B task B3)
+   transform and opacity only, no layout-property animation, no per-second text
+   reflow. Reduced motion is honoured by the global rule above plus the block at
+   the end of this section.
+   ============================================================================= */
+
+/* Ticker: two identical chunks scroll 0 to -50% over 40s. Pause on hover, on
+   focus, and whenever the js pauses the strip (hidden tab or offscreen). */
+.marquee-strip:hover .marquee-track,
+.marquee-strip:focus-within .marquee-track,
+.marquee-strip[data-paused="true"] .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Press feedback: instant settle on pointerdown, 120ms release. The transform lives
+   on an inner `.press-settle` wrapper, so the control's own box and its focus ring
+   never move (curator must-fix, 2026-10-15). */
+.press-settle {
+  display: inline-flex;
+  align-items: center;
+  gap: inherit;
+  transition: transform 120ms linear;
+}
+
+.inquiry-btn:active .press-settle,
+.btn-primary:active .press-settle,
+.btn-secondary:active .press-settle,
+.creative-btn:active .press-settle,
+.proof-deck-btn:active .press-settle,
+.essay-filter-btn:active .press-settle {
+  transform: translateY(1px);
+  transition: transform 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inquiry-btn:active .press-settle,
+  .btn-primary:active .press-settle,
+  .btn-secondary:active .press-settle,
+  .creative-btn:active .press-settle,
+  .proof-deck-btn:active .press-settle,
+  .essay-filter-btn:active .press-settle {
+    transform: none;
+  }
+
+  .portrait-img,
+  .portrait-img--layer,
+  .nav-wave-bar {
+    transition: none;
+  }
+}
