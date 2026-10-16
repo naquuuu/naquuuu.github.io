@@ -1,0 +1,10 @@
+{
+  "title": "naquuuu, selected work",
+  "contact": "rbkrishnamurti@gmail.com / naquuuu.github.io",
+  "max_pages": 20,
+  "output_default": "portfolio.pdf",
+  "routes": [
+    { "path": "/portfolio/3m-bio-mask/", "pages": 2 },
+    { "path": "/portfolio/schneider-hotsand/", "pages": 2 }
+  ]
+}

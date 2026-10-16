@@ -25,7 +25,7 @@ JS_PATH = ROOT / "assets" / "js" / "main.js"
 SITEMAP_PATH = ROOT / "sitemap.xml"
 ROBOTS_PATH = ROOT / "robots.txt"
 SITE_URL = "https://naquuuu.github.io/"
-CURRENT_ASSET_VERSION = "20261015ide"
+CURRENT_ASSET_VERSION = "20261016pack"
 # non-creative pages must carry a blueprint flowchart (STYLE_BIBLE 2.8); the two creative essays are exempt
 FLOWCHART_REQUIRED = {
     "blog/building-an-autonomous-product-operating-system/index.html",

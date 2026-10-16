@@ -4737,3 +4737,179 @@ body[data-mode="culture"] .ai-note-label { color: #DC2626; }
     transition: none;
   }
 }
+
+/* =============================================================================
+   PRINT / PDF EXPORT LAYER (2026-10-16, portfolio pack phase 1, task D1)
+   Paper ground on whichever lens the page booted in, site chrome off, no motion,
+   nothing broken through the middle of a figure or a callout. Every rule lives in
+   this print layer, so screen rendering is unchanged (verified by a computed-style
+   spot check in the 2026-10-16 receipt). Rendered to PDF by
+   scripts/build_portfolio_pdf.py through headless Chromium --print-to-pdf.
+   ============================================================================= */
+
+@page {
+  size: A4;
+  margin: 14mm 15mm 16mm;
+}
+
+@media print {
+  /* Paper tokens forced back on. Restated per selector because
+     body[data-mode="culture"] otherwise wins on specificity and the culture lens
+     would print dark. Same values as :root. */
+  :root,
+  body,
+  body[data-mode="culture"] {
+    --bg-primary: #FBFBFA;
+    --bg-surface: #F2F2ED;
+    --bg-surface-elevated: #ECECE6;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #F8F8F4;
+    --bg-input: #FFFFFF;
+    --bg-code: #F0EFEA;
+    --border-subtle: #E5E5DF;
+    --border-active: #D4D4CE;
+    --border-crimson: #DC2626;
+    --border-glow: rgba(220, 38, 38, 0.2);
+    --text-primary: #111110;
+    --text-secondary: #555550;
+    --text-accent: #DC2626;
+    --text-muted: #555550;
+    --text-code: #111110;
+    --accent-crimson: #DC2626;
+    --accent-crimson-hover: #B91C1C;
+    --accent-crimson-dim: rgba(220, 38, 38, 0.08);
+    --accent-wine: #991B1B;
+    --shadow-card: none;
+    --shadow-glow: none;
+    --shadow-elevated: none;
+    color-scheme: light;
+  }
+
+  /* A washer keeps its tint on paper: the browser drops background fills by
+     default, and exact is asked for only where the tint carries meaning. */
+  html,
+  body,
+  .ai-note,
+  .note-tag,
+  .concept-box,
+  .failure-tree-card,
+  .inquiry-card,
+  pre,
+  code,
+  mark {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  html,
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+  }
+
+  /* Site chrome off. In this stylesheet the scroll affordance is the floating lens
+     switcher; there is no separate scroll progress indicator to hide. */
+  .skip-link,
+  .site-header,
+  .nav-links,
+  .nav-link,
+  .nav-back-link,
+  .nav-search-chip,
+  .nav-clock,
+  .nav-cv-chip,
+  .nav-audio-pill,
+  .cmdk,
+  .marquee-strip,
+  .sticky-perspective-wrap,
+  .mobile-bottom-dock,
+  .mode-switch-wrap {
+    display: none !important;
+  }
+
+  /* Motion off, and anything that was revealed on scroll is simply present. */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Media never runs past the content column, and a horizontal scroll container
+     prints its whole content instead of clipping it. */
+  img,
+  video,
+  iframe,
+  canvas {
+    max-width: 100% !important;
+    height: auto;
+  }
+
+  svg {
+    max-width: 100% !important;
+  }
+
+  .scroll-x {
+    overflow: visible !important;
+  }
+
+  /* No break through a figure, a callout, an arrow or a table row. */
+  figure,
+  figcaption,
+  blockquote,
+  pre,
+  table,
+  tr,
+  .ai-note,
+  .concept-box,
+  .failure-tree-card,
+  .failure-tree-text,
+  .proof-card,
+  .battle-card,
+  .degrade-card,
+  .sys-card,
+  .essay-card,
+  .flow-card,
+  .loop-card,
+  .note-item,
+  .atelier-card,
+  .moment {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* A heading never ends a sheet, and the opening block stays with its body. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .essay-header {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Major sections: an explicit sheet start is opt-in through this utility, which
+     the generated export cover uses. A blanket rule on every h2 was rejected: on a
+     two page per work export it would spend the 20 page cap on half empty sheets. */
+  .print-page-break {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  a {
+    color: var(--text-accent);
+  }
+
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+}
