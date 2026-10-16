@@ -62,11 +62,19 @@
       <aside class="ai-note" role="note"><span class="ai-note-label">ai note</span>this page was written by ai and might be wrong. check anything important and double check it with the blog owner before you rely on it.</aside>
     </div>
 
+    <!-- Outcome first -->
+    <div class="concept-box" style="margin-bottom: 2.5rem;">
+      <h2 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">outcome first</h2>
+      <p style="color: var(--text-secondary); font-size: 0.94rem; line-height: 1.7; margin: 0;">
+        the result this page leads with: flight refund calculation accuracy moved from 87.97% to 94.24%. the work behind it: direct provider api integration, plus a tax (vat, service charges) and commission calculation engine. refund closing automation doubled from 16.76% to 34.38%. refund policy completeness reached 95.76%.
+      </p>
+    </div>
+
     <!-- Core Context -->
     <div class="concept-box" style="margin-bottom: 2.5rem;">
       <h2 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">the operational reality</h2>
       <p style="color: var(--text-secondary); font-size: 0.94rem; line-height: 1.7; margin: 0;">
-        Managing airline ticketing and high-volume refund operations requires balancing commercial flexibility, complex carrier tariff structures, and strict regulatory standards. At Traveloka, I owned commercial ticket development, led direct provider API integrations and tax calculation engines, and implemented automation to reduce operational workload while ensuring compliance with Indonesian Ministry of Transportation PM 185 tahun 2015.
+        managing airline ticketing and high-volume refund operations requires balancing commercial flexibility, complex carrier tariff structures, and strict regulatory standards. at traveloka, i owned commercial ticket development, led direct provider api integrations and tax calculation engines, and implemented automation to reduce operational workload while ensuring compliance with indonesian ministry of transportation pm 185 tahun 2015.
       </p>
     </div>
 
@@ -185,13 +193,13 @@
       <div class="failure-tree-card">
         <div class="failure-tree-header">modified inventory ticket product</div>
         <div class="failure-tree-text">
-          Owned end-to-end development of a modified inventory ticket product, redesigning marked-up refund fee policies and discounted pricing logic. Maintained strict compliance with Indonesian Ministry of Transportation PM 185 tahun 2015.
+          owned end-to-end development of a modified inventory ticket product, redesigning marked-up refund fee policies and discounted pricing logic. maintained strict compliance with indonesian ministry of transportation pm 185 tahun 2015.
         </div>
       </div>
       <div class="failure-tree-card">
         <div class="failure-tree-header">commercial outcome: ~idr 10bn net revenue</div>
         <div class="failure-tree-text">
-          Generated approximately IDR 10 billion in net revenue within 3 months of launch from a modified inventory ticket product with redesigned refund-fee policies and discounted pricing logic.
+          generated approximately idr 10 billion in net revenue within 3 months of launch from a modified inventory ticket product with redesigned refund-fee policies and discounted pricing logic.
         </div>
       </div>
     </div>
@@ -206,14 +214,14 @@
       <div class="failure-tree-card">
         <div class="failure-tree-header">tax &amp; commission calculation engine</div>
         <div class="failure-tree-text">
-          Led direct provider API integration and engineered a calculation engine supporting new tax components (VAT, service charges) and commissions, significantly reducing customer and operational escalations.
+          led direct provider api integration and engineered a calculation engine supporting new tax components (vat, service charges) and commissions, reducing customer and operational escalations.
         </div>
       </div>
 
       <div class="failure-tree-card">
         <div class="failure-tree-header">accuracy improvement: 87.97% to 94.24%</div>
         <div class="failure-tree-text">
-          Improved flight refund calculation accuracy from 87.97% to 94.24% by leading direct provider API integration and engineering a tax (VAT, service charges) and commission calculation engine.
+          improved flight refund calculation accuracy from 87.97% to 94.24% by leading direct provider api integration and engineering a tax (vat, service charges) and commission calculation engine.
         </div>
       </div>
     </div>
@@ -228,14 +236,51 @@
       <div class="failure-tree-card">
         <div class="failure-tree-header">rpa refund closing automation: 16.76% to 34.38%</div>
         <div class="failure-tree-text">
-          Doubled refund closing automation from 16.76% to 34.38% through robotic process automation (RPA), cutting manual handling time and freeing operations capacity.
+          doubled refund closing automation from 16.76% to 34.38% through robotic process automation (rpa), cutting manual handling time and freeing operations capacity.
         </div>
       </div>
 
       <div class="failure-tree-card">
         <div class="failure-tree-header">policy completeness (95.76%) &amp; cat 16 fare rules</div>
         <div class="failure-tree-text">
-          Drove refund policy completeness to 95.76% via direct provider API integration and built an anomaly detection dashboard to flag illogical policy data for provider escalation. Improved an LLM-powered workflow to parse and translate airline CAT 16 Fare Rules in real-time, designed to automate refund policy interpretation at scale.
+          drove refund policy completeness to 95.76% via direct provider api integration and built an anomaly detection dashboard to flag illogical policy data for provider escalation. improved an llm-powered workflow to parse and translate airline cat 16 fare rules in real-time, designed to automate refund policy interpretation at scale.
+        </div>
+      </div>
+    </div>
+
+    <!-- Failure Modes & Edge Cases -->
+    <div class="section-label-bar" style="margin-top: 2.5rem;">
+      <span class="section-label">failure modes &amp; edge cases</span>
+      <span class="section-count">[ provider feeds and fare rules ]</span>
+    </div>
+
+    <div class="failure-tree-grid">
+      <div class="failure-tree-card">
+        <div class="failure-tree-header">illogical policy data</div>
+        <div class="failure-tree-text">
+          provider policy feeds can carry illogical policy data, so an anomaly detection dashboard flags policy errors for provider escalation instead of trusting the raw feed.
+        </div>
+      </div>
+
+      <div class="failure-tree-card">
+        <div class="failure-tree-header">unstructured fare rules</div>
+        <div class="failure-tree-text">
+          airline cat 16 fare rules arrive as unstructured tariff text, so an llm-powered workflow was improved to parse and translate them in real time, designed to automate refund policy interpretation at scale.
+        </div>
+      </div>
+    </div>
+
+    <!-- Trade-offs -->
+    <div class="section-label-bar" style="margin-top: 2.5rem;">
+      <span class="section-label">trade-offs</span>
+      <span class="section-count">[ commercial flexibility against regulation ]</span>
+    </div>
+
+    <div class="failure-tree-grid">
+      <div class="failure-tree-card">
+        <div class="failure-tree-header">pricing freedom inside a regulated frame</div>
+        <div class="failure-tree-text">
+          the work sits between commercial flexibility, complex carrier tariff structures, and strict regulatory standards: refund fee and discounted pricing logic was redesigned while maintaining compliance with indonesian ministry of transportation pm 185 tahun 2015.
         </div>
       </div>
     </div>
