@@ -853,6 +853,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ===========================================================================
+  // 9. Lens indicator (2026-10-22): one ink block slides between the two tabs
+  //    instead of the old per-button pop + glow (rejected in STYLE_BIBLE 2.9).
+  //    Without this block the active button keeps its own fill, so no-JS users
+  //    still see a normal segmented control.
+  // ===========================================================================
+  const modeSwitchers = Array.from(document.querySelectorAll('.mode-switcher'));
+
+  function syncModeIndicators() {
+    modeSwitchers.forEach(switcher => {
+      const indicator = switcher.querySelector('.mode-switcher-indicator');
+      const activeBtn = switcher.querySelector('.mode-tab-btn.active');
+      if (!indicator || !activeBtn) return;
+      const switcherRect = switcher.getBoundingClientRect();
+      const btnRect = activeBtn.getBoundingClientRect();
+      if (!btnRect.width) return;
+      switcher.classList.add('has-indicator');
+      indicator.style.width = btnRect.width + 'px';
+      indicator.style.transform = 'translateX(' + (btnRect.left - switcherRect.left - switcher.clientLeft) + 'px)';
+    });
+  }
+
+  syncModeIndicators();
+  window.addEventListener('resize', syncModeIndicators);
+  window.addEventListener('load', syncModeIndicators, { once: true });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(syncModeIndicators);
+  }
+  /* the sticky switcher is hidden until it scrolls in, so it has zero width at
+     load; a resize observer re-measures it the moment it gets laid out */
+  if ('ResizeObserver' in window) {
+    const modeSwitcherObserver = new ResizeObserver(() => syncModeIndicators());
+    modeSwitchers.forEach(switcher => modeSwitcherObserver.observe(switcher));
+  }
+  new MutationObserver(syncModeIndicators).observe(document.body, {
+    attributes: true,
+    attributeFilter: ['data-mode']
+  });
+
   // Instagram Live Embed Handshake
   if (window.instgrm && window.instgrm.Embeds) {
     try {

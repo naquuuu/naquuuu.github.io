@@ -943,24 +943,53 @@ body[data-mode="culture"] .hero-epigraph {
   color: var(--text-primary);
 }
 
-@keyframes tabActivePop {
-  0% { transform: scale(0.97); }
-  60% { transform: scale(1.02); }
-  100% { transform: scale(1); }
+/* The lens is one ink block that slides between the two labels. The old per-button
+   pop (scale 0.97 -> 1.02) and its crimson glow were rejected in STYLE_BIBLE 2.9;
+   the indicator is the sanctioned ink-filled segmented control, just moving. */
+.mode-switcher-indicator {
+  display: none;
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 0;
+  height: calc(100% - 8px);
+  z-index: 1;
+  background: var(--text-primary);
+  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1), width 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+body[data-mode="culture"] .mode-switcher-indicator { background: #F3E6E1; }
+.mode-switcher.has-indicator .mode-switcher-indicator { display: block; }
 
+/* Base active state (the no-JS and pre-measure fallback) is the ink fill. */
 .mode-tab-btn.active {
-  background: var(--bg-card);
-  color: var(--text-primary);
-  border-color: var(--border-crimson);
-  box-shadow: var(--shadow-glow);
-  animation: tabActivePop 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+  background: var(--text-primary);
+  color: var(--bg-primary, #FBFBFA);
+  border-color: var(--text-primary);
 }
 
 body[data-mode="culture"] .mode-tab-btn.active {
-  background: var(--bg-surface-elevated);
-  border-color: var(--border-crimson);
-  box-shadow: var(--shadow-glow);
+  background: #F3E6E1;
+  color: #2A1416;
+  border-color: #F3E6E1;
+}
+
+/* With JS measuring the indicator, the ink moves to the indicator itself. */
+.mode-switcher.has-indicator .mode-tab-btn.active,
+body[data-mode="culture"] .mode-switcher.has-indicator .mode-tab-btn.active {
+  background: transparent;
+  border-color: transparent;
+  color: var(--bg-primary, #FBFBFA);
+}
+body[data-mode="culture"] .mode-switcher.has-indicator .mode-tab-btn.active { color: #2A1416; }
+
+.sticky-perspective-inner .mode-switcher-indicator {
+  top: 3px;
+  height: calc(100% - 6px);
+  border-radius: var(--radius-full);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mode-switcher-indicator { transition: none; }
 }
 
 .mode-tab-icon {
@@ -4352,15 +4381,9 @@ main { counter-reset: sec; }
 /* =============================================================================
    ROUND 3: lens switcher, toolkit chips, command palette
    ============================================================================= */
-/* Lens switcher: an ink-filled segmented control, no glow or pop */
-.mode-tab-btn.active,
-body[data-mode="culture"] .mode-tab-btn.active {
-  background: var(--text-primary);
-  color: var(--bg-primary, #FBFBFA);
-  border-color: var(--text-primary);
-  box-shadow: none;
-  animation: none;
-}
+/* Lens switcher: the ink spec now lives with .mode-tab-btn.active near the top of
+   this sheet, and the sliding indicator owns the animated fill. The old pop
+   keyframes and glow are deleted, not overridden. */
 .sticky-perspective-inner {
   padding: 3px;
   gap: 2px;
@@ -4384,7 +4407,6 @@ body[data-mode="culture"] .mode-tab-btn.active {
   background: currentColor; opacity: 0.35; flex: none;
 }
 .sticky-perspective-inner .mode-tab-btn.active::before { background: var(--accent-crimson); opacity: 1; }
-body[data-mode="culture"] .mode-tab-btn.active { background: #F3E6E1; color: #2A1416; border-color: #F3E6E1; }
 
 /* Toolkit chips: regular sans, source tooltip on hover or focus */
 .comp-chips .comp-item { padding: 0; border: 0; background: none; font-family: var(--font-sans); }
@@ -4449,11 +4471,11 @@ a.skill-chip:hover, a.skill-chip:focus-visible { border-color: var(--accent-crim
 /* Command palette */
 .cmdk { position: fixed; inset: 0; z-index: 3000; }
 .cmdk[hidden] { display: none; }
-.cmdk-backdrop { position: absolute; inset: 0; background: rgba(17, 17, 16, 0.28); backdrop-filter: blur(2px); }
+.cmdk-backdrop { position: absolute; inset: 0; background: rgba(17, 17, 16, 0.22); }
 .cmdk-panel {
   position: relative; margin: 12vh auto 0; width: min(560px, calc(100% - 2rem));
-  background: var(--bg-primary, #FBFBFA); border: 1px solid var(--border-active); border-radius: 12px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18); overflow: hidden;
+  background: var(--bg-primary, #FBFBFA); border: 1px solid var(--border-active); border-radius: var(--radius-sm, 10px);
+  box-shadow: none; overflow: hidden;
 }
 .cmdk-search { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1rem; border-bottom: 1px solid var(--border-subtle); }
 .cmdk-prompt { font-family: var(--font-mono); color: var(--accent-crimson); font-weight: 700; }
@@ -4750,6 +4772,62 @@ body[data-mode="culture"] .ai-note-label { color: #DC2626; }
 @page {
   size: A4;
   margin: 14mm 15mm 16mm;
+}
+
+/* =============================================================================
+   Role timeline (experience hub)
+   One static hairline row, oldest to newest. It indexes the dossiers below:
+   about 36px tall, no rail fill, no scroll listener, no card surface.
+   ========================================================================== */
+.role-timeline {
+  margin: 0 0 1.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.role-timeline-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.role-timeline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 36px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  text-transform: lowercase;
+  transition: color 0.2s ease;
+}
+
+.role-timeline-dot {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--border-subtle);
+  transition: background-color 0.2s ease;
+}
+
+.role-timeline-when { margin-left: 0.3rem; opacity: 0.75; }
+
+.role-timeline-link:hover,
+.role-timeline-link:focus-visible { color: var(--text-primary); }
+.role-timeline-link:hover .role-timeline-dot { background: var(--text-muted); }
+
+.role-timeline-item.is-current .role-timeline-link { color: var(--accent-crimson); }
+.role-timeline-item.is-current .role-timeline-dot { background: var(--accent-crimson); }
+
+@media (prefers-reduced-motion: reduce) {
+  .role-timeline-link,
+  .role-timeline-dot { transition: none; }
 }
 
 @media print {
