@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>build your own blog with opencode and a few agents | naquuuu</title>
+<meta name="description" content="a 12 slide setup guide for the team: free github pages, opencode desktop, and a small agent workspace, one post at a time.">
+<meta property="og:image" content="https://naquuuu.github.io/assets/img/naquuuu-og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="naquuuu share card: a studio portrait on warm paper with the naquuuu wordmark and the line matter + code.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="build your own blog with opencode and a few agents">
+<meta name="twitter:description" content="a 12 slide setup guide for the team: free github pages, opencode desktop, and a small agent workspace, one post at a time.">
+<meta name="twitter:image" content="https://naquuuu.github.io/assets/img/naquuuu-og-card.png">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="canonical" href="https://naquuuu.github.io/blog/build-your-own-blog-with-opencode/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="naquuuu">
+<meta property="og:title" content="build your own blog with opencode and a few agents">
+<meta property="og:description" content="a 12 slide setup guide for the team: free github pages, opencode desktop, and a small agent workspace, one post at a time.">
+<meta property="og:url" content="https://naquuuu.github.io/blog/build-your-own-blog-with-opencode/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": "https://naquuuu.github.io/blog/build-your-own-blog-with-opencode/",
+  "headline": "build your own blog with opencode and a few agents",
+  "description": "a 12 slide setup guide for the team: free github pages, opencode desktop, and a small agent workspace, one post at a time.",
+  "datePublished": "2026-10-21",
+  "author": {
+    "@type": "Person",
+    "@id": "https://naquuuu.github.io/#person",
+    "name": "krishna",
+    "url": "https://naquuuu.github.io/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "naquuuu",
+    "url": "https://naquuuu.github.io/"
+  },
+  "image": "https://naquuuu.github.io/assets/img/naquuuu-studio-bw.jpeg",
+  "inLanguage": "en"
+}
+</script>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg?v=20260917i">
+<link rel="alternate icon" href="../../favicon.ico?v=20260917i">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+/* ==================================================================
+   naquuuu sharing session: build your own blog with opencode
+   order: 0 tokens, 1 shell, 2 chrome, 3 type + shared parts,
+   4 motion, 5 per-slide blocks, 6 print + reduced motion
+   ================================================================== */
+
+/* ---------- 0. tokens (light is the default; dark via data-theme) ---------- */
+:root{
+  --bg-primary:#fbfbfa; --bg-surface:#f2f2ed; --bg-surface-elevated:#ecece6; --bg-card:#ffffff;
+  --border-subtle:#e5e5df; --border-active:#d4d4ce;
+  --text-primary:#111110; --text-secondary:#555550;
+  --accent-crimson:#dc2626; --accent-crimson-dim:rgba(220,38,38,.08);
+  --wash-a:rgba(220,38,38,.10); --wash-b:rgba(220,38,38,.05);
+  --paper:#fffdf6; --node:#fbf8ee; --line:#bdb7a5; --arrow:#6b675c; --ink:#111110;
+  --n-weak:#bdb7a5; --n-strong:#6b675c;
+  --shadow-card:0 2px 12px rgba(0,0,0,.04);
+  --r-sm:6px; --r-md:12px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --f-head:'Segoe UI',system-ui,sans-serif; --f-body:'Open Sans',system-ui,sans-serif; --f-mono:Consolas,ui-monospace,monospace;
+}
+html[data-theme="dark"]{
+  --bg-primary:#160e10; --bg-surface:#22171a; --bg-surface-elevated:#2b1d20; --bg-card:#26191c;
+  --border-subtle:#362529; --border-active:#4f353b;
+  --text-primary:#f5ece8; --text-secondary:#b5a5a0;
+  --accent-crimson:#c85250; --accent-crimson-dim:rgba(200,82,80,.14);
+  --wash-a:rgba(200,82,80,.12); --wash-b:rgba(200,82,80,.06);
+  --paper:#2a1d1f; --node:#33242a; --line:#5a4247; --arrow:#b5a5a0; --ink:#f5ece8;
+  --n-weak:#85736f; --n-strong:#cdbeb8;
+  --shadow-card:0 4px 24px rgba(0,0,0,.5);
+}
+
+/* ---------- 1. shell: viewport, scaling stage, slides ---------- */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg-surface);color:var(--text-primary);font-family:var(--f-body);-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit}
+.viewport{position:fixed;left:0;top:0;right:0;bottom:0;overflow:hidden;background:var(--bg-surface)}
+.stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center;background:var(--bg-primary);border:1px solid var(--border-subtle);overflow:hidden}
+.slide{position:absolute;left:0;top:0;width:1280px;height:720px;padding:80px 88px 68px;display:none;flex-direction:column;background:var(--bg-primary);overflow:hidden}
+.slide.active{display:flex}
+.body{flex:1;display:flex;flex-direction:column;gap:22px;min-height:0}
+.body.mid{justify-content:center}
+.notes{display:none}
+
+/* ---------- 2. chrome: top bar, footer, hud, notes panel ---------- */
+.top{position:absolute;top:30px;left:88px;right:88px;z-index:3;display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--border-subtle);font:700 14px/20px var(--f-mono);letter-spacing:.04em;color:var(--text-primary);white-space:nowrap}
+.top .num{color:var(--accent-crimson);margin-right:8px}
+.top .tr{font-weight:400;font-size:13px;letter-spacing:.02em;color:var(--text-secondary)}
+.foot{position:absolute;left:0;right:0;bottom:0;height:44px;border-top:1px solid var(--border-subtle);display:flex;align-items:center;gap:24px;padding:0 88px;font:400 13px var(--f-mono);color:var(--text-secondary);background:var(--bg-primary);z-index:3}
+.wm{font:700 17px var(--f-head);letter-spacing:-.015em;color:var(--text-primary);flex:none}
+.wm i{font-style:normal;color:var(--accent-crimson)}
+.marq{flex:1;overflow:hidden;white-space:nowrap;min-width:0}
+.marq-in{display:inline-block;animation:mq 44s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ctr{flex:none;font-weight:600;color:var(--text-primary)}
+.hud{position:fixed;top:3px;right:6px;display:flex;gap:4px;z-index:20;opacity:.38;transition:opacity .2s;flex-wrap:wrap;max-width:calc(100vw - 12px);justify-content:flex-end}
+.hud:hover,.hud:focus-within{opacity:1}
+.hud button{font:600 11px/1 var(--f-mono);background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:3px;padding:3px 8px;cursor:pointer;color:var(--text-secondary)}
+.hud button:hover{border-color:var(--accent-crimson);color:var(--accent-crimson)}
+.deck-back-link{display:inline-flex;min-width:44px;min-height:44px;align-items:center;justify-content:center;padding:3px 10px;border:1px solid var(--border-subtle);border-radius:3px;background:var(--bg-card);color:var(--text-secondary);font:600 11px/1 var(--f-mono);text-decoration:none}
+.deck-back-link:hover,.deck-back-link:focus-visible{border-color:var(--accent-crimson);color:var(--accent-crimson)}
+.notespanel{position:fixed;left:0;right:0;bottom:0;height:30vh;background:var(--bg-card);border-top:2px solid var(--accent-crimson);z-index:30;display:none;flex-direction:column;overflow:hidden}
+.notespanel.open{display:flex}
+.notespanel header{font:700 12px var(--f-mono);letter-spacing:.06em;color:var(--accent-crimson);padding:10px 24px 4px}
+.notespanel .nb{overflow-y:auto;padding:4px 24px 16px;font-size:18px;line-height:1.55;color:var(--text-primary)}
+.notespanel .nb p{margin:0 0 8px;max-width:1100px}
+
+/* ---------- 3. type + shared parts ---------- */
+h1,h2,h3,p{margin:0}
+.t{font:700 46px/1.12 var(--f-head);letter-spacing:-.02em;color:var(--text-primary);max-width:1104px}
+.t em{font-style:normal;color:var(--accent-crimson)}
+.sub{font:400 23px/1.5 var(--f-body);color:var(--text-secondary);max-width:960px}
+.txt{font:400 21px/1.5 var(--f-body);color:var(--text-secondary)}
+.foot-note{font:400 13px/1.5 var(--f-mono);color:var(--text-secondary);letter-spacing:.02em}
+.kicker{font:600 13px var(--f-mono);letter-spacing:.06em;color:var(--text-secondary)}
+.tag{display:inline-block;font:600 12px var(--f-mono);letter-spacing:.04em;border:1px solid var(--border-subtle);border-radius:999px;padding:3px 11px;color:var(--text-secondary);background:var(--bg-surface);white-space:nowrap}
+.rule{height:2px;background:var(--accent-crimson);border:0}
+
+/* paper card (visuals) */
+.card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:22px 24px;box-shadow:var(--shadow-card);min-width:0}
+.fig{position:relative;margin:0;background:var(--paper);border:1px solid var(--border-subtle);border-radius:var(--r-sm);box-shadow:var(--shadow-card);min-width:0}
+.fig svg{display:block;width:100%;height:auto}
+
+/* svg text and strokes shared by the diagram */
+svg text{font-family:var(--f-mono);font-size:14px;letter-spacing:.02em;fill:var(--text-secondary)}
+svg text.ink{fill:var(--ink)}
+svg text.red{fill:var(--accent-crimson)}
+svg text.b{font-weight:700}
+svg .nd{fill:var(--bg-card);stroke:var(--border-active);stroke-width:1}
+svg .lnk{fill:none;stroke:var(--arrow);stroke-width:1.5}
+svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
+
+/* ---------- 4. motion (calm editorial) ---------- */
+@keyframes k-rise{from{opacity:0;transform:translateY(12px)}}
+@keyframes k-fade{from{opacity:0}}
+.slide.play .rise{animation:k-rise calc(var(--t,.8)*1s) var(--ease) calc(var(--d,0)*1s) both}
+.slide.play .fade{animation:k-fade calc(var(--t,.7)*1s) var(--ease) calc(var(--d,0)*1s) both}
+
+/* ---------- 5. per-slide blocks ---------- */
+
+/* ===== s1 cover ===== */
+.s1{background:radial-gradient(900px 560px at 88% 6%,var(--wash-a),transparent 70%),radial-gradient(720px 520px at 4% 98%,var(--wash-b),transparent 70%),var(--bg-primary)}
+.s1 .body{position:relative;z-index:1;gap:0;justify-content:center}
+.s1-rule{width:64px;height:2px;background:var(--accent-crimson);margin:0 0 22px}
+.cover-h{font:700 66px/1.06 var(--f-head);letter-spacing:-.03em;color:var(--text-primary);max-width:980px}
+.cover-h em{font-style:normal;color:var(--accent-crimson)}
+.s1 .sub{margin-top:22px;max-width:820px}
+.cover-meta{display:flex;gap:18px;align-items:center;margin-top:26px;font:400 14px var(--f-mono);color:var(--text-secondary)}
+.cover-meta i{font-style:normal;color:var(--accent-crimson)}
+.ai-note{margin:26px 0 0;padding:9px 13px;background:var(--accent-crimson-dim);border:1px solid var(--accent-crimson-dim);border-left:4px solid var(--accent-crimson);border-radius:var(--r-sm);font:500 13px/1.5 var(--f-body);color:var(--text-primary);max-width:760px}
+.ai-note-label{font:700 11px var(--f-mono);letter-spacing:.04em;color:var(--accent-crimson);margin-right:8px}
+
+/* ===== s2 promise: three cards ===== */
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.grid3 .card{display:flex;flex-direction:column;gap:10px}
+.card-num{font:700 13px var(--f-mono);letter-spacing:.06em;color:var(--accent-crimson)}
+.card-h{font:700 24px/1.25 var(--f-head);letter-spacing:-.015em;color:var(--text-primary)}
+.card-p{font:400 18px/1.5 var(--f-body);color:var(--text-secondary)}
+
+/* ===== s3 stack rows ===== */
+.rows{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border-subtle)}
+.row{display:grid;grid-template-columns:64px 210px 1fr;gap:22px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--border-subtle)}
+.row-num{font:700 14px var(--f-mono);color:var(--accent-crimson);letter-spacing:.06em}
+.row-h{font:700 24px/1.2 var(--f-head);letter-spacing:-.015em}
+.row-p{font:400 19px/1.5 var(--f-body);color:var(--text-secondary)}
+.flowline{font:400 15px var(--f-mono);color:var(--text-secondary);letter-spacing:.03em}
+.flowline b{color:var(--accent-crimson)}
+
+/* ===== s4 + s10 command cards ===== */
+.cmd{margin:0;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-card)}
+.cmd-label{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 16px;background:var(--bg-surface-elevated);border-bottom:1px solid var(--border-subtle);font:400 12px var(--f-mono);letter-spacing:.05em;color:var(--text-secondary)}
+.cmd-body{padding:14px 18px}
+.cmd-line{display:grid;grid-template-columns:104px 1fr;gap:14px;align-items:baseline;padding:6px 0;font:400 15px/1.45 var(--f-mono)}
+.cmd-key{color:var(--text-secondary)}
+.cmd-text{color:var(--text-primary);overflow-wrap:anywhere}
+.cmd-text i{font-style:normal;color:var(--accent-crimson)}
+
+/* ===== s5 file tree + notes ===== */
+.split{display:grid;grid-template-columns:470px 1fr;gap:36px;align-items:start;min-width:0}
+.tree{margin:0;padding:20px 22px;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);font:400 16px/1.85 var(--f-mono);color:var(--text-secondary);box-shadow:var(--shadow-card);min-width:0}
+.tree b{color:var(--text-primary);font-weight:700}
+.tree i{font-style:normal;color:var(--accent-crimson)}
+.tree .dim{color:var(--n-weak)}
+.bullets{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+.bullets li{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:baseline;font:400 19px/1.5 var(--f-body);color:var(--text-secondary)}
+.bullets b{font:700 13px var(--f-mono);color:var(--accent-crimson);letter-spacing:.04em}
+
+/* ===== s6 roster ===== */
+.roster{display:grid;grid-template-columns:400px 1fr;gap:34px;align-items:center;min-width:0}
+.roles{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
+.roles li{display:grid;grid-template-columns:108px 1fr;gap:12px;align-items:baseline;padding-bottom:9px;border-bottom:1px solid var(--border-subtle);font:400 17px/1.45 var(--f-body);color:var(--text-secondary)}
+.roles b{font:700 13px var(--f-mono);color:var(--accent-crimson);letter-spacing:.04em}
+.legend{display:flex;gap:22px;align-items:center;font:400 12px var(--f-mono);color:var(--text-secondary);margin-top:6px}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.lg{display:inline-block;height:0;width:26px}
+.lg-flow{border-top:1.5px solid var(--arrow)}
+.lg-box{border-top:1.5px dashed var(--n-weak)}
+
+/* ===== s7 two lists ===== */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;min-width:0}
+.two .card{padding:22px 24px}
+.list-h{font:700 13px var(--f-mono);letter-spacing:.06em;color:var(--accent-crimson);margin:0 0 12px}
+.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.list li{font:400 19px/1.45 var(--f-body);color:var(--text-secondary);display:grid;grid-template-columns:16px 1fr;gap:10px;align-items:baseline}
+.list li::before{content:"-";color:var(--accent-crimson);font:700 15px var(--f-mono)}
+.two .muted .list-h{color:var(--text-secondary)}
+.two .muted .list li::before{content:"+";color:var(--text-secondary)}
+
+/* ===== s8 brief prompt + loop ===== */
+.prompt{background:var(--paper);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:18px 22px;box-shadow:var(--shadow-card)}
+.prompt-line{display:grid;grid-template-columns:126px 1fr;gap:16px;align-items:baseline;padding:7px 0;font:400 17px/1.45 var(--f-mono);color:var(--text-primary)}
+.prompt-line b{font-weight:700;color:var(--accent-crimson);font-size:13px;letter-spacing:.04em}
+.loop{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:400 14px var(--f-mono);color:var(--text-secondary)}
+.loop span{padding:7px 13px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--bg-card);color:var(--text-primary)}
+.loop i{font-style:normal;color:var(--accent-crimson)}
+
+/* ===== s9 gates ===== */
+.gates{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border-subtle)}
+.gates li{display:grid;grid-template-columns:52px 260px 1fr;gap:20px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--border-subtle)}
+.gates b{font:700 13px var(--f-mono);color:var(--accent-crimson);letter-spacing:.06em}
+.gates .g-h{font:700 20px/1.25 var(--f-head);letter-spacing:-.01em;color:var(--text-primary)}
+.gates .g-p{font:400 18px/1.45 var(--f-body);color:var(--text-secondary)}
+
+/* ===== s10 publish ===== */
+.publish{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:start;min-width:0}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.steps li{display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:baseline;font:400 18px/1.45 var(--f-body);color:var(--text-secondary)}
+.steps b{font:700 13px var(--f-mono);color:var(--accent-crimson)}
+.alert{margin:0;padding:12px 16px;background:var(--accent-crimson-dim);border:1px solid var(--accent-crimson-dim);border-left:4px solid var(--accent-crimson);border-radius:var(--r-sm);font:400 15px/1.5 var(--f-body);color:var(--text-primary)}
+.alert b{font:700 12px var(--f-mono);color:var(--accent-crimson);margin-right:8px;letter-spacing:.04em}
+
+/* ===== s11 scope chips ===== */
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chip{font:400 15px var(--f-mono);padding:8px 14px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--bg-card);color:var(--text-secondary);text-decoration:line-through;text-decoration-color:var(--accent-crimson);text-decoration-thickness:1.5px}
+.scope-line{font:700 28px/1.35 var(--f-head);letter-spacing:-.015em;color:var(--text-primary);max-width:900px}
+.scope-line em{font-style:normal;color:var(--accent-crimson)}
+
+/* ===== s12 turn ===== */
+.turn{display:grid;grid-template-columns:1fr 330px;gap:36px;align-items:end;min-width:0}
+.moves{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.moves li{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:baseline;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:16px 20px;box-shadow:var(--shadow-card);font:600 21px/1.35 var(--f-head);letter-spacing:-.01em;color:var(--text-primary)}
+.moves b{font:700 13px var(--f-mono);color:var(--accent-crimson);letter-spacing:.04em}
+.close{font:700 40px/1.15 var(--f-mono);letter-spacing:-.01em;color:var(--accent-crimson);margin:0 0 8px}
+.close-note{font:400 18px/1.5 var(--f-body);color:var(--text-secondary)}
+
+/* ---------- 6. print (final state) + reduced motion ---------- */
+@page{size:1280px 720px;margin:0}
+@media print{
+  html,body{overflow:visible;height:auto;background:#ffffff}
+  .viewport{position:static;overflow:visible}
+  .stage{position:static;transform:none!important;width:1280px;height:auto;border:0;overflow:visible}
+  .slide{display:flex!important;position:relative;width:1280px;height:720px;break-after:page;page-break-after:always;overflow:hidden}
+  .hud,.notespanel{display:none!important}
+  .slide *,.slide *::before,.slide *::after{animation:none!important;transition:none!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (prefers-reduced-motion:reduce){
+  .slide *,.slide *::before,.slide *::after{animation:none!important;transition:none!important}
+  .marq-in{animation:none!important}
+}
+</style>
+<link rel="stylesheet" href="mobile.css?v=20261021agents" media="screen and (max-width:760px)">
+<link rel="stylesheet" href="../../assets/css/palette.css?v=20261015palette">
+</head>
+<body>
+<div class="viewport" id="vp">
+<div class="stage" id="stage">
+
+<!-- ================================================================
+     00 cover
+     ================================================================ -->
+<section class="slide s1" id="s1" data-title="build your own blog with opencode">
+  <div class="body mid">
+    <div class="s1-rule rise" style="--d:.05;--t:.5"></div>
+    <p class="kicker rise" style="--d:.1;--t:.6">sharing session / jakarta / 2026</p>
+    <h1 class="cover-h rise" style="--d:.2;--t:.9;margin-top:14px">build your own blog.<br><em>with opencode.</em></h1>
+    <p class="sub rise" style="--d:.4">a 12 slide guide to a free site at yourname.github.io, a small agent workspace, and one post at a time.</p>
+    <div class="cover-meta fade" style="--d:.7">
+      <span>krishna (naquuuu)</span><i>/</i><span>for the team</span><i>/</i><span>12 slides</span>
+    </div>
+    <aside class="ai-note fade" role="note" style="--d:.9"><span class="ai-note-label">ai note</span>this post was written by ai and might be wrong. check anything important and double check it with the blog owner before you rely on it.</aside>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Sesi ini tidak tentang membangun blog yang rumit. Tujuannya satu: setiap orang di ruangan ini bisa pulang dengan situs sendiri di yourname.github.io, tanpa server dan tanpa biaya hosting.</p>
+    <p>Yang kita pakai hanya tiga hal: repo publik, folder lokal, dan aplikasi opencode. Semua yang lain di workspace saya sifatnya opsional untuk sesi ini.</p>
+    <p><em>Mulai dengan janji yang kecil. Jangan buka daftar fitur di menit pertama.</em></p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     01 the promise
+     ================================================================ -->
+<section class="slide" id="s2" data-title="one afternoon, one site that is yours">
+  <div class="top"><span class="lbl"><span class="num">(01)</span>the promise</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="body">
+    <h2 class="t rise">one afternoon. one site that is <em>yours</em>.</h2>
+    <p class="sub rise" style="--d:.15">you do not need a server, a database, or a build pipeline. you need a repo, a folder, and something that can type.</p>
+    <div class="grid3" style="margin-top:8px">
+      <div class="card rise" style="--d:.3">
+        <span class="card-num">01 / host</span>
+        <h3 class="card-h">free hosting</h3>
+        <p class="card-p">a public repo named yourname.github.io. github pages serves it at that address, with no extra service to pay for.</p>
+      </div>
+      <div class="card rise" style="--d:.4">
+        <span class="card-num">02 / files</span>
+        <h3 class="card-h">plain pages</h3>
+        <p class="card-p">html and css you can read. no hidden build step between the file you write and the page a reader opens.</p>
+      </div>
+      <div class="card rise" style="--d:.5">
+        <span class="card-num">03 / name</span>
+        <h3 class="card-h">your name on it</h3>
+        <p class="card-p">your commits, your words, your taste. a custom domain later is one small file and a dns record.</p>
+      </div>
+    </div>
+    <p class="foot-note rise" style="--d:.75">the only bill is the model you connect.</p>
+  </div>
+  <aside class="notes" lang="id">
+    <p>github pages gratis untuk repo publik. Kalau reponya privat, pages butuh paket berbayar, jadi untuk latihan ini reponya dibuat publik sejak awal.</p>
+    <p>Situsnya hanya html dan css. Tidak ada database, tidak ada server yang harus dijaga menyala, dan tidak ada tagihan bulanan untuk halaman yang jarang dibuka.</p>
+    <p><em>Tekankan bahwa ini situs milik mereka, bukan akun di platform orang lain.</em></p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     02 the stack
+     ================================================================ -->
+<section class="slide" id="s3" data-title="three pieces, in this order">
+  <div class="top"><span class="lbl"><span class="num">(02)</span>the stack</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="body">
+    <h2 class="t rise">three pieces, in this order.</h2>
+    <p class="sub rise" style="--d:.15">each one has one job. when something breaks, you know which piece to open.</p>
+    <div class="rows" style="margin-top:6px">
+      <div class="row rise" style="--d:.25">
+        <span class="row-num">01</span>
+        <span class="row-h">the repo</span>
+        <p class="row-p">a public folder on github. this is the published site, and the history of every change you make to it.</p>
+      </div>
+      <div class="row rise" style="--d:.35">
+        <span class="row-num">02</span>
+        <span class="row-h">the local folder</span>
+        <p class="row-p">where the files live on your machine, and where the agent reads and writes. versioned with git, so nothing is lost.</p>
+      </div>
+      <div class="row rise" style="--d:.45">
+        <span class="row-num">03</span>
+        <span class="row-h">opencode desktop</span>
+        <p class="row-p">the app that opens the folder, reads your rules, and runs the agents you define there.</p>
+      </div>
+    </div>
+    <p class="flowline rise" style="--d:.6">repo <b>&rarr;</b> folder <b>&rarr;</b> app <b>&rarr;</b> page</p>
+    <p class="foot-note rise" style="--d:.7">everything else i run, a chat bot, a relay, a server, a domain, is optional. this session stops at the published page.</p>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Urutannya sengaja sederhana. Repo adalah tempat hasil akhir. Folder adalah tempat kerja. Aplikasi adalah yang membaca folder itu.</p>
+    <p>Kalau salah satu bermasalah, kita bisa menunjuk bagian yang salah tanpa menebak. Repo bermasalah berarti git. Folder bermasalah berarti file atau config. Aplikasi bermasalah berarti instalasi atau model.</p>
+    <p><em>Sebutkan sekali bahwa relay dan bot di workspace saya tidak dibutuhkan hari ini, lalu lanjut.</em></p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     03 step 01 install the desktop app
+     ================================================================ -->
+<section class="slide" id="s4" data-title="step 01, install opencode desktop">
+  <div class="top"><span class="lbl"><span class="num">(03)</span>step 01 / install</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="body">
+    <h2 class="t rise">start with the <em>desktop app</em>.</h2>
+    <p class="sub rise" style="--d:.15">the app is in beta and updates itself. it holds the editor, the file tree, and the agent in one window, so there is no terminal to learn first.</p>
+    <div class="cmd rise" style="--d:.3">
+      <div class="cmd-label"><span>install</span><span>pick one line</span></div>
+      <div class="cmd-body">
+        <div class="cmd-line"><span class="cmd-key">windows</span><span class="cmd-text">winget install --id Anomaly.OpenCode.Desktop -e</span></div>
+        <div class="cmd-line"><span class="cmd-key">macos</span><span class="cmd-text">brew install --cask opencode-desktop</span></div>
+        <div class="cmd-line"><span class="cmd-key">no package</span><span class="cmd-text">opencode.ai/download</span></div>
+      </div>
+    </div>
+    <div class="two">
+      <div class="card rise" style="--d:.45">
+        <p class="list-h">then connect one model</p>
+        <ul class="list">
+          <li>open settings, sign in, or paste a provider api key</li>
+          <li>pick one small model to start, you can raise it later</li>
+          <li>the key bills per token, and it never goes into the repo</li>
+        </ul>
+      </div>
+      <div class="card rise muted" style="--d:.55">
+        <p class="list-h">if you live in a terminal</p>
+        <ul class="list">
+          <li>the cli runs the same engine with the same config</li>
+          <li>windows package managers are not supported for the cli</li>
+          <li>today we stay in the app, because it is one install</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Install lewat winget di windows, brew di macos, atau unduh langsung dari opencode.ai/download. Aplikasi ini masih beta, tapi sudah cukup stabil untuk dipakai harian dan update sendiri.</p>
+    <p>Setelah terbuka, sambungkan satu model. api key ditagih per token, jadi mulai dari model kecil dan naikkan hanya kalau tugasnya butuh. Simpan key di pengaturan aplikasi, jangan pernah di dalam folder repo.</p>
+    <p><em>Kalau ada yang bertanya soal cli, jawab singkat: mesinnya sama, tapi sesi ini memakai aplikasi supaya satu instalasi selesai.</em></p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     04 step 02 open the folder
+     ================================================================ -->
+<section class="slide" id="s5" data-title="step 02, give it a folder">
+  <div class="top"><span class="lbl"><span class="num">(04)</span>step 02 / open</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="body">
+    <h2 class="t rise">give it a folder, not a <em>chat window</em>.</h2>
+    <p class="sub rise" style="--d:.15">a chat forgets. a folder remembers: the rules, the personas, the scripts, and the site itself.</p>
+    <div class="split" style="margin-top:6px">
+      <pre class="tree rise" style="--d:.3"><b>workspace/</b>
+  <i>AGENTS.md</i>        house rules
+  <i>opencode.jsonc</i>   models + agents
+  <b>.opencode/agent/</b>  one file per role
+  <b>blog/</b>           the site
+  <b>scripts/</b>        the gates
+  <span class="dim">relay/       not today</span>
+  <span class="dim">hermes/      not today</span></pre>
+      <ul class="bullets rise" style="--d:.45">
+        <li><b>01</b><span>open the workspace folder as a project, so the agent can read every file it needs.</span></li>
+        <li><b>02</b><span>opencode.jsonc names the models and the agents. AGENTS.md holds the rules you do not want to repeat.</span></li>
+        <li><b>03</b><span>start from a copy you can delete. no global install, no magic, and the project state stays in the folder.</span></li>
+        <li><b>04</b><span>ask me for the template, then strip it. the relay and bot folders go on day one.</span></li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Buka folder workspace sebagai project di aplikasi. Semua yang dibutuhkan agent ada di dalam folder itu, jadi tidak ada state tersembunyi di tempat lain.</p>
+    <p>Dua file yang paling sering dibaca: opencode.jsonc untuk daftar model dan agent, AGENTS.md untuk aturan rumah. Kalau kamu mengulang instruksi yang sama tiga kali, itu tanda instruksinya harus pindah ke AGENTS.md.</p>
+    <p><em>Ingatkan bahwa template saya berisi relay dan bot. Hapus folder itu di hari pertama supaya tidak bingung.</em></p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     05 step 03 the roster
+     ================================================================ -->
+<section class="slide" id="s6" data-title="step 03, one orchestrator and four helpers">
+  <div class="top"><span class="lbl"><span class="num">(05)</span>step 03 / roster</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="body">
+    <h2 class="t rise">one orchestrator, four <em>helpers</em>.</h2>
+    <p class="sub rise" style="--d:.15">you talk to one agent. it delegates, checks, and reports back. the helpers stay out of your way.</p>
+    <div class="roster" style="margin-top:4px">
+      <ul class="roles rise" style="--d:.3">
+        <li><b>builder</b><span>writes and edits the page, the styles, and the small scripts.</span></li>
+        <li><b>scribe</b><span>drafts the copy, keeps the structure, and matches the house voice.</span></li>
+        <li><b>skeptic</b><span>argues with the draft: weak claims, missing cases, false confidence.</span></li>
+        <li><b>verifier</b><span>runs the gates and reports what actually passed.</span></li>
+      </ul>
+      <figure class="fig rise" style="--d:.4">
+        <svg viewBox="0 0 620 300" role="img" aria-label="the human talks to one orchestrator, which delegates to four hidden subagents: builder, scribe, skeptic and verifier">
+          <defs>
+            <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--arrow)"/></marker>
+          </defs>
+          <rect class="gl" x="392" y="18" width="228" height="264" rx="8" stroke-dasharray="6 5"/>
+          <rect x="0" y="112" width="96" height="60" rx="5" fill="var(--accent-crimson-dim)" stroke="var(--accent-crimson)" stroke-width="1.4"/>
+          <text class="b ink" x="48" y="138" text-anchor="middle">you</text>
+          <text x="48" y="157" text-anchor="middle" font-size="12">human</text>
+          <path class="lnk" d="M96 142 H146" marker-end="url(#ar)"/>
+          <rect class="nd" x="150" y="96" width="196" height="92" rx="5"/>
+          <text class="b ink" x="248" y="128" text-anchor="middle">orchestrator</text>
+          <text x="248" y="149" text-anchor="middle" font-size="12">plans, delegates,</text>
+          <text x="248" y="165" text-anchor="middle" font-size="12">checks the evidence</text>
+          <path class="lnk" d="M346 142 C378 142 370 40 402 40" marker-end="url(#ar)"/>
+          <path class="lnk" d="M346 142 C378 142 370 94 402 94" marker-end="url(#ar)"/>
+          <path class="lnk" d="M346 142 C378 142 370 196 402 196" marker-end="url(#ar)"/>
+          <path class="lnk" d="M346 142 C378 142 370 250 402 250" marker-end="url(#ar)"/>
+          <rect class="nd" x="404" y="20" width="204" height="46" rx="5"/>
+          <text class="b ink" x="418" y="40" font-size="13">builder</text><text x="418" y="56" font-size="12">writes the page</text>
+          <rect class="nd" x="404" y="74" width="204" height="46" rx="5"/>
+          <text class="b ink" x="418" y="94" font-size="13">scribe</text><text x="418" y="110" font-size="12">drafts the copy</text>
+          <rect class="nd" x="404" y="176" width="204" height="46" rx="5"/>
+          <text class="b ink" x="418" y="196" font-size="13">skeptic</text><text x="418" y="212" font-size="12">argues back</text>
+          <rect class="nd" x="404" y="230" width="204" height="46" rx="5"/>
+          <text class="b ink" x="418" y="250" font-size="13">verifier</text><text x="418" y="266" font-size="12">runs the gates</text>
+        </svg>
+      </figure>
+    </div>
+    <div class="legend rise" style="--d:.6">
+      <span><i class="lg lg-flow"></i>delegation</span>
+      <span><i class="lg lg-box"></i>hidden from you</span>
+      <span>one writer per file</span>
+    </div>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Kamu hanya berbicara dengan orchestrator. Dia yang memecah tugas, memilih agent, dan merangkum hasilnya kembali ke kamu.</p>
+    <p>Builder menulis, scribe merapikan copy, skeptic mencari lubang, verifier menjalankan cek. Subagent tidak bisa menghubungi kamu langsung, tidak bisa mendelegasikan lagi, dan tidak bisa menyetujui pekerjaannya sendiri.</p>
+    <p><em>Bilang bahwa mulai dari dua peran juga tidak apa-apa. Roster ini tumbuh sesuai kebutuhan, bukan sejak hari pertama.</em></p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     06 what agents are good at
+     ================================================================ -->
+<section class="slide" id="s7" data-title="they draft fast, they do not know when they are wrong">
+  <div class="top"><span class="lbl"><span class="num">(06)</span>the honest half</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="body">
+    <h2 class="t rise">they draft fast. they do not know when they are <em>wrong</em>.</h2>
+    <p class="sub rise" style="--d:.1">the split is simple: let the agents do the boring half, and keep the judgment for yourself.</p>
+    <div class="two" style="margin-top:6px">
+      <div class="card rise" style="--d:.25">
+        <p class="list-h">the agents do this</p>
+        <ul class="list">
+          <li>turn one brief into three draft shapes you can choose from</li>
+          <li>keep the page structure and the tokens consistent</li>
+          <li>run the gates and tell you which one failed</li>
+          <li>summarise what changed, so review takes minutes</li>
+        </ul>
+      </div>
+      <div class="card muted rise" style="--d:.35">
+        <p class="list-h">you still own this</p>
+        <ul class="list">
+          <li>the thesis, and the one thing the post is actually about</li>
+          <li>which claims are true, and which ones you can defend</li>
+          <li>the taste call: shorter, warmer, less clever</li>
+          <li>the publish button, and the answer for what you shipped</li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-note rise" style="--d:.5">this deck and the murphy deck were built this way. a human kept the claims, the taste, and the publish button.</p>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Model cepat menulis, tapi tidak tahu kapan dirinya salah. Jadi pekerjaan yang bisa dicek mesin kita serahkan ke mesin, dan yang butuh penilaian tetap di manusia.</p>
+    <p>Contohnya: memilih tesis, memastikan klaim bisa dipertanggungjawabkan, dan memutuskan kapan tulisan sudah cukup. Tiga hal itu tidak bisa didelegasikan tanpa kehilangan sesuatu.</p>
+    <p><em>Dua deck di blog ini dibuat dengan pola yang sama. Sebut ini sebagai bukti, bukan sebagai janji.</em></p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     07 step 04 brief
+     ================================================================ -->
+<section class="slide" id="s8" data-title="step 04, brief first, draft second">
+  <div class="top"><span class="lbl"><span class="num">(07)</span>step 04 / brief</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="body">
+    <h2 class="t rise">brief first. draft <em>second</em>.</h2>
+    <p class="sub rise" style="--d:.12">four lines beat a paragraph of instructions. write them once, reuse the shape every time.</p>
+    <div class="prompt rise" style="--d:.25">
+      <div class="prompt-line"><b>goal</b><span>one post about what i learned testing a checkout flow</span></div>
+      <div class="prompt-line"><b>context</b><span>read blog/blog/ and match the house style</span></div>
+      <div class="prompt-line"><b>done when</b><span>the page renders at 320px and every link resolves</span></div>
+      <div class="prompt-line"><b>constraints</b><span>no new dependencies, ask before pushing</span></div>
+    </div>
+    <div class="loop rise" style="--d:.45">
+      <span>brief</span><i>&rarr;</i><span>draft</span><i>&rarr;</i><span>review</span><i>&rarr;</i><span>gates</span><i>&rarr;</i><span>commit</span>
+    </div>
+    <p class="foot-note rise" style="--d:.55">one post per session. a deck you can finish beats a book you cannot.</p>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Brief yang jelas menghemat satu jam bolak-balik. Empat baris sudah cukup: goal, context, done when, constraints.</p>
+    <p>Bagian done when yang paling sering dilupakan. Kalau tidak ada kriteria selesai, agent akan terus menambah bagian sampai terasa lengkap, dan lengkap belum tentu benar.</p>
+    <p><em>Minta semua orang menulis satu brief di catatan sebelum sesi selesai.</em></p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     08 the gates
+     ================================================================ -->
+<section class="slide" id="s9" data-title="five cheap checks, every time">
+  <div class="top"><span class="lbl"><span class="num">(08)</span>the gates</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="body">
+    <h2 class="t rise">five cheap checks, every <em>time</em>.</h2>
+    <p class="sub rise" style="--d:.12">a script does not get tired, does not skip the boring page, and does not want to go home early.</p>
+    <ul class="gates" style="margin-top:4px">
+      <li class="rise" style="--d:.2"><b>01</b><span class="g-h">viewport at 320</span><span class="g-p">no sideways scroll on a small phone, the layout holds its shape.</span></li>
+      <li class="rise" style="--d:.27"><b>02</b><span class="g-h">anchors resolve</span><span class="g-p">every in-page link lands on a real id, not a 404 with extra steps.</span></li>
+      <li class="rise" style="--d:.34"><b>03</b><span class="g-h">alt text exists</span><span class="g-p">an image says what it is, for the reader who cannot see it.</span></li>
+      <li class="rise" style="--d:.41"><b>04</b><span class="g-h">sitemap is current</span><span class="g-p">every page listed, dated with the commit that changed it.</span></li>
+      <li class="rise" style="--d:.48"><b>05</b><span class="g-h">no secrets</span><span class="g-p">no keys, tokens, or phone numbers anywhere in the repo.</span></li>
+    </ul>
+    <p class="foot-note rise" style="--d:.6">run the script, do not trust the summary. a gate you skip is a gate you do not have.</p>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Lima cek ini murah dan menangkap sebagian besar kesalahan yang sering lolos. Ukuran layar, anchor, alt text, sitemap, dan rahasia yang tidak sengaja masuk repo.</p>
+    <p>Jalankan script-nya, jangan hanya membaca ringkasan dari agent. Gate yang dilewati sama saja dengan gate yang tidak ada.</p>
+    <p><em>Kalau waktu sempit, cek nomor lima dulu. Kebocoran key jauh lebih mahal daripada link yang mati.</em></p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     09 step 05 publish
+     ================================================================ -->
+<section class="slide" id="s10" data-title="step 05, push then point pages at it">
+  <div class="top"><span class="lbl"><span class="num">(09)</span>step 05 / publish</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="body">
+    <h2 class="t rise">push, then point pages at <em>the branch</em>.</h2>
+    <p class="sub rise" style="--d:.12">five lines in a terminal, three clicks in settings. after that, publishing is just another push.</p>
+    <div class="publish" style="margin-top:4px">
+      <div class="cmd rise" style="--d:.25">
+        <div class="cmd-label"><span>first publish</span><span>in your project folder</span></div>
+        <div class="cmd-body">
+          <div class="cmd-line"><span class="cmd-key">init</span><span class="cmd-text">git init</span></div>
+          <div class="cmd-line"><span class="cmd-key">stage</span><span class="cmd-text">git add .</span></div>
+          <div class="cmd-line"><span class="cmd-key">commit</span><span class="cmd-text">git commit -m "first post"</span></div>
+          <div class="cmd-line"><span class="cmd-key">remote</span><span class="cmd-text">git remote add origin https://github.com/<i>you</i>/<i>you</i>.github.io.git</span></div>
+          <div class="cmd-line"><span class="cmd-key">push</span><span class="cmd-text">git push -u origin main</span></div>
+        </div>
+      </div>
+      <div class="rise" style="--d:.4">
+        <ol class="steps">
+          <li><b>01</b><span>repo settings, then pages.</span></li>
+          <li><b>02</b><span>source: deploy from a branch, main, root folder.</span></li>
+          <li><b>03</b><span>wait, then open https://yourname.github.io.</span></li>
+        </ol>
+        <p class="alert" style="margin-top:20px"><b>note</b>free pages needs a public repo. if a draft should not be public, it does not belong in the repo.</p>
+      </div>
+    </div>
+    <p class="foot-note rise" style="--d:.6">first push is the slow one. every push after it is one command.</p>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Lima perintah, lalu tiga klik di settings. Setelah sekali berhasil, publish berikutnya cukup git add, commit, push.</p>
+    <p>Repo harus publik untuk plan gratis. Kalau ada draft yang belum siap dilihat orang, jangan dimasukkan ke repo ini. Tidak ada folder rahasia di repo publik.</p>
+    <p><em>Minta semua orang menyelesaikan ini sebelum sesi selesai, supaya masalahnya ketahuan sekarang, bukan minggu depan.</em></p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     10 scope
+     ================================================================ -->
+<section class="slide" id="s11" data-title="what we are not building today">
+  <div class="top"><span class="lbl"><span class="num">(10)</span>scope</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="body mid">
+    <h2 class="t rise">what we are <em>not</em> building today.</h2>
+    <p class="sub rise" style="--d:.12">each one is a real project. none of them is needed to publish a post.</p>
+    <div class="chips rise" style="--d:.25;margin-top:6px">
+      <span class="chip">a vps</span>
+      <span class="chip">a whatsapp bot</span>
+      <span class="chip">a chat relay</span>
+      <span class="chip">a custom domain</span>
+      <span class="chip">a cms</span>
+    </div>
+    <p class="scope-line rise" style="--d:.4;margin-top:10px">start with the smallest thing that <em>publishes</em>. add the rest when a real need shows up.</p>
+    <p class="foot-note rise" style="--d:.55">my workspace does run a relay and a server. that is a later chapter, not step one.</p>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Hari ini kita tidak menyentuh vps, bot whatsapp, relay, domain custom, atau cms. Semua itu proyek sendiri dengan biaya dan risikonya sendiri.</p>
+    <p>Workspace saya memakai semua itu, tapi tidak satu pun dibutuhkan untuk menerbitkan satu halaman. Mulai dari yang paling kecil yang sudah bisa dilihat orang lain.</p>
+    <p><em>Ini bagian yang menjaga sesi tetap selesai tepat waktu.</em></p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     11 your turn
+     ================================================================ -->
+<section class="slide" id="s12" data-title="this week, four small moves">
+  <div class="top"><span class="lbl"><span class="num">(11)</span>your turn</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="body mid">
+    <h2 class="t rise">this week, four <em>small</em> moves.</h2>
+    <div class="turn" style="margin-top:8px">
+      <ol class="moves">
+        <li class="rise" style="--d:.2"><b>01</b><span>create a public repo named yourname.github.io.</span></li>
+        <li class="rise" style="--d:.28"><b>02</b><span>install opencode desktop and connect one model.</span></li>
+        <li class="rise" style="--d:.36"><b>03</b><span>copy the template, rename it, delete what you do not use.</span></li>
+        <li class="rise" style="--d:.44"><b>04</b><span>ask for one 6 slide post about something you already know.</span></li>
+      </ol>
+      <div class="rise" style="--d:.55">
+        <p class="close">q&amp;a</p>
+        <p class="close-note">questions now, or send me the repo link when it is live. i will read the first post and tell you one thing to fix.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Empat langkah minggu ini. Repo, aplikasi, template, lalu satu post pendek. Tidak lebih.</p>
+    <p>Satu post dulu, bukan sepuluh. Post pertama biasanya mengungkap masalah konfigurasi yang tidak terlihat sampai ada halaman sungguhan.</p>
+    <p><em>Kalau macet, kirim link repo-nya. Saya lebih cepat membantu kalau bisa melihat file yang sebenarnya.</em></p>
+  </aside>
+</section>
+
+</div>
+</div>
+
+<div class="hud" id="hud">
+  <button type="button" id="b-prev" aria-label="previous slide">prev</button>
+  <button type="button" id="b-next" aria-label="next slide">next</button>
+  <button type="button" id="b-replay" aria-label="replay this slide">r replay</button>
+  <button type="button" id="b-notes" aria-label="toggle notes">n notes</button>
+  <button type="button" id="b-theme" aria-label="toggle theme">t theme</button>
+  <button type="button" id="b-full" aria-label="toggle fullscreen">f full</button>
+  <a class="deck-back-link" href="../" aria-label="back to notes archive">notes</a>
+</div>
+<div class="notespanel" id="np"><header>[ catatan pembicara ]</header><div class="nb" id="nb"></div></div>
+
+<script>
+(function(){
+  'use strict';
+  var vp=document.getElementById('vp'), stage=document.getElementById('stage'), np=document.getElementById('np'), nb=document.getElementById('nb');
+  var slides=[].slice.call(document.querySelectorAll('.slide')), n=slides.length, cur=0, notesOpen=false;
+  var root=document.documentElement;
+  var mqReduce=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  function pad(x){return (x<10?'0':'')+x}
+  function isReduced(){return !!mqReduce.matches}
+
+  /* ---------- footer, per slide ---------- */
+  var mq='systems & matter / culture & taste / ', half='';
+  for(var k=0;k<6;k++){half+=mq}
+  slides.forEach(function(s,i){
+    var f=document.createElement('footer'); f.className='foot';
+    var w=document.createElement('span'); w.className='wm'; w.innerHTML='naquuuu<i>.</i>';
+    var m=document.createElement('div'); m.className='marq';
+    var mi=document.createElement('span'); mi.className='marq-in'; mi.textContent=half+half; m.appendChild(mi);
+    var c=document.createElement('span'); c.className='ctr'; c.textContent=pad(i+1)+' / '+pad(n);
+    f.appendChild(w); f.appendChild(m); f.appendChild(c); s.appendChild(f);
+    s.setAttribute('aria-label','slide '+(i+1)+' of '+n);
+  });
+
+  /* ---------- scale the 1280x720 stage into the window ---------- */
+  function fit(){
+    if(!window.innerWidth||!window.innerHeight)return;
+    var mobile=window.innerWidth<=760;
+    root.classList.toggle('mobile',mobile);
+    var nav=document.querySelector('.m-nav'), navH=mobile?(nav?nav.offsetHeight:64):0;
+    var panelH=(notesOpen&&np.offsetHeight)?np.offsetHeight:0;
+    vp.style.bottom=(panelH+navH)+'px';
+    var s=Math.min(vp.clientWidth/1280, vp.clientHeight/720);
+    stage.style.transform='translate(-50%,-50%) scale('+s+')';
+  }
+
+  /* ---------- motion: a slide plays when it becomes active, r replays ---------- */
+  function play(i){
+    var s=slides[i]; if(!s)return;
+    s.classList.remove('play');
+    void s.offsetWidth;
+    if(!isReduced())s.classList.add('play');
+  }
+
+  function show(i,write){
+    i=Math.max(0,Math.min(n-1,i)); cur=i;
+    slides.forEach(function(s,k){var on=(k===i); s.classList.toggle('active',on); if(!on)s.classList.remove('play')});
+    nb.innerHTML=''; var a=slides[i].querySelector('.notes');
+    if(a){[].slice.call(a.children).forEach(function(c){nb.appendChild(c.cloneNode(true))})}
+    if(write!==false){try{history.replaceState(null,'',location.pathname+location.search+'#'+(i+1))}catch(e){location.hash='#'+(i+1)}}
+    window.dispatchEvent(new Event('deck:slidechange'));
+    document.title=pad(i+1)+' / '+pad(n)+' '+(slides[i].getAttribute('data-title')||'naquuuu');
+    vp.scrollTop=0;
+    play(i);
+  }
+  function fromHash(){var v=parseInt((location.hash||'').replace('#',''),10); return (v>=1&&v<=n)?v-1:0}
+  function next(){show(cur+1)} function prev(){show(cur-1)}
+  function replay(){play(cur)}
+  function toggleNotes(){notesOpen=!notesOpen; np.classList.toggle('open',notesOpen); fit(); window.dispatchEvent(new Event('deck:controlschange'))}
+  function setTheme(d){root.setAttribute('data-theme',d)}
+  function toggleTheme(){
+    var d=root.getAttribute('data-theme')==='dark'?'light':'dark'; setTheme(d);
+    try{localStorage.setItem('naq-deck-theme',d)}catch(e){}
+    window.dispatchEvent(new Event('deck:controlschange'))
+  }
+  function toggleFull(){
+    try{ if(document.fullscreenElement){document.exitFullscreen()} else if(root.requestFullscreen){root.requestFullscreen()} }catch(e){}
+  }
+
+  try{var t=localStorage.getItem('naq-deck-theme'); if(t==='dark'||t==='light'){setTheme(t)}}catch(e){}
+  var qm=/[?&]theme=(dark|light)/.exec(location.search); if(qm){setTheme(qm[1])}
+
+  /* ---------- keys ---------- */
+  document.addEventListener('keydown',function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    var k=e.key, lk=(k&&k.length===1)?k.toLowerCase():k;
+    if(k==='ArrowRight'||k==='ArrowDown'||k===' '||k==='PageDown'||k==='Enter'){e.preventDefault();next()}
+    else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'||k==='Backspace'){e.preventDefault();prev()}
+    else if(k==='Home'){show(0)} else if(k==='End'){show(n-1)}
+    else if(lk==='n'){toggleNotes()}
+    else if(lk==='t'){toggleTheme()}
+    else if(lk==='f'){toggleFull()}
+    else if(lk==='r'){replay()}
+  });
+  vp.addEventListener('click',function(e){
+    if(e.target.closest('a,button,input,.notespanel'))return;
+    if(root.classList.contains('mobile'))return;
+    var x=e.clientX/window.innerWidth; if(x<0.25)prev(); else next();
+  });
+  var sx=0,sy=0;
+  vp.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+  vp.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){ if(dx<0)next(); else prev(); }
+  },{passive:true});
+  document.getElementById('b-prev').onclick=prev;
+  document.getElementById('b-next').onclick=next;
+  document.getElementById('b-replay').onclick=replay;
+  document.getElementById('b-notes').onclick=toggleNotes;
+  document.getElementById('b-theme').onclick=toggleTheme;
+  document.getElementById('b-full').onclick=toggleFull;
+  window.addEventListener('resize',fit);
+  window.addEventListener('deck:controlschange',fit);
+  window.addEventListener('hashchange',function(){show(fromHash(),false)});
+  show(fromHash(),false);
+  fit();
+})();
+</script>
+<script src="../../assets/js/palette.js?v=20261015palette"></script>
+<script src="mobile.js?v=20261021agents"></script>
+</body>
+</html>
