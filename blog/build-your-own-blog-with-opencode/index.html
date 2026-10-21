@@ -218,7 +218,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
 
 /* ===== s8 brief prompt + loop ===== */
 .prompt{background:var(--paper);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:18px 22px;box-shadow:var(--shadow-card)}
-.prompt-line{display:grid;grid-template-columns:126px 1fr;gap:16px;align-items:baseline;padding:7px 0;font:400 17px/1.45 var(--f-mono);color:var(--text-primary)}
+.prompt-line{display:grid;grid-template-columns:126px 1fr;gap:16px;align-items:baseline;padding:5px 0;font:400 17px/1.45 var(--f-mono);color:var(--text-primary)}
 .prompt-line b{font-weight:700;color:var(--accent-crimson);font-size:13px;letter-spacing:.04em}
 .loop{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:400 14px var(--f-mono);color:var(--text-secondary)}
 .loop span{padding:7px 13px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--bg-card);color:var(--text-primary)}
@@ -573,7 +573,8 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
     <h2 class="t rise">make it <em>yours</em>, not a copy.</h2>
     <p class="sub rise" style="--d:.1">fill the brackets, then hand this to the agent. the sample answers how a site is built; these lines answer what yours is for.</p>
     <div class="prompt rise" style="--d:.22;margin-top:4px">
-      <div class="prompt-line"><b>goal</b><span>build my own site. the sample is structure only, not words or colours.</span></div>
+      <div class="prompt-line"><b>goal</b><span>build my own simple site, not a copy.</span></div>
+      <div class="prompt-line"><b>source</b><span>github.com/naquuuu/naquuuu.github.io as reference. keep it small.</span></div>
       <div class="prompt-line"><b>about</b><span><i class="ph">[NAME]</i>, <i class="ph">[ROLE]</i>, <i class="ph">[CITY]</i>. i write about <i class="ph">[TOPIC]</i> and <i class="ph">[TOPIC]</i>.</span></div>
       <div class="prompt-line"><b>vision</b><span><i class="ph">[ONE SENTENCE: why this site should exist]</i></span></div>
       <div class="prompt-line"><b>pages</b><span><i class="ph">[HOME]</i> <i class="ph">[ABOUT]</i> <i class="ph">[NOTES]</i> <i class="ph">[CONTACT]</i></span></div>
@@ -989,9 +990,9 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
     var btn=document.getElementById('b-prompt'), note=document.getElementById('copy-note');
     if(!btn)return;
     var text=[
-      'i am building my own personal site. it should be mine, not a copy of the sample.',
+      'i am building my own personal site. it should be mine, not a copy of the sample, and it should stay simple.',
       '',
-      'read the sample repo at https://github.com/naquuuu/naquuuu.github.io only to understand the structure: how a page is built, where the styles live, how the deploy works. do not copy its words, its palette, its diagrams, or its personal details.',
+      'read the sample repo at https://github.com/naquuuu/naquuuu.github.io only to understand the structure: how a page is built, where the styles live, how the deploy works. do not copy its words, its palette, its diagrams, or its personal details, and do not copy the whole setup. build the smallest version that works.',
       '',
       'about me',
       'name: [YOUR NAME]',
@@ -1016,7 +1017,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
       'the page renders at 320px with no sideways scroll, every in-page link resolves, every image has alt text, the sitemap lists every page, no placeholder text is left, and no sentence is copied from the sample.',
       '',
       'constraints',
-      'static html and css, no new dependencies, no tracking, keys stay in settings and never in the repo, ask before deleting files, ask before pushing. work through the orchestrator, one writer per file, and show me the file list before you start.',
+      'static html and css, no framework, no build step, no tracking, keys stay in settings and never in the repo, no feature i did not ask for, ask before deleting files, ask before pushing. work through the orchestrator, one writer per file, and show me the file list before you start.',
       '',
       'start by proposing the site map and the first page in five lines. wait for my yes.'
     ].join('\n');
