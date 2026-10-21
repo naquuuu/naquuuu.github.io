@@ -4,21 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>build your own blog with opencode and a few agents | naquuuu</title>
-<meta name="description" content="a 14 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.">
+<meta name="description" content="a 15 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.">
 <meta property="og:image" content="https://naquuuu.github.io/assets/img/naquuuu-og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="naquuuu share card: a studio portrait on warm paper with the naquuuu wordmark and the line matter + code.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="build your own blog with opencode and a few agents">
-<meta name="twitter:description" content="a 14 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.">
+<meta name="twitter:description" content="a 15 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.">
 <meta name="twitter:image" content="https://naquuuu.github.io/assets/img/naquuuu-og-card.png">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="canonical" href="https://naquuuu.github.io/blog/build-your-own-blog-with-opencode/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="naquuuu">
 <meta property="og:title" content="build your own blog with opencode and a few agents">
-<meta property="og:description" content="a 14 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.">
+<meta property="og:description" content="a 15 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.">
 <meta property="og:url" content="https://naquuuu.github.io/blog/build-your-own-blog-with-opencode/">
 <script type="application/ld+json">
 {
@@ -26,7 +26,7 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": "https://naquuuu.github.io/blog/build-your-own-blog-with-opencode/",
   "headline": "build your own blog with opencode and a few agents",
-  "description": "a 14 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.",
+  "description": "a 15 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.",
   "datePublished": "2026-10-21",
   "author": {
     "@type": "Person",
@@ -285,6 +285,19 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
 .swap .card{padding:16px 18px}
 .swap .list-h{margin-bottom:8px}
 .swap p{font:400 16px/1.45 var(--f-body);color:var(--text-secondary)}
+.repos{display:flex;gap:12px;flex-wrap:wrap}
+.repo{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:8px 14px;border:1px solid var(--border-subtle);border-radius:var(--r-sm);background:var(--bg-card);text-decoration:none;box-shadow:var(--shadow-card)}
+.repo:hover,.repo:focus-visible{border-color:var(--accent-crimson)}
+.repo:hover .repo-u,.repo:focus-visible .repo-u{color:var(--text-primary)}
+.repo-k{font:700 11px var(--f-mono);letter-spacing:.04em;color:var(--accent-crimson);white-space:nowrap}
+.repo-u{font:400 15px var(--f-mono);color:var(--text-secondary);overflow-wrap:anywhere}
+
+/* ===== customise prompt (s-prompt) ===== */
+.copy-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.copy{font:700 12px var(--f-mono);letter-spacing:.04em;border:1px solid var(--accent-crimson);background:var(--accent-crimson-dim);color:var(--accent-crimson);border-radius:3px;padding:10px 14px;min-height:44px;cursor:pointer}
+.copy:hover,.copy:focus-visible{background:var(--accent-crimson);color:var(--bg-primary)}
+.copy-note{font:400 13px var(--f-mono);color:var(--text-secondary)}
+.ph{font-style:normal;color:var(--accent-crimson)}
 .cp{display:grid;grid-template-columns:1fr 356px;gap:32px;min-width:0;align-items:start}
 .cp-side{display:flex;flex-direction:column;gap:14px;min-width:0}
 .prog-n{font:700 26px/1.1 var(--f-mono);color:var(--accent-crimson);margin:2px 0 10px;letter-spacing:-.01em}
@@ -322,9 +335,9 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
     <div class="s1-rule rise" style="--d:.05;--t:.5"></div>
     <p class="kicker rise" style="--d:.1;--t:.6">sharing session / jakarta / 2026</p>
     <h1 class="cover-h rise" style="--d:.2;--t:.9;margin-top:14px">build your own blog.<br><em>with opencode.</em></h1>
-    <p class="sub rise" style="--d:.4">a 14 slide workshop: a free site at yourname.github.io, a small agent workspace, and one page built in the room.</p>
+    <p class="sub rise" style="--d:.4">a 15 slide workshop: a free site at yourname.github.io, a small agent workspace, and one prompt for your own version.</p>
     <div class="cover-meta fade" style="--d:.7">
-      <span>krishna (naquuuu)</span><i>/</i><span>for the team</span><i>/</i><span>14 slides</span>
+      <span>krishna (naquuuu)</span><i>/</i><span>for the team</span><i>/</i><span>15 slides</span>
     </div>
     <aside class="ai-note fade" role="note" style="--d:.9"><span class="ai-note-label">ai note</span>this post was written by ai and might be wrong. check anything important and double check it with the blog owner before you rely on it.</aside>
   </div>
@@ -346,7 +359,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
     <ul class="ag rise" style="--d:.2;margin-top:6px">
       <li><b>00-10</b><span class="a-w"><span class="a-h">setup</span><span class="a-p">install opencode desktop and connect one model.</span></span></li>
       <li><b>10-25</b><span class="a-w"><span class="a-h">repo and sample</span><span class="a-p">create your repo, open mine, read three files.</span></span></li>
-      <li><b>25-40</b><span class="a-w"><span class="a-h">first page</span><span class="a-p">write the brief, build one page, keep it short.</span></span></li>
+      <li><b>25-40</b><span class="a-w"><span class="a-h">make it yours</span><span class="a-p">fill the prompt, then build the first page.</span></span></li>
       <li><b>40-50</b><span class="a-w"><span class="a-h">gates and publish</span><span class="a-p">run the checks, push, point pages at main.</span></span></li>
       <li><b>50-60</b><span class="a-w"><span class="a-h">prove it and swap</span><span class="a-p">open your url on another phone, trade one fix.</span></span></li>
     </ul>
@@ -491,20 +504,55 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
       </ul>
     </div>
     <p class="do rise" style="--d:.5"><b>do now / 15 min</b><span>create your repo, open mine as a project, and read three files: AGENTS.md, opencode.jsonc, one agent file.</span></p>
-    <p class="foot-note rise" style="--d:.6">the structure is reusable. the words, the colours and the layout should be yours.</p>
+    <div class="repos rise" style="--d:.6">
+      <a class="repo" href="https://github.com/naquuuu/naquuuu.github.io" target="_blank" rel="noopener"><span class="repo-k">sample site</span><span class="repo-u">naquuuu/naquuuu.github.io</span></a>
+      <a class="repo" href="https://github.com/naquuuu/naquuuu-personal-works" target="_blank" rel="noopener"><span class="repo-k">sample workspace</span><span class="repo-u">naquuuu/naquuuu-personal-works</span></a>
+    </div>
   </div>
   <aside class="notes" lang="id">
     <p>Buka folder workspace sebagai project di aplikasi. Semua yang dibutuhkan agent ada di dalam folder itu, jadi tidak ada state tersembunyi di tempat lain.</p>
     <p>Dua file yang paling sering dibaca: opencode.jsonc untuk daftar model dan agent, AGENTS.md untuk aturan rumah. Kalau kamu mengulang instruksi yang sama tiga kali, itu tanda instruksinya harus pindah ke AGENTS.md.</p>
+    <p>Dua link di slide: repo situs dan repo workspace. Kirim keduanya di chat, karena orang lebih cepat membuka tautan daripada mengetik ulang.</p>
+    <p>Struktur boleh dipinjam. Kata-kata, warna, dan tata letaknya harus versi mereka sendiri.</p>
     <p><em>Ingatkan bahwa repo saya dipakai sebagai contoh, bukan formulir. Mereka membaca strukturnya lalu membangun versi sendiri; folder relay dan bot tidak perlu dibawa.</em></p>
   </aside>
 </section>
 
 <!-- ================================================================
-     05 step 03 the roster
+     06 make it yours
+     ================================================================ -->
+<section class="slide" id="s-prompt" data-title="make it yours, not a copy">
+  <div class="top"><span class="lbl"><span class="num">(06)</span>make it yours</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="body">
+    <h2 class="t rise">make it <em>yours</em>, not a copy.</h2>
+    <p class="sub rise" style="--d:.1">fill the brackets, then hand this to the agent. the sample answers how a site is built; these lines answer what yours is for.</p>
+    <div class="prompt rise" style="--d:.22;margin-top:4px">
+      <div class="prompt-line"><b>goal</b><span>build my own site. the sample is structure only, not words or colours.</span></div>
+      <div class="prompt-line"><b>about</b><span><i class="ph">[NAME]</i>, <i class="ph">[ROLE]</i>, <i class="ph">[CITY]</i>. i write about <i class="ph">[TOPIC]</i> and <i class="ph">[TOPIC]</i>.</span></div>
+      <div class="prompt-line"><b>vision</b><span><i class="ph">[ONE SENTENCE: why this site should exist]</i></span></div>
+      <div class="prompt-line"><b>pages</b><span><i class="ph">[HOME]</i> <i class="ph">[ABOUT]</i> <i class="ph">[NOTES]</i> <i class="ph">[CONTACT]</i></span></div>
+      <div class="prompt-line"><b>features</b><span><i class="ph">[WHAT I ACTUALLY NEED]</i>, not <i class="ph">[WHAT I DO NOT NEED]</i></span></div>
+      <div class="prompt-line"><b>style</b><span><i class="ph">[THREE WORDS]</i>, <i class="ph">[COLOURS]</i>, <i class="ph">[TYPE FEEL]</i></span></div>
+      <div class="prompt-line"><b>done when</b><span>320px, links resolve, no placeholder text, no copied sentence.</span></div>
+    </div>
+    <div class="copy-row rise" style="--d:.45">
+      <button id="b-prompt" class="copy" type="button">copy the full prompt</button>
+      <span id="copy-note" class="copy-note" role="status" aria-live="polite">includes the do-not list and the stop-and-ask rule</span>
+    </div>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Setelah repo dan aplikasi siap, ini bagian yang paling penting: menentukan situs mereka untuk apa. Kalau langkah ini dilewati, hasilnya akan jadi salinan blog saya dengan nama lain.</p>
+    <p>Minta mereka mengisi kurung siku dengan kalimat sendiri, termasuk tiga topik yang benar-benar ingin ditulis dan satu fitur yang benar-benar dipakai. Fitur yang tidak dipakai justru lebih penting disebut, supaya agent tidak menambahkannya.</p>
+    <p>Tombol copy membawa versi lengkap, termasuk daftar jangan dan aturan berhenti sebelum push. Tempel di chat juga, supaya bisa dibaca ulang setelah sesi.</p>
+    <p><em>Kalau ada yang bingung soal vision, minta satu kalimat: "situs ini ada supaya [orang] bisa [melakukan hal]."</em></p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     07 step 03 the roster
      ================================================================ -->
 <section class="slide" id="s6" data-title="step 03, one orchestrator and four helpers">
-  <div class="top"><span class="lbl"><span class="num">(06)</span>step 03 / roster</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(07)</span>step 03 / roster</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">one orchestrator, four <em>helpers</em>.</h2>
     <p class="sub rise" style="--d:.15">you talk to one agent. it delegates, checks, and reports back. the helpers stay out of your way.</p>
@@ -561,7 +609,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      06 what agents are good at
      ================================================================ -->
 <section class="slide" id="s7" data-title="they draft fast, they do not know when they are wrong">
-  <div class="top"><span class="lbl"><span class="num">(07)</span>the honest half</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(08)</span>the honest half</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">they draft fast. they do not know when they are <em>wrong</em>.</h2>
     <p class="sub rise" style="--d:.1">the split is simple: let the agents do the boring half, and keep the judgment for yourself.</p>
@@ -598,7 +646,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      07 step 04 brief
      ================================================================ -->
 <section class="slide" id="s8" data-title="step 04, brief first, draft second">
-  <div class="top"><span class="lbl"><span class="num">(08)</span>step 04 / brief</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(09)</span>step 04 / brief</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">brief first. draft <em>second</em>.</h2>
     <p class="sub rise" style="--d:.12">four lines beat a paragraph of instructions. write them once, reuse the shape every time.</p>
@@ -625,7 +673,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      08 the gates
      ================================================================ -->
 <section class="slide" id="s9" data-title="five cheap checks, every time">
-  <div class="top"><span class="lbl"><span class="num">(09)</span>the gates</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(10)</span>the gates</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">five cheap checks, every <em>time</em>.</h2>
     <p class="sub rise" style="--d:.12">a script does not get tired, does not skip the boring page, and does not want to go home early.</p>
@@ -649,7 +697,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      09 step 05 publish
      ================================================================ -->
 <section class="slide" id="s10" data-title="step 05, push then point pages at it">
-  <div class="top"><span class="lbl"><span class="num">(10)</span>step 05 / publish</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(11)</span>step 05 / publish</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">push, then point pages at <em>the branch</em>.</h2>
     <p class="sub rise" style="--d:.12">five lines in a terminal, three clicks in settings. after that, publishing is just another push.</p>
@@ -687,7 +735,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      11 checkpoint
      ================================================================ -->
 <section class="slide" id="s-cp" data-title="checkpoint, does it open on another phone">
-  <div class="top"><span class="lbl"><span class="num">(11)</span>checkpoint</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(12)</span>checkpoint</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">checkpoint. open it on <em>another</em> phone.</h2>
     <p class="sub rise" style="--d:.1">tick what is done. the list survives a reload, so you can close the laptop and come back.</p>
@@ -726,7 +774,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      12 scope
      ================================================================ -->
 <section class="slide" id="s11" data-title="what we are not building today">
-  <div class="top"><span class="lbl"><span class="num">(12)</span>scope</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(13)</span>scope</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body mid">
     <h2 class="t rise">what we are <em>not</em> building today.</h2>
     <p class="sub rise" style="--d:.12">each one is a real project. none of them is needed to publish a post.</p>
@@ -751,7 +799,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      11 your turn
      ================================================================ -->
 <section class="slide" id="s12" data-title="this week, four small moves">
-  <div class="top"><span class="lbl"><span class="num">(13)</span>your turn</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(14)</span>your turn</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body mid">
     <h2 class="t rise">keep the <em>habit</em>, not the template.</h2>
     <div class="turn" style="margin-top:8px">
@@ -890,6 +938,57 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
   document.getElementById('b-notes').onclick=toggleNotes;
   document.getElementById('b-theme').onclick=toggleTheme;
   document.getElementById('b-full').onclick=toggleFull;
+  /* ---------- copyable customisation prompt ---------- */
+  (function(){
+    var btn=document.getElementById('b-prompt'), note=document.getElementById('copy-note');
+    if(!btn)return;
+    var text=[
+      'i am building my own personal site. it should be mine, not a copy of the sample.',
+      '',
+      'read the sample repo at https://github.com/naquuuu/naquuuu.github.io only to understand the structure: how a page is built, where the styles live, how the deploy works. do not copy its words, its palette, its diagrams, or its personal details.',
+      '',
+      'about me',
+      'name: [YOUR NAME]',
+      'role: [WHAT YOU DO]',
+      'place: [CITY]',
+      'topics i want to write about: [TOPIC], [TOPIC], [TOPIC]',
+      'why this site should exist: [ONE SENTENCE]',
+      '',
+      'build',
+      'pages: [HOME] [ABOUT] [NOTES] [CONTACT]',
+      'the one thing a visitor should do: [READ A POST / SEE MY WORK / EMAIL ME]',
+      'features i actually need: [FEATURE], [FEATURE], [FEATURE]',
+      'features i do not need: [ANALYTICS] [COMMENTS] [DARK MODE]',
+      '',
+      'style',
+      'three words: [WORD], [WORD], [WORD]',
+      'colours: [COLOURS]',
+      'type: [SERIF / SANS / MONO]',
+      'one site i like, and why: [URL] because [REASON]',
+      '',
+      'done when',
+      'the page renders at 320px with no sideways scroll, every in-page link resolves, every image has alt text, the sitemap lists every page, no placeholder text is left, and no sentence is copied from the sample.',
+      '',
+      'constraints',
+      'static html and css, no new dependencies, no tracking, keys stay in settings and never in the repo, ask before deleting files, ask before pushing. work through the orchestrator, one writer per file, and show me the file list before you start.',
+      '',
+      'start by proposing the site map and the first page in five lines. wait for my yes.'
+    ].join('\n');
+    var idle=note?note.textContent:'';
+    function ok(){ if(note){ note.textContent='copied. paste it into the agent.'; setTimeout(function(){ note.textContent=idle },4000) } }
+    function fallback(){
+      var ta=document.createElement('textarea');
+      ta.value=text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.left='-9999px';
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); ok() }catch(e){ if(note)note.textContent='select the prompt text and copy it by hand.' }
+      ta.remove();
+    }
+    btn.addEventListener('click',function(){
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(ok,fallback) }
+      else fallback();
+    });
+  })();
+
   /* ---------- workshop checklist (state lives in this browser) ---------- */
   (function(){
     var KEY='naq-workshop-v1';
