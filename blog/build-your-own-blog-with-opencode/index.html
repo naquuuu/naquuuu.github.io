@@ -4,21 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>build your own blog with opencode and a few agents | naquuuu</title>
-<meta name="description" content="an 18 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.">
+<meta name="description" content="a 19 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.">
 <meta property="og:image" content="https://naquuuu.github.io/assets/img/naquuuu-og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="naquuuu share card: a studio portrait on warm paper with the naquuuu wordmark and the line matter + code.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="build your own blog with opencode and a few agents">
-<meta name="twitter:description" content="an 18 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.">
+<meta name="twitter:description" content="a 19 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.">
 <meta name="twitter:image" content="https://naquuuu.github.io/assets/img/naquuuu-og-card.png">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="canonical" href="https://naquuuu.github.io/blog/build-your-own-blog-with-opencode/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="naquuuu">
 <meta property="og:title" content="build your own blog with opencode and a few agents">
-<meta property="og:description" content="an 18 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.">
+<meta property="og:description" content="a 19 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.">
 <meta property="og:url" content="https://naquuuu.github.io/blog/build-your-own-blog-with-opencode/">
 <script type="application/ld+json">
 {
@@ -26,7 +26,7 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": "https://naquuuu.github.io/blog/build-your-own-blog-with-opencode/",
   "headline": "build your own blog with opencode and a few agents",
-  "description": "an 18 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.",
+  "description": "a 19 slide hands-on workshop for the team: free github pages, opencode desktop, a sample repo, and one page built in the room.",
   "datePublished": "2026-10-21",
   "author": {
     "@type": "Person",
@@ -299,6 +299,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
 .copy:hover,.copy:focus-visible{background:var(--accent-crimson);color:var(--bg-primary)}
 .copy-note{font:400 13px var(--f-mono);color:var(--text-secondary)}
 .ph{font-style:normal;color:var(--accent-crimson)}
+.model-id{font:400 15px/1.45 var(--f-mono);color:var(--text-primary);overflow-wrap:anywhere;margin:2px 0 10px}
 .mini{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .mini li{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:baseline;font:400 16px/1.45 var(--f-body);color:var(--text-secondary)}
 .mini b{font:700 11px var(--f-mono);color:var(--accent-crimson);letter-spacing:.04em}
@@ -339,9 +340,9 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
     <div class="s1-rule rise" style="--d:.05;--t:.5"></div>
     <p class="kicker rise" style="--d:.1;--t:.6">sharing session / jakarta / 2026</p>
     <h1 class="cover-h rise" style="--d:.2;--t:.9;margin-top:14px">build your own blog.<br><em>with opencode.</em></h1>
-    <p class="sub rise" style="--d:.4">an 18 slide workshop: a free site at yourname.github.io, a small agent workspace, and one prompt for your own version.</p>
+    <p class="sub rise" style="--d:.4">a 19 slide workshop: a free site at yourname.github.io, a small agent workspace, and one prompt for your own version.</p>
     <div class="cover-meta fade" style="--d:.7">
-      <span>krishna (naquuuu)</span><i>/</i><span>for the team</span><i>/</i><span>18 slides</span>
+      <span>krishna (naquuuu)</span><i>/</i><span>for the team</span><i>/</i><span>19 slides</span>
     </div>
     <aside class="ai-note fade" role="note" style="--d:.9"><span class="ai-note-label">ai note</span>this post was written by ai and might be wrong. check anything important and double check it with the blog owner before you rely on it.</aside>
   </div>
@@ -545,7 +546,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
         <p class="card-p">never in the repo, a screenshot, or a prompt. if it leaks, revoke it and make a new one.</p>
       </div>
     </div>
-    <p class="do rise" style="--d:.4"><b>do now / 5 min</b><span>paste your key and pick one model. no key yet? share a seat, never a key.</span></p>
+    <p class="do rise" style="--d:.4"><b>do now / 5 min</b><span>paste your key and connect a provider. we pick the model next. no key yet? share a seat, never a key.</span></p>
     <p class="foot-note rise" style="--d:.5">the app may ask permission before it runs a command or edits a file. read the line before you press allow.</p>
   </div>
   <aside class="notes" lang="id">
@@ -557,10 +558,49 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
 </section>
 
 <!-- ================================================================
-     07 setup the folder
+     07 setup the model
+     ================================================================ -->
+<section class="slide" id="s-model" data-title="pick this model">
+  <div class="top"><span class="lbl"><span class="num">(07)</span>setup / model</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="body tight">
+    <h2 class="t rise">pick <em>this</em> model.</h2>
+    <p class="sub rise" style="--d:.1">one model for the room, so we hit the same bugs and can fix them together. a cheap coding model is enough for html and css.</p>
+    <div class="two rise" style="--d:.2;margin-top:4px">
+      <div class="card">
+        <p class="list-h">paid / go plan</p>
+        <p class="model-id">opencode-go/deepseek-v4.1-flash</p>
+        <p class="card-p">list price $0.15 in, $0.60 out per million tokens. fast and cheap enough to iterate.</p>
+      </div>
+      <div class="card">
+        <p class="list-h">free / try it</p>
+        <p class="model-id">opencode/deepseek-v4.1-flash-free</p>
+        <p class="card-p">the same model at zero cost. use it if you do not have a key yet.</p>
+      </div>
+    </div>
+    <div class="card rise" style="--d:.35">
+      <p class="list-h">why this one</p>
+      <ul class="list">
+        <li>the work is html, css, and following a brief, not hard reasoning.</li>
+        <li>cheap enough to draft three times and throw two away.</li>
+        <li>one model for everyone means the same mistakes and the same fixes.</li>
+      </ul>
+    </div>
+    <p class="foot-note rise" style="--d:.5">pick it in the model list after connecting. switch up only when you are stuck, then switch back.</p>
+  </div>
+  <aside class="notes" lang="id">
+    <p>Model yang dipakai di sesi ini deepseek v4.1 flash. Pilih varian berbayar di opencode go, atau yang gratis kalau belum punya key. Keduanya model yang sama.</p>
+    <p>Di aplikasi, pilih dari daftar model setelah provider tersambung. Di terminal, perintahnya /models. Kalau ragu, pakai yang berbayar karena lebih stabil; yang gratis cocok untuk mencoba alur.</p>
+    <p>Kenapa bukan model termahal: pekerjaan hari ini menulis html, css, dan mengikuti brief. Model yang lebih besar tidak otomatis lebih benar untuk tugas seperti ini, dan biayanya membuat orang takut mencoba ulang.</p>
+    <p>Harga di slide adalah list price dari katalog model. Tagihan sebenarnya mengikuti paket yang mereka pilih, jadi cek halaman paket sebelum menebak.</p>
+    <p><em>Kalau ada yang macet di bug aneh, boleh naik ke model yang lebih besar sebentar, lalu turun lagi.</em></p>
+  </aside>
+</section>
+
+<!-- ================================================================
+     08 setup the folder
      ================================================================ -->
 <section class="slide" id="s-folder" data-title="make the folder, copy the path">
-  <div class="top"><span class="lbl"><span class="num">(07)</span>setup / folder</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(08)</span>setup / folder</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">make the folder. copy the <em>path</em>.</h2>
     <p class="sub rise" style="--d:.1">first a public repo named yourname.github.io. then one folder for it, somewhere boring and permanent.</p>
@@ -603,7 +643,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      06 step 02 open the folder
      ================================================================ -->
 <section class="slide" id="s5" data-title="step 02, give it a folder">
-  <div class="top"><span class="lbl"><span class="num">(08)</span>step 02 / open</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(09)</span>step 02 / open</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">give it a folder, not a <em>chat window</em>.</h2>
     <p class="sub rise" style="--d:.15">a chat forgets. a folder remembers: the rules, the personas, the scripts, and the site itself.</p>
@@ -642,7 +682,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      06 make it yours
      ================================================================ -->
 <section class="slide" id="s-prompt" data-title="make it yours, not a copy">
-  <div class="top"><span class="lbl"><span class="num">(09)</span>make it yours</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(10)</span>make it yours</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">make it <em>yours</em>, not a copy.</h2>
     <p class="sub rise" style="--d:.1">fill what you know and leave the rest. the agent will interview you for the gaps before it builds.</p>
@@ -658,7 +698,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
     </div>
     <div class="copy-row rise" style="--d:.45">
       <button id="b-prompt" class="copy" type="button">copy the full prompt</button>
-      <span id="copy-note" class="copy-note" role="status" aria-live="polite">includes the do-not list and the stop-and-ask rule</span>
+      <span id="copy-note" class="copy-note" role="status" aria-live="polite">pins deepseek v4.1 flash, plus the do-not list and the stop-and-ask rule</span>
     </div>
   </div>
   <aside class="notes" lang="id">
@@ -673,7 +713,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      07 step 03 the roster
      ================================================================ -->
 <section class="slide" id="s6" data-title="step 03, one orchestrator and four helpers">
-  <div class="top"><span class="lbl"><span class="num">(10)</span>step 03 / roster</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(11)</span>step 03 / roster</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">one orchestrator, four <em>helpers</em>.</h2>
     <p class="sub rise" style="--d:.15">you talk to one agent. it delegates, checks, and reports back. the helpers stay out of your way.</p>
@@ -730,7 +770,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      06 what agents are good at
      ================================================================ -->
 <section class="slide" id="s7" data-title="they draft fast, they do not know when they are wrong">
-  <div class="top"><span class="lbl"><span class="num">(11)</span>the honest half</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(12)</span>the honest half</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">they draft fast. they do not know when they are <em>wrong</em>.</h2>
     <p class="sub rise" style="--d:.1">the split is simple: let the agents do the boring half, and keep the judgment for yourself.</p>
@@ -767,7 +807,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      07 step 04 brief
      ================================================================ -->
 <section class="slide" id="s8" data-title="step 04, brief first, draft second">
-  <div class="top"><span class="lbl"><span class="num">(12)</span>step 04 / brief</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(13)</span>step 04 / brief</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">brief first. draft <em>second</em>.</h2>
     <p class="sub rise" style="--d:.12">four lines beat a paragraph of instructions. write them once, reuse the shape every time.</p>
@@ -794,7 +834,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      08 the gates
      ================================================================ -->
 <section class="slide" id="s9" data-title="five cheap checks, every time">
-  <div class="top"><span class="lbl"><span class="num">(13)</span>the gates</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(14)</span>the gates</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">five cheap checks, every <em>time</em>.</h2>
     <p class="sub rise" style="--d:.12">a script does not get tired, does not skip the boring page, and does not want to go home early.</p>
@@ -818,7 +858,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      09 step 05 publish
      ================================================================ -->
 <section class="slide" id="s10" data-title="step 05, push then point pages at it">
-  <div class="top"><span class="lbl"><span class="num">(14)</span>step 05 / publish</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(15)</span>step 05 / publish</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">push, then point pages at <em>the branch</em>.</h2>
     <p class="sub rise" style="--d:.12">five lines in a terminal, three clicks in settings. after that, publishing is just another push.</p>
@@ -856,7 +896,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      11 checkpoint
      ================================================================ -->
 <section class="slide" id="s-cp" data-title="checkpoint, does it open on another phone">
-  <div class="top"><span class="lbl"><span class="num">(15)</span>checkpoint</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(16)</span>checkpoint</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body">
     <h2 class="t rise">checkpoint. open it on <em>another</em> phone.</h2>
     <p class="sub rise" style="--d:.1">tick what is done. the list survives a reload, so you can close the laptop and come back.</p>
@@ -895,7 +935,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      12 scope
      ================================================================ -->
 <section class="slide" id="s11" data-title="what we are not building today">
-  <div class="top"><span class="lbl"><span class="num">(16)</span>scope</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(17)</span>scope</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body mid">
     <h2 class="t rise">what we are <em>not</em> building today.</h2>
     <p class="sub rise" style="--d:.12">each one is a real project. none of them is needed to publish a post.</p>
@@ -920,7 +960,7 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
      11 your turn
      ================================================================ -->
 <section class="slide" id="s12" data-title="this week, four small moves">
-  <div class="top"><span class="lbl"><span class="num">(17)</span>your turn</span><span class="tr">[ build your own blog ]</span></div>
+  <div class="top"><span class="lbl"><span class="num">(18)</span>your turn</span><span class="tr">[ build your own blog ]</span></div>
   <div class="body mid">
     <h2 class="t rise">keep the <em>habit</em>, not the template.</h2>
     <div class="turn" style="margin-top:8px">
@@ -1065,6 +1105,8 @@ svg .gl{fill:none;stroke:var(--border-subtle);stroke-width:1}
     if(!btn)return;
     var text=[
       'i am building my own personal site. it should be mine, not a copy of the sample, and it should stay simple.',
+      '',
+      'model: i am using opencode-go/deepseek-v4.1-flash, or opencode/deepseek-v4.1-flash-free. do not ask me to switch models unless a task is genuinely blocked.',
       '',
       'read the sample repo at https://github.com/naquuuu/naquuuu.github.io only to understand the structure: how a page is built, where the styles live, how the deploy works. do not copy its words, its palette, its diagrams, or its personal details, and do not copy the whole setup. build the smallest version that works.',
       '',
