@@ -22,7 +22,7 @@
   <meta name="twitter:description" content="Detailed engineering and product management track record across MAPCLUB, Traveloka, and Boston Consulting Group (BCG) by Krishna (naquuuu).">
   <meta name="twitter:image" content="https://naquuuu.github.io/assets/img/naquuuu-og-card.png">
   <link rel="canonical" href="https://naquuuu.github.io/experience/">
-  <link rel="stylesheet" href="../assets/css/style.css?v=20261016pack">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20261022ui">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=20260917i">
   <link rel="alternate icon" href="../favicon.ico?v=20260917i">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,11 +74,21 @@
       </p>
     </div>
 
+    <!-- Role timeline: one static hairline row, oldest to newest. It indexes the
+         dossiers below; no rail fill, no scroll listeners, no extra height. -->
+    <nav class="role-timeline" aria-label="roles, oldest to newest">
+      <ol class="role-timeline-list">
+        <li class="role-timeline-item"><a class="role-timeline-link" href="#exp-bcg"><span class="role-timeline-dot" aria-hidden="true"></span>bcg<span class="role-timeline-when">2023</span></a></li>
+        <li class="role-timeline-item"><a class="role-timeline-link" href="#exp-traveloka"><span class="role-timeline-dot" aria-hidden="true"></span>traveloka<span class="role-timeline-when">2024</span></a></li>
+        <li class="role-timeline-item is-current"><a class="role-timeline-link" href="#exp-mapclub"><span class="role-timeline-dot" aria-hidden="true"></span>mapclub<span class="role-timeline-when">2026</span></a></li>
+      </ol>
+    </nav>
+
     <!-- 3 Case Study Stack -->
     <div class="dossier-stack">
 
       <!-- Case 01: MAPCLUB -->
-      <article class="dossier-card">
+      <article class="dossier-card" id="exp-mapclub">
         <div class="dossier-tab">
           <span>exp 01</span>
           <span class="dossier-tab-sep">/</span>
@@ -121,7 +131,7 @@
       </article>
 
       <!-- Case 02: Traveloka -->
-      <article class="dossier-card">
+      <article class="dossier-card" id="exp-traveloka">
         <div class="dossier-tab">
           <span>exp 02</span>
           <span class="dossier-tab-sep">/</span>
@@ -164,7 +174,7 @@
       </article>
 
       <!-- Case 03: BCG -->
-      <article class="dossier-card">
+      <article class="dossier-card" id="exp-bcg">
         <div class="dossier-tab">
           <span>exp 03</span>
           <span class="dossier-tab-sep">/</span>
@@ -263,6 +273,6 @@
 
   <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
   <script data-goatcounter="https://naquuuu.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <script src="../assets/js/palette.js?v=20261015palette" defer></script>
+  <script src="../assets/js/palette.js?v=20261022ui" defer></script>
 </body>
 </html>
