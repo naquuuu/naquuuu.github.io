@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>jatuh blueprint</title>
+<style>
+  :root {
+    --paper: #f4efe4; --sheet: #fbf8f1; --ink: #2f2d2a; --slate: #4f5b66;
+    --terra: #b4573b; --sage: #6f8466; --hair: #cfc6b4; --mute: #8a8378;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font-family: "Helvetica Neue", Arial, system-ui, sans-serif; }
+  header { max-width: 1188px; margin: 0 auto; padding: 32px 16px 8px; }
+  header h1 { font-size: 20px; font-weight: 500; margin: 0 0 4px; letter-spacing: .02em; }
+  header p { margin: 0; color: var(--mute); font-size: 14px; }
+  figure { max-width: 1188px; margin: 16px auto 32px; padding: 0 16px; }
+  svg.sheet { width: 100%; height: auto; display: block; background: var(--sheet);
+              border: 1px solid var(--hair); }
+  svg text { font-family: "Helvetica Neue", Arial, system-ui, sans-serif; fill: var(--ink); font-size: 13px; }
+  svg .mono { font-family: "SF Mono", Consolas, monospace; font-size: 12px; }
+  svg .small { font-size: 11px; fill: var(--slate); }
+  svg .h { font-size: 15px; font-weight: 600; }
+  svg .ink { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+  svg .thin { fill: none; stroke: var(--ink); stroke-width: .7; }
+  svg .hair { fill: none; stroke: var(--hair); stroke-width: .7; }
+  svg .dim { fill: none; stroke: var(--slate); stroke-width: .6; }
+  svg .dash { fill: none; stroke: var(--slate); stroke-width: .9; stroke-dasharray: 5 4; }
+  svg .terra { stroke: var(--terra); }
+  svg .sage { stroke: var(--sage); }
+  svg .fill-terra { fill: var(--terra); stroke: none; }
+  svg .fill-sage { fill: var(--sage); stroke: none; }
+  svg .fill-soft { fill: #efe7d6; stroke: var(--ink); stroke-width: 1; }
+  svg .fill-white { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.2; }
+  svg .w-red { fill: none; stroke: #b03a2e; stroke-width: 2; }
+  svg .w-blk { fill: none; stroke: #2f2d2a; stroke-width: 2; }
+  svg .w-sda { fill: none; stroke: var(--sage); stroke-width: 2; }
+  svg .w-scl { fill: none; stroke: var(--terra); stroke-width: 2; }
+  svg .lead { stroke-dasharray: 7 4; }
+  svg .hl { stroke: var(--terra); stroke-width: 1.6; }
+  @media print {
+    @page { size: A4 landscape; margin: 8mm; }
+    body { background: #fff; }
+    header { display: none; }
+    figure { margin: 0; padding: 0; max-width: none; page-break-after: always; }
+    svg.sheet { border: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>jatuh · blueprint, phase a</h1>
+  <p>five sheets, j-01 to j-05. written spec: 03-blueprint.md. prints one sheet per a4 landscape page.</p>
+</header>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#4f5b66"/>
+    </marker>
+    <marker id="tick" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M2 8 L8 2" stroke="#4f5b66" stroke-width="1.2"/>
+    </marker>
+  </defs>
+</svg>
+
+<!-- ============ J-01 general arrangement ============ -->
+<figure>
+<svg class="sheet" viewBox="0 0 1188 840" data-no="j-01" data-title="general arrangement, back view" data-scale="nts">
+  <text x="40" y="52" class="h">general arrangement · back view · wearer standing</text>
+
+  <!-- figure -->
+  <circle cx="420" cy="130" r="38" class="thin"/>
+  <path d="M400 166 L400 186 M440 166 L440 186" class="thin"/>
+  <path d="M330 200 Q420 180 510 200 L520 300 L505 395 L335 395 L320 300 Z" class="thin"/>
+  <path d="M330 200 L290 330 L300 400 M510 200 L550 330 L540 400" class="thin"/>
+  <path d="M372 590 L368 750 M468 590 L472 750 M372 590 L468 590" class="hair"/>
+  <text x="420" y="300" text-anchor="middle" class="small">shirt (any)</text>
+
+  <!-- yoke -->
+  <rect x="330" y="392" width="180" height="18" class="fill-soft"/>
+  <!-- panel -->
+  <path d="M335 410 L505 410 L565 565 Q420 600 275 565 Z" class="ink"/>
+  <path d="M420 410 L420 585" class="hair"/>
+  <!-- pod pouch -->
+  <rect x="358" y="388" width="28" height="26" class="fill-terra" opacity=".85"/>
+  <!-- lead -->
+  <path d="M386 402 L420 402 L420 562" class="dash terra"/>
+  <circle cx="420" cy="470" r="2.5" fill="#4f5b66"/><circle cx="420" cy="510" r="2.5" fill="#4f5b66"/><circle cx="420" cy="540" r="2.5" fill="#4f5b66"/>
+  <!-- hem pocket -->
+  <rect x="411" y="562" width="18" height="12" class="fill-sage"/>
+
+  <!-- turn arrow and floor marks -->
+  <path d="M330 778 A 110 22 0 0 0 520 770" class="dim" marker-end="url(#arr)"/>
+  <path d="M300 790 L330 790 M510 790 L540 790" class="ink"/>
+  <text x="420" y="810" text-anchor="middle" class="small">cued quarter turn between two floor marks · 60 bpm: turn on 1, stop on 2</text>
+
+  <!-- callouts -->
+  <g class="dim">
+    <path d="M372 388 L372 340 L620 340"/>
+    <path d="M510 401 L620 401"/>
+    <path d="M540 500 L620 500"/>
+    <path d="M425 455 L620 455"/>
+    <path d="M429 568 L620 568"/>
+  </g>
+  <g>
+    <circle cx="632" cy="340" r="11" class="fill-white"/><text x="632" y="344.5" text-anchor="middle">1</text>
+    <circle cx="632" cy="401" r="11" class="fill-white"/><text x="632" y="405.5" text-anchor="middle">2</text>
+    <circle cx="632" cy="455" r="11" class="fill-white"/><text x="632" y="459.5" text-anchor="middle">3</text>
+    <circle cx="632" cy="500" r="11" class="fill-white"/><text x="632" y="504.5" text-anchor="middle">4</text>
+    <circle cx="632" cy="568" r="11" class="fill-white"/><text x="632" y="572.5" text-anchor="middle">5</text>
+  </g>
+  <g>
+    <text x="652" y="337">pod pouch, back left, 70 from cb</text>
+    <text x="652" y="352" class="small">esp32-c3, body imu 0x68, lipo, charger · about 26 g · j-03, j-04</text>
+    <text x="652" y="398">waist yoke, 30 high, twill + interfacing</text>
+    <text x="652" y="413" class="small">9 snap studs every 60 along back and sides · buckle at front · j-03</text>
+    <text x="652" y="452">hem lead, 350, runs up cb inside</text>
+    <text x="652" y="467" class="small">4 x 28 awg silicone · 3 loose thread loops at 100 spacing · j-04</text>
+    <text x="652" y="497">hem panel, one pattern, three fabrics</text>
+    <text x="652" y="512" class="small">linen · tropical wool · cotton twill · snaps onto the yoke · j-02</text>
+    <text x="652" y="565">hem imu pocket, cb, 20 above finished hem</text>
+    <text x="652" y="580" class="small">same position on every panel · one imu moved between panels · about 4 g at the hem</text>
+  </g>
+
+  <!-- intent note -->
+  <rect x="652" y="620" width="480" height="78" class="hair"/>
+  <text x="664" y="642" class="small">intent: a test fixture, not a fashion piece. the yoke and the</text>
+  <text x="664" y="658" class="small">sensor stay fixed; only the panel changes, so fabric is the only</text>
+  <text x="664" y="674" class="small">variable. the body imu is the control: it stops when you stop.</text>
+  <text x="664" y="690" class="small">the hem keeps going. the instrument plays the difference.</text>
+</svg>
+</figure>
+
+<!-- ============ J-02 hem panel pattern ============ -->
+<figure>
+<svg class="sheet" viewBox="0 0 1188 840" data-no="j-02" data-title="hem panel pattern" data-scale="nts">
+  <text x="40" y="52" class="h">hem panel · ring-sector pattern · cut one per fabric (x3), two rounds (v1, v2)</text>
+
+  <!-- draft centre -->
+  <path d="M410 90 L430 90 M420 80 L420 100" class="dim"/>
+  <text x="436" y="94" class="small">draft centre</text>
+  <!-- radius construction lines -->
+  <path d="M420 90 L238 471.6 M420 90 L602 471.6" class="hair"/>
+  <!-- panel outline: inner R600 (drawn 300), outer R900 (drawn 450), centre at 420,90 -->
+  <path d="M298.7 364.4 A 300 300 0 0 0 541.3 364.4 L 602 501.6 A 450 450 0 0 1 238 501.6 Z" class="ink"/>
+  <!-- cb line -->
+  <path d="M420 390 L420 540" class="hair"/>
+  <!-- grainline -->
+  <path d="M388 368 L388 452" class="dim" marker-start="url(#arr)" marker-end="url(#arr)"/>
+  <text x="380" y="414" class="small" text-anchor="end">grain</text>
+  <!-- snaps on waist edge -->
+  <g fill="#6f8466">
+    <circle cx="301.2" cy="370.9" r="3.2"/><circle cx="329.9" cy="381.4" r="3.2"/><circle cx="359.4" cy="388.9" r="3.2"/>
+    <circle cx="389.5" cy="393.5" r="3.2"/><circle cx="420" cy="395" r="3.2"/><circle cx="450.5" cy="393.5" r="3.2"/>
+    <circle cx="480.6" cy="388.9" r="3.2"/><circle cx="510.1" cy="381.4" r="3.2"/><circle cx="538.8" cy="370.9" r="3.2"/>
+  </g>
+  <!-- pocket -->
+  <rect x="410" y="515" width="20" height="15" class="fill-sage"/>
+
+  <!-- dimensions -->
+  <path d="M420 90 L331 377" class="dim" marker-end="url(#arr)"/>
+  <text x="330" y="230" class="mono">r600</text>
+  <path d="M420 90 L558 514" class="dim" marker-end="url(#arr)"/>
+  <text x="500" y="250" class="mono">r900</text>
+  <path d="M372 165 A 80 80 0 0 0 468 165" class="dim"/>
+  <text x="420" y="196" text-anchor="middle" class="mono">48°</text>
+  <path d="M640 390 L640 540" class="dim" marker-start="url(#arr)" marker-end="url(#arr)"/>
+  <path d="M425 390 L650 390 M425 540 L650 540" class="hair"/>
+  <text x="650" y="470" class="mono">drop 300 at cb</text>
+  <text x="380" y="572" class="mono">hem edge 750</text>
+  <text x="160" y="368" class="mono">waist edge 500</text>
+
+  <!-- callouts for pocket and snaps -->
+  <path d="M430 522 L520 670 L560 670" class="dim"/>
+  <text x="566" y="674">imu pocket 40 x 30, cb, lower edge 20 above finished hem</text>
+  <path d="M450 393 L480 700 L560 700" class="dim"/>
+  <text x="566" y="704">9 snap sockets on 25 tape, every 60, centred on cb</text>
+
+  <!-- parameter table -->
+  <g transform="translate(760,110)">
+    <text class="h" x="0" y="0">draft</text>
+    <path d="M0 10 L380 10" class="hair"/>
+    <text x="0" y="32" class="small">waist edge</text><text x="190" y="32" class="mono">500 (about 0.6 x waist)</text>
+    <text x="0" y="54" class="small">drop at cb</text><text x="190" y="54" class="mono">300</text>
+    <text x="0" y="76" class="small">hem edge</text><text x="190" y="76" class="mono">750 (1.5 x waist edge)</text>
+    <text x="0" y="98" class="small">radii</text><text x="190" y="98" class="mono">r600 / r900</text>
+    <text x="0" y="120" class="small">angle</text><text x="190" y="120" class="mono">48° (47.7 calc.)</text>
+    <text x="0" y="142" class="small">cut size</text><text x="190" y="142" class="mono">about 730 x 355 + allowances</text>
+    <text x="0" y="164" class="small">grain</text><text x="190" y="164" class="mono">cb on lengthwise grain</text>
+    <path d="M0 178 L380 178" class="hair"/>
+    <text x="0" y="200" class="small">rule: all three panels from this one pattern,</text>
+    <text x="0" y="216" class="small">same grain, same finishes, same pocket position.</text>
+  </g>
+
+  <!-- finish details -->
+  <g transform="translate(760,380)">
+    <text class="h" x="0" y="0">finishes (sections, nts)</text>
+    <path d="M0 10 L380 10" class="hair"/>
+    <!-- hem double fold -->
+    <path d="M10 60 L170 60 L170 76 L60 76 L60 68 L160 68" class="ink"/>
+    <text x="190" y="62">hem: 10 double fold</text>
+    <text x="190" y="78" class="small">20 allowance</text>
+    <!-- waist tape -->
+    <path d="M10 130 L150 130" class="ink"/>
+    <path d="M150 118 L120 118 Q100 130 120 142 L150 142" class="ink sage"/>
+    <circle cx="135" cy="130" r="4" class="fill-sage"/>
+    <text x="190" y="126">waist: 25 twill tape bound over edge</text>
+    <text x="190" y="142" class="small">snap sockets through tape and panel</text>
+    <!-- side -->
+    <path d="M10 190 L150 190 L150 198 L120 198" class="ink"/>
+    <text x="190" y="194">sides: 6 narrow hem</text>
+    <text x="0" y="228" class="small">v2 option (all three panels together): 10 g weighted</text>
+    <text x="0" y="244" class="small">tape in the hem fold, if linen swings too lightly.</text>
+  </g>
+</svg>
+</figure>
+
+<!-- ============ J-03 details ============ -->
+<figure>
+<svg class="sheet" viewBox="0 0 1188 840" data-no="j-03" data-title="yoke, pod pouch, imu pocket" data-scale="nts">
+  <text x="40" y="52" class="h">a · waist yoke, plan, outside face, laid flat</text>
+  <rect x="80" y="110" width="1000" height="40" class="fill-soft"/>
+  <rect x="60" y="116" width="28" height="28" class="ink"/><text x="74" y="170" text-anchor="middle" class="small">buckle</text>
+  <path d="M1080 120 L1110 120 L1110 140 L1080 140" class="ink"/><text x="1095" y="170" text-anchor="middle" class="small">webbing</text>
+  <g fill="#6f8466">
+    <circle cx="340" cy="130" r="5"/><circle cx="400" cy="130" r="5"/><circle cx="460" cy="130" r="5"/><circle cx="520" cy="130" r="5"/>
+    <circle cx="580" cy="130" r="5"/><circle cx="640" cy="130" r="5"/><circle cx="700" cy="130" r="5"/><circle cx="760" cy="130" r="5"/><circle cx="820" cy="130" r="5"/>
+  </g>
+  <path d="M580 95 L580 165" class="dim"/><text x="580" y="90" text-anchor="middle" class="small">cb</text>
+  <path d="M330 95 L330 165 M830 95 L830 165" class="hair"/>
+  <text x="330" y="90" text-anchor="middle" class="small">left side</text><text x="830" y="90" text-anchor="middle" class="small">right side</text>
+  <rect x="475" y="138" width="70" height="45" class="fill-terra" opacity=".85"/>
+  <text x="510" y="200" text-anchor="middle" class="small">pod pouch 70 x 45</text>
+  <path d="M545 160 L575 160 L575 240" class="dash terra"/>
+  <text x="586" y="236" class="small">hem lead to j-02 pocket</text>
+  <path d="M340 230 L400 230" class="dim" marker-start="url(#arr)" marker-end="url(#arr)"/><text x="370" y="250" text-anchor="middle" class="mono">60</text>
+  <path d="M510 260 L580 260" class="dim" marker-start="url(#arr)" marker-end="url(#arr)"/><text x="545" y="280" text-anchor="middle" class="mono">70</text>
+  <path d="M1130 110 L1130 150" class="dim" marker-start="url(#arr)" marker-end="url(#arr)"/><text x="1140" y="134" class="mono">30</text>
+  <text x="80" y="200" class="small">length = waist + 100 overlap</text>
+
+  <!-- B pouch section -->
+  <text x="40" y="340" class="h">b · pod pouch, section</text>
+  <g transform="translate(60,370)">
+    <rect x="0" y="0" width="300" height="10" class="fill-soft"/><text x="320" y="9" class="small">yoke (twill + interfacing)</text>
+    <rect x="0" y="14" width="300" height="6" class="thin"/><text x="320" y="22" class="small">pouch outer, twill</text>
+    <rect x="0" y="24" width="300" height="10" fill="#e3d9c4" stroke="#8a8378"/><text x="320" y="34" class="small">felt 2</text>
+    <rect x="10" y="38" width="80" height="22" class="fill-white"/><text x="50" y="53" text-anchor="middle" class="small">c3</text>
+    <rect x="96" y="38" width="70" height="22" class="fill-white"/><text x="131" y="53" text-anchor="middle" class="small">imu</text>
+    <rect x="172" y="38" width="118" height="22" class="fill-white"/><text x="231" y="53" text-anchor="middle" class="small">lipo + tp4056</text>
+    <text x="320" y="54" class="small">boards side by side on a 1 sled, not stacked</text>
+    <rect x="0" y="64" width="300" height="10" fill="#e3d9c4" stroke="#8a8378"/><text x="320" y="74" class="small">felt 2</text>
+    <rect x="0" y="78" width="300" height="6" class="thin"/><text x="320" y="86" class="small">pouch inner, velcro flap opens up</text>
+    <path d="M-20 14 L-20 84" class="dim" marker-start="url(#arr)" marker-end="url(#arr)"/><text x="-26" y="54" text-anchor="end" class="mono">18</text>
+  </g>
+
+  <!-- C imu pocket detail -->
+  <text x="40" y="530" class="h">c · hem imu pocket, inside face, enlarged about 4x</text>
+  <g transform="translate(120,600)">
+    <rect x="0" y="0" width="160" height="120" class="ink"/>
+    <rect x="20" y="22" width="120" height="88" class="fill-soft"/>
+    <rect x="38" y="36" width="84" height="64" class="fill-white"/>
+    <text x="80" y="72" text-anchor="middle" class="small">gy-521</text>
+    <path d="M80 112 L80 112" class="thin"/>
+    <path d="M0 0 L160 0" class="hair"/>
+    <path d="M70 0 L70 -40 M78 0 L78 -40 M86 0 L86 -40 M94 0 L94 -40" class="thin"/>
+    <text x="104" y="-24" class="small">lead out at top</text>
+    <!-- axes -->
+    <path d="M200 90 L260 90" class="dim" marker-end="url(#arr)"/><text x="266" y="94" class="mono">x along hem</text>
+    <path d="M200 90 L200 30" class="dim" marker-end="url(#arr)"/><text x="206" y="28" class="mono">y up</text>
+    <circle cx="200" cy="90" r="7" class="thin"/><circle cx="200" cy="90" r="2" fill="#4f5b66"/><text x="214" y="112" class="mono">z out of fabric</text>
+    <!-- hem edge -->
+    <path d="M-40 200 Q0 196 40 200 T120 200 T200 200" class="ink"/>
+    <text x="210" y="204" class="small">finished hem edge</text>
+    <path d="M-20 120 L-20 200" class="dim" marker-start="url(#arr)" marker-end="url(#arr)"/><text x="-26" y="165" text-anchor="end" class="mono">20</text>
+    <path d="M0 -12 L160 -12" class="dim" marker-start="url(#arr)" marker-end="url(#arr)"/><text x="40" y="-18" class="mono">40</text>
+    <path d="M172 0 L172 120" class="dim" marker-start="url(#arr)" marker-end="url(#arr)"/><text x="176" y="140" class="mono">30</text>
+  </g>
+
+  <!-- D mass table -->
+  <g transform="translate(760,470)">
+    <text class="h" x="0" y="10">d · mass budget</text>
+    <path d="M0 20 L380 20" class="hair"/>
+    <text x="0" y="42" class="small">c3 supermini</text><text x="300" y="42" class="mono">2 g</text>
+    <text x="0" y="62" class="small">body imu + sled</text><text x="300" y="62" class="mono">3 g</text>
+    <text x="0" y="82" class="small">lipo 400 mah protected</text><text x="300" y="82" class="mono">9 g</text>
+    <text x="0" y="102" class="small">tp4056 module</text><text x="300" y="102" class="mono">2 g</text>
+    <text x="0" y="122" class="small">switch, wire, connector</text><text x="300" y="122" class="mono">4 g</text>
+    <text x="0" y="142" class="small">pouch</text><text x="300" y="142" class="mono">6 g</text>
+    <path d="M0 152 L380 152" class="hair"/>
+    <text x="0" y="172">pod total (budget ≤ 35)</text><text x="300" y="172" class="mono">26 g</text>
+    <text x="0" y="196">at the hem (budget ≤ 5)</text><text x="300" y="196" class="mono">4 g</text>
+    <text x="0" y="222" class="small">verify every value on the 0.01 g scale; record in the design log.</text>
+  </g>
+</svg>
+</figure>
+
+<!-- ============ J-04 wiring ============ -->
+<figure>
+<svg class="sheet" viewBox="0 0 1188 840" data-no="j-04" data-title="wiring, pod and hem lead" data-scale="schematic">
+  <text x="40" y="52" class="h">wiring · pod (in the yoke pouch) and hem lead</text>
+
+  <!-- LiPo -->
+  <rect x="60" y="160" width="110" height="80" class="fill-white"/>
+  <text x="115" y="196" text-anchor="middle">lipo 3.7 v</text><text x="115" y="214" text-anchor="middle" class="small">~400 mah, protected</text>
+  <!-- TP4056 -->
+  <rect x="240" y="160" width="140" height="80" class="fill-white"/>
+  <text x="310" y="196" text-anchor="middle">tp4056 usb-c</text><text x="310" y="214" text-anchor="middle" class="small">with protection</text>
+  <text x="246" y="181" class="small">b+</text><text x="246" y="232" class="small">b-</text>
+  <text x="352" y="181" class="small">out+</text><text x="352" y="232" class="small">out-</text>
+  <path d="M170 175 L240 175" class="w-red"/><path d="M170 225 L240 225" class="w-blk"/>
+  <!-- switch -->
+  <path d="M380 175 L440 175" class="w-red"/>
+  <circle cx="444" cy="175" r="4" class="thin"/><path d="M447 173 L490 160" class="ink"/><circle cx="494" cy="175" r="4" class="thin"/>
+  <text x="468" y="150" text-anchor="middle" class="small">sw1</text>
+  <path d="M498 175 L560 175" class="w-red"/>
+  <path d="M380 225 L560 225" class="w-blk"/>
+  <!-- divider -->
+  <circle cx="410" cy="175" r="3" fill="#b03a2e"/>
+  <path d="M410 175 L410 320" class="w-red"/>
+  <rect x="402" y="320" width="16" height="40" class="fill-white"/><text x="426" y="345" class="small">r1 100k</text>
+  <path d="M410 360 L410 400" class="thin"/>
+  <circle cx="410" cy="385" r="3" fill="#2f2d2a"/>
+  <path d="M410 385 L560 385" class="thin"/>
+  <rect x="402" y="400" width="16" height="40" class="fill-white"/><text x="426" y="425" class="small">r2 100k</text>
+  <path d="M410 440 L410 465 M396 465 L424 465 M401 471 L419 471 M406 477 L414 477" class="w-blk"/>
+
+  <!-- C3 -->
+  <rect x="560" y="140" width="200" height="290" class="fill-white"/>
+  <text x="660" y="300" text-anchor="middle" class="h">esp32-c3</text><text x="660" y="318" text-anchor="middle" class="small">supermini</text>
+  <text x="568" y="179" class="mono">5v</text><text x="568" y="229" class="mono">gnd</text><text x="568" y="389" class="mono">gpio3 adc</text>
+  <text x="752" y="179" class="mono" text-anchor="end">3v3</text><text x="752" y="229" class="mono" text-anchor="end">gnd</text>
+  <text x="752" y="269" class="mono" text-anchor="end">gpio6 sda</text><text x="752" y="309" class="mono" text-anchor="end">gpio7 scl</text>
+  <text x="660" y="420" text-anchor="middle" class="small">do not use gpio 2, 8, 9 (strapping)</text>
+
+  <!-- bus to body IMU -->
+  <path d="M760 175 L900 175" class="w-red"/><path d="M760 225 L900 225" class="w-blk"/>
+  <path d="M760 265 L900 265" class="w-sda"/><path d="M760 305 L900 305" class="w-scl"/>
+  <rect x="900" y="140" width="180" height="200" class="fill-white"/>
+  <text x="990" y="250" text-anchor="middle" class="h">body imu</text><text x="990" y="268" text-anchor="middle" class="small">gy-521 · addr 0x68</text>
+  <text x="908" y="179" class="mono">vcc</text><text x="908" y="229" class="mono">gnd</text><text x="908" y="269" class="mono">sda</text><text x="908" y="309" class="mono">scl</text>
+  <text x="996" y="334" class="mono">ad0</text>
+  <path d="M990 340 L990 368 M976 368 L1004 368 M981 374 L999 374 M986 380 L994 380" class="w-blk"/>
+
+  <!-- taps to J1 -->
+  <circle cx="800" cy="175" r="3" fill="#b03a2e"/><circle cx="815" cy="225" r="3" fill="#2f2d2a"/>
+  <circle cx="830" cy="265" r="3" fill="#6f8466"/><circle cx="845" cy="305" r="3" fill="#b4573b"/>
+  <path d="M800 175 L800 480" class="w-red"/><path d="M815 225 L815 480" class="w-blk"/>
+  <path d="M830 265 L830 480" class="w-sda"/><path d="M845 305 L845 480" class="w-scl"/>
+  <rect x="785" y="480" width="75" height="28" class="fill-soft"/>
+  <text x="870" y="499">j1 · 4-pin, at the pouch</text>
+  <text x="870" y="515" class="small">1 3v3 · 2 gnd · 3 sda · 4 scl</text>
+
+  <!-- lead -->
+  <path d="M800 508 L800 600" class="w-red lead"/><path d="M815 508 L815 600" class="w-blk lead"/>
+  <path d="M830 508 L830 600" class="w-sda lead"/><path d="M845 508 L845 600" class="w-scl lead"/>
+  <text x="870" y="570">hem lead · 350 · 4 x 28 awg silicone</text>
+  <text x="870" y="586" class="small">sda twisted with gnd, scl twisted with 3v3 · i2c at 100 khz</text>
+  <rect x="760" y="600" width="140" height="100" class="fill-white"/>
+  <text x="830" y="640" text-anchor="middle" class="h">hem imu</text><text x="830" y="658" text-anchor="middle" class="small">gy-521 · addr 0x69</text>
+  <text x="830" y="678" text-anchor="middle" class="small">ad0 bridged to vcc</text>
+
+  <!-- pin table -->
+  <g transform="translate(60,540)">
+    <text class="h" x="0" y="0">notes</text>
+    <path d="M0 10 L600 10" class="hair"/>
+    <text x="0" y="32" class="small">pull-ups: the two gy-521 boards in parallel give about 2.35 kΩ; enough for a 350 lead at 100 khz.</text>
+    <text x="0" y="52" class="small">battery sense: r1/r2 halve out+; read on gpio3; alert below 3.6 v.</text>
+    <text x="0" y="72" class="small">power: out+ to the c3 5v pin; the onboard ldo makes 3.3 v for both imus.</text>
+    <text x="0" y="92" class="small">strain relief: every wire leaving a board is stitched down within 10.</text>
+    <text x="0" y="112" class="small">phase b: the c3 has no capacitive touch; the strap patch needs a classic esp32 or s3.</text>
+    <text x="0" y="140" class="small">wire colours</text>
+    <path d="M90 136 L120 136" class="w-red"/><text x="126" y="140" class="small">3v3 / vbat</text>
+    <path d="M200 136 L230 136" class="w-blk"/><text x="236" y="140" class="small">gnd</text>
+    <path d="M280 136 L310 136" class="w-sda"/><text x="316" y="140" class="small">sda</text>
+    <path d="M360 136 L390 136" class="w-scl"/><text x="396" y="140" class="small">scl</text>
+  </g>
+</svg>
+</figure>
+
+<!-- ============ J-05 signal chain and failure ============ -->
+<figure>
+<svg class="sheet" viewBox="0 0 1188 840" data-no="j-05" data-title="signal chain, failure classes" data-scale="schematic">
+  <text x="40" y="52" class="h">signal chain · audio path (top) and control path (bottom)</text>
+
+  <!-- audio row -->
+  <rect x="40" y="150" width="120" height="60" class="fill-white"/><text x="100" y="185" text-anchor="middle">guitar</text>
+  <rect x="200" y="150" width="140" height="60" class="fill-white"/><text x="270" y="178" text-anchor="middle">interface in</text><text x="270" y="196" text-anchor="middle" class="small">hi-z</text>
+  <rect x="380" y="110" width="430" height="150" class="ink"/>
+  <text x="392" y="130" class="small">laptop · reaper · asio 64 to 128 samples</text>
+  <rect x="400" y="160" width="90" height="50" class="fill-soft"/><text x="445" y="190" text-anchor="middle" class="small">input gate</text>
+  <rect x="510" y="150" width="160" height="70" class="fill-white hl"/>
+  <text x="590" y="178" text-anchor="middle">jsfx jatuh-mod</text><text x="590" y="196" text-anchor="middle" class="small">chorus driven by r</text><text x="590" y="211" text-anchor="middle" class="small">+ heartbeat watchdog</text>
+  <rect x="690" y="160" width="100" height="50" class="fill-soft"/><text x="740" y="182" text-anchor="middle" class="small">fixed clean</text><text x="740" y="197" text-anchor="middle" class="small">tone, delay 25%</text>
+  <rect x="850" y="150" width="140" height="60" class="fill-white"/><text x="920" y="178" text-anchor="middle">interface out</text><text x="920" y="196" text-anchor="middle" class="small">about -20 db</text>
+  <rect x="1030" y="150" width="120" height="60" class="fill-white"/><text x="1090" y="178" text-anchor="middle">old amp</text><text x="1090" y="196" text-anchor="middle" class="small">set clean</text>
+  <g class="dim">
+    <path d="M160 180 L198 180" marker-end="url(#arr)"/><path d="M340 180 L398 180" marker-end="url(#arr)"/>
+    <path d="M490 185 L508 185" marker-end="url(#arr)"/><path d="M670 185 L688 185" marker-end="url(#arr)"/>
+    <path d="M790 180 L848 180" marker-end="url(#arr)"/><path d="M990 180 L1028 180" marker-end="url(#arr)"/>
+  </g>
+  <path d="M270 210 L270 290 L920 290 L920 212" class="dash" marker-end="url(#arr)"/>
+  <text x="595" y="308" text-anchor="middle" class="small">manual fallback: interface hardware direct monitor (dry), only if reaper is down</text>
+
+  <!-- control row -->
+  <rect x="40" y="430" width="200" height="80" class="fill-white"/>
+  <text x="140" y="462" text-anchor="middle">pod</text><text x="140" y="480" text-anchor="middle" class="small">body + hem imu, 200 hz read</text><text x="140" y="496" text-anchor="middle" class="small">100 hz stream</text>
+  <rect x="380" y="420" width="300" height="100" class="fill-white"/>
+  <text x="530" y="450" text-anchor="middle">jatuh-core · python</text>
+  <text x="530" y="470" text-anchor="middle" class="small">align, band-pass, r = hem - body</text>
+  <text x="530" y="486" text-anchor="middle" class="small">sensor watchdog · estimates · logger</text>
+  <text x="530" y="502" text-anchor="middle" class="small">condition a / b / c</text>
+  <rect x="760" y="430" width="180" height="80" class="fill-white"/>
+  <text x="850" y="462" text-anchor="middle">dashboard</text><text x="850" y="480" text-anchor="middle" class="small">laptop browser</text>
+  <path d="M240 470 L378 470" class="dim" marker-end="url(#arr)"/><text x="309" y="460" text-anchor="middle" class="small">wi-fi ws</text>
+  <path d="M680 470 L758 470" class="dim" marker-end="url(#arr)"/>
+  <path d="M590 420 L590 222" class="dim" marker-end="url(#arr)"/>
+  <text x="600" y="360" class="small">osc: /jatuh/wave 100 hz · /depth · /hb every 50 ms · /cond</text>
+
+  <!-- failure markers -->
+  <circle cx="309" cy="496" r="13" class="fill-white" style="stroke:#b4573b"/><text x="309" y="501" text-anchor="middle">1</text>
+  <circle cx="620" cy="390" r="13" class="fill-white" style="stroke:#b4573b"/><text x="620" y="395" text-anchor="middle">2</text>
+  <circle cx="800" cy="120" r="13" class="fill-white" style="stroke:#b4573b"/><text x="800" y="125" text-anchor="middle">3</text>
+
+  <!-- failure table -->
+  <g transform="translate(40,580)">
+    <text class="h" x="0" y="0">failure classes</text>
+    <path d="M0 12 L740 12" class="hair"/>
+    <text x="0" y="36" class="small">#</text><text x="30" y="36" class="small">class</text><text x="200" y="36" class="small">detected by</text><text x="420" y="36" class="small">behaviour</text><text x="640" y="36" class="small">automatic</text>
+    <text x="0" y="60">1</text><text x="30" y="60">sensor loss</text><text x="200" y="60" class="small">core: no packet 300 ms, hem_ok false</text><text x="420" y="60" class="small">depth glides to 0 in 1 s</text><text x="640" y="60" class="small">yes</text>
+    <text x="0" y="84">2</text><text x="30" y="84">core loss</text><text x="200" y="84" class="small">jsfx: no /jatuh/hb 300 ms</text><text x="420" y="84" class="small">jsfx fades its own depth to 0 in 1 s</text><text x="640" y="84" class="small">yes, in reaper</text>
+    <text x="0" y="108">3</text><text x="30" y="108">audio host loss</text><text x="200" y="108" class="small">silence</text><text x="420" y="108" class="small">audio stops; direct monitor or restart ≤ 30 s</text><text x="640" y="108" class="small" style="fill:#b4573b">no, manual</text>
+    <text x="0" y="140" class="small">rule: no automatic fallback ever holds a stale value. it returns to depth 0, the clean guitar.</text>
+  </g>
+</svg>
+</figure>
+
+<script>
+  // title block and frame for every sheet
+  document.querySelectorAll('svg.sheet').forEach(function (svg) {
+    var ns = 'http://www.w3.org/2000/svg';
+    var g = document.createElementNS(ns, 'g');
+    var no = svg.dataset.no, title = svg.dataset.title, scale = svg.dataset.scale || 'nts';
+    g.innerHTML =
+      '<rect x="16" y="16" width="1156" height="808" fill="none" stroke="#2f2d2a" stroke-width="1.2"/>' +
+      '<rect x="828" y="724" width="344" height="100" fill="#fbf8f1" stroke="#2f2d2a" stroke-width="1"/>' +
+      '<path d="M828 754 L1172 754 M828 784 L1172 784 M1060 724 L1060 824" fill="none" stroke="#cfc6b4" stroke-width=".8"/>' +
+      '<text x="840" y="744" style="font-size:14px;font-weight:600">jatuh</text>' +
+      '<text x="900" y="744" class="small">naquuuu · phase a</text>' +
+      '<text x="840" y="774">' + title + '</text>' +
+      '<text x="840" y="806" class="small">units mm · ' + scale + ' · rev a · 2026-10-22</text>' +
+      '<text x="1116" y="748" text-anchor="middle" class="small">sheet</text>' +
+      '<text x="1116" y="778" text-anchor="middle" style="font-size:20px;font-weight:600">' + no + '</text>' +
+      '<text x="1116" y="808" text-anchor="middle" class="small">of 5</text>';
+    svg.appendChild(g);
+  });
+</script>
+</body>
+</html>

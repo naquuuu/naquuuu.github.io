@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex, nofollow">
+  <title>jatuh workbook</title>
+  <meta name="description" content="working material for jatuh: timeline, prd, blueprint, dashboard, reviews. not linked from the site.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #FBFBFA; --surface: #F2F2ED; --card: #FFFFFF; --line: #E5E5DF;
+      --ink: #111110; --soft: #555550; --mute: #6E6E66; --terra: #B4573B; --sage: #6F8466;
+    }
+    * { box-sizing: border-box; }
+    html, body { overflow-x: clip; }
+    body { margin: 0; background: var(--paper); color: var(--ink);
+           font: 16px/1.6 'Plus Jakarta Sans', -apple-system, 'Segoe UI', Roboto, sans-serif; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 32px 16px 64px;
+            display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 32px; }
+    header.top { grid-column: 1 / -1; border-bottom: 1px solid var(--ink); padding-bottom: 14px; }
+    header.top h1 { font-size: 22px; font-weight: 600; margin: 0; }
+    header.top p { margin: 4px 0 0; color: var(--mute); font-size: 14px; }
+    nav h2 { font-size: 11px; letter-spacing: .08em; color: var(--mute); font-weight: 600; margin: 20px 0 6px; }
+    nav h2:first-child { margin-top: 0; }
+    nav a { display: flex; align-items: center; min-height: 44px; padding: 0 10px; color: var(--ink);
+            text-decoration: none; border-left: 2px solid transparent; font-size: 15px; }
+    nav a:hover { background: var(--surface); }
+    nav a.on { border-left-color: var(--terra); background: var(--surface); font-weight: 500; }
+    nav a .ext { margin-left: auto; color: var(--mute); font-size: 12px; }
+    main { min-width: 0; }
+    .doc { max-width: 72ch; }
+    .doc h1 { font-size: 26px; line-height: 1.25; margin: 0 0 12px; font-weight: 600; }
+    .doc h2 { font-size: 19px; margin: 32px 0 8px; font-weight: 600; }
+    .doc h3 { font-size: 16px; margin: 24px 0 6px; font-weight: 600; }
+    .doc blockquote { margin: 0 0 16px; padding: 8px 14px; border-left: 2px solid var(--line);
+                      color: var(--soft); font-size: 14px; background: var(--surface); }
+    .doc blockquote p { margin: 4px 0; }
+    .doc code { font-family: 'JetBrains Mono', Consolas, monospace; font-size: 13px; background: var(--surface); padding: 1px 4px; }
+    .doc pre { background: var(--surface); padding: 12px 14px; overflow-x: auto; border: 1px solid var(--line); }
+    .doc pre code { background: none; padding: 0; }
+    .doc pre.src { white-space: pre-wrap; font: 13px/1.6 'JetBrains Mono', Consolas, monospace; }
+    .tbl { overflow-x: auto; margin: 0 0 16px; }
+    .doc table { border-collapse: collapse; font-size: 14px; min-width: 100%; }
+    .doc th { text-align: left; font-weight: 600; border-bottom: 1px solid var(--ink); padding: 6px 8px; }
+    .doc td { border-bottom: 1px solid var(--line); padding: 6px 8px; vertical-align: top; }
+    .doc a { color: var(--terra); }
+    .mermaid { background: var(--card); border: 1px solid var(--line); padding: 12px; margin: 0 0 16px; overflow-x: auto; }
+    .status { color: var(--mute); font-size: 14px; }
+    .note { font-size: 13px; color: var(--mute); margin-top: 24px; border-top: 1px solid var(--line); padding-top: 12px; }
+    @media (max-width: 768px) {
+      .wrap { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-top: 20px; }
+      nav { border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <h1>jatuh · workbook</h1>
+      <p>working material for the IDE application. not linked from the site, not indexed. source of truth: internal-docs/application/jatuh/</p>
+    </header>
+
+    <nav aria-label="workbook">
+      <h2>plan</h2>
+      <a href="?doc=01-timeline" data-doc="01-timeline">01 · timeline &amp; fallbacks</a>
+      <a href="?doc=02-prd" data-doc="02-prd">02 · prd</a>
+      <h2>build</h2>
+      <a href="?doc=03-blueprint" data-doc="03-blueprint">03 · blueprint spec</a>
+      <a href="blueprint.html">blueprint sheets j-01 to j-05 <span class="ext">open</span></a>
+      <a href="?doc=04-dashboard" data-doc="04-dashboard">04 · dashboard spec</a>
+      <a href="dashboard.html">dashboard mockup <span class="ext">open</span></a>
+      <h2>review</h2>
+      <a href="?doc=00-astra-review-pack" data-doc="00-astra-review-pack">00 · astra review pack</a>
+      <a href="?doc=05-review-disposition" data-doc="05-review-disposition">05 · review disposition</a>
+    </nav>
+
+    <main>
+      <article class="doc" id="doc"><p class="status">loading…</p></article>
+      <p class="note">copies are refreshed with <code>python scripts/sync_jatuh_workbook.py</code> from the workspace root. edit the source, not this folder.</p>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      var docs = ['00-astra-review-pack', '01-timeline', '02-prd', '03-blueprint', '04-dashboard', '05-review-disposition'];
+      var want = new URLSearchParams(location.search).get('doc');
+      var name = docs.indexOf(want) >= 0 ? want : '01-timeline';
+      var el = document.getElementById('doc');
+      document.querySelectorAll('nav a[data-doc]').forEach(function (a) {
+        if (a.dataset.doc === name) a.classList.add('on');
+      });
+
+      // load a CDN script without blocking the page; give up after a timeout
+      function load(src, ms) {
+        return new Promise(function (resolve) {
+          var s = document.createElement('script'), done = false;
+          var finish = function (ok) { if (!done) { done = true; resolve(ok); } };
+          s.src = src; s.async = true;
+          s.onload = function () { finish(true); }; s.onerror = function () { finish(false); };
+          setTimeout(function () { finish(false); }, ms);
+          document.head.appendChild(s);
+        });
+      }
+
+      function plain(md, why) {
+        var pre = document.createElement('pre'); pre.className = 'src'; pre.textContent = md;
+        el.innerHTML = '<p class="status">' + why + '</p>'; el.appendChild(pre);
+      }
+
+      function render(md) {
+        el.innerHTML = window.marked.parse(md, { gfm: true });
+        el.querySelectorAll('table').forEach(function (t) {
+          var w = document.createElement('div'); w.className = 'tbl';
+          t.parentNode.insertBefore(w, t); w.appendChild(t);
+        });
+        var blocks = el.querySelectorAll('pre code.language-mermaid');
+        blocks.forEach(function (c) {
+          var d = document.createElement('div'); d.className = 'mermaid'; d.textContent = c.textContent;
+          c.parentNode.replaceWith(d);
+        });
+        var h = el.querySelector('h1'); if (h) document.title = h.textContent + ' · jatuh workbook';
+        if (!blocks.length) return;
+        load('https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js', 8000).then(function (ok) {
+          if (!ok || !window.mermaid) return;
+          window.mermaid.initialize({ startOnLoad: false, theme: 'neutral', securityLevel: 'strict' });
+          window.mermaid.run({ nodes: el.querySelectorAll('.mermaid') });
+        });
+      }
+
+      var mdP = fetch('docs/' + name + '.md', { cache: 'no-cache' })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
+      var libP = load('https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js', 5000);
+      Promise.all([mdP, libP])
+        .then(function (res) {
+          if (res[1] && window.marked) render(res[0]);
+          else plain(res[0], 'renderer unavailable (offline or blocked), showing the source.');
+        })
+        .catch(function (e) { el.innerHTML = '<p class="status">could not load docs/' + name + '.md (' + e.message + ')</p>'; });
+    })();
+  </script>
+</body>
+</html>
