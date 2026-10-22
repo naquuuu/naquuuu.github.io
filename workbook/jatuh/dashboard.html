@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>jatuh dashboard</title>
+<style>
+  :root {
+    --paper: #f4efe4; --card: #fbf8f1; --ink: #2f2d2a; --slate: #4f5b66; --mute: #8a8378;
+    --hair: #d9d0bf; --terra: #b4573b; --sage: #6f8466; --linen: #c9a46a; --wool: #4f5b66; --twill: #b4573b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font: 14px/1.4 "Helvetica Neue", Arial, system-ui, sans-serif; }
+  .mono { font-family: "SF Mono", Consolas, monospace; font-variant-numeric: tabular-nums; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 16px; }
+  .note { font-size: 12px; color: var(--terra); margin: 0 0 12px; }
+  header.bar { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline;
+               padding: 12px 0 14px; border-bottom: 1px solid var(--ink); margin-bottom: 16px; }
+  header.bar h1 { font-size: 18px; font-weight: 600; margin: 0; letter-spacing: .02em; }
+  header.bar span { color: var(--slate); }
+  .state { padding: 2px 8px; border: 1px solid currentColor; border-radius: 2px; font-size: 12px; }
+  .ok { color: var(--sage); } .bad { color: var(--terra); } .idle { color: var(--slate); }
+  .seg { display: inline-flex; border: 1px solid var(--hair); }
+  .seg button { font: inherit; font-size: 12px; background: none; border: 0; padding: 3px 9px; color: var(--slate); cursor: pointer; }
+  .seg button.on { background: var(--ink); color: var(--card); }
+  .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+  .tw { overflow-x: auto; }
+  section { background: var(--card); border: 1px solid var(--hair); padding: 12px 14px; min-width: 0; }
+  section h2 { font-size: 12px; font-weight: 600; letter-spacing: .06em; margin: 0 0 10px;
+               color: var(--slate); border-bottom: 1px solid var(--hair); padding-bottom: 6px; }
+  .c4 { grid-column: span 4; } .c5 { grid-column: span 5; } .c7 { grid-column: span 7; }
+  .c8 { grid-column: span 8; } .c6 { grid-column: span 6; } .c12 { grid-column: span 12; } .c3 { grid-column: span 3; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; font-weight: 400; color: var(--mute); font-size: 11px; padding: 3px 4px; border-bottom: 1px solid var(--hair); }
+  td { padding: 4px; border-bottom: 1px solid #eee6d6; }
+  td.num, th.num { text-align: right; }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 13px; }
+  .kv dt { color: var(--mute); } .kv dd { margin: 0; text-align: right; }
+  .big { font-size: 26px; }
+  canvas { width: 100%; display: block; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--slate); margin-top: 6px; }
+  .sw { display: inline-block; width: 14px; height: 2px; vertical-align: middle; margin-right: 5px; }
+  .log { font-size: 12px; max-height: 170px; overflow: auto; }
+  .log div { padding: 3px 0; border-bottom: 1px solid #eee6d6; display: grid; grid-template-columns: 70px 120px 1fr; gap: 8px; }
+  .meter { height: 8px; background: #eee6d6; position: relative; margin: 6px 0 2px; }
+  .meter i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--sage); }
+  .meter b { position: absolute; top: -3px; bottom: -3px; width: 1px; background: var(--terra); }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: minmax(0, 1fr); }
+    .c3, .c4, .c5, .c6, .c7, .c8, .c12 { grid-column: 1 / -1; }
+    header.bar { gap: 8px 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="note">mockup with simulated sample data. nothing here is a measured result.</p>
+  <header class="bar">
+    <h1>jatuh</h1>
+    <span class="mono">session 2026-11-20T21-14</span>
+    <span>panel <div class="seg" id="panelSeg"><button data-p="linen" class="on">linen</button><button data-p="wool">wool</button><button data-p="twill">twill</button></div></span>
+    <span>condition <div class="seg" id="condSeg"><button data-c="a">a fixed</button><button data-c="b">b body</button><button data-c="c" class="on">c garment</button></div></span>
+    <span class="mono">mapping v1.0</span>
+    <span class="state ok" id="rigState">live</span>
+    <span class="mono" id="timer">take 07 · 00:00</span>
+  </header>
+
+  <div class="grid">
+    <section class="c5">
+      <h2>1 · rig health</h2>
+      <div class="tw"><table>
+        <tr><th>link</th><th class="num">hb age</th><th class="num">rate</th><th class="num">loss</th><th class="num">batt</th><th class="num">rssi</th></tr>
+        <tr><td>pod</td><td class="num mono" id="hbPod">18 ms</td><td class="num mono">100 hz</td><td class="num mono">0.1%</td><td class="num mono">3.92 v</td><td class="num mono">-58</td></tr>
+        <tr><td>hem imu</td><td class="num mono ok" id="hemOk">ok</td><td class="num mono">100 hz</td><td class="num mono">0.0%</td><td class="num mono">via pod</td><td class="num mono">-</td></tr>
+        <tr><td>core → reaper hb</td><td class="num mono" id="hbCore">12 ms</td><td class="num mono">20 hz</td><td class="num mono">0.0%</td><td class="num mono">-</td><td class="num mono">-</td></tr>
+        <tr><td>reaper osc</td><td class="num mono ok">ok</td><td colspan="4" class="mono" style="color:var(--mute)">asio 128 · cpu 9%</td></tr>
+      </table></div>
+      <div class="legend" style="margin-top:10px">
+        <span>fault drills:</span>
+        <div class="seg"><button id="killPod">pod off</button><button id="killCore">kill core</button><button id="restore">restore</button></div>
+      </div>
+    </section>
+
+    <section class="c7">
+      <h2>2 · motion · last 6 s</h2>
+      <canvas id="motion" height="190"></canvas>
+      <div class="legend">
+        <span><i class="sw" style="background:var(--slate)"></i>body</span>
+        <span><i class="sw" style="background:var(--linen)"></i>hem</span>
+        <span><i class="sw" style="background:var(--terra)"></i>r = hem - body (what the chorus plays)</span>
+        <span>| body stop · ¦ hem settle</span>
+      </div>
+    </section>
+
+    <section class="c3">
+      <h2>3 · last turn</h2>
+      <dl class="kv">
+        <dt>follow-through t_ft</dt><dd class="mono big" id="tft">2.6 s</dd>
+        <dt>f</dt><dd class="mono" id="fv">1.82 hz</dd>
+        <dt>zeta</dt><dd class="mono" id="zv">0.11</dd>
+        <dt>peaks</dt><dd class="mono" id="pk">7</dd>
+        <dt>r²</dt><dd class="mono" id="r2">0.91</dd>
+        <dt>estimate</dt><dd class="ok" id="valid">valid</dd>
+      </dl>
+    </section>
+
+    <section class="c5">
+      <h2>4 · experiment · t_ft per repeat (s)</h2>
+      <canvas id="exp" height="190"></canvas>
+      <div class="legend"><span>dots = repeats · bar = mean · band = ±1 sd · separation rule: every pair of means differs by &gt; 2 x the larger sd</span></div>
+      <p class="mono ok" id="sep" style="margin:6px 0 0;font-size:12px">separation: pass (3 of 3 pairs)</p>
+    </section>
+
+    <section class="c4">
+      <h2>5 · modulation sent</h2>
+      <dl class="kv">
+        <dt>source</dt><dd id="src">c · garment r</dd>
+        <dt>wave</dt><dd class="mono" id="wave">+0.00</dd>
+        <dt>depth</dt><dd class="mono" id="depth">0.00 ms</dd>
+        <dt>clamp hits this take</dt><dd class="mono">0</dd>
+        <dt>mix / delay fb</dt><dd class="mono">40% / 25% fixed</dd>
+      </dl>
+      <div class="meter"><i id="depthBar"></i><b style="left:100%"></b></div>
+      <div class="legend"><span>0 to 4 ms sweep · hard clamp at 4 ms</span></div>
+    </section>
+
+    <section class="c3">
+      <h2>6 · audio</h2>
+      <dl class="kv">
+        <dt>input</dt><dd class="mono" id="lvl">-14 dbfs</dd>
+        <dt>clips</dt><dd class="mono ok">0</dd>
+        <dt>round trip</dt><dd class="mono ok">10.7 ms</dd>
+        <dt>target</dt><dd class="mono">≤ 12 ms</dd>
+      </dl>
+      <div class="meter"><i id="lvlBar"></i><b style="left:90%"></b></div>
+    </section>
+
+    <section class="c4">
+      <h2>7 · control latency · 60 s</h2>
+      <canvas id="lat" height="110"></canvas>
+      <div class="legend"><span class="mono">p50 <b id="p50">18</b> ms · p95 <b id="p95">31</b> ms · target p95 ≤ 40 ms</span></div>
+    </section>
+
+    <section class="c5">
+      <h2>8 · event log</h2>
+      <div class="log mono" id="log"></div>
+    </section>
+  </div>
+</div>
+
+<script>
+(function () {
+  var css = getComputedStyle(document.documentElement);
+  var C = function (n) { return css.getPropertyValue(n).trim(); };
+  var fabrics = {
+    linen: { f: 1.82, z: 0.11, tft: 2.6, col: C('--linen'), reps: [2.6, 2.4, 2.9, 2.5, 2.7] },
+    wool:  { f: 2.10, z: 0.19, tft: 1.8, col: C('--wool'),  reps: [1.8, 1.7, 2.0, 1.6, 1.9] },
+    twill: { f: 2.60, z: 0.32, tft: 1.1, col: C('--twill'), reps: [1.1, 1.3, 1.0, 1.2, 1.1] }
+  };
+  var panel = 'linen', cond = 'c', podDown = false, coreDown = false, t0 = performance.now();
+
+  function setup(cv) {
+    var r = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.height;
+    if (!cv._h) cv._h = h;
+    cv.width = w * r; cv.height = cv._h * r; cv.style.height = cv._h + 'px';
+    var x = cv.getContext('2d'); x.setTransform(r, 0, 0, r, 0, 0); return { x: x, w: w, h: cv._h };
+  }
+
+  // simulated turn: body moves 0.6 to 1.6 s, stops; hem lags and settles at the fabric's rate
+  function sample(t, fab) {
+    var T = 8, tt = t % T, body = 0, hem = 0;
+    if (tt > 0.6 && tt < 1.6) body = Math.sin((tt - 0.6) * Math.PI) * 3.2;
+    var lag = tt - 0.75;
+    if (lag > 0 && lag < 0.85) hem = Math.sin(lag / 0.85 * Math.PI) * 3.0;
+    var ts = tt - 1.6;
+    if (ts > 0) {
+      var w = 2 * Math.PI * fab.f;
+      hem += 2.6 * Math.exp(-fab.z * w * ts) * Math.sin(w * ts);
+    }
+    var n = function () { return (Math.random() - 0.5) * 0.12; };
+    return { body: body + n(), hem: hem + n(), tt: tt };
+  }
+
+  function drawMotion() {
+    var g = setup(document.getElementById('motion')), x = g.x, w = g.w, h = g.h, fab = fabrics[panel];
+    x.clearRect(0, 0, w, h);
+    x.strokeStyle = C('--hair'); x.lineWidth = 1;
+    x.beginPath(); x.moveTo(0, h / 2); x.lineTo(w, h / 2); x.stroke();
+    var now = (performance.now() - t0) / 1000, N = 300, sc = h / 9;
+    var series = [];
+    for (var i = 0; i < N; i++) { series.push(sample(now - 6 + i * 6 / N + 6, fab)); }
+    function line(key, col, fn) {
+      x.strokeStyle = col; x.lineWidth = key === 'r' ? 1.8 : 1.2; x.beginPath();
+      series.forEach(function (s, i) {
+        var v = fn(s), px = i / (N - 1) * w, py = h / 2 - v * sc;
+        if (i === 0) x.moveTo(px, py); else x.lineTo(px, py);
+      });
+      x.stroke();
+    }
+    line('body', C('--slate'), function (s) { return podDown ? 0 : s.body; });
+    line('hem', C('--linen'), function (s) { return podDown ? 0 : s.hem; });
+    line('r', C('--terra'), function (s) { return podDown ? 0 : s.hem - s.body; });
+    // markers at body stop (1.6 s) and hem settle (1.6 + tft) within the 6 s loop
+    var tt = series[N - 1].tt;
+    [1.6, 1.6 + fab.tft].forEach(function (m, k) {
+      var age = (tt - m + 8) % 8, px = w - age / 6 * w;
+      if (age > 6) return;
+      x.strokeStyle = C('--slate'); x.setLineDash(k ? [3, 3] : []); x.beginPath(); x.moveTo(px, 6); x.lineTo(px, h - 6); x.stroke(); x.setLineDash([]);
+    });
+    var last = series[N - 1], r = podDown ? 0 : last.hem - last.body;
+    return r;
+  }
+
+  function drawExp() {
+    var g = setup(document.getElementById('exp')), x = g.x, w = g.w, h = g.h;
+    x.clearRect(0, 0, w, h);
+    var keys = ['linen', 'wool', 'twill'], max = 3.5, padL = 34, padB = 22;
+    x.fillStyle = C('--mute'); x.font = '11px Consolas, monospace';
+    for (var v = 0; v <= 3; v++) {
+      var y = h - padB - v / max * (h - padB - 10);
+      x.strokeStyle = C('--hair'); x.beginPath(); x.moveTo(padL, y); x.lineTo(w, y); x.stroke();
+      x.fillText(v + ' s', 2, y + 4);
+    }
+    keys.forEach(function (k, i) {
+      var f = fabrics[k], cx = padL + (i + 0.5) * (w - padL) / 3;
+      var m = f.reps.reduce(function (a, b) { return a + b; }) / f.reps.length;
+      var sd = Math.sqrt(f.reps.reduce(function (a, b) { return a + (b - m) * (b - m); }, 0) / (f.reps.length - 1));
+      var Y = function (val) { return h - padB - val / max * (h - padB - 10); };
+      x.fillStyle = f.col; x.globalAlpha = .14; x.fillRect(cx - 34, Y(m + sd), 68, Y(m - sd) - Y(m + sd)); x.globalAlpha = 1;
+      x.strokeStyle = f.col; x.lineWidth = 2; x.beginPath(); x.moveTo(cx - 34, Y(m)); x.lineTo(cx + 34, Y(m)); x.stroke();
+      f.reps.forEach(function (r, j) { x.beginPath(); x.arc(cx - 16 + j * 8, Y(r), 3.2, 0, 7); x.fill(); });
+      x.fillStyle = k === panel ? C('--ink') : C('--mute'); x.font = (k === panel ? '600 ' : '') + '12px Helvetica, Arial';
+      x.textAlign = 'center'; x.fillText(k, cx, h - 5); x.textAlign = 'left'; x.font = '11px Consolas, monospace';
+    });
+  }
+
+  var lat = [];
+  for (var i = 0; i < 120; i++) lat.push(14 + Math.random() * 12 + (Math.random() < .05 ? 12 : 0));
+  function drawLat() {
+    var g = setup(document.getElementById('lat')), x = g.x, w = g.w, h = g.h, max = 60;
+    x.clearRect(0, 0, w, h);
+    var yT = h - 40 / max * h;
+    x.strokeStyle = C('--terra'); x.setLineDash([4, 4]); x.beginPath(); x.moveTo(0, yT); x.lineTo(w, yT); x.stroke(); x.setLineDash([]);
+    x.fillStyle = C('--terra'); x.font = '11px Consolas, monospace'; x.fillText('40 ms', w - 42, yT - 4);
+    x.strokeStyle = C('--slate'); x.lineWidth = 1.3; x.beginPath();
+    lat.forEach(function (v, i) { var px = i / (lat.length - 1) * w, py = h - v / max * h; i ? x.lineTo(px, py) : x.moveTo(px, py); });
+    x.stroke();
+    var s = lat.slice().sort(function (a, b) { return a - b; });
+    document.getElementById('p50').textContent = Math.round(s[Math.floor(s.length * .5)]);
+    document.getElementById('p95').textContent = Math.round(s[Math.floor(s.length * .95)]);
+  }
+
+  var logEl = document.getElementById('log');
+  function log(kind, msg, bad) {
+    var d = new Date(), ts = d.toTimeString().slice(0, 8), row = document.createElement('div');
+    row.innerHTML = '<span>' + ts + '</span><span class="' + (bad ? 'bad' : 'ok') + '">' + kind + '</span><span>' + msg + '</span>';
+    logEl.prepend(row);
+  }
+  log('live', 'pod ok, hem_ok true, core heartbeat ok');
+  log('estimate', 'linen t_ft 2.6 s · f 1.82 hz · zeta 0.11 · 7 peaks · r² 0.91 · valid');
+
+  function updateTurn() {
+    var f = fabrics[panel];
+    document.getElementById('tft').textContent = f.tft.toFixed(1) + ' s';
+    document.getElementById('fv').textContent = f.f.toFixed(2) + ' hz';
+    document.getElementById('zv').textContent = f.z.toFixed(2);
+    var peaks = Math.max(2, Math.round(f.tft * f.f * 1.5));
+    document.getElementById('pk').textContent = peaks;
+    var valid = peaks >= 3;
+    document.getElementById('r2').textContent = valid ? (0.85 + f.z * 0.2).toFixed(2) : '0.62';
+    var v = document.getElementById('valid');
+    v.textContent = valid ? 'valid' : 'invalid: fewer than 3 peaks'; v.className = valid ? 'ok' : 'bad';
+    drawExp();
+  }
+
+  function seg(id, attr, cb) {
+    document.getElementById(id).addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      this.querySelectorAll('button').forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on'); cb(b.dataset[attr]);
+    });
+  }
+  seg('panelSeg', 'p', function (p) { panel = p; updateTurn(); log('label', 'panel set to ' + p); });
+  seg('condSeg', 'c', function (c) {
+    cond = c;
+    document.getElementById('src').textContent = { a: 'a · fixed 0.8 hz sine', b: 'b · body imu', c: 'c · garment r' }[c];
+    log('label', 'condition set to ' + c);
+  });
+
+  var st = document.getElementById('rigState');
+  function setState(s, bad) { st.textContent = s; st.className = 'state ' + (bad ? 'bad' : 'ok'); }
+  document.getElementById('killPod').onclick = function () {
+    podDown = true; setState('sensor_lost', true);
+    document.getElementById('hbPod').className = 'num mono bad'; document.getElementById('hemOk').className = 'num mono bad';
+    document.getElementById('hemOk').textContent = 'no data';
+    log('sensor_lost', 'no pod packet 312 ms · depth glides to 0 over 1 s', true);
+  };
+  document.getElementById('killCore').onclick = function () {
+    coreDown = true; setState('core_lost', true);
+    document.getElementById('hbCore').className = 'num mono bad';
+    log('core_lost', 'jsfx: no /jatuh/hb 300 ms · jsfx fades its own depth to 0', true);
+  };
+  document.getElementById('restore').onclick = function () {
+    podDown = coreDown = false; setState('live', false);
+    ['hbPod', 'hbCore'].forEach(function (id) { document.getElementById(id).className = 'num mono'; });
+    var h = document.getElementById('hemOk'); h.className = 'num mono ok'; h.textContent = 'ok';
+    log('live', 'links back · depth glides in over 1 s');
+  };
+
+  var depthNow = 0, start = performance.now();
+  function frame() {
+    var r = drawMotion();
+    var target;
+    if (cond === 'a') { r = Math.sin((performance.now() - t0) / 1000 * 2 * Math.PI * 0.8); target = 2.0; }
+    else if (cond === 'b') { var s = sample((performance.now() - t0) / 1000, fabrics[panel]); r = podDown ? 0 : s.body / 3.2; target = Math.min(4, Math.abs(r) * 4); }
+    else { target = Math.min(4, Math.abs(r) * 1.4); }
+    if (podDown || coreDown) target = 0;
+    depthNow += (target - depthNow) * 0.05;
+    var wave = Math.max(-1, Math.min(1, r / 3));
+    document.getElementById('wave').textContent = (wave >= 0 ? '+' : '') + wave.toFixed(2);
+    document.getElementById('depth').textContent = depthNow.toFixed(2) + ' ms';
+    document.getElementById('depthBar').style.width = (depthNow / 4 * 100) + '%';
+    var sec = Math.floor((performance.now() - start) / 1000);
+    document.getElementById('timer').textContent = 'take 07 · ' + String(Math.floor(sec / 60)).padStart(2, '0') + ':' + String(sec % 60).padStart(2, '0');
+    var lvl = -18 + Math.random() * 6;
+    document.getElementById('lvl').textContent = lvl.toFixed(0) + ' dbfs';
+    document.getElementById('lvlBar').style.width = ((lvl + 60) / 60 * 100) + '%';
+    requestAnimationFrame(frame);
+  }
+  setInterval(function () { lat.shift(); lat.push(14 + Math.random() * 12 + (Math.random() < .05 ? 12 : 0)); drawLat(); }, 500);
+  window.addEventListener('resize', function () { drawExp(); drawLat(); });
+  updateTurn(); drawLat(); frame();
+})();
+</script>
+</body>
+</html>

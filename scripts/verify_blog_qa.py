@@ -42,6 +42,10 @@ NOT_IN_SITEMAP = {
     "portfolio/index.html": "noindex redirect shell",
     "404.html": "utility page",
     "performance/recovery/session-map.html": "utility page",
+    # hidden workbook (noindex, unlinked); synced by scripts/sync_jatuh_workbook.py (ADR-058)
+    "workbook/jatuh/index.html": "hidden workbook page",
+    "workbook/jatuh/blueprint.html": "hidden workbook page",
+    "workbook/jatuh/dashboard.html": "hidden workbook page",
 }
 
 failures: list[str] = []
