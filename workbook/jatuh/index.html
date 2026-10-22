@@ -49,7 +49,11 @@
     .doc th { text-align: left; font-weight: 600; border-bottom: 1px solid var(--ink); padding: 6px 8px; }
     .doc td { border-bottom: 1px solid var(--line); padding: 6px 8px; vertical-align: top; }
     .doc a { color: var(--terra); }
-    .mermaid { background: var(--card); border: 1px solid var(--line); padding: 12px; margin: 0 0 16px; overflow-x: auto; }
+    .mermaid { background: var(--card); border: 1px solid var(--line); padding: 12px; margin: 0 0 16px; overflow-x: auto;
+               white-space: pre; font: 12px/1.5 'JetBrains Mono', Consolas, monospace; color: var(--soft); }
+    .mermaid svg { white-space: normal; }
+    .doc ul, .doc ol { padding-left: 22px; }
+    .doc hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
     .status { color: var(--mute); font-size: 14px; }
     .note { font-size: 13px; color: var(--mute); margin-top: 24px; border-top: 1px solid var(--line); padding-top: 12px; }
     @media (max-width: 768px) {
@@ -107,13 +111,76 @@
         });
       }
 
-      function plain(md, why) {
-        var pre = document.createElement('pre'); pre.className = 'src'; pre.textContent = md;
-        el.innerHTML = '<p class="status">' + why + '</p>'; el.appendChild(pre);
+      // small built-in markdown renderer: headings, paragraphs, lists, tables, quotes, code, hr, inline marks
+      function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+      function inline(t) {
+        var codes = [];
+        t = t.replace(/`([^`]+)`/g, function (_, c) { codes.push(c); return '\u0000' + (codes.length - 1) + '\u0000'; });
+        t = esc(t)
+          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+          .replace(/(^|[^*\w])\*([^*\n]+)\*(?=[^*\w]|$)/g, '$1<em>$2</em>')
+          .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (_, txt, url) {
+            return /^(https?:|\.{0,2}\/|[\w-]+\.)/.test(url) ? '<a href="' + url + '">' + txt + '</a>' : txt;
+          });
+        return t.replace(/\u0000(\d+)\u0000/g, function (_, i) { return '<code>' + esc(codes[+i]) + '</code>'; });
+      }
+      function cells(line) {
+        return line.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(function (c) { return c.trim(); });
+      }
+      function mdToHtml(md) {
+        var L = md.replace(/\r/g, '').split('\n'), out = [], i = 0;
+        while (i < L.length) {
+          var l = L[i];
+          if (!l.trim()) { i++; continue; }
+          var fence = l.match(/^```(\w*)/);
+          if (fence) {
+            var buf = []; i++;
+            while (i < L.length && !/^```/.test(L[i])) buf.push(L[i++]);
+            i++;
+            out.push('<pre><code class="language-' + (fence[1] || 'text') + '">' + esc(buf.join('\n')) + '</code></pre>');
+            continue;
+          }
+          var h = l.match(/^(#{1,4})\s+(.*)$/);
+          if (h) { out.push('<h' + h[1].length + '>' + inline(h[2]) + '</h' + h[1].length + '>'); i++; continue; }
+          if (/^-{3,}\s*$/.test(l)) { out.push('<hr>'); i++; continue; }
+          if (/^>/.test(l)) {
+            var q = [];
+            while (i < L.length && /^>/.test(L[i])) q.push(L[i++].replace(/^>\s?/, ''));
+            out.push('<blockquote>' + mdToHtml(q.join('\n')) + '</blockquote>');
+            continue;
+          }
+          if (/^\s*\|/.test(l) && i + 1 < L.length && /^\s*\|?\s*:?-{3,}/.test(L[i + 1])) {
+            var head = cells(l), rows = []; i += 2;
+            while (i < L.length && /^\s*\|/.test(L[i])) rows.push(cells(L[i++]));
+            out.push('<table><thead><tr>' + head.map(function (c) { return '<th>' + inline(c) + '</th>'; }).join('') +
+              '</tr></thead><tbody>' + rows.map(function (r) {
+                return '<tr>' + r.map(function (c) { return '<td>' + inline(c) + '</td>'; }).join('') + '</tr>';
+              }).join('') + '</tbody></table>');
+            continue;
+          }
+          var li = l.match(/^(\s*)([-*]|\d+\.)\s+(.*)$/);
+          if (li) {
+            var ordered = /\d/.test(li[2]), items = [];
+            while (i < L.length) {
+              var m = L[i].match(/^(\s*)([-*]|\d+\.)\s+(.*)$/);
+              if (m) { items.push(inline(m[3])); i++; }
+              else if (L[i].trim() && /^\s{2,}/.test(L[i])) { items[items.length - 1] += ' ' + inline(L[i].trim()); i++; }
+              else break;
+            }
+            var tag = ordered ? 'ol' : 'ul';
+            out.push('<' + tag + '>' + items.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</' + tag + '>');
+            continue;
+          }
+          var para = [];
+          while (i < L.length && L[i].trim() && !/^(#{1,4}\s|```|>|\s*\||\s*([-*]|\d+\.)\s|-{3,}\s*$)/.test(L[i])) para.push(L[i++].trim());
+          if (!para.length) { para.push(l.trim()); i++; }
+          out.push('<p>' + inline(para.join(' ')) + '</p>');
+        }
+        return out.join('\n');
       }
 
       function render(md) {
-        el.innerHTML = window.marked.parse(md, { gfm: true });
+        el.innerHTML = mdToHtml(md);
         el.querySelectorAll('table').forEach(function (t) {
           var w = document.createElement('div'); w.className = 'tbl';
           t.parentNode.insertBefore(w, t); w.appendChild(t);
@@ -132,14 +199,9 @@
         });
       }
 
-      var mdP = fetch('docs/' + name + '.md', { cache: 'no-cache' })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
-      var libP = load('https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js', 5000);
-      Promise.all([mdP, libP])
-        .then(function (res) {
-          if (res[1] && window.marked) render(res[0]);
-          else plain(res[0], 'renderer unavailable (offline or blocked), showing the source.');
-        })
+      fetch('docs/' + name + '.md', { cache: 'no-cache' })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then(render)
         .catch(function (e) { el.innerHTML = '<p class="status">could not load docs/' + name + '.md (' + e.message + ')</p>'; });
     })();
   </script>
