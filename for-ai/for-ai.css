@@ -1397,7 +1397,10 @@ html.fa-dialog-open {
 .fa-dialog:not([open]) { display:none; }
 .fa-letter { border-top:4px solid var(--fa-ink); background:var(--fa-paper); }
 .fa-letter-photo { max-width:24rem; padding:.45rem .45rem 1.1rem; background:var(--bg-primary); transform:rotate(-1deg); margin:2rem auto; }
-.fa-letter-p:nth-last-of-type(2) { font-size:clamp(1.5rem,5vw,2rem); line-height:1.4; color:var(--fa-ink); letter-spacing:-.035em; margin-top:2rem; }
+.fa-letter-question { font-size:clamp(1.5rem,5vw,2rem); line-height:1.4; color:var(--fa-ink); letter-spacing:-.035em; margin-top:2rem; }
+.fa-letter-date { margin-top:.5rem; color:var(--text-secondary); font-family:var(--font-read); font-size:.85rem; }
+.fa-letter-question strong, .fa-letter-sign strong { font-weight:700; }
+.fa-letter-sign strong { font-style:normal; }
 .fa-screen[data-fa-screen="welcome"] { border-top:3px solid var(--fa-ink); padding-top:2rem; }
 .fa-welcome-photo { padding:.45rem .45rem 1.2rem; background:var(--bg-primary); transform:rotate(1.5deg); }
 .fa-screen[data-fa-screen="done"] { margin-top:1rem; padding:clamp(1.4rem,5vw,3.5rem); background:var(--bg-primary); border:1px solid var(--border-active); outline:1px solid var(--border-subtle); outline-offset:-9px; }
