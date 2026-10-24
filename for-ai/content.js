@@ -168,10 +168,8 @@ export const booklet = {
     },
     {
       number: '03',
-      label: 'chapter 03',
-      title: 'one more thing.',
-      text: "There's actually something else I wanted to tell you.",
-      button: 'A little secret ♡',
+      discreet: true,
+      button: 'a little note ♡',
     },
   ],
   letter: {
