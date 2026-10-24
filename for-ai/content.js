@@ -9,6 +9,7 @@ export const config = {
   themeKey: 'naquuuu_mode',
   bookletSessionKey: 'naquuuu_fa_booklet',
   kitchenSessionKey: 'naquuuu_fa_kitchen',
+  letterSessionKey: 'naquuuu_fa_letter',
   kitchenStateKey: 'naquuuu_fa_kitchen_state',
   kitchenStateVersion: 1,
 };
@@ -17,6 +18,7 @@ export const config = {
 export const passwords = {
   booklet: '251026',
   kitchen: 'DINNERFORAI',
+  letter: 'naloveayi',
 };
 
 export const landing = {
@@ -123,6 +125,10 @@ export const booklet = {
           text: "Old buildings, little streets, photographs, and that palm-reading experience you've been wanting to try.",
         },
         {
+          title: 'A little pause at Acaraki',
+          text: "A stop at Acaraki while we're exploring Kota Tua. No rush, just a little more time together.",
+        },
+        {
           title: 'A little stop at Café Batavia',
           text: 'Somewhere lovely to sit, something to eat or drink, and a little more time together.',
         },
@@ -170,6 +176,13 @@ export const booklet = {
   ],
   letter: {
     label: 'for ai, from na.',
+    gate: {
+      title: 'just one more little secret.',
+      description: 'this one is for the right moment.',
+      field: 'the letter code',
+      button: 'open my letter ♡',
+      error: 'not quite, try again ♡',
+    },
     photo: '04',
     date: '25 october 2026',
     question: 'would you be my girlfriend?',

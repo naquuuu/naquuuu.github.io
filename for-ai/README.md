@@ -18,7 +18,7 @@ Everything is in **`content.js`**. That is the only file you need to touch for c
 
 | What | In `content.js` |
 | --- | --- |
-| Both passwords | `passwords.booklet`, `passwords.kitchen` |
+| All three passwords | `passwords.booklet`, `passwords.kitchen`, `passwords.letter` |
 | Landing copy | `landing` |
 | Password screen copy | `bookletGate`, `kitchenGate` |
 | Cover, dedication, intro | `booklet.cover` |
@@ -44,6 +44,7 @@ Two independent session unlocks, both `sessionStorage`:
 
 - booklet: `naquuuu_fa_booklet`
 - kitchen: `naquuuu_fa_kitchen`
+- confession letter: `naquuuu_fa_letter` (separate from booklet access)
 
 Unlocking one never unlocks the other. Passwords are compared after trimming
 spaces and ignoring case. If `sessionStorage` is unavailable, the page keeps the
