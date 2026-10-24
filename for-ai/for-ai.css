@@ -630,7 +630,8 @@ html[data-fa-unlocked] .fa-gate {
   height: 352px;
   min-height: 352px;
   flex-shrink: 0;
-  border: 1px solid var(--border-subtle);
+  border: 0;
+  outline: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   background: var(--bg-surface);
 }
