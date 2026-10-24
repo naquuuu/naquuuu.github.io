@@ -1,0 +1,57 @@
+---
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="light dark">
+  <title>Na &amp; Ai's Little Kitchen</title>
+  <meta name="description" content="a private little edition, shared quietly.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..700;1,400..700&amp;family=Open+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap">
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261022ui">
+  <link rel="stylesheet" href="/for-ai/for-ai.css?v=20261024fa">
+</head>
+<body class="fa" data-mode="systems" data-fa-page="kitchen">
+<script>
+  (function () {
+    try {
+      var mode = localStorage.getItem('naquuuu_mode');
+      if (mode === 'culture' || mode === 'systems') document.body.setAttribute('data-mode', mode);
+      if (sessionStorage.getItem('naquuuu_fa_kitchen') === '1') {
+        document.documentElement.setAttribute('data-fa-unlocked', '1');
+      }
+    } catch (err) {}
+  })();
+</script>
+<a class="fa-skip" href="#fa-main">skip to content</a>
+<header class="fa-topbar">
+  <a class="fa-back" href="/for-ai/">back to the little edition</a>
+  <button class="fa-theme" type="button" data-fa-theme aria-label="colour theme: systems. switch to culture.">
+    <span class="fa-theme-dot" aria-hidden="true"></span>
+    <span data-fa-theme-label>systems</span>
+  </button>
+</header>
+<main class="fa-main" id="fa-main">
+  <section class="fa-gate" data-fa-gate aria-labelledby="fa-gate-title">
+    <form data-fa-gate-form novalidate>
+      <p class="fa-label" data-fa-gate-label></p>
+      <h1 class="fa-display" id="fa-gate-title" data-fa-gate-title tabindex="-1"></h1>
+      <p class="fa-gate-sub" data-fa-gate-sub></p>
+      <div class="fa-field">
+        <label for="fa-kitchen-code" data-fa-gate-field></label>
+        <input id="fa-kitchen-code" name="code" type="password" autocomplete="off" autocapitalize="characters" spellcheck="false" required data-fa-input>
+      </div>
+      <button class="fa-btn fa-btn--primary" type="submit" data-fa-gate-submit></button>
+      <p class="fa-error" data-fa-error role="status" aria-live="polite"></p>
+    </form>
+  </section>
+  <div data-fa-content hidden></div>
+</main>
+<script type="module" src="/for-ai/for-ai.js"></script>
+</body>
+</html>
