@@ -12,7 +12,7 @@ import {
   playlist,
   booklet,
   kitchen,
-} from './content.js';
+} from './content.js?v=20261024letter';
 
 /* ------------------------------------------------------------------ storage */
 
@@ -441,7 +441,8 @@ function buildLetter() {
   inner.append(
     closeButton(letter.close, 'fa-dialog-close'),
     el('p', { class: 'fa-label', text: letter.label }),
-    el('h2', { class: 'fa-sr', id: 'fa-letter-title', text: 'a letter, for you.' })
+    el('h2', { class: 'fa-sr', id: 'fa-letter-title', text: letter.label }),
+    el('p', { class: 'fa-letter-date' }, [el('em', { text: letter.date })])
   );
 
   if (letter.photo) {
@@ -452,8 +453,10 @@ function buildLetter() {
 
   letter.paragraphs.forEach((text, index) => {
     const isSign = index === letter.paragraphs.length - 1;
+    const isQuestion = text === letter.question;
     inner.append(
-      el('p', { class: isSign ? 'fa-letter-sign' : 'fa-letter-p', text: text })
+      el('p', { class: isSign ? 'fa-letter-sign' : isQuestion ? 'fa-letter-p fa-letter-question' : 'fa-letter-p' },
+        [isSign || isQuestion ? el('strong', { text }) : text])
     );
   });
 
