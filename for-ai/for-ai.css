@@ -692,6 +692,21 @@ html[data-fa-unlocked] .fa-gate {
   margin-top: clamp(2rem, 6vh, 3rem);
 }
 
+.fa-note-entry {
+  max-width: var(--fa-col);
+  margin: 0 auto;
+  padding: .5rem 0 2rem;
+}
+
+.fa-note-entry .fa-secret {
+  border: 0;
+  border-radius: 0;
+  padding: .4rem 0;
+  text-underline-offset: .35em;
+}
+
+.fa-note-entry .fa-secret:hover { text-decoration: underline; }
+
 .fa-secret {
   display: inline-flex;
   align-items: center;

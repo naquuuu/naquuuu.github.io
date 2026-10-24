@@ -12,7 +12,7 @@ import {
   playlist,
   booklet,
   kitchen,
-} from './content.js?v=20261024secret';
+} from './content.js?v=20261024note';
 
 /* ------------------------------------------------------------------ storage */
 
@@ -377,6 +377,14 @@ function buildBooklet(host) {
 }
 
 function buildChapter(chapter, lightbox) {
+  if (chapter.discreet) {
+    return el('div', { class: 'fa-note-entry' }, [
+      el('button', {
+        type: 'button', class: 'fa-secret',
+        'aria-haspopup': 'dialog', 'data-fa-secret': '', text: chapter.button,
+      }),
+    ]);
+  }
   const section = el('section', {
     class: 'fa-section fa-chapter',
     id: 'fa-chapter-' + chapter.number,
