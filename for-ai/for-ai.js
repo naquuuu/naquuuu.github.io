@@ -12,7 +12,7 @@ import {
   playlist,
   booklet,
   kitchen,
-} from './content.js?v=20261024letter';
+} from './content.js?v=20261024secret';
 
 /* ------------------------------------------------------------------ storage */
 
@@ -438,6 +438,8 @@ function buildLetter() {
   });
 
   const inner = el('div', { class: 'fa-dialog-inner fa-letter-inner' });
+  function renderLetter() {
+  inner.replaceChildren();
   inner.append(
     closeButton(letter.close, 'fa-dialog-close'),
     el('p', { class: 'fa-label', text: letter.label }),
@@ -468,6 +470,49 @@ function buildLetter() {
   });
   back.addEventListener('click', () => dialog.close());
   inner.append(el('div', { class: 'fa-actions fa-actions--start' }, [back]));
+  }
+
+  if (stores.session.get(config.letterSessionKey) === '1') {
+    renderLetter();
+  } else {
+    const input = el('input', {
+      id: 'fa-letter-code', type: 'password', autocomplete: 'off',
+      autocapitalize: 'none', spellcheck: 'false', required: true,
+      'aria-describedby': 'fa-letter-error',
+    });
+    const error = el('p', { class: 'fa-error', id: 'fa-letter-error', role: 'alert' });
+    const form = el('form', { class: 'fa-letter-gate' }, [
+      el('div', { class: 'fa-field' }, [
+        el('label', { for: 'fa-letter-code', text: letter.gate.field }), input,
+      ]),
+      error,
+      el('button', { class: 'fa-btn fa-btn--primary', type: 'submit', text: letter.gate.button }),
+    ]);
+    inner.append(
+      closeButton(letter.close),
+      el('p', { class: 'fa-label', text: letter.label }),
+      el('h2', { class: 'fa-dialog-title', id: 'fa-letter-title', text: letter.gate.title }),
+      el('p', { class: 'fa-note', text: letter.gate.description }), form,
+    );
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (input.value.trim().toLowerCase() !== passwords.letter.toLowerCase()) {
+        error.textContent = letter.gate.error;
+        input.setAttribute('aria-invalid', 'true');
+        input.focus();
+        input.select();
+        return;
+      }
+      stores.session.set(config.letterSessionKey, '1');
+      renderLetter();
+      dialog.scrollTop = 0;
+      inner.querySelector('.fa-dialog-close').focus({ preventScroll: true });
+    });
+    input.addEventListener('input', () => {
+      error.textContent = '';
+      input.removeAttribute('aria-invalid');
+    });
+  }
   dialog.append(inner);
   wireDialog(dialog);
   return dialog;

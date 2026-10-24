@@ -626,6 +626,10 @@ html[data-fa-unlocked] .fa-gate {
 .fa-iframe {
   display: block;
   width: 100%;
+  /* Override the shared media reset so Spotify shows the playlist rows. */
+  height: 352px;
+  min-height: 352px;
+  flex-shrink: 0;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   background: var(--bg-surface);
@@ -1401,6 +1405,7 @@ html.fa-dialog-open {
 .fa-letter-date { margin-top:.5rem; color:var(--text-secondary); font-family:var(--font-read); font-size:.85rem; }
 .fa-letter-question strong, .fa-letter-sign strong { font-weight:700; }
 .fa-letter-sign strong { font-style:normal; }
+.fa-letter-gate { display:grid; gap:1rem; margin-top:1.5rem; }
 .fa-screen[data-fa-screen="welcome"] { border-top:3px solid var(--fa-ink); padding-top:2rem; }
 .fa-welcome-photo { padding:.45rem .45rem 1.2rem; background:var(--bg-primary); transform:rotate(1.5deg); }
 .fa-screen[data-fa-screen="done"] { margin-top:1rem; padding:clamp(1.4rem,5vw,3.5rem); background:var(--bg-primary); border:1px solid var(--border-active); outline:1px solid var(--border-subtle); outline-offset:-9px; }
