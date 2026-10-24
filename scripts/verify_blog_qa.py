@@ -18,6 +18,7 @@ import subprocess
 import sys
 from pathlib import Path
 from xml.etree import ElementTree
+from urllib.parse import urljoin, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 CSS_PATH = ROOT / "assets" / "css" / "style.css"
@@ -38,6 +39,9 @@ FLOWCHART_REQUIRED = {
 EXCLUDE_PARTS = {"_revamp", "drafts", ".git", ".github", ".vscode", "node_modules"}
 # pages that must never appear in sitemap.xml: noindex redirect shells and utility pages
 NOT_IN_SITEMAP = {
+    "for-ai/index.html": "private sentimental edition",
+    "for-ai/booklet/index.html": "private sentimental booklet",
+    "for-ai/kitchen/index.html": "private sentimental workshop",
     "about/index.html": "noindex redirect shell",
     "portfolio/index.html": "noindex redirect shell",
     "404.html": "utility page",
@@ -46,6 +50,10 @@ NOT_IN_SITEMAP = {
     "workbook/jatuh/index.html": "hidden workbook page",
     "workbook/jatuh/blueprint.html": "hidden workbook page",
     "workbook/jatuh/dashboard.html": "hidden workbook page",
+}
+
+PRIVATE_EDITION_PAGES = {
+    "for-ai/index.html", "for-ai/booklet/index.html", "for-ai/kitchen/index.html",
 }
 
 failures: list[str] = []
@@ -128,6 +136,11 @@ def main() -> int:
             line = text.count("\n", 0, m.start()) + 1
             d1.append(f"inline width: {p.relative_to(ROOT)}:{line}")
         body = strip_noncopy(text)
+        if p.relative_to(ROOT).as_posix() in PRIVATE_EDITION_PAGES:
+            # Owner-approved private edition uses these exact date labels.
+            # Other punctuation and all inline-width checks remain enforced.
+            body = body.replace("24\u201425 october 2026", "24-25 october 2026")
+            body = body.replace("24\u201325 october 2026", "24-25 october 2026")
         for ch, label in ((em, "em-dash"), (en, "en-dash")):
             if ch in body:
                 first_line = body[: body.index(ch)].count("\n") + 1
@@ -267,6 +280,33 @@ def main() -> int:
         url = page_url(rel)
         if url in listed:
             d6.append(f"sitemap must not list {url} ({rel} is a {kind})")
+    for rel in sorted(PRIVATE_EDITION_PAGES):
+        private_page = ROOT / rel
+        if not private_page.exists():
+            d6.append(f"private edition page missing: {rel}")
+            continue
+        private_html = private_page.read_text(encoding="utf-8")
+        if not re.search(r'<meta\s+name="robots"\s+content="noindex,\s*nofollow"\s*/?>', private_html):
+            d6.append(f"private edition missing noindex,nofollow: {rel}")
+        front_matter = re.match(r'\A---\n(.*?)\n---(?:\n|$)', private_html, re.DOTALL)
+        if not front_matter:
+            d6.append(f"private edition missing complete Jekyll front matter: {rel}")
+        if not front_matter or not re.search(r'(?m)^sitemap:\s*false\s*$', front_matter.group(1)):
+            d6.append(f"private edition missing sitemap exclusion: {rel}")
+    for surface in ("index.html", "blog/index.html", "feed.xml", "sitemap.xml", "assets/js/palette.js"):
+        if "/for-ai" in (ROOT / surface).read_text(encoding="utf-8"):
+            d6.append(f"private edition exposed on public discovery surface: {surface}")
+    for public_page in htmls:
+        rel = public_page.relative_to(ROOT).as_posix()
+        if rel.startswith("for-ai/"):
+            continue
+        public_html = public_page.read_text(encoding="utf-8")
+        for href in re.findall(r'href=["\']([^"\']+)["\']', public_html, re.IGNORECASE):
+            destination = urlparse(urljoin(page_url(rel), href))
+            if destination.hostname in {"naquuuu.github.io", "naquuuu.xyz", "www.naquuuu.xyz"} and (
+                destination.path == "/for-ai" or destination.path.startswith("/for-ai/")
+            ):
+                d6.append(f"private edition linked from public HTML: {rel}")
     for p in htmls:
         if p.name.startswith("_"):
             url = page_url(p.relative_to(ROOT).as_posix())

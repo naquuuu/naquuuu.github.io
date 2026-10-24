@@ -35,6 +35,7 @@ plugins:
 
 # Exclude local scratch files and discontinued revamp context
 exclude:
+  - for-ai/README.md
   - _revamp
   - README.md
   - Gemfile
