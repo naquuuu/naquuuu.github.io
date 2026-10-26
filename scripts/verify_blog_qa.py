@@ -7,17 +7,15 @@ Gates:
   3. Responsive baseline (viewport meta everywhere; overflow-x clip; mobile media query)
   4. Valid audio/media (metadata preload, button-driven, ended-loop, no autoplay/loop/mousemove)
   5. Typography & a11y baseline (72ch essay column, 44px touch targets, 16px inputs, charset)
-  6. Sitemap freshness (absolute urls, lastmod == committed date, no shells or utility pages)
+  6. Noindex (every page carries robots noindex; no sitemap; robots.txt never blocks the crawl)
 
 Stdlib only. Cross-platform. Exit 1 on any failure.
 """
 from __future__ import annotations
 
 import re
-import subprocess
 import sys
 from pathlib import Path
-from xml.etree import ElementTree
 from urllib.parse import urljoin, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -37,20 +35,8 @@ FLOWCHART_REQUIRED = {
     "experience/bcg/index.html",
 }
 EXCLUDE_PARTS = {"_revamp", "drafts", ".git", ".github", ".vscode", "node_modules"}
-# pages that must never appear in sitemap.xml: noindex redirect shells and utility pages
-NOT_IN_SITEMAP = {
-    "for-ai/index.html": "private sentimental edition",
-    "for-ai/booklet/index.html": "private sentimental booklet",
-    "for-ai/kitchen/index.html": "private sentimental workshop",
-    "about/index.html": "noindex redirect shell",
-    "portfolio/index.html": "noindex redirect shell",
-    "404.html": "utility page",
-    "performance/recovery/session-map.html": "utility page",
-    # hidden workbook (noindex, unlinked); synced by scripts/sync_jatuh_workbook.py (ADR-058)
-    "workbook/jatuh/index.html": "hidden workbook page",
-    "workbook/jatuh/blueprint.html": "hidden workbook page",
-    "workbook/jatuh/dashboard.html": "hidden workbook page",
-}
+# the site is kept out of search results on purpose (2026-10-26): every page must carry this
+NOINDEX_RE = re.compile(r'<meta name="robots" content="[^"]*\bnoindex\b[^"]*"', re.IGNORECASE)
 
 PRIVATE_EDITION_PAGES = {
     "for-ai/index.html", "for-ai/booklet/index.html", "for-ai/kitchen/index.html",
@@ -89,29 +75,6 @@ def page_url(rel: str) -> str:
     return SITE_URL + rel[: -len("index.html")] if rel.endswith("index.html") else SITE_URL + rel
 
 
-def git_last_commit_date(rel: str) -> str:
-    """Committed (HEAD) date of a repo path as YYYY-MM-DD, or "" when unknown."""
-    try:
-        out = subprocess.run(
-            ["git", "-C", str(ROOT), "log", "-1", "--format=%cs", "--", rel],
-            capture_output=True, text=True,
-        )
-    except (OSError, subprocess.SubprocessError):
-        return ""
-    return out.stdout.strip() if out.returncode == 0 else ""
-
-
-def lastmod_mismatch(url: str, found: str | None, expected: str) -> str | None:
-    """None when the sitemap lastmod matches the committed date, else a specific message."""
-    if found is None:
-        return f"sitemap missing <lastmod> for {url} (git date {expected or 'unknown'})"
-    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", found):
-        return f"sitemap lastmod not YYYY-MM-DD for {url}: found '{found}', git date '{expected}'"
-    if found != expected:
-        return f"sitemap lastmod stale for {url}: found '{found}', git date '{expected}'"
-    return None
-
-
 def main() -> int:
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -139,8 +102,8 @@ def main() -> int:
         if p.relative_to(ROOT).as_posix() in PRIVATE_EDITION_PAGES:
             # Owner-approved private edition uses these exact date labels.
             # Other punctuation and all inline-width checks remain enforced.
-            body = body.replace("24\u201425 october 2026", "24-25 october 2026")
-            body = body.replace("24\u201325 october 2026", "24-25 october 2026")
+            body = body.replace("24—25 october 2026", "24-25 october 2026")
+            body = body.replace("24–25 october 2026", "24-25 october 2026")
         for ch, label in ((em, "em-dash"), (en, "en-dash")):
             if ch in body:
                 first_line = body[: body.index(ch)].count("\n") + 1
@@ -231,69 +194,36 @@ def main() -> int:
             d5.append(f"retired font referenced (ADR-035): {p.relative_to(ROOT)}")
     gate_result("5. typography & a11y baseline", not d5, d5 or ["72ch column, 44px targets, 16px inputs, charset + alt everywhere"])
 
-    # ---- Gate 6: sitemap freshness ----
+    # ---- Gate 6: noindex ----
     d6: list[str] = []
-    sitemap_locs: dict[str, str | None] = {}
-    if not SITEMAP_PATH.exists():
-        d6.append("sitemap.xml not found")
-    else:
-        try:
-            sitemap_root = ElementTree.fromstring(SITEMAP_PATH.read_text(encoding="utf-8", errors="replace"))
-        except ElementTree.ParseError as exc:
-            sitemap_root = None
-            d6.append(f"sitemap.xml does not parse as XML: {exc}")
-        if sitemap_root is not None:
-            if not sitemap_root.tag.endswith("urlset"):
-                d6.append(f"sitemap.xml root element is '{sitemap_root.tag}', expected 'urlset'")
-            for url_el in sitemap_root:
-                loc_el = url_el.find("{http://www.sitemaps.org/schemas/sitemap/0.9}loc")
-                if loc_el is None or not (loc_el.text or "").strip():
-                    d6.append("sitemap.xml <url> entry without <loc>")
-                    continue
-                loc = loc_el.text.strip()
-                lastmod_el = url_el.find("{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod")
-                sitemap_locs[loc] = lastmod_el.text.strip() if lastmod_el is not None and lastmod_el.text else None
-                if not loc.startswith(SITE_URL):
-                    d6.append(f"sitemap url is not absolute under {SITE_URL}: {loc}")
-
-    listed = set(sitemap_locs)
-    content_pages = [
-        p for p in htmls
-        if not p.name.startswith("_")
-        and p.relative_to(ROOT).as_posix() not in NOT_IN_SITEMAP
-    ]
-    for p in content_pages:
-        rel = p.relative_to(ROOT).as_posix()
-        url = page_url(rel)
-        if url not in sitemap_locs:
-            d6.append(f"sitemap missing content page {url} ({rel})")
+    for p in htmls:
+        if p.name.startswith("_"):  # jekyll never publishes underscore files
             continue
-        expected = git_last_commit_date(rel)
-        if not expected:
-            d6.append(f"sitemap lastmod not verifiable for {url}: no committed git date for {rel}")
-            continue
-        issue = lastmod_mismatch(url, sitemap_locs[url], expected)
-        if issue:
-            d6.append(issue)
-
-    for rel, kind in NOT_IN_SITEMAP.items():
-        url = page_url(rel)
-        if url in listed:
-            d6.append(f"sitemap must not list {url} ({rel} is a {kind})")
+        if not NOINDEX_RE.search(p.read_text(encoding="utf-8", errors="replace")):
+            d6.append(f"missing robots noindex meta: {p.relative_to(ROOT)}")
+    if SITEMAP_PATH.exists():
+        d6.append("sitemap.xml exists (a noindex site must not advertise its pages)")
+    robots = ROBOTS_PATH.read_text(encoding="utf-8", errors="replace") if ROBOTS_PATH.exists() else ""
+    if re.search(r"(?im)^\s*sitemap:", robots):
+        d6.append("robots.txt advertises a sitemap")
+    # a Disallow would stop crawlers from ever reading the noindex tag, so indexed urls would stay listed
+    if re.search(r"(?im)^\s*disallow:\s*/\s*$", robots):
+        d6.append("robots.txt disallows the whole site (crawlers could not read the noindex tag)")
     for rel in sorted(PRIVATE_EDITION_PAGES):
         private_page = ROOT / rel
         if not private_page.exists():
             d6.append(f"private edition page missing: {rel}")
             continue
         private_html = private_page.read_text(encoding="utf-8")
-        if not re.search(r'<meta\s+name="robots"\s+content="noindex,\s*nofollow"\s*/?>', private_html):
+        robots_meta = NOINDEX_RE.search(private_html)
+        if not robots_meta or "nofollow" not in robots_meta.group(0):
             d6.append(f"private edition missing noindex,nofollow: {rel}")
         front_matter = re.match(r'\A---\n(.*?)\n---(?:\n|$)', private_html, re.DOTALL)
         if not front_matter:
             d6.append(f"private edition missing complete Jekyll front matter: {rel}")
         if not front_matter or not re.search(r'(?m)^sitemap:\s*false\s*$', front_matter.group(1)):
             d6.append(f"private edition missing sitemap exclusion: {rel}")
-    for surface in ("index.html", "blog/index.html", "feed.xml", "sitemap.xml", "assets/js/palette.js"):
+    for surface in ("index.html", "blog/index.html", "feed.xml", "assets/js/palette.js"):
         if "/for-ai" in (ROOT / surface).read_text(encoding="utf-8"):
             d6.append(f"private edition exposed on public discovery surface: {surface}")
     for public_page in htmls:
@@ -307,19 +237,8 @@ def main() -> int:
                 destination.path == "/for-ai" or destination.path.startswith("/for-ai/")
             ):
                 d6.append(f"private edition linked from public HTML: {rel}")
-    for p in htmls:
-        if p.name.startswith("_"):
-            url = page_url(p.relative_to(ROOT).as_posix())
-            if url in listed:
-                d6.append(f"sitemap must not list {url} (draft page)")
-
-    robots = ROBOTS_PATH.read_text(encoding="utf-8", errors="replace") if ROBOTS_PATH.exists() else ""
-    if not re.search(rf"(?im)^\s*sitemap:\s*{re.escape(SITE_URL)}sitemap\.xml\s*$", robots):
-        d6.append(f"robots.txt does not point at {SITE_URL}sitemap.xml")
-
-    gate_result("6. sitemap freshness", not d6,
-                d6 or [f"{len(content_pages)} content pages listed with lastmod == git date; "
-                       f"no shells or utility pages; robots.txt points at the sitemap; all urls absolute"])
+    gate_result("6. noindex", not d6,
+                d6 or [f"robots noindex on all {len(htmls)} pages; no sitemap; robots.txt allows the crawl"])
 
     # ---- summary ----
     print("\n=== SUMMARY ===")

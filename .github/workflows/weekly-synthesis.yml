@@ -61,8 +61,7 @@ jobs:
               if (files.length > 0) {
                 const latestDraft = files[files.length - 1];
                 const issueBody = `### 🚀 New Autonomous Blog Draft Ready for Review\n\n` +
-                  `- **Target Author**: Ramadhana Bhanuharya Krishnamurti (Krishna / naquuuu)\n` +
-                  `- **Notification Target**: \`rbkrishnamurti@gmail.com\`\n` +
+                  `- **Target Author**: naquuuu\n` +
                   `- **Scheduled Publish**: Saturday 11:00 AM JKT (UTC+7)\n` +
                   `- **Draft Directory**: \`blog/drafts/${latestDraft}/index.html\`\n` +
                   `- **Reliability Status**: ✅ All 5 QA Gates Passed (Zero Inline Width, Responsive, Valid Audio, 72ch Typography)\n\n` +

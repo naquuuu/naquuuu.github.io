@@ -1,4 +1,10 @@
+# Site is intentionally kept out of search results: every page carries a
+# robots noindex meta tag. Crawling stays allowed on purpose so search engines
+# can see that tag and drop already-indexed URLs. Do not Disallow here until
+# Google Search Console shows zero indexed pages, or the noindex is never read.
 User-agent: *
 Allow: /
 
-Sitemap: https://naquuuu.github.io/sitemap.xml
+# The CV is linked from the site for visitors but must never be fetched or
+# listed by search engines (a PDF cannot carry a noindex meta tag).
+Disallow: /assets/private/

@@ -1,6 +1,6 @@
 # naquuuu@pm — Personal Product & AI Systems Blog
 
-A public thought-leadership and engineering workstation by **Ramadhana Bhanuharya Krishnamurti (Krishna / naquuuu)**.
+A public thought-leadership and engineering workstation by **naquuuu**.
 Bridging AI agentic workflows, high-precision technical product management, and systems architecture.
 
 - Live URL: [https://naquuuu.github.io/](https://naquuuu.github.io/)
@@ -50,4 +50,4 @@ To publish a reviewed draft:
 ```bash
 python scripts/generate_blog_post.py --publish [slug]
 ```
-Weekly autonomous synthesis runs automatically every **Saturday morning at 11:00 AM JKT (+7)**, emailing draft notifications to `rbkrishnamurti@gmail.com`.
+Weekly autonomous synthesis runs automatically every **Saturday morning at 11:00 AM JKT (+7)**.

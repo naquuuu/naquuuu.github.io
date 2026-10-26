@@ -4,17 +4,15 @@
 
 title: "naquuuu"
 tagline: "Building systems that don't break when real life gets messy."
-description: "Personal portfolio and systems architecture journey of Ramadhana Bhanuharya Krishnamurti (naquuuu)."
+description: "Personal portfolio and systems architecture journey of naquuuu."
 url: "https://naquuuu.github.io"
 baseurl: ""
 
 # Author metadata
 author:
-  name: "Ramadhana Bhanuharya Krishnamurti"
+  name: "naquuuu"
   handle: "naquuuu"
   location: "Bandung / Jakarta, Indonesia"
-  linkedin: "https://www.linkedin.com/in/rbkrishnamurti/"
-  brother_site: "https://bhanuharya.github.io/"
 
 # Build & Markdown Settings
 markdown: kramdown
@@ -29,9 +27,9 @@ permalink: /blog/:title/
 
 # GitHub Pages Native Plugins (Whitelisted by GitHub Pages)
 # jekyll-feed is disabled: it cannot see hand-authored pages, so feed.xml is
-# maintained by hand (2026-10-15, blog IDE round, task B5). jekyll-sitemap stays.
-plugins:
-  - jekyll-sitemap
+# maintained by hand (2026-10-15, blog IDE round, task B5). jekyll-sitemap was
+# removed 2026-10-26: the site is noindex, so it must not advertise a sitemap.
+plugins: []
 
 # Exclude local scratch files and discontinued revamp context
 exclude:

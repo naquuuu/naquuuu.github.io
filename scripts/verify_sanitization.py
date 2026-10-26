@@ -24,6 +24,7 @@ scraped raw dumps) are out of scope. Pass --all to scan the raw working tree.
 import os
 import sys
 import re
+import hashlib
 import subprocess
 import argparse
 
@@ -77,15 +78,19 @@ ALLOWED_FILES = {
 }
 
 # Public contact numbers the owner intentionally publishes (e.g. the blog
-# inquiry button). Canonical form: digits only, country code 62, no plus.
-ALLOWED_PHONE_NUMBERS = {
-    "6282112255009",
+# inquiry button), stored as sha256 of the canonical form (digits only,
+# country code 62, no plus) so this public file never carries the number.
+ALLOWED_PHONE_HASHES = {
+    "43a029133208eecc120207ffe0213e42fcbb41292f54c2aa86afcb6c38307bef",
 }
 
 SCAN_EXTENSIONS = (".html", ".js", ".ts", ".jsx", ".tsx", ".json", ".md", ".py", ".css", ".txt")
 
 # Tracked template files that carry no scannable extension but must still be audited.
 SCAN_FILENAMES = {".env.example"}
+
+def phone_hash(raw):
+    return hashlib.sha256(normalize_phone(raw).encode()).hexdigest()
 
 def normalize_phone(raw):
     digits = re.sub(r"\D", "", raw)
@@ -138,7 +143,7 @@ def scan_file(filepath):
                 for pattern, desc in FORBIDDEN_RULES:
                     match = re.search(pattern, line, re.IGNORECASE)
                     if match:
-                        if "phone number" in desc and normalize_phone(match.group(0)) in ALLOWED_PHONE_NUMBERS:
+                        if "phone number" in desc and phone_hash(match.group(0)) in ALLOWED_PHONE_HASHES:
                             continue
                         issues.append((line_idx, match.group(0), desc))
     except Exception as e:
