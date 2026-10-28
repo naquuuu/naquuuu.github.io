@@ -1,0 +1,47 @@
+name: Refresh Visit Counter Snapshot
+
+# The footer counter reads assets/data/visits.json from the site's own origin,
+# because *.goatcounter.com is unreachable from some networks and silently blanked
+# the number (ADR-057). This job keeps that snapshot a day behind at worst.
+
+on:
+  schedule:
+    # Daily at 03:00 UTC (10:00 WIB)
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: visits-snapshot
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    name: Refresh the public visit total
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Read the counter endpoint
+        run: python scripts/refresh_visits.py
+
+      - name: Commit when the count moved
+        run: |
+          if [ -z "$(git status --porcelain assets/data/visits.json)" ]; then
+            echo "snapshot already current; nothing to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/visits.json
+          git commit -m "chore(visits): refresh public visit total [skip ci]"
+          git push

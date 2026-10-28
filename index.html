@@ -846,19 +846,36 @@
   <script async src="https://www.instagram.com/embed.js"></script>
   <script src="./assets/js/main.js?v=20261022ui"></script>
   <script>
-    /* Public visit total from GoatCounter. Needs "allow adding visitor counts on your website" enabled in
-       GoatCounter settings; stays hidden if the endpoint is off, blocked or offline. */
+    /* Public visit total. Reads the same-origin snapshot in assets/data/visits.json
+       (refreshed by scripts/refresh_visits.py via .github/workflows/visits.yml), so the
+       number still shows when naquuuu.goatcounter.com is blocked or unreachable, then
+       upgrades to the live total if that host answers. Hidden only when both are empty. */
     (function () {
       var el = document.getElementById('footer-visits');
-      if (!el || !window.fetch || /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return;
-      fetch('https://naquuuu.goatcounter.com/counter/TOTAL.json')
+      if (!el || !window.fetch) return;
+
+      function show(count) {
+        if (!count || count === '0') return;
+        el.textContent = count + ' visits so far';
+        el.hidden = false;
+      }
+
+      /* 1. same-origin snapshot: no CORS, no blocker, no third-party request */
+      fetch('./assets/data/visits.json', { cache: 'no-cache' })
         .then(function (r) { return r.ok ? r.json() : null; })
-        .then(function (d) {
-          if (!d || !d.count || d.count === '0') return;
-          el.textContent = d.count + ' visits so far';
-          el.hidden = false;
-        })
-        .catch(function () {});
+        .then(function (d) { if (d) show(d.count); })
+        .catch(function () {})
+        .then(function () {
+          /* 2. live total from goatcounter, skipped on local dev, capped at 4s */
+          if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return;
+          var controller = window.AbortController ? new AbortController() : null;
+          var timer = controller ? setTimeout(function () { controller.abort(); }, 4000) : null;
+          fetch('https://naquuuu.goatcounter.com/counter/TOTAL.json', controller ? { signal: controller.signal } : {})
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .then(function (d) { if (d) show(d.count); })
+            .catch(function () {})
+            .then(function () { if (timer) clearTimeout(timer); });
+        });
     })();
   </script>
   <!-- visit counter: GoatCounter, no cookies, no personal data (ADR-039) -->
