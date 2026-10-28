@@ -3,24 +3,6 @@
 (function () {
   'use strict';
 
-  // Email and whatsapp are stored reversed + base64 and only assembled in the
-  // browser, so the raw html carries no address or number for scrapers. Pages
-  // are also robots noindex; this keeps the contacts out of harvested lists.
-  function unpack(s) { return atob(s).split('').reverse().join(''); }
-  var CONTACT = {
-    mail: 'mailto:' + unpack('bW9jLmxpYW1nQGl0cnVtYW5oc2lya2Jy'),
-    wa: 'https://wa.me/' + unpack('OTAwNTUyMjExMjgyNg==')
-  };
-  function wireContacts() {
-    var links = document.querySelectorAll('a[data-contact]');
-    for (var i = 0; i < links.length; i++) {
-      var href = CONTACT[links[i].getAttribute('data-contact')];
-      if (href) links[i].href = href;
-    }
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wireContacts);
-  else wireContacts();
-
   var ITEMS = [
     { group: 'sections', label: 'philosophy', hint: 'home', href: '/#philosophy' },
     { group: 'sections', label: 'how i think about systems', hint: 'home', href: '/#operating-philosophy' },
@@ -42,9 +24,6 @@
     { group: 'notes', label: 'the geometry of shibuya-kei', hint: 'culture', href: '/blog/the-geometry-of-shibuya-kei/' },
     { group: 'notes', label: 'smart tailoring for everyday life', hint: 'culture', href: '/blog/smart-tailoring-as-kinetic-infrastructure/' },
     { group: 'notes', label: 'all essays & notes', hint: 'archive', href: '/blog/' },
-    { group: 'contact', label: 'request cv', hint: 'email', href: CONTACT.mail },
-    { group: 'contact', label: 'email', hint: 'inbox', href: CONTACT.mail },
-    { group: 'contact', label: 'whatsapp', hint: 'chat', href: CONTACT.wa, external: true },
     { group: 'contact', label: 'linkedin', hint: 'profile', href: 'https://www.linkedin.com/in/rbkrishnamurti/', external: true },
     { group: 'contact', label: 'instagram', hint: '@naquuuu_', href: 'https://www.instagram.com/naquuuu_/', external: true },
     { group: 'contact', label: 'spotify', hint: 'listening', href: 'https://open.spotify.com/user/1j69whrwxcopwxxto9n74zcdf', external: true },
