@@ -5,6 +5,7 @@
 User-agent: *
 Allow: /
 
-# The CV is linked from the site for visitors but must never be fetched or
-# listed by search engines (a PDF cannot carry a noindex meta tag).
+# PDFs are not linked from the site anymore. Keep them out of crawlers in case
+# an old export gets dropped back in (a PDF cannot carry a noindex meta tag).
 Disallow: /assets/private/
+Disallow: /portfolio.pdf

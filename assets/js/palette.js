@@ -42,7 +42,7 @@
     { group: 'notes', label: 'the geometry of shibuya-kei', hint: 'culture', href: '/blog/the-geometry-of-shibuya-kei/' },
     { group: 'notes', label: 'smart tailoring for everyday life', hint: 'culture', href: '/blog/smart-tailoring-as-kinetic-infrastructure/' },
     { group: 'notes', label: 'all essays & notes', hint: 'archive', href: '/blog/' },
-    { group: 'contact', label: 'open cv (pdf)', hint: 'download', href: '/assets/private/Krishna_CV_2026.pdf', external: true },
+    { group: 'contact', label: 'request cv', hint: 'email', href: CONTACT.mail },
     { group: 'contact', label: 'email', hint: 'inbox', href: CONTACT.mail },
     { group: 'contact', label: 'whatsapp', hint: 'chat', href: CONTACT.wa, external: true },
     { group: 'contact', label: 'linkedin', hint: 'profile', href: 'https://www.linkedin.com/in/rbkrishnamurti/', external: true },
