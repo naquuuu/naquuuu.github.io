@@ -215,7 +215,7 @@
 
   var currentScript = document.currentScript;
   if (currentScript && !document.querySelector('link[href*="/assets/css/palette.css"]')) {
-    var cssHref = currentScript.src.replace(/\/assets\/js\/palette\.js(?:\?.*)?$/, '/assets/css/palette.css?v=20261022ui');
+    var cssHref = currentScript.src.replace(/\/assets\/js\/palette\.js(?:\?.*)?$/, '/assets/css/palette.css?v=20261103xyz');
     var styleLink = document.createElement('link'); styleLink.rel = 'stylesheet'; styleLink.href = cssHref;
     document.head.appendChild(styleLink);
   }

@@ -3,7 +3,7 @@
 A public thought-leadership and engineering workstation by **naquuuu**.
 Bridging AI agentic workflows, high-precision technical product management, and systems architecture.
 
-- Live URL: [https://naquuuu.github.io/](https://naquuuu.github.io/)
+- Live URL: [https://naquuuu.xyz/](https://naquuuu.xyz/)
 
 ---
 

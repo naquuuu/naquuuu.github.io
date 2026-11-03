@@ -302,6 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const showSticky = window.scrollY > 180;
       stickyPerspectiveBar.classList.toggle('visible', showSticky);
       stickyPerspectiveBar.setAttribute('aria-hidden', showSticky ? 'false' : 'true');
+      stickyPerspectiveBar.toggleAttribute('inert', !showSticky);
     }
 
     if (isNavClickScrolling) return;

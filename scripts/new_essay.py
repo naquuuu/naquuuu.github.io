@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic essay scaffolder and mechanical checker for naquuuu.github.io.
+"""Deterministic essay scaffolder and mechanical checker for naquuuu.xyz.
 
 Two modes. No model calls, no API keys, no prose invention.
 
@@ -46,7 +46,7 @@ THEME_COLOR = {"culture": "#1B1214", "systems": "#120305"}
 DEFAULT_READ_TIME = {"culture": "6 min read", "systems": "8 min read"}
 PREFERRED_DESCRIPTOR = {"culture": "notes on style", "systems": "notes on tools"}
 READ_TIME_BAND = {"culture": (4, 6), "systems": (7, 9)}
-SITE_ORIGIN = "https://naquuuu.github.io/blog/"
+SITE_ORIGIN = "https://naquuuu.xyz/blog/"
 
 BULLET = "\u2022"
 LEFT_ARROW = "\u2190"
@@ -291,7 +291,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
         </a>
       </div>
       <nav class="nav-links">
-        <a href="https://naquuuu.github.io/" class="nav-back-link">[ {left_arrow} naquuuu.github.io ]</a>
+        <a href="https://naquuuu.xyz/" class="nav-back-link">[ {left_arrow} naquuuu.xyz ]</a>
       </nav>
     </div>
   </header>
@@ -369,12 +369,12 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     <div class="footer-wordmark" aria-hidden="true">naquuuu</div>
     <div class="wrap footer-content">
       <div class="footer-channels">
-        <a href="https://naquuuu.github.io/">home</a>
+        <a href="https://naquuuu.xyz/">home</a>
         <a href="https://github.com/naquuuu" target="_blank" rel="noopener noreferrer">github</a>
 {email_link}
       </div>
       <div class="footer-live-stamp">
-        <span>naquuuu.github.io {bullet} built with matter and code.</span>
+        <span>naquuuu.xyz {bullet} built with matter and code.</span>
       </div>
     </div>
   </footer>
@@ -1161,7 +1161,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="new_essay.py",
         description=(
-            "Deterministic essay scaffolder and mechanical checker for naquuuu.github.io. "
+            "Deterministic essay scaffolder and mechanical checker for naquuuu.xyz. "
             "No model calls, no prose invention."
         ),
         epilog=(

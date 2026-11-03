@@ -1,11 +1,11 @@
 # ==============================================================================
-# naquuuu.github.io — Jekyll Configuration (GitHub Pages Native)
+# naquuuu.xyz — Jekyll Configuration (GitHub Pages Native)
 # ==============================================================================
 
 title: "naquuuu"
 tagline: "Building systems that don't break when real life gets messy."
 description: "Personal portfolio and systems architecture journey of naquuuu."
-url: "https://naquuuu.github.io"
+url: "https://naquuuu.xyz"
 baseurl: ""
 
 # Author metadata
@@ -43,3 +43,7 @@ exclude:
 
   - scripts
   - drafts
+  - _draft-preview.html
+  - workbook
+  - _draft-preview.html
+  - workbook

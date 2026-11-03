@@ -23,8 +23,8 @@ CSS_PATH = ROOT / "assets" / "css" / "style.css"
 JS_PATH = ROOT / "assets" / "js" / "main.js"
 SITEMAP_PATH = ROOT / "sitemap.xml"
 ROBOTS_PATH = ROOT / "robots.txt"
-SITE_URL = "https://naquuuu.github.io/"
-CURRENT_ASSET_VERSION = "20261022ui"
+SITE_URL = "https://naquuuu.xyz/"
+CURRENT_ASSET_VERSION = "20261103xyz"
 # non-creative pages must carry a blueprint flowchart (STYLE_BIBLE 2.8); the two creative essays are exempt
 FLOWCHART_REQUIRED = {
     "blog/building-an-autonomous-product-operating-system/index.html",
@@ -62,9 +62,17 @@ def iter_html():
 
 
 def strip_noncopy(html: str) -> str:
-    html = re.sub(r"<!--.*?-->", " ", html, flags=re.DOTALL)
-    html = re.sub(r"<script\b.*?</script>", " ", html, flags=re.DOTALL | re.IGNORECASE)
-    html = re.sub(r"<style\b.*?</style>", " ", html, flags=re.DOTALL | re.IGNORECASE)
+    """Remove comments, scripts and styles while preserving line numbering.
+
+    Every stripped block is replaced by the same number of newlines it spanned,
+    so line numbers computed on the result match the original file exactly.
+    """
+    def blank(m: re.Match[str]) -> str:
+        return "\n" * m.group(0).count("\n")
+
+    html = re.sub(r"<!--.*?-->", blank, html, flags=re.DOTALL)
+    html = re.sub(r"<script\b.*?</script>", blank, html, flags=re.DOTALL | re.IGNORECASE)
+    html = re.sub(r"<style\b.*?</style>", blank, html, flags=re.DOTALL | re.IGNORECASE)
     return html
 
 

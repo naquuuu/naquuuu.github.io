@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>November Cut</title>
+  <meta name="description" content="private tracker for the november cut. data stays in this browser. not linked from the site.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --paper: #FBFBFA; --surface: #F2F2ED; --card: #FFFFFF; --line: #E5E5DF;
+      --ink: #111110; --soft: #555550; --mute: #6E6E66;
+      --terra: #B4573B; --sage: #6F8466; --sky: #4F7A9A; --sun: #C9922E; --rose: #B5485A;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --paper: #121211; --surface: #1B1B19; --card: #1F1F1C; --line: #2E2E2A;
+        --ink: #F1F1EC; --soft: #B9B9B0; --mute: #8C8C83;
+        --terra: #D9775A; --sage: #93AC88; --sky: #7FA8C6; --sun: #E0AE52; --rose: #D76E80;
+      }
+    }
+    :root[data-theme="dark"] {
+      --paper: #121211; --surface: #1B1B19; --card: #1F1F1C; --line: #2E2E2A;
+      --ink: #F1F1EC; --soft: #B9B9B0; --mute: #8C8C83;
+      --terra: #D9775A; --sage: #93AC88; --sky: #7FA8C6; --sun: #E0AE52; --rose: #D76E80;
+    }
+    * { box-sizing: border-box; }
+    html, body { overflow-x: clip; }
+    body { margin: 0; background: var(--paper); color: var(--ink);
+           font: 15px/1.55 'Plus Jakarta Sans', -apple-system, 'Segoe UI', Roboto, sans-serif; }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 16px 64px; }
+    header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px;
+             border-bottom: 1px solid var(--ink); padding-bottom: 14px; margin-bottom: 20px; }
+    h1 { font-size: 24px; margin: 0; font-weight: 700; letter-spacing: -.01em; }
+    header p { margin: 2px 0 0; color: var(--mute); font-size: 13px; }
+    .phase { font: 500 12px 'JetBrains Mono', monospace; padding: 6px 10px; border-radius: 999px;
+             background: var(--surface); border: 1px solid var(--line); }
+    .grid { display: grid; gap: 14px; }
+    .kpis { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom: 14px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; min-width: 0; }
+    .kpi .lbl { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); font-weight: 600; }
+    .kpi .val { font-size: 28px; font-weight: 700; margin-top: 4px; font-variant-numeric: tabular-nums; }
+    .kpi .val small { font-size: 14px; color: var(--mute); font-weight: 500; }
+    .kpi .sub { font-size: 12px; color: var(--soft); margin-top: 2px; }
+    .bar { height: 6px; background: var(--surface); border-radius: 99px; margin-top: 10px; overflow: hidden; }
+    .bar i { display: block; height: 100%; width: var(--w, 0%); background: var(--sage); border-radius: 99px; }
+    .main { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); margin-bottom: 14px; }
+    .two { grid-template-columns: 1fr 1fr; margin-bottom: 14px; }
+    @media (max-width: 860px) { .main, .two { grid-template-columns: 1fr; } }
+    h2 { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--mute); margin: 0 0 12px; font-weight: 600; }
+    .chart { position: relative; height: 240px; }
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    label { font-size: 12px; color: var(--soft); display: grid; gap: 4px; }
+    label.full { grid-column: 1 / -1; }
+    input, select, textarea { font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--line);
+             border-radius: 8px; padding: 9px 10px; min-height: 40px; width: 100%; }
+    textarea { min-height: 56px; resize: vertical; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chips label { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border: 1px solid var(--line);
+             border-radius: 999px; cursor: pointer; font-size: 13px; color: var(--ink); }
+    .chips input { width: auto; min-height: 0; }
+    button { font: 600 14px inherit; font-family: inherit; border: 1px solid var(--ink); background: var(--ink); color: var(--paper);
+             border-radius: 8px; padding: 10px 14px; cursor: pointer; min-height: 42px; }
+    button.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+    .row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .row input[type="number"] { width: 90px; }
+    .cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+    .cal .dow { font-size: 10px; color: var(--mute); text-align: center; font-weight: 600; }
+    .day { aspect-ratio: 1; border-radius: 8px; background: var(--surface); display: grid; place-items: center;
+           font: 500 12px 'JetBrains Mono', monospace; cursor: pointer; border: 1px solid transparent; position: relative; }
+    .day.today { border-color: var(--ink); }
+    .day.lift::after { content: ''; position: absolute; top: 4px; right: 4px; width: 5px; height: 5px; border-radius: 50%; background: var(--terra); }
+    .legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 11px; color: var(--mute); margin-top: 10px; }
+    .legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; background: var(--c); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+    th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    th { font-size: 11px; color: var(--mute); text-transform: uppercase; letter-spacing: .05em; }
+    .scroll { overflow-x: auto; }
+    .ok { color: var(--sage); } .bad { color: var(--rose); }
+    pre { background: var(--surface); border-radius: 8px; padding: 12px; font: 12px/1.5 'JetBrains Mono', monospace;
+          white-space: pre-wrap; max-height: 260px; overflow: auto; margin: 10px 0 0; }
+    .note { font-size: 12px; color: var(--mute); }
+    .meal { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 10px; align-items: start;
+            border: 1px solid var(--line); border-radius: 10px; padding: 8px; }
+    .meal img, .meal .ph { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; background: var(--surface); }
+    .meal b { font-size: 13px; } .meal p { margin: 2px 0 0; font-size: 12px; color: var(--soft); overflow-wrap: anywhere; }
+    .meal button { min-height: 32px; padding: 4px 10px; font-size: 12px; }
+    .toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--paper);
+             padding: 10px 16px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity .2s; pointer-events: none; }
+    .toast.on { opacity: 1; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>November Cut</h1>
+      <p id="sub">1 → 30 Nov · scored on kg lost</p>
+    </div>
+    <div class="row" style="align-items:end">
+      <label>Start kg<input type="number" id="sStart" step="0.1" min="40" max="150"></label>
+      <label>Goal kg<input type="number" id="sGoal" step="0.1" min="40" max="150"></label>
+    </div>
+    <span class="phase" id="phase">-</span>
+  </header>
+
+  <section class="grid kpis" id="kpis"></section>
+
+  <section class="grid main">
+    <div class="card">
+      <h2>Weight vs target line</h2>
+      <div class="chart"><canvas id="cWeight"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Log a day</h2>
+      <form id="f">
+        <label>Date<input type="date" name="date" required min="2026-10-25" max="2026-12-05"></label>
+        <label>Weight (kg, morning)<input type="number" name="weight" step="0.1" min="40" max="150"></label>
+        <label>Calories (est. kcal)<input type="number" name="kcal" step="10" min="0" max="6000"></label>
+        <label>Protein (g)<input type="number" name="protein" step="1" min="0" max="400"></label>
+        <label>Steps<input type="number" name="steps" step="100" min="0" max="80000"></label>
+        <label>Water (L)<input type="number" name="water" step="0.25" min="0" max="10"></label>
+        <label>Sleep (h, last night)<input type="number" name="sleep" step="0.25" min="0" max="16"></label>
+        <label>Sleep quality (1-5)<input type="number" name="sleepq" step="1" min="1" max="5"></label>
+        <label class="full">Exercise
+          <div class="chips" id="ex"></div>
+        </label>
+        <label>Session (min)<input type="number" name="minutes" step="5" min="0" max="300"></label>
+        <label>Lift felt (1-5)<input type="number" name="rpe" step="1" min="1" max="5"></label>
+        <label class="full">Notes<textarea name="note" placeholder="what you ate, sleep, bloat, mood"></textarea></label>
+        <div class="row full" style="grid-column:1/-1">
+          <button type="submit">Save day</button>
+          <button type="button" class="ghost" id="del">Delete day</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="card" style="margin-bottom:14px">
+    <h2>Meals · <span id="mealDate"></span></h2>
+    <div class="grid two" style="margin:0">
+      <form id="mf">
+        <label>Meal<select name="slot"><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Snack</option></select></label>
+        <label>Photo<input type="file" name="photo" accept="image/*" capture="environment"></label>
+        <label class="full">Possible ingredients<textarea name="ing" placeholder="nasi setengah, ayam bakar dada 1, daun singkong, sambal sedikit"></textarea></label>
+        <label>Est. kcal<input type="number" name="kcal" step="10" min="0" max="3000"></label>
+        <label>Est. protein (g)<input type="number" name="protein" step="1" min="0" max="200"></label>
+        <div class="row" style="grid-column:1/-1"><button type="submit">Add meal</button></div>
+        <p class="note full" style="grid-column:1/-1">Day calories and protein are summed from meals that have numbers. Photos are shrunk and kept in this browser; the relay script sends them for estimation.</p>
+      </form>
+      <div id="meals" class="grid" style="align-content:start;gap:10px"></div>
+    </div>
+  </section>
+
+  <section class="grid two">
+    <div class="card"><h2>Calories vs plan</h2><div class="chart"><canvas id="cKcal"></canvas></div></div>
+    <div class="card"><h2>Steps (10k line)</h2><div class="chart"><canvas id="cSteps"></canvas></div></div>
+  </section>
+
+  <section class="grid two">
+    <div class="card">
+      <h2>Adherence calendar</h2>
+      <div class="cal" id="cal"></div>
+      <div class="legend">
+        <span style="--c:var(--surface)">no log</span>
+        <span style="--c:color-mix(in srgb, var(--rose) 55%, transparent)">0-2 of 5</span>
+        <span style="--c:color-mix(in srgb, var(--sun) 60%, transparent)">3-4 of 5</span>
+        <span style="--c:var(--sage)">5 of 5</span>
+        <span style="--c:var(--terra)">● lift day</span>
+      </div>
+      <p class="note">5 checks: kcal within plan, protein ≥ 150 g, steps ≥ 10k, sleep ≥ 7 h, planned session done (or rest day).</p>
+    </div>
+    <div class="card">
+      <h2>Relay analysis for tomorrow</h2>
+      <p class="note">Copies a ready prompt with your last 7 days and the plan. Paste it to the opencode relay on WhatsApp, or save the JSON export to <code>internal-docs/health/cut-log.json</code> and run <code>python scripts/cut_daily_analysis.py</code>.</p>
+      <div class="row">
+        <button type="button" id="copyPrompt">Copy relay prompt</button>
+        <button type="button" class="ghost" id="exp">Export JSON</button>
+        <label class="ghost" style="display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:8px;padding:0 14px;min-height:42px;cursor:pointer;color:var(--ink);font-weight:600;font-size:14px">Import JSON<input type="file" id="imp" accept="application/json" hidden></label>
+      </div>
+      <pre id="preview"></pre>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Log</h2>
+    <div class="scroll"><table id="tbl"></table></div>
+  </section>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const PLAN = {
+  start: '2026-11-01', end: '2026-11-30', startWeight: 75.2, goalWeight: 70.2,
+  protein: 150, steps: 10000, water: 3, sleep: 7,
+  // [from, to, kcalLow, kcalHigh, label]
+  phases: [
+    ['2026-11-01', '2026-11-22', 1700, 1800, 'Weeks 1-3 · fat loss'],
+    ['2026-11-23', '2026-11-27', 1450, 1550, 'Week 4 · taper'],
+    ['2026-11-28', '2026-11-30', 1400, 1550, 'Peak · low sodium'],
+  ],
+  // 0 = Sunday. Push, Pull, Legs, rest, Upper, Lower, rest.
+  split: { 1: 'Push', 2: 'Pull', 3: 'Legs', 4: 'Rest', 5: 'Upper', 6: 'Lower', 0: 'Rest' },
+};
+const EX = ['Push', 'Pull', 'Legs', 'Upper', 'Lower', 'Cardio', 'Walk', 'Rest'];
+const KEY = 'novcut.v1';
+
+const store = {
+  load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } },
+  save(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); return true; } catch { return false; } },
+};
+let data = store.load();
+
+// start/goal weight are editable and saved separately from the daily log
+const SKEY = 'novcut.settings.v1';
+try { Object.assign(PLAN, JSON.parse(localStorage.getItem(SKEY)) || {}); } catch {}
+for (const [id, k] of [['sStart', 'startWeight'], ['sGoal', 'goalWeight']]) {
+  const el = document.getElementById(id); el.value = PLAN[k];
+  el.addEventListener('change', () => {
+    const v = Number(el.value); if (!(v >= 40 && v <= 150)) { el.value = PLAN[k]; return; }
+    PLAN[k] = v;
+    try { localStorage.setItem(SKEY, JSON.stringify({ startWeight: PLAN.startWeight, goalWeight: PLAN.goalWeight })); } catch {}
+    render();
+  });
+}
+
+// least-squares slope (kg/day) over the last 7 weigh-ins, projected to the end date
+function projection() {
+  const pts = Object.keys(data).sort().filter(s => data[s].weight != null).slice(-7)
+    .map(s => [(parse(s) - parse(PLAN.start)) / 864e5, data[s].weight]);
+  if (pts.length < 3) return null;
+  const mx = avg(pts.map(p => p[0])), my = avg(pts.map(p => p[1]));
+  const den = pts.reduce((a, p) => a + (p[0] - mx) ** 2, 0); if (!den) return null;
+  const slope = pts.reduce((a, p) => a + (p[0] - mx) * (p[1] - my), 0) / den;
+  return { slope, at: x => my + slope * (x - mx), end: my + slope * (29 - mx) };
+}
+
+const iso = d => d.toISOString().slice(0, 10);
+const parse = s => new Date(s + 'T00:00:00Z');
+const addDays = (s, n) => iso(new Date(parse(s).getTime() + n * 864e5));
+const today = (() => { const d = new Date(); return iso(new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()))); })();
+const days = Array.from({ length: 30 }, (_, i) => addDays(PLAN.start, i));
+const phaseOf = s => PLAN.phases.find(p => s >= p[0] && s <= p[1]);
+const planned = s => PLAN.split[parse(s).getUTCDay()];
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const fmt = (n, d = 0) => n == null || isNaN(n) ? '-' : Number(n).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: d });
+const avg = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : null;
+
+function toast(t) { const el = document.getElementById('toast'); el.textContent = t; el.classList.add('on'); setTimeout(() => el.classList.remove('on'), 1800); }
+
+function checks(s) {
+  const e = data[s]; if (!e) return null;
+  const p = phaseOf(s); const ex = e.exercise || [];
+  const plan = planned(s);
+  return {
+    kcal: e.kcal != null && p ? e.kcal <= p[3] + 50 : null,
+    protein: e.protein != null ? e.protein >= PLAN.protein : null,
+    steps: e.steps != null ? e.steps >= PLAN.steps : null,
+    sleep: e.sleep != null ? e.sleep >= PLAN.sleep : null,
+    session: plan === 'Rest' ? true : ex.some(x => x !== 'Rest' && x !== 'Walk'),
+  };
+}
+const score = c => c ? Object.values(c).filter(v => v === true).length : null;
+
+/* ---------- form ---------- */
+const f = document.getElementById('f');
+document.getElementById('ex').innerHTML = EX.map(x => `<label><input type="checkbox" value="${x}">${x}</label>`).join('');
+function fill(s) {
+  f.date.value = s; const e = data[s] || {};
+  for (const k of ['weight', 'kcal', 'protein', 'steps', 'water', 'sleep', 'sleepq', 'minutes', 'rpe', 'note']) f[k].value = e[k] ?? '';
+  document.querySelectorAll('#ex input').forEach(i => i.checked = (e.exercise || []).includes(i.value));
+  renderMeals();
+}
+f.date.addEventListener('change', () => fill(f.date.value));
+f.addEventListener('submit', ev => {
+  ev.preventDefault();
+  const e = {};
+  for (const k of ['weight', 'kcal', 'protein', 'steps', 'water', 'sleep', 'sleepq', 'minutes', 'rpe']) if (f[k].value !== '') e[k] = Number(f[k].value);
+  if (f.note.value.trim()) e.note = f.note.value.trim();
+  if (data[f.date.value]?.meals) e.meals = data[f.date.value].meals;
+  e.exercise = [...document.querySelectorAll('#ex input:checked')].map(i => i.value);
+  data[f.date.value] = e;
+  toast(store.save(data) ? 'Saved ' + f.date.value : 'Saved for this tab only (storage blocked)');
+  render();
+});
+document.getElementById('del').addEventListener('click', () => {
+  if (!data[f.date.value] || !confirm('Delete ' + f.date.value + '?')) return;
+  delete data[f.date.value]; store.save(data); fill(f.date.value); render();
+});
+
+/* ---------- meals ---------- */
+const mf = document.getElementById('mf');
+const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function shrink(file, max = 512) {
+  return new Promise((res, rej) => {
+    const img = new Image(); img.onerror = rej;
+    img.onload = () => {
+      const k = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement('canvas'); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(img.src);
+      res(c.toDataURL('image/jpeg', 0.7));
+    };
+    img.src = URL.createObjectURL(file);
+  });
+}
+function syncTotals(s) {
+  const m = data[s]?.meals || [];
+  const sum = k => m.some(x => x[k] != null) ? m.reduce((a, x) => a + (x[k] || 0), 0) : undefined;
+  const k = sum('kcal'), p = sum('protein');
+  if (k != null) data[s].kcal = k; if (p != null) data[s].protein = p;
+}
+function renderMeals() {
+  const s = f.date.value; const m = data[s]?.meals || [];
+  document.getElementById('mealDate').textContent = s;
+  document.getElementById('meals').innerHTML = m.length ? m.map((x, i) => `<div class="meal">
+    ${x.photo ? `<img src="${x.photo}" alt="${esc(x.slot)} photo">` : '<div class="ph"></div>'}
+    <div><b>${esc(x.slot)}</b> <span class="note">${x.kcal != null ? x.kcal + ' kcal' : ''}${x.protein != null ? ' · ' + x.protein + ' g' : ''}</span><p>${esc(x.ing || '')}</p></div>
+    <button type="button" class="ghost" data-i="${i}">Remove</button></div>`).join('') : '<p class="note">No meals for this day yet.</p>';
+  document.querySelectorAll('#meals button').forEach(b => b.addEventListener('click', () => {
+    m.splice(+b.dataset.i, 1); syncTotals(s); store.save(data); fill(s); render();
+  }));
+}
+mf.addEventListener('submit', async ev => {
+  ev.preventDefault();
+  const s = f.date.value; if (!s) return;
+  const meal = { slot: mf.slot.value, ing: mf.ing.value.trim() };
+  if (mf.kcal.value !== '') meal.kcal = Number(mf.kcal.value);
+  if (mf.protein.value !== '') meal.protein = Number(mf.protein.value);
+  if (mf.photo.files[0]) { try { meal.photo = await shrink(mf.photo.files[0]); } catch { toast('Could not read that photo'); return; } }
+  if (!meal.photo && !meal.ing) { toast('Add a photo or ingredients'); return; }
+  data[s] = data[s] || { exercise: [] }; (data[s].meals = data[s].meals || []).push(meal);
+  syncTotals(s);
+  if (!store.save(data)) { data[s].meals.pop(); syncTotals(s); toast('Storage full: export JSON and remove old photos'); return; }
+  mf.reset(); fill(s); render(); toast('Meal added');
+});
+
+function mealLines(s) {
+  const m = s ? data[s]?.meals || [] : [];
+  return m.length ? ['', `Makanan ${s} (foto dikirim terpisah bila lewat skrip):`, ...m.map(x => `- ${x.slot}: ${x.ing || '(foto saja)'}${x.kcal != null ? ' ~' + x.kcal + ' kcal' : ''}${x.protein != null ? ', ' + x.protein + ' g protein' : ''}`)] : [];
+}
+
+/* ---------- export / import / relay ---------- */
+document.getElementById('exp').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify({ plan: PLAN, log: data }, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'cut-log.json'; a.click();
+});
+document.getElementById('imp').addEventListener('change', async ev => {
+  const file = ev.target.files[0]; if (!file) return;
+  try { const j = JSON.parse(await file.text()); data = { ...data, ...(j.log || j) }; store.save(data); render(); toast('Imported'); }
+  catch { toast('Not a valid export'); }
+});
+
+function relayPrompt() {
+  const last = Object.keys(data).sort().filter(s => s <= today).slice(-7);
+  const tomorrow = addDays(today, 1); const p = phaseOf(tomorrow);
+  const lines = last.map(s => {
+    const e = data[s];
+    return `${s} | ${e.weight ?? '-'} kg | ${e.kcal ?? '-'} kcal | ${e.protein ?? '-'} g prot | ${e.steps ?? '-'} steps | ${e.water ?? '-'} L | tidur ${e.sleep ?? '-'} h${e.sleepq ? ' (q' + e.sleepq + ')' : ''} | ${(e.exercise || []).join('+') || '-'}${e.minutes ? ' ' + e.minutes + 'min' : ''}${e.note ? ' | ' + e.note : ''}`;
+  });
+  return [
+    'Analisis diet challenge November (dinilai dari kg turun). Jawab singkat dalam Bahasa Indonesia.',
+    `Profil: pria 176 cm, mulai ${PLAN.startWeight} kg tanggal ${PLAN.start}, target ${PLAN.goalWeight} kg tanggal ${PLAN.end}. Angkat beban 5x/minggu (Push/Pull/Legs/Rest/Upper/Lower/Rest).`,
+    `Target harian: protein ≥ ${PLAN.protein} g, langkah ≥ ${PLAN.steps}, air ≥ ${PLAN.water} L, tidur ≥ ${PLAN.sleep} jam.`,
+    `Besok ${tomorrow}: fase "${p ? p[4] : 'di luar challenge'}", kalori ${p ? p[2] + '-' + p[3] : '-'} kcal, latihan terjadwal: ${planned(tomorrow)}.`,
+    ...(projection() ? [`Tren 7 timbangan terakhir: ${projection().slope * 7 >= 0 ? '+' : ''}${(projection().slope * 7).toFixed(2)} kg/minggu, proyeksi ${projection().end.toFixed(1)} kg pada ${PLAN.end}.`] : []),
+    '', 'Log 7 hari terakhir (tanggal | berat | kalori | protein | langkah | air | tidur | latihan | catatan):',
+    ...(lines.length ? lines : ['(belum ada data)']),
+    ...mealLines(last.at(-1)),
+    '', 'Berikan: 1) tren berat dan apakah on track, 2) apa yang kurang kemarin, 3) koreksi estimasi kalori/protein tiap makanan dari bahan yang ditulis, 4) rencana konkret besok (kalori, protein, menu warung/masak, langkah, latihan), 5) satu peringatan jika ada tanda kurang makan, kurang tidur, atau dehidrasi.',
+  ].join('\n');
+}
+document.getElementById('copyPrompt').addEventListener('click', async () => {
+  const t = relayPrompt();
+  try { await navigator.clipboard.writeText(t); toast('Prompt copied'); } catch { toast('Copy blocked: select the text below'); }
+});
+
+/* ---------- render ---------- */
+let charts = {};
+function chart(id, cfg) { charts[id]?.destroy(); charts[id] = new Chart(document.getElementById(id), cfg); }
+
+function render() {
+  const p = phaseOf(today);
+  document.getElementById('phase').textContent = p ? p[4] + ' · ' + p[2] + '-' + p[3] + ' kcal' : (today < PLAN.start ? 'Starts 1 Nov' : 'Challenge over');
+
+  const logged = days.filter(s => data[s]);
+  const weights = days.filter(s => data[s]?.weight != null);
+  const lastW = weights.length ? data[weights.at(-1)].weight : null;
+  const lost = lastW != null ? PLAN.startWeight - lastW : null;
+  const goal = PLAN.startWeight - PLAN.goalWeight;
+  const recent = logged.filter(s => s <= today).slice(-7);
+  const k7 = avg(recent.map(s => data[s].kcal).filter(v => v != null));
+  const s7 = avg(recent.map(s => data[s].steps).filter(v => v != null));
+  const sl7 = avg(recent.map(s => data[s].sleep).filter(v => v != null));
+  const p7 = avg(recent.map(s => data[s].protein).filter(v => v != null));
+  const lifts = days.filter(s => (data[s]?.exercise || []).some(x => ['Push', 'Pull', 'Legs', 'Upper', 'Lower'].includes(x))).length;
+  const daysLeft = Math.max(0, Math.round((parse(PLAN.end) - parse(today)) / 864e5));
+  const pct = lost != null ? Math.max(0, Math.min(100, lost / goal * 100)) : 0;
+  const proj = projection();
+  document.getElementById('sub').textContent = `1 → 30 Nov · ${PLAN.startWeight} kg → ${PLAN.goalWeight} kg · scored on kg lost`;
+  // what's still needed per week to land on goal from the latest weigh-in
+  const remainDays = lastW != null ? Math.max(1, Math.round((parse(PLAN.end) - parse(weights.at(-1))) / 864e5)) : null;
+  const needWk = lastW != null ? (lastW - PLAN.goalWeight) / remainDays * 7 : null;
+
+  const kpi = (lbl, val, sub, bar) => `<div class="card kpi"><div class="lbl">${lbl}</div><div class="val">${val}</div><div class="sub">${sub}</div>${bar != null ? `<div class="bar"><i style="--w:${bar}%"></i></div>` : ''}</div>`;
+  document.getElementById('kpis').innerHTML = [
+    kpi('Current', `${fmt(lastW, 1)}<small> kg</small>`, weights.length ? 'as of ' + weights.at(-1).slice(5) : 'log your first weigh-in'),
+    kpi('Lost', `${fmt(lost, 1)}<small> / ${fmt(goal, 1)} kg</small>`, `${fmt(pct)}% of goal`, pct),
+    kpi('Projected 30 Nov', proj ? `${fmt(proj.end, 1)}<small> kg</small>` : '-',
+      proj ? `${fmt(proj.slope * 7, 2)} kg/wk · ${proj.end <= PLAN.goalWeight ? '<span class="ok">on track</span>' : '<span class="bad">' + fmt(proj.end - PLAN.goalWeight, 1) + ' kg short</span>'}` : 'needs 3+ weigh-ins'),
+    kpi('Needed pace', needWk != null ? `${fmt(-needWk, 2)}<small> kg/wk</small>` : '-',
+      needWk == null ? 'from latest weigh-in' : needWk > 1.0 ? '<span class="bad">over 1 kg/wk - consider a softer goal</span>' : 'to hit goal from latest weigh-in'),
+    kpi('Days left', `${daysLeft}`, `${logged.length}/30 days logged`, logged.length / 30 * 100),
+    kpi('Kcal · 7d avg', fmt(k7), p ? `plan ${p[2]}-${p[3]}` : 'plan 1700-1800'),
+    kpi('Protein · 7d', `${fmt(p7)}<small> g</small>`, `target ≥ ${PLAN.protein} g`, p7 ? Math.min(100, p7 / PLAN.protein * 100) : 0),
+    kpi('Steps · 7d', fmt(s7), `target ≥ 10,000`, s7 ? Math.min(100, s7 / PLAN.steps * 100) : 0),
+    kpi('Sleep · 7d', `${fmt(sl7, 1)}<small> h</small>`, `target ≥ ${PLAN.sleep} h`, sl7 ? Math.min(100, sl7 / PLAN.sleep * 100) : 0),
+    kpi('Lift sessions', `${lifts}<small> / 21</small>`, 'planned in November', lifts / 21 * 100),
+  ].join('');
+
+  const ink = css('--ink'), mute = css('--mute'), line = css('--line');
+  Chart.defaults.color = mute; Chart.defaults.borderColor = line; Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+  const labels = days.map(s => s.slice(8));
+  const base = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, interaction: { mode: 'index', intersect: false } };
+
+  chart('cWeight', { type: 'line', data: { labels, datasets: [
+    { label: 'Target', data: days.map((_, i) => +(PLAN.startWeight - goal * i / 29).toFixed(2)), borderColor: mute, borderDash: [5, 5], pointRadius: 0, borderWidth: 1.5 },
+    ...(proj ? [{ label: 'Trend', data: days.map((_, i) => +proj.at(i).toFixed(2)), borderColor: css('--sky'), borderDash: [2, 3], pointRadius: 0, borderWidth: 1.5 }] : []),
+    { label: 'Weight', data: days.map(s => data[s]?.weight ?? null), borderColor: css('--terra'), backgroundColor: css('--terra'), spanGaps: true, tension: .3, pointRadius: 3, borderWidth: 2.5 },
+  ] }, options: { ...base, plugins: { legend: { display: true, labels: { boxWidth: 10 } } }, scales: { y: { suggestedMin: PLAN.goalWeight - .5, suggestedMax: PLAN.startWeight + .5 } } } });
+
+  chart('cKcal', { type: 'bar', data: { labels, datasets: [
+    { type: 'line', label: 'Plan max', data: days.map(s => phaseOf(s)[3]), borderColor: mute, borderDash: [4, 4], pointRadius: 0, borderWidth: 1.5, stepped: true },
+    { label: 'kcal', data: days.map(s => data[s]?.kcal ?? null), backgroundColor: days.map(s => (data[s]?.kcal ?? 0) > phaseOf(s)[3] + 50 ? css('--rose') : css('--sun')), borderRadius: 4 },
+  ] }, options: { ...base, scales: { y: { beginAtZero: true, suggestedMax: 2400 } } } });
+
+  chart('cSteps', { type: 'bar', data: { labels, datasets: [
+    { type: 'line', label: '10k', data: days.map(() => PLAN.steps), borderColor: mute, borderDash: [4, 4], pointRadius: 0, borderWidth: 1.5 },
+    { label: 'steps', data: days.map(s => data[s]?.steps ?? null), backgroundColor: days.map(s => (data[s]?.steps ?? 0) >= PLAN.steps ? css('--sage') : css('--sky')), borderRadius: 4 },
+  ] }, options: { ...base, scales: { y: { beginAtZero: true } } } });
+
+  // calendar (Mon-first)
+  const lead = (parse(PLAN.start).getUTCDay() + 6) % 7;
+  const colors = [css('--rose'), css('--rose'), css('--rose'), css('--sun'), css('--sun'), css('--sage')];
+  document.getElementById('cal').innerHTML =
+    ['M', 'T', 'W', 'T', 'F', 'S', 'S'].map(d => `<div class="dow">${d}</div>`).join('') +
+    '<div></div>'.repeat(lead) +
+    days.map(s => {
+      const sc = score(checks(s));
+      const bg = sc == null ? '' : `background:color-mix(in srgb, ${colors[sc]} ${sc === 5 ? 100 : 55}%, transparent);${sc === 5 ? 'color:#fff' : ''}`;
+      const lift = planned(s) !== 'Rest' ? ' lift' : '';
+      return `<div class="day${lift}${s === today ? ' today' : ''}" style="${bg}" data-d="${s}" title="${s} · ${planned(s)}${sc != null ? ' · ' + sc + '/5' : ''}">${+s.slice(8)}</div>`;
+    }).join('');
+  document.querySelectorAll('.day').forEach(el => el.addEventListener('click', () => { fill(el.dataset.d); f.scrollIntoView({ behavior: 'smooth', block: 'center' }); }));
+
+  // table
+  const rows = Object.keys(data).sort().reverse();
+  const mark = v => v == null ? '' : v ? ' class="ok"' : ' class="bad"';
+  document.getElementById('tbl').innerHTML = '<tr><th>Date</th><th>Plan</th><th>kg</th><th>Δ</th><th>kcal</th><th>Protein</th><th>Steps</th><th>Water</th><th>Sleep</th><th>Meals</th><th>Exercise</th><th>Score</th></tr>' +
+    (rows.length ? rows.map((s, i) => {
+      const e = data[s], c = checks(s) || {}; const prev = rows.slice(i + 1).find(r => data[r].weight != null);
+      const d = e.weight != null && prev ? e.weight - data[prev].weight : null;
+      return `<tr><td>${s}</td><td>${planned(s)}</td><td>${fmt(e.weight, 1)}</td><td${d == null ? '' : d <= 0 ? ' class="ok"' : ' class="bad"'}>${d == null ? '' : (d > 0 ? '+' : '') + d.toFixed(1)}</td><td${mark(c.kcal)}>${fmt(e.kcal)}</td><td${mark(c.protein)}>${fmt(e.protein)}</td><td${mark(c.steps)}>${fmt(e.steps)}</td><td>${fmt(e.water, 1)}</td><td${mark(c.sleep)}>${fmt(e.sleep, 1)}</td><td>${(e.meals || []).length || ''}</td><td>${(e.exercise || []).join(', ')}</td><td>${score(checks(s)) ?? ''}/5</td></tr>`;
+    }).join('') : '<tr><td colspan="12" class="note">No entries yet.</td></tr>');
+
+  document.getElementById('preview').textContent = relayPrompt();
+}
+
+fill(days.includes(today) ? today : PLAN.start);
+render();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+</script>
+</body>
+</html>
