@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>APERD Mutual Fund System Blueprint | Visual Architecture Reference</title>
+  <meta name="description" content="private study page, not linked from the site. domain architecture, order state machines, s-invest plumbing, payment idempotency and 3-way reconciliation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #FBFBFA;
+      --surface: #F2F2ED;
+      --card: #FFFFFF;
+      --line: #E5E5DF;
+      --ink: #111110;
+      --soft: #555550;
+      --mute: #6E6E66;
+      --terra: #B4573B;
+      --sage: #6F8466;
+      --sky: #4F7A9A;
+      --sun: #C9922E;
+      --rose: #B5485A;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --paper: #121211;
+        --surface: #1B1B19;
+        --card: #1F1F1C;
+        --line: #2E2E2A;
+        --ink: #F1F1EC;
+        --soft: #B9B9B0;
+        --mute: #8C8C83;
+        --terra: #D9775A;
+        --sage: #93AC88;
+        --sky: #7FA8C6;
+        --sun: #E0AE52;
+        --rose: #D76E80;
+      }
+    }
+    :root[data-theme="dark"] {
+      --paper: #121211;
+      --surface: #1B1B19;
+      --card: #1F1F1C;
+      --line: #2E2E2A;
+      --ink: #F1F1EC;
+      --soft: #B9B9B0;
+      --mute: #8C8C83;
+      --terra: #D9775A;
+      --sage: #93AC88;
+      --sky: #7FA8C6;
+      --sun: #E0AE52;
+      --rose: #D76E80;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 36px 20px 96px;
+      min-width: 0;
+    }
+
+    .prose {
+      max-width: 72ch;
+      margin: 0 auto 20px auto;
+      min-width: 0;
+    }
+
+    header.doc-header {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+
+    .meta-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .badge {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--soft);
+      letter-spacing: 0.02em;
+    }
+
+    .badge.warn {
+      border-color: var(--terra);
+      color: var(--terra);
+      background: rgba(180, 87, 59, 0.08);
+    }
+
+    .badge.ok {
+      border-color: var(--sage);
+      color: var(--sage);
+      background: rgba(111, 132, 102, 0.08);
+    }
+
+    h1.doc-title {
+      font-size: 32px;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 10px 0;
+    }
+
+    p.doc-subtitle {
+      font-size: 17px;
+      color: var(--mute);
+      margin: 0 0 18px 0;
+      line-height: 1.5;
+    }
+
+    .disclaimer-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--sun);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      font-size: 14.5px;
+      color: var(--soft);
+      line-height: 1.6;
+    }
+    .disclaimer-card strong {
+      color: var(--ink);
+    }
+
+    /* Sticky In-Page Navigation */
+    nav.sticky-toc {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 12px 0;
+      margin: 0 -20px 36px -20px;
+      padding-left: 20px;
+      padding-right: 20px;
+      backdrop-filter: blur(10px);
+      background: rgba(251, 251, 250, 0.94);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    @media (prefers-color-scheme: dark) {
+      nav.sticky-toc {
+        background: rgba(18, 18, 17, 0.94);
+      }
+    }
+    :root[data-theme="dark"] nav.sticky-toc {
+      background: rgba(18, 18, 17, 0.94);
+    }
+
+    .toc-scroll {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 8px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+    .toc-scroll::-webkit-scrollbar { display: none; }
+
+    .toc-link {
+      display: inline-block;
+      white-space: nowrap;
+      font-size: 13px;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--soft);
+      text-decoration: none;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      transition: all 0.15s ease;
+      min-height: 36px;
+      line-height: 20px;
+    }
+    .toc-link:hover, .toc-link:focus {
+      color: var(--ink);
+      border-color: var(--ink);
+      background: var(--card);
+    }
+
+    /* Section Layout */
+    section.doc-section {
+      margin-bottom: 64px;
+      scroll-margin-top: 72px;
+    }
+
+    .section-header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 4px;
+    }
+
+    h2.section-title {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0;
+      color: var(--ink);
+    }
+
+    h3.sub-title {
+      font-size: 19px;
+      font-weight: 700;
+      margin: 28px 0 12px 0;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      margin: 0 0 16px 0;
+      color: var(--soft);
+    }
+    p strong {
+      color: var(--ink);
+    }
+
+    /* Visual Diagram Container */
+    .diagram-wrap {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 24px 0 28px 0;
+    }
+
+    .diagram-caption {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--mute);
+      text-align: center;
+      margin-top: 14px;
+      letter-spacing: 0.02em;
+    }
+
+    svg.blueprint-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* SVG internal styles */
+    .svg-bg { fill: var(--card); stroke: var(--line); stroke-width: 1; }
+    .svg-box { fill: var(--paper); stroke: var(--line); stroke-width: 1; rx: 8px; }
+    .svg-box-accent { fill: var(--surface); stroke: var(--soft); stroke-width: 1.5; rx: 8px; }
+    .svg-box-terra { fill: rgba(180, 87, 59, 0.08); stroke: var(--terra); stroke-width: 1.5; rx: 8px; }
+    .svg-box-sage { fill: rgba(111, 132, 102, 0.08); stroke: var(--sage); stroke-width: 1.5; rx: 8px; }
+    .svg-box-sky { fill: rgba(79, 122, 154, 0.08); stroke: var(--sky); stroke-width: 1.5; rx: 8px; }
+    .svg-text-title { font-family: var(--font-sans); font-size: 13px; font-weight: 700; fill: var(--ink); }
+    .svg-text-body { font-family: var(--font-sans); font-size: 11.5px; fill: var(--soft); }
+    .svg-text-mono { font-family: var(--font-mono); font-size: 10.5px; fill: var(--mute); }
+    .svg-text-tag { font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; fill: var(--ink); }
+    .svg-line { stroke: var(--soft); stroke-width: 1.5; fill: none; }
+    .svg-line-dash { stroke: var(--mute); stroke-width: 1.5; stroke-dasharray: 4,4; fill: none; }
+    .svg-line-terra { stroke: var(--terra); stroke-width: 1.8; fill: none; }
+    .svg-line-sage { stroke: var(--sage); stroke-width: 1.8; fill: none; }
+    .svg-line-sky { stroke: var(--sky); stroke-width: 1.8; fill: none; }
+    .svg-marker { fill: var(--soft); }
+    .svg-marker-terra { fill: var(--terra); }
+    .svg-marker-sage { fill: var(--sage); }
+    .svg-marker-sky { fill: var(--sky); }
+
+    /* Visual Grid Cards */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .grid-cards-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .vcard {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .vcard.terra { border-left: 4px solid var(--terra); }
+    .vcard.sage { border-left: 4px solid var(--sage); }
+    .vcard.sky { border-left: 4px solid var(--sky); }
+    .vcard.sun { border-left: 4px solid var(--sun); }
+
+    .vcard-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vcard-icon {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .vcard-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .vcard-rule {
+      font-size: 14.5px;
+      color: var(--soft);
+      line-height: 1.5;
+    }
+
+    .vcard-bite {
+      font-size: 13.5px;
+      color: var(--terra);
+      background: rgba(180, 87, 59, 0.06);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      margin-top: 4px;
+    }
+
+    /* 2x2 Matrix Grid */
+    .matrix-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    @media (max-width: 680px) {
+      .matrix-2x2 { grid-template-columns: 1fr; }
+    }
+
+    .matrix-cell {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px;
+      background: var(--card);
+    }
+    .matrix-cell.success {
+      border-color: var(--sage);
+      background: rgba(111, 132, 102, 0.06);
+    }
+    .matrix-cell.warning {
+      border-color: var(--sun);
+      background: rgba(201, 146, 46, 0.06);
+    }
+    .matrix-cell.danger {
+      border-color: var(--rose);
+      background: rgba(181, 72, 90, 0.06);
+    }
+
+    .matrix-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .mb-success { background: var(--sage); color: #fff; }
+    .mb-warning { background: var(--sun); color: #fff; }
+    .mb-danger { background: var(--rose); color: #fff; }
+
+    /* Tables */
+    .scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 18px 0;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--card);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--surface);
+      font-size: 11.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--mute);
+      white-space: nowrap;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    td code, p code, li code {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 2px 5px;
+      border-radius: 4px;
+      color: var(--ink);
+    }
+
+    /* Severity badges */
+    .sev-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .sev-s1 { background: rgba(181, 72, 90, 0.15); color: var(--rose); border: 1px solid var(--rose); }
+    .sev-s2 { background: rgba(201, 146, 46, 0.15); color: var(--sun); border: 1px solid var(--sun); }
+    .sev-s3 { background: rgba(79, 122, 154, 0.15); color: var(--sky); border: 1px solid var(--sky); }
+    .sev-s4 { background: var(--surface); color: var(--mute); border: 1px solid var(--line); }
+
+    /* Interactive Details / Cards */
+    details.qa-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: border-color 0.15s ease;
+    }
+    details.qa-card[open] {
+      border-color: var(--ink);
+    }
+    summary.qa-header {
+      padding: 16px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      min-height: 48px;
+      list-style: none;
+    }
+    summary.qa-header::-webkit-details-marker { display: none; }
+    summary.qa-header::after {
+      content: '+';
+      font-family: var(--font-mono);
+      font-size: 18px;
+      color: var(--mute);
+      margin-left: 12px;
+    }
+    details[open] summary.qa-header::after {
+      content: '-';
+    }
+    .qa-body {
+      padding: 0 20px 20px 20px;
+      border-top: 1px dashed var(--line);
+      margin-top: 4px;
+      padding-top: 16px;
+      font-size: 15px;
+      color: var(--soft);
+      line-height: 1.65;
+    }
+
+    details.table-toggle {
+      margin: 14px 0 20px 0;
+    }
+    details.table-toggle summary {
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--sky);
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: var(--surface);
+      display: inline-block;
+      min-height: 36px;
+      line-height: 20px;
+    }
+
+    .formula-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--ink);
+      margin: 14px 0;
+    }
+
+    /* Footer */
+    footer.doc-footer {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+      margin-top: 72px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--mute);
+      font-family: var(--font-mono);
+    }
+
+    @media (max-width: 600px) {
+      .wrap { padding: 20px 14px 60px; }
+      h1.doc-title { font-size: 26px; }
+      nav.sticky-toc { margin-left: -14px; margin-right: -14px; padding-left: 14px; padding-right: 14px; }
+      body { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="doc-header">
+    <div class="meta-badge-row">
+      <span class="badge warn">private workbook</span>
+      <span class="badge">unindexed</span>
+      <span class="badge ok">wealthtech domain blueprint</span>
+      <span class="badge">ksei s-invest architecture</span>
+    </div>
+    <h1 class="doc-title">aperd mutual fund system blueprint</h1>
+    <p class="doc-subtitle">
+      visual architecture reference: ecosystem actor maps, clearing clock timelines, order state machines,
+      payment idempotency checkpoints, and 3-way reconciliation topology.
+    </p>
+
+    <div class="disclaimer-card">
+      <strong>regulatory verification notice:</strong>
+      this document is a system design reference for technical interview preparation.
+      regulatory references (ojk pojk 39/2014, seojk 51/2016, pojk 23/2016, pojk 12/2017, pojk 8/2023, uu pph pasal 4 ayat 3(i)),
+      ksei s-invest operational file cycles, and fee schedules reflect standard indonesian capital market blueprints
+      and must be validated against official ojk, ksei, and ticmi source regulations.
+    </div>
+  </header>
+
+  <!-- Sticky In-Page Navigation -->
+  <nav class="sticky-toc" aria-label="in-page table of contents">
+    <div class="toc-scroll">
+      <a class="toc-link" href="#actors">1. actor map</a>
+      <a class="toc-link" href="#timeline">2. clearing clock</a>
+      <a class="toc-link" href="#cutoff">3. 13:00 cut-off 2x2</a>
+      <a class="toc-link" href="#lifecycles">4. order state machine</a>
+      <a class="toc-link" href="#payments">5. webhook 4-gate</a>
+      <a class="toc-link" href="#recon">6. 3-way recon venn</a>
+      <a class="toc-link" href="#gaps">7. 8 critical gaps</a>
+      <a class="toc-link" href="#selftest">8. rapid self-test</a>
+      <a class="toc-link" href="#uat-runbook">9. uat &amp; rca</a>
+    </div>
+  </nav>
+
+  <!-- SECTION 1: ACTOR MAP -->
+  <section class="doc-section" id="actors">
+    <div class="section-header">
+      <div class="section-num">section 01</div>
+      <h2 class="section-title">ecosystem actor map &amp; three-rail separation</h2>
+    </div>
+
+    <div class="prose">
+      <p>
+        the foundation of mutual fund architecture is the strict segregation of three distinct ledgers:
+        <strong>cash</strong> (escrow and custody accounts), <strong>units</strong> (ksei s-invest fractional balances),
+        and <strong>instructions</strong> (aperd oms orders).
+      </p>
+      <p>
+        under ojk pojk 39/2014, the aperd platform acts purely as an order broker and distributor.
+        <strong>the aperd platform never touches investor cash or mutual fund units.</strong>
+      </p>
+    </div>
+
+    <!-- Diagram 1: Visual Actor Map SVG -->
+    <div class="diagram-wrap">
+      <svg class="blueprint-svg" viewBox="0 0 960 490" role="img" aria-label="visual map of 7 capital market actors with 3 colored arrow rails">
+        <title>capital market ecosystem actor map</title>
+        <defs>
+          <marker id="arr-sage" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 1 L 8 5 L 0 9 z" class="svg-marker-sage" />
+          </marker>
+          <marker id="arr-sky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 1 L 8 5 L 0 9 z" class="svg-marker-sky" />
+          </marker>
+          <marker id="arr-terra" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 1 L 8 5 L 0 9 z" class="svg-marker-terra" />
+          </marker>
+        </defs>
+
+        <!-- Background -->
+        <rect x="10" y="10" width="940" height="470" rx="12" class="svg-bg" />
+
+        <!-- Legend Bar -->
+        <rect x="30" y="24" width="900" height="36" rx="8" class="svg-box" />
+        <text x="45" y="47" class="svg-text-mono">three rails: </text>
+        <line x1="140" y1="42" x2="175" y2="42" class="svg-line-sage" />
+        <text x="185" y="46" class="svg-text-mono">money rail (sage: cash via va / escrow / custody)</text>
+        <line x1="500" y1="42" x2="535" y2="42" class="svg-line-sky" />
+        <text x="545" y="46" class="svg-text-mono">unit rail (sky: ksei 4-decimal ledger)</text>
+        <line x1="770" y1="42" x2="805" y2="42" class="svg-line-terra" />
+        <text x="815" y="46" class="svg-text-mono">instruction rail (terra)</text>
+
+        <!-- Node 1: Investor -->
+        <g transform="translate(40, 95)">
+          <rect width="180" height="110" class="svg-box-accent" />
+          <text x="16" y="32" class="svg-text-title">1. investor (nasabah)</text>
+          <text x="16" y="54" class="svg-text-body">e-kyc &amp; suitability</text>
+          <text x="16" y="74" class="svg-text-body">nominal idr orders</text>
+          <text x="16" y="94" class="svg-text-mono">sid: idd1204ab892104</text>
+        </g>
+
+        <!-- Node 2: APERD OMS -->
+        <g transform="translate(280, 95)">
+          <rect width="200" height="110" class="svg-box-terra" />
+          <text x="16" y="32" class="svg-text-title">2. aperd platform</text>
+          <text x="16" y="54" class="svg-text-body">order capture &amp; gateway</text>
+          <text x="16" y="74" class="svg-text-body">13:00 wib cut-off gate</text>
+          <text x="16" y="94" class="svg-text-mono">never holds cash or units</text>
+        </g>
+
+        <!-- Node 3: Transient Payment Rail -->
+        <g transform="translate(40, 275)">
+          <rect width="180" height="110" class="svg-box-sage" />
+          <text x="16" y="32" class="svg-text-title">3. transient payment</text>
+          <text x="16" y="54" class="svg-text-body">closed va / rdn rail</text>
+          <text x="16" y="74" class="svg-text-body">segregated escrow</text>
+          <text x="16" y="94" class="svg-text-mono">sweep to bk &lt; 13:00 wib</text>
+        </g>
+
+        <!-- Node 4: Bank Kustodian (BK) -->
+        <g transform="translate(280, 275)">
+          <rect width="200" height="110" class="svg-box-sage" />
+          <text x="16" y="32" class="svg-text-title">4. bank kustodian (bk)</text>
+          <text x="16" y="54" class="svg-text-body">good funds validation</text>
+          <text x="16" y="74" class="svg-text-body">daily nav/up calculation</text>
+          <text x="16" y="94" class="svg-text-mono">direct payout (max t+7)</text>
+        </g>
+
+        <!-- Node 5: Manajer Investasi (MI) -->
+        <g transform="translate(540, 95)">
+          <rect width="180" height="110" class="svg-box-terra" />
+          <text x="16" y="32" class="svg-text-title">5. manajer investasi</text>
+          <text x="16" y="54" class="svg-text-body">portfolio management</text>
+          <text x="16" y="74" class="svg-text-body">confirms / rejects orders</text>
+          <text x="16" y="94" class="svg-text-mono">trailer fee revenue</text>
+        </g>
+
+        <!-- Node 6: KSEI S-INVEST -->
+        <g transform="translate(540, 275)">
+          <rect width="200" height="110" class="svg-box-sky" />
+          <text x="16" y="32" class="svg-text-title">6. ksei s-invest</text>
+          <text x="16" y="54" class="svg-text-body">central clearinghouse</text>
+          <text x="16" y="74" class="svg-text-body">unit allotment &amp; balance</text>
+          <text x="16" y="94" class="svg-text-mono">unit ledger of record</text>
+        </g>
+
+        <!-- Node 7: OJK Oversight -->
+        <g transform="translate(780, 185)">
+          <rect width="150" height="120" class="svg-box" />
+          <text x="14" y="30" class="svg-text-title">7. ojk oversight</text>
+          <text x="14" y="52" class="svg-text-body">pojk 39/2014</text>
+          <text x="14" y="72" class="svg-text-body">pojk 23/2016</text>
+          <text x="14" y="92" class="svg-text-body">seojk 51/2016</text>
+          <text x="14" y="108" class="svg-text-mono">suitability audits</text>
+        </g>
+
+        <!-- Flow Lines -->
+        <!-- Cash 1: Investor to Payment -->
+        <path d="M 130 205 L 130 275" class="svg-line-sage" marker-end="url(#arr-sage)" />
+        <!-- Cash 2: Sweep to BK -->
+        <path d="M 220 330 L 280 330" class="svg-line-sage" marker-end="url(#arr-sage)" />
+        <!-- Cash 3: Direct redemption payout from BK to Investor -->
+        <path d="M 280 355 L 40 355 L 40 205" class="svg-line-sage" marker-end="url(#arr-sage)" />
+
+        <!-- Instructions: Investor -> APERD -> MI -> BK -->
+        <path d="M 220 150 L 280 150" class="svg-line-terra" marker-end="url(#arr-terra)" />
+        <path d="M 480 150 L 540 150" class="svg-line-terra" marker-end="url(#arr-terra)" />
+        <path d="M 450 205 L 450 240 L 570 240 L 570 275" class="svg-line-terra" marker-end="url(#arr-terra)" />
+        <path d="M 630 205 L 630 230 L 460 230 L 460 275" class="svg-line-terra" marker-end="url(#arr-terra)" />
+
+        <!-- Units: BK -> S-INVEST -> APERD -->
+        <path d="M 480 330 L 540 330" class="svg-line-sky" marker-end="url(#arr-sky)" />
+        <path d="M 640 275 L 640 180 L 480 180" class="svg-line-sky" marker-end="url(#arr-sky)" />
+
+        <!-- OJK supervision dashes -->
+        <path d="M 780 245 L 740 245 L 740 330" class="svg-line-dash" />
+        <path d="M 740 150 L 720 150" class="svg-line-dash" />
+      </svg>
+      <div class="diagram-caption">figure 1. actor map with 3 colored rails: money (sage), units (sky), instructions (terra)</div>
+    </div>
+
+    <!-- 3 Core Invariant Cards -->
+    <div class="grid-cards-3">
+      <div class="vcard sage">
+        <div class="vcard-header">
+          <span class="vcard-icon">💵</span>
+          <div class="vcard-title">aperd holds zero cash</div>
+        </div>
+        <div class="vcard-rule">investor money flows directly to segregated bank kustodian fund accounts. overnight float retention is illegal under pojk 39/2014.</div>
+      </div>
+      <div class="vcard sky">
+        <div class="vcard-header">
+          <span class="vcard-icon">🏛️</span>
+          <div class="vcard-title">ksei owns the ledger</div>
+        </div>
+        <div class="vcard-rule">the platform database is merely an advisory mirror. legal beneficial ownership exists only as recorded in s-invest.</div>
+      </div>
+      <div class="vcard terra">
+        <div class="vcard-header">
+          <span class="vcard-icon">📑</span>
+          <div class="vcard-title">direct redemption payout</div>
+        </div>
+        <div class="vcard-rule">bank kustodian wires redemption proceeds directly to the investor's verified bank account. aperd never touches liquidation proceeds.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: CLEARING CLOCK TIMELINE -->
+  <section class="doc-section" id="timeline">
+    <div class="section-header">
+      <div class="section-num">section 02</div>
+      <h2 class="section-title">the national clearing clock: from order intake to t+7 payout</h2>
+    </div>
+
+    <div class="prose">
+      <p>
+        mutual fund clearing operates on a rigid national timetable governed by exchange days (hari bursa).
+        missing the <strong>13:00 wib cut-off</strong> by even one second rolls order pricing by an entire exchange day.
+      </p>
+    </div>
+
+    <!-- Diagram 2: Horizontal Day-Clock Timeline SVG -->
+    <div class="diagram-wrap">
+      <svg class="blueprint-svg" viewBox="0 0 960 210" role="img" aria-label="horizontal clearing clock timeline highlighting the 13:00 wib cut-off line">
+        <title>mutual fund national daily clearing clock timeline</title>
+        <rect x="10" y="10" width="940" height="190" rx="12" class="svg-bg" />
+
+        <!-- Timeline track line -->
+        <line x1="50" y1="95" x2="910" y2="95" class="svg-line" />
+
+        <!-- Highlighted 13:00 Cut-off Zone -->
+        <rect x="290" y="25" width="8" height="145" rx="4" class="svg-marker-terra" />
+        <rect x="235" y="25" width="120" height="26" rx="6" class="svg-box-terra" />
+        <text x="245" y="42" class="svg-text-tag">13:00 wib cut-off</text>
+
+        <!-- Milestones on timeline -->
+        <!-- 08:00 WIB -->
+        <circle cx="90" cy="95" r="7" class="svg-marker" />
+        <text x="65" y="80" class="svg-text-title">08:00 wib</text>
+        <text x="50" y="125" class="svg-text-body">market open</text>
+        <text x="50" y="142" class="svg-text-mono">order intake starts</text>
+
+        <!-- 13:00 WIB -->
+        <circle cx="294" cy="95" r="9" class="svg-marker-terra" />
+        <text x="294" y="80" class="svg-text-title" style="fill:var(--terra)">13:00 wib</text>
+        <text x="250" y="125" class="svg-text-body">cut-off threshold</text>
+        <text x="250" y="142" class="svg-text-mono">good order x good funds</text>
+
+        <!-- 16:00 WIB -->
+        <circle cx="450" cy="95" r="7" class="svg-marker" />
+        <text x="425" y="80" class="svg-text-title">16:00 wib</text>
+        <text x="415" y="125" class="svg-text-body">idx market close</text>
+        <text x="415" y="142" class="svg-text-mono">bk begins valuation</text>
+
+        <!-- T+1 Morning 08:00 -->
+        <circle cx="610" cy="95" r="7" class="svg-marker-sky" />
+        <text x="575" y="80" class="svg-text-title">t+1 (08:00)</text>
+        <text x="570" y="125" class="svg-text-body">nav published</text>
+        <text x="570" y="142" class="svg-text-mono">s-invest nav feed</text>
+
+        <!-- T+1 10:00 - 14:00 -->
+        <circle cx="750" cy="95" r="7" class="svg-marker-sage" />
+        <text x="715" y="80" class="svg-text-title">t+1 (12:00)</text>
+        <text x="705" y="125" class="svg-text-body">unit allotment</text>
+        <text x="705" y="142" class="svg-text-mono">s-invest balance file</text>
+
+        <!-- T+7 Maximum Payout -->
+        <circle cx="880" cy="95" r="7" class="svg-marker-terra" />
+        <text x="850" y="80" class="svg-text-title">max t+7</text>
+        <text x="835" y="125" class="svg-text-body">redemption cap</text>
+        <text x="835" y="142" class="svg-text-mono">pojk 23/2016 ceiling</text>
+      </svg>
+      <div class="diagram-caption">figure 2. national daily clearing timetable with the 13:00 wib cut-off line highlighted</div>
+    </div>
+
+    <!-- Timeline Callout Cards -->
+    <div class="grid-cards-3">
+      <div class="vcard">
+        <div class="vcard-header">
+          <span class="vcard-icon">📅</span>
+          <div class="vcard-title">hari bursa convention</div>
+        </div>
+        <div class="vcard-rule">indonesia stock exchange trading days only (mon-fri minus public holidays). weekend orders price at monday's closing nav.</div>
+      </div>
+      <div class="vcard terra">
+        <div class="vcard-header">
+          <span class="vcard-icon">⚡</span>
+          <div class="vcard-title">13:00 hard ceiling</div>
+        </div>
+        <div class="vcard-rule">both order and payment must clear before 13:00 wib. post-cutoff orders legally roll to next exchange day (nab t+1).</div>
+      </div>
+      <div class="vcard sage">
+        <div class="vcard-header">
+          <span class="vcard-icon">🛡️</span>
+          <div class="vcard-title">t+7 statutory maximum</div>
+        </div>
+        <div class="vcard-rule">custodian bank must wire redemption funds within 7 exchange days. money market funds typically disburse in t+1 to t+2.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: CUT-OFF 2X2 -->
+  <section class="doc-section" id="cutoff">
+    <div class="section-header">
+      <div class="section-num">section 03</div>
+      <h2 class="section-title">good order &times; good funds: the 2&times;2 cut-off decision matrix</h2>
+    </div>
+
+    <div class="prose">
+      <p>
+        an investor receives today's closing nav (nab day t) if and only if <strong>both</strong> independent conditions
+        are satisfied before 13:00 wib. if either leg arrives late, pricing rolls over automatically.
+      </p>
+    </div>
+
+    <!-- 2x2 Matrix Cards -->
+    <div class="matrix-2x2">
+      <div class="matrix-cell success">
+        <span class="matrix-badge mb-success">t+0 nav (same-day execution)</span>
+        <h4 style="margin:0 0 6px 0; font-size:16px; font-weight:700">good order &le; 13:00 &times; good funds &le; 13:00</h4>
+        <p style="margin:0; font-size:14.5px">both order instruction in s-invest and cash in bank kustodian custody account arrived prior to cut-off. order is allotted at day t closing nav.</p>
+      </div>
+
+      <div class="matrix-cell warning">
+        <span class="matrix-badge mb-warning">t+1 nav (rollover to next day)</span>
+        <h4 style="margin:0 0 6px 0; font-size:16px; font-weight:700">good order &le; 13:00 &times; good funds &gt; 13:00 (late cash)</h4>
+        <p style="margin:0; font-size:14.5px">investor paid at 12:56 wib via aggregator, but bank sweep landed at bank kustodian at 13:04 wib. funds stamped post cut-off; order prices at nab t+1.</p>
+      </div>
+
+      <div class="matrix-cell warning">
+        <span class="matrix-badge mb-warning">t+1 nav (rollover to next day)</span>
+        <h4 style="margin:0 0 6px 0; font-size:16px; font-weight:700">good order &gt; 13:00 &times; good funds &le; 13:00 (late order)</h4>
+        <p style="margin:0; font-size:14.5px">funds arrived in escrow early, but user submitted order instruction at 13:02 wib. order misses cut-off and rolls over to nab t+1.</p>
+      </div>
+
+      <div class="matrix-cell danger">
+        <span class="matrix-badge mb-danger">rejected / refund suspense</span>
+        <h4 style="margin:0 0 6px 0; font-size:16px; font-weight:700">order missing / third-party payer name mismatch</h4>
+        <p style="margin:0; font-size:14.5px">cash received from bank account whose name does not match investor ktp/sid. rejected under apu-ppt rules; frozen in suspense for manual refund.</p>
+      </div>
+    </div>
+
+    <div class="grid-cards">
+      <div class="vcard terra">
+        <div class="vcard-header">
+          <span class="vcard-icon">⏱️</span>
+          <div class="vcard-title">why aggregator vas need a 12:30 buffer</div>
+        </div>
+        <div class="vcard-rule">interbank clearing between an aggregator and the custodian bank takes 15-30 minutes. platforms set a 12:30 internal cut-off buffer to guarantee funds sweep before 13:00 wib.</div>
+      </div>
+      <div class="vcard">
+        <div class="vcard-header">
+          <span class="vcard-icon">🆔</span>
+          <div class="vcard-title">sid &amp; ifua multi-goal architecture</div>
+        </div>
+        <div class="vcard-rule">one master sid per investor, but separate sub-ifuas per in-app goal (e.g. emergency fund vs wedding) to prevent pooled fifo cost-basis distortion at ksei aksed.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: ORDER STATE MACHINE -->
+  <section class="doc-section" id="lifecycles">
+    <div class="section-header">
+      <div class="section-num">section 04</div>
+      <h2 class="section-title">order state machine &amp; forward pricing visual</h2>
+    </div>
+
+    <div class="prose">
+      <p>
+        mutual funds execute blind under <strong>forward pricing</strong>: when you place an order, you see yesterday's price,
+        but you receive today's closing price calculated after market close.
+      </p>
+    </div>
+
+    <!-- Forward Pricing Worked Example Card -->
+    <div class="vcard sky" style="margin-bottom:24px">
+      <div class="vcard-header">
+        <span class="vcard-icon">🧮</span>
+        <div class="vcard-title">forward pricing worked math card</div>
+      </div>
+      <div class="vcard-rule">
+        you invest: <strong>Rp 1,000,000</strong> (display price: Rp 1,200.0000 yesterday)<br>
+        market closes at 16:00 WIB &rarr; Bank Kustodian calculates closing NAB: <strong>Rp 1,250.0000</strong><br>
+        units allotted at T+1: <strong>Rp 1,000,000 / 1,250.0000 = 800.0000 UP</strong> (exact 4-decimal precision)
+      </div>
+    </div>
+
+    <!-- Diagram 3: Order State Machine SVG -->
+    <div class="diagram-wrap">
+      <svg class="blueprint-svg" viewBox="0 0 960 260" role="img" aria-label="mutual fund order lifecycle state machine diagram with colored pill nodes">
+        <title>mutual fund order lifecycle state machine</title>
+        <rect x="10" y="10" width="940" height="240" rx="12" class="svg-bg" />
+
+        <!-- Happy Path Nodes (Sage) -->
+        <g transform="translate(30, 75)">
+          <rect width="150" height="70" class="svg-box-accent" />
+          <text x="14" y="28" class="svg-text-title">1. created</text>
+          <text x="14" y="48" class="svg-text-body">suitability check</text>
+          <text x="14" y="62" class="svg-text-mono">va / rdn issued</text>
+        </g>
+
+        <g transform="translate(220, 75)">
+          <rect width="160" height="70" class="svg-box-sage" />
+          <text x="14" y="28" class="svg-text-title">2. funds_cleared</text>
+          <text x="14" y="48" class="svg-text-body">bank credit verified</text>
+          <text x="14" y="62" class="svg-text-mono">good funds flag = true</text>
+        </g>
+
+        <g transform="translate(420, 75)">
+          <rect width="160" height="70" class="svg-box-sage" />
+          <text x="14" y="28" class="svg-text-title">3. matched (t+0)</text>
+          <text x="14" y="48" class="svg-text-body">good order x funds</text>
+          <text x="14" y="62" class="svg-text-mono">assigned nav_day_t</text>
+        </g>
+
+        <g transform="translate(620, 75)">
+          <rect width="150" height="70" class="svg-box-sky" />
+          <text x="14" y="28" class="svg-text-title">4. allocating</text>
+          <text x="14" y="48" class="svg-text-body">eod nav computed</text>
+          <text x="14" y="62" class="svg-text-mono">s-invest batch push</text>
+        </g>
+
+        <g transform="translate(800, 75)">
+          <rect width="130" height="70" class="svg-box-sage" />
+          <text x="14" y="28" class="svg-text-title">5. allotted</text>
+          <text x="14" y="48" class="svg-text-body">4-dec units in ifua</text>
+          <text x="14" y="62" class="svg-text-mono">order complete</text>
+        </g>
+
+        <!-- Happy Path Connectors -->
+        <path d="M 180 110 L 220 110" class="svg-line-sage" marker-end="url(#arr-sage)" />
+        <path d="M 380 110 L 420 110" class="svg-line-sage" marker-end="url(#arr-sage)" />
+        <path d="M 580 110 L 620 110" class="svg-line-sky" marker-end="url(#arr-sky)" />
+        <path d="M 770 110 L 800 110" class="svg-line-sage" marker-end="url(#arr-sage)" />
+
+        <!-- Failure Nodes (Rose) -->
+        <g transform="translate(220, 175)">
+          <rect width="160" height="50" class="svg-box-terra" />
+          <text x="12" y="22" class="svg-text-title" style="fill:var(--rose)">payment_expired</text>
+          <text x="12" y="40" class="svg-text-mono">attempt closed &gt; a(n+1)</text>
+        </g>
+
+        <g transform="translate(420, 175)">
+          <rect width="160" height="50" class="svg-box-terra" />
+          <text x="12" y="22" class="svg-text-title" style="fill:var(--rose)">rolled_to_t_plus_1</text>
+          <text x="12" y="40" class="svg-text-mono">funds arrived &gt; 13:00</text>
+        </g>
+
+        <!-- Failure Connectors -->
+        <path d="M 300 145 L 300 175" class="svg-line-dash" marker-end="url(#arr-terra)" />
+        <path d="M 500 145 L 500 175" class="svg-line-dash" marker-end="url(#arr-terra)" />
+      </svg>
+      <div class="diagram-caption">figure 3. order lifecycle state machine with green-toned happy path and rose failure branches</div>
+    </div>
+
+    <!-- 3 Lifecycle Cards -->
+    <div class="grid-cards-3">
+      <div class="vcard sage">
+        <div class="vcard-header">
+          <span class="vcard-icon">📥</span>
+          <div class="vcard-title">subscription (nominal in)</div>
+        </div>
+        <div class="vcard-rule">investor specifies rupiah amount (e.g. Rp 10,000,000). received units are rounded to 4 decimals at closing nav.</div>
+      </div>
+      <div class="vcard sky">
+        <div class="vcard-header">
+          <span class="vcard-icon">📤</span>
+          <div class="vcard-title">redemption (units out)</div>
+        </div>
+        <div class="vcard-rule">investor specifies units to liquidate. bank kustodian wires cash directly to investor minus interbank fee (bi-fast Rp 2,500).</div>
+      </div>
+      <div class="vcard terra">
+        <div class="vcard-header">
+          <span class="vcard-icon">🔀</span>
+          <div class="vcard-title">switching constraints</div>
+        </div>
+        <div class="vcard-rule">native s-invest switch only within same mi. cross-mi switch requires 2-leg chained machine via rdn with 2-day market slippage.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: PAYMENT & WEBHOOK SAFETY -->
+  <section class="doc-section" id="payments">
+    <div class="section-header">
+      <div class="section-num">section 05</div>
+      <h2 class="section-title">payment integration &amp; 4-gate webhook safety strip</h2>
+    </div>
+
+    <div class="prose">
+      <p>
+        treating a payment webhook as an entitlement instruction without verification is the most common cause of fintech loss.
+        every payment notification must pass through a strict <strong>4-gate checkpoint strip</strong>:
+      </p>
+    </div>
+
+    <!-- Diagram 4: 4-Gate Checkpoint Strip SVG -->
+    <div class="diagram-wrap">
+      <svg class="blueprint-svg" viewBox="0 0 960 170" role="img" aria-label="4-gate webhook safety checkpoint strip diagram">
+        <title>4-gate payment webhook verification checkpoint</title>
+        <rect x="10" y="10" width="940" height="150" rx="12" class="svg-bg" />
+
+        <!-- Gate 1: Signature -->
+        <g transform="translate(30, 35)">
+          <rect width="200" height="100" class="svg-box-terra" />
+          <text x="14" y="26" class="svg-text-title">gate 1: signature</text>
+          <text x="14" y="48" class="svg-text-body">hmac-sha512 raw body</text>
+          <text x="14" y="66" class="svg-text-body">constant-time compare</text>
+          <text x="14" y="86" class="svg-text-mono">fail-closed &rarr; 401</text>
+        </g>
+
+        <!-- Gate 2: Status Back-Check -->
+        <g transform="translate(265, 35)">
+          <rect width="200" height="100" class="svg-box-sky" />
+          <text x="14" y="26" class="svg-text-title">gate 2: status check</text>
+          <text x="14" y="48" class="svg-text-body">get /v2/&lt;id&gt;/status</text>
+          <text x="14" y="66" class="svg-text-body">authoritative back-poll</text>
+          <text x="14" y="86" class="svg-text-mono">never trust body alone</text>
+        </g>
+
+        <!-- Gate 3: Idempotency -->
+        <g transform="translate(500, 35)">
+          <rect width="200" height="100" class="svg-box-sage" />
+          <text x="14" y="26" class="svg-text-title">gate 3: dedupe keys</text>
+          <text x="14" y="48" class="svg-text-body">k_delivery: body hash</text>
+          <text x="14" y="66" class="svg-text-body">k_settle: receipt key</text>
+          <text x="14" y="86" class="svg-text-mono">k_allot: unit dedupe</text>
+        </g>
+
+        <!-- Gate 4: Monotonic Rank -->
+        <g transform="translate(735, 35)">
+          <rect width="195" height="100" class="svg-box-accent" />
+          <text x="14" y="26" class="svg-text-title">gate 4: rank persist</text>
+          <text x="14" y="48" class="svg-text-body">rank law (50 &gt; 20)</text>
+          <text x="14" y="66" class="svg-text-body">persist then act</text>
+          <text x="14" y="86" class="svg-text-mono">no state regressions</text>
+        </g>
+
+        <!-- Arrows -->
+        <path d="M 230 85 L 265 85" class="svg-line" marker-end="url(#arr-terra)" />
+        <path d="M 465 85 L 500 85" class="svg-line" marker-end="url(#arr-sky)" />
+        <path d="M 700 85 L 735 85" class="svg-line" marker-end="url(#arr-sage)" />
+      </svg>
+      <div class="diagram-caption">figure 4. 4-gate webhook safety strip: signature check, status poll, dedupe keys, and monotonic rank law</div>
+    </div>
+
+    <!-- 4 Idempotency Key Cards -->
+    <div class="grid-cards">
+      <div class="vcard">
+        <div class="vcard-header">
+          <span class="vcard-icon">🔑</span>
+          <div class="vcard-title">K_charge: attempt dedupe</div>
+        </div>
+        <div class="vcard-rule">prevents minting duplicate virtual accounts for the same bill. format: <code>INV-YYYYMMDD-XXXXXX-aN</code>.</div>
+      </div>
+      <div class="vcard">
+        <div class="vcard-header">
+          <span class="vcard-icon">🛡️</span>
+          <div class="vcard-title">K_delivery: replay block</div>
+        </div>
+        <div class="vcard-rule">unique index on sha256 of raw webhook bytes. identical transport retries result in harmless 200 OK no-ops.</div>
+      </div>
+      <div class="vcard sage">
+        <div class="vcard-header">
+          <span class="vcard-icon">💰</span>
+          <div class="vcard-title">K_settle: cash credit dedupe</div>
+        </div>
+        <div class="vcard-rule">primary key on payment facts ledger. ensures a single payment receipt can never credit internal cash ledgers twice.</div>
+      </div>
+      <div class="vcard sky">
+        <div class="vcard-header">
+          <span class="vcard-icon">📈</span>
+          <div class="vcard-title">K_allot: unit allotment dedupe</div>
+        </div>
+        <div class="vcard-rule">unique index on s-invest subscription instructions. guarantees that paying once can never allot mutual fund units twice.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: 3-WAY RECONCILIATION -->
+  <section class="doc-section" id="recon">
+    <div class="section-header">
+      <div class="section-num">section 06</div>
+      <h2 class="section-title">3-way daily reconciliation: three overlapping circles &amp; breaks</h2>
+    </div>
+
+    <div class="prose">
+      <p>
+        daily reconciliation joins three independent external records:
+        <strong>aperd oms</strong> (commercial intent), <strong>bank statement</strong> (cash authority), and <strong>ksei s-invest</strong> (unit authority).
+      </p>
+    </div>
+
+    <!-- Diagram 5: 3-Way Recon Venn Diagram SVG -->
+    <div class="diagram-wrap">
+      <svg class="blueprint-svg" viewBox="0 0 960 380" role="img" aria-label="3-way reconciliation diagram showing 3 overlapping circles with exception codes in intersections">
+        <title>3-way reconciliation overlapping circles</title>
+        <rect x="10" y="10" width="940" height="360" rx="12" class="svg-bg" />
+
+        <!-- Circle 1: APERD OMS (Terra) -->
+        <circle cx="370" cy="170" r="130" fill="rgba(180, 87, 59, 0.08)" stroke="var(--terra)" stroke-width="2" />
+        <!-- Circle 2: Bank Cash (Sage) -->
+        <circle cx="590" cy="170" r="130" fill="rgba(111, 132, 102, 0.08)" stroke="var(--sage)" stroke-width="2" />
+        <!-- Circle 3: KSEI S-INVEST (Sky) -->
+        <circle cx="480" cy="245" r="115" fill="rgba(79, 122, 154, 0.08)" stroke="var(--sky)" stroke-width="2" />
+
+        <!-- Circle Titles -->
+        <text x="265" y="130" class="svg-text-title" style="fill:var(--terra)">leg a: aperd oms</text>
+        <text x="270" y="150" class="svg-text-mono">order intent</text>
+
+        <text x="630" y="130" class="svg-text-title" style="fill:var(--sage)">leg b: bank cash</text>
+        <text x="635" y="150" class="svg-text-mono">bank custody statement</text>
+
+        <text x="430" y="340" class="svg-text-title" style="fill:var(--sky)">leg c: ksei s-invest</text>
+        <text x="445" y="355" class="svg-text-mono">4-dec unit ledger</text>
+
+        <!-- Center Intersection (1,1,1) MATCHED -->
+        <circle cx="480" cy="185" r="24" fill="var(--card)" stroke="var(--line)" stroke-width="1.5" />
+        <text x="460" y="190" class="svg-text-tag" style="fill:var(--sage)">matched</text>
+
+        <!-- Overlap A & B only (1,1,0): XU-01 -->
+        <rect x="445" y="105" width="70" height="26" rx="4" fill="var(--card)" stroke="var(--rose)" stroke-width="1.2" />
+        <text x="455" y="122" class="svg-text-tag" style="fill:var(--rose)">xu-01 (s1)</text>
+
+        <!-- Overlap A & C only (1,0,1): XU-02 / XC-01 -->
+        <rect x="350" y="240" width="75" height="26" rx="4" fill="var(--card)" stroke="var(--rose)" stroke-width="1.2" />
+        <text x="358" y="257" class="svg-text-tag" style="fill:var(--rose)">xu-02 (s1)</text>
+
+        <!-- Overlap B & C only (0,1,1): XC-02 -->
+        <rect x="540" y="240" width="75" height="26" rx="4" fill="var(--card)" stroke="var(--rose)" stroke-width="1.2" />
+        <text x="548" y="257" class="svg-text-tag" style="fill:var(--rose)">xc-02 (s1)</text>
+
+        <!-- Leg B alone (0,1,0): XC-02 Suspense -->
+        <rect x="710" y="210" width="80" height="26" rx="4" fill="var(--card)" stroke="var(--sun)" stroke-width="1.2" />
+        <text x="718" y="227" class="svg-text-tag" style="fill:var(--sun)">xc-02 cash</text>
+
+        <!-- Legend Callout on Left -->
+        <rect x="30" y="30" width="220" height="90" rx="8" class="svg-box" />
+        <text x="42" y="52" class="svg-text-title">critical s1 breaks:</text>
+        <text x="42" y="72" class="svg-text-body">&bull; xu-01: paid but unallotted</text>
+        <text x="42" y="90" class="svg-text-body">&bull; xu-02: units without cash</text>
+        <text x="42" y="108" class="svg-text-body">&bull; xc-02: unidentified cash</text>
+      </svg>
+      <div class="diagram-caption">figure 5. 3-way reconciliation overlapping circles showing primary exception codes at intersections</div>
+    </div>
+
+    <!-- Core Top Exceptions Table -->
+    <h3 class="sub-title">core reconciliation exceptions (top 8 operational breaks)</h3>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>code</th>
+            <th>leg</th>
+            <th>condition description</th>
+            <th>sev</th>
+            <th>immediate action</th>
+            <th>target sla</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>XU-01</code></td>
+            <td>Units</td>
+            <td>Paid order with cleared cash has no S-INVEST units after T+2</td>
+            <td><span class="sev-badge sev-s1">s1</span></td>
+            <td>Idempotent re-drive (K_allot key); escalate to Manajer Investasi</td>
+            <td>4 hours</td>
+          </tr>
+          <tr>
+            <td><code>XU-02</code></td>
+            <td>Units</td>
+            <td>Units allotted in S-INVEST with no underlying cash or order</td>
+            <td><span class="sev-badge sev-s1">s1</span></td>
+            <td>Freeze portfolio display; submit formal correction to KSEI</td>
+            <td>immediate</td>
+          </tr>
+          <tr>
+            <td><code>XC-01</code></td>
+            <td>Cash</td>
+            <td>Payment gateway reports paid, but no credit found on bank statement</td>
+            <td><span class="sev-badge sev-s1">s1</span></td>
+            <td>Trigger gateway status API poll; request settlement advice</td>
+            <td>4 hours</td>
+          </tr>
+          <tr>
+            <td><code>XC-02</code></td>
+            <td>Cash</td>
+            <td>Unidentified bank credit received with no matching investor order</td>
+            <td><span class="sev-badge sev-s1">s1</span></td>
+            <td>Freeze funds into suspense; never auto-credit; request bank trace</td>
+            <td>1 day</td>
+          </tr>
+          <tr>
+            <td><code>XC-03</code></td>
+            <td>Cash</td>
+            <td>Bank credit &lt; invoice amount (transfer fee deducted by sender bank)</td>
+            <td><span class="sev-badge sev-s2">s2</span></td>
+            <td>Compute delta; generate top-up payment link for difference</td>
+            <td>1 day</td>
+          </tr>
+          <tr>
+            <td><code>XC-05</code></td>
+            <td>Cash</td>
+            <td>Two bank credits received for a single invoice attempt</td>
+            <td><span class="sev-badge sev-s1">s1</span></td>
+            <td>Block second credit; disburse duplicate refund via four-eyes approval</td>
+            <td>same day</td>
+          </tr>
+          <tr>
+            <td><code>XC-08</code></td>
+            <td>Cash</td>
+            <td>Paid before cut-off, but bank sweep lands after 13:00 WIB (straddle)</td>
+            <td><span class="sev-badge sev-s2">s2</span></td>
+            <td>Confirm valuation date with MI; adjust instruction to Day T+1</td>
+            <td>1 day</td>
+          </tr>
+          <tr>
+            <td><code>XG-01</code></td>
+            <td>System</td>
+            <td>KSEI S-INVEST batch file missing, zero-byte, or header-corrupted</td>
+            <td><span class="sev-badge sev-s1">s1</span></td>
+            <td>Abort reconciliation run completely; publish zero partial reports</td>
+            <td>immediate</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Collapsible Full 34 Exception Matrix -->
+    <details class="table-toggle">
+      <summary>&darr; click to view the complete 34 exception code dictionary (xc-01 to xg-07)</summary>
+      <div class="scroll" style="margin-top:14px">
+        <table>
+          <thead>
+            <tr>
+              <th>code</th>
+              <th>domain</th>
+              <th>condition</th>
+              <th>sev</th>
+              <th>operations team resolution</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>XC-01</code></td><td>Cash</td><td>Gateway paid, no bank credit</td><td><span class="sev-badge sev-s1">s1</span></td><td>Contact acquirer; obtain settlement trace advice</td></tr>
+            <tr><td><code>XC-02</code></td><td>Cash</td><td>Unidentified bank credit</td><td><span class="sev-badge sev-s1">s1</span></td><td>Hold in suspense; identify payer via bank; refund</td></tr>
+            <tr><td><code>XC-03</code></td><td>Cash</td><td>Underpayment delta</td><td><span class="sev-badge sev-s2">s2</span></td><td>Top-up attempt or partial refund with investor consent</td></tr>
+            <tr><td><code>XC-04</code></td><td>Cash</td><td>Overpayment delta</td><td><span class="sev-badge sev-s2">s2</span></td><td>Four-eyes maker-checker approval for excess refund</td></tr>
+            <tr><td><code>XC-05</code></td><td>Cash</td><td>Duplicate bank credits</td><td><span class="sev-badge sev-s1">s1</span></td><td>Confirm with bank; refund duplicate credit line</td></tr>
+            <tr><td><code>XC-06</code></td><td>Cash</td><td>MDR rate variance</td><td><span class="sev-badge sev-s3">s3</span></td><td>Recompute with dated fee schedule; update config</td></tr>
+            <tr><td><code>XC-07</code></td><td>Cash</td><td>Credit in wrong custody account</td><td><span class="sev-badge sev-s1">s1</span></td><td>Halt sweep; issue inter-account bank transfer</td></tr>
+            <tr><td><code>XC-08</code></td><td>Cash</td><td>13:00 WIB cut-off straddle</td><td><span class="sev-badge sev-s2">s2</span></td><td>Confirm applicable NAV date with MI policy</td></tr>
+            <tr><td><code>XC-09</code></td><td>Cash</td><td>Refund recorded, no bank debit</td><td><span class="sev-badge sev-s1">s1</span></td><td>Trace payout reference with disbursement bank</td></tr>
+            <tr><td><code>XC-10</code></td><td>Cash</td><td>Bank debit without gateway event</td><td><span class="sev-badge sev-s1">s1</span></td><td>Freeze account; investigate potential fraud/chargeback</td></tr>
+            <tr><td><code>XC-11</code></td><td>Cash</td><td>Credit for expired attempt</td><td><span class="sev-badge sev-s2">s2</span></td><td>Re-open invoice or refund if a2 was already paid</td></tr>
+            <tr><td><code>XC-12</code></td><td>Cash</td><td>Non-IDR currency credit</td><td><span class="sev-badge sev-s1">s1</span></td><td>Reject credit; compliance escalation; FX reversal</td></tr>
+            <tr><td><code>XU-01</code></td><td>Units</td><td>Paid order has no S-INVEST units</td><td><span class="sev-badge sev-s1">s1</span></td><td>Idempotent re-drive; escalate to MI operations</td></tr>
+            <tr><td><code>XU-02</code></td><td>Units</td><td>S-INVEST units without internal order</td><td><span class="sev-badge sev-s1">s1</span></td><td>Halt UI display; formal inquiry to KSEI and MI</td></tr>
+            <tr><td><code>XU-03</code></td><td>Units</td><td>Subscribed principal mismatch</td><td><span class="sev-badge sev-s1">s1</span></td><td>Block trading; correct via top-up or partial redemption</td></tr>
+            <tr><td><code>XU-04</code></td><td>Units</td><td>Calculated units != principal / NAV</td><td><span class="sev-badge sev-s1">s1</span></td><td>Quantify rounding drift; request custodian true-up</td></tr>
+            <tr><td><code>XU-05</code></td><td>Units</td><td>Assigned NAV date != cut-off policy</td><td><span class="sev-badge sev-s1">s1</span></td><td>MI confirmation; bulk trade cancel and re-booking</td></tr>
+            <tr><td><code>XU-06</code></td><td>Units</td><td>Duplicate unit allotment in S-INVEST</td><td><span class="sev-badge sev-s1">s1</span></td><td>Block duplicate units; submit KSEI reversal request</td></tr>
+            <tr><td><code>XU-07</code></td><td>Units</td><td>Units allotted under wrong SID</td><td><span class="sev-badge sev-s1">s1</span></td><td>Lock both accounts; immediate KSEI correction request</td></tr>
+            <tr><td><code>XU-08</code></td><td>Units</td><td>Units allotted in wrong fund code</td><td><span class="sev-badge sev-s1">s1</span></td><td>Execute correction switch via MI operations</td></tr>
+            <tr><td><code>XU-09</code></td><td>Units</td><td>Redemption units burned, cash missing</td><td><span class="sev-badge sev-s1">s1</span></td><td>Trace payout reference with Custodian Bank</td></tr>
+            <tr><td><code>XU-10</code></td><td>Units</td><td>Proceeds received, units unburned</td><td><span class="sev-badge sev-s1">s1</span></td><td>Freeze payout ledger; confirm unit cancellation with BK</td></tr>
+            <tr><td><code>XU-11</code></td><td>Units</td><td>Switching out-leg done, in-leg missing</td><td><span class="sev-badge sev-s1">s1</span></td><td>Block switch order; escalate paired reference to MI</td></tr>
+            <tr><td><code>XU-12</code></td><td>Units</td><td>Holding snapshot != trade ledger sum</td><td><span class="sev-badge sev-s2">s2</span></td><td>Check missing corporate action / PHI dividend files</td></tr>
+            <tr><td><code>XU-13</code></td><td>Units</td><td>Negative balance after redemption</td><td><span class="sev-badge sev-s1">s1</span></td><td>Lock account; over-redemption compliance audit</td></tr>
+            <tr><td><code>XU-14</code></td><td>Units</td><td>S-INVEST transaction pending &gt; T+2</td><td><span class="sev-badge sev-s2">s2</span></td><td>Generate SLA breach escalation to Custodian desk</td></tr>
+            <tr><td><code>XU-15</code></td><td>Units</td><td>Confirmation file missing / corrupt</td><td><span class="sev-badge sev-s1">s1</span></td><td>Abort run (XG-01); re-request batch file from KSEI</td></tr>
+            <tr><td><code>XG-01</code></td><td>System</td><td>Source file missing or corrupt</td><td><span class="sev-badge sev-s1">s1</span></td><td>Abort pipeline immediately; never reconcile on partials</td></tr>
+            <tr><td><code>XG-02</code></td><td>System</td><td>Identifier translation failure</td><td><span class="sev-badge sev-s2">s2</span></td><td>Retain unmapped row; update mapping table; re-run</td></tr>
+            <tr><td><code>XG-03</code></td><td>System</td><td>Reconciliation job timed out</td><td><span class="sev-badge sev-s2">s2</span></td><td>Re-run idempotently from last checkpoint; sign-off blocked</td></tr>
+            <tr><td><code>XG-04</code></td><td>System</td><td>UTC vs WIB date boundary shift</td><td><span class="sev-badge sev-s3">s3</span></td><td>Normalize all dates to Asia/Jakarta; fix producer service</td></tr>
+            <tr><td><code>XG-05</code></td><td>System</td><td>Accumulated 4-decimal unit drift</td><td><span class="sev-badge sev-s3">s3</span></td><td>Quantify drift; schedule monthly true-up with MI</td></tr>
+            <tr><td><code>XG-06</code></td><td>System</td><td>Duplicate file for same business date</td><td><span class="sev-badge sev-s2">s2</span></td><td>Reject second file by hash check; verify if revision</td></tr>
+            <tr><td><code>XG-07</code></td><td>System</td><td>Manual journal without maker-checker</td><td><span class="sev-badge sev-s1">s1</span></td><td>Block posting; require four-eyes dual-authorization</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </section>
+
+  <!-- SECTION 7: 8 CRITICAL GAPS -->
+  <section class="doc-section" id="gaps">
+    <div class="section-header">
+      <div class="section-num">section 07</div>
+      <h2 class="section-title">the 8 critical domain gaps: fixed-price commerce vs. mutual funds</h2>
+    </div>
+
+    <div class="prose">
+      <p>
+        here are the 8 architectural patterns that exist in regulated wealthtech platforms
+        that never exist in standard e-commerce or ticketing:
+      </p>
+    </div>
+
+    <!-- 8 Numbered Visual Cards Grid -->
+    <div class="grid-cards">
+      <!-- Gap 1 -->
+      <div class="vcard sky">
+        <div class="vcard-header">
+          <span class="vcard-icon">1️⃣</span>
+          <div class="vcard-title">forward pricing &amp; 4-decimal math</div>
+        </div>
+        <div class="vcard-rule"><strong>what it is:</strong> execution price (closing nab t) is unknown at checkout. subscription is nominal idr in; redemption is 4-decimal units out.</div>
+        <div class="vcard-bite">why it bites: partial nominal redemptions breach minimum holding balance if nab drops afternoon.</div>
+      </div>
+
+      <!-- Gap 2 -->
+      <div class="vcard terra">
+        <div class="vcard-header">
+          <span class="vcard-icon">2️⃣</span>
+          <div class="vcard-title">dual-clock 13:00 wib cut-off</div>
+        </div>
+        <div class="vcard-rule"><strong>what it is:</strong> both good order (s-invest) and good funds (bank kustodian) must clear before 13:00 wib.</div>
+        <div class="vcard-bite">why it bites: payment gateway webhook saying paid at 12:57 wib still misses cut-off if interbank sweep arrives at 13:04 wib.</div>
+      </div>
+
+      <!-- Gap 3 -->
+      <div class="vcard sage">
+        <div class="vcard-header">
+          <span class="vcard-icon">3️⃣</span>
+          <div class="vcard-title">s-invest batch cycles &amp; multi-ifua</div>
+        </div>
+        <div class="vcard-rule"><strong>what it is:</strong> national daily batch timetable (08:00-13:00 intake, 17:00-21:00 nav upload, 10:00-14:00 t+1 allotment).</div>
+        <div class="vcard-bite">why it bites: separate in-app portfolio goals require dedicated sub-ifuas to prevent pooled fifo cost-basis distortion.</div>
+      </div>
+
+      <!-- Gap 4 -->
+      <div class="vcard sun">
+        <div class="vcard-header">
+          <span class="vcard-icon">4️⃣</span>
+          <div class="vcard-title">native vs synthetic cross-mi switch</div>
+        </div>
+        <div class="vcard-rule"><strong>what it is:</strong> native s-invest switch works only within same mi. cross-mi switch requires a 2-leg chained machine via rdn.</div>
+        <div class="vcard-bite">why it bites: client experiences 2 days of market price exposure while money moves between custodians.</div>
+      </div>
+
+      <!-- Gap 5 -->
+      <div class="vcard terra">
+        <div class="vcard-header">
+          <span class="vcard-icon">5️⃣</span>
+          <div class="vcard-title">bank kustodian redemption payout</div>
+        </div>
+        <div class="vcard-rule"><strong>what it is:</strong> aperd never touches redemption cash; custodian bank wires proceeds directly to client bank account.</div>
+        <div class="vcard-bite">why it bites: bank transfer fee (bi-fast Rp 2,500) deducted from payout creates support tickets if not previewed in ui.</div>
+      </div>
+
+      <!-- Gap 6 -->
+      <div class="vcard sage">
+        <div class="vcard-header">
+          <span class="vcard-icon">6️⃣</span>
+          <div class="vcard-title">daily nav fee accrual &amp; 0% tax</div>
+        </div>
+        <div class="vcard-rule"><strong>what it is:</strong> management fees are accrued daily out of fund assets prior to publishing nab; returns are 0% pph tax under uu pph.</div>
+        <div class="vcard-bite">why it bites: aperd earns revenue via monthly trailer fee sharing invoiced to the mi based on settled aum.</div>
+      </div>
+
+      <!-- Gap 7 -->
+      <div class="vcard sky">
+        <div class="vcard-header">
+          <span class="vcard-icon">7️⃣</span>
+          <div class="vcard-title">corporate actions (phi dividends)</div>
+        </div>
+        <div class="vcard-rule"><strong>what it is:</strong> fixed-income funds distribute yields as cash or automatic unit reinvestments without user-placed orders.</div>
+        <div class="vcard-bite">why it bites: ignoring corporate action files in s-invest ingestion causes client balances to drift lower than ksei aksed (xu-12).</div>
+      </div>
+
+      <!-- Gap 8 -->
+      <div class="vcard">
+        <div class="vcard-header">
+          <span class="vcard-icon">8️⃣</span>
+          <div class="vcard-title">suitability mismatch gates (seojk 51)</div>
+        </div>
+        <div class="vcard-rule"><strong>what it is:</strong> client risk score (1-5) mapped to fund risk. high-risk fund triggers a blocking mismatch warning modal.</div>
+        <div class="vcard-bite">why it bites: failing to capture immutable electronic consent logs creates severe ojk mis-selling sanctions.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: RAPID SELF-TEST -->
+  <section class="doc-section" id="selftest">
+    <div class="section-header">
+      <div class="section-num">section 08</div>
+      <h2 class="section-title">5 rapid self-test questions (60-second interview drills)</h2>
+    </div>
+
+    <div class="prose">
+      <p>
+        click each question to reveal the concise, high-rigor architectural answer:
+      </p>
+    </div>
+
+    <!-- Question 1 -->
+    <details class="qa-card">
+      <summary class="qa-header">
+        q1: why cannot an investor buy an exact unit count, and why might a partial nominal redemption fail at 17:00 wib?
+      </summary>
+      <div class="qa-body">
+        <strong>answer key:</strong><br>
+        &bull; <strong>forward pricing:</strong> transaction price (closing NAB Day T) is unknown at checkout and published only after market close by the Bank Kustodian. orders must be nominal-driven (IDR in, 4-decimal units out).<br>
+        &bull; <strong>minimum balance breach:</strong> if an investor redeems nominal Rupiah leaving a narrow margin above the prospectus-mandated Saldo Minimum Kepemilikan (e.g. Rp 100,000), an afternoon market drop will lower remaining unit value below the threshold.<br>
+        &bull; <strong>architectural fix:</strong> enforce a 10% volatility buffer or mandate full liquidation ("Jual Semua Unit").
+      </div>
+    </details>
+
+    <!-- Question 2 -->
+    <details class="qa-card">
+      <summary class="qa-header">
+        q2: an investor pays a virtual account at 12:56 wib and gateway says paid at 12:57 wib. do they get day t nav?
+      </summary>
+      <div class="qa-body">
+        <strong>answer key:</strong><br>
+        &bull; <strong>not guaranteed:</strong> receiving Day T NAV requires both Good Order (S-INVEST) and Good Funds (cleared in Bank Kustodian custody account) prior to 13:00 WIB.<br>
+        &bull; <strong>aggregator transit delay:</strong> if funds land in the Bank Kustodian account at 13:04 WIB via interbank sweep, the Custodian legally stamps funds as post cut-off.<br>
+        &bull; <strong>consequence:</strong> the order rolls over to receive Day T+1 NAV. direct BK Virtual Accounts or RDN debits eliminate this sweep latency.
+      </div>
+    </details>
+
+    <!-- Question 3 -->
+    <details class="qa-card">
+      <summary class="qa-header">
+        q3: can an investor switch directly from a mandiri money market fund to a schroder equity fund in one instruction?
+      </summary>
+      <div class="qa-body">
+        <strong>answer key:</strong><br>
+        &bull; <strong>no:</strong> native S-INVEST switching instructions are strictly atomic within the same Manajer Investasi.<br>
+        &bull; <strong>synthetic cross-mi machine:</strong> the APERD platform must orchestrate a 2-leg chained machine: Leg 1 redeems Fund A to client's RDN at T+2; Leg 2 auto-subscribes Fund B upon RDN credit webhook.<br>
+        &bull; <strong>trade-off:</strong> the investor experiences 2 days of market price exposure while money clears between custodian banks.
+      </div>
+    </details>
+
+    <!-- Question 4 -->
+    <details class="qa-card">
+      <summary class="qa-header">
+        q4: what happens if an investor edits their bank account in the app and immediately clicks redeem?
+      </summary>
+      <div class="qa-body">
+        <strong>answer key:</strong><br>
+        &bull; <strong>redemption must be blocked:</strong> the platform must hold the redemption until the bank account amendment is successfully acknowledged by KSEI S-INVEST.<br>
+        &bull; <strong>custodian wires to s-invest record:</strong> the Bank Kustodian disburses cash directly to the bank account on file in S-INVEST, not the APERD local database.<br>
+        &bull; <strong>failure mode:</strong> un-synchronized amendments cause the Custodian to wire funds to the old closed bank account, resulting in a bank bounce/retur.
+      </div>
+    </details>
+
+    <!-- Question 5 -->
+    <details class="qa-card">
+      <summary class="qa-header">
+        q5: how does daily 3-way reconciliation work, what are the three sources, and what are the two most critical breaks?
+      </summary>
+      <div class="qa-body">
+        <strong>answer key:</strong><br>
+        &bull; <strong>three sources:</strong> (A) APERD OMS (commercial intent), (B) Bank Custody Statement (cash authority net of MDR), (C) KSEI S-INVEST Allotment File (unit authority).<br>
+        &bull; <strong>pairwise passes:</strong> A&harr;B for cash, A&harr;C for units, B&harr;C for orphan residual sweep.<br>
+        &bull; <strong>two most critical S1 breaks:</strong><br>
+        1. <code>(1, 1, 0) XU-01</code>: paid order with cleared cash but zero S-INVEST units (primary client harm).<br>
+        2. <code>(1, 0, 1) XU-02 / XC-01</code>: units allotted without cleared cash (severe regulatory/custody breach).
+      </div>
+    </details>
+  </section>
+
+  <!-- SECTION 9: UAT & RUNBOOK -->
+  <section class="doc-section" id="uat-runbook">
+    <div class="section-header">
+      <div class="section-num">section 09</div>
+      <h2 class="section-title">uat acceptance matrix &amp; s1-s4 production incident runbooks</h2>
+    </div>
+
+    <div class="prose">
+      <p>
+        production sign-off requires 100% pass across core verification scenarios and clear operational playbooks:
+      </p>
+    </div>
+
+    <!-- Core UAT Table -->
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>layer</th>
+            <th>scenario</th>
+            <th>expected system behavior</th>
+            <th>catastrophic negative test</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Payment</td>
+            <td>Full subscription paid &le; 13:00 WIB</td>
+            <td>One paid attempt, invoice settled, units at Day T NAV</td>
+            <td>Double settlement; generating second attempt</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Payment</td>
+            <td>Attempt a1 expires; client retries</td>
+            <td>a1 &rarr; expired; attempt a2 generated; invoice stays open</td>
+            <td>Reusing expired attempt a1; marking invoice failed</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Payment</td>
+            <td>Payment received at 13:05 WIB</td>
+            <td>Order assigned to Day T+1 NAV per cut-off policy</td>
+            <td>Silent incorrect same-day Day T pricing</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Payment</td>
+            <td>Webhook replayed 3 times identical</td>
+            <td>First delivery settles; subsequent 2 are K_delivery no-ops</td>
+            <td>Creating duplicate payment facts or instructions</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Payment</td>
+            <td>Tampered signature / invalid secret</td>
+            <td>401 Unauthorized; nothing written; metric incremented</td>
+            <td>Settling payment on untrusted body; leaking keys</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Payment</td>
+            <td>Out-of-order: paid then stale pending</td>
+            <td>Rank law preserves paid state (50 &gt; 20); stale logged</td>
+            <td>State regression from paid back to pending</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Recon</td>
+            <td>Underpayment (sender fee deducted)</td>
+            <td>XC-03 raised; no units created; top-up link issued</td>
+            <td>Allotting fractional units on partial funding</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Recon</td>
+            <td>KSEI S-INVEST batch file missing</td>
+            <td>XG-01 aborts pipeline; publishes zero partial reports</td>
+            <td>Publishing partial reconciliation report</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Severity Cards Grid -->
+    <h3 class="sub-title">incident severity classification &amp; playbooks</h3>
+    <div class="grid-cards">
+      <div class="vcard terra">
+        <div class="vcard-header">
+          <span class="sev-badge sev-s1">s1 critical</span>
+          <div class="vcard-title">15-min response sla</div>
+        </div>
+        <div class="vcard-rule">money or units wrong/missing at scale, client harm, security breach. immediate executive notification.</div>
+        <div class="vcard-bite">playbooks: pb-1 (gateway 5xx), pb-2 (double debit), pb-3 (xu-01 backlog), pb-4 (over-allotment)</div>
+      </div>
+
+      <div class="vcard sun">
+        <div class="vcard-header">
+          <span class="sev-badge sev-s2">s2 major</span>
+          <div class="vcard-title">30-min response sla</div>
+        </div>
+        <div class="vcard-rule">settlement delayed &gt;1 clearing cycle, single-client material impact, daily recon sign-off blocked.</div>
+        <div class="vcard-bite">playbooks: pb-5 (pricing drift), pb-6 (file corrupt), pb-8 (misrouted cash)</div>
+      </div>
+
+      <div class="vcard sky">
+        <div class="vcard-header">
+          <span class="sev-badge sev-s3">s3 moderate</span>
+          <div class="vcard-title">2-hour response sla</div>
+        </div>
+        <div class="vcard-rule">degraded non-financial system performance with available operational workaround.</div>
+        <div class="vcard-bite">actions: mdr fee schedule recomputation, timezone normalization</div>
+      </div>
+
+      <div class="vcard">
+        <div class="vcard-header">
+          <span class="sev-badge sev-s4">s4 minor</span>
+          <div class="vcard-title">next sprint backlog</div>
+        </div>
+        <div class="vcard-rule">cosmetic ui issues, non-financial reporting defects, or minor wording discrepancies.</div>
+        <div class="vcard-bite">actions: ui copy correction, report layout adjustments</div>
+      </div>
+    </div>
+
+    <!-- RCA Quality Gate Card -->
+    <div class="vcard sage" style="margin-top:20px">
+      <div class="vcard-header">
+        <span class="vcard-icon">✅</span>
+        <div class="vcard-title">rca quality gate: mandatory automated verification</div>
+      </div>
+      <div class="vcard-rule">
+        every post-incident root cause analysis must attach an automated verification test (a synthetic fixture in uat or a real-time prometheus/cloud alert).
+        procedural corrective actions such as "retrain operator" or "add to manual checklist" are rejected as incomplete.
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="doc-footer">
+    <div>
+      <span>aperd technical architecture reference &bull; private workbook</span>
+    </div>
+    <div>
+      <span>ksei s-invest &bull; ojk pasar modal &bull; 3-way recon</span>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
