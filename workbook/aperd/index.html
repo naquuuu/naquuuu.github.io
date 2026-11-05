@@ -656,6 +656,91 @@
       min-height: 44px;
       cursor: pointer;
     }
+
+    /* Search Quick-Jump Menu & Pulse Navigation */
+    .search-quick-jumps {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .quick-jump-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--f-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .quick-jump-hint {
+      font-size: 11px;
+      color: var(--accent-crimson);
+    }
+    .quick-jump-list {
+      display: grid;
+      gap: 6px;
+      max-height: 290px;
+      overflow-y: auto;
+    }
+    .jump-item-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-active);
+      border-radius: 8px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 14px;
+      min-height: 44px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+    }
+    .jump-item-btn:hover, .jump-item-btn:focus, .jump-item-btn.selected {
+      background: var(--bg-card);
+      border-color: var(--accent-crimson);
+      transform: translateX(4px);
+      outline: none;
+    }
+    .jump-item-badge {
+      font-family: var(--f-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+      background: var(--bg-surface-elevated);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-active);
+    }
+    .jump-item-badge.sec { background: #fdf6f5; color: #a63822; border-color: #d99b82; }
+    .jump-item-badge.dict { background: #e8eef3; color: #2d4b63; border-color: #9bb4c7; }
+    .jump-item-title {
+      font-weight: 700;
+      flex: 1 1 auto;
+      line-height: 1.35;
+    }
+    .jump-item-arrow {
+      font-family: var(--f-mono);
+      font-size: 12px;
+      color: var(--accent-crimson);
+      font-weight: 700;
+    }
+
+    /* Target Pulse Highlight on Jump Navigation */
+    @keyframes targetGlow {
+      0% { box-shadow: 0 0 0 0 rgba(166, 56, 34, 0.7); }
+      50% { box-shadow: 0 0 0 14px rgba(166, 56, 34, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(166, 56, 34, 0); }
+    }
+    .highlight-target {
+      animation: targetGlow 1.8s ease-out;
+      border-color: var(--accent-crimson) !important;
+    }
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
@@ -1034,6 +1119,14 @@
       <div class="search-row">
         <input type="search" id="global-search" class="search-input" placeholder="Search any term, plain meaning, flow, or edge case (e.g. 'IFUA', '13:00', 'Bank Kustodian', 'Tax', 'XU-01')... [Press /]" aria-label="Search terms and sections">
         <button type="button" id="search-clear" class="search-clear">Clear</button>
+      </div>
+      <!-- Instant Direct-Jump Results Drawer -->
+      <div id="search-quick-jumps" class="search-quick-jumps" hidden>
+        <div class="quick-jump-header">
+          <span>🎯 Direct Section Jump Matches (Click or Press Enter to Navigate):</span>
+          <span class="quick-jump-hint">[Press Enter to Jump · Esc to Close]</span>
+        </div>
+        <div class="quick-jump-list" id="quick-jump-list" role="listbox" aria-label="Direct Section Navigation Matches"></div>
       </div>
       <div class="filter-bar" role="toolbar" aria-label="Filter dictionary by category">
         <button type="button" class="filter-btn active" data-cat-filter="all">All 25 Terms</button>
@@ -2987,15 +3080,132 @@
 
         if (statusEl) {
           if (!q && activeCat === 'all') {
-            statusEl.textContent = 'showing all ' + dictCards.length + ' dictionary terms, 8 gaps & 5 self-test questions';
+            statusEl.textContent = 'Showing all ' + dictCards.length + ' dictionary terms, 8 gaps & 5 self-test questions';
           } else {
-            statusEl.textContent = 'matched ' + shownDict + ' terms, ' + shownGaps + ' gaps, ' + shownQa + ' questions';
+            statusEl.textContent = 'Matched ' + shownDict + ' terms, ' + shownGaps + ' gaps, ' + shownQa + ' questions';
           }
         }
+
+        updateQuickJumps(q);
+      }
+
+      // Section Search Index for Instant Direct Navigation
+      var SECTION_INDEX = [
+        { id: 'bp-dictionary', badge: 'Section 00', title: 'Domain Dictionary (25 Essential Terms)', keywords: 'dictionary kamus istilah aperd glossary terms definitions kata arti' },
+        { id: 'bp-subscription', badge: 'Blueprint 01', title: 'End-to-End Buy Flow (Subscription Lifecycle)', keywords: 'buy beli subscription alur pembelian 1,000,000 800.0000 good order good funds t+1 unit allotment' },
+        { id: 'bp-onboarding', badge: 'Blueprint 02', title: 'Investor e-KYC, SID & Multi-IFUA Provisioning', keywords: 'onboarding e-kyc kyc sid ifua dukcapil ktp selfie 15-char goal buckets single investor identification' },
+        { id: 'bp-clock', badge: 'Blueprint 03', title: '13:00 WIB Cut-Off & Forward Pricing Math', keywords: '13:00 cutoff cut-off cut off jam 1 forward pricing nab hari bursa math fee buffer minimum saldo method a method b' },
+        { id: 'bp-redemption', badge: 'Blueprint 04', title: 'Redemption (Sell) & Switching Architecture', keywords: 'sell jual redemption pencairan switch switching pengalihan native cross-mi t+7 rdn fifo holding period' },
+        { id: 'bp-webhooks', badge: 'Blueprint 05', title: '4-Gate Webhooks & Retry Architecture', keywords: 'webhook webhooks callback payment attempt inv-001-a1 -a2 sha-512 hmac idempotency monotonic rank status' },
+        { id: 'bp-recon', badge: 'Blueprint 06', title: '3-Way Daily Reconciliation Engine', keywords: 'recon reconciliation rekonsiliasi 3-way xu-01 xu-02 xc-01 xc-02 xc-08 xu-12 break s1 audit discrepancy' },
+        { id: 'bp-gaps', badge: 'Section 07', title: '8 Critical Mutual Fund Domain Gaps', keywords: 'gaps differences e-commerce ticketing forward pricing suitability phi trailer fee dividend' },
+        { id: 'bp-quiz', badge: 'Section 08', title: '5 Interview Trap Questions & Architecture Answers', keywords: 'quiz trap questions pertanyaan jebakan self-test interview test' },
+        { id: 'bp-indonesia', badge: 'Section 09', title: 'Panduan Wawancara Sistem APERD (Bahasa Indonesia)', keywords: 'indonesia bahasa panduan wawancara glosarium resmi piramida komunikasi' }
+      ];
+
+      var quickJumpsBox = document.getElementById('search-quick-jumps');
+      var quickJumpsList = document.getElementById('quick-jump-list');
+
+      function jumpToElement(targetId) {
+        var el = document.getElementById(targetId);
+        if (!el) return;
+        
+        // If inside details (e.g. Q&A quiz), expand it automatically
+        if (el.tagName === 'DETAILS' || el.closest('details')) {
+          var det = el.tagName === 'DETAILS' ? el : el.closest('details');
+          det.open = true;
+        }
+
+        // Smooth scroll with offset center
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Add visual pulse glow
+        el.classList.remove('highlight-target');
+        void el.offsetWidth; // trigger reflow
+        el.classList.add('highlight-target');
+
+        // Close dropdown and clear blur
+        if (quickJumpsBox) quickJumpsBox.hidden = true;
+        if (searchInput) searchInput.blur();
+      }
+
+      function updateQuickJumps(q) {
+        if (!quickJumpsBox || !quickJumpsList) return;
+        if (!q || q.length < 2) {
+          quickJumpsBox.hidden = true;
+          quickJumpsList.innerHTML = '';
+          return;
+        }
+
+        var matches = [];
+
+        // 1. Check Section Index
+        SECTION_INDEX.forEach(function (sec) {
+          if (sec.title.toLowerCase().indexOf(q) !== -1 || sec.keywords.indexOf(q) !== -1) {
+            matches.push({ id: sec.id, badge: sec.badge, title: sec.title, type: 'sec' });
+          }
+        });
+
+        // 2. Check Dictionary Cards
+        dictCards.forEach(function (card) {
+          var titleEl = card.querySelector('.dict-term');
+          var text = (card.getAttribute('data-search') || '').toLowerCase();
+          if (text.indexOf(q) !== -1 && titleEl) {
+            matches.push({ id: card.id, badge: 'Term 📖', title: titleEl.textContent.trim(), type: 'dict' });
+          }
+        });
+
+        if (matches.length === 0) {
+          quickJumpsBox.hidden = true;
+          quickJumpsList.innerHTML = '';
+          return;
+        }
+
+        // Render top 5 direct jump items
+        quickJumpsList.innerHTML = '';
+        var topMatches = matches.slice(0, 6);
+        topMatches.forEach(function (m, idx) {
+          var a = document.createElement('a');
+          a.className = 'jump-item-btn' + (idx === 0 ? ' selected' : '');
+          a.href = '#' + m.id;
+          a.setAttribute('role', 'option');
+          a.innerHTML = '<span class="jump-item-badge ' + m.type + '">' + m.badge + '</span>' +
+                        '<span class="jump-item-title">' + m.title + '</span>' +
+                        '<span class="jump-item-arrow">Jump &rarr;</span>';
+          a.addEventListener('click', function (e) {
+            e.preventDefault();
+            jumpToElement(m.id);
+          });
+          quickJumpsList.appendChild(a);
+        });
+
+        quickJumpsBox.hidden = false;
       }
 
       if (searchInput) {
         searchInput.addEventListener('input', applyFilter);
+        searchInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            // If quick jumps has matches, navigate to the first one!
+            var firstJump = quickJumpsList ? quickJumpsList.querySelector('.jump-item-btn') : null;
+            if (firstJump) {
+              var targetHref = firstJump.getAttribute('href');
+              if (targetHref && targetHref.startsWith('#')) {
+                jumpToElement(targetHref.substring(1));
+              }
+            } else {
+              // Otherwise jump to first visible dictionary card
+              var firstVisibleCard = dictCards.find(function (c) { return !c.hidden; });
+              if (firstVisibleCard) {
+                jumpToElement(firstVisibleCard.id);
+              }
+            }
+          } else if (e.key === 'Escape') {
+            if (quickJumpsBox) quickJumpsBox.hidden = true;
+            searchInput.blur();
+          }
+        });
       }
       if (clearBtn) {
         clearBtn.addEventListener('click', function () {
