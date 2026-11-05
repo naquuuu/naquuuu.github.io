@@ -44,6 +44,5 @@ exclude:
   - scripts
   - drafts
   - _draft-preview.html
-  - workbook
-  - _draft-preview.html
-  - workbook
+  - workbook/cut
+  - workbook/jatuh
