@@ -613,6 +613,155 @@
       flex-wrap: wrap;
       gap: 10px;
     }
+
+    /* Global Search & Dictionary */
+    .search-shell {
+      background: var(--bg-card);
+      border: 2px solid var(--text-primary);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 0 0 24px 0;
+      box-shadow: var(--shadow-card);
+    }
+    .search-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .search-input {
+      flex: 1 1 260px;
+      font-family: var(--f-sans);
+      font-size: 16px;
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-active);
+      border-radius: 8px;
+      padding: 10px 14px;
+      min-height: 44px;
+    }
+    .search-input:focus {
+      outline: 2px solid var(--accent-crimson);
+      background: var(--bg-card);
+    }
+    .search-clear {
+      font-family: var(--f-mono);
+      font-size: 12.5px;
+      font-weight: 600;
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-active);
+      border-radius: 8px;
+      padding: 8px 14px;
+      min-height: 44px;
+      cursor: pointer;
+    }
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+      align-items: center;
+    }
+    .filter-btn {
+      font-family: var(--f-mono);
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-active);
+      border-radius: 999px;
+      padding: 7px 13px;
+      min-height: 44px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .filter-btn.active {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-color: var(--text-primary);
+    }
+    .search-status {
+      font-family: var(--f-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+    .dict-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin: 18px 0;
+    }
+    .dict-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+    .dict-card[hidden], .bp-section[hidden], .gap-card[hidden], details.qa-card[hidden] {
+      display: none !important;
+    }
+    .dict-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .dict-cat {
+      font-family: var(--f-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border-active);
+    }
+    .cat-actors { background: #e8eef3; color: #2d4b63; border-color: #9bb4c7; }
+    .cat-orders { background: #fdf8ec; color: #7a5210; border-color: #c9922e; }
+    .cat-payments { background: #f4f8f5; color: #244b35; border-color: #88af95; }
+    .cat-rules { background: #fdf6f5; color: #a63822; border-color: #d99b82; }
+    .dict-slug {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    h3.dict-term {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+    .dict-block {
+      border-radius: 8px;
+      padding: 9px 11px;
+      background: var(--bg-surface);
+      border-left: 3px solid var(--border-active);
+    }
+    .dict-block.plain { border-left-color: var(--accent-sage); }
+    .dict-block.analogy { border-left-color: var(--accent-slate); }
+    .dict-block.interview { border-left-color: var(--accent-crimson); background: var(--bg-primary); border: 1px solid var(--border-subtle); border-left: 3px solid var(--accent-crimson); }
+    .dict-lbl {
+      display: block;
+      font-family: var(--f-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+    }
+    .dict-block p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.48;
+      color: var(--text-primary);
+    }
+
   </style>
 </head>
 <body>
@@ -665,8 +814,25 @@
       </div>
     </header>
 
+    <!-- Global Live Search Bar -->
+    <div class="search-shell" role="search" aria-label="search domain dictionary and architecture sections">
+      <div class="search-row">
+        <input type="search" id="global-search" class="search-input" placeholder="Search any term, plain meaning, flow, or edge case (e.g. 'ifua', '13:00', 'bank kustodian', 'tax', 'xu-01')... [Press /]" aria-label="search terms and sections">
+        <button type="button" id="search-clear" class="search-clear">clear</button>
+      </div>
+      <div class="filter-bar" role="toolbar" aria-label="filter dictionary by category">
+        <button type="button" class="filter-btn active" data-cat-filter="all">all 25 terms</button>
+        <button type="button" class="filter-btn" data-cat-filter="actors">who's who &amp; accounts (7)</button>
+        <button type="button" class="filter-btn" data-cat-filter="orders">buying, selling &amp; pricing (9)</button>
+        <button type="button" class="filter-btn" data-cat-filter="payments">payments &amp; recon (3)</button>
+        <button type="button" class="filter-btn" data-cat-filter="rules">rules, fees &amp; tax (6)</button>
+        <span class="search-status" id="search-status">showing all 25 dictionary terms &amp; 8 sections</span>
+      </div>
+    </div>
+
     <nav class="jump-bar" aria-label="section navigation">
       <div class="jump-list">
+        <a class="jump-chip" href="#bp-dictionary">📖 00. domain dictionary (25)</a>
         <a class="jump-chip" href="#bp-subscription">01. end-to-end buy flow</a>
         <a class="jump-chip" href="#bp-onboarding">02. e-kyc, sid &amp; ifua</a>
         <a class="jump-chip" href="#bp-clock">03. 13:00 cut-off &amp; math</a>
@@ -677,6 +843,524 @@
         <a class="jump-chip" href="#bp-quiz">08. 5 trap questions</a>
       </div>
     </nav>
+
+    <!-- =====================================================================
+         SECTION 00: PLAIN-ENGLISH TO INSIDER DOMAIN DICTIONARY (SEARCHABLE)
+         ===================================================================== -->
+    <section class="bp-section" id="bp-dictionary">
+      <div class="sec-bar">
+        <span class="sec-tag">section 00 // plain-english &rarr; domain dictionary</span>
+        <span class="sec-meta">[ 25 essential terms · plain meaning + system analogy + interview line ]</span>
+      </div>
+      <h2 class="sec-title">the mutual fund (aperd) dictionary: everyday words &rarr; insider terms</h2>
+      <div class="prose">
+        <p>
+          new to mutual fund jargon? every card below translates an official <strong>indonesian mutual fund / ksei s-invest term</strong> into <strong>plain everyday words</strong>, connects it to <strong>a system you already built</strong> (flights, e-commerce, edtech payments), and gives you the <strong>exact sentence to say in the interview</strong>. use the search bar above to filter instantly.
+        </p>
+      </div>
+      <div class="dict-grid" id="dict-grid">
+
+        <article class="dict-card" id="term-aperd" data-cat="actors" data-search="aperd (agen penjual efek reksa dana) who's who & accounts the licensed mutual fund store/platform (like bibit, bareksa, or a bank's wealth app) that lets users buy and sell mutual funds. like traveloka for flights: traveloka sells the ticket and collects the order, but does not fly the plane. as an aperd platform under pojk 39/2014, our system is an order router and suitability gate - we never hold investor cash or manage the fund portfolio.">
+          <div class="dict-top">
+            <span class="dict-cat cat-actors">Who's Who & Accounts</span>
+            <code class="dict-slug">#aperd</code>
+          </div>
+          <h3 class="dict-term">APERD (Agen Penjual Efek Reksa Dana)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>The licensed mutual fund store/platform (like Bibit, Bareksa, or a bank's wealth app) that lets users buy and sell mutual funds.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like Traveloka for flights: Traveloka sells the ticket and collects the order, but does not fly the plane.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;As an APERD platform under POJK 39/2014, our system is an order router and suitability gate - we never hold investor cash or manage the fund portfolio.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-mi" data-cat="actors" data-search="manajer investasi (mi / fund manager) who's who & accounts the licensed investment company (e.g., schroders, mandiri manajemen investasi) that decides which stocks, bonds, or deposits the mutual fund buys. like the airline carrier (garuda/citilink) that actually operates the flight and sets the product rules. each manajer investasi defines fund-level rules in the prospectus - such as minimum subscription, fee calculation mode, and whether native switching is allowed.">
+          <div class="dict-top">
+            <span class="dict-cat cat-actors">Who's Who & Accounts</span>
+            <code class="dict-slug">#mi</code>
+          </div>
+          <h3 class="dict-term">Manajer Investasi (MI / Fund Manager)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>The licensed investment company (e.g., Schroders, Mandiri Manajemen Investasi) that decides which stocks, bonds, or deposits the mutual fund buys.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like the airline carrier (Garuda/Citilink) that actually operates the flight and sets the product rules.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Each Manajer Investasi defines fund-level rules in the Prospectus - such as minimum subscription, fee calculation mode, and whether native switching is allowed.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-bk" data-cat="actors" data-search="bank kustodian (bk / custodian bank) who's who & accounts an independent bank (e.g., bca, standard chartered, hsbc) that safely holds all the mutual fund's money and assets, calculates the daily unit price (nab/up), and wires cash back to investors when they sell. like an independent bank vault + accounting engine that neither the app nor the fund manager can steal from. the bank kustodian is the cash authority for good funds before 13:00 wib and calculates the official closing nab/up every evening.">
+          <div class="dict-top">
+            <span class="dict-cat cat-actors">Who's Who & Accounts</span>
+            <code class="dict-slug">#bk</code>
+          </div>
+          <h3 class="dict-term">Bank Kustodian (BK / Custodian Bank)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>An independent bank (e.g., BCA, Standard Chartered, HSBC) that safely holds all the mutual fund's money and assets, calculates the daily unit price (NAB/UP), and wires cash back to investors when they sell.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like an independent bank vault + accounting engine that neither the app nor the fund manager can steal from.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;The Bank Kustodian is the cash authority for Good Funds before 13:00 WIB and calculates the official closing NAB/UP every evening.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-sinvest" data-cat="actors" data-search="ksei s-invest who's who & accounts indonesia's mandatory national database and clearinghouse (run by ksei) that connects all aperd apps, fund managers (mi), and custodian banks (bk). it is the single source of truth for who owns how many mutual fund units. like the central airline gds (amadeus/sabre) or national land registry - if a unit isn't recorded in s-invest, the investor doesn't legally own it. our local database is only a mirror; ksei s-invest is the authoritative unit ledger of record that we reconcile against every day.">
+          <div class="dict-top">
+            <span class="dict-cat cat-actors">Who's Who & Accounts</span>
+            <code class="dict-slug">#sinvest</code>
+          </div>
+          <h3 class="dict-term">KSEI S-INVEST</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>Indonesia's mandatory national database and clearinghouse (run by KSEI) that connects all APERD apps, Fund Managers (MI), and Custodian Banks (BK). It is the single source of truth for who owns how many mutual fund units.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like the central airline GDS (Amadeus/Sabre) or national land registry - if a unit isn't recorded in S-INVEST, the investor doesn't legally own it.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Our local database is only a mirror; KSEI S-INVEST is the authoritative unit ledger of record that we reconcile against every day.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-sid" data-cat="actors" data-search="sid (single investor identification) who's who & accounts a 15-character master investor id issued by ksei (e.g., idd1204ab892104). every indonesian citizen (1 nik) gets only one master sid across all investment apps. like a national tax id (npwp) or passport number for the capital market. during onboarding, we submit the investor's verified e-kyc data to ksei s-invest to provision or link their 15-character master sid before unlocking checkout.">
+          <div class="dict-top">
+            <span class="dict-cat cat-actors">Who's Who & Accounts</span>
+            <code class="dict-slug">#sid</code>
+          </div>
+          <h3 class="dict-term">SID (Single Investor Identification)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>A 15-character master investor ID issued by KSEI (e.g., IDD1204AB892104). Every Indonesian citizen (1 NIK) gets only ONE master SID across all investment apps.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like a national tax ID (NPWP) or passport number for the capital market.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;During onboarding, we submit the investor's verified e-KYC data to KSEI S-INVEST to provision or link their 15-character master SID before unlocking checkout.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-ifua" data-cat="actors" data-search="ifua (investor fund unit account) who's who & accounts the sub-account under an investor's sid where their actual mutual fund units live. one investor has 1 sid, but multiple ifuas (one per selling agent + fund manager/custodian, or one per in-app goal bucket). if sid is your bank customer id (cif), ifuas are your separate savings sub-accounts/pockets for emergency fund, wedding, and retirement. we provision separate sub-ifuas per portfolio goal in s-invest so fifo unit cost basis stays isolated per goal and matches ksei akses.">
+          <div class="dict-top">
+            <span class="dict-cat cat-actors">Who's Who & Accounts</span>
+            <code class="dict-slug">#ifua</code>
+          </div>
+          <h3 class="dict-term">IFUA (Investor Fund Unit Account)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>The sub-account under an investor's SID where their actual mutual fund units live. One investor has 1 SID, but multiple IFUAs (one per Selling Agent + Fund Manager/Custodian, or one per in-app Goal bucket).</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>If SID is your bank customer ID (CIF), IFUAs are your separate savings sub-accounts/pockets for Emergency Fund, Wedding, and Retirement.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;We provision separate sub-IFUAs per portfolio goal in S-INVEST so FIFO unit cost basis stays isolated per goal and matches KSEI AKSes.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-rdn-escrow" data-cat="actors" data-search="rdn vs. rekening tampungan reksa dana who's who & accounts rdn is a personal cash wallet bank account opened in the investor's own name. rekening tampungan (escrow / fund collection account) is a segregated pass-through account used to collect virtual account payments and sweep them to the custodian bank. rdn is your personal wallet balance; rekening tampungan is a checkout transit pipe that must be emptied into the custodian bank before 13:00 wib. whether we collect via rdn auto-debit or closed virtual accounts into a segregated collection account, anti-commingling rules forbid mixing investor cash with company operating funds.">
+          <div class="dict-top">
+            <span class="dict-cat cat-actors">Who's Who & Accounts</span>
+            <code class="dict-slug">#rdn-escrow</code>
+          </div>
+          <h3 class="dict-term">RDN vs. Rekening Tampungan Reksa Dana</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>RDN is a personal cash wallet bank account opened in the investor's own name. Rekening Tampungan (Escrow / Fund Collection Account) is a segregated pass-through account used to collect Virtual Account payments and sweep them to the Custodian Bank.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>RDN is your personal wallet balance; Rekening Tampungan is a checkout transit pipe that must be emptied into the Custodian Bank before 13:00 WIB.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Whether we collect via RDN auto-debit or Closed Virtual Accounts into a segregated collection account, anti-commingling rules forbid mixing investor cash with company operating funds.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-kik" data-cat="rules" data-search="reksa dana kik (kontrak investasi kolektif) rules, fees & tax the legal structure of indonesian mutual funds: a 3-party contract signed between the fund manager (mi) and custodian bank (bk) where investors buy fractional units. the fund's assets are legally separate from all companies' balance sheets. like a ring-fenced trust account: even if the app or fund manager goes bankrupt, the investor's assets stay safe at the custodian bank. under pojk 23/2016, reksa dana kik assets are legally segregated at the bank kustodian and never enter the aperd's balance sheet.">
+          <div class="dict-top">
+            <span class="dict-cat cat-rules">Rules, Fees & Tax</span>
+            <code class="dict-slug">#kik</code>
+          </div>
+          <h3 class="dict-term">Reksa Dana KIK (Kontrak Investasi Kolektif)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>The legal structure of Indonesian mutual funds: a 3-party contract signed between the Fund Manager (MI) and Custodian Bank (BK) where investors buy fractional units. The fund's assets are legally separate from all companies' balance sheets.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like a ring-fenced trust account: even if the app or Fund Manager goes bankrupt, the investor's assets stay safe at the Custodian Bank.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Under POJK 23/2016, Reksa Dana KIK assets are legally segregated at the Bank Kustodian and never enter the APERD's balance sheet.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-nab-up" data-cat="orders" data-search="nab / up (nilai aktiva bersih per unit penyertaan / nav) buying, selling & pricing the price of 1 mutual fund unit on a given day (calculated as total fund assets minus daily fees/liabilities, divided by total units in circulation). units are tracked to 4 decimal places (e.g., 800.1234 up). like the daily exchange rate of a currency or gram price of gold, except it is only calculated once a day after the market closes at 16:00 wib. because nab/up is computed to 4 decimal places after market close, our schema stores unit quantities and prices as exact fixed-point decimals, never floating point.">
+          <div class="dict-top">
+            <span class="dict-cat cat-orders">Buying, Selling & Pricing</span>
+            <code class="dict-slug">#nab-up</code>
+          </div>
+          <h3 class="dict-term">NAB / UP (Nilai Aktiva Bersih per Unit Penyertaan / NAV)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>The price of 1 mutual fund unit on a given day (calculated as Total Fund Assets minus Daily Fees/Liabilities, divided by Total Units in circulation). Units are tracked to 4 decimal places (e.g., 800.1234 UP).</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like the daily exchange rate of a currency or gram price of gold, except it is only calculated once a day after the market closes at 16:00 WIB.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Because NAB/UP is computed to 4 decimal places after market close, our schema stores unit quantities and prices as exact fixed-point decimals, never floating point.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-forward-pricing" data-cat="orders" data-search="forward pricing (blind / unknown nav at checkout) buying, selling & pricing when you buy or sell a mutual fund at 10:00 am, nobody knows today's unit price yet! the app shows yesterday's price (nab t-1), but your order actually executes at today's closing price (nab t), published tomorrow morning (t+1). unlike e-commerce where price is fixed at checkout, mutual funds work like pre-ordering at today's closing market rate. forward pricing is why subscriptions are entered in nominal rupiah while redemptions are executed in units, and why partial nominal redemptions need a volatility buffer.">
+          <div class="dict-top">
+            <span class="dict-cat cat-orders">Buying, Selling & Pricing</span>
+            <code class="dict-slug">#forward-pricing</code>
+          </div>
+          <h3 class="dict-term">Forward Pricing (Blind / Unknown NAV at Checkout)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>When you buy or sell a mutual fund at 10:00 AM, nobody knows today's unit price yet! The app shows yesterday's price (NAB T-1), but your order actually executes at today's closing price (NAB T), published tomorrow morning (T+1).</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Unlike e-commerce where price is fixed at checkout, mutual funds work like pre-ordering at today's closing market rate.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Forward pricing is why subscriptions are entered in nominal Rupiah while redemptions are executed in units, and why partial nominal redemptions need a volatility buffer.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-cutoff" data-cat="orders" data-search="cut-off time (13:00 wib hari bursa) buying, selling & pricing the daily 1:00 pm jakarta time deadline on stock exchange business days. if your order and your money arrive before 13:00 wib, you get today's price (nab t). if either is 1 second late (13:00:01), you get tomorrow's price (nab t+1). like the check-in gate closing for a flight: miss 13:00 wib and you are automatically moved to tomorrow's flight. we enforce an internal 12:30 wib payment buffer on aggregator virtual accounts so interbank sweeps land at the bank kustodian before the 13:00 wib cut-off.">
+          <div class="dict-top">
+            <span class="dict-cat cat-orders">Buying, Selling & Pricing</span>
+            <code class="dict-slug">#cutoff</code>
+          </div>
+          <h3 class="dict-term">Cut-Off Time (13:00 WIB Hari Bursa)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>The daily 1:00 PM Jakarta time deadline on stock exchange business days. If your order AND your money arrive before 13:00 WIB, you get today's price (NAB T). If either is 1 second late (13:00:01), you get tomorrow's price (NAB T+1).</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like the check-in gate closing for a flight: miss 13:00 WIB and you are automatically moved to tomorrow's flight.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;We enforce an internal 12:30 WIB payment buffer on aggregator Virtual Accounts so interbank sweeps land at the Bank Kustodian before the 13:00 WIB cut-off.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-hari-bursa" data-cat="orders" data-search="hari bursa (exchange business day) buying, selling & pricing a day when the indonesia stock exchange (idx / bei) is open for trading (monday-friday, excluding national holidays and joint leave days). mutual fund clocks (t+0, t+1, t+7) only count hari bursa, never weekends. like banking working days: an order placed on saturday at 10:00 am is treated as a monday morning order. our cut-off bucketing engine must join against an authoritative idx hari bursa holiday calendar table, never simple weekday math.">
+          <div class="dict-top">
+            <span class="dict-cat cat-orders">Buying, Selling & Pricing</span>
+            <code class="dict-slug">#hari-bursa</code>
+          </div>
+          <h3 class="dict-term">Hari Bursa (Exchange Business Day)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>A day when the Indonesia Stock Exchange (IDX / BEI) is open for trading (Monday-Friday, excluding national holidays and joint leave days). Mutual fund clocks (T+0, T+1, T+7) only count Hari Bursa, never weekends.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like banking working days: an order placed on Saturday at 10:00 AM is treated as a Monday morning order.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Our cut-off bucketing engine must join against an authoritative IDX Hari Bursa holiday calendar table, never simple weekday math.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-good-order" data-cat="orders" data-search="good order buying, selling & pricing a valid, complete transaction instruction (active sid/ifua, suitability passed, above minimum amount) received and registered in ksei s-invest before 13:00 wib. half 1 of the ticket: the booking form is valid and registered in the central system. good order alone does not lock today's nav; it must be matched with good funds at the bank kustodian before 13:00 wib.">
+          <div class="dict-top">
+            <span class="dict-cat cat-orders">Buying, Selling & Pricing</span>
+            <code class="dict-slug">#good-order</code>
+          </div>
+          <h3 class="dict-term">Good Order</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>A valid, complete transaction instruction (active SID/IFUA, suitability passed, above minimum amount) received and registered in KSEI S-INVEST before 13:00 WIB.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Half 1 of the ticket: the booking form is valid and registered in the central system.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Good Order alone does not lock today's NAV; it must be matched with Good Funds at the Bank Kustodian before 13:00 WIB.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-good-funds" data-cat="payments" data-search="good funds (dana efektif) payments & reconciliation cash that has actually arrived, cleared, and been matched inside the mutual fund's account at the bank kustodian (bk) before 13:00 wib - not merely a 'paid' webhook from a payment gateway. half 2 of the ticket: the money is physically in the custodian bank's vault, not stuck in transit at a payment gateway. a payment gateway 'settlement' callback is only an advisory hint; good funds is determined exclusively by the bank kustodian's account credit timestamp.">
+          <div class="dict-top">
+            <span class="dict-cat cat-payments">Payments & Reconciliation</span>
+            <code class="dict-slug">#good-funds</code>
+          </div>
+          <h3 class="dict-term">Good Funds (Dana Efektif)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>Cash that has actually arrived, cleared, and been matched inside the Mutual Fund's account at the Bank Kustodian (BK) before 13:00 WIB - NOT merely a 'paid' webhook from a payment gateway.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Half 2 of the ticket: the money is physically in the Custodian Bank's vault, not stuck in transit at a payment gateway.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;A payment gateway 'settlement' callback is only an advisory hint; Good Funds is determined exclusively by the Bank Kustodian's account credit timestamp.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-subscription" data-cat="orders" data-search="subscription (pembelian unit) buying, selling & pricing buying a mutual fund. the investor specifies a rupiah amount (e.g., rp 1,000,000), pays via va/rdn/qris, and receives 4-decimal units (up) on t+1 morning after the closing price (nab t) is published. topping up rupiah to convert into fractional fund units once today's closing rate is known. on a subscription, our oms tracks two asynchronous phases: cash settlement (good funds) on day t and s-invest unit allotment on day t+1.">
+          <div class="dict-top">
+            <span class="dict-cat cat-orders">Buying, Selling & Pricing</span>
+            <code class="dict-slug">#subscription</code>
+          </div>
+          <h3 class="dict-term">Subscription (Pembelian Unit)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>Buying a mutual fund. The investor specifies a Rupiah amount (e.g., Rp 1,000,000), pays via VA/RDN/QRIS, and receives 4-decimal units (UP) on T+1 morning after the closing price (NAB T) is published.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Topping up Rupiah to convert into fractional fund units once today's closing rate is known.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;On a Subscription, our OMS tracks two asynchronous phases: cash settlement (Good Funds) on Day T and S-INVEST unit allotment on Day T+1.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-redemption" data-cat="orders" data-search="redemption (penjualan kembali / pencairan) buying, selling & pricing selling mutual fund units back into cash. the investor specifies how many units (up) to sell; units are burned at closing price (nab t), and the bank kustodian wires cash directly to the investor's bank within t+1 to max t+7 exchange days. cashing out units: the custodian bank wires the proceeds directly to the user's registered bank account. during redemption, aperd never touches the payout cash; the bank kustodian wires funds directly to the investor's s-invest registered bank account within the statutory t+7 cap.">
+          <div class="dict-top">
+            <span class="dict-cat cat-orders">Buying, Selling & Pricing</span>
+            <code class="dict-slug">#redemption</code>
+          </div>
+          <h3 class="dict-term">Redemption (Penjualan Kembali / Pencairan)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>Selling mutual fund units back into cash. The investor specifies how many Units (UP) to sell; units are burned at closing price (NAB T), and the Bank Kustodian wires cash directly to the investor's bank within T+1 to max T+7 Exchange Days.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Cashing out units: the Custodian Bank wires the proceeds directly to the user's registered bank account.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;During Redemption, APERD never touches the payout cash; the Bank Kustodian wires funds directly to the investor's S-INVEST registered bank account within the statutory T+7 cap.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-switching" data-cat="orders" data-search="switching (pengalihan unit) buying, selling & pricing moving money directly from fund a to fund b. native s-invest switching only works between two funds managed by the same manajer investasi (mi). switching across different mis requires selling fund a first, waiting t+2 for cash in rdn, then buying fund b. same-mi switch is a direct connecting flight on one airline; cross-mi switch is landing, collecting baggage (waiting t+2 for cash), and re-booking on another airline. our brd distinguishes native 1-step s-invest switching within the same mi from synthetic 2-leg cross-mi switching via rdn, which carries a 2-day nav gap.">
+          <div class="dict-top">
+            <span class="dict-cat cat-orders">Buying, Selling & Pricing</span>
+            <code class="dict-slug">#switching</code>
+          </div>
+          <h3 class="dict-term">Switching (Pengalihan Unit)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>Moving money directly from Fund A to Fund B. Native S-INVEST Switching only works between two funds managed by the SAME Manajer Investasi (MI). Switching across different MIs requires selling Fund A first, waiting T+2 for cash in RDN, then buying Fund B.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Same-MI Switch is a direct connecting flight on one airline; Cross-MI Switch is landing, collecting baggage (waiting T+2 for cash), and re-booking on another airline.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Our BRD distinguishes native 1-step S-INVEST switching within the same MI from synthetic 2-leg cross-MI switching via RDN, which carries a 2-day NAV gap.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-min-balance" data-cat="orders" data-search="saldo minimum kepemilikan (minimum remaining balance) buying, selling & pricing the minimum unit/rupiah value an investor must keep in a fund after a partial sale (e.g., rp 100,000). if a market drop at 16:00 wib pushes their remaining balance below this floor, the partial sale is either rejected or forced into 'sell all units'. like a bank account minimum balance rule, complicated by the fact that the afternoon market price can move by 1-3%. to prevent partial nominal redemptions from failing eod validation at s-invest, we apply a 10% volatility buffer or prompt the user to redeem all units.">
+          <div class="dict-top">
+            <span class="dict-cat cat-orders">Buying, Selling & Pricing</span>
+            <code class="dict-slug">#min-balance</code>
+          </div>
+          <h3 class="dict-term">Saldo Minimum Kepemilikan (Minimum Remaining Balance)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>The minimum unit/Rupiah value an investor must keep in a fund after a partial sale (e.g., Rp 100,000). If a market drop at 16:00 WIB pushes their remaining balance below this floor, the partial sale is either rejected or forced into 'Sell All Units'.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like a bank account minimum balance rule, complicated by the fact that the afternoon market price can move by 1-3%.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;To prevent partial nominal redemptions from failing EOD validation at S-INVEST, we apply a 10% volatility buffer or prompt the user to Redeem All Units.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-trailer-fee" data-cat="rules" data-search="trailer fee (management fee sharing) rules, fees & tax how zero-fee fintech aperd apps make recurring revenue: the fund manager (mi) shares a slice of its annual management fee (e.g., 0.3%-0.8% per year of the total assets held by your app's users), calculated daily and paid monthly. like an ongoing affiliate revenue share on the total balance your users keep invested. even when front-end subscription fees are 0%, accurate daily unitholder balance reconciliation is critical because our monthly trailer fee accrual from each mi depends on daily settled aum.">
+          <div class="dict-top">
+            <span class="dict-cat cat-rules">Rules, Fees & Tax</span>
+            <code class="dict-slug">#trailer-fee</code>
+          </div>
+          <h3 class="dict-term">Trailer Fee (Management Fee Sharing)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>How zero-fee fintech APERD apps make recurring revenue: the Fund Manager (MI) shares a slice of its annual Management Fee (e.g., 0.3%-0.8% per year of the total assets held by your app's users), calculated daily and paid monthly.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like an ongoing affiliate revenue share on the total balance your users keep invested.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Even when front-end subscription fees are 0%, accurate daily unitholder balance reconciliation is critical because our monthly Trailer Fee accrual from each MI depends on daily settled AUM.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-tax" data-cat="rules" data-search="bukan objek pajak (0% mutual fund income tax) rules, fees & tax in indonesia (uu pph pasal 4 ayat 3 huruf i), mutual fund profits and dividends are not taxed when the investor sells or receives payouts (0% tax deduction), because taxes were already paid inside the fund portfolio. investors only report the balance as an asset (harta kode 036) on their annual spt. tax-free take-home payout for the user - no withholding tax calculation needed on redemption. mutual fund capital gains and phi distributions are bukan objek pajak to the unitholder, though we provide annual e-statements for their spt harta reporting.">
+          <div class="dict-top">
+            <span class="dict-cat cat-rules">Rules, Fees & Tax</span>
+            <code class="dict-slug">#tax</code>
+          </div>
+          <h3 class="dict-term">Bukan Objek Pajak (0% Mutual Fund Income Tax)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>In Indonesia (UU PPh Pasal 4 ayat 3 huruf i), mutual fund profits and dividends are NOT taxed when the investor sells or receives payouts (0% tax deduction), because taxes were already paid inside the fund portfolio. Investors only report the balance as an Asset (Harta Kode 036) on their annual SPT.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Tax-free take-home payout for the user - no withholding tax calculation needed on redemption.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Mutual fund capital gains and PHI distributions are Bukan Objek Pajak to the unitholder, though we provide annual e-statements for their SPT Harta reporting.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-phi" data-cat="orders" data-search="phi (pembagian hasil investasi / dividend) buying, selling & pricing periodic profit distributions paid by some fixed income funds, either wired as cash by the custodian bank or automatically reinvested into new units (up) in s-invest without the user placing an order. like automatic interest/dividend reinvestment that adds units to your account overnight. our daily s-invest ingestion pipeline must process phi dividend unit reinvestment files; otherwise, our local unit balance will drift below ksei (exception xu-12).">
+          <div class="dict-top">
+            <span class="dict-cat cat-orders">Buying, Selling & Pricing</span>
+            <code class="dict-slug">#phi</code>
+          </div>
+          <h3 class="dict-term">PHI (Pembagian Hasil Investasi / Dividend)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>Periodic profit distributions paid by some Fixed Income funds, either wired as Cash by the Custodian Bank or automatically reinvested into new Units (UP) in S-INVEST without the user placing an order.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like automatic interest/dividend reinvestment that adds units to your account overnight.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Our daily S-INVEST ingestion pipeline must process PHI dividend unit reinvestment files; otherwise, our local unit balance will drift below KSEI (Exception XU-12).&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-suitability" data-cat="rules" data-search="profil risiko & suitability mismatch gate (seojk 51/2016) rules, fees & tax every investor takes a quiz to get a risk profile (1=conservative to 5=aggressive), and every fund has a risk score (1 to 5). if a user buys a fund riskier than their profile, the app must show a warning and log their explicit consent. like an age/safety waiver before buying a high-risk product, stored in an immutable audit log for ojk inspectors. per seojk 51/2016, every order snapshots the investor's risk profile score and logs an immutable mismatch consent if fund risk exceeds investor risk.">
+          <div class="dict-top">
+            <span class="dict-cat cat-rules">Rules, Fees & Tax</span>
+            <code class="dict-slug">#suitability</code>
+          </div>
+          <h3 class="dict-term">Profil Risiko & Suitability Mismatch Gate (SEOJK 51/2016)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>Every investor takes a quiz to get a Risk Profile (1=Conservative to 5=Aggressive), and every fund has a Risk Score (1 to 5). If a user buys a fund riskier than their profile, the app MUST show a warning and log their explicit consent.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like an age/safety waiver before buying a high-risk product, stored in an immutable audit log for OJK inspectors.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Per SEOJK 51/2016, every order snapshots the investor's risk profile score and logs an immutable mismatch consent if Fund Risk exceeds Investor Risk.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-apu-ppt" data-cat="rules" data-search="apu-ppt, e-kyc & third-party payer rejection rules, fees & tax anti-money laundering rules (pojk 12/2017 & pojk 8/2023): identity is verified via ktp + selfie liveness + dukcapil, screened against pep/terrorist lists, and payments/redemptions must come from/go to a bank account in the exact same legal name as the investor's sid. strict name-matching security: you cannot pay for your mutual fund using your spouse's or friend's bank account. if funds arrive from a third-party bank account name that doesn't match the sid, the bank kustodian flags an apu-ppt mismatch and parks the cash in suspense for manual refund.">
+          <div class="dict-top">
+            <span class="dict-cat cat-rules">Rules, Fees & Tax</span>
+            <code class="dict-slug">#apu-ppt</code>
+          </div>
+          <h3 class="dict-term">APU-PPT, e-KYC & Third-Party Payer Rejection</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>Anti-Money Laundering rules (POJK 12/2017 & POJK 8/2023): identity is verified via KTP + selfie liveness + Dukcapil, screened against PEP/terrorist lists, and payments/redemptions MUST come from/go to a bank account in the exact same legal name as the investor's SID.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Strict name-matching security: you cannot pay for your mutual fund using your spouse's or friend's bank account.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;If funds arrive from a third-party bank account name that doesn't match the SID, the Bank Kustodian flags an APU-PPT mismatch and parks the cash in suspense for manual refund.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-attempt-idempotency" data-cat="payments" data-search="invoice vs. attempt (-a1 / -a2) & 4 idempotency keys payments & reconciliation separating the parent order/invoice (`inv-001`) from each 15-minute payment attempt (`inv-001-a1`, `inv-001-a2`) so an expired qris/va can be retried cleanly, guarded by 4 deduplication keys (`k_charge`, `k_delivery`, `k_settle`, `k_allot`) and monotonic status ranks. the exact architecture you designed in your payment staging plan: retrying a payment ticket never creates a duplicate order or double unit allotment. we decouple invoice state from attempt state (`<order_id>-a1`, `-a2`) and enforce raw sha-512 verification plus a mandatory server-to-server get /status back-check.">
+          <div class="dict-top">
+            <span class="dict-cat cat-payments">Payments & Reconciliation</span>
+            <code class="dict-slug">#attempt-idempotency</code>
+          </div>
+          <h3 class="dict-term">Invoice vs. Attempt (-a1 / -a2) & 4 Idempotency Keys</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>Separating the parent Order/Invoice (`INV-001`) from each 15-minute payment attempt (`INV-001-a1`, `INV-001-a2`) so an expired QRIS/VA can be retried cleanly, guarded by 4 deduplication keys (`K_charge`, `K_delivery`, `K_settle`, `K_allot`) and monotonic status ranks.</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>The exact architecture you designed in your payment staging plan: retrying a payment ticket never creates a duplicate order or double unit allotment.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;We decouple invoice state from attempt state (`<order_id>-a1`, `-a2`) and enforce raw SHA-512 verification plus a mandatory server-to-server GET /status back-check.&rdquo;</p>
+          </div>
+        </article>
+
+        <article class="dict-card" id="term-recon-3way" data-cat="payments" data-search="3-way daily reconciliation (oms vs. bk cash vs. s-invest units) payments & reconciliation the daily automated audit that compares three separate lists: (1) orders in your app db, (2) real money in the custodian bank statement, and (3) real units allotted in ksei s-invest - catching breaks like 'paid but no units' (`xu-01`) or 'units without cash' (`xu-02`). like matching your store receipts, your bank statement, and the warehouse inventory shipment log every afternoon. because cash settles at the bank kustodian while units settle in ksei s-invest on t+1, a 3-way reconciliation engine is mandatory to catch and resolve s1 breaks within sla.">
+          <div class="dict-top">
+            <span class="dict-cat cat-payments">Payments & Reconciliation</span>
+            <code class="dict-slug">#recon-3way</code>
+          </div>
+          <h3 class="dict-term">3-Way Daily Reconciliation (OMS vs. BK Cash vs. S-INVEST Units)</h3>
+          <div class="dict-block plain">
+            <span class="dict-lbl">in plain words (what it really is)</span>
+            <p>The daily automated audit that compares three separate lists: (1) Orders in your App DB, (2) Real Money in the Custodian Bank Statement, and (3) Real Units allotted in KSEI S-INVEST - catching breaks like 'Paid but No Units' (`XU-01`) or 'Units without Cash' (`XU-02`).</p>
+          </div>
+          <div class="dict-block analogy">
+            <span class="dict-lbl">analogy to systems you already know</span>
+            <p>Like matching your store receipts, your bank statement, and the warehouse inventory shipment log every afternoon.</p>
+          </div>
+          <div class="dict-block interview">
+            <span class="dict-lbl">how to say it in the interview</span>
+            <p>&ldquo;Because cash settles at the Bank Kustodian while units settle in KSEI S-INVEST on T+1, a 3-way reconciliation engine is mandatory to catch and resolve S1 breaks within SLA.&rdquo;</p>
+          </div>
+        </article>
+      </div>
+    </section>
 
     <!-- =====================================================================
          SECTION 01: END-TO-END SUBSCRIPTION & SETTLEMENT (SERPENTINE BLUEPRINT)
@@ -844,35 +1528,35 @@
       <div class="story-steps">
         <div class="step-item">
           <span class="step-num">1</span>
-          <div class="step-body"><strong>investor places nominal order</strong>subscribes in rupiah (Rp 1,000,000). app shows yesterday's price (nab t-1), not the actual execution price.</div>
+          <div class="step-body"><strong>1. user clicks 'buy Rp 1,000,000' (subscription)</strong>in mutual funds, you buy in rupiah, not units. the app shows yesterday's unit price (<code>NAB T-1</code>) because today's price doesn't exist yet (<em>forward pricing</em>).</div>
         </div>
         <div class="step-item crimson">
           <span class="step-num">2</span>
-          <div class="step-body"><strong>aperd validates good order</strong>verifies active sid/ifua and risk suitability, then transmits order instruction to ksei s-invest.</div>
+          <div class="step-body"><strong>2. app checks investor id &amp; sends instruction (good order)</strong>your platform (<code>APERD</code>) checks that the user's master id (<code>SID</code>) and fund sub-account (<code>IFUA</code>) are active, then sends the buy instruction to <code>KSEI S-INVEST</code>.</div>
         </div>
         <div class="step-item sage">
           <span class="step-num">3</span>
-          <div class="step-body"><strong>cash sweeps to custodian</strong>investor pays via va or rdn. funds must land inside the bank kustodian (bk) fund account.</div>
+          <div class="step-body"><strong>3. user pays &amp; money moves to the safe bank (bank kustodian)</strong>user pays via virtual account or <code>RDN</code>. remember: your app cannot keep the money - it must sweep into the fund's account at the <code>Bank Kustodian (BK)</code>.</div>
         </div>
         <div class="step-item crimson">
           <span class="step-num">4</span>
-          <div class="step-body"><strong>the 13:00 wib cut-off gate</strong>if both order and bk cash arrive &le; 13:00 wib, day t price is locked. if either is &gt; 13:00, it rolls to day t+1.</div>
+          <div class="step-body"><strong>4. the 1:00 pm (13:00 wib) deadline check</strong>did both the order in S-INVEST (<code>Good Order</code>) and the money in the Custodian Bank (<code>Good Funds</code>) arrive before 13:00 WIB? if yes &rarr; gets today's price. if late &rarr; gets tomorrow's price.</div>
         </div>
         <div class="step-item sage">
           <span class="step-num">5</span>
-          <div class="step-body"><strong>16:00 wib market valuation</strong>idx closes; bank kustodian values the fund portfolio and computes closing nab_t = Rp 1,250.0000.</div>
+          <div class="step-body"><strong>5. 4:00 pm market closes &amp; bank calculates today's unit price</strong>after the stock market closes at 16:00 WIB, the <code>Bank Kustodian</code> adds up the fund's value and calculates today's official unit price: <code>NAB_T = Rp 1,250.0000</code>.</div>
         </div>
         <div class="step-item slate">
           <span class="step-num">6</span>
-          <div class="step-body"><strong>t+1 s-invest unit allotment</strong>ksei s-invest divides Rp 1,000,000 / 1,250.0000 = 800.0000 units (up) and posts them to the investor's ifua.</div>
+          <div class="step-body"><strong>6. next morning (t+1): ksei issues 800.0000 units (unit allotment)</strong><code>KSEI S-INVEST</code> divides Rp 1,000,000 by Rp 1,250.0000 = <code>800.0000 Units (UP)</code> (4 decimal places) and deposits them into the user's <code>IFUA</code>.</div>
         </div>
         <div class="step-item crimson">
           <span class="step-num">7</span>
-          <div class="step-body"><strong>3-way daily reconciliation</strong>aperd matches oms order = bk bank statement = s-invest unit file before updating the user's portfolio.</div>
+          <div class="step-body"><strong>7. 3-way daily matching check (reconciliation)</strong>your system compares 3 files: (a) your app orders, (b) the Custodian Bank money list, and (c) KSEI's unit list. if a paid order got 0 units, it triggers alert <code>XU-01</code>.</div>
         </div>
         <div class="step-item sage">
           <span class="step-num">8</span>
-          <div class="step-body"><strong>portfolio synced &amp; live</strong>investor sees 800.0000 up in the app and receives official trade confirmation from ksei akses.</div>
+          <div class="step-body"><strong>8. user sees their 800.0000 units in the app</strong>once the 3-way check passes, the user's portfolio updates to <code>800.0000 UP</code> and KSEI sends their official trade confirmation.</div>
         </div>
       </div>
     </section>
@@ -1597,6 +2281,79 @@
       if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         setTimeout(function () { runTrace('svg-sub'); }, 500);
       }
+
+      // Live Search + Category Filter
+      var searchInput = document.getElementById('global-search');
+      var clearBtn = document.getElementById('search-clear');
+      var statusEl = document.getElementById('search-status');
+      var catBtns = Array.prototype.slice.call(document.querySelectorAll('[data-cat-filter]'));
+      var dictCards = Array.prototype.slice.call(document.querySelectorAll('.dict-card'));
+      var gapCards = Array.prototype.slice.call(document.querySelectorAll('.gap-card'));
+      var qaCards = Array.prototype.slice.call(document.querySelectorAll('details.qa-card'));
+      var activeCat = 'all';
+
+      function applyFilter() {
+        var q = (searchInput ? searchInput.value : '').trim().toLowerCase();
+        var shownDict = 0;
+
+        dictCards.forEach(function (card) {
+          var catOk = activeCat === 'all' || card.getAttribute('data-cat') === activeCat;
+          var textOk = !q || (card.getAttribute('data-search') || '').indexOf(q) !== -1;
+          var vis = catOk && textOk;
+          card.hidden = !vis;
+          if (vis) shownDict++;
+        });
+
+        var shownGaps = 0;
+        gapCards.forEach(function (card) {
+          var vis = !q || card.textContent.toLowerCase().indexOf(q) !== -1;
+          card.hidden = !vis;
+          if (vis) shownGaps++;
+        });
+
+        var shownQa = 0;
+        qaCards.forEach(function (card) {
+          var vis = !q || card.textContent.toLowerCase().indexOf(q) !== -1;
+          card.hidden = !vis;
+          if (vis && q) card.open = true;
+          if (vis) shownQa++;
+        });
+
+        if (statusEl) {
+          if (!q && activeCat === 'all') {
+            statusEl.textContent = 'showing all ' + dictCards.length + ' dictionary terms, 8 gaps & 5 self-test questions';
+          } else {
+            statusEl.textContent = 'matched ' + shownDict + ' terms, ' + shownGaps + ' gaps, ' + shownQa + ' questions';
+          }
+        }
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', applyFilter);
+      }
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+          if (searchInput) searchInput.value = '';
+          activeCat = 'all';
+          catBtns.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-cat-filter') === 'all'); });
+          applyFilter();
+        });
+      }
+      catBtns.forEach(function (btnEl) {
+        btnEl.addEventListener('click', function () {
+          activeCat = btnEl.getAttribute('data-cat-filter') || 'all';
+          catBtns.forEach(function (b) { b.classList.toggle('active', b === btnEl); });
+          applyFilter();
+        });
+      });
+
+      window.addEventListener('keydown', function (e) {
+        if (e.key === '/' && document.activeElement !== searchInput) {
+          e.preventDefault();
+          if (searchInput) searchInput.focus();
+        }
+      });
+
     })();
   </script>
 </body>
