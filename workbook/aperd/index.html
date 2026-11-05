@@ -9,10 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- KaTeX for High-Fidelity Mathematical Equations -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
   <style>
     :root {
       --bg-primary: #FBFBFA;
@@ -895,44 +891,6 @@
       line-height: 1.42;
     }
 
-    /* LaTeX Equation Display Box */
-    .latex-eq-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-active);
-      border-radius: 10px;
-      padding: 16px 18px;
-      margin: 14px 0;
-      box-shadow: var(--shadow-card);
-    }
-    .latex-eq-title {
-      font-family: var(--f-mono);
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-secondary);
-      margin: 0 0 10px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .latex-rendered {
-      padding: 12px 14px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      font-size: 16.5px;
-      overflow-x: auto;
-      text-align: center;
-      margin: 8px 0;
-    }
-    .latex-desc {
-      font-size: 13.5px;
-      color: var(--text-secondary);
-      margin: 8px 0 0 0;
-      line-height: 1.45;
-    }
-
     /* Language Switcher Buttons */
     .lang-btn {
       font-family: var(--f-mono);
@@ -965,6 +923,88 @@
       background: #302b25;
       border-color: #4a3e2a;
       border-left-color: #e0ae52;
+    }
+
+    /* Native Robust Mathematical Typography (Zero CDN / Zero JS Failure) */
+    .math-eq-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-active);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      box-shadow: var(--shadow-card);
+    }
+    .math-eq-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .math-eq-title {
+      font-family: var(--f-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+    }
+    .math-eq-body {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-x: auto;
+    }
+    .math-line {
+      font-family: var(--f-mono);
+      font-size: 15.5px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      line-height: 1.4;
+    }
+    .math-var {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .math-frac {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      padding: 0 4px;
+      font-size: 0.95em;
+    }
+    .math-frac-num {
+      border-bottom: 1.5px solid var(--text-primary);
+      padding-bottom: 2px;
+      font-weight: 600;
+    }
+    .math-frac-den {
+      padding-top: 2px;
+      font-weight: 600;
+    }
+    .math-bracket {
+      font-size: 1.4em;
+      font-weight: 300;
+      color: var(--accent-crimson);
+      line-height: 1;
+    }
+    .math-eq-desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      margin: 10px 0 0 0;
+      line-height: 1.48;
     }
   </style>
 </head>
@@ -1670,12 +1710,12 @@
           <span class="hl hl-sage">POJK 23/2016 Compliant</span>
         </div>
         <div class="latex-rendered">
-          $$Gross_{proceeds} = UP_{redeemed} \times NAB_t$$
-          $$Fee_{redemption} = \sum_{i=1}^{k} \left( UP_i \times NAB_t \times r(HoldingDays_i) \right)$$
+          $$Gross_{proceeds} = UP_{redeemed} &times; NAB_t$$
+          $$Fee_{redemption} = \sum_{i=1}^{k} \left( UP_i &times; NAB_t &times; r(HoldingDays_i) \right)$$
           $$Net_{disbursement} = Gross_{proceeds} - Fee_{redemption} - Fee_{bi\_fast}$$
         </div>
         <p class="latex-desc">
-          <strong>FIFO Accounting Law:</strong> Units are liquidated in the exact chronological order of their allotment dates. If tranche $i$ was held for $< 365$ days, fee rate $r$ applies; if held $\ge 365$ days, $r = 0\%$. Under <span class="hl hl-sage">UU PPh Pasal 4 Ayat 3(i)</span>, tax withholding is $0\%$ (Bukan Objek Pajak).
+          <strong>FIFO Accounting Law:</strong> Units are liquidated in the exact chronological order of their allotment dates. If tranche <em>i</em> was held for &lt; 365 days, fee rate <em>r</em> applies; if held &ge; 365 days, <em>r</em> = 0%. Under <span class="hl hl-sage">UU PPh Pasal 4 Ayat 3(i)</span>, tax withholding is 0% (Bukan Objek Pajak).
         </p>
       </div>
 
@@ -1876,12 +1916,12 @@
           <span class="hl hl-sage">POJK 23/2016 Compliant</span>
         </div>
         <div class="latex-rendered">
-          $$Gross_{proceeds} = UP_{redeemed} \times NAB_t$$
-          $$Fee_{redemption} = \sum_{i=1}^{k} \left( UP_i \times NAB_t \times r(HoldingDays_i) \right)$$
+          $$Gross_{proceeds} = UP_{redeemed} &times; NAB_t$$
+          $$Fee_{redemption} = \sum_{i=1}^{k} \left( UP_i &times; NAB_t &times; r(HoldingDays_i) \right)$$
           $$Net_{disbursement} = Gross_{proceeds} - Fee_{redemption} - Fee_{bi\_fast}$$
         </div>
         <p class="latex-desc">
-          <strong>FIFO Accounting Law:</strong> Units are liquidated in the exact chronological order of their allotment dates. If tranche $i$ was held for $< 365$ days, fee rate $r$ applies; if held $\ge 365$ days, $r = 0\%$. Under <span class="hl hl-sage">UU PPh Pasal 4 Ayat 3(i)</span>, tax withholding is $0\%$ (Bukan Objek Pajak).
+          <strong>FIFO Accounting Law:</strong> Units are liquidated in the exact chronological order of their allotment dates. If tranche <em>i</em> was held for &lt; 365 days, fee rate <em>r</em> applies; if held &ge; 365 days, <em>r</em> = 0%. Under <span class="hl hl-sage">UU PPh Pasal 4 Ayat 3(i)</span>, tax withholding is 0% (Bukan Objek Pajak).
         </p>
       </div>
 
@@ -2014,63 +2054,108 @@
         </div>
       </div>
 
-            <!-- High-Fidelity KaTeX Mathematical LaTeX Equations -->
-      <div class="latex-eq-card">
-        <div class="latex-eq-title">
-          <span>Mathematical Formulation 01: Forward Pricing &amp; 4-Decimal Unit Allotment</span>
+                  <!-- Native Mathematical Equations (Robust & Responsive) -->
+      <div class="math-eq-card">
+        <div class="math-eq-header">
+          <span class="math-eq-title">Mathematical Formulation 01: Forward Pricing &amp; 4-Decimal Unit Allotment</span>
           <span class="hl hl-sage">KSEI S-INVEST Standard</span>
         </div>
-        <div class="latex-rendered">
-          $$UP_{allotted} = \left\lfloor \frac{Nominal_{net}}{NAB_t} \right\rfloor_4 = \left\lfloor \frac{Rp\,1{,}000{,}000}{Rp\,1{,}250.0000} \right\rfloor_4 = 800.0000\text{ UP}$$
+        <div class="math-eq-body">
+          <div class="math-line">
+            <span class="math-var">Units Allotted</span> = 
+            <span class="math-bracket">&lfloor;</span>
+            <span class="math-frac">
+              <span class="math-frac-num">Nominal<sub>net</sub></span>
+              <span class="math-frac-den">NAB<sub>t</sub></span>
+            </span>
+            <span class="math-bracket">&rfloor;</span><sub>4</sub>
+            =
+            <span class="math-bracket">&lfloor;</span>
+            <span class="math-frac">
+              <span class="math-frac-num">Rp 1,000,000</span>
+              <span class="math-frac-den">Rp 1,250.0000</span>
+            </span>
+            <span class="math-bracket">&rfloor;</span><sub>4</sub>
+            = <span class="hl hl-sage">800.0000 UP</span>
+          </div>
         </div>
-        <p class="latex-desc">
-          <strong>Governing Rule:</strong> All mutual fund units are truncated (floor) to exactly <strong>4 decimal places</strong> per KSEI S-INVEST specification, avoiding fractional accumulation drift.
+        <p class="math-eq-desc">
+          <strong>Governing Rule:</strong> All Indonesian mutual fund units are truncated (floor) to exactly <strong>4 decimal places</strong> per KSEI S-INVEST specification, avoiding unitholder fractional accumulation drift.
         </p>
       </div>
 
       <div class="split-2">
-        <div class="latex-eq-card">
-          <div class="latex-eq-title">
-            <span>Formula A: Deduct Fee from Gross</span>
-            <span class="hl hl-slate">Method A (Multiplicative)</span>
+        <div class="math-eq-card">
+          <div class="math-eq-header">
+            <span class="math-eq-title">Method A: Deduct Fee from Gross</span>
+            <span class="hl hl-slate">Multiplicative Mode</span>
           </div>
-          <div class="latex-rendered">
-            $$Nominal_{net} = Nominal_{gross} \times (1 - Fee_{sub})$$
-            $$UP = \left\lfloor \frac{Nominal_{gross} \times (1 - Fee_{sub})}{NAB_t} \right\rfloor_4$$
+          <div class="math-eq-body">
+            <div class="math-line">
+              <span class="math-var">Nominal<sub>net</sub></span> = <span class="math-var">Gross</span> &times; ( 1 &minus; <span class="math-var">Fee<sub>sub</sub></span> )
+            </div>
+            <div class="math-line">
+              <span class="math-var">Units</span> = 
+              <span class="math-bracket">&lfloor;</span>
+              <span class="math-frac">
+                <span class="math-frac-num">Gross &times; ( 1 &minus; Fee<sub>sub</sub> )</span>
+                <span class="math-frac-den">NAB<sub>t</sub></span>
+              </span>
+              <span class="math-bracket">&rfloor;</span><sub>4</sub>
+            </div>
           </div>
-          <p class="latex-desc">
-            Example: $Rp\,1{,}000{,}000 \times (1 - 0.01) = Rp\,990{,}000$ &rarr; $\frac{990{,}000}{1{,}250.0000} = \mathbf{792.0000\text{ UP}}$.
+          <p class="math-eq-desc">
+            <strong>Worked Example (1% Fee):</strong><br>
+            Nominal<sub>net</sub> = Rp 1,000,000 &times; (1 &minus; 0.01) = <strong>Rp 990,000</strong><br>
+            Units = Rp 990,000 &divide; Rp 1,250.0000 = <span class="hl hl-slate">792.0000 UP</span>
           </p>
         </div>
 
-        <div class="latex-eq-card">
-          <div class="latex-eq-title">
-            <span>Formula B: Gross Divided by (1 + Fee)</span>
-            <span class="hl hl-amber">Method B (Divisive)</span>
+        <div class="math-eq-card">
+          <div class="math-eq-header">
+            <span class="math-eq-title">Method B: Divide Gross by (1 + Fee)</span>
+            <span class="hl hl-amber">Divisive Mode</span>
           </div>
-          <div class="latex-rendered">
-            $$Nominal_{net} = \frac{Nominal_{gross}}{1 + Fee_{sub}}$$
-            $$UP = \left\lfloor \frac{Nominal_{gross}}{(1 + Fee_{sub}) \times NAB_t} \right\rfloor_4$$
+          <div class="math-eq-body">
+            <div class="math-line">
+              <span class="math-var">Nominal<sub>net</sub></span> = 
+              <span class="math-frac">
+                <span class="math-frac-num">Nominal<sub>gross</sub></span>
+                <span class="math-frac-den">1 + Fee<sub>sub</sub></span>
+              </span>
+            </div>
+            <div class="math-line">
+              <span class="math-var">Units</span> = 
+              <span class="math-bracket">&lfloor;</span>
+              <span class="math-frac">
+                <span class="math-frac-num">Nominal<sub>gross</sub></span>
+                <span class="math-frac-den">( 1 + Fee<sub>sub</sub> ) &times; NAB<sub>t</sub></span>
+              </span>
+              <span class="math-bracket">&rfloor;</span><sub>4</sub>
+            </div>
           </div>
-          <p class="latex-desc">
-            Example: $\frac{Rp\,1{,}000{,}000}{1.01} = Rp\,990{,}099.01$ &rarr; $\frac{990{,}099.01}{1{,}250.0000} = \mathbf{792.0792\text{ UP}}$.
+          <p class="math-eq-desc">
+            <strong>Worked Example (1% Fee):</strong><br>
+            Nominal<sub>net</sub> = Rp 1,000,000 &divide; 1.01 = <strong>Rp 990,099.01</strong><br>
+            Units = Rp 990,099.01 &divide; Rp 1,250.0000 = <span class="hl hl-amber">792.0792 UP</span>
           </p>
         </div>
       </div>
 
-      <div class="latex-eq-card">
-        <div class="latex-eq-title">
-          <span>Mathematical Formulation 02: Partial Redemption Volatility Buffer</span>
+      <div class="math-eq-card">
+        <div class="math-eq-header">
+          <span class="math-eq-title">Mathematical Formulation 02: Partial Redemption Volatility Buffer</span>
           <span class="hl hl-crimson">Risk Mitigation</span>
         </div>
-        <div class="latex-rendered">
-          $$\left( UP_{remaining} \times NAB_{t-1} \times (1 - \sigma_{buffer}) \right) \ge Balance_{minimum}$$
+        <div class="math-eq-body">
+          <div class="math-line">
+            [ <span class="math-var">UP<sub>remaining</sub></span> &times; <span class="math-var">NAB<sub>t-1</sub></span> &times; ( 1 &minus; <span class="math-var">&sigma;<sub>buffer</sub></span> ) ] &ge; <span class="math-var">Balance<sub>minimum</sub></span>
+          </div>
         </div>
-        <p class="latex-desc">
-          <strong>BRD Safety Condition:</strong> Because today's closing $NAB_t$ is unknown when a user places a partial Rupiah sell order at 11:00 WIB, the checkout engine applies a safety factor $\sigma_{buffer} \ge 0.10$ (10% market cushion) to prevent the remaining balance from breaching the fund's mandatory minimum holding threshold (<em>Saldo Minimum Kepemilikan</em>).
+        <p class="math-eq-desc">
+          <strong>BRD Safety Condition:</strong> Because today's closing NAB<sub>t</sub> is unknown when a user places a partial Rupiah sell order at 11:00 WIB, the checkout engine enforces a safety cushion <strong>&sigma;<sub>buffer</sub> &ge; 10%</strong> to prevent the remaining balance from breaching the fund's mandatory minimum holding threshold (<em>Saldo Minimum Kepemilikan</em>) if the market drops at 16:00 WIB close.
         </p>
       </div>
-
       <div class="split-2">
         <div class="box-card">
           <h3>🧮 Subscription Fee &amp; 4-Decimal Unit Formulas</h3>
@@ -2112,7 +2197,27 @@
         </p>
       </div>
 
-      <div class="flowchart-whiteboard-box">
+            <div class="math-eq-card">
+        <div class="math-eq-header">
+          <span class="math-eq-title">Mathematical Formulation 03: FIFO Redemption Fee &amp; Net Bank Disbursement</span>
+          <span class="hl hl-sage">POJK 23/2016 Compliant</span>
+        </div>
+        <div class="math-eq-body">
+          <div class="math-line">
+            <span class="math-var">Gross Proceeds</span> = <span class="math-var">UP<sub>redeemed</sub></span> &times; <span class="math-var">NAB<sub>t</sub></span>
+          </div>
+          <div class="math-line">
+            <span class="math-var">Redemption Fee</span> = &sum;<sub>i=1</sub><sup>k</sup> ( <span class="math-var">UP<sub>i</sub></span> &times; <span class="math-var">NAB<sub>t</sub></span> &times; <span class="math-var">FeeRate<sub>i</sub>(HoldingDays<sub>i</sub>)</span> )
+          </div>
+          <div class="math-line">
+            <span class="math-var">Net Disbursement</span> = <span class="math-var">Gross Proceeds</span> &minus; <span class="math-var">Redemption Fee</span> &minus; <span class="math-var">Transfer Fee</span>
+          </div>
+        </div>
+        <p class="math-eq-desc">
+          <strong>FIFO Accounting Law:</strong> Units are liquidated in the exact chronological order of their allotment dates. If tranche <em>i</em> was held for &lt; 365 days, holding fee rate applies; if held &ge; 365 days, fee rate = 0%. Under <span class="hl hl-sage">UU PPh Pasal 4 Ayat 3(i)</span>, withholding tax is <strong>0% (Bukan Objek Pajak)</strong>.
+        </p>
+      </div>
+<div class="flowchart-whiteboard-box">
         <div class="flowchart-board-toolbar">
           <div class="toolbar-left">
             <span><strong>Redemption (Top Lane)</strong> vs. <strong>Native &amp; Cross-MI Switching (Bottom Lane)</strong></span>
@@ -2914,27 +3019,6 @@
           if (searchInput) searchInput.focus();
         }
       });
-
-
-      // KaTeX Auto-Render Initializer
-      function initMath() {
-        if (window.renderMathInElement) {
-          window.renderMathInElement(document.body, {
-            delimiters: [
-              { left: '$$', right: '$$', display: true },
-              { left: '$', right: '$', display: false }
-            ],
-            throwOnError: false
-          });
-        } else {
-          setTimeout(initMath, 200);
-        }
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initMath);
-      } else {
-        initMath();
-      }
 
       // Bilingual View Switcher
       var btnEn = document.getElementById('btn-lang-en');
