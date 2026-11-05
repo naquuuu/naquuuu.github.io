@@ -1386,8 +1386,8 @@
           <button type="button" class="trace-btn" data-trace="svg-sub">▶ trace flow (steps 1 &rarr; 8)</button>
         </div>
         <div class="flowchart-board-canvas">
-          <svg id="svg-sub" class="flowchart-svg" viewBox="0 0 880 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="serpentine 8-step diagram of mutual fund subscription from checkout through 13:00 wib cut-off, custodian nav calculation, s-invest unit allotment, and 3-way reconciliation">
-            <title>end-to-end mutual fund subscription serpentine blueprint</title>
+                    <svg id="svg-sub" class="flowchart-svg" viewBox="0 0 880 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="left-to-right 8-step diagram with explicit start at top-left and end at bottom-right showing mutual fund subscription">
+            <title>end-to-end mutual fund subscription blueprint (start top-left to end bottom-right)</title>
             <defs>
               <marker id="arr-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#8c897e"/></marker>
               <marker id="arr-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#3b6989"/></marker>
@@ -1397,129 +1397,128 @@
             <rect width="100%" height="100%" fill="var(--bg-surface, #F2F2ED)"/>
 
             <!-- ROW BAND LABELS -->
-            <text x="24" y="32" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="700" fill="#8a3b1e">row 1 · day t morning (before 13:00 wib exchange cut-off): order instruction &amp; cash collection</text>
-            <text x="24" y="182" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="700" fill="#2d4b63">row 2 · day t close (16:00 wib) &rarr; day t+1: nav valuation, s-invest 4-decimal allotment &amp; 3-way reconciliation</text>
+            <text x="24" y="26" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="700" fill="#8a3b1e">row 1 (read left &rarr; right) · day t morning before 13:00 wib: user buys &amp; money moves to custodian bank</text>
+            <text x="24" y="198" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="700" fill="#2d4b63">row 2 (read left &rarr; right) · day t 16:00 close &rarr; day t+1: price calculated, ksei issues units &amp; 3-way check completes</text>
 
-            <!-- CONNECTORS (Ordered 1 -> 8 for animated packet trace) -->
+            <!-- BIG START BADGE (Top-Left above Step 1) -->
+            <rect x="24" y="34" width="92" height="20" rx="10" fill="#a63822"/>
+            <text x="70" y="47.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">▶ start here</text>
+
+            <!-- BIG END BADGE (Bottom-Right above Step 8) -->
+            <rect x="742" y="206" width="114" height="20" rx="10" fill="#2e6844"/>
+            <text x="799" y="219.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">✓ end (completed)</text>
+
+            <!-- ORDERED SOLID CONNECTORS (1 -> 2 -> 3 -> 4 -> wrap to 5 -> 6 -> 7 -> 8) -->
             <!-- 1 -> 2 -->
-            <path d="M 184 86 L 218 86" stroke="#8c897e" stroke-width="1.4" fill="none" marker-end="url(#arr-gray)"/>
+            <path d="M 184 94 L 218 94" stroke="#8c897e" stroke-width="1.5" fill="none" marker-end="url(#arr-gray)"/>
             <!-- 2 -> 3 -->
-            <path d="M 402 86 L 436 86" stroke="#8c897e" stroke-width="1.4" fill="none" marker-end="url(#arr-gray)"/>
+            <path d="M 402 94 L 436 94" stroke="#8c897e" stroke-width="1.5" fill="none" marker-end="url(#arr-gray)"/>
             <!-- 3 -> 4 -->
-            <path d="M 616 86 L 656 86" stroke="#2e6844" stroke-width="1.5" fill="none" marker-end="url(#arr-sage)"/>
-            <!-- 4 -> 5 (Serpentine drop down right side on <= 13:00 pass) -->
-            <path d="M 738 124 L 738 206" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#arr-sage)"/>
-            <!-- 5 -> 6 (Row 2 Right -> Left) -->
-            <path d="M 648 236 L 616 236" stroke="#3b6989" stroke-width="1.5" fill="none" marker-end="url(#arr-slate)"/>
+            <path d="M 616 94 L 656 94" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#arr-sage)"/>
+            <!-- 4 (Top-Right) -> 5 (Bottom-Left) Clean Reading Wrap Line -->
+            <path d="M 738 132 L 738 162 Q 738 170 730 170 L 114 170 Q 106 170 106 178 L 106 232" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#arr-sage)"/>
+            <!-- 5 -> 6 (Row 2 Left -> Right) -->
+            <path d="M 196 264 L 230 264" stroke="#3b6989" stroke-width="1.6" fill="none" marker-end="url(#arr-slate)"/>
             <!-- 6 -> 7 -->
-            <path d="M 436 236 L 402 236" stroke="#3b6989" stroke-width="1.5" fill="none" marker-end="url(#arr-slate)"/>
+            <path d="M 410 264 L 444 264" stroke="#3b6989" stroke-width="1.6" fill="none" marker-end="url(#arr-slate)"/>
             <!-- 7 -> 8 -->
-            <path d="M 218 236 L 184 236" stroke="#2e6844" stroke-width="1.8" fill="none" marker-end="url(#arr-sage)"/>
+            <path d="M 628 264 L 668 264" stroke="#2e6844" stroke-width="1.8" fill="none" marker-end="url(#arr-sage)"/>
+
+            <!-- Wrap Label on the middle line -->
+            <rect x="330" y="161" width="220" height="17" rx="4" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="1"/>
+            <text x="440" y="172.5" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="700" fill="#244b35" text-anchor="middle">[both &le; 13:00 wib &rarr; continue to step 5]</text>
 
             <!-- Exception Branch from Diamond 4 (> 13:00 Rollover) -->
-            <path d="M 738 48 L 738 22 L 848 22 L 848 72" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#arr-crimson)"/>
-            <rect x="746" y="12" width="96" height="14" rx="3" fill="#fdf6f5" stroke="#d85c46" stroke-width="0.8"/>
-            <text x="794" y="21.5" font-family="'JetBrains Mono', monospace" font-size="7.2" font-weight="700" fill="#a63822" text-anchor="middle">[> 13:00: rolls t+1]</text>
-            <rect x="814" y="74" width="54" height="28" rx="4" fill="#fdf6f5" stroke="#d85c46" stroke-width="1"/>
-            <text x="841" y="87" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#a63822" text-anchor="middle">nab t+1</text>
-            <text x="841" y="97" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" fill="#a63822" text-anchor="middle">next day</text>
+            <path d="M 806 94 L 832 94" stroke="#a63822" stroke-width="1.4" stroke-dasharray="4,3" fill="none" marker-end="url(#arr-crimson)"/>
+            <rect x="822" y="64" width="52" height="56" rx="6" fill="#fdf6f5" stroke="#d85c46" stroke-width="1.2"/>
+            <text x="848" y="82" font-family="'JetBrains Mono', monospace" font-size="7.2" font-weight="700" fill="#a63822" text-anchor="middle">&gt;13:00</text>
+            <text x="848" y="95" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="700" fill="#a63822" text-anchor="middle">rolls to</text>
+            <text x="848" y="107" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#a63822" text-anchor="middle">nab t+1</text>
 
-            <!-- Serpentine Pass Badge -->
-            <rect x="682" y="148" width="112" height="16" rx="3" fill="#f4f8f5" stroke="#5b8a6d" stroke-width="0.9"/>
-            <text x="738" y="159" font-family="'JetBrains Mono', monospace" font-size="7.8" font-weight="700" fill="#244b35" text-anchor="middle">[both &le; 13:00: day t]</text>
+            <!-- ROW 1 NODES (Left -> Right: Steps 1, 2, 3, 4) -->
+            <!-- Step 1: Investor Checkout -->
+            <polygon points="34,62 192,62 176,126 18,126" fill="var(--bg-card, #FFFFFF)" stroke="#a63822" stroke-width="1.8" stroke-linejoin="round"/>
+            <rect x="38" y="68" width="56" height="12" rx="2" fill="#fdf6f5" stroke="#d99b82" stroke-width="0.8"/>
+            <text x="66" y="76.5" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#a63822" text-anchor="middle">step 01</text>
+            <text x="106" y="94" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">user clicks buy</text>
+            <text x="106" y="108" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">Rp 1,000,000 (subscription)</text>
+            <text x="106" y="119" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#8a3b1e" text-anchor="middle">today's price unknown</text>
 
-            <!-- ROW 1 NODES -->
-            <!-- Node 1: Investor Checkout (Input Parallelogram) -->
-            <polygon points="34,54 192,54 176,118 18,118" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.4" stroke-linejoin="round"/>
-            <rect x="38" y="60" width="56" height="12" rx="2" fill="#f0ede6" stroke="#c4bfb2" stroke-width="0.8"/>
-            <text x="66" y="68.5" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#5a5850" text-anchor="middle">step 01</text>
-            <text x="106" y="86" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">investor order</text>
-            <text x="106" y="100" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">buys Rp 1,000,000</text>
-            <text x="106" y="111" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#8a3b1e" text-anchor="middle">nab_t unknown at buy</text>
+            <!-- Step 2: APERD Good Order Gate -->
+            <polygon points="230,62 390,62 402,94 390,126 230,126 218,94" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" stroke-linejoin="round"/>
+            <rect x="236" y="68" width="84" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8"/>
+            <text x="278" y="76.5" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">step 02 · aperd</text>
+            <text x="310" y="94" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">check id &amp; send order</text>
+            <text x="310" y="108" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">checks sid/ifua &amp; risk</text>
+            <text x="310" y="119" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#8a3b1e" text-anchor="middle">sends good order to ksei</text>
 
-            <!-- Node 2: APERD OMS & S-INVEST Instruction (Control Hexagon) -->
-            <polygon points="230,54 390,54 402,86 390,118 230,118 218,86" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" stroke-linejoin="round"/>
-            <rect x="236" y="60" width="84" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8"/>
-            <text x="278" y="68.5" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">step 02 · aperd</text>
-            <text x="310" y="86" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">good order gate</text>
-            <text x="310" y="100" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">checks sid/ifua &amp; risk</text>
-            <text x="310" y="111" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#8a3b1e" text-anchor="middle">sends stp to s-invest</text>
+            <!-- Step 3: VA / RDN Payment to BK -->
+            <rect x="436" y="62" width="180" height="64" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#88af95" stroke-width="1.5"/>
+            <rect x="444" y="68" width="96" height="12" rx="2" fill="#f4f8f5" stroke="#88af95" stroke-width="0.8"/>
+            <text x="492" y="76.5" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">step 03 · cash rail</text>
+            <text x="526" y="94" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">money to custodian</text>
+            <text x="526" y="108" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">va / rdn sweeps to bk</text>
+            <text x="526" y="119" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#244b35" text-anchor="middle">app holds Rp 0 float</text>
 
-            <!-- Node 3: VA / RDN Payment & Sweep to BK (Action Box) -->
-            <rect x="436" y="54" width="180" height="64" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#88af95" stroke-width="1.5"/>
-            <rect x="444" y="60" width="96" height="12" rx="2" fill="#f4f8f5" stroke="#88af95" stroke-width="0.8"/>
-            <text x="492" y="68.5" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">step 03 · cash rail</text>
-            <text x="526" y="86" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">va / rdn to custodian</text>
-            <text x="526" y="100" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">cash swept to bk account</text>
-            <text x="526" y="111" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#244b35" text-anchor="middle">aperd holds Rp 0 float</text>
+            <!-- Step 4: 13:00 WIB Cut-Off Decision Diamond -->
+            <polygon points="656,94 734,56 806,94 734,132" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.6" stroke-linejoin="round"/>
+            <text x="731" y="90" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">4. &le; 13:00 wib?</text>
+            <text x="731" y="103" font-family="'JetBrains Mono', monospace" font-size="7.2" fill="var(--text-secondary, #555550)" text-anchor="middle">order + bk cash</text>
 
-            <!-- Node 4: 13:00 WIB Cut-Off Decision Diamond -->
-            <polygon points="656,86 738,48 806,86 738,124" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.6" stroke-linejoin="round"/>
-            <text x="734" y="82" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">4. &le; 13:00 wib?</text>
-            <text x="734" y="95" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">order + bk cash</text>
+            <!-- ROW 2 NODES (Left -> Right: Steps 5, 6, 7, 8) -->
+            <!-- Step 5: Bank Kustodian 16:00 Valuation (Bottom-Left) -->
+            <rect x="22" y="232" width="174" height="64" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#88af95" stroke-width="1.5"/>
+            <rect x="30" y="238" width="104" height="12" rx="2" fill="#f4f8f5" stroke="#88af95" stroke-width="0.8"/>
+            <text x="82" y="246.5" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">step 05 · 16:00 close</text>
+            <text x="109" y="264" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">bank calculates price</text>
+            <text x="109" y="278" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">bank kustodian values fund</text>
+            <text x="109" y="289" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#244b35" text-anchor="middle">nab_t = Rp 1,250.0000</text>
 
-            <!-- ROW 2 NODES (Right -> Left) -->
-            <!-- Node 5: Bank Kustodian 16:00 Valuation (Action Box at Right) -->
-            <rect x="648" y="204" width="180" height="64" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#88af95" stroke-width="1.5"/>
-            <rect x="656" y="210" width="104" height="12" rx="2" fill="#f4f8f5" stroke="#88af95" stroke-width="0.8"/>
-            <text x="708" y="218.5" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#244b35" text-anchor="middle">step 05 · custodian</text>
-            <text x="738" y="236" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">eod nav valuation</text>
-            <text x="738" y="250" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">16:00 idx market close</text>
-            <text x="738" y="261" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#244b35" text-anchor="middle">nab_t = Rp 1,250.0000</text>
+            <!-- Step 6: KSEI S-INVEST Unit Allotment (Bottom Center-Left) -->
+            <path d="M 230 238 A 90 6 0 0 1 410 238 V 290 A 90 6 0 0 1 230 290 Z" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.6"/>
+            <path d="M 230 238 A 90 6 0 0 0 410 238" fill="none" stroke="#9bb4c7" stroke-width="1.6"/>
+            <rect x="240" y="242" width="98" height="12" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8"/>
+            <text x="289" y="250.5" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#2d4b63" text-anchor="middle">step 06 · s-invest</text>
+            <text x="320" y="267" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">t+1 unit allotment</text>
+            <text x="320" y="280" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">1m / 1,250 = 800.0000 up</text>
+            <text x="320" y="291" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#2d4b63" text-anchor="middle">saved in investor ifua</text>
 
-            <!-- Node 6: KSEI S-INVEST Unit Allotment (Data Cylinder) -->
-            <path d="M 436 210 A 90 6 0 0 1 616 210 V 262 A 90 6 0 0 1 436 262 Z" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.6"/>
-            <path d="M 436 210 A 90 6 0 0 0 616 210" fill="none" stroke="#9bb4c7" stroke-width="1.6"/>
-            <rect x="446" y="214" width="98" height="12" rx="2" fill="#e8eef3" stroke="#9bb4c7" stroke-width="0.8"/>
-            <text x="495" y="222.5" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#2d4b63" text-anchor="middle">step 06 · s-invest</text>
-            <text x="526" y="239" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">t+1 unit allotment</text>
-            <text x="526" y="252" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">1m / 1,250 = 800.0000 up</text>
-            <text x="526" y="263" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#2d4b63" text-anchor="middle">posted to investor ifua</text>
+            <!-- Step 7: 3-Way Reconciliation Gate (Bottom Center-Right) -->
+            <polygon points="456,232 616,232 628,264 616,296 456,296 444,264" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" stroke-linejoin="round"/>
+            <rect x="462" y="238" width="94" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8"/>
+            <text x="509" y="246.5" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">step 07 · 3-way check</text>
+            <text x="536" y="264" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">match 3 ledgers</text>
+            <text x="536" y="278" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">app order = bk cash = ksei</text>
+            <text x="536" y="289" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#8a3b1e" text-anchor="middle">alerts xu-01 if missing</text>
 
-            <!-- Node 7: 3-Way Reconciliation Gate (Control Hexagon) -->
-            <polygon points="230,204 390,204 402,236 390,268 230,268 218,236" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5" stroke-linejoin="round"/>
-            <rect x="236" y="210" width="94" height="12" rx="2" fill="#f7ede6" stroke="#d99b82" stroke-width="0.8"/>
-            <text x="283" y="218.5" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#8a3b1e" text-anchor="middle">step 07 · 3-way recon</text>
-            <text x="310" y="236" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">oms = bk = ksei</text>
-            <text x="310" y="250" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" fill="var(--text-secondary, #555550)" text-anchor="middle">verifies cash &amp; 4-dec units</text>
-            <text x="310" y="261" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#8a3b1e" text-anchor="middle">flags xu-01 if unallotted</text>
-
-            <!-- Node 8: Portfolio Active (Terminal Pill at Left) -->
-            <rect x="22" y="206" width="162" height="60" rx="30" fill="#f4f8f5" stroke="#2e6844" stroke-width="1.8"/>
-            <text x="103" y="229" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#244b35" text-anchor="middle">step 08 · completed</text>
-            <text x="103" y="244" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">800.0000 up live</text>
-            <text x="103" y="257" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.2" fill="#244b35" text-anchor="middle">app &amp; ksei akses synced</text>
-
-            <!-- Remediation Loop (Step 7 -> Exception Queue if mismatch) -->
-            <path d="M 310 268 L 310 302 Q 310 310 318 310 L 526 310 Q 534 310 534 302 L 534 268" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#arr-crimson)"/>
-            <rect x="352" y="302" width="140" height="14" rx="3" fill="var(--bg-surface, #F2F2ED)" stroke="var(--border-active, #D4D4CE)" stroke-width="0.8"/>
-            <text x="422" y="311.5" font-family="'JetBrains Mono', monospace" font-size="7.2" fill="#a63822" text-anchor="middle">[mismatch &rarr; xu-01 / xc-02 queue]</text>
+            <!-- Step 8: Portfolio Active (Terminal Pill at Bottom-Right) -->
+            <rect x="668" y="234" width="188" height="60" rx="30" fill="#f4f8f5" stroke="#2e6844" stroke-width="2.2"/>
+            <text x="762" y="256" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#244b35" text-anchor="middle">step 08 · done</text>
+            <text x="762" y="272" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">800.0000 units live</text>
+            <text x="762" y="285" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.2" fill="#244b35" text-anchor="middle">shown in app &amp; ksei akses</text>
 
             <!-- LEGEND -->
-            <line x1="24" y1="340" x2="856" y2="340" stroke="var(--border-active, #D4D4CE)" stroke-width="1"/>
-            <text x="24" y="362" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)">lines</text>
-            <line x1="78" y1="358.5" x2="108" y2="358.5" stroke="#8c897e" stroke-width="1.4" marker-end="url(#arr-gray)"/>
-            <text x="116" y="362" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">instruction flow</text>
-            <line x1="230" y1="358.5" x2="260" y2="358.5" stroke="#2e6844" stroke-width="1.6" marker-end="url(#arr-sage)"/>
-            <text x="268" y="362" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">verified cash / completion</text>
-            <line x1="436" y1="358.5" x2="466" y2="358.5" stroke="#3b6989" stroke-width="1.5" marker-end="url(#arr-slate)"/>
-            <text x="474" y="362" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">s-invest unit feed</text>
-            <line x1="606" y1="358.5" x2="636" y2="358.5" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#arr-crimson)"/>
-            <text x="644" y="362" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">rollover or recon break</text>
+            <line x1="24" y1="348" x2="856" y2="348" stroke="var(--border-active, #D4D4CE)" stroke-width="1"/>
+            <text x="24" y="370" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)">how to read:</text>
+            <rect x="114" y="359" width="66" height="15" rx="7.5" fill="#a63822"/>
+            <text x="147" y="369.5" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">▶ start</text>
+            <text x="188" y="370" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">top-left (step 01) &rarr; read row 1 left-to-right &rarr; follow green line to row 2 &rarr; read left-to-right to</text>
+            <rect x="752" y="359" width="66" height="15" rx="7.5" fill="#2e6844"/>
+            <text x="785" y="369.5" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">✓ end</text>
 
-            <text x="24" y="388" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)">shapes</text>
-            <polygon points="82,379 96,379 92,390 78,390" fill="var(--bg-card, #FFFFFF)" stroke="#8c897e" stroke-width="1.2"/>
-            <text x="104" y="388" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">user input</text>
-            <polygon points="184,379 196,379 200,384.5 196,390 184,390 180,384.5" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.2"/>
-            <text x="208" y="388" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">control gate</text>
-            <rect x="298" y="379" width="18" height="11" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#88af95" stroke-width="1.2"/>
-            <text x="322" y="388" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">custodian action</text>
-            <polygon points="436,384.5 445,378 454,384.5 445,391" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.2"/>
-            <text x="462" y="388" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">13:00 cut-off decision</text>
-            <path d="M 604 381 A 9 2.5 0 0 1 622 381 V 388 A 9 2.5 0 0 1 604 388 Z" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.2"/>
-            <text x="628" y="388" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">ksei s-invest ledger</text>
-            <rect x="756" y="379" width="20" height="11" rx="5.5" fill="#f4f8f5" stroke="#2e6844" stroke-width="1.2"/>
-            <text x="782" y="388" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">settled state</text>
+            <text x="24" y="398" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="var(--text-secondary, #555550)">shapes:</text>
+            <polygon points="82,389 96,389 92,400 78,400" fill="var(--bg-card, #FFFFFF)" stroke="#a63822" stroke-width="1.2"/>
+            <text x="104" y="398" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">start input</text>
+            <polygon points="194,389 206,389 210,394.5 206,400 194,400 190,394.5" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.2"/>
+            <text x="218" y="398" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">validation gate</text>
+            <rect x="328" y="389" width="18" height="11" rx="2" fill="var(--bg-card, #FFFFFF)" stroke="#88af95" stroke-width="1.2"/>
+            <text x="352" y="398" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">bank action</text>
+            <polygon points="446,394.5 455,388 464,394.5 455,401" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.2"/>
+            <text x="472" y="398" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">13:00 decision</text>
+            <path d="M 584 391 A 9 2.5 0 0 1 602 391 V 398 A 9 2.5 0 0 1 584 398 Z" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.2"/>
+            <text x="608" y="398" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">ksei database</text>
+            <rect x="716" y="389" width="20" height="11" rx="5.5" fill="#f4f8f5" stroke="#2e6844" stroke-width="1.5"/>
+            <text x="742" y="398" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="var(--text-secondary, #555550)">end state</text>
           </svg>
         </div>
       </div>
@@ -1585,63 +1584,72 @@
           <button type="button" class="trace-btn" data-trace="svg-kyc">▶ trace onboarding (steps 1 &rarr; 7)</button>
         </div>
         <div class="flowchart-board-canvas">
-          <svg id="svg-kyc" class="flowchart-svg" viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="serpentine 7-step diagram of investor onboarding from ktp liveness through dukcapil and apu-ppt screening to ksei s-invest sid and multi-ifua creation">
+                    <svg id="svg-kyc" class="flowchart-svg" viewBox="0 0 880 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="left-to-right 7-step investor onboarding diagram with explicit start at top-left and end at bottom-right">
             <title>investor onboarding and ksei sid/ifua provisioning blueprint</title>
             <rect width="100%" height="100%" fill="var(--bg-surface, #F2F2ED)"/>
 
-            <!-- Connectors 1 -> 7 -->
-            <path d="M 184 76 L 220 76" stroke="#8c897e" stroke-width="1.4" fill="none" marker-end="url(#arr-gray)"/>
-            <path d="M 408 76 L 444 76" stroke="#8c897e" stroke-width="1.4" fill="none" marker-end="url(#arr-gray)"/>
-            <path d="M 624 76 L 664 76" stroke="#3b6989" stroke-width="1.5" fill="none" marker-end="url(#arr-slate)"/>
-            <path d="M 744 112 L 744 188" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#arr-sage)"/>
-            <path d="M 648 218 L 606 218" stroke="#3b6989" stroke-width="1.5" fill="none" marker-end="url(#arr-slate)"/>
-            <path d="M 416 218 L 372 218" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#arr-sage)"/>
+            <!-- BIG START & END BADGES -->
+            <rect x="24" y="20" width="92" height="20" rx="10" fill="#a63822"/>
+            <text x="70" y="33.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">▶ start here</text>
 
-            <!-- Reject Loop from KSEI Diamond (4 -> 1/2) -->
-            <path d="M 744 40 L 744 18 L 314 18 L 314 44" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#arr-crimson)"/>
-            <rect x="440" y="9" width="188" height="14" rx="3" fill="#fdf6f5" stroke="#d85c46" stroke-width="0.8"/>
-            <text x="534" y="18.5" font-family="'JetBrains Mono', monospace" font-size="7.2" font-weight="700" fill="#a63822" text-anchor="middle">[ksei reject: nik / bank name mismatch]</text>
+            <rect x="688" y="170" width="144" height="20" rx="10" fill="#2e6844"/>
+            <text x="760" y="183.5" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">✓ end (ready to buy)</text>
 
-            <!-- Row 1 Nodes -->
-            <polygon points="32,46 192,46 176,106 16,106" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.4"/>
-            <text x="104" y="68" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#5a5850" text-anchor="middle">step 01 · capture</text>
-            <text x="104" y="83" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">e-ktp + liveness</text>
-            <text x="104" y="96" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.2" fill="var(--text-secondary, #555550)" text-anchor="middle">16-digit nik + risk quiz</text>
+            <!-- Connectors 1 -> 2 -> 3 -> 4 -> wrap to 5 -> 6 -> 7 (All Left -> Right!) -->
+            <path d="M 184 78 L 220 78" stroke="#8c897e" stroke-width="1.5" fill="none" marker-end="url(#arr-gray)"/>
+            <path d="M 408 78 L 444 78" stroke="#8c897e" stroke-width="1.5" fill="none" marker-end="url(#arr-gray)"/>
+            <path d="M 624 78 L 664 78" stroke="#3b6989" stroke-width="1.5" fill="none" marker-end="url(#arr-slate)"/>
+            <!-- Wrap 4 (Top-Right) -> 5 (Bottom-Left) -->
+            <path d="M 744 114 L 744 146 Q 744 154 736 154 L 126 154 Q 118 154 118 162 L 118 196" stroke="#2e6844" stroke-width="1.6" fill="none" marker-end="url(#arr-sage)"/>
+            <!-- 5 -> 6 -> 7 (Row 2 Left -> Right) -->
+            <path d="M 220 226 L 276 226" stroke="#3b6989" stroke-width="1.5" fill="none" marker-end="url(#arr-slate)"/>
+            <path d="M 476 226 L 536 226" stroke="#2e6844" stroke-width="1.8" fill="none" marker-end="url(#arr-sage)"/>
 
-            <polygon points="232,46 396,46 408,76 396,106 232,106 220,76" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5"/>
-            <text x="314" y="66" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#8a3b1e" text-anchor="middle">step 02 · apu-ppt gate</text>
-            <text x="314" y="82" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">dukcapil &amp; pep/dttot</text>
-            <text x="314" y="95" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.2" fill="var(--text-secondary, #555550)" text-anchor="middle">bank name == ktp name</text>
+            <!-- Reject Loop from KSEI Diamond (4 -> 2) -->
+            <path d="M 744 42 L 744 16 L 314 16 L 314 46" stroke="#a63822" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#arr-crimson)"/>
+            <rect x="430" y="7" width="204" height="14" rx="3" fill="#fdf6f5" stroke="#d85c46" stroke-width="0.8"/>
+            <text x="532" y="16.5" font-family="'JetBrains Mono', monospace" font-size="7.2" font-weight="700" fill="#a63822" text-anchor="middle">[if rejected: fix nik / bank account name]</text>
 
-            <rect x="444" y="46" width="180" height="60" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5"/>
-            <text x="534" y="66" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#2d4b63" text-anchor="middle">step 03 · s-invest api</text>
-            <text x="534" y="82" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">submit cif payload</text>
-            <text x="534" y="95" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.2" fill="var(--text-secondary, #555550)" text-anchor="middle">idempotency: cif_id + attempt</text>
+            <!-- Row 1 Nodes (Left -> Right) -->
+            <polygon points="32,48 192,48 176,108 16,108" fill="var(--bg-card, #FFFFFF)" stroke="#a63822" stroke-width="1.8"/>
+            <text x="104" y="70" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#a63822" text-anchor="middle">step 01 · start</text>
+            <text x="104" y="85" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">upload ktp + selfie</text>
+            <text x="104" y="98" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.2" fill="var(--text-secondary, #555550)" text-anchor="middle">16-digit nik + risk quiz</text>
 
-            <polygon points="664,76 744,40 824,76 744,112" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5"/>
-            <text x="744" y="73" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">4. ksei valid?</text>
-            <text x="744" y="86" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">sla: t+0 / t+1</text>
+            <polygon points="232,48 396,48 408,78 396,108 232,108 220,78" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5"/>
+            <text x="314" y="68" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#8a3b1e" text-anchor="middle">step 02 · kyc check</text>
+            <text x="314" y="84" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">dukcapil &amp; anti-fraud</text>
+            <text x="314" y="97" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.2" fill="var(--text-secondary, #555550)" text-anchor="middle">bank name must match ktp</text>
 
-            <!-- Row 2 Nodes (Right -> Left) -->
-            <path d="M 648 194 A 96 6 0 0 1 840 194 V 244 A 96 6 0 0 1 648 244 Z" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.6"/>
-            <path d="M 648 194 A 96 6 0 0 0 840 194" fill="none" stroke="#9bb4c7" stroke-width="1.6"/>
-            <text x="744" y="213" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#2d4b63" text-anchor="middle">step 05 · 1 master sid</text>
-            <text x="744" y="228" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">sid: idd1204ab892104</text>
-            <text x="744" y="240" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">15-char capital market id</text>
+            <rect x="444" y="48" width="180" height="60" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.5"/>
+            <text x="534" y="68" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#2d4b63" text-anchor="middle">step 03 · send to ksei</text>
+            <text x="534" y="84" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">register in s-invest</text>
+            <text x="534" y="97" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.2" fill="var(--text-secondary, #555550)" text-anchor="middle">sends 13 investor fields</text>
 
-            <path d="M 416 194 Q 416 188 422 188 H 600 Q 606 188 606 194 V 242 C 566 236 534 248 498 244 S 446 238 416 243 Z" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.5"/>
-            <text x="511" y="209" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#5a5850" text-anchor="middle">step 06 · n sub-accounts</text>
-            <text x="511" y="224" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">multi-ifua per goal</text>
-            <text x="511" y="236" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">isolates fifo cost basis per goal</text>
+            <polygon points="664,78 744,42 824,78 744,114" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5"/>
+            <text x="744" y="75" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">4. ksei approved?</text>
+            <text x="744" y="88" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-secondary, #555550)" text-anchor="middle">async callback</text>
 
-            <rect x="172" y="188" width="200" height="60" rx="30" fill="#f4f8f5" stroke="#2e6844" stroke-width="1.8"/>
-            <text x="272" y="210" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#244b35" text-anchor="middle">step 07 · active state</text>
-            <text x="272" y="226" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">sid_ifua_active</text>
-            <text x="272" y="239" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.2" fill="#244b35" text-anchor="middle">unlocks subscription checkout</text>
+            <!-- Row 2 Nodes (Left -> Right: Steps 5 -> 6 -> 7) -->
+            <path d="M 28 202 A 96 6 0 0 1 220 202 V 252 A 96 6 0 0 1 28 252 Z" fill="var(--bg-card, #FFFFFF)" stroke="#9bb4c7" stroke-width="1.6"/>
+            <path d="M 28 202 A 96 6 0 0 0 220 202" fill="none" stroke="#9bb4c7" stroke-width="1.6"/>
+            <text x="124" y="221" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#2d4b63" text-anchor="middle">step 05 · 1 master id</text>
+            <text x="124" y="236" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">sid: idd1204ab892104</text>
+            <text x="124" y="248" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">1 sid for life across indonesia</text>
+
+            <path d="M 276 202 Q 276 196 282 196 H 470 Q 476 196 476 202 V 250 C 436 244 404 256 368 252 S 306 246 276 251 Z" fill="var(--bg-card, #FFFFFF)" stroke="#c4bfb2" stroke-width="1.5"/>
+            <text x="376" y="217" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#5a5850" text-anchor="middle">step 06 · unit sub-accounts</text>
+            <text x="376" y="232" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">multi-ifua per goal</text>
+            <text x="376" y="244" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">separate pocket per goal / mi</text>
+
+            <rect x="536" y="196" width="308" height="60" rx="30" fill="#f4f8f5" stroke="#2e6844" stroke-width="2.2"/>
+            <text x="690" y="218" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#244b35" text-anchor="middle">step 07 · end (account active)</text>
+            <text x="690" y="234" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-primary, #111110)" text-anchor="middle">sid_ifua_active &rarr; can buy funds</text>
+            <text x="690" y="247" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.2" fill="#244b35" text-anchor="middle">investor is now allowed to place orders</text>
 
             <!-- Anatomy Callout Strip at Bottom -->
-            <rect x="24" y="272" width="832" height="42" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1"/>
-            <text x="40" y="297" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-primary, #111110)">
+            <rect x="24" y="284" width="832" height="42" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1"/>
+            <text x="40" y="309" font-family="'JetBrains Mono', monospace" font-size="10" fill="var(--text-primary, #111110)">
               <tspan font-weight="700" fill="#8a3b1e">15-char sid anatomy:</tspan>
               <tspan> [ID] individual/corp · [D] domestic/foreign · [1204] birth marker · [AB8921] ksei serial · [04] check digits</tspan>
             </text>
@@ -1771,6 +1779,13 @@
             <path d="M 320 264 L 320 304 L 446 304" stroke="#a63822" stroke-width="1.4" stroke-dasharray="4,3" fill="none" marker-end="url(#arr-crimson)"/>
             <path d="M 646 304 L 692 304" stroke="#a63822" stroke-width="1.4" stroke-dasharray="4,3" fill="none" marker-end="url(#arr-crimson)"/>
 
+            <!-- START & END BADGES FOR LANE A & B -->
+            <rect x="24" y="30" width="76" height="16" rx="8" fill="#a63822"/>
+            <text x="62" y="41" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">▶ start</text>
+            <rect x="736" y="28" width="112" height="16" rx="8" fill="#2e6844"/>
+            <text x="792" y="39" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">✓ end (paid out)</text>
+            <rect x="24" y="182" width="76" height="16" rx="8" fill="#a63822"/>
+            <text x="62" y="193" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">▶ start</text>
             <!-- LANE A NODES -->
             <polygon points="32,48 198,48 184,108 18,108" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.4"/>
             <text x="108" y="69" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#5a5850" text-anchor="middle">redemption order</text>
@@ -1873,6 +1888,11 @@
             <text x="677" y="245" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--text-secondary, #555550)" text-anchor="middle">3x replay or late pending ignored</text>
 
             <!-- Nodes -->
+            <!-- START & END BADGES FOR WEBHOOK PIPELINE -->
+            <rect x="22" y="36" width="84" height="18" rx="9" fill="#a63822"/>
+            <text x="64" y="48" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="700" fill="#ffffff" text-anchor="middle">▶ start</text>
+            <rect x="780" y="40" width="88" height="18" rx="9" fill="#2e6844"/>
+            <text x="824" y="52" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="700" fill="#ffffff" text-anchor="middle">✓ end</text>
             <!-- 1. Attempt -a1 -->
             <rect x="22" y="62" width="156" height="68" rx="6" fill="var(--bg-card, #FFFFFF)" stroke="var(--border-active, #D4D4CE)" stroke-width="1.4"/>
             <text x="100" y="82" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#5a5850" text-anchor="middle">attempt separation</text>
@@ -1946,6 +1966,11 @@
             <path d="M 526 190 L 590 190 Q 600 190 600 232 L 616 232" stroke="#a63822" stroke-width="1.4" stroke-dasharray="4,3" fill="none" marker-end="url(#arr-crimson)"/>
             <path d="M 526 200 L 566 200 Q 578 200 578 212 L 578 308 Q 578 320 590 320 L 616 320" stroke="#a63822" stroke-width="1.4" stroke-dasharray="4,3" fill="none" marker-end="url(#arr-crimson)"/>
 
+            <!-- START & END BADGES FOR 3-WAY RECON -->
+            <rect x="28" y="18" width="140" height="18" rx="9" fill="#a63822"/>
+            <text x="98" y="30" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="700" fill="#ffffff" text-anchor="middle">▶ start (3 input files)</text>
+            <rect x="716" y="4" width="136" height="18" rx="9" fill="#2e6844"/>
+            <text x="784" y="16" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="700" fill="#ffffff" text-anchor="middle">✓ end (4 outcomes)</text>
             <!-- LEFT COLUMN: 3 AUTHORITATIVE SOURCES -->
             <!-- Leg A: APERD OMS -->
             <path d="M 28 46 A 98 6 0 0 1 224 46 V 98 A 98 6 0 0 1 28 98 Z" fill="var(--bg-card, #FFFFFF)" stroke="#d99b82" stroke-width="1.5"/>
